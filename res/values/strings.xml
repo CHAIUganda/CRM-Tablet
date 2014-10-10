@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello chai-crm-android!</string>
-    <string name="app_name">chai-crm-android</string>
+    <string name="app_name">CHAI CRM System</string>
+    <string name="hello">Hell android</string>
 </resources>
