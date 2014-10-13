@@ -22,6 +22,11 @@
              </version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>de.greenrobot</groupId>
+            <artifactId>greendao</artifactId>
+            <version>1.3.0-beta-1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -35,7 +40,7 @@
                         <path>${android.sdk.path}</path>
                         <platform>11</platform>
                     </sdk>
-                    <deleteConflictingFiles>true</deleteConflictingFiles>
+                    <!--<deleteConflictingFiles>true</deleteConflictingFiles>-->
                     <undeployBeforeDeploy>true</undeployBeforeDeploy>
                 </configuration>
                 <extensions>true</extensions>
