@@ -14,6 +14,8 @@ public class user {
 
     private Long id;
     /** Not-null value. */
+    private String sysid;
+    /** Not-null value. */
     private String username;
     /** Not-null value. */
     private String password;
@@ -39,8 +41,9 @@ public class user {
         this.id = id;
     }
 
-    public user(Long id, String username, String password, boolean enabled, boolean accountexpired, boolean accountlocked, Boolean passwordexpired) {
+    public user(Long id, String sysid, String username, String password, boolean enabled, boolean accountexpired, boolean accountlocked, Boolean passwordexpired) {
         this.id = id;
+        this.sysid = sysid;
         this.username = username;
         this.password = password;
         this.enabled = enabled;
@@ -61,6 +64,16 @@ public class user {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /** Not-null value. */
+    public String getSysid() {
+        return sysid;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setSysid(String sysid) {
+        this.sysid = sysid;
     }
 
     /** Not-null value. */

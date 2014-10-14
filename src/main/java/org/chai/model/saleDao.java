@@ -27,11 +27,12 @@ public class saleDao extends AbstractDao<sale, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Quantity = new Property(1, int.class, "quantity", false, "QUANTITY");
-        public final static Property SalePrice = new Property(2, int.class, "salePrice", false, "SALE_PRICE");
-        public final static Property DateOfSale = new Property(3, java.util.Date.class, "dateOfSale", false, "DATE_OF_SALE");
-        public final static Property OrderId = new Property(4, long.class, "orderId", false, "ORDER_ID");
-        public final static Property ProductId = new Property(5, long.class, "productId", false, "PRODUCT_ID");
+        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Quantity = new Property(2, int.class, "quantity", false, "QUANTITY");
+        public final static Property SalePrice = new Property(3, int.class, "salePrice", false, "SALE_PRICE");
+        public final static Property DateOfSale = new Property(4, java.util.Date.class, "dateOfSale", false, "DATE_OF_SALE");
+        public final static Property OrderId = new Property(5, long.class, "orderId", false, "ORDER_ID");
+        public final static Property ProductId = new Property(6, long.class, "productId", false, "PRODUCT_ID");
     };
 
     private DaoSession daoSession;
@@ -53,11 +54,12 @@ public class saleDao extends AbstractDao<sale, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'SALE' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'QUANTITY' INTEGER NOT NULL ," + // 1: quantity
-                "'SALE_PRICE' INTEGER NOT NULL ," + // 2: salePrice
-                "'DATE_OF_SALE' INTEGER NOT NULL ," + // 3: dateOfSale
-                "'ORDER_ID' INTEGER NOT NULL ," + // 4: orderId
-                "'PRODUCT_ID' INTEGER NOT NULL );"); // 5: productId
+                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'QUANTITY' INTEGER NOT NULL ," + // 2: quantity
+                "'SALE_PRICE' INTEGER NOT NULL ," + // 3: salePrice
+                "'DATE_OF_SALE' INTEGER NOT NULL ," + // 4: dateOfSale
+                "'ORDER_ID' INTEGER NOT NULL ," + // 5: orderId
+                "'PRODUCT_ID' INTEGER NOT NULL );"); // 6: productId
     }
 
     /** Drops the underlying database table. */
@@ -75,11 +77,12 @@ public class saleDao extends AbstractDao<sale, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getQuantity());
-        stmt.bindLong(3, entity.getSalePrice());
-        stmt.bindLong(4, entity.getDateOfSale().getTime());
-        stmt.bindLong(5, entity.getOrderId());
-        stmt.bindLong(6, entity.getProductId());
+        stmt.bindString(2, entity.getSysid());
+        stmt.bindLong(3, entity.getQuantity());
+        stmt.bindLong(4, entity.getSalePrice());
+        stmt.bindLong(5, entity.getDateOfSale().getTime());
+        stmt.bindLong(6, entity.getOrderId());
+        stmt.bindLong(7, entity.getProductId());
     }
 
     @Override
@@ -99,11 +102,12 @@ public class saleDao extends AbstractDao<sale, Long> {
     public sale readEntity(Cursor cursor, int offset) {
         sale entity = new sale( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getInt(offset + 1), // quantity
-            cursor.getInt(offset + 2), // salePrice
-            new java.util.Date(cursor.getLong(offset + 3)), // dateOfSale
-            cursor.getLong(offset + 4), // orderId
-            cursor.getLong(offset + 5) // productId
+            cursor.getString(offset + 1), // sysid
+            cursor.getInt(offset + 2), // quantity
+            cursor.getInt(offset + 3), // salePrice
+            new java.util.Date(cursor.getLong(offset + 4)), // dateOfSale
+            cursor.getLong(offset + 5), // orderId
+            cursor.getLong(offset + 6) // productId
         );
         return entity;
     }
@@ -112,11 +116,12 @@ public class saleDao extends AbstractDao<sale, Long> {
     @Override
     public void readEntity(Cursor cursor, sale entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setQuantity(cursor.getInt(offset + 1));
-        entity.setSalePrice(cursor.getInt(offset + 2));
-        entity.setDateOfSale(new java.util.Date(cursor.getLong(offset + 3)));
-        entity.setOrderId(cursor.getLong(offset + 4));
-        entity.setProductId(cursor.getLong(offset + 5));
+        entity.setSysid(cursor.getString(offset + 1));
+        entity.setQuantity(cursor.getInt(offset + 2));
+        entity.setSalePrice(cursor.getInt(offset + 3));
+        entity.setDateOfSale(new java.util.Date(cursor.getLong(offset + 4)));
+        entity.setOrderId(cursor.getLong(offset + 5));
+        entity.setProductId(cursor.getLong(offset + 6));
      }
     
     /** @inheritdoc */

@@ -17,7 +17,7 @@ import org.chai.model.promotionalItem;
 /** 
  * DAO for table PROMOTIONAL_ITEM.
 */
-public class promotionalItemDao extends AbstractDao<promotionalItem, Void> {
+public class promotionalItemDao extends AbstractDao<promotionalItem, Long> {
 
     public static final String TABLENAME = "PROMOTIONAL_ITEM";
 
@@ -26,8 +26,10 @@ public class promotionalItemDao extends AbstractDao<promotionalItem, Void> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Name = new Property(0, String.class, "name", false, "NAME");
-        public final static Property PromotionId = new Property(1, long.class, "promotionId", false, "PROMOTION_ID");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
+        public final static Property PromotionId = new Property(3, long.class, "promotionId", false, "PROMOTION_ID");
     };
 
     private DaoSession daoSession;
@@ -47,8 +49,10 @@ public class promotionalItemDao extends AbstractDao<promotionalItem, Void> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'PROMOTIONAL_ITEM' (" + //
-                "'NAME' TEXT NOT NULL ," + // 0: name
-                "'PROMOTION_ID' INTEGER NOT NULL );"); // 1: promotionId
+                "'_id' INTEGER PRIMARY KEY ," + // 0: id
+                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'NAME' TEXT NOT NULL ," + // 2: name
+                "'PROMOTION_ID' INTEGER NOT NULL );"); // 3: promotionId
     }
 
     /** Drops the underlying database table. */
@@ -61,8 +65,14 @@ public class promotionalItemDao extends AbstractDao<promotionalItem, Void> {
     @Override
     protected void bindValues(SQLiteStatement stmt, promotionalItem entity) {
         stmt.clearBindings();
-        stmt.bindString(1, entity.getName());
-        stmt.bindLong(2, entity.getPromotionId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
+        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(3, entity.getName());
+        stmt.bindLong(4, entity.getPromotionId());
     }
 
     @Override
@@ -73,16 +83,18 @@ public class promotionalItemDao extends AbstractDao<promotionalItem, Void> {
 
     /** @inheritdoc */
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public promotionalItem readEntity(Cursor cursor, int offset) {
         promotionalItem entity = new promotionalItem( //
-            cursor.getString(offset + 0), // name
-            cursor.getLong(offset + 1) // promotionId
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 2), // name
+            cursor.getLong(offset + 3) // promotionId
         );
         return entity;
     }
@@ -90,21 +102,27 @@ public class promotionalItemDao extends AbstractDao<promotionalItem, Void> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, promotionalItem entity, int offset) {
-        entity.setName(cursor.getString(offset + 0));
-        entity.setPromotionId(cursor.getLong(offset + 1));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setSysid(cursor.getString(offset + 1));
+        entity.setName(cursor.getString(offset + 2));
+        entity.setPromotionId(cursor.getLong(offset + 3));
      }
     
     /** @inheritdoc */
     @Override
-    protected Void updateKeyAfterInsert(promotionalItem entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected Long updateKeyAfterInsert(promotionalItem entity, long rowId) {
+        entity.setId(rowId);
+        return rowId;
     }
     
     /** @inheritdoc */
     @Override
-    public Void getKey(promotionalItem entity) {
-        return null;
+    public Long getKey(promotionalItem entity) {
+        if(entity != null) {
+            return entity.getId();
+        } else {
+            return null;
+        }
     }
 
     /** @inheritdoc */

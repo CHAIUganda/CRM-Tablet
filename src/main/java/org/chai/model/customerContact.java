@@ -14,6 +14,8 @@ public class customerContact {
 
     private Long id;
     /** Not-null value. */
+    private String sysid;
+    /** Not-null value. */
     private String name;
     /** Not-null value. */
     private String contact;
@@ -46,8 +48,9 @@ public class customerContact {
         this.id = id;
     }
 
-    public customerContact(Long id, String name, String contact, String typeOfContact, String gender, String role, String qualification, String networkOrAssociation, Integer graduationYear, long customerId) {
+    public customerContact(Long id, String sysid, String name, String contact, String typeOfContact, String gender, String role, String qualification, String networkOrAssociation, Integer graduationYear, long customerId) {
         this.id = id;
+        this.sysid = sysid;
         this.name = name;
         this.contact = contact;
         this.typeOfContact = typeOfContact;
@@ -71,6 +74,16 @@ public class customerContact {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /** Not-null value. */
+    public String getSysid() {
+        return sysid;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setSysid(String sysid) {
+        this.sysid = sysid;
     }
 
     /** Not-null value. */

@@ -14,6 +14,8 @@ import de.greenrobot.dao.DaoException;
 public class customer {
 
     private Long id;
+    /** Not-null value. */
+    private String sysid;
     private Double latitude;
     private Double longitude;
     /** Not-null value. */
@@ -66,8 +68,9 @@ public class customer {
         this.id = id;
     }
 
-    public customer(Long id, Double latitude, Double longitude, String outletName, String outletType, String outletSize, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, Integer numberOfProducts, Integer restockFrequency, Double turnOver, java.util.Date tenureStartDate, java.util.Date tenureEndDate, long subcountyId) {
+    public customer(Long id, String sysid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, Integer numberOfProducts, Integer restockFrequency, Double turnOver, java.util.Date tenureStartDate, java.util.Date tenureEndDate, long subcountyId) {
         this.id = id;
+        this.sysid = sysid;
         this.latitude = latitude;
         this.longitude = longitude;
         this.outletName = outletName;
@@ -104,6 +107,16 @@ public class customer {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /** Not-null value. */
+    public String getSysid() {
+        return sysid;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setSysid(String sysid) {
+        this.sysid = sysid;
     }
 
     public Double getLatitude() {

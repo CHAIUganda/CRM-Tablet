@@ -15,6 +15,8 @@ public class region {
 
     private Long id;
     /** Not-null value. */
+    private String sysid;
+    /** Not-null value. */
     private String name;
 
     /** Used to resolve relations */
@@ -35,8 +37,9 @@ public class region {
         this.id = id;
     }
 
-    public region(Long id, String name) {
+    public region(Long id, String sysid, String name) {
         this.id = id;
+        this.sysid = sysid;
         this.name = name;
     }
 
@@ -52,6 +55,16 @@ public class region {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /** Not-null value. */
+    public String getSysid() {
+        return sysid;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setSysid(String sysid) {
+        this.sysid = sysid;
     }
 
     /** Not-null value. */

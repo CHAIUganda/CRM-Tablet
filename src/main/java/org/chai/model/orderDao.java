@@ -27,13 +27,14 @@ public class orderDao extends AbstractDao<order, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Quantity = new Property(1, double.class, "quantity", false, "QUANTITY");
-        public final static Property DeliveryDate = new Property(2, java.util.Date.class, "deliveryDate", false, "DELIVERY_DATE");
-        public final static Property OrderDate = new Property(3, java.util.Date.class, "orderDate", false, "ORDER_DATE");
-        public final static Property ContactTel = new Property(4, String.class, "contactTel", false, "CONTACT_TEL");
-        public final static Property ContactName = new Property(5, String.class, "contactName", false, "CONTACT_NAME");
-        public final static Property CustomerId = new Property(6, long.class, "customerId", false, "CUSTOMER_ID");
-        public final static Property ProductId = new Property(7, long.class, "productId", false, "PRODUCT_ID");
+        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Quantity = new Property(2, double.class, "quantity", false, "QUANTITY");
+        public final static Property DeliveryDate = new Property(3, java.util.Date.class, "deliveryDate", false, "DELIVERY_DATE");
+        public final static Property OrderDate = new Property(4, java.util.Date.class, "orderDate", false, "ORDER_DATE");
+        public final static Property ContactTel = new Property(5, String.class, "contactTel", false, "CONTACT_TEL");
+        public final static Property ContactName = new Property(6, String.class, "contactName", false, "CONTACT_NAME");
+        public final static Property CustomerId = new Property(7, long.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property ProductId = new Property(8, long.class, "productId", false, "PRODUCT_ID");
     };
 
     private DaoSession daoSession;
@@ -55,13 +56,14 @@ public class orderDao extends AbstractDao<order, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'orders' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'QUANTITY' REAL NOT NULL ," + // 1: quantity
-                "'DELIVERY_DATE' INTEGER NOT NULL ," + // 2: deliveryDate
-                "'ORDER_DATE' INTEGER NOT NULL ," + // 3: orderDate
-                "'CONTACT_TEL' TEXT NOT NULL ," + // 4: contactTel
-                "'CONTACT_NAME' TEXT NOT NULL ," + // 5: contactName
-                "'CUSTOMER_ID' INTEGER NOT NULL ," + // 6: customerId
-                "'PRODUCT_ID' INTEGER NOT NULL );"); // 7: productId
+                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'QUANTITY' REAL NOT NULL ," + // 2: quantity
+                "'DELIVERY_DATE' INTEGER NOT NULL ," + // 3: deliveryDate
+                "'ORDER_DATE' INTEGER NOT NULL ," + // 4: orderDate
+                "'CONTACT_TEL' TEXT NOT NULL ," + // 5: contactTel
+                "'CONTACT_NAME' TEXT NOT NULL ," + // 6: contactName
+                "'CUSTOMER_ID' INTEGER NOT NULL ," + // 7: customerId
+                "'PRODUCT_ID' INTEGER NOT NULL );"); // 8: productId
     }
 
     /** Drops the underlying database table. */
@@ -79,13 +81,14 @@ public class orderDao extends AbstractDao<order, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindDouble(2, entity.getQuantity());
-        stmt.bindLong(3, entity.getDeliveryDate().getTime());
-        stmt.bindLong(4, entity.getOrderDate().getTime());
-        stmt.bindString(5, entity.getContactTel());
-        stmt.bindString(6, entity.getContactName());
-        stmt.bindLong(7, entity.getCustomerId());
-        stmt.bindLong(8, entity.getProductId());
+        stmt.bindString(2, entity.getSysid());
+        stmt.bindDouble(3, entity.getQuantity());
+        stmt.bindLong(4, entity.getDeliveryDate().getTime());
+        stmt.bindLong(5, entity.getOrderDate().getTime());
+        stmt.bindString(6, entity.getContactTel());
+        stmt.bindString(7, entity.getContactName());
+        stmt.bindLong(8, entity.getCustomerId());
+        stmt.bindLong(9, entity.getProductId());
     }
 
     @Override
@@ -105,13 +108,14 @@ public class orderDao extends AbstractDao<order, Long> {
     public order readEntity(Cursor cursor, int offset) {
         order entity = new order( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getDouble(offset + 1), // quantity
-            new java.util.Date(cursor.getLong(offset + 2)), // deliveryDate
-            new java.util.Date(cursor.getLong(offset + 3)), // orderDate
-            cursor.getString(offset + 4), // contactTel
-            cursor.getString(offset + 5), // contactName
-            cursor.getLong(offset + 6), // customerId
-            cursor.getLong(offset + 7) // productId
+            cursor.getString(offset + 1), // sysid
+            cursor.getDouble(offset + 2), // quantity
+            new java.util.Date(cursor.getLong(offset + 3)), // deliveryDate
+            new java.util.Date(cursor.getLong(offset + 4)), // orderDate
+            cursor.getString(offset + 5), // contactTel
+            cursor.getString(offset + 6), // contactName
+            cursor.getLong(offset + 7), // customerId
+            cursor.getLong(offset + 8) // productId
         );
         return entity;
     }
@@ -120,13 +124,14 @@ public class orderDao extends AbstractDao<order, Long> {
     @Override
     public void readEntity(Cursor cursor, order entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setQuantity(cursor.getDouble(offset + 1));
-        entity.setDeliveryDate(new java.util.Date(cursor.getLong(offset + 2)));
-        entity.setOrderDate(new java.util.Date(cursor.getLong(offset + 3)));
-        entity.setContactTel(cursor.getString(offset + 4));
-        entity.setContactName(cursor.getString(offset + 5));
-        entity.setCustomerId(cursor.getLong(offset + 6));
-        entity.setProductId(cursor.getLong(offset + 7));
+        entity.setSysid(cursor.getString(offset + 1));
+        entity.setQuantity(cursor.getDouble(offset + 2));
+        entity.setDeliveryDate(new java.util.Date(cursor.getLong(offset + 3)));
+        entity.setOrderDate(new java.util.Date(cursor.getLong(offset + 4)));
+        entity.setContactTel(cursor.getString(offset + 5));
+        entity.setContactName(cursor.getString(offset + 6));
+        entity.setCustomerId(cursor.getLong(offset + 7));
+        entity.setProductId(cursor.getLong(offset + 8));
      }
     
     /** @inheritdoc */

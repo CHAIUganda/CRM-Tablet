@@ -24,7 +24,8 @@ public class regionDao extends AbstractDao<region, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
     };
 
     private DaoSession daoSession;
@@ -44,7 +45,8 @@ public class regionDao extends AbstractDao<region, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'REGION' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'NAME' TEXT NOT NULL );"); // 1: name
+                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'NAME' TEXT NOT NULL );"); // 2: name
     }
 
     /** Drops the underlying database table. */
@@ -62,7 +64,8 @@ public class regionDao extends AbstractDao<region, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getName());
+        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(3, entity.getName());
     }
 
     @Override
@@ -82,7 +85,8 @@ public class regionDao extends AbstractDao<region, Long> {
     public region readEntity(Cursor cursor, int offset) {
         region entity = new region( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1) // name
+            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 2) // name
         );
         return entity;
     }
@@ -91,7 +95,8 @@ public class regionDao extends AbstractDao<region, Long> {
     @Override
     public void readEntity(Cursor cursor, region entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setName(cursor.getString(offset + 1));
+        entity.setSysid(cursor.getString(offset + 1));
+        entity.setName(cursor.getString(offset + 2));
      }
     
     /** @inheritdoc */

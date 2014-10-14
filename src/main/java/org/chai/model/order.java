@@ -14,6 +14,8 @@ import de.greenrobot.dao.DaoException;
 public class order {
 
     private Long id;
+    /** Not-null value. */
+    private String sysid;
     private double quantity;
     /** Not-null value. */
     private java.util.Date deliveryDate;
@@ -44,8 +46,9 @@ public class order {
         this.id = id;
     }
 
-    public order(Long id, double quantity, java.util.Date deliveryDate, java.util.Date orderDate, String contactTel, String contactName, long customerId, long productId) {
+    public order(Long id, String sysid, double quantity, java.util.Date deliveryDate, java.util.Date orderDate, String contactTel, String contactName, long customerId, long productId) {
         this.id = id;
+        this.sysid = sysid;
         this.quantity = quantity;
         this.deliveryDate = deliveryDate;
         this.orderDate = orderDate;
@@ -67,6 +70,16 @@ public class order {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /** Not-null value. */
+    public String getSysid() {
+        return sysid;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setSysid(String sysid) {
+        this.sysid = sysid;
     }
 
     public double getQuantity() {

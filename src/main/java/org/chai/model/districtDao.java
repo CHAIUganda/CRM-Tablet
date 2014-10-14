@@ -27,8 +27,9 @@ public class districtDao extends AbstractDao<district, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property RegionId = new Property(2, long.class, "regionId", false, "REGION_ID");
+        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
+        public final static Property RegionId = new Property(3, long.class, "regionId", false, "REGION_ID");
     };
 
     private DaoSession daoSession;
@@ -49,8 +50,9 @@ public class districtDao extends AbstractDao<district, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'DISTRICT' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'NAME' TEXT NOT NULL ," + // 1: name
-                "'REGION_ID' INTEGER NOT NULL );"); // 2: regionId
+                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'NAME' TEXT NOT NULL ," + // 2: name
+                "'REGION_ID' INTEGER NOT NULL );"); // 3: regionId
     }
 
     /** Drops the underlying database table. */
@@ -68,8 +70,9 @@ public class districtDao extends AbstractDao<district, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getName());
-        stmt.bindLong(3, entity.getRegionId());
+        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(3, entity.getName());
+        stmt.bindLong(4, entity.getRegionId());
     }
 
     @Override
@@ -89,8 +92,9 @@ public class districtDao extends AbstractDao<district, Long> {
     public district readEntity(Cursor cursor, int offset) {
         district entity = new district( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // name
-            cursor.getLong(offset + 2) // regionId
+            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 2), // name
+            cursor.getLong(offset + 3) // regionId
         );
         return entity;
     }
@@ -99,8 +103,9 @@ public class districtDao extends AbstractDao<district, Long> {
     @Override
     public void readEntity(Cursor cursor, district entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setName(cursor.getString(offset + 1));
-        entity.setRegionId(cursor.getLong(offset + 2));
+        entity.setSysid(cursor.getString(offset + 1));
+        entity.setName(cursor.getString(offset + 2));
+        entity.setRegionId(cursor.getLong(offset + 3));
      }
     
     /** @inheritdoc */

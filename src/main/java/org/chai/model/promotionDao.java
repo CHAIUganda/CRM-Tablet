@@ -27,10 +27,11 @@ public class promotionDao extends AbstractDao<promotion, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Description = new Property(1, String.class, "description", false, "DESCRIPTION");
-        public final static Property StartDate = new Property(2, java.util.Date.class, "startDate", false, "START_DATE");
-        public final static Property StopDate = new Property(3, java.util.Date.class, "stopDate", false, "STOP_DATE");
-        public final static Property ProductId = new Property(4, long.class, "productId", false, "PRODUCT_ID");
+        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Description = new Property(2, String.class, "description", false, "DESCRIPTION");
+        public final static Property StartDate = new Property(3, java.util.Date.class, "startDate", false, "START_DATE");
+        public final static Property StopDate = new Property(4, java.util.Date.class, "stopDate", false, "STOP_DATE");
+        public final static Property ProductId = new Property(5, long.class, "productId", false, "PRODUCT_ID");
     };
 
     private DaoSession daoSession;
@@ -51,10 +52,11 @@ public class promotionDao extends AbstractDao<promotion, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'PROMOTION' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'DESCRIPTION' TEXT NOT NULL ," + // 1: description
-                "'START_DATE' INTEGER NOT NULL ," + // 2: startDate
-                "'STOP_DATE' INTEGER NOT NULL ," + // 3: stopDate
-                "'PRODUCT_ID' INTEGER NOT NULL );"); // 4: productId
+                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'DESCRIPTION' TEXT NOT NULL ," + // 2: description
+                "'START_DATE' INTEGER NOT NULL ," + // 3: startDate
+                "'STOP_DATE' INTEGER NOT NULL ," + // 4: stopDate
+                "'PRODUCT_ID' INTEGER NOT NULL );"); // 5: productId
     }
 
     /** Drops the underlying database table. */
@@ -72,10 +74,11 @@ public class promotionDao extends AbstractDao<promotion, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getDescription());
-        stmt.bindLong(3, entity.getStartDate().getTime());
-        stmt.bindLong(4, entity.getStopDate().getTime());
-        stmt.bindLong(5, entity.getProductId());
+        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(3, entity.getDescription());
+        stmt.bindLong(4, entity.getStartDate().getTime());
+        stmt.bindLong(5, entity.getStopDate().getTime());
+        stmt.bindLong(6, entity.getProductId());
     }
 
     @Override
@@ -95,10 +98,11 @@ public class promotionDao extends AbstractDao<promotion, Long> {
     public promotion readEntity(Cursor cursor, int offset) {
         promotion entity = new promotion( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // description
-            new java.util.Date(cursor.getLong(offset + 2)), // startDate
-            new java.util.Date(cursor.getLong(offset + 3)), // stopDate
-            cursor.getLong(offset + 4) // productId
+            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 2), // description
+            new java.util.Date(cursor.getLong(offset + 3)), // startDate
+            new java.util.Date(cursor.getLong(offset + 4)), // stopDate
+            cursor.getLong(offset + 5) // productId
         );
         return entity;
     }
@@ -107,10 +111,11 @@ public class promotionDao extends AbstractDao<promotion, Long> {
     @Override
     public void readEntity(Cursor cursor, promotion entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setDescription(cursor.getString(offset + 1));
-        entity.setStartDate(new java.util.Date(cursor.getLong(offset + 2)));
-        entity.setStopDate(new java.util.Date(cursor.getLong(offset + 3)));
-        entity.setProductId(cursor.getLong(offset + 4));
+        entity.setSysid(cursor.getString(offset + 1));
+        entity.setDescription(cursor.getString(offset + 2));
+        entity.setStartDate(new java.util.Date(cursor.getLong(offset + 3)));
+        entity.setStopDate(new java.util.Date(cursor.getLong(offset + 4)));
+        entity.setProductId(cursor.getLong(offset + 5));
      }
     
     /** @inheritdoc */

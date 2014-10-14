@@ -15,6 +15,8 @@ public class district {
 
     private Long id;
     /** Not-null value. */
+    private String sysid;
+    /** Not-null value. */
     private String name;
     private long regionId;
 
@@ -36,8 +38,9 @@ public class district {
         this.id = id;
     }
 
-    public district(Long id, String name, long regionId) {
+    public district(Long id, String sysid, String name, long regionId) {
         this.id = id;
+        this.sysid = sysid;
         this.name = name;
         this.regionId = regionId;
     }
@@ -54,6 +57,16 @@ public class district {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /** Not-null value. */
+    public String getSysid() {
+        return sysid;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setSysid(String sysid) {
+        this.sysid = sysid;
     }
 
     /** Not-null value. */

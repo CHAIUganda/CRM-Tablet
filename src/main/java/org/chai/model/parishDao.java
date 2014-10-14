@@ -27,8 +27,9 @@ public class parishDao extends AbstractDao<parish, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property SubcountyId = new Property(2, long.class, "subcountyId", false, "SUBCOUNTY_ID");
+        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
+        public final static Property SubcountyId = new Property(3, long.class, "subcountyId", false, "SUBCOUNTY_ID");
     };
 
     private DaoSession daoSession;
@@ -49,8 +50,9 @@ public class parishDao extends AbstractDao<parish, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'PARISH' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'NAME' TEXT NOT NULL ," + // 1: name
-                "'SUBCOUNTY_ID' INTEGER NOT NULL );"); // 2: subcountyId
+                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'NAME' TEXT NOT NULL ," + // 2: name
+                "'SUBCOUNTY_ID' INTEGER NOT NULL );"); // 3: subcountyId
     }
 
     /** Drops the underlying database table. */
@@ -68,8 +70,9 @@ public class parishDao extends AbstractDao<parish, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getName());
-        stmt.bindLong(3, entity.getSubcountyId());
+        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(3, entity.getName());
+        stmt.bindLong(4, entity.getSubcountyId());
     }
 
     @Override
@@ -89,8 +92,9 @@ public class parishDao extends AbstractDao<parish, Long> {
     public parish readEntity(Cursor cursor, int offset) {
         parish entity = new parish( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // name
-            cursor.getLong(offset + 2) // subcountyId
+            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 2), // name
+            cursor.getLong(offset + 3) // subcountyId
         );
         return entity;
     }
@@ -99,8 +103,9 @@ public class parishDao extends AbstractDao<parish, Long> {
     @Override
     public void readEntity(Cursor cursor, parish entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setName(cursor.getString(offset + 1));
-        entity.setSubcountyId(cursor.getLong(offset + 2));
+        entity.setSysid(cursor.getString(offset + 1));
+        entity.setName(cursor.getString(offset + 2));
+        entity.setSubcountyId(cursor.getLong(offset + 3));
      }
     
     /** @inheritdoc */

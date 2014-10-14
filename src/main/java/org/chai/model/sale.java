@@ -13,6 +13,8 @@ import de.greenrobot.dao.DaoException;
 public class sale {
 
     private Long id;
+    /** Not-null value. */
+    private String sysid;
     private int quantity;
     private int salePrice;
     /** Not-null value. */
@@ -37,8 +39,9 @@ public class sale {
         this.id = id;
     }
 
-    public sale(Long id, int quantity, int salePrice, java.util.Date dateOfSale, long orderId, long productId) {
+    public sale(Long id, String sysid, int quantity, int salePrice, java.util.Date dateOfSale, long orderId, long productId) {
         this.id = id;
+        this.sysid = sysid;
         this.quantity = quantity;
         this.salePrice = salePrice;
         this.dateOfSale = dateOfSale;
@@ -58,6 +61,16 @@ public class sale {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /** Not-null value. */
+    public String getSysid() {
+        return sysid;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setSysid(String sysid) {
+        this.sysid = sysid;
     }
 
     public int getQuantity() {

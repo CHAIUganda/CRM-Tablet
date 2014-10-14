@@ -15,6 +15,8 @@ public class parish {
 
     private Long id;
     /** Not-null value. */
+    private String sysid;
+    /** Not-null value. */
     private String name;
     private long subcountyId;
 
@@ -36,8 +38,9 @@ public class parish {
         this.id = id;
     }
 
-    public parish(Long id, String name, long subcountyId) {
+    public parish(Long id, String sysid, String name, long subcountyId) {
         this.id = id;
+        this.sysid = sysid;
         this.name = name;
         this.subcountyId = subcountyId;
     }
@@ -54,6 +57,16 @@ public class parish {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /** Not-null value. */
+    public String getSysid() {
+        return sysid;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setSysid(String sysid) {
+        this.sysid = sysid;
     }
 
     /** Not-null value. */

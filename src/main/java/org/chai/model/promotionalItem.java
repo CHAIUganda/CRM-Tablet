@@ -12,6 +12,9 @@ import de.greenrobot.dao.DaoException;
  */
 public class promotionalItem {
 
+    private Long id;
+    /** Not-null value. */
+    private String sysid;
     /** Not-null value. */
     private String name;
     private long promotionId;
@@ -29,7 +32,13 @@ public class promotionalItem {
     public promotionalItem() {
     }
 
-    public promotionalItem(String name, long promotionId) {
+    public promotionalItem(Long id) {
+        this.id = id;
+    }
+
+    public promotionalItem(Long id, String sysid, String name, long promotionId) {
+        this.id = id;
+        this.sysid = sysid;
         this.name = name;
         this.promotionId = promotionId;
     }
@@ -38,6 +47,24 @@ public class promotionalItem {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getPromotionalItemDao() : null;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /** Not-null value. */
+    public String getSysid() {
+        return sysid;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setSysid(String sysid) {
+        this.sysid = sysid;
     }
 
     /** Not-null value. */
