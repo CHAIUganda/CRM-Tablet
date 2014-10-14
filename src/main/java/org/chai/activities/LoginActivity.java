@@ -1,8 +1,9 @@
-package org.chai;
+package org.chai.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import org.chai.R;
 
 public class LoginActivity extends Activity {
 
