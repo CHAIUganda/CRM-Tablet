@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CHAI CRM System</string>
-    <string name="hello">Hell android</string>
+    <string name="signinlabel">Sign In</string>
+    <string name="loginResponse">The username/password combination is not valid</string>
+    <string name="usernameLabel">Username</string>
+    <string name="passwordLabel">Password</string>
 </resources>
