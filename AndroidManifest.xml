@@ -4,13 +4,17 @@
     <uses-sdk
             android:minSdkVersion="11"
             android:targetSdkVersion="16" />
-  <application android:icon="@drawable/logo" android:label="@string/app_name">
+  <application android:icon="@drawable/icon" android:label="@string/app_name">
     <activity android:name=".activities.LoginActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+      <activity android:name=".activities.HomeActivity"/>
+      <activity android:name=".activities.tasks.TasksMainActivity"/>
+      <activity android:name=".activities.customer.CustomersMainActivity"/>
+      <activity android:name=".activities.calls.CallsMainActivity"/>
   </application>
 
 </manifest>
