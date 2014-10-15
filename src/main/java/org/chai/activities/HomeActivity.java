@@ -1,10 +1,14 @@
 package org.chai.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import org.chai.R;
+import org.chai.activities.calls.CallsMainActivity;
+import org.chai.activities.customer.CustomersMainActivity;
+import org.chai.activities.tasks.TasksMainActivity;
 
 /**
  * Created by victor on 10/15/14.
@@ -23,6 +27,8 @@ public class HomeActivity extends Activity {
 
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), TasksMainActivity.class);
+                startActivity(i);
             }
         });
 
@@ -30,6 +36,8 @@ public class HomeActivity extends Activity {
 
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), CustomersMainActivity.class);
+                startActivity(i);
             }
         });
 
@@ -37,6 +45,8 @@ public class HomeActivity extends Activity {
 
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), CallsMainActivity.class);
+                startActivity(i);
             }
         });
 
