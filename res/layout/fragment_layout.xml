@@ -1,8 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
+<org.chai.activities.DashboardLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#f8f9fe" >
+    <!--  News Feed Button -->
+    <Button
+            android:id="@+id/btn_tasks"
+            style="@style/DashboardButton"
+            android:drawableTop="@drawable/btn_tasks"
+            android:text="Tasks" />
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    <!--  Friends Button -->
+    <Button
+            android:id="@+id/btn_customers"
+            style="@style/DashboardButton"
+            android:drawableTop="@drawable/btn_customer"
+            android:text="Customers" />
 
-</LinearLayout>
+    <!--  Messages Button -->
+    <Button
+            android:id="@+id/btn_calls"
+            style="@style/DashboardButton"
+            android:drawableTop="@drawable/btn_calls"
+            android:text="Calls" />
+
+    <!--  Places Button -->
+    <Button
+            android:id="@+id/btn_sync"
+            style="@style/DashboardButton"
+            android:drawableTop="@drawable/btn_sync"
+            android:text="Syncronise" />
+
+</org.chai.activities.DashboardLayout>
