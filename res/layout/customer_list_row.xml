@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_row_selector"
+                android:padding="8dp" >
+
+    <!-- Thumbnail Image -->
+    <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/customer"/>
+
+    <!-- Customer name-->
+    <TextView
+            android:id="@+id/customername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/thumbnail"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:textSize="@dimen/list_main_text_size"
+            android:textColor="@color/list_main_text_color"
+            android:text="kakama victor"
+            android:textStyle="bold"/>
+
+    <!-- Address -->
+    <TextView
+            android:id="@+id/customeraddress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/customername"
+            android:layout_marginTop="1dip"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:textSize="@dimen/list_sub_text_size"
+            android:text="P.O Box 6692,  Kampala"
+            android:textStyle="italic"/>
+
+    <!-- telephone -->
+    <TextView
+            android:id="@+id/customertelephone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/customeraddress"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:textColor="@color/list_sub_subtext_color"
+            android:textSize="@dimen/list_sub_sub_text_size"
+            android:text="0777505033"
+            android:textStyle="italic"/>
+
+</RelativeLayout>
