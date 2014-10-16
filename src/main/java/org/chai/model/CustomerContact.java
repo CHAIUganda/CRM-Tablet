@@ -10,7 +10,7 @@ import de.greenrobot.dao.DaoException;
 /**
  * Entity mapped to table CUSTOMER_CONTACT.
  */
-public class customerContact {
+public class CustomerContact {
 
     private Long id;
     /** Not-null value. */
@@ -35,23 +35,23 @@ public class customerContact {
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    private transient customerContactDao myDao;
+    private transient CustomerContactDao myDao;
 
-    private customer customer;
+    private Customer customer;
     private Long customer__resolvedKey;
 
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
-    public customerContact() {
+    public CustomerContact() {
     }
 
-    public customerContact(Long id) {
+    public CustomerContact(Long id) {
         this.id = id;
     }
 
-    public customerContact(Long id, String sysid, String name, String contact, String typeOfContact, String gender, String role, String qualification, String networkOrAssociation, Integer graduationYear, long customerId) {
+    public CustomerContact(Long id, String sysid, String name, String contact, String typeOfContact, String gender, String role, String qualification, String networkOrAssociation, Integer graduationYear, long customerId) {
         this.id = id;
         this.sysid = sysid;
         this.name = name;
@@ -174,14 +174,14 @@ public class customerContact {
     }
 
     /** To-one relationship, resolved on first access. */
-    public customer getCustomer() {
+    public Customer getCustomer() {
         long __key = this.customerId;
         if (customer__resolvedKey == null || !customer__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            customerDao targetDao = daoSession.getCustomerDao();
-            customer customerNew = targetDao.load(__key);
+            CustomerDao targetDao = daoSession.getCustomerDao();
+            Customer customerNew = targetDao.load(__key);
             synchronized (this) {
                 customer = customerNew;
             	customer__resolvedKey = __key;
@@ -190,7 +190,7 @@ public class customerContact {
         return customer;
     }
 
-    public void setCustomer(customer customer) {
+    public void setCustomer(Customer customer) {
         if (customer == null) {
             throw new DaoException("To-one property 'customerId' has not-null constraint; cannot set to-one to null");
         }

@@ -10,7 +10,7 @@ import de.greenrobot.dao.DaoException;
 /**
  * Entity mapped to table VILLAGE.
  */
-public class village {
+public class Village {
 
     private Long id;
     /** Not-null value. */
@@ -23,23 +23,23 @@ public class village {
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    private transient villageDao myDao;
+    private transient VillageDao myDao;
 
-    private parish parish;
+    private Parish parish;
     private Long parish__resolvedKey;
 
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
-    public village() {
+    public Village() {
     }
 
-    public village(Long id) {
+    public Village(Long id) {
         this.id = id;
     }
 
-    public village(Long id, String sysid, String name, long parishId) {
+    public Village(Long id, String sysid, String name, long parishId) {
         this.id = id;
         this.sysid = sysid;
         this.name = name;
@@ -89,14 +89,14 @@ public class village {
     }
 
     /** To-one relationship, resolved on first access. */
-    public parish getParish() {
+    public Parish getParish() {
         long __key = this.parishId;
         if (parish__resolvedKey == null || !parish__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            parishDao targetDao = daoSession.getParishDao();
-            parish parishNew = targetDao.load(__key);
+            ParishDao targetDao = daoSession.getParishDao();
+            Parish parishNew = targetDao.load(__key);
             synchronized (this) {
                 parish = parishNew;
             	parish__resolvedKey = __key;
@@ -105,7 +105,7 @@ public class village {
         return parish;
     }
 
-    public void setParish(parish parish) {
+    public void setParish(Parish parish) {
         if (parish == null) {
             throw new DaoException("To-one property 'parishId' has not-null constraint; cannot set to-one to null");
         }

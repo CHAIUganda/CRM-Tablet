@@ -10,7 +10,7 @@ import de.greenrobot.dao.DaoException;
 /**
  * Entity mapped to table USER.
  */
-public class user {
+public class User {
 
     private Long id;
     /** Not-null value. */
@@ -28,20 +28,20 @@ public class user {
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    private transient userDao myDao;
+    private transient UserDao myDao;
 
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
-    public user() {
+    public User() {
     }
 
-    public user(Long id) {
+    public User(Long id) {
         this.id = id;
     }
 
-    public user(Long id, String sysid, String username, String password, boolean enabled, boolean accountexpired, boolean accountlocked, Boolean passwordexpired) {
+    public User(Long id, String sysid, String username, String password, boolean enabled, boolean accountexpired, boolean accountlocked, Boolean passwordexpired) {
         this.id = id;
         this.sysid = sysid;
         this.username = username;

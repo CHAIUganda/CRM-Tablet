@@ -11,7 +11,7 @@ import de.greenrobot.dao.DaoException;
 /**
  * Entity mapped to table REGION.
  */
-public class region {
+public class Region {
 
     private Long id;
     /** Not-null value. */
@@ -23,21 +23,21 @@ public class region {
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    private transient regionDao myDao;
+    private transient RegionDao myDao;
 
-    private List<district> districts;
+    private List<District> districts;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
-    public region() {
+    public Region() {
     }
 
-    public region(Long id) {
+    public Region(Long id) {
         this.id = id;
     }
 
-    public region(Long id, String sysid, String name) {
+    public Region(Long id, String sysid, String name) {
         this.id = id;
         this.sysid = sysid;
         this.name = name;
@@ -78,13 +78,13 @@ public class region {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<district> getDistricts() {
+    public List<District> getDistricts() {
         if (districts == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            districtDao targetDao = daoSession.getDistrictDao();
-            List<district> districtsNew = targetDao._queryRegion_Districts(id);
+            DistrictDao targetDao = daoSession.getDistrictDao();
+            List<District> districtsNew = targetDao._queryRegion_Districts(id);
             synchronized (this) {
                 if(districts == null) {
                     districts = districtsNew;

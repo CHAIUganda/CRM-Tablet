@@ -1,6 +1,5 @@
 package org.chai.model;
 
-import java.util.List;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -9,49 +8,48 @@ import de.greenrobot.dao.DaoException;
 // KEEP INCLUDES - put your custom includes here
 // KEEP INCLUDES END
 /**
- * Entity mapped to table PARISH.
+ * Entity mapped to table PROMOTIONAL_ITEM.
  */
-public class parish {
+public class PromotionalItem {
 
     private Long id;
     /** Not-null value. */
     private String sysid;
     /** Not-null value. */
     private String name;
-    private long subcountyId;
+    private long promotionId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    private transient parishDao myDao;
+    private transient PromotionalItemDao myDao;
 
-    private subcounty subcounty;
-    private Long subcounty__resolvedKey;
+    private Promotion promotion;
+    private Long promotion__resolvedKey;
 
-    private List<village> villages;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
-    public parish() {
+    public PromotionalItem() {
     }
 
-    public parish(Long id) {
+    public PromotionalItem(Long id) {
         this.id = id;
     }
 
-    public parish(Long id, String sysid, String name, long subcountyId) {
+    public PromotionalItem(Long id, String sysid, String name, long promotionId) {
         this.id = id;
         this.sysid = sysid;
         this.name = name;
-        this.subcountyId = subcountyId;
+        this.promotionId = promotionId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getParishDao() : null;
+        myDao = daoSession != null ? daoSession.getPromotionalItemDao() : null;
     }
 
     public Long getId() {
@@ -82,62 +80,40 @@ public class parish {
         this.name = name;
     }
 
-    public long getSubcountyId() {
-        return subcountyId;
+    public long getPromotionId() {
+        return promotionId;
     }
 
-    public void setSubcountyId(long subcountyId) {
-        this.subcountyId = subcountyId;
+    public void setPromotionId(long promotionId) {
+        this.promotionId = promotionId;
     }
 
     /** To-one relationship, resolved on first access. */
-    public subcounty getSubcounty() {
-        long __key = this.subcountyId;
-        if (subcounty__resolvedKey == null || !subcounty__resolvedKey.equals(__key)) {
+    public Promotion getPromotion() {
+        long __key = this.promotionId;
+        if (promotion__resolvedKey == null || !promotion__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            subcountyDao targetDao = daoSession.getSubcountyDao();
-            subcounty subcountyNew = targetDao.load(__key);
+            PromotionDao targetDao = daoSession.getPromotionDao();
+            Promotion promotionNew = targetDao.load(__key);
             synchronized (this) {
-                subcounty = subcountyNew;
-            	subcounty__resolvedKey = __key;
+                promotion = promotionNew;
+            	promotion__resolvedKey = __key;
             }
         }
-        return subcounty;
+        return promotion;
     }
 
-    public void setSubcounty(subcounty subcounty) {
-        if (subcounty == null) {
-            throw new DaoException("To-one property 'subcountyId' has not-null constraint; cannot set to-one to null");
+    public void setPromotion(Promotion promotion) {
+        if (promotion == null) {
+            throw new DaoException("To-one property 'promotionId' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
-            this.subcounty = subcounty;
-            subcountyId = subcounty.getId();
-            subcounty__resolvedKey = subcountyId;
+            this.promotion = promotion;
+            promotionId = promotion.getId();
+            promotion__resolvedKey = promotionId;
         }
-    }
-
-    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<village> getVillages() {
-        if (villages == null) {
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            villageDao targetDao = daoSession.getVillageDao();
-            List<village> villagesNew = targetDao._queryParish_Villages(id);
-            synchronized (this) {
-                if(villages == null) {
-                    villages = villagesNew;
-                }
-            }
-        }
-        return villages;
-    }
-
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    public synchronized void resetVillages() {
-        villages = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

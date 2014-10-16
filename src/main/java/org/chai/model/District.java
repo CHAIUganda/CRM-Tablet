@@ -1,5 +1,6 @@
 package org.chai.model;
 
+import java.util.List;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -8,48 +9,49 @@ import de.greenrobot.dao.DaoException;
 // KEEP INCLUDES - put your custom includes here
 // KEEP INCLUDES END
 /**
- * Entity mapped to table PROMOTIONAL_ITEM.
+ * Entity mapped to table DISTRICT.
  */
-public class promotionalItem {
+public class District {
 
     private Long id;
     /** Not-null value. */
     private String sysid;
     /** Not-null value. */
     private String name;
-    private long promotionId;
+    private long regionId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    private transient promotionalItemDao myDao;
+    private transient DistrictDao myDao;
 
-    private promotion promotion;
-    private Long promotion__resolvedKey;
+    private Region region;
+    private Long region__resolvedKey;
 
+    private List<Subcounty> subcounties;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
-    public promotionalItem() {
+    public District() {
     }
 
-    public promotionalItem(Long id) {
+    public District(Long id) {
         this.id = id;
     }
 
-    public promotionalItem(Long id, String sysid, String name, long promotionId) {
+    public District(Long id, String sysid, String name, long regionId) {
         this.id = id;
         this.sysid = sysid;
         this.name = name;
-        this.promotionId = promotionId;
+        this.regionId = regionId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getPromotionalItemDao() : null;
+        myDao = daoSession != null ? daoSession.getDistrictDao() : null;
     }
 
     public Long getId() {
@@ -80,40 +82,62 @@ public class promotionalItem {
         this.name = name;
     }
 
-    public long getPromotionId() {
-        return promotionId;
+    public long getRegionId() {
+        return regionId;
     }
 
-    public void setPromotionId(long promotionId) {
-        this.promotionId = promotionId;
+    public void setRegionId(long regionId) {
+        this.regionId = regionId;
     }
 
     /** To-one relationship, resolved on first access. */
-    public promotion getPromotion() {
-        long __key = this.promotionId;
-        if (promotion__resolvedKey == null || !promotion__resolvedKey.equals(__key)) {
+    public Region getRegion() {
+        long __key = this.regionId;
+        if (region__resolvedKey == null || !region__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            promotionDao targetDao = daoSession.getPromotionDao();
-            promotion promotionNew = targetDao.load(__key);
+            RegionDao targetDao = daoSession.getRegionDao();
+            Region regionNew = targetDao.load(__key);
             synchronized (this) {
-                promotion = promotionNew;
-            	promotion__resolvedKey = __key;
+                region = regionNew;
+            	region__resolvedKey = __key;
             }
         }
-        return promotion;
+        return region;
     }
 
-    public void setPromotion(promotion promotion) {
-        if (promotion == null) {
-            throw new DaoException("To-one property 'promotionId' has not-null constraint; cannot set to-one to null");
+    public void setRegion(Region region) {
+        if (region == null) {
+            throw new DaoException("To-one property 'regionId' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
-            this.promotion = promotion;
-            promotionId = promotion.getId();
-            promotion__resolvedKey = promotionId;
+            this.region = region;
+            regionId = region.getId();
+            region__resolvedKey = regionId;
         }
+    }
+
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<Subcounty> getSubcounties() {
+        if (subcounties == null) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            SubcountyDao targetDao = daoSession.getSubcountyDao();
+            List<Subcounty> subcountiesNew = targetDao._queryDistrict_Subcounties(id);
+            synchronized (this) {
+                if(subcounties == null) {
+                    subcounties = subcountiesNew;
+                }
+            }
+        }
+        return subcounties;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetSubcounties() {
+        subcounties = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

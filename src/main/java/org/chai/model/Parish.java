@@ -9,50 +9,49 @@ import de.greenrobot.dao.DaoException;
 // KEEP INCLUDES - put your custom includes here
 // KEEP INCLUDES END
 /**
- * Entity mapped to table SUBCOUNTY.
+ * Entity mapped to table PARISH.
  */
-public class subcounty {
+public class Parish {
 
     private Long id;
     /** Not-null value. */
     private String sysid;
     /** Not-null value. */
     private String name;
-    private long districtId;
+    private long subcountyId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    private transient subcountyDao myDao;
+    private transient ParishDao myDao;
 
-    private district district;
-    private Long district__resolvedKey;
+    private Subcounty subcounty;
+    private Long subcounty__resolvedKey;
 
-    private List<parish> parishes;
-    private List<customer> customers;
+    private List<Village> villages;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
-    public subcounty() {
+    public Parish() {
     }
 
-    public subcounty(Long id) {
+    public Parish(Long id) {
         this.id = id;
     }
 
-    public subcounty(Long id, String sysid, String name, long districtId) {
+    public Parish(Long id, String sysid, String name, long subcountyId) {
         this.id = id;
         this.sysid = sysid;
         this.name = name;
-        this.districtId = districtId;
+        this.subcountyId = subcountyId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getSubcountyDao() : null;
+        myDao = daoSession != null ? daoSession.getParishDao() : null;
     }
 
     public Long getId() {
@@ -83,84 +82,62 @@ public class subcounty {
         this.name = name;
     }
 
-    public long getDistrictId() {
-        return districtId;
+    public long getSubcountyId() {
+        return subcountyId;
     }
 
-    public void setDistrictId(long districtId) {
-        this.districtId = districtId;
+    public void setSubcountyId(long subcountyId) {
+        this.subcountyId = subcountyId;
     }
 
     /** To-one relationship, resolved on first access. */
-    public district getDistrict() {
-        long __key = this.districtId;
-        if (district__resolvedKey == null || !district__resolvedKey.equals(__key)) {
+    public Subcounty getSubcounty() {
+        long __key = this.subcountyId;
+        if (subcounty__resolvedKey == null || !subcounty__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            districtDao targetDao = daoSession.getDistrictDao();
-            district districtNew = targetDao.load(__key);
+            SubcountyDao targetDao = daoSession.getSubcountyDao();
+            Subcounty subcountyNew = targetDao.load(__key);
             synchronized (this) {
-                district = districtNew;
-            	district__resolvedKey = __key;
+                subcounty = subcountyNew;
+            	subcounty__resolvedKey = __key;
             }
         }
-        return district;
+        return subcounty;
     }
 
-    public void setDistrict(district district) {
-        if (district == null) {
-            throw new DaoException("To-one property 'districtId' has not-null constraint; cannot set to-one to null");
+    public void setSubcounty(Subcounty subcounty) {
+        if (subcounty == null) {
+            throw new DaoException("To-one property 'subcountyId' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
-            this.district = district;
-            districtId = district.getId();
-            district__resolvedKey = districtId;
+            this.subcounty = subcounty;
+            subcountyId = subcounty.getId();
+            subcounty__resolvedKey = subcountyId;
         }
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<parish> getParishes() {
-        if (parishes == null) {
+    public List<Village> getVillages() {
+        if (villages == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            parishDao targetDao = daoSession.getParishDao();
-            List<parish> parishesNew = targetDao._querySubcounty_Parishes(id);
+            VillageDao targetDao = daoSession.getVillageDao();
+            List<Village> villagesNew = targetDao._queryParish_Villages(id);
             synchronized (this) {
-                if(parishes == null) {
-                    parishes = parishesNew;
+                if(villages == null) {
+                    villages = villagesNew;
                 }
             }
         }
-        return parishes;
+        return villages;
     }
 
     /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    public synchronized void resetParishes() {
-        parishes = null;
-    }
-
-    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<customer> getCustomers() {
-        if (customers == null) {
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            customerDao targetDao = daoSession.getCustomerDao();
-            List<customer> customersNew = targetDao._querySubcounty_Customers(id);
-            synchronized (this) {
-                if(customers == null) {
-                    customers = customersNew;
-                }
-            }
-        }
-        return customers;
-    }
-
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    public synchronized void resetCustomers() {
-        customers = null;
+    public synchronized void resetVillages() {
+        villages = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

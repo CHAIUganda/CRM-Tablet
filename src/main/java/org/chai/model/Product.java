@@ -11,7 +11,7 @@ import de.greenrobot.dao.DaoException;
 /**
  * Entity mapped to table PRODUCT.
  */
-public class product {
+public class Product {
 
     private Long id;
     /** Not-null value. */
@@ -32,23 +32,23 @@ public class product {
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    private transient productDao myDao;
+    private transient ProductDao myDao;
 
-    private List<order> orders;
-    private List<promotion> promotions;
-    private List<sale> sales;
+    private List<Order> orders;
+    private List<Promotion> promotions;
+    private List<Sale> sales;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
-    public product() {
+    public Product() {
     }
 
-    public product(Long id) {
+    public Product(Long id) {
         this.id = id;
     }
 
-    public product(Long id, String sysid, String productGroup, String productName, String brandName, String formulation, String unitOfMeasure, double unitPrice) {
+    public Product(Long id, String sysid, String productGroup, String productName, String brandName, String formulation, String unitOfMeasure, double unitPrice) {
         this.id = id;
         this.sysid = sysid;
         this.productGroup = productGroup;
@@ -142,13 +142,13 @@ public class product {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<order> getOrders() {
+    public List<Order> getOrders() {
         if (orders == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            orderDao targetDao = daoSession.getOrderDao();
-            List<order> ordersNew = targetDao._queryProduct_Orders(id);
+            OrderDao targetDao = daoSession.getOrderDao();
+            List<Order> ordersNew = targetDao._queryProduct_Orders(id);
             synchronized (this) {
                 if(orders == null) {
                     orders = ordersNew;
@@ -164,13 +164,13 @@ public class product {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<promotion> getPromotions() {
+    public List<Promotion> getPromotions() {
         if (promotions == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            promotionDao targetDao = daoSession.getPromotionDao();
-            List<promotion> promotionsNew = targetDao._queryProduct_Promotions(id);
+            PromotionDao targetDao = daoSession.getPromotionDao();
+            List<Promotion> promotionsNew = targetDao._queryProduct_Promotions(id);
             synchronized (this) {
                 if(promotions == null) {
                     promotions = promotionsNew;
@@ -186,13 +186,13 @@ public class product {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<sale> getSales() {
+    public List<Sale> getSales() {
         if (sales == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            saleDao targetDao = daoSession.getSaleDao();
-            List<sale> salesNew = targetDao._queryProduct_Sales(id);
+            SaleDao targetDao = daoSession.getSaleDao();
+            List<Sale> salesNew = targetDao._queryProduct_Sales(id);
             synchronized (this) {
                 if(sales == null) {
                     sales = salesNew;

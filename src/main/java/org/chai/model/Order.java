@@ -11,7 +11,7 @@ import de.greenrobot.dao.DaoException;
 /**
  * Entity mapped to table orders.
  */
-public class order {
+public class Order {
 
     private Long id;
     /** Not-null value. */
@@ -32,27 +32,27 @@ public class order {
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    private transient orderDao myDao;
+    private transient OrderDao myDao;
 
-    private customer customer;
+    private Customer customer;
     private Long customer__resolvedKey;
 
-    private product product;
+    private Product product;
     private Long product__resolvedKey;
 
-    private List<sale> sales;
+    private List<Sale> sales;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
-    public order() {
+    public Order() {
     }
 
-    public order(Long id) {
+    public Order(Long id) {
         this.id = id;
     }
 
-    public order(Long id, String sysid, double quantity, java.util.Date deliveryDate, java.util.Date orderDate, String contactTel, String contactName, long customerId, long productId) {
+    public Order(Long id, String sysid, double quantity, java.util.Date deliveryDate, java.util.Date orderDate, String contactTel, String contactName, long customerId, long productId) {
         this.id = id;
         this.sysid = sysid;
         this.quantity = quantity;
@@ -153,14 +153,14 @@ public class order {
     }
 
     /** To-one relationship, resolved on first access. */
-    public customer getCustomer() {
+    public Customer getCustomer() {
         long __key = this.customerId;
         if (customer__resolvedKey == null || !customer__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            customerDao targetDao = daoSession.getCustomerDao();
-            customer customerNew = targetDao.load(__key);
+            CustomerDao targetDao = daoSession.getCustomerDao();
+            Customer customerNew = targetDao.load(__key);
             synchronized (this) {
                 customer = customerNew;
             	customer__resolvedKey = __key;
@@ -169,7 +169,7 @@ public class order {
         return customer;
     }
 
-    public void setCustomer(customer customer) {
+    public void setCustomer(Customer customer) {
         if (customer == null) {
             throw new DaoException("To-one property 'customerId' has not-null constraint; cannot set to-one to null");
         }
@@ -181,14 +181,14 @@ public class order {
     }
 
     /** To-one relationship, resolved on first access. */
-    public product getProduct() {
+    public Product getProduct() {
         long __key = this.productId;
         if (product__resolvedKey == null || !product__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            productDao targetDao = daoSession.getProductDao();
-            product productNew = targetDao.load(__key);
+            ProductDao targetDao = daoSession.getProductDao();
+            Product productNew = targetDao.load(__key);
             synchronized (this) {
                 product = productNew;
             	product__resolvedKey = __key;
@@ -197,7 +197,7 @@ public class order {
         return product;
     }
 
-    public void setProduct(product product) {
+    public void setProduct(Product product) {
         if (product == null) {
             throw new DaoException("To-one property 'productId' has not-null constraint; cannot set to-one to null");
         }
@@ -209,13 +209,13 @@ public class order {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<sale> getSales() {
+    public List<Sale> getSales() {
         if (sales == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            saleDao targetDao = daoSession.getSaleDao();
-            List<sale> salesNew = targetDao._queryOrder_Sales(id);
+            SaleDao targetDao = daoSession.getSaleDao();
+            List<Sale> salesNew = targetDao._queryOrder_Sales(id);
             synchronized (this) {
                 if(sales == null) {
                     sales = salesNew;

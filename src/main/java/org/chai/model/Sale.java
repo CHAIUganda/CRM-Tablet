@@ -1,6 +1,5 @@
 package org.chai.model;
 
-import java.util.List;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -9,55 +8,57 @@ import de.greenrobot.dao.DaoException;
 // KEEP INCLUDES - put your custom includes here
 // KEEP INCLUDES END
 /**
- * Entity mapped to table PROMOTION.
+ * Entity mapped to table SALE.
  */
-public class promotion {
+public class Sale {
 
     private Long id;
     /** Not-null value. */
     private String sysid;
+    private int quantity;
+    private int salePrice;
     /** Not-null value. */
-    private String description;
-    /** Not-null value. */
-    private java.util.Date startDate;
-    /** Not-null value. */
-    private java.util.Date stopDate;
+    private java.util.Date dateOfSale;
+    private long orderId;
     private long productId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    private transient promotionDao myDao;
+    private transient SaleDao myDao;
 
-    private product product;
+    private Order order;
+    private Long order__resolvedKey;
+
+    private Product product;
     private Long product__resolvedKey;
 
-    private List<promotionalItem> items;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
-    public promotion() {
+    public Sale() {
     }
 
-    public promotion(Long id) {
+    public Sale(Long id) {
         this.id = id;
     }
 
-    public promotion(Long id, String sysid, String description, java.util.Date startDate, java.util.Date stopDate, long productId) {
+    public Sale(Long id, String sysid, int quantity, int salePrice, java.util.Date dateOfSale, long orderId, long productId) {
         this.id = id;
         this.sysid = sysid;
-        this.description = description;
-        this.startDate = startDate;
-        this.stopDate = stopDate;
+        this.quantity = quantity;
+        this.salePrice = salePrice;
+        this.dateOfSale = dateOfSale;
+        this.orderId = orderId;
         this.productId = productId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getPromotionDao() : null;
+        myDao = daoSession != null ? daoSession.getSaleDao() : null;
     }
 
     public Long getId() {
@@ -78,34 +79,38 @@ public class promotion {
         this.sysid = sysid;
     }
 
-    /** Not-null value. */
-    public String getDescription() {
-        return description;
+    public int getQuantity() {
+        return quantity;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    /** Not-null value. */
-    public java.util.Date getStartDate() {
-        return startDate;
+    public int getSalePrice() {
+        return salePrice;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setStartDate(java.util.Date startDate) {
-        this.startDate = startDate;
+    public void setSalePrice(int salePrice) {
+        this.salePrice = salePrice;
     }
 
     /** Not-null value. */
-    public java.util.Date getStopDate() {
-        return stopDate;
+    public java.util.Date getDateOfSale() {
+        return dateOfSale;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setStopDate(java.util.Date stopDate) {
-        this.stopDate = stopDate;
+    public void setDateOfSale(java.util.Date dateOfSale) {
+        this.dateOfSale = dateOfSale;
+    }
+
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 
     public long getProductId() {
@@ -117,14 +122,42 @@ public class promotion {
     }
 
     /** To-one relationship, resolved on first access. */
-    public product getProduct() {
+    public Order getOrder() {
+        long __key = this.orderId;
+        if (order__resolvedKey == null || !order__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            OrderDao targetDao = daoSession.getOrderDao();
+            Order orderNew = targetDao.load(__key);
+            synchronized (this) {
+                order = orderNew;
+            	order__resolvedKey = __key;
+            }
+        }
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        if (order == null) {
+            throw new DaoException("To-one property 'orderId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.order = order;
+            orderId = order.getId();
+            order__resolvedKey = orderId;
+        }
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public Product getProduct() {
         long __key = this.productId;
         if (product__resolvedKey == null || !product__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            productDao targetDao = daoSession.getProductDao();
-            product productNew = targetDao.load(__key);
+            ProductDao targetDao = daoSession.getProductDao();
+            Product productNew = targetDao.load(__key);
             synchronized (this) {
                 product = productNew;
             	product__resolvedKey = __key;
@@ -133,7 +166,7 @@ public class promotion {
         return product;
     }
 
-    public void setProduct(product product) {
+    public void setProduct(Product product) {
         if (product == null) {
             throw new DaoException("To-one property 'productId' has not-null constraint; cannot set to-one to null");
         }
@@ -142,28 +175,6 @@ public class promotion {
             productId = product.getId();
             product__resolvedKey = productId;
         }
-    }
-
-    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<promotionalItem> getItems() {
-        if (items == null) {
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            promotionalItemDao targetDao = daoSession.getPromotionalItemDao();
-            List<promotionalItem> itemsNew = targetDao._queryPromotion_Items(id);
-            synchronized (this) {
-                if(items == null) {
-                    items = itemsNew;
-                }
-            }
-        }
-        return items;
-    }
-
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    public synchronized void resetItems() {
-        items = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

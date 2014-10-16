@@ -11,7 +11,7 @@ import de.greenrobot.dao.DaoException;
 /**
  * Entity mapped to table CUSTOMER.
  */
-public class customer {
+public class Customer {
 
     private Long id;
     /** Not-null value. */
@@ -53,26 +53,26 @@ public class customer {
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    private transient customerDao myDao;
+    private transient CustomerDao myDao;
 
-    private subcounty subcounty;
+    private Subcounty subcounty;
     private Long subcounty__resolvedKey;
 
-    private List<customerContact> contacts;
-    private List<order> orders;
-    private List<task> tasks;
+    private List<CustomerContact> contacts;
+    private List<Order> orders;
+    private List<Task> tasks;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
-    public customer() {
+    public Customer() {
     }
 
-    public customer(Long id) {
+    public Customer(Long id) {
         this.id = id;
     }
 
-    public customer(Long id, String sysid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, Integer numberOfProducts, Integer restockFrequency, Double turnOver, java.util.Date tenureStartDate, java.util.Date tenureEndDate, long subcountyId) {
+    public Customer(Long id, String sysid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, Integer numberOfProducts, Integer restockFrequency, Double turnOver, java.util.Date tenureStartDate, java.util.Date tenureEndDate, long subcountyId) {
         this.id = id;
         this.sysid = sysid;
         this.latitude = latitude;
@@ -327,14 +327,14 @@ public class customer {
     }
 
     /** To-one relationship, resolved on first access. */
-    public subcounty getSubcounty() {
+    public Subcounty getSubcounty() {
         long __key = this.subcountyId;
         if (subcounty__resolvedKey == null || !subcounty__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            subcountyDao targetDao = daoSession.getSubcountyDao();
-            subcounty subcountyNew = targetDao.load(__key);
+            SubcountyDao targetDao = daoSession.getSubcountyDao();
+            Subcounty subcountyNew = targetDao.load(__key);
             synchronized (this) {
                 subcounty = subcountyNew;
             	subcounty__resolvedKey = __key;
@@ -343,7 +343,7 @@ public class customer {
         return subcounty;
     }
 
-    public void setSubcounty(subcounty subcounty) {
+    public void setSubcounty(Subcounty subcounty) {
         if (subcounty == null) {
             throw new DaoException("To-one property 'subcountyId' has not-null constraint; cannot set to-one to null");
         }
@@ -355,13 +355,13 @@ public class customer {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<customerContact> getContacts() {
+    public List<CustomerContact> getContacts() {
         if (contacts == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            customerContactDao targetDao = daoSession.getCustomerContactDao();
-            List<customerContact> contactsNew = targetDao._queryCustomer_Contacts(id);
+            CustomerContactDao targetDao = daoSession.getCustomerContactDao();
+            List<CustomerContact> contactsNew = targetDao._queryCustomer_Contacts(id);
             synchronized (this) {
                 if(contacts == null) {
                     contacts = contactsNew;
@@ -377,13 +377,13 @@ public class customer {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<order> getOrders() {
+    public List<Order> getOrders() {
         if (orders == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            orderDao targetDao = daoSession.getOrderDao();
-            List<order> ordersNew = targetDao._queryCustomer_Orders(id);
+            OrderDao targetDao = daoSession.getOrderDao();
+            List<Order> ordersNew = targetDao._queryCustomer_Orders(id);
             synchronized (this) {
                 if(orders == null) {
                     orders = ordersNew;
@@ -399,13 +399,13 @@ public class customer {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<task> getTasks() {
+    public List<Task> getTasks() {
         if (tasks == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            taskDao targetDao = daoSession.getTaskDao();
-            List<task> tasksNew = targetDao._queryCustomer_Tasks(id);
+            TaskDao targetDao = daoSession.getTaskDao();
+            List<Task> tasksNew = targetDao._queryCustomer_Tasks(id);
             synchronized (this) {
                 if(tasks == null) {
                     tasks = tasksNew;
