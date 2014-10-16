@@ -30,6 +30,9 @@ public class promotion {
     /** Used for active entity operations. */
     private transient promotionDao myDao;
 
+    private product product;
+    private Long product__resolvedKey;
+
     private List<promotionalItem> items;
 
     // KEEP FIELDS - put your custom fields here
@@ -111,6 +114,34 @@ public class promotion {
 
     public void setProductId(long productId) {
         this.productId = productId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public product getProduct() {
+        long __key = this.productId;
+        if (product__resolvedKey == null || !product__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            productDao targetDao = daoSession.getProductDao();
+            product productNew = targetDao.load(__key);
+            synchronized (this) {
+                product = productNew;
+            	product__resolvedKey = __key;
+            }
+        }
+        return product;
+    }
+
+    public void setProduct(product product) {
+        if (product == null) {
+            throw new DaoException("To-one property 'productId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.product = product;
+            productId = product.getId();
+            product__resolvedKey = productId;
+        }
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

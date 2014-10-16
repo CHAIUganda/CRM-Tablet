@@ -26,6 +26,9 @@ public class subcounty {
     /** Used for active entity operations. */
     private transient subcountyDao myDao;
 
+    private district district;
+    private Long district__resolvedKey;
+
     private List<parish> parishes;
     private List<customer> customers;
 
@@ -86,6 +89,34 @@ public class subcounty {
 
     public void setDistrictId(long districtId) {
         this.districtId = districtId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public district getDistrict() {
+        long __key = this.districtId;
+        if (district__resolvedKey == null || !district__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            districtDao targetDao = daoSession.getDistrictDao();
+            district districtNew = targetDao.load(__key);
+            synchronized (this) {
+                district = districtNew;
+            	district__resolvedKey = __key;
+            }
+        }
+        return district;
+    }
+
+    public void setDistrict(district district) {
+        if (district == null) {
+            throw new DaoException("To-one property 'districtId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.district = district;
+            districtId = district.getId();
+            district__resolvedKey = districtId;
+        }
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

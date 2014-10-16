@@ -22,6 +22,7 @@ public class customer {
     private String outletName;
     private String outletType;
     private String outletSize;
+    private byte[] outletPicture;
     /** Not-null value. */
     private String split;
     /** Not-null value. */
@@ -54,6 +55,9 @@ public class customer {
     /** Used for active entity operations. */
     private transient customerDao myDao;
 
+    private subcounty subcounty;
+    private Long subcounty__resolvedKey;
+
     private List<customerContact> contacts;
     private List<order> orders;
     private List<task> tasks;
@@ -68,7 +72,7 @@ public class customer {
         this.id = id;
     }
 
-    public customer(Long id, String sysid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, Integer numberOfProducts, Integer restockFrequency, Double turnOver, java.util.Date tenureStartDate, java.util.Date tenureEndDate, long subcountyId) {
+    public customer(Long id, String sysid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, Integer numberOfProducts, Integer restockFrequency, Double turnOver, java.util.Date tenureStartDate, java.util.Date tenureEndDate, long subcountyId) {
         this.id = id;
         this.sysid = sysid;
         this.latitude = latitude;
@@ -76,6 +80,7 @@ public class customer {
         this.outletName = outletName;
         this.outletType = outletType;
         this.outletSize = outletSize;
+        this.outletPicture = outletPicture;
         this.split = split;
         this.openingHours = openingHours;
         this.majoritySourceOfSupply = majoritySourceOfSupply;
@@ -159,6 +164,14 @@ public class customer {
 
     public void setOutletSize(String outletSize) {
         this.outletSize = outletSize;
+    }
+
+    public byte[] getOutletPicture() {
+        return outletPicture;
+    }
+
+    public void setOutletPicture(byte[] outletPicture) {
+        this.outletPicture = outletPicture;
     }
 
     /** Not-null value. */
@@ -311,6 +324,34 @@ public class customer {
 
     public void setSubcountyId(long subcountyId) {
         this.subcountyId = subcountyId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public subcounty getSubcounty() {
+        long __key = this.subcountyId;
+        if (subcounty__resolvedKey == null || !subcounty__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            subcountyDao targetDao = daoSession.getSubcountyDao();
+            subcounty subcountyNew = targetDao.load(__key);
+            synchronized (this) {
+                subcounty = subcountyNew;
+            	subcounty__resolvedKey = __key;
+            }
+        }
+        return subcounty;
+    }
+
+    public void setSubcounty(subcounty subcounty) {
+        if (subcounty == null) {
+            throw new DaoException("To-one property 'subcountyId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.subcounty = subcounty;
+            subcountyId = subcounty.getId();
+            subcounty__resolvedKey = subcountyId;
+        }
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

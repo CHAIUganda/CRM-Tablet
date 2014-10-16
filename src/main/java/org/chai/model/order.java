@@ -34,6 +34,12 @@ public class order {
     /** Used for active entity operations. */
     private transient orderDao myDao;
 
+    private customer customer;
+    private Long customer__resolvedKey;
+
+    private product product;
+    private Long product__resolvedKey;
+
     private List<sale> sales;
 
     // KEEP FIELDS - put your custom fields here
@@ -144,6 +150,62 @@ public class order {
 
     public void setProductId(long productId) {
         this.productId = productId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public customer getCustomer() {
+        long __key = this.customerId;
+        if (customer__resolvedKey == null || !customer__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            customerDao targetDao = daoSession.getCustomerDao();
+            customer customerNew = targetDao.load(__key);
+            synchronized (this) {
+                customer = customerNew;
+            	customer__resolvedKey = __key;
+            }
+        }
+        return customer;
+    }
+
+    public void setCustomer(customer customer) {
+        if (customer == null) {
+            throw new DaoException("To-one property 'customerId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.customer = customer;
+            customerId = customer.getId();
+            customer__resolvedKey = customerId;
+        }
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public product getProduct() {
+        long __key = this.productId;
+        if (product__resolvedKey == null || !product__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            productDao targetDao = daoSession.getProductDao();
+            product productNew = targetDao.load(__key);
+            synchronized (this) {
+                product = productNew;
+            	product__resolvedKey = __key;
+            }
+        }
+        return product;
+    }
+
+    public void setProduct(product product) {
+        if (product == null) {
+            throw new DaoException("To-one property 'productId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.product = product;
+            productId = product.getId();
+            product__resolvedKey = productId;
+        }
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

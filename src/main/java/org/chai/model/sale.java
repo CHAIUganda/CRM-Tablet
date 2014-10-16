@@ -28,6 +28,12 @@ public class sale {
     /** Used for active entity operations. */
     private transient saleDao myDao;
 
+    private order order;
+    private Long order__resolvedKey;
+
+    private product product;
+    private Long product__resolvedKey;
+
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -113,6 +119,62 @@ public class sale {
 
     public void setProductId(long productId) {
         this.productId = productId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public order getOrder() {
+        long __key = this.orderId;
+        if (order__resolvedKey == null || !order__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            orderDao targetDao = daoSession.getOrderDao();
+            order orderNew = targetDao.load(__key);
+            synchronized (this) {
+                order = orderNew;
+            	order__resolvedKey = __key;
+            }
+        }
+        return order;
+    }
+
+    public void setOrder(order order) {
+        if (order == null) {
+            throw new DaoException("To-one property 'orderId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.order = order;
+            orderId = order.getId();
+            order__resolvedKey = orderId;
+        }
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public product getProduct() {
+        long __key = this.productId;
+        if (product__resolvedKey == null || !product__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            productDao targetDao = daoSession.getProductDao();
+            product productNew = targetDao.load(__key);
+            synchronized (this) {
+                product = productNew;
+            	product__resolvedKey = __key;
+            }
+        }
+        return product;
+    }
+
+    public void setProduct(product product) {
+        if (product == null) {
+            throw new DaoException("To-one property 'productId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.product = product;
+            productId = product.getId();
+            product__resolvedKey = productId;
+        }
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

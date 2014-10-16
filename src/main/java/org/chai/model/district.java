@@ -26,6 +26,9 @@ public class district {
     /** Used for active entity operations. */
     private transient districtDao myDao;
 
+    private region region;
+    private Long region__resolvedKey;
+
     private List<subcounty> subcounties;
 
     // KEEP FIELDS - put your custom fields here
@@ -85,6 +88,34 @@ public class district {
 
     public void setRegionId(long regionId) {
         this.regionId = regionId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public region getRegion() {
+        long __key = this.regionId;
+        if (region__resolvedKey == null || !region__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            regionDao targetDao = daoSession.getRegionDao();
+            region regionNew = targetDao.load(__key);
+            synchronized (this) {
+                region = regionNew;
+            	region__resolvedKey = __key;
+            }
+        }
+        return region;
+    }
+
+    public void setRegion(region region) {
+        if (region == null) {
+            throw new DaoException("To-one property 'regionId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.region = region;
+            regionId = region.getId();
+            region__resolvedKey = regionId;
+        }
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

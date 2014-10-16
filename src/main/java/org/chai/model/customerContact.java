@@ -37,6 +37,9 @@ public class customerContact {
     /** Used for active entity operations. */
     private transient customerContactDao myDao;
 
+    private customer customer;
+    private Long customer__resolvedKey;
+
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -168,6 +171,34 @@ public class customerContact {
 
     public void setCustomerId(long customerId) {
         this.customerId = customerId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public customer getCustomer() {
+        long __key = this.customerId;
+        if (customer__resolvedKey == null || !customer__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            customerDao targetDao = daoSession.getCustomerDao();
+            customer customerNew = targetDao.load(__key);
+            synchronized (this) {
+                customer = customerNew;
+            	customer__resolvedKey = __key;
+            }
+        }
+        return customer;
+    }
+
+    public void setCustomer(customer customer) {
+        if (customer == null) {
+            throw new DaoException("To-one property 'customerId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.customer = customer;
+            customerId = customer.getId();
+            customer__resolvedKey = customerId;
+        }
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

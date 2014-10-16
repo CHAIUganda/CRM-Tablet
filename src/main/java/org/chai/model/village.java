@@ -25,6 +25,9 @@ public class village {
     /** Used for active entity operations. */
     private transient villageDao myDao;
 
+    private parish parish;
+    private Long parish__resolvedKey;
+
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -83,6 +86,34 @@ public class village {
 
     public void setParishId(long parishId) {
         this.parishId = parishId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public parish getParish() {
+        long __key = this.parishId;
+        if (parish__resolvedKey == null || !parish__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            parishDao targetDao = daoSession.getParishDao();
+            parish parishNew = targetDao.load(__key);
+            synchronized (this) {
+                parish = parishNew;
+            	parish__resolvedKey = __key;
+            }
+        }
+        return parish;
+    }
+
+    public void setParish(parish parish) {
+        if (parish == null) {
+            throw new DaoException("To-one property 'parishId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.parish = parish;
+            parishId = parish.getId();
+            parish__resolvedKey = parishId;
+        }
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

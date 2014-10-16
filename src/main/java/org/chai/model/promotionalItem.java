@@ -25,6 +25,9 @@ public class promotionalItem {
     /** Used for active entity operations. */
     private transient promotionalItemDao myDao;
 
+    private promotion promotion;
+    private Long promotion__resolvedKey;
+
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -83,6 +86,34 @@ public class promotionalItem {
 
     public void setPromotionId(long promotionId) {
         this.promotionId = promotionId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public promotion getPromotion() {
+        long __key = this.promotionId;
+        if (promotion__resolvedKey == null || !promotion__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            promotionDao targetDao = daoSession.getPromotionDao();
+            promotion promotionNew = targetDao.load(__key);
+            synchronized (this) {
+                promotion = promotionNew;
+            	promotion__resolvedKey = __key;
+            }
+        }
+        return promotion;
+    }
+
+    public void setPromotion(promotion promotion) {
+        if (promotion == null) {
+            throw new DaoException("To-one property 'promotionId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.promotion = promotion;
+            promotionId = promotion.getId();
+            promotion__resolvedKey = promotionId;
+        }
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

@@ -26,6 +26,9 @@ public class parish {
     /** Used for active entity operations. */
     private transient parishDao myDao;
 
+    private subcounty subcounty;
+    private Long subcounty__resolvedKey;
+
     private List<village> villages;
 
     // KEEP FIELDS - put your custom fields here
@@ -85,6 +88,34 @@ public class parish {
 
     public void setSubcountyId(long subcountyId) {
         this.subcountyId = subcountyId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public subcounty getSubcounty() {
+        long __key = this.subcountyId;
+        if (subcounty__resolvedKey == null || !subcounty__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            subcountyDao targetDao = daoSession.getSubcountyDao();
+            subcounty subcountyNew = targetDao.load(__key);
+            synchronized (this) {
+                subcounty = subcountyNew;
+            	subcounty__resolvedKey = __key;
+            }
+        }
+        return subcounty;
+    }
+
+    public void setSubcounty(subcounty subcounty) {
+        if (subcounty == null) {
+            throw new DaoException("To-one property 'subcountyId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.subcounty = subcounty;
+            subcountyId = subcounty.getId();
+            subcounty__resolvedKey = subcountyId;
+        }
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
