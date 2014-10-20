@@ -1,8 +1,574 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-</LinearLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f8f9fe">
+
+        <include layout="@layout/header_layout"/>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_below="@+id/header">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Customer:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/detailsname"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:background="@drawable/bordertextfield"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/address"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:background="@drawable/bordertextfield"
+                        android:textStyle="italic" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tenure Start Date:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/detailstenurestartdate"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tenure End Date:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_tenure_end_date"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Outlet Type:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_outlet_type"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Outlet Size:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Split:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/customernamevalue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Opening Hours:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/detail_opening_hrs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Majority Sources Of Supply:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_sources_of_supply"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Key wholesaler Name:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_key_wholesaler_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Key Wholesaler Contact:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_key_wholesaler_contact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Building Structure:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/detials_building_structure"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Equipment:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_equipment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description Of Outlet Location:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_desc_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number Of Employees:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_number_of_employees"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number Of Branches:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_number_of_branches"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number Of Customers/Day:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_num_customers_per_day"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number Of Products:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_num_products"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Restock Frequency:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_restock_frequency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Turn Over:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_turn_over"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Subcounty:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_subcounty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

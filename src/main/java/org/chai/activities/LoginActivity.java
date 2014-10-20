@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import org.chai.R;
+import org.chai.util.SampleData;
 
 public class LoginActivity extends Activity {
 
@@ -23,6 +24,10 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
 		Log.i(TAG, "onCreate");
         setContentView(R.layout.login_activity);
+
+        //create initial data incase there is none
+        SampleData sampleData = new SampleData(this);
+        sampleData.createBaseData();
 
         Button loginBtn = (Button)findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener(){

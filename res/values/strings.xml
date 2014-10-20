@@ -5,4 +5,12 @@
     <string name="loginResponse">The username/password combination is not valid</string>
     <string name="usernameLabel">Username</string>
     <string name="passwordLabel">Password</string>
+    <string name="searcHint">Type here to filter&#8230;</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="update">Update</string>
+    <string name="newcustomer">Add new Customer</string>
+    <string name="nearbycustomer">Find Nearby Customers</string>
+    <string name="editprofile">Edit Profile</string>
+    <string name="markasinactive">Mark As Inactive</string>
 </resources>

@@ -2,7 +2,7 @@
 <resources>
     <dimen name="text_label_size">12dp</dimen>
     <dimen name="login_label_size">18dp</dimen>
-    <dimen name="list_main_text_size">26dp</dimen>
+    <dimen name="list_main_text_size">20dp</dimen>
     <dimen name="list_sub_text_size">18dip</dimen>
     <dimen name="list_sub_sub_text_size">14dip</dimen>
 </resources>

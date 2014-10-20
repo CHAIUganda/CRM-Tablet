@@ -1,18 +1,23 @@
-package org.chai.adapters;
+package org.chai.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import org.chai.R;
+import org.chai.activities.customer.CustomerDetailsActivity;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.util.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by victor on 10/16/14.
@@ -22,10 +27,15 @@ public class CustomerAdapter extends BaseAdapter{
     private Activity activity;
     private LayoutInflater inflater;
     private List<Customer> customers;
+    private ArrayList<Customer> filterList;
+    private Context context;
 
-    public CustomerAdapter(Activity activity,List<Customer> customers){
+    public CustomerAdapter(Context context,Activity activity,List<Customer> customers){
         this.activity = activity;
         this.customers = customers;
+        this.context = context;
+        filterList = new ArrayList<Customer>();
+        filterList.addAll(customers);
     }
 
     @Override
@@ -56,19 +66,32 @@ public class CustomerAdapter extends BaseAdapter{
         TextView telephone = (TextView)convertView.findViewById(R.id.customertelephone);
 
         Customer customer = customers.get(position);
-        CustomerContact customerContact = null;
+        CustomerContact customerCtct = null;
         if(customer.getContacts().size()>0){
-            customerContact = getKeyCustomerContact(customer.getContacts());
+            customerCtct = getKeyCustomerContact(customer.getContacts());
         }
 
-        if(customerContact!=null){
-            telephone.setText(customerContact.getContact());
+        if(customerCtct!=null){
+            telephone.setText(customerCtct.getContact());
         }else{
             telephone.setText("No Contact Available");
         }
 
         customerName.setText(customer.getOutletName());
-        customerAddress.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(),20));
+        customerAddress.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(),50));
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    Intent intent = new Intent(activity.getApplicationContext(), CustomerDetailsActivity.class);
+                    //context.startActivity(intent);
+                    activity.startActivity(intent);
+                }catch (Exception ex){
+                    Toast.makeText(context, "error:" + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         return convertView;
     }
 
@@ -79,5 +102,20 @@ public class CustomerAdapter extends BaseAdapter{
             }
         }
         return customerContacts.get(0);
+    }
+
+    public void filter(String term){
+        term = term.toLowerCase(Locale.getDefault());
+        customers.clear();
+        if(term.length()== 0){
+            customers.addAll(filterList);
+        }else{
+            for(Customer customer:filterList){
+                if(customer.getOutletName().toLowerCase(Locale.getDefault()).contains(term)){
+                    customers.add(customer);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

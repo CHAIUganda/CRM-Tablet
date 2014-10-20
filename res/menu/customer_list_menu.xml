@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+                android:id="@+id/menu_new_customer"
+                android:icon="@drawable/new_icon"
+                android:title="Add New Customer"/>
 
+        <item
+                android:id="@+id/menu_nearby_customer"
+                android:icon="@drawable/nearby_icon"
+                android:title="Find Nearby Customers"/>
+    </menu>
 </menu>

@@ -1,6 +1,5 @@
 package org.chai.util;
 
-import org.chai.R;
 
 /**
  * Created by victor on 10/16/14.
