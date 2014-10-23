@@ -13,4 +13,7 @@
     <string name="nearbycustomer">Find Nearby Customers</string>
     <string name="editprofile">Edit Profile</string>
     <string name="markasinactive">Mark As Inactive</string>
+    <string name="addnewcustomerlabel">Add New Customer</string>
+    <string name="cancellabel">Cancel</string>
+    <string name="updatelabel">Update</string>
 </resources>
