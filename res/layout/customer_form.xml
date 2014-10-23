@@ -566,6 +566,21 @@
                         android:background="@drawable/bordertextfield"/>
 
             </LinearLayout>
+            <LinearLayout android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:padding="10dp">
+                <Button
+                        android:id="@+id/menu_add_new_customer"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="50dp"
+                        android:text="@string/addnewcustomerlabel"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:background="#428bca"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
