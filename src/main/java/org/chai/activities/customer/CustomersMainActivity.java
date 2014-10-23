@@ -2,6 +2,7 @@ package org.chai.activities.customer;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
@@ -99,6 +100,8 @@ public class CustomersMainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem menuItem){
         switch (menuItem.getItemId()){
             case R.id.menu_new_customer:
+                Intent intent = new Intent(getApplicationContext(),NewCustomerActivity.class);
+                startActivity(intent);
             case R.id.menu_nearby_customer:
             default:
                return super.onOptionsItemSelected(menuItem);
