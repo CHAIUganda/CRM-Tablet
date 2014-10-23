@@ -17,6 +17,7 @@
       <activity android:name=".activities.calls.CallsMainActivity"/>
       <activity android:name=".activities.customer.CustomerDetailsActivity"/>
       <activity android:name=".activities.customer.NewCustomerActivity"/>
+      <activity android:name=".activities.customer.CustomerEditActivity"/>
   </application>
 
 </manifest>
