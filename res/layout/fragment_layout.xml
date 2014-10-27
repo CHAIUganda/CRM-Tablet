@@ -23,7 +23,7 @@
             android:id="@+id/btn_calls"
             style="@style/DashboardButton"
             android:drawableTop="@drawable/btn_calls"
-            android:text="Calls" />
+            android:text="Call Data" />
 
     <!--  Places Button -->
     <Button

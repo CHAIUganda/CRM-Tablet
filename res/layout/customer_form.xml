@@ -192,7 +192,7 @@
                         android:textStyle="bold"/>
 
                 <EditText
-                        android:id="@+id/customernamevalue"
+                        android:id="@+id/details_split"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -322,7 +322,7 @@
                         android:textStyle="bold"/>
 
                 <EditText
-                        android:id="@+id/detials_building_structure"
+                        android:id="@+id/details_building_structure"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -541,6 +541,31 @@
 
             </LinearLayout>
 
+            <LinearLayout android:orientation="horizontal"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:padding="10dp">
+
+                <EditText
+                        android:id="@+id/details_gps"
+                        android:text=""
+                        android:minWidth="20dip"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:width="150dip"
+                        android:height="40dip"
+                        android:textColor="@color/list_main_text_color"
+                        android:background="@drawable/bordertextfield"/>
+
+                <Button
+                        android:id="@+id/new_customer_capture_gps"
+                        android:text="Record GPS Coordinates"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#428bca"
+                        android:layout_marginLeft="5dp"/>
+            </LinearLayout>
+
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -555,15 +580,12 @@
                         android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
-                <EditText
+                <Spinner
                         android:id="@+id/details_subcounty"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textSize="@dimen/list_sub_text_size"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:background="@drawable/bordertextfield"/>
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:background="@drawable/btn_dropdown"/>
 
             </LinearLayout>
             <LinearLayout android:orientation="vertical"
@@ -574,7 +596,8 @@
                         android:id="@+id/menu_add_new_customer"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:text="@string/addnewcustomerlabel"
                         android:layout_marginLeft="50dp"
                         android:layout_marginRight="50dp"

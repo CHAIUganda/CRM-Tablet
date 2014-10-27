@@ -16,4 +16,12 @@
     <string name="addnewcustomerlabel">Add New Customer</string>
     <string name="cancellabel">Cancel</string>
     <string name="updatelabel">Update</string>
+    <string name="selectItem">Select Item</string>
+    <string name="zinc">Zinc</string>
+    <string name="ors">ORS</string>
+    <string name="selectpromotion">Select Promotion</string>
+    <string name="gpscoordinates">GPS Coordinates</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="savecalldata">Save Call Data</string>
 </resources>

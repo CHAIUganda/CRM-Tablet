@@ -24,4 +24,15 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:background">#dedede</item>
     </style>
+
+    <style name="myCheckBox">
+        <item name="android:background">@drawable/btn_check_label_background</item>
+        <item name="android:button">@drawable/my_checkbox</item>
+    </style>
+    <style name="myEditText">
+        <item name="android:height">40dp</item>
+        <item name="android:textColor">@color/list_main_text_color</item>
+        <item name="android:background">@drawable/bordertextfield</item>
+        <item name="android:textSize">@dimen/list_sub_text_size</item>
+    </style>
 </resources>
