@@ -23,6 +23,7 @@ public class SampleData {
     private RegionDao regionDao;
     private DistrictDao districtDao;
     private SubcountyDao subcountyDao;
+    private TaskDao taskDao;
     private Context context;
 
     public SampleData(Context context) {
@@ -41,6 +42,7 @@ public class SampleData {
             regionDao = daoSession.getRegionDao();
             districtDao = daoSession.getDistrictDao();
             subcountyDao = daoSession.getSubcountyDao();
+            taskDao = daoSession.getTaskDao();
         } catch (Exception ex) {
             //
         }
@@ -55,6 +57,10 @@ public class SampleData {
             Subcounty subcounty = new Subcounty(null, UUID.randomUUID().toString(), "Kamuokya", districtId);
             long subcountyId = subcountyDao.insert(subcounty);
             generateSampleCustomers(subcountyId);
+
+            long customerId = insertSampleCustomer(subcountyId,"Diva medical center");
+            insertSampleContact(customerId,"Kamugisha James");
+            insertSampleTasks(customerId);
 
         } catch (Exception ex) {
             Toast.makeText(context, "error in createbaseData:" + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
@@ -187,6 +193,68 @@ public class SampleData {
         customerContactDao.insert(customerContact);
         customerContactDao.insert(customerContact2);
         customerContactDao.insert(customerContact3);
+    }
+
+    public void insertSampleTasks(long customer1Id){
+        Task task1 = new Task(null,UUID.randomUUID().toString(),"deliver order to sentumbwe","New task","high",new Date(),customer1Id);
+        Task task2 = new Task(null,UUID.randomUUID().toString(),"deliver order to John","New task","high",new Date(),customer1Id);
+        Task task3 = new Task(null,UUID.randomUUID().toString(),"deliver order to JOhn","New task","high",new Date(),customer1Id);
+        Task task4 = new Task(null,UUID.randomUUID().toString(),"deliver order to Mary","Outstanding","high",new Date(),customer1Id);
+        Task task5 = new Task(null,UUID.randomUUID().toString(),"deliver order to Sarah","Scheduled","high",new Date(),customer1Id);
+
+        taskDao.insert(task1);
+        taskDao.insert(task2);
+        taskDao.insert(task3);
+        taskDao.insert(task4);
+        taskDao.insert(task5);
+
+
+    }
+
+    public long insertSampleCustomer(long subcountyId,String name){
+        Customer customer1 = new Customer(null);
+        customer1.setSysid(UUID.randomUUID().toString());
+        customer1.setOutletName(name);
+        customer1.setDescriptionOfOutletLocation("Wandegeya");
+        customer1.setLatitude(0.4183211563884709);
+        customer1.setLongitude(31.221599949502696);
+        customer1.setOutletType("Retail");
+        customer1.setOutletSize("Medium");
+        customer1.setSplit("Urban");
+        customer1.setOpeningHours("Early Morning");
+        customer1.setMajoritySourceOfSupply("Kampala,kamuokya");
+        customer1.setKeyWholeSalerName("Kayondo Ronald");
+        customer1.setKeyWholeSalerContact("0777505033");
+        customer1.setBuildingStructure("Permanent");
+        customer1.setEquipment("Trays");
+        customer1.setNumberOfEmployees(10);
+        customer1.setNumberOfBranches(5);
+        customer1.setNumberOfCustomersPerDay(50);
+        customer1.setNumberOfProducts(10);
+        customer1.setRestockFrequency(2);
+        customer1.setTurnOver(3143.345);
+        customer1.setTenureStartDate(new Date());
+        customer1.setTenureEndDate(new Date());
+        customer1.setSubcountyId(subcountyId);
+        long customerId1 = customerDao.insert(customer1);
+
+        return customerId1;
+    }
+
+    public long insertSampleContact(long customerId,String name){
+        CustomerContact customerContact = new CustomerContact(null);
+        customerContact.setSysid(UUID.randomUUID().toString());
+        customerContact.setContact("(256) 363-1791");
+        customerContact.setName(name);
+        customerContact.setTypeOfContact("key");
+        customerContact.setGender("Male");
+        customerContact.setRole("Doctor");
+        customerContact.setQualification("University");
+        customerContact.setNetworkOrAssociation("Kampala Medics");
+        customerContact.setGraduationYear(2013);
+        customerContact.setCustomerId(customerId);
+
+        return customerContactDao.insert(customerContact);
     }
 
 }
