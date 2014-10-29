@@ -45,8 +45,10 @@ public class Customer {
     private Integer numberOfProducts;
     private Integer restockFrequency;
     private Double turnOver;
-    private java.util.Date tenureStartDate;
-    private java.util.Date tenureEndDate;
+    private Integer tenureLengthYears;
+    private Integer tenureLengthMonths;
+    private String parish;
+    private String village;
     private long subcountyId;
 
     /** Used to resolve relations */
@@ -72,7 +74,7 @@ public class Customer {
         this.id = id;
     }
 
-    public Customer(Long id, String sysid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, Integer numberOfProducts, Integer restockFrequency, Double turnOver, java.util.Date tenureStartDate, java.util.Date tenureEndDate, long subcountyId) {
+    public Customer(Long id, String sysid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, Integer numberOfProducts, Integer restockFrequency, Double turnOver, Integer tenureLengthYears, Integer tenureLengthMonths, String parish, String village, long subcountyId) {
         this.id = id;
         this.sysid = sysid;
         this.latitude = latitude;
@@ -95,8 +97,10 @@ public class Customer {
         this.numberOfProducts = numberOfProducts;
         this.restockFrequency = restockFrequency;
         this.turnOver = turnOver;
-        this.tenureStartDate = tenureStartDate;
-        this.tenureEndDate = tenureEndDate;
+        this.tenureLengthYears = tenureLengthYears;
+        this.tenureLengthMonths = tenureLengthMonths;
+        this.parish = parish;
+        this.village = village;
         this.subcountyId = subcountyId;
     }
 
@@ -302,20 +306,36 @@ public class Customer {
         this.turnOver = turnOver;
     }
 
-    public java.util.Date getTenureStartDate() {
-        return tenureStartDate;
+    public Integer getTenureLengthYears() {
+        return tenureLengthYears;
     }
 
-    public void setTenureStartDate(java.util.Date tenureStartDate) {
-        this.tenureStartDate = tenureStartDate;
+    public void setTenureLengthYears(Integer tenureLengthYears) {
+        this.tenureLengthYears = tenureLengthYears;
     }
 
-    public java.util.Date getTenureEndDate() {
-        return tenureEndDate;
+    public Integer getTenureLengthMonths() {
+        return tenureLengthMonths;
     }
 
-    public void setTenureEndDate(java.util.Date tenureEndDate) {
-        this.tenureEndDate = tenureEndDate;
+    public void setTenureLengthMonths(Integer tenureLengthMonths) {
+        this.tenureLengthMonths = tenureLengthMonths;
+    }
+
+    public String getParish() {
+        return parish;
+    }
+
+    public void setParish(String parish) {
+        this.parish = parish;
+    }
+
+    public String getVillage() {
+        return village;
+    }
+
+    public void setVillage(String village) {
+        this.village = village;
     }
 
     public long getSubcountyId() {

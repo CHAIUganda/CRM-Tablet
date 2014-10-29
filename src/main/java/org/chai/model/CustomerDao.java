@@ -50,9 +50,11 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         public final static Property NumberOfProducts = new Property(19, Integer.class, "numberOfProducts", false, "NUMBER_OF_PRODUCTS");
         public final static Property RestockFrequency = new Property(20, Integer.class, "restockFrequency", false, "RESTOCK_FREQUENCY");
         public final static Property TurnOver = new Property(21, Double.class, "turnOver", false, "TURN_OVER");
-        public final static Property TenureStartDate = new Property(22, java.util.Date.class, "tenureStartDate", false, "TENURE_START_DATE");
-        public final static Property TenureEndDate = new Property(23, java.util.Date.class, "tenureEndDate", false, "TENURE_END_DATE");
-        public final static Property SubcountyId = new Property(24, long.class, "subcountyId", false, "SUBCOUNTY_ID");
+        public final static Property TenureLengthYears = new Property(22, Integer.class, "tenureLengthYears", false, "TENURE_LENGTH_YEARS");
+        public final static Property TenureLengthMonths = new Property(23, Integer.class, "tenureLengthMonths", false, "TENURE_LENGTH_MONTHS");
+        public final static Property Parish = new Property(24, String.class, "parish", false, "PARISH");
+        public final static Property Village = new Property(25, String.class, "village", false, "VILLAGE");
+        public final static Property SubcountyId = new Property(26, long.class, "subcountyId", false, "SUBCOUNTY_ID");
     };
 
     private DaoSession daoSession;
@@ -94,9 +96,11 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
                 "'NUMBER_OF_PRODUCTS' INTEGER," + // 19: numberOfProducts
                 "'RESTOCK_FREQUENCY' INTEGER," + // 20: restockFrequency
                 "'TURN_OVER' REAL," + // 21: turnOver
-                "'TENURE_START_DATE' INTEGER," + // 22: tenureStartDate
-                "'TENURE_END_DATE' INTEGER," + // 23: tenureEndDate
-                "'SUBCOUNTY_ID' INTEGER NOT NULL );"); // 24: subcountyId
+                "'TENURE_LENGTH_YEARS' INTEGER," + // 22: tenureLengthYears
+                "'TENURE_LENGTH_MONTHS' INTEGER," + // 23: tenureLengthMonths
+                "'PARISH' TEXT," + // 24: parish
+                "'VILLAGE' TEXT," + // 25: village
+                "'SUBCOUNTY_ID' INTEGER NOT NULL );"); // 26: subcountyId
     }
 
     /** Drops the underlying database table. */
@@ -180,16 +184,26 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
             stmt.bindDouble(22, turnOver);
         }
  
-        java.util.Date tenureStartDate = entity.getTenureStartDate();
-        if (tenureStartDate != null) {
-            stmt.bindLong(23, tenureStartDate.getTime());
+        Integer tenureLengthYears = entity.getTenureLengthYears();
+        if (tenureLengthYears != null) {
+            stmt.bindLong(23, tenureLengthYears);
         }
  
-        java.util.Date tenureEndDate = entity.getTenureEndDate();
-        if (tenureEndDate != null) {
-            stmt.bindLong(24, tenureEndDate.getTime());
+        Integer tenureLengthMonths = entity.getTenureLengthMonths();
+        if (tenureLengthMonths != null) {
+            stmt.bindLong(24, tenureLengthMonths);
         }
-        stmt.bindLong(25, entity.getSubcountyId());
+ 
+        String parish = entity.getParish();
+        if (parish != null) {
+            stmt.bindString(25, parish);
+        }
+ 
+        String village = entity.getVillage();
+        if (village != null) {
+            stmt.bindString(26, village);
+        }
+        stmt.bindLong(27, entity.getSubcountyId());
     }
 
     @Override
@@ -230,9 +244,11 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
             cursor.isNull(offset + 19) ? null : cursor.getInt(offset + 19), // numberOfProducts
             cursor.isNull(offset + 20) ? null : cursor.getInt(offset + 20), // restockFrequency
             cursor.isNull(offset + 21) ? null : cursor.getDouble(offset + 21), // turnOver
-            cursor.isNull(offset + 22) ? null : new java.util.Date(cursor.getLong(offset + 22)), // tenureStartDate
-            cursor.isNull(offset + 23) ? null : new java.util.Date(cursor.getLong(offset + 23)), // tenureEndDate
-            cursor.getLong(offset + 24) // subcountyId
+            cursor.isNull(offset + 22) ? null : cursor.getInt(offset + 22), // tenureLengthYears
+            cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23), // tenureLengthMonths
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // parish
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // village
+            cursor.getLong(offset + 26) // subcountyId
         );
         return entity;
     }
@@ -262,9 +278,11 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         entity.setNumberOfProducts(cursor.isNull(offset + 19) ? null : cursor.getInt(offset + 19));
         entity.setRestockFrequency(cursor.isNull(offset + 20) ? null : cursor.getInt(offset + 20));
         entity.setTurnOver(cursor.isNull(offset + 21) ? null : cursor.getDouble(offset + 21));
-        entity.setTenureStartDate(cursor.isNull(offset + 22) ? null : new java.util.Date(cursor.getLong(offset + 22)));
-        entity.setTenureEndDate(cursor.isNull(offset + 23) ? null : new java.util.Date(cursor.getLong(offset + 23)));
-        entity.setSubcountyId(cursor.getLong(offset + 24));
+        entity.setTenureLengthYears(cursor.isNull(offset + 22) ? null : cursor.getInt(offset + 22));
+        entity.setTenureLengthMonths(cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23));
+        entity.setParish(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setVillage(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
+        entity.setSubcountyId(cursor.getLong(offset + 26));
      }
     
     /** @inheritdoc */

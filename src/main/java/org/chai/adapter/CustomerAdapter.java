@@ -80,18 +80,17 @@ public class CustomerAdapter extends BaseAdapter{
         customerName.setText(customer.getOutletName());
         customerAddress.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(),50));
 
-        convertView.setOnClickListener(new View.OnClickListener() {
+/*        convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try{
                     Intent intent = new Intent(activity.getApplicationContext(), CustomerDetailsActivity.class);
-                    //context.startActivity(intent);
                     activity.startActivity(intent);
                 }catch (Exception ex){
                     Toast.makeText(context, "error:" + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
         return convertView;
     }
 

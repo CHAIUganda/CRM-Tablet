@@ -50,17 +50,20 @@ public class SampleData {
 
     public void createBaseData() {
         try {
-            Region region = new Region(null, UUID.randomUUID().toString(), "Central");
-            long regionId = regionDao.insert(region);
-            District district = new District(null, UUID.randomUUID().toString(), "Kampla", regionId);
-            long districtId = districtDao.insert(district);
-            Subcounty subcounty = new Subcounty(null, UUID.randomUUID().toString(), "Kamuokya", districtId);
-            long subcountyId = subcountyDao.insert(subcounty);
-            generateSampleCustomers(subcountyId);
+            List<Region> regions = regionDao.loadAll();
+            if(regions.isEmpty()){
+                Region region = new Region(null, UUID.randomUUID().toString(), "Central");
+                long regionId = regionDao.insert(region);
+                District district = new District(null, UUID.randomUUID().toString(), "Kampla", regionId);
+                long districtId = districtDao.insert(district);
+                Subcounty subcounty = new Subcounty(null, UUID.randomUUID().toString(), "Kamuokya", districtId);
+                long subcountyId = subcountyDao.insert(subcounty);
+                generateSampleCustomers(subcountyId);
 
-            long customerId = insertSampleCustomer(subcountyId,"Diva medical center");
-            insertSampleContact(customerId,"Kamugisha James");
-            insertSampleTasks(customerId);
+                long customerId = insertSampleCustomer(subcountyId,"Diva medical center");
+                insertSampleContact(customerId,"Kamugisha James");
+                insertSampleTasks(customerId);
+            }
 
         } catch (Exception ex) {
             Toast.makeText(context, "error in createbaseData:" + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
@@ -90,9 +93,11 @@ public class SampleData {
         customer1.setNumberOfProducts(10);
         customer1.setRestockFrequency(2);
         customer1.setTurnOver(3143.345);
-        customer1.setTenureStartDate(new Date());
-        customer1.setTenureEndDate(new Date());
+        customer1.setTenureLengthYears(3);
+        customer1.setTenureLengthMonths(6);
         customer1.setSubcountyId(subcountyId);
+        customer1.setParish("Buranga");
+        customer1.setVillage("kyonyo");
         long customerId1 = customerDao.insert(customer1);
 
         Customer customer2 = new Customer(null);
@@ -116,9 +121,11 @@ public class SampleData {
         customer2.setNumberOfProducts(10);
         customer2.setRestockFrequency(2);
         customer2.setTurnOver(3143.345);
-        customer2.setTenureStartDate(new Date());
-        customer2.setTenureEndDate(new Date());
+        customer2.setTenureLengthYears(3);
+        customer2.setTenureLengthMonths(6);
         customer2.setSubcountyId(subcountyId);
+        customer2.setParish("Buranga");
+        customer2.setVillage("kyonyo");
         long customerId2 = customerDao.insert(customer2);
 
         Customer customer3 = new Customer(null);
@@ -142,9 +149,11 @@ public class SampleData {
         customer3.setNumberOfProducts(10);
         customer3.setRestockFrequency(2);
         customer3.setTurnOver(3143.345);
-        customer3.setTenureStartDate(new Date());
-        customer3.setTenureEndDate(new Date());
+        customer3.setTenureLengthYears(3);
+        customer3.setTenureLengthMonths(6);
         customer3.setSubcountyId(subcountyId);
+        customer3.setParish("Buranga");
+        customer3.setVillage("kyonyo");
         long customerId3 = customerDao.insert(customer3);
 
         generateSampleCustomerContacts(customerId1, customerId2, customerId3);
@@ -233,9 +242,11 @@ public class SampleData {
         customer1.setNumberOfProducts(10);
         customer1.setRestockFrequency(2);
         customer1.setTurnOver(3143.345);
-        customer1.setTenureStartDate(new Date());
-        customer1.setTenureEndDate(new Date());
+        customer1.setTenureLengthYears(3);
+        customer1.setTenureLengthMonths(6);
         customer1.setSubcountyId(subcountyId);
+        customer1.setParish("Buranga");
+        customer1.setVillage("kyonyo");
         long customerId1 = customerDao.insert(customer1);
 
         return customerId1;

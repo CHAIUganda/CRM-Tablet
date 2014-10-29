@@ -10,6 +10,8 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -72,7 +74,18 @@ public class CustomersMainActivity extends Activity {
                 }
             });
 
-//            customerAdapter.notifyDataSetChanged();
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                    Intent intent = new Intent(getApplicationContext(), CustomerDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("id",((Customer)adapterView.getItemAtPosition(position)).getId());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+//                    Toast.makeText(getApplicationContext(), "Error initialising Database:" +((Customer)adapterView.getItemAtPosition(position)).getOutletName(), Toast.LENGTH_LONG).show();
+
+                }
+            });
         } catch (Exception exception) {
             Toast.makeText(getApplicationContext(),"error in CustomerList:"+exception.getLocalizedMessage(),Toast.LENGTH_LONG).show();
         }
@@ -100,11 +113,24 @@ public class CustomersMainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem menuItem){
         switch (menuItem.getItemId()){
             case R.id.menu_new_customer:
-                Intent intent = new Intent(getApplicationContext(),NewCustomerActivity.class);
+                Intent intent = new Intent(getApplicationContext(),CustomerForm.class);
+                Bundle bundle = new Bundle();
+                bundle.putLong("id",0);
+                intent.putExtras(bundle);
                 startActivity(intent);
+                return true;
             case R.id.menu_nearby_customer:
+                return true;
             default:
                return super.onOptionsItemSelected(menuItem);
         }
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        customerList.clear();
+        customerList.addAll(customerDao.loadAll());
+        customerAdapter.notifyDataSetChanged();
     }
 }
