@@ -12,4 +12,75 @@
         <item>@string/yes</item>
         <item>@string/no</item>
     </string-array>
+    <string-array name="months">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="years">
+        <item>2010</item>
+        <item>2011</item>
+        <item>2012</item>
+        <item>2013</item>
+        <item>2014</item>
+        <item>2015</item>
+        <item>2016</item>
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+    </string-array>
+    <string-array name="outlettypes">
+        <item>Retail Pharmacy</item>
+        <item>Wholesale Pharmacy</item>
+        <item>Drug Shop</item>
+        <item>Private Clinic</item>
+        <item>Public Health Center</item>
+        <item>Publich Hospital</item>
+        <item>Private Hospital</item>
+    </string-array>
+    <string-array name="outletsize">
+        <item>Big</item>
+        <item>Medium</item>
+        <item>Small</item>
+    </string-array>
+    <string-array name="licencetype">
+        <item>National Drug Authority</item>
+        <item>Pharmaceutical Society of Uganda</item>
+        <item>Ugandan Medical and Dental Practitioners</item>
+        <item>Ministry of Health</item>
+        <item>Unlicensed</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="split">
+        <item>Urban</item>
+        <item>Rural</item>
+    </string-array>
+    <string-array name="openingdays">
+        <item>Early morning</item>
+        <item>Late morning</item>
+        <item>Noon</item>
+        <item>Early afternoon</item>
+        <item>Late afternoon</item>
+        <item>Evening</item>
+    </string-array>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="buildingstructure">
+        <item>Parmanent</item>
+        <item>Semi-Parmanent</item>
+        <item>Non-Parmanent</item>
+    </string-array>
 </resources>
