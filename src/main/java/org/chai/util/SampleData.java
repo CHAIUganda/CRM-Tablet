@@ -57,7 +57,10 @@ public class SampleData {
                 District district = new District(null, UUID.randomUUID().toString(), "Kampla", regionId);
                 long districtId = districtDao.insert(district);
                 Subcounty subcounty = new Subcounty(null, UUID.randomUUID().toString(), "Kamuokya", districtId);
+                Subcounty subcounty2 = new Subcounty(null, UUID.randomUUID().toString(), "Kiwatule", districtId);
+
                 long subcountyId = subcountyDao.insert(subcounty);
+                subcountyDao.insert(subcounty2);
                 generateSampleCustomers(subcountyId);
 
                 long customerId = insertSampleCustomer(subcountyId,"Diva medical center");

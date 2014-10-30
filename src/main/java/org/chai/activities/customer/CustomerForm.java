@@ -61,7 +61,7 @@ public class CustomerForm extends Activity {
                     if (isSaved) {
                         Toast.makeText(getApplicationContext(), "New Customer has been  successfully added!", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "New Customer" + ((Spinner) findViewById(R.id.details_building_structure)).getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "A problem Occured while saving a new Customer,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -83,20 +83,21 @@ public class CustomerForm extends Activity {
                 }
             }
         });
+        bindCustomerToUI();
     }
 
     private void initialiseGreenDao() {
-//        try {
+        try {
             DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "chai-crm-db", null);
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
             customerDao = daoSession.getCustomerDao();
             subcountyDao = daoSession.getSubcountyDao();
-       /* } catch (Exception ex) {
+        } catch (Exception ex) {
             Log.d("Error=====================================",ex.getLocalizedMessage());
             Toast.makeText(getApplicationContext(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
-        }*/
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -108,7 +109,7 @@ public class CustomerForm extends Activity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menu_add_new_customer:
-                boolean isSaved = getCustomerFormValues();
+                boolean isSaved = saveCustomer();
                 if (isSaved) {
                     Intent intent = new Intent(getApplicationContext(), CustomersMainActivity.class);
                     startActivity(intent);
@@ -118,7 +119,7 @@ public class CustomerForm extends Activity {
         }
     }
 
-    private boolean getCustomerFormValues() {
+    private void getCustomerFormValues() {
         try {
             customerInstance.setSysid(UUID.randomUUID().toString());
             customerInstance.setOutletName(((EditText) findViewById(R.id.detailsname)).getText().toString());
@@ -148,24 +149,69 @@ public class CustomerForm extends Activity {
             customerInstance.setSubcounty(((Subcounty) subcountySpinner.getSelectedItem()));
             customerInstance.setVillage(((EditText) findViewById(R.id.details_village)).getText().toString());
             customerInstance.setParish(((EditText) findViewById(R.id.details_parish)).getText().toString());
-            customerDao.insert(customerInstance);
-            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return false;
 
+    }
+
+    private void bindCustomerToUI() {
+        if (!isNewCustomer()) {
+            ((EditText) findViewById(R.id.detailsname)).setText(customerInstance.getOutletName() == null ? "" : customerInstance.getOutletName());
+            ((EditText) findViewById(R.id.details_tenure_length_years)).setText(customerInstance.getTenureLengthYears() == null ? "" : customerInstance.getTenureLengthYears() + "");
+            ((EditText) findViewById(R.id.details_tenure_length_months)).setText(customerInstance.getTenureLengthMonths() == null ? "" : customerInstance.getTenureLengthMonths() + "");
+
+            ((EditText) findViewById(R.id.details_sources_of_supply)).setText(customerInstance.getMajoritySourceOfSupply() == null ? "" : customerInstance.getMajoritySourceOfSupply());
+            ((EditText) findViewById(R.id.details_key_wholesaler_name)).setText(customerInstance.getKeyWholeSalerName() == null ? "" : customerInstance.getKeyWholeSalerName());
+            ((EditText) findViewById(R.id.details_key_wholesaler_contact)).setText(customerInstance.getKeyWholeSalerContact() == null ? "" : customerInstance.getKeyWholeSalerContact());
+
+
+            ((EditText) findViewById(R.id.details_equipment)).setText(customerInstance.getEquipment() == null ? "" : customerInstance.getEquipment());
+            ((EditText) findViewById(R.id.details_desc_location)).setText(customerInstance.getDescriptionOfOutletLocation() == null ? "" : customerInstance.getDescriptionOfOutletLocation());
+            ((EditText) findViewById(R.id.details_number_of_employees)).setText(customerInstance.getNumberOfEmployees() == null ? "" : customerInstance.getNumberOfEmployees() + "");
+            ((EditText) findViewById(R.id.details_number_of_branches)).setText(customerInstance.getNumberOfBranches() == null ? "" : customerInstance.getNumberOfBranches() + "");
+            ((EditText) findViewById(R.id.details_num_customers_per_day)).setText(customerInstance.getNumberOfCustomersPerDay() == null ? "" : customerInstance.getNumberOfCustomersPerDay() + "");
+            ((EditText) findViewById(R.id.details_num_products)).setText(customerInstance.getNumberOfProducts() == null ? "" : customerInstance.getNumberOfProducts() + "");
+            ((EditText) findViewById(R.id.details_restock_frequency)).setText(customerInstance.getRestockFrequency() == null ? "" : customerInstance.getRestockFrequency() + "");
+            ((EditText) findViewById(R.id.details_turn_over)).setText(customerInstance.getTurnOver() == null ? "" : customerInstance.getTurnOver() + "");
+            ((EditText) findViewById(R.id.details_village)).setText(customerInstance.getVillage() == null ? "" : customerInstance.getVillage());
+            ((EditText) findViewById(R.id.details_parish)).setText(customerInstance.getParish() == null ? "" : customerInstance.getParish());
+
+
+            Spinner outletTypeSpinner = (Spinner) findViewById(R.id.details_outlet_type);
+            setSpinnerSelection(outletTypeSpinner, customerInstance.getOutletType());
+
+            Spinner outletSizeSpinner = (Spinner) findViewById(R.id.details_size);
+            setSpinnerSelection(outletSizeSpinner, customerInstance.getOutletSize());
+
+            Spinner splitSpinner = (Spinner) findViewById(R.id.details_split);
+            setSpinnerSelection(splitSpinner, customerInstance.getSplit());
+
+            Spinner openingHrsSpinner = (Spinner) findViewById(R.id.details_opening_hrs);
+            setSpinnerSelection(openingHrsSpinner, customerInstance.getOpeningHours());
+
+            Spinner buildingStructureSpinner = (Spinner) findViewById(R.id.details_building_structure);
+            setSpinnerSelection(buildingStructureSpinner, customerInstance.getBuildingStructure());
+
+            Spinner subcountySpinner2 = (Spinner) findViewById(R.id.details_subcounty);
+            setSpinnerSelection(subcountySpinner2, customerInstance.getSubcounty().getName());
+        }
     }
 
     private boolean saveCustomer() {
         boolean isSaved = false;
-        if (customerInstance != null) {
-            getCustomerFormValues();
-            if (isNewCustomer()) {
-                customerDao.insert(customerInstance);
-            } else {
-                customerDao.update(customerInstance);
+        try{
+            if (customerInstance != null) {
+                getCustomerFormValues();
+                if (isNewCustomer()) {
+                    customerDao.insert(customerInstance);
+                } else {
+                    customerDao.update(customerInstance);
+                }
+                isSaved = true;
             }
+        }catch (Exception ex){
+
         }
         return isSaved;
     }
@@ -197,5 +243,11 @@ public class CustomerForm extends Activity {
         }else{
             saveCustomerBtn.setText("Update Customer");
         }
+    }
+
+    private void setSpinnerSelection(Spinner spinner, String item) {
+        ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
+        int position = adapter.getPosition(item);
+        spinner.setSelection(position);
     }
 }

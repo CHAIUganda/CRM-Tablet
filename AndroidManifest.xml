@@ -19,8 +19,6 @@
       <activity android:name=".activities.customer.CustomersMainActivity"/>
       <activity android:name=".activities.calls.CallsMainActivity"/>
       <activity android:name=".activities.customer.CustomerDetailsActivity"/>
-      <activity android:name=".activities.customer.NewCustomerActivity"/>
-      <activity android:name=".activities.customer.CustomerEditActivity"/>
       <activity android:name=".activities.tasks.CaptureCallDataActivity"/>
       <activity android:name=".activities.customer.CustomerForm"/>
   </application>
