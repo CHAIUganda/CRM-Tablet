@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,10 +53,10 @@ public class CustomersMainActivity extends Activity {
             customerList.addAll(customerDao.loadAll());
             listView = (ListView) findViewById(R.id.customerlist);
 
-            customerAdapter = new CustomerAdapter(this.getApplicationContext(),this, customerList);
+            customerAdapter = new CustomerAdapter(this.getApplicationContext(), this, customerList);
             listView.setAdapter(customerAdapter);
 
-            searchText = (EditText)findViewById(R.id.customersearch);
+            searchText = (EditText) findViewById(R.id.customersearch);
             searchText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -79,56 +80,56 @@ public class CustomersMainActivity extends Activity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                     Intent intent = new Intent(getApplicationContext(), CustomerDetailsActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putLong("id",((Customer)adapterView.getItemAtPosition(position)).getId());
+                    bundle.putLong("id", ((Customer) adapterView.getItemAtPosition(position)).getId());
                     intent.putExtras(bundle);
                     startActivity(intent);
-//                    Toast.makeText(getApplicationContext(), "Error initialising Database:" +((Customer)adapterView.getItemAtPosition(position)).getOutletName(), Toast.LENGTH_LONG).show();
 
                 }
             });
         } catch (Exception exception) {
-            Toast.makeText(getApplicationContext(),"error in CustomerList:"+exception.getLocalizedMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "error in CustomerList:" + exception.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
-    private void initialiseGreenDao(){
-        try{
-            DaoMaster.DevOpenHelper helper =new  DaoMaster.DevOpenHelper(this,"chai-crm-db",null);
+    private void initialiseGreenDao() {
+        try {
+            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "chai-crm-db", null);
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
             customerDao = daoSession.getCustomerDao();
-        }catch (Exception ex){
-            Toast.makeText(getApplicationContext(),"Error initialising Database:"+ex.getMessage(),Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.customer_list_menu,menu);
+        menuInflater.inflate(R.menu.customer_list_menu, menu);
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem menuItem){
-        switch (menuItem.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
             case R.id.menu_new_customer:
-                Intent intent = new Intent(getApplicationContext(),CustomerForm.class);
+                Intent intent = new Intent(getApplicationContext(), CustomerForm.class);
                 Bundle bundle = new Bundle();
-                bundle.putLong("id",0);
+                bundle.putLong("id", 0);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return true;
             case R.id.menu_nearby_customer:
                 return true;
             default:
-               return super.onOptionsItemSelected(menuItem);
+                return super.onOptionsItemSelected(menuItem);
         }
     }
 
     @Override
-    public void onRestart() {
+    protected void onRestart() {
         super.onRestart();
+        Log.i("Test", "On reStart .....");
         customerList.clear();
         customerList.addAll(customerDao.loadAll());
         customerAdapter.notifyDataSetChanged();

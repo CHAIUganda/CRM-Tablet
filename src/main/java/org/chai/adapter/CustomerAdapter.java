@@ -117,4 +117,9 @@ public class CustomerAdapter extends BaseAdapter{
         }
         notifyDataSetChanged();
     }
+
+    public void updateListView(List<Customer> customersList){
+        customers = customersList;
+        notifyDataSetChanged();
+    }
 }
