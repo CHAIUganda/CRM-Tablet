@@ -83,4 +83,16 @@
         <item>Semi-Parmanent</item>
         <item>Non-Parmanent</item>
     </string-array>
+    <string-array name="sources_of_information">
+        <item>Training</item>
+        <item>Radio</item>
+        <item>Whole Sale</item>
+        <item>Television</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="ratings">
+        <item>Good</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </string-array>
 </resources>

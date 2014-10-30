@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 import org.chai.R;
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
+import org.chai.model.Task;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,11 +19,11 @@ import java.util.List;
 public class TaskListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> listDataHeader;
-    private HashMap<String,List<String>> listDataChild;
+    private HashMap<String,List<Task>> taskList;
 
-    public TaskListAdapter(Context context,List<String> listDataHeader,HashMap<String,List<String>> listDataChild){
+    public TaskListAdapter(Context context,List<String> listDataHeader,HashMap<String,List<Task>> listDataChild){
         this.context = context;
-        this.listDataChild = listDataChild;
+        this.taskList = listDataChild;
         this.listDataHeader = listDataHeader;
     }
 
@@ -34,7 +34,7 @@ public class TaskListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this.listDataChild.get(this.listDataHeader.get(groupPosition)).size();
+        return this.taskList.get(this.listDataHeader.get(groupPosition)).size();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class TaskListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return this.listDataChild.get(this.listDataHeader.get(groupPosition)).get(childPosition);
+        return this.taskList.get(this.listDataHeader.get(groupPosition)).get(childPosition);
     }
 
     @Override
@@ -78,13 +78,13 @@ public class TaskListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String childText = (String)getChild(groupPosition,childPosition);
+        Task task = (Task)getChild(groupPosition,childPosition);
         if(convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.task_list_item,null);
         }
         TextView taskListItem = (TextView)convertView.findViewById(R.id.task_list_item_label);
-        taskListItem.setText(childText);
+        taskListItem.setText(task.getDescription());
 
         return convertView;
     }

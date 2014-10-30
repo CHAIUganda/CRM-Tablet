@@ -129,7 +129,6 @@ public class CustomersMainActivity extends Activity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.i("Test", "On reStart .....");
         customerList.clear();
         customerList.addAll(customerDao.loadAll());
         customerAdapter.notifyDataSetChanged();

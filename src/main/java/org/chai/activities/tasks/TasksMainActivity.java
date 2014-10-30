@@ -30,7 +30,7 @@ public class TasksMainActivity extends Activity {
     TaskListAdapter taskListAdapter;
     ExpandableListView expandableListView;
     List<String> listDataHeader;
-    HashMap<String,List<String>> listDataChild;
+    HashMap<String,List<Task>> taskList;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +44,19 @@ public class TasksMainActivity extends Activity {
         }
 
         expandableListView = (ExpandableListView)findViewById(R.id.task_list_main_view);
-        taskListAdapter = new TaskListAdapter(this,listDataHeader,listDataChild);
+        taskListAdapter = new TaskListAdapter(this,listDataHeader, taskList);
 
         expandableListView.setAdapter(taskListAdapter);
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
-                Intent intent = new Intent(getApplicationContext(),CaptureCallDataActivity.class);
+                String selectedHeader = listDataHeader.get(groupPosition);
+                Task selectedChild = taskList.get(selectedHeader).get(childPosition);
+                Intent intent = new Intent(getApplicationContext(),DetailersActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putLong("id",selectedChild.getId());
+                intent.putExtras(bundle);
                 startActivity(intent);
                 return false;
             }
@@ -72,7 +77,7 @@ public class TasksMainActivity extends Activity {
 
     private void loadTasksFromDb(){
         listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
+        taskList = new HashMap<String, List<Task>>();
 
         listDataHeader.add("New task");
         listDataHeader.add("Outstanding");
@@ -83,18 +88,10 @@ public class TasksMainActivity extends Activity {
         List<Task> outstandingTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("Outstanding")).list();
         List<Task> scheduledTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("Scheduled")).list();
 
-        listDataChild.put(listDataHeader.get(0),getTaskDescriptions(newTasks));
-        listDataChild.put(listDataHeader.get(1),getTaskDescriptions(outstandingTasks));
-        listDataChild.put(listDataHeader.get(2),getTaskDescriptions(scheduledTasks));
+        taskList.put(listDataHeader.get(0),newTasks);
+        taskList.put(listDataHeader.get(1), outstandingTasks);
+        taskList.put(listDataHeader.get(2), scheduledTasks);
 
-    }
-
-    private List<String> getTaskDescriptions(List<Task> taskList){
-        List<String> descriptions = new ArrayList<String>();
-       for(Task task:taskList){
-           descriptions.add(task.getDescription());
-       }
-        return descriptions;
     }
 
 
