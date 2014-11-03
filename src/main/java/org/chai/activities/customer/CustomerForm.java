@@ -1,20 +1,22 @@
 package org.chai.activities.customer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.widget.*;
 import org.chai.R;
 import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.GPSTracker;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,6 +32,7 @@ public class CustomerForm extends Activity {
     private DaoSession daoSession;
     private CustomerDao customerDao;
     private SubcountyDao subcountyDao;
+    private CustomerContactDao customerContactDao;
 
     private Subcounty[] subcounties;
     private GPSTracker gpsTracker;
@@ -37,6 +40,7 @@ public class CustomerForm extends Activity {
     private double capturedLongitude;
 
     private Customer customerInstance;
+    private List<CustomerContact> customerContacts = new ArrayList<CustomerContact>();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +87,48 @@ public class CustomerForm extends Activity {
                 }
             }
         });
+
+        Button newContactBtn = (Button)findViewById(R.id.menu_add_new_customer_contact);
+        newContactBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflater =  (LayoutInflater)CustomerForm.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View entryView = layoutInflater.inflate(R.layout.add_contact_layout,null);
+                AlertDialog.Builder alert = new AlertDialog.Builder(CustomerForm.this);
+                alert.setIcon(R.drawable.icon).setTitle("New Contact").setView(entryView).setPositiveButton("Save",new DialogInterface.OnClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int button) {
+                        CustomerContact customerContact = new CustomerContact(null);
+                        customerContact.setSysid(UUID.randomUUID().toString());
+                        customerContact.setContact(((EditText)entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
+                        customerContact.setGender(((Spinner)entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
+                        customerContact.setGraduationYear(Integer.parseInt(((EditText)entryView.findViewById(R.id.customer_contact_graduation_year)).getText().toString()));
+                        customerContact.setName(((EditText)entryView.findViewById(R.id.customer_contact_name)).getText().toString());
+                        customerContact.setNetworkOrAssociation(((EditText)entryView.findViewById(R.id.customer_contact_network)).getText().toString());
+                        customerContact.setQualification(((EditText)entryView.findViewById(R.id.customer_contact_qualification)).getText().toString());
+                        customerContact.setTypeOfContact(((Spinner)entryView.findViewById(R.id.customer_contact_type)).getSelectedItem().toString());
+                        customerContacts.add(customerContact);
+                        //add to parent form
+                        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.customer_contacts_layout);
+
+                        TextView contactView = new TextView(CustomerForm.this);
+                        contactView.setText(customerContact.getName()+":"+customerContact.getContact());
+                        contactView.setTextSize(16);
+                        contactView.setTextColor(Color.parseColor("#000000"));
+                        linearLayout.addView(contactView);
+
+                    }
+                }).setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int button) {
+
+                    }
+                });
+                alert.show();
+            }
+        });
         bindCustomerToUI();
     }
 
@@ -94,6 +140,7 @@ public class CustomerForm extends Activity {
             daoSession = daoMaster.newSession();
             customerDao = daoSession.getCustomerDao();
             subcountyDao = daoSession.getSubcountyDao();
+            customerContactDao = daoSession.getCustomerContactDao();
         } catch (Exception ex) {
             Log.d("Error=====================================",ex.getLocalizedMessage());
             Toast.makeText(getApplicationContext(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -119,7 +166,7 @@ public class CustomerForm extends Activity {
         }
     }
 
-    private void getCustomerFormValues() {
+    private void bindUIToCustomer() {
         try {
             customerInstance.setSysid(UUID.randomUUID().toString());
             customerInstance.setOutletName(((EditText) findViewById(R.id.detailsname)).getText().toString());
@@ -202,16 +249,18 @@ public class CustomerForm extends Activity {
         boolean isSaved = false;
         try{
             if (customerInstance != null) {
-                getCustomerFormValues();
+                bindUIToCustomer();
                 if (isNewCustomer()) {
-                    customerDao.insert(customerInstance);
+                    Long customerId = customerDao.insert(customerInstance);
+                    saveCustomerContacts(customerId);
                 } else {
                     customerDao.update(customerInstance);
                 }
                 isSaved = true;
             }
         }catch (Exception ex){
-
+            ex.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Error inserting Customer Data:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
         return isSaved;
     }
@@ -249,5 +298,12 @@ public class CustomerForm extends Activity {
         ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
         int position = adapter.getPosition(item);
         spinner.setSelection(position);
+    }
+
+    private void saveCustomerContacts(Long customerId){
+        for(CustomerContact customerContact:customerContacts){
+            customerContact.setCustomerId(customerId);
+            customerContactDao.insert(customerContact);
+        }
     }
 }

@@ -64,7 +64,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
                 "'CONTACT' TEXT NOT NULL ," + // 3: contact
                 "'TYPE_OF_CONTACT' TEXT NOT NULL ," + // 4: typeOfContact
                 "'GENDER' TEXT NOT NULL ," + // 5: gender
-                "'ROLE' TEXT NOT NULL ," + // 6: role
+                "'ROLE' TEXT," + // 6: role
                 "'QUALIFICATION' TEXT NOT NULL ," + // 7: qualification
                 "'NETWORK_OR_ASSOCIATION' TEXT," + // 8: networkOrAssociation
                 "'GRADUATION_YEAR' INTEGER," + // 9: graduationYear
@@ -91,7 +91,11 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         stmt.bindString(4, entity.getContact());
         stmt.bindString(5, entity.getTypeOfContact());
         stmt.bindString(6, entity.getGender());
-        stmt.bindString(7, entity.getRole());
+ 
+        String role = entity.getRole();
+        if (role != null) {
+            stmt.bindString(7, role);
+        }
         stmt.bindString(8, entity.getQualification());
  
         String networkOrAssociation = entity.getNetworkOrAssociation();
@@ -128,7 +132,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
             cursor.getString(offset + 3), // contact
             cursor.getString(offset + 4), // typeOfContact
             cursor.getString(offset + 5), // gender
-            cursor.getString(offset + 6), // role
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // role
             cursor.getString(offset + 7), // qualification
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // networkOrAssociation
             cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // graduationYear
@@ -146,7 +150,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         entity.setContact(cursor.getString(offset + 3));
         entity.setTypeOfContact(cursor.getString(offset + 4));
         entity.setGender(cursor.getString(offset + 5));
-        entity.setRole(cursor.getString(offset + 6));
+        entity.setRole(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setQualification(cursor.getString(offset + 7));
         entity.setNetworkOrAssociation(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setGraduationYear(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));

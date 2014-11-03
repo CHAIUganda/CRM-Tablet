@@ -95,4 +95,8 @@
         <item>Medium</item>
         <item>Low</item>
     </string-array>
+    <string-array name="contact_type">
+        <item>Key</item>
+        <item>Ordinary</item>
+    </string-array>
 </resources>

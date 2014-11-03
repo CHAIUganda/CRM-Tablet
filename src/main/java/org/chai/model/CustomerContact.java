@@ -23,7 +23,6 @@ public class CustomerContact {
     private String typeOfContact;
     /** Not-null value. */
     private String gender;
-    /** Not-null value. */
     private String role;
     /** Not-null value. */
     private String qualification;
@@ -129,12 +128,10 @@ public class CustomerContact {
         this.gender = gender;
     }
 
-    /** Not-null value. */
     public String getRole() {
         return role;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setRole(String role) {
         this.role = role;
     }

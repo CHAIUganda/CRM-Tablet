@@ -68,7 +68,7 @@ public class CustomerAdapter extends BaseAdapter{
         Customer customer = customers.get(position);
         CustomerContact customerCtct = null;
         if(customer.getContacts().size()>0){
-            customerCtct = getKeyCustomerContact(customer.getContacts());
+            customerCtct = Utils.getKeyCustomerContact(customer.getContacts());
         }
 
         if(customerCtct!=null){
@@ -92,15 +92,6 @@ public class CustomerAdapter extends BaseAdapter{
             }
         });*/
         return convertView;
-    }
-
-    private CustomerContact getKeyCustomerContact(List<CustomerContact> customerContacts){
-        for(int i=0;i<customerContacts.size();i++){
-            if(customerContacts.get(i).getTypeOfContact().equalsIgnoreCase("key")){
-                return customerContacts.get(i);
-            }
-        }
-        return customerContacts.get(0);
     }
 
     public void filter(String term){
