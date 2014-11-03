@@ -67,7 +67,7 @@
                     android:textStyle="bold"/>
 
             <EditText
-                    android:id="@+id/detailsname"
+                    android:id="@+id/detailer_name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -117,7 +117,7 @@
                     android:textStyle="bold"/>
 
             <EditText
-                    android:id="@+id/details_desc_location"
+                    android:id="@+id/detailer_desc_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -165,7 +165,7 @@
                     android:textStyle="bold"/>
 
             <EditText
-                    android:id="@+id/details_parish"
+                    android:id="@+id/detailer_parish"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -186,12 +186,12 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Description Of Outlet Location:"
+                    android:text="Village:"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
             <EditText
-                    android:id="@+id/details_desc_location"
+                    android:id="@+id/detailer_village"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -244,7 +244,7 @@
                     android:textStyle="bold"/>
 
             <EditText
-                    android:id="@+id/details_key_wholesaler_name"
+                    android:id="@+id/detailer_key_retailer_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -265,12 +265,12 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Key Wholesaler Telephone:"
+                    android:text="Key Retailer Telephone:"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
             <EditText
-                    android:id="@+id/details_key_wholesaler_contact"
+                    android:id="@+id/detailer_key_retailer_contact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -296,7 +296,7 @@
                     android:textStyle="bold"/>
 
             <EditText
-                    android:id="@+id/details_key_wholesaler_contact"
+                    android:id="@+id/detailer_how_many_diarrhea_patients_in_facility"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -304,7 +304,8 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:inputType="number"/>
 
         </LinearLayout>
 
@@ -322,7 +323,7 @@
                     android:textStyle="bold"/>
 
             <Spinner
-                    android:id="@+id/detailer_hearabout_treatment_with_zinc"
+                    android:id="@+id/detailer_hearabout_treatment_with_zinc_ors"
                     android:layout_height="wrap_content"
                     android:prompt="@string/selectItem"
                     android:layout_width="fill_parent"
@@ -345,12 +346,39 @@
                     android:textStyle="bold"/>
 
             <Spinner
-                    android:id="@+id/detailer_how_did_you_hearabout_zinc"
+                    android:id="@+id/detailer_how_did_you_hearabout_zinc_ors"
                     android:layout_height="wrap_content"
                     android:prompt="@string/selectItem"
                     android:layout_width="fill_parent"
                     android:entries="@array/sources_of_information"
                     android:background="@drawable/btn_dropdown"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/detailer_howdidyouhearaboutzinc_other_layout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Please specify Other ways you heard about zinc"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <EditText
+                    android:id="@+id/detailer_other_ways_youheard_about_zinc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="@dimen/list_sub_text_size"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:background="@drawable/bordertextfield"
+                    android:singleLine="true"/>
 
         </LinearLayout>
 
@@ -470,58 +498,123 @@
         </LinearLayout>
 
         <LinearLayout
-                android:orientation="vertical"
+                android:id="@+id/detailer_zinc_stock_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:orientation="vertical">
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="If Yes, Check how many are in stock:"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="bold"/>
-
-            <EditText
-                    android:id="@+id/detailers_howmany_in_stock"
+            <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"/>
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="If Yes, Check how many are in stock(Zinc):"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/detailers_howmany_in_stock_zinc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:inputType="number"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="If Yes, Check how many are in stock(ORS):"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/detailers_howmany_in_stock_ors"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:inputType="number"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Note the brands sold(Zinc):"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/detailers_brand_sold_zinc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Note the brands sold(ORS):"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/detailers_brand_sold_ors"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Note the brands sold:"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="bold"/>
-
-            <EditText
-                    android:id="@+id/detailers_brand_sold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"/>
-
-        </LinearLayout>
-
-        <LinearLayout
+                android:id="@+id/detailer_ifnowhy_layout"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -548,6 +641,7 @@
         </LinearLayout>
 
         <LinearLayout
+                android:id="@+id/detailer_whatpricedoyoubuy_layout"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -569,7 +663,8 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:inputType="number"/>
 
         </LinearLayout>
 
@@ -672,7 +767,7 @@
                     android:layout_height="wrap_content"
                     android:prompt="@string/selectItem"
                     android:layout_width="fill_parent"
-                    android:entries="@array/yesnolist"
+                    android:entries="@array/ratings"
                     android:background="@drawable/btn_dropdown"/>
 
         </LinearLayout>

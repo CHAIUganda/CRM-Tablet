@@ -30,21 +30,21 @@ public class TasksMainActivity extends Activity {
     TaskListAdapter taskListAdapter;
     ExpandableListView expandableListView;
     List<String> listDataHeader;
-    HashMap<String,List<Task>> taskList;
+    HashMap<String, List<Task>> taskList;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_list_main);
         initialiseGreenDao();
-        try{
+        try {
             //load data
             loadTasksFromDb();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-        expandableListView = (ExpandableListView)findViewById(R.id.task_list_main_view);
-        taskListAdapter = new TaskListAdapter(this,listDataHeader, taskList);
+        expandableListView = (ExpandableListView) findViewById(R.id.task_list_main_view);
+        taskListAdapter = new TaskListAdapter(this, listDataHeader, taskList);
 
         expandableListView.setAdapter(taskListAdapter);
 
@@ -53,9 +53,9 @@ public class TasksMainActivity extends Activity {
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
                 String selectedHeader = listDataHeader.get(groupPosition);
                 Task selectedChild = taskList.get(selectedHeader).get(childPosition);
-                Intent intent = new Intent(getApplicationContext(),DetailersActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DetailersActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putLong("id",selectedChild.getId());
+                bundle.putLong("taskId", selectedChild.getId());
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return false;
@@ -63,19 +63,19 @@ public class TasksMainActivity extends Activity {
         });
     }
 
-    private void initialiseGreenDao(){
-        try{
-            DaoMaster.DevOpenHelper helper =new  DaoMaster.DevOpenHelper(this,"chai-crm-db",null);
+    private void initialiseGreenDao() {
+        try {
+            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "chai-crm-db", null);
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
             taskDao = daoSession.getTaskDao();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
-    private void loadTasksFromDb(){
+    private void loadTasksFromDb() {
         listDataHeader = new ArrayList<String>();
         taskList = new HashMap<String, List<Task>>();
 
@@ -88,7 +88,7 @@ public class TasksMainActivity extends Activity {
         List<Task> outstandingTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("Outstanding")).list();
         List<Task> scheduledTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("Scheduled")).list();
 
-        taskList.put(listDataHeader.get(0),newTasks);
+        taskList.put(listDataHeader.get(0), newTasks);
         taskList.put(listDataHeader.get(1), outstandingTasks);
         taskList.put(listDataHeader.get(2), scheduledTasks);
 
