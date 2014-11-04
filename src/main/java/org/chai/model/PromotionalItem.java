@@ -14,7 +14,7 @@ public class PromotionalItem {
 
     private Long id;
     /** Not-null value. */
-    private String sysid;
+    private String uuid;
     /** Not-null value. */
     private String name;
     private long promotionId;
@@ -39,9 +39,9 @@ public class PromotionalItem {
         this.id = id;
     }
 
-    public PromotionalItem(Long id, String sysid, String name, long promotionId) {
+    public PromotionalItem(Long id, String uuid, String name, long promotionId) {
         this.id = id;
-        this.sysid = sysid;
+        this.uuid = uuid;
         this.name = name;
         this.promotionId = promotionId;
     }
@@ -61,13 +61,13 @@ public class PromotionalItem {
     }
 
     /** Not-null value. */
-    public String getSysid() {
-        return sysid;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setSysid(String sysid) {
-        this.sysid = sysid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     /** Not-null value. */

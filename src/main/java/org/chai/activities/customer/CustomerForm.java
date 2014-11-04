@@ -100,7 +100,7 @@ public class CustomerForm extends Activity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int button) {
                         CustomerContact customerContact = new CustomerContact(null);
-                        customerContact.setSysid(UUID.randomUUID().toString());
+                        customerContact.setUuid(UUID.randomUUID().toString());
                         customerContact.setContact(((EditText)entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
                         customerContact.setGender(((Spinner)entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
                         customerContact.setGraduationYear(Integer.parseInt(((EditText)entryView.findViewById(R.id.customer_contact_graduation_year)).getText().toString()));
@@ -168,7 +168,7 @@ public class CustomerForm extends Activity {
 
     private void bindUIToCustomer() {
         try {
-            customerInstance.setSysid(UUID.randomUUID().toString());
+            customerInstance.setUuid(UUID.randomUUID().toString());
             customerInstance.setOutletName(((EditText) findViewById(R.id.detailsname)).getText().toString());
             customerInstance.setTenureLengthYears(Integer.parseInt(((EditText) findViewById(R.id.details_tenure_length_years)).getText().toString()));
             customerInstance.setTenureLengthMonths(Integer.parseInt(((EditText) findViewById(R.id.details_tenure_length_months)).getText().toString()));

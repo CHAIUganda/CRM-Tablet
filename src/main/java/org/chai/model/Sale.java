@@ -14,7 +14,7 @@ public class Sale {
 
     private Long id;
     /** Not-null value. */
-    private String sysid;
+    private String uuid;
     private int quantity;
     private int salePrice;
     /** Not-null value. */
@@ -45,9 +45,9 @@ public class Sale {
         this.id = id;
     }
 
-    public Sale(Long id, String sysid, int quantity, int salePrice, java.util.Date dateOfSale, long orderId, long productId) {
+    public Sale(Long id, String uuid, int quantity, int salePrice, java.util.Date dateOfSale, long orderId, long productId) {
         this.id = id;
-        this.sysid = sysid;
+        this.uuid = uuid;
         this.quantity = quantity;
         this.salePrice = salePrice;
         this.dateOfSale = dateOfSale;
@@ -70,13 +70,13 @@ public class Sale {
     }
 
     /** Not-null value. */
-    public String getSysid() {
-        return sysid;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setSysid(String sysid) {
-        this.sysid = sysid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public int getQuantity() {

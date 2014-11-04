@@ -29,7 +29,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
         public final static Property Name = new Property(2, String.class, "name", false, "NAME");
         public final static Property Contact = new Property(3, String.class, "contact", false, "CONTACT");
         public final static Property TypeOfContact = new Property(4, String.class, "typeOfContact", false, "TYPE_OF_CONTACT");
@@ -59,7 +59,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'CUSTOMER_CONTACT' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
                 "'NAME' TEXT NOT NULL ," + // 2: name
                 "'CONTACT' TEXT NOT NULL ," + // 3: contact
                 "'TYPE_OF_CONTACT' TEXT NOT NULL ," + // 4: typeOfContact
@@ -86,7 +86,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(2, entity.getUuid());
         stmt.bindString(3, entity.getName());
         stmt.bindString(4, entity.getContact());
         stmt.bindString(5, entity.getTypeOfContact());
@@ -127,7 +127,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
     public CustomerContact readEntity(Cursor cursor, int offset) {
         CustomerContact entity = new CustomerContact( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 1), // uuid
             cursor.getString(offset + 2), // name
             cursor.getString(offset + 3), // contact
             cursor.getString(offset + 4), // typeOfContact
@@ -145,7 +145,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
     @Override
     public void readEntity(Cursor cursor, CustomerContact entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setSysid(cursor.getString(offset + 1));
+        entity.setUuid(cursor.getString(offset + 1));
         entity.setName(cursor.getString(offset + 2));
         entity.setContact(cursor.getString(offset + 3));
         entity.setTypeOfContact(cursor.getString(offset + 4));

@@ -29,7 +29,7 @@ public class TaskDao extends AbstractDao<Task, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
         public final static Property Description = new Property(2, String.class, "description", false, "DESCRIPTION");
         public final static Property Status = new Property(3, String.class, "status", false, "STATUS");
         public final static Property Priority = new Property(4, String.class, "priority", false, "PRIORITY");
@@ -55,7 +55,7 @@ public class TaskDao extends AbstractDao<Task, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'TASK' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
                 "'DESCRIPTION' TEXT," + // 2: description
                 "'STATUS' TEXT," + // 3: status
                 "'PRIORITY' TEXT," + // 4: priority
@@ -78,7 +78,7 @@ public class TaskDao extends AbstractDao<Task, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(2, entity.getUuid());
  
         String description = entity.getDescription();
         if (description != null) {
@@ -119,7 +119,7 @@ public class TaskDao extends AbstractDao<Task, Long> {
     public Task readEntity(Cursor cursor, int offset) {
         Task entity = new Task( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 1), // uuid
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // description
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // status
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // priority
@@ -133,7 +133,7 @@ public class TaskDao extends AbstractDao<Task, Long> {
     @Override
     public void readEntity(Cursor cursor, Task entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setSysid(cursor.getString(offset + 1));
+        entity.setUuid(cursor.getString(offset + 1));
         entity.setDescription(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setStatus(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setPriority(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));

@@ -14,7 +14,7 @@ public class DetailerCall {
 
     private Long id;
     /** Not-null value. */
-    private String sysid;
+    private String uuid;
     private java.util.Date dateOfSurvey;
     private Integer diarrheaPatientsInFacility;
     private String heardAboutDiarrheaTreatmentInChildren;
@@ -60,9 +60,9 @@ public class DetailerCall {
         this.id = id;
     }
 
-    public DetailerCall(Long id, String sysid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPrice, String action, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, long taskId) {
+    public DetailerCall(Long id, String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPrice, String action, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, long taskId) {
         this.id = id;
-        this.sysid = sysid;
+        this.uuid = uuid;
         this.dateOfSurvey = dateOfSurvey;
         this.diarrheaPatientsInFacility = diarrheaPatientsInFacility;
         this.heardAboutDiarrheaTreatmentInChildren = heardAboutDiarrheaTreatmentInChildren;
@@ -104,13 +104,13 @@ public class DetailerCall {
     }
 
     /** Not-null value. */
-    public String getSysid() {
-        return sysid;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setSysid(String sysid) {
-        this.sysid = sysid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public java.util.Date getDateOfSurvey() {

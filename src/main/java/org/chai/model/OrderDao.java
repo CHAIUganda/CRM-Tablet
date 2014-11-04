@@ -29,7 +29,7 @@ public class OrderDao extends AbstractDao<Order, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
         public final static Property Quantity = new Property(2, double.class, "quantity", false, "QUANTITY");
         public final static Property DeliveryDate = new Property(3, java.util.Date.class, "deliveryDate", false, "DELIVERY_DATE");
         public final static Property OrderDate = new Property(4, java.util.Date.class, "orderDate", false, "ORDER_DATE");
@@ -58,7 +58,7 @@ public class OrderDao extends AbstractDao<Order, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'orders' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
                 "'QUANTITY' REAL NOT NULL ," + // 2: quantity
                 "'DELIVERY_DATE' INTEGER NOT NULL ," + // 3: deliveryDate
                 "'ORDER_DATE' INTEGER NOT NULL ," + // 4: orderDate
@@ -83,7 +83,7 @@ public class OrderDao extends AbstractDao<Order, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(2, entity.getUuid());
         stmt.bindDouble(3, entity.getQuantity());
         stmt.bindLong(4, entity.getDeliveryDate().getTime());
         stmt.bindLong(5, entity.getOrderDate().getTime());
@@ -110,7 +110,7 @@ public class OrderDao extends AbstractDao<Order, Long> {
     public Order readEntity(Cursor cursor, int offset) {
         Order entity = new Order( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 1), // uuid
             cursor.getDouble(offset + 2), // quantity
             new java.util.Date(cursor.getLong(offset + 3)), // deliveryDate
             new java.util.Date(cursor.getLong(offset + 4)), // orderDate
@@ -126,7 +126,7 @@ public class OrderDao extends AbstractDao<Order, Long> {
     @Override
     public void readEntity(Cursor cursor, Order entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setSysid(cursor.getString(offset + 1));
+        entity.setUuid(cursor.getString(offset + 1));
         entity.setQuantity(cursor.getDouble(offset + 2));
         entity.setDeliveryDate(new java.util.Date(cursor.getLong(offset + 3)));
         entity.setOrderDate(new java.util.Date(cursor.getLong(offset + 4)));

@@ -29,7 +29,7 @@ public class VillageDao extends AbstractDao<Village, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
         public final static Property Name = new Property(2, String.class, "name", false, "NAME");
         public final static Property ParishId = new Property(3, long.class, "parishId", false, "PARISH_ID");
     };
@@ -52,7 +52,7 @@ public class VillageDao extends AbstractDao<Village, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'VILLAGE' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
                 "'NAME' TEXT NOT NULL ," + // 2: name
                 "'PARISH_ID' INTEGER NOT NULL );"); // 3: parishId
     }
@@ -72,7 +72,7 @@ public class VillageDao extends AbstractDao<Village, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(2, entity.getUuid());
         stmt.bindString(3, entity.getName());
         stmt.bindLong(4, entity.getParishId());
     }
@@ -94,7 +94,7 @@ public class VillageDao extends AbstractDao<Village, Long> {
     public Village readEntity(Cursor cursor, int offset) {
         Village entity = new Village( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 1), // uuid
             cursor.getString(offset + 2), // name
             cursor.getLong(offset + 3) // parishId
         );
@@ -105,7 +105,7 @@ public class VillageDao extends AbstractDao<Village, Long> {
     @Override
     public void readEntity(Cursor cursor, Village entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setSysid(cursor.getString(offset + 1));
+        entity.setUuid(cursor.getString(offset + 1));
         entity.setName(cursor.getString(offset + 2));
         entity.setParishId(cursor.getLong(offset + 3));
      }

@@ -14,7 +14,7 @@ public class Village {
 
     private Long id;
     /** Not-null value. */
-    private String sysid;
+    private String uuid;
     /** Not-null value. */
     private String name;
     private long parishId;
@@ -39,9 +39,9 @@ public class Village {
         this.id = id;
     }
 
-    public Village(Long id, String sysid, String name, long parishId) {
+    public Village(Long id, String uuid, String name, long parishId) {
         this.id = id;
-        this.sysid = sysid;
+        this.uuid = uuid;
         this.name = name;
         this.parishId = parishId;
     }
@@ -61,13 +61,13 @@ public class Village {
     }
 
     /** Not-null value. */
-    public String getSysid() {
-        return sysid;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setSysid(String sysid) {
-        this.sysid = sysid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     /** Not-null value. */

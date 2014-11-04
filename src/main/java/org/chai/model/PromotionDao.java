@@ -29,7 +29,7 @@ public class PromotionDao extends AbstractDao<Promotion, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
         public final static Property Description = new Property(2, String.class, "description", false, "DESCRIPTION");
         public final static Property StartDate = new Property(3, java.util.Date.class, "startDate", false, "START_DATE");
         public final static Property StopDate = new Property(4, java.util.Date.class, "stopDate", false, "STOP_DATE");
@@ -54,7 +54,7 @@ public class PromotionDao extends AbstractDao<Promotion, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'PROMOTION' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
                 "'DESCRIPTION' TEXT NOT NULL ," + // 2: description
                 "'START_DATE' INTEGER NOT NULL ," + // 3: startDate
                 "'STOP_DATE' INTEGER NOT NULL ," + // 4: stopDate
@@ -76,7 +76,7 @@ public class PromotionDao extends AbstractDao<Promotion, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(2, entity.getUuid());
         stmt.bindString(3, entity.getDescription());
         stmt.bindLong(4, entity.getStartDate().getTime());
         stmt.bindLong(5, entity.getStopDate().getTime());
@@ -100,7 +100,7 @@ public class PromotionDao extends AbstractDao<Promotion, Long> {
     public Promotion readEntity(Cursor cursor, int offset) {
         Promotion entity = new Promotion( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 1), // uuid
             cursor.getString(offset + 2), // description
             new java.util.Date(cursor.getLong(offset + 3)), // startDate
             new java.util.Date(cursor.getLong(offset + 4)), // stopDate
@@ -113,7 +113,7 @@ public class PromotionDao extends AbstractDao<Promotion, Long> {
     @Override
     public void readEntity(Cursor cursor, Promotion entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setSysid(cursor.getString(offset + 1));
+        entity.setUuid(cursor.getString(offset + 1));
         entity.setDescription(cursor.getString(offset + 2));
         entity.setStartDate(new java.util.Date(cursor.getLong(offset + 3)));
         entity.setStopDate(new java.util.Date(cursor.getLong(offset + 4)));

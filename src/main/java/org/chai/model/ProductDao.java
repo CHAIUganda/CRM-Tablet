@@ -24,7 +24,7 @@ public class ProductDao extends AbstractDao<Product, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
         public final static Property ProductGroup = new Property(2, String.class, "productGroup", false, "PRODUCT_GROUP");
         public final static Property ProductName = new Property(3, String.class, "productName", false, "PRODUCT_NAME");
         public final static Property BrandName = new Property(4, String.class, "brandName", false, "BRAND_NAME");
@@ -50,7 +50,7 @@ public class ProductDao extends AbstractDao<Product, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'PRODUCT' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
                 "'PRODUCT_GROUP' TEXT NOT NULL ," + // 2: productGroup
                 "'PRODUCT_NAME' TEXT NOT NULL ," + // 3: productName
                 "'BRAND_NAME' TEXT NOT NULL ," + // 4: brandName
@@ -74,7 +74,7 @@ public class ProductDao extends AbstractDao<Product, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(2, entity.getUuid());
         stmt.bindString(3, entity.getProductGroup());
         stmt.bindString(4, entity.getProductName());
         stmt.bindString(5, entity.getBrandName());
@@ -100,7 +100,7 @@ public class ProductDao extends AbstractDao<Product, Long> {
     public Product readEntity(Cursor cursor, int offset) {
         Product entity = new Product( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 1), // uuid
             cursor.getString(offset + 2), // productGroup
             cursor.getString(offset + 3), // productName
             cursor.getString(offset + 4), // brandName
@@ -115,7 +115,7 @@ public class ProductDao extends AbstractDao<Product, Long> {
     @Override
     public void readEntity(Cursor cursor, Product entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setSysid(cursor.getString(offset + 1));
+        entity.setUuid(cursor.getString(offset + 1));
         entity.setProductGroup(cursor.getString(offset + 2));
         entity.setProductName(cursor.getString(offset + 3));
         entity.setBrandName(cursor.getString(offset + 4));

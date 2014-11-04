@@ -29,7 +29,7 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
         public final static Property DateOfSurvey = new Property(2, java.util.Date.class, "dateOfSurvey", false, "DATE_OF_SURVEY");
         public final static Property DiarrheaPatientsInFacility = new Property(3, Integer.class, "diarrheaPatientsInFacility", false, "DIARRHEA_PATIENTS_IN_FACILITY");
         public final static Property HeardAboutDiarrheaTreatmentInChildren = new Property(4, String.class, "heardAboutDiarrheaTreatmentInChildren", false, "HEARD_ABOUT_DIARRHEA_TREATMENT_IN_CHILDREN");
@@ -74,7 +74,7 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'DETAILER_CALL' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
                 "'DATE_OF_SURVEY' INTEGER," + // 2: dateOfSurvey
                 "'DIARRHEA_PATIENTS_IN_FACILITY' INTEGER," + // 3: diarrheaPatientsInFacility
                 "'HEARD_ABOUT_DIARRHEA_TREATMENT_IN_CHILDREN' TEXT," + // 4: heardAboutDiarrheaTreatmentInChildren
@@ -116,7 +116,7 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(2, entity.getUuid());
  
         java.util.Date dateOfSurvey = entity.getDateOfSurvey();
         if (dateOfSurvey != null) {
@@ -252,7 +252,7 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
     public DetailerCall readEntity(Cursor cursor, int offset) {
         DetailerCall entity = new DetailerCall( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 1), // uuid
             cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)), // dateOfSurvey
             cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // diarrheaPatientsInFacility
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // heardAboutDiarrheaTreatmentInChildren
@@ -285,7 +285,7 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
     @Override
     public void readEntity(Cursor cursor, DetailerCall entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setSysid(cursor.getString(offset + 1));
+        entity.setUuid(cursor.getString(offset + 1));
         entity.setDateOfSurvey(cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)));
         entity.setDiarrheaPatientsInFacility(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
         entity.setHeardAboutDiarrheaTreatmentInChildren(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));

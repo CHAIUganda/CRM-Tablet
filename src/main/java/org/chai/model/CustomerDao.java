@@ -29,7 +29,7 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
         public final static Property Latitude = new Property(2, Double.class, "latitude", false, "LATITUDE");
         public final static Property Longitude = new Property(3, Double.class, "longitude", false, "LONGITUDE");
         public final static Property OutletName = new Property(4, String.class, "outletName", false, "OUTLET_NAME");
@@ -75,7 +75,7 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'CUSTOMER' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
                 "'LATITUDE' REAL," + // 2: latitude
                 "'LONGITUDE' REAL," + // 3: longitude
                 "'OUTLET_NAME' TEXT NOT NULL ," + // 4: outletName
@@ -118,7 +118,7 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(2, entity.getUuid());
  
         Double latitude = entity.getLatitude();
         if (latitude != null) {
@@ -223,7 +223,7 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
     public Customer readEntity(Cursor cursor, int offset) {
         Customer entity = new Customer( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 1), // uuid
             cursor.isNull(offset + 2) ? null : cursor.getDouble(offset + 2), // latitude
             cursor.isNull(offset + 3) ? null : cursor.getDouble(offset + 3), // longitude
             cursor.getString(offset + 4), // outletName
@@ -257,7 +257,7 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
     @Override
     public void readEntity(Cursor cursor, Customer entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setSysid(cursor.getString(offset + 1));
+        entity.setUuid(cursor.getString(offset + 1));
         entity.setLatitude(cursor.isNull(offset + 2) ? null : cursor.getDouble(offset + 2));
         entity.setLongitude(cursor.isNull(offset + 3) ? null : cursor.getDouble(offset + 3));
         entity.setOutletName(cursor.getString(offset + 4));

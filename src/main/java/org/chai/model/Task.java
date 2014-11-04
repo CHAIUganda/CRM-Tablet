@@ -15,7 +15,7 @@ public class Task {
 
     private Long id;
     /** Not-null value. */
-    private String sysid;
+    private String uuid;
     private String description;
     private String status;
     private String priority;
@@ -43,9 +43,9 @@ public class Task {
         this.id = id;
     }
 
-    public Task(Long id, String sysid, String description, String status, String priority, java.util.Date dateScheduled, long customerId) {
+    public Task(Long id, String uuid, String description, String status, String priority, java.util.Date dateScheduled, long customerId) {
         this.id = id;
-        this.sysid = sysid;
+        this.uuid = uuid;
         this.description = description;
         this.status = status;
         this.priority = priority;
@@ -68,13 +68,13 @@ public class Task {
     }
 
     /** Not-null value. */
-    public String getSysid() {
-        return sysid;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setSysid(String sysid) {
-        this.sysid = sysid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getDescription() {

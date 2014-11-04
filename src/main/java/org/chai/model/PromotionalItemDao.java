@@ -29,7 +29,7 @@ public class PromotionalItemDao extends AbstractDao<PromotionalItem, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Sysid = new Property(1, String.class, "sysid", false, "SYSID");
+        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
         public final static Property Name = new Property(2, String.class, "name", false, "NAME");
         public final static Property PromotionId = new Property(3, long.class, "promotionId", false, "PROMOTION_ID");
     };
@@ -52,7 +52,7 @@ public class PromotionalItemDao extends AbstractDao<PromotionalItem, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'PROMOTIONAL_ITEM' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'SYSID' TEXT NOT NULL UNIQUE ," + // 1: sysid
+                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
                 "'NAME' TEXT NOT NULL ," + // 2: name
                 "'PROMOTION_ID' INTEGER NOT NULL );"); // 3: promotionId
     }
@@ -72,7 +72,7 @@ public class PromotionalItemDao extends AbstractDao<PromotionalItem, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getSysid());
+        stmt.bindString(2, entity.getUuid());
         stmt.bindString(3, entity.getName());
         stmt.bindLong(4, entity.getPromotionId());
     }
@@ -94,7 +94,7 @@ public class PromotionalItemDao extends AbstractDao<PromotionalItem, Long> {
     public PromotionalItem readEntity(Cursor cursor, int offset) {
         PromotionalItem entity = new PromotionalItem( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // sysid
+            cursor.getString(offset + 1), // uuid
             cursor.getString(offset + 2), // name
             cursor.getLong(offset + 3) // promotionId
         );
@@ -105,7 +105,7 @@ public class PromotionalItemDao extends AbstractDao<PromotionalItem, Long> {
     @Override
     public void readEntity(Cursor cursor, PromotionalItem entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setSysid(cursor.getString(offset + 1));
+        entity.setUuid(cursor.getString(offset + 1));
         entity.setName(cursor.getString(offset + 2));
         entity.setPromotionId(cursor.getLong(offset + 3));
      }

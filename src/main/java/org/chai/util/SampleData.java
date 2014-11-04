@@ -76,7 +76,7 @@ public class SampleData {
     public void generateSampleCustomers(long subcountyId) {
 
         Customer customer1 = new Customer(null);
-        customer1.setSysid(UUID.randomUUID().toString());
+        customer1.setUuid(UUID.randomUUID().toString());
         customer1.setOutletName("Byaruhanga Drug shop");
         customer1.setDescriptionOfOutletLocation("Near Kyebando Super market");
         customer1.setLatitude(0.4183211563884709);
@@ -104,7 +104,7 @@ public class SampleData {
         long customerId1 = customerDao.insert(customer1);
 
         Customer customer2 = new Customer(null);
-        customer2.setSysid(UUID.randomUUID().toString());
+        customer2.setUuid(UUID.randomUUID().toString());
         customer2.setOutletName("Mugenyi Drug shop");
         customer2.setDescriptionOfOutletLocation("Masaka Town");
         customer2.setLatitude(0.4183211563884709);
@@ -132,7 +132,7 @@ public class SampleData {
         long customerId2 = customerDao.insert(customer2);
 
         Customer customer3 = new Customer(null);
-        customer3.setSysid(UUID.randomUUID().toString());
+        customer3.setUuid(UUID.randomUUID().toString());
         customer3.setOutletName("Imwota Drug shop");
         customer3.setDescriptionOfOutletLocation("Opposite Natete market");
         customer3.setLatitude(0.4183211563884709);
@@ -167,7 +167,7 @@ public class SampleData {
     public void generateSampleCustomerContacts(long customer1Id, long customer2Id, long customer3Id) {
 
         CustomerContact customerContact = new CustomerContact(null);
-        customerContact.setSysid(UUID.randomUUID().toString());
+        customerContact.setUuid(UUID.randomUUID().toString());
         customerContact.setContact("(256) 363-1791");
         customerContact.setName("Mugenyi Peter Bala");
         customerContact.setTypeOfContact("key");
@@ -179,7 +179,7 @@ public class SampleData {
         customerContact.setCustomerId(customer1Id);
 
         CustomerContact customerContact2 = new CustomerContact();
-        customerContact2.setSysid(UUID.randomUUID().toString());
+        customerContact2.setUuid(UUID.randomUUID().toString());
         customerContact2.setContact("(256) 239-2354");
         customerContact2.setName("Owamukama Eliasaph");
         customerContact2.setTypeOfContact("key");
@@ -191,7 +191,7 @@ public class SampleData {
         customerContact2.setCustomerId(customer2Id);
 
         CustomerContact customerContact3 = new CustomerContact(null);
-        customerContact3.setSysid(UUID.randomUUID().toString());
+        customerContact3.setUuid(UUID.randomUUID().toString());
         customerContact3.setContact("(256) 620-7136");
         customerContact3.setName("Nasasira Unity");
         customerContact3.setTypeOfContact("key");
@@ -225,7 +225,7 @@ public class SampleData {
 
     public long insertSampleCustomer(long subcountyId,String name){
         Customer customer1 = new Customer(null);
-        customer1.setSysid(UUID.randomUUID().toString());
+        customer1.setUuid(UUID.randomUUID().toString());
         customer1.setOutletName(name);
         customer1.setDescriptionOfOutletLocation("Wandegeya");
         customer1.setLatitude(0.4183211563884709);
@@ -257,7 +257,7 @@ public class SampleData {
 
     public long insertSampleContact(long customerId,String name){
         CustomerContact customerContact = new CustomerContact(null);
-        customerContact.setSysid(UUID.randomUUID().toString());
+        customerContact.setUuid(UUID.randomUUID().toString());
         customerContact.setContact("(256) 363-1791");
         customerContact.setName(name);
         customerContact.setTypeOfContact("key");
@@ -270,5 +270,6 @@ public class SampleData {
 
         return customerContactDao.insert(customerContact);
     }
+
 
 }

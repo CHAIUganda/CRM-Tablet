@@ -219,7 +219,7 @@ public class DetailersActivity extends Activity {
             detailerCall = new DetailerCall(null);
         }
         //
-        detailerCall.setSysid(UUID.randomUUID().toString());
+        detailerCall.setUuid(UUID.randomUUID().toString());
         detailerCall.setDateOfSurvey(new Date());
         detailerCall.setDiarrheaPatientsInFacility(Integer.parseInt(((EditText) findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).getText().toString()));
         detailerCall.setOtherWaysHowYouHeard(((EditText) findViewById(R.id.detailer_other_ways_youheard_about_zinc)).getText().toString());

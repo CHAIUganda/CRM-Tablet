@@ -15,7 +15,7 @@ public class Subcounty {
 
     private Long id;
     /** Not-null value. */
-    private String sysid;
+    private String uuid;
     /** Not-null value. */
     private String name;
     private long districtId;
@@ -42,9 +42,9 @@ public class Subcounty {
         this.id = id;
     }
 
-    public Subcounty(Long id, String sysid, String name, long districtId) {
+    public Subcounty(Long id, String uuid, String name, long districtId) {
         this.id = id;
-        this.sysid = sysid;
+        this.uuid = uuid;
         this.name = name;
         this.districtId = districtId;
     }
@@ -64,13 +64,13 @@ public class Subcounty {
     }
 
     /** Not-null value. */
-    public String getSysid() {
-        return sysid;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setSysid(String sysid) {
-        this.sysid = sysid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     /** Not-null value. */

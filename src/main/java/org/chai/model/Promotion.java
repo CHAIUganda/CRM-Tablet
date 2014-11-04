@@ -15,7 +15,7 @@ public class Promotion {
 
     private Long id;
     /** Not-null value. */
-    private String sysid;
+    private String uuid;
     /** Not-null value. */
     private String description;
     /** Not-null value. */
@@ -45,9 +45,9 @@ public class Promotion {
         this.id = id;
     }
 
-    public Promotion(Long id, String sysid, String description, java.util.Date startDate, java.util.Date stopDate, long productId) {
+    public Promotion(Long id, String uuid, String description, java.util.Date startDate, java.util.Date stopDate, long productId) {
         this.id = id;
-        this.sysid = sysid;
+        this.uuid = uuid;
         this.description = description;
         this.startDate = startDate;
         this.stopDate = stopDate;
@@ -69,13 +69,13 @@ public class Promotion {
     }
 
     /** Not-null value. */
-    public String getSysid() {
-        return sysid;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setSysid(String sysid) {
-        this.sysid = sysid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     /** Not-null value. */

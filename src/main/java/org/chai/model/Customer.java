@@ -15,7 +15,7 @@ public class Customer {
 
     private Long id;
     /** Not-null value. */
-    private String sysid;
+    private String uuid;
     private Double latitude;
     private Double longitude;
     /** Not-null value. */
@@ -74,9 +74,9 @@ public class Customer {
         this.id = id;
     }
 
-    public Customer(Long id, String sysid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, Integer numberOfProducts, Integer restockFrequency, Double turnOver, Integer tenureLengthYears, Integer tenureLengthMonths, String parish, String village, long subcountyId) {
+    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, Integer numberOfProducts, Integer restockFrequency, Double turnOver, Integer tenureLengthYears, Integer tenureLengthMonths, String parish, String village, long subcountyId) {
         this.id = id;
-        this.sysid = sysid;
+        this.uuid = uuid;
         this.latitude = latitude;
         this.longitude = longitude;
         this.outletName = outletName;
@@ -119,13 +119,13 @@ public class Customer {
     }
 
     /** Not-null value. */
-    public String getSysid() {
-        return sysid;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setSysid(String sysid) {
-        this.sysid = sysid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public Double getLatitude() {

@@ -15,7 +15,7 @@ public class Product {
 
     private Long id;
     /** Not-null value. */
-    private String sysid;
+    private String uuid;
     /** Not-null value. */
     private String productGroup;
     /** Not-null value. */
@@ -48,9 +48,9 @@ public class Product {
         this.id = id;
     }
 
-    public Product(Long id, String sysid, String productGroup, String productName, String brandName, String formulation, String unitOfMeasure, double unitPrice) {
+    public Product(Long id, String uuid, String productGroup, String productName, String brandName, String formulation, String unitOfMeasure, double unitPrice) {
         this.id = id;
-        this.sysid = sysid;
+        this.uuid = uuid;
         this.productGroup = productGroup;
         this.productName = productName;
         this.brandName = brandName;
@@ -74,13 +74,13 @@ public class Product {
     }
 
     /** Not-null value. */
-    public String getSysid() {
-        return sysid;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setSysid(String sysid) {
-        this.sysid = sysid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     /** Not-null value. */

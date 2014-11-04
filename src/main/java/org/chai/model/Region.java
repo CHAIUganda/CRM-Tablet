@@ -15,7 +15,7 @@ public class Region {
 
     private Long id;
     /** Not-null value. */
-    private String sysid;
+    private String uuid;
     /** Not-null value. */
     private String name;
 
@@ -37,9 +37,9 @@ public class Region {
         this.id = id;
     }
 
-    public Region(Long id, String sysid, String name) {
+    public Region(Long id, String uuid, String name) {
         this.id = id;
-        this.sysid = sysid;
+        this.uuid = uuid;
         this.name = name;
     }
 
@@ -58,13 +58,13 @@ public class Region {
     }
 
     /** Not-null value. */
-    public String getSysid() {
-        return sysid;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setSysid(String sysid) {
-        this.sysid = sysid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     /** Not-null value. */

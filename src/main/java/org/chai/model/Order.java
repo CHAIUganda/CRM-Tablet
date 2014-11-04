@@ -15,7 +15,7 @@ public class Order {
 
     private Long id;
     /** Not-null value. */
-    private String sysid;
+    private String uuid;
     private double quantity;
     /** Not-null value. */
     private java.util.Date deliveryDate;
@@ -52,9 +52,9 @@ public class Order {
         this.id = id;
     }
 
-    public Order(Long id, String sysid, double quantity, java.util.Date deliveryDate, java.util.Date orderDate, String contactTel, String contactName, long customerId, long productId) {
+    public Order(Long id, String uuid, double quantity, java.util.Date deliveryDate, java.util.Date orderDate, String contactTel, String contactName, long customerId, long productId) {
         this.id = id;
-        this.sysid = sysid;
+        this.uuid = uuid;
         this.quantity = quantity;
         this.deliveryDate = deliveryDate;
         this.orderDate = orderDate;
@@ -79,13 +79,13 @@ public class Order {
     }
 
     /** Not-null value. */
-    public String getSysid() {
-        return sysid;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setSysid(String sysid) {
-        this.sysid = sysid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public double getQuantity() {
