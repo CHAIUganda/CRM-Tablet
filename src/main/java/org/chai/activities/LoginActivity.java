@@ -26,9 +26,9 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login_activity);
 
         //create initial data incase there is none
-        SampleData sampleData = new SampleData(this);
+      /*  SampleData sampleData = new SampleData(this);
         sampleData.createBaseData();
-
+*/
         Button loginBtn = (Button)findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){

@@ -15,19 +15,16 @@ public class CustomerContact {
     private Long id;
     /** Not-null value. */
     private String uuid;
-    /** Not-null value. */
     private String name;
-    /** Not-null value. */
     private String contact;
-    /** Not-null value. */
     private String typeOfContact;
-    /** Not-null value. */
     private String gender;
     private String role;
-    /** Not-null value. */
     private String qualification;
     private String networkOrAssociation;
     private Integer graduationYear;
+    private java.util.Date dateCreated;
+    private java.util.Date lastUpdated;
     private long customerId;
 
     /** Used to resolve relations */
@@ -50,7 +47,7 @@ public class CustomerContact {
         this.id = id;
     }
 
-    public CustomerContact(Long id, String uuid, String name, String contact, String typeOfContact, String gender, String role, String qualification, String networkOrAssociation, Integer graduationYear, long customerId) {
+    public CustomerContact(Long id, String uuid, String name, String contact, String typeOfContact, String gender, String role, String qualification, String networkOrAssociation, Integer graduationYear, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -61,6 +58,8 @@ public class CustomerContact {
         this.qualification = qualification;
         this.networkOrAssociation = networkOrAssociation;
         this.graduationYear = graduationYear;
+        this.dateCreated = dateCreated;
+        this.lastUpdated = lastUpdated;
         this.customerId = customerId;
     }
 
@@ -88,42 +87,34 @@ public class CustomerContact {
         this.uuid = uuid;
     }
 
-    /** Not-null value. */
     public String getName() {
         return name;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setName(String name) {
         this.name = name;
     }
 
-    /** Not-null value. */
     public String getContact() {
         return contact;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setContact(String contact) {
         this.contact = contact;
     }
 
-    /** Not-null value. */
     public String getTypeOfContact() {
         return typeOfContact;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setTypeOfContact(String typeOfContact) {
         this.typeOfContact = typeOfContact;
     }
 
-    /** Not-null value. */
     public String getGender() {
         return gender;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setGender(String gender) {
         this.gender = gender;
     }
@@ -136,12 +127,10 @@ public class CustomerContact {
         this.role = role;
     }
 
-    /** Not-null value. */
     public String getQualification() {
         return qualification;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setQualification(String qualification) {
         this.qualification = qualification;
     }
@@ -160,6 +149,22 @@ public class CustomerContact {
 
     public void setGraduationYear(Integer graduationYear) {
         this.graduationYear = graduationYear;
+    }
+
+    public java.util.Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(java.util.Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public java.util.Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(java.util.Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     public long getCustomerId() {

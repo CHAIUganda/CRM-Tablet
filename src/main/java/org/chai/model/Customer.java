@@ -23,33 +23,26 @@ public class Customer {
     private String outletType;
     private String outletSize;
     private byte[] outletPicture;
-    /** Not-null value. */
     private String split;
-    /** Not-null value. */
     private String openingHours;
-    /** Not-null value. */
     private String majoritySourceOfSupply;
-    /** Not-null value. */
     private String keyWholeSalerName;
-    /** Not-null value. */
     private String keyWholeSalerContact;
-    /** Not-null value. */
     private String buildingStructure;
-    /** Not-null value. */
     private String equipment;
-    /** Not-null value. */
+    private String typeOfLicence;
     private String descriptionOfOutletLocation;
     private Integer numberOfEmployees;
     private Integer numberOfBranches;
     private Integer numberOfCustomersPerDay;
-    private Integer numberOfProducts;
+    private String numberOfProducts;
     private Integer restockFrequency;
-    private Double turnOver;
+    private String turnOver;
     private Integer tenureLengthYears;
     private Integer tenureLengthMonths;
-    private String parish;
-    private String village;
-    private long subcountyId;
+    private java.util.Date dateCreated;
+    private java.util.Date lastUpdated;
+    private long villageId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -57,10 +50,10 @@ public class Customer {
     /** Used for active entity operations. */
     private transient CustomerDao myDao;
 
-    private Subcounty subcounty;
-    private Long subcounty__resolvedKey;
+    private Village village;
+    private Long village__resolvedKey;
 
-    private List<CustomerContact> contacts;
+    private List<CustomerContact> customerContacts;
     private List<Order> orders;
     private List<Task> tasks;
 
@@ -74,7 +67,7 @@ public class Customer {
         this.id = id;
     }
 
-    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, Integer numberOfProducts, Integer restockFrequency, Double turnOver, Integer tenureLengthYears, Integer tenureLengthMonths, String parish, String village, long subcountyId) {
+    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, String numberOfProducts, Integer restockFrequency, String turnOver, Integer tenureLengthYears, Integer tenureLengthMonths, java.util.Date dateCreated, java.util.Date lastUpdated, long villageId) {
         this.id = id;
         this.uuid = uuid;
         this.latitude = latitude;
@@ -90,6 +83,7 @@ public class Customer {
         this.keyWholeSalerContact = keyWholeSalerContact;
         this.buildingStructure = buildingStructure;
         this.equipment = equipment;
+        this.typeOfLicence = typeOfLicence;
         this.descriptionOfOutletLocation = descriptionOfOutletLocation;
         this.numberOfEmployees = numberOfEmployees;
         this.numberOfBranches = numberOfBranches;
@@ -99,9 +93,9 @@ public class Customer {
         this.turnOver = turnOver;
         this.tenureLengthYears = tenureLengthYears;
         this.tenureLengthMonths = tenureLengthMonths;
-        this.parish = parish;
-        this.village = village;
-        this.subcountyId = subcountyId;
+        this.dateCreated = dateCreated;
+        this.lastUpdated = lastUpdated;
+        this.villageId = villageId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -178,82 +172,74 @@ public class Customer {
         this.outletPicture = outletPicture;
     }
 
-    /** Not-null value. */
     public String getSplit() {
         return split;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setSplit(String split) {
         this.split = split;
     }
 
-    /** Not-null value. */
     public String getOpeningHours() {
         return openingHours;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setOpeningHours(String openingHours) {
         this.openingHours = openingHours;
     }
 
-    /** Not-null value. */
     public String getMajoritySourceOfSupply() {
         return majoritySourceOfSupply;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setMajoritySourceOfSupply(String majoritySourceOfSupply) {
         this.majoritySourceOfSupply = majoritySourceOfSupply;
     }
 
-    /** Not-null value. */
     public String getKeyWholeSalerName() {
         return keyWholeSalerName;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setKeyWholeSalerName(String keyWholeSalerName) {
         this.keyWholeSalerName = keyWholeSalerName;
     }
 
-    /** Not-null value. */
     public String getKeyWholeSalerContact() {
         return keyWholeSalerContact;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setKeyWholeSalerContact(String keyWholeSalerContact) {
         this.keyWholeSalerContact = keyWholeSalerContact;
     }
 
-    /** Not-null value. */
     public String getBuildingStructure() {
         return buildingStructure;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setBuildingStructure(String buildingStructure) {
         this.buildingStructure = buildingStructure;
     }
 
-    /** Not-null value. */
     public String getEquipment() {
         return equipment;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setEquipment(String equipment) {
         this.equipment = equipment;
     }
 
-    /** Not-null value. */
+    public String getTypeOfLicence() {
+        return typeOfLicence;
+    }
+
+    public void setTypeOfLicence(String typeOfLicence) {
+        this.typeOfLicence = typeOfLicence;
+    }
+
     public String getDescriptionOfOutletLocation() {
         return descriptionOfOutletLocation;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setDescriptionOfOutletLocation(String descriptionOfOutletLocation) {
         this.descriptionOfOutletLocation = descriptionOfOutletLocation;
     }
@@ -282,11 +268,11 @@ public class Customer {
         this.numberOfCustomersPerDay = numberOfCustomersPerDay;
     }
 
-    public Integer getNumberOfProducts() {
+    public String getNumberOfProducts() {
         return numberOfProducts;
     }
 
-    public void setNumberOfProducts(Integer numberOfProducts) {
+    public void setNumberOfProducts(String numberOfProducts) {
         this.numberOfProducts = numberOfProducts;
     }
 
@@ -298,11 +284,11 @@ public class Customer {
         this.restockFrequency = restockFrequency;
     }
 
-    public Double getTurnOver() {
+    public String getTurnOver() {
         return turnOver;
     }
 
-    public void setTurnOver(Double turnOver) {
+    public void setTurnOver(String turnOver) {
         this.turnOver = turnOver;
     }
 
@@ -322,78 +308,78 @@ public class Customer {
         this.tenureLengthMonths = tenureLengthMonths;
     }
 
-    public String getParish() {
-        return parish;
+    public java.util.Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void setParish(String parish) {
-        this.parish = parish;
+    public void setDateCreated(java.util.Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public String getVillage() {
-        return village;
+    public java.util.Date getLastUpdated() {
+        return lastUpdated;
     }
 
-    public void setVillage(String village) {
-        this.village = village;
+    public void setLastUpdated(java.util.Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
-    public long getSubcountyId() {
-        return subcountyId;
+    public long getVillageId() {
+        return villageId;
     }
 
-    public void setSubcountyId(long subcountyId) {
-        this.subcountyId = subcountyId;
+    public void setVillageId(long villageId) {
+        this.villageId = villageId;
     }
 
     /** To-one relationship, resolved on first access. */
-    public Subcounty getSubcounty() {
-        long __key = this.subcountyId;
-        if (subcounty__resolvedKey == null || !subcounty__resolvedKey.equals(__key)) {
+    public Village getVillage() {
+        long __key = this.villageId;
+        if (village__resolvedKey == null || !village__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            SubcountyDao targetDao = daoSession.getSubcountyDao();
-            Subcounty subcountyNew = targetDao.load(__key);
+            VillageDao targetDao = daoSession.getVillageDao();
+            Village villageNew = targetDao.load(__key);
             synchronized (this) {
-                subcounty = subcountyNew;
-            	subcounty__resolvedKey = __key;
+                village = villageNew;
+            	village__resolvedKey = __key;
             }
         }
-        return subcounty;
+        return village;
     }
 
-    public void setSubcounty(Subcounty subcounty) {
-        if (subcounty == null) {
-            throw new DaoException("To-one property 'subcountyId' has not-null constraint; cannot set to-one to null");
+    public void setVillage(Village village) {
+        if (village == null) {
+            throw new DaoException("To-one property 'villageId' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
-            this.subcounty = subcounty;
-            subcountyId = subcounty.getId();
-            subcounty__resolvedKey = subcountyId;
+            this.village = village;
+            villageId = village.getId();
+            village__resolvedKey = villageId;
         }
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<CustomerContact> getContacts() {
-        if (contacts == null) {
+    public List<CustomerContact> getCustomerContacts() {
+        if (customerContacts == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
             CustomerContactDao targetDao = daoSession.getCustomerContactDao();
-            List<CustomerContact> contactsNew = targetDao._queryCustomer_Contacts(id);
+            List<CustomerContact> customerContactsNew = targetDao._queryCustomer_CustomerContacts(id);
             synchronized (this) {
-                if(contacts == null) {
-                    contacts = contactsNew;
+                if(customerContacts == null) {
+                    customerContacts = customerContactsNew;
                 }
             }
         }
-        return contacts;
+        return customerContacts;
     }
 
     /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    public synchronized void resetContacts() {
-        contacts = null;
+    public synchronized void resetCustomerContacts() {
+        customerContacts = null;
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

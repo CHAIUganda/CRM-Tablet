@@ -87,7 +87,7 @@ public class CustomerDetailsActivity extends Activity {
         ((TextView) findViewById(R.id.customer_profile_num_products)).setText(customer.getNumberOfProducts() + "");
         ((TextView) findViewById(R.id.customer_profile_restock_frequency)).setText(customer.getRestockFrequency() + "");
         ((TextView) findViewById(R.id.customer_profile_turn_over)).setText(customer.getTurnOver() + "");
-        ((TextView) findViewById(R.id.customer_profile_subcounty)).setText(customer.getSubcounty().getName());
+        ((TextView) findViewById(R.id.customer_profile_subcounty)).setText(customer.getVillage().getName());
 
     }
 

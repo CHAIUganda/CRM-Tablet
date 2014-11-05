@@ -25,16 +25,17 @@ import java.util.UUID;
  */
 public class CustomerForm extends Activity {
 
-    private Spinner subcountySpinner;
+    private Spinner villageSpinner;
     private SubcountyArrayAdapter adapter;
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private CustomerDao customerDao;
     private SubcountyDao subcountyDao;
+    private VillageDao villageDao;
     private CustomerContactDao customerContactDao;
 
-    private Subcounty[] subcounties;
+    private Village[] villages;
     private GPSTracker gpsTracker;
     private double capturedLatitude;
     private double capturedLongitude;
@@ -50,12 +51,12 @@ public class CustomerForm extends Activity {
         Long customerId = bundle.getLong("id");
         setCustomerInstance(customerId);
         try {
-            List<Subcounty> subcountyData = subcountyDao.loadAll();
-            subcounties = subcountyData.toArray(new Subcounty[subcountyData.size()]);
-            subcountySpinner = (Spinner) findViewById(R.id.details_subcounty);
+            List<Village> villageData = villageDao.loadAll();
+            villages = villageData.toArray(new Village[villageData.size()]);
+            villageSpinner = (Spinner) findViewById(R.id.details_subcounty);
 
-            adapter = new SubcountyArrayAdapter(this, android.R.layout.simple_spinner_item, subcounties);
-            subcountySpinner.setAdapter(adapter);
+            adapter = new SubcountyArrayAdapter(this, android.R.layout.simple_spinner_item, villages);
+            villageSpinner.setAdapter(adapter);
             Button saveCustomerBtn = (Button) findViewById(R.id.menu_add_new_customer);
             setSaveButtonText(saveCustomerBtn);
             saveCustomerBtn.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +142,7 @@ public class CustomerForm extends Activity {
             customerDao = daoSession.getCustomerDao();
             subcountyDao = daoSession.getSubcountyDao();
             customerContactDao = daoSession.getCustomerContactDao();
+            villageDao = daoSession.getVillageDao();
         } catch (Exception ex) {
             Log.d("Error=====================================",ex.getLocalizedMessage());
             Toast.makeText(getApplicationContext(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -188,14 +190,12 @@ public class CustomerForm extends Activity {
             customerInstance.setNumberOfEmployees(Integer.parseInt(((EditText) findViewById(R.id.details_number_of_employees)).getText().toString()));
             customerInstance.setNumberOfBranches(Integer.parseInt(((EditText) findViewById(R.id.details_number_of_branches)).getText().toString()));
             customerInstance.setNumberOfCustomersPerDay(Integer.parseInt(((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString()));
-            customerInstance.setNumberOfProducts(Integer.parseInt(((EditText) findViewById(R.id.details_num_products)).getText().toString()));
+            customerInstance.setNumberOfProducts(((EditText) findViewById(R.id.details_num_products)).getText().toString());
             customerInstance.setRestockFrequency(Integer.parseInt(((EditText) findViewById(R.id.details_restock_frequency)).getText().toString()));
-            customerInstance.setTurnOver(Double.parseDouble(((EditText) findViewById(R.id.details_turn_over)).getText().toString()));
+            customerInstance.setTurnOver(((Spinner) findViewById(R.id.details_turn_over)).getSelectedItem().toString());
             customerInstance.setLongitude(capturedLongitude);
             customerInstance.setLatitude(capturedLatitude);
-            customerInstance.setSubcounty(((Subcounty) subcountySpinner.getSelectedItem()));
-            customerInstance.setVillage(((EditText) findViewById(R.id.details_village)).getText().toString());
-            customerInstance.setParish(((EditText) findViewById(R.id.details_parish)).getText().toString());
+            customerInstance.setVillage(((Village) villageSpinner.getSelectedItem()));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -220,10 +220,9 @@ public class CustomerForm extends Activity {
             ((EditText) findViewById(R.id.details_num_customers_per_day)).setText(customerInstance.getNumberOfCustomersPerDay() == null ? "" : customerInstance.getNumberOfCustomersPerDay() + "");
             ((EditText) findViewById(R.id.details_num_products)).setText(customerInstance.getNumberOfProducts() == null ? "" : customerInstance.getNumberOfProducts() + "");
             ((EditText) findViewById(R.id.details_restock_frequency)).setText(customerInstance.getRestockFrequency() == null ? "" : customerInstance.getRestockFrequency() + "");
-            ((EditText) findViewById(R.id.details_turn_over)).setText(customerInstance.getTurnOver() == null ? "" : customerInstance.getTurnOver() + "");
-            ((EditText) findViewById(R.id.details_village)).setText(customerInstance.getVillage() == null ? "" : customerInstance.getVillage());
-            ((EditText) findViewById(R.id.details_parish)).setText(customerInstance.getParish() == null ? "" : customerInstance.getParish());
 
+            Spinner turnoverspinner = (Spinner) findViewById(R.id.details_turn_over);
+            setSpinnerSelection(turnoverspinner,customerInstance.getTurnOver() == null ? "" : customerInstance.getTurnOver() + "");
 
             Spinner outletTypeSpinner = (Spinner) findViewById(R.id.details_outlet_type);
             setSpinnerSelection(outletTypeSpinner, customerInstance.getOutletType());
@@ -241,7 +240,7 @@ public class CustomerForm extends Activity {
             setSpinnerSelection(buildingStructureSpinner, customerInstance.getBuildingStructure());
 
             Spinner subcountySpinner2 = (Spinner) findViewById(R.id.details_subcounty);
-            setSpinnerSelection(subcountySpinner2, customerInstance.getSubcounty().getName());
+            setSpinnerSelection(subcountySpinner2, customerInstance.getVillage().getName());
         }
     }
 

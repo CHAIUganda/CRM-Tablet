@@ -67,8 +67,8 @@ public class CustomerAdapter extends BaseAdapter{
 
         Customer customer = customers.get(position);
         CustomerContact customerCtct = null;
-        if(customer.getContacts().size()>0){
-            customerCtct = Utils.getKeyCustomerContact(customer.getContacts());
+        if(customer.getCustomerContacts().size()>0){
+            customerCtct = Utils.getKeyCustomerContact(customer.getCustomerContacts());
         }
 
         if(customerCtct!=null){
