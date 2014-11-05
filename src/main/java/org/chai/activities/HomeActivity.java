@@ -1,6 +1,7 @@
 package org.chai.activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +10,14 @@ import org.chai.R;
 import org.chai.activities.calls.CallsMainActivity;
 import org.chai.activities.customer.CustomersMainActivity;
 import org.chai.activities.tasks.TasksMainActivity;
+import org.chai.sync.CHAISynchroniser;
 
 /**
  * Created by victor on 10/15/14.
  */
 public class HomeActivity extends Activity {
 
+    private ProgressDialog progressDialog;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard_layout);
@@ -22,6 +25,7 @@ public class HomeActivity extends Activity {
         Button btnCustomers = (Button)findViewById(R.id.btn_customers);
         Button btnCallsData = (Button)findViewById(R.id.btn_calls);
         Button btnSyncronise = (Button)findViewById(R.id.btn_sync);
+        progressDialog = new ProgressDialog(this);
 
         btnTasks.setOnClickListener(new View.OnClickListener(){
 
@@ -54,7 +58,28 @@ public class HomeActivity extends Activity {
 
             @Override
             public void onClick(View view) {
+                progressDialog.setMessage("Syncronising with Server:) ");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CHAISynchroniser chaiSynchroniser = new CHAISynchroniser(HomeActivity.this);
+                        chaiSynchroniser.startSyncronisationProcess();
+                        progressDialog.setProgress(100);
+                        progressDialog.cancel();
+                    }
+                }).start();
             }
         });
+
+    }
+
+    public void open(View view){
+        progressDialog.setMessage("Downloading Music :) ");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
     }
 }
