@@ -3,7 +3,11 @@ package org.chai.activities.tasks;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,11 +41,11 @@ public class DetailersActivity extends Activity {
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
-    private SubcountyDao subcountyDao;
+    private VillageDao villageDao;
     private TaskDao taskDao;
     private DetailerCallDao detailerCallDao;
 
-    private Spinner subcountySpinner;
+    private EditText subcountyTxt;
     private SubcountyArrayAdapter adapter;
 
     private DetailerCall detailerCall;
@@ -66,12 +70,10 @@ public class DetailersActivity extends Activity {
         }
         setDateWidget();
         setGpsWidget();
-        List<Subcounty> subcountyData = subcountyDao.loadAll();
-        Subcounty[] subcounties = subcountyData.toArray(new Subcounty[subcountyData.size()]);
-        subcountySpinner = (Spinner) findViewById(R.id.detailer_subcounty);
+        List<Village> villageData = villageDao.loadAll();
+        Village[] villages = villageData.toArray(new Village[villageData.size()]);
+        subcountyTxt = (EditText) findViewById(R.id.detailer_subcounty);
 
-        adapter = new SubcountyArrayAdapter(this, android.R.layout.simple_spinner_item, subcounties);
-        subcountySpinner.setAdapter(adapter);
         manageDoyouStockZincResponses();
         manageHowDidyouHearOtherOption();
 
@@ -96,7 +98,7 @@ public class DetailersActivity extends Activity {
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
-            subcountyDao = daoSession.getSubcountyDao();
+            villageDao = daoSession.getVillageDao();
             taskDao = daoSession.getTaskDao();
             detailerCallDao = daoSession.getDetailerCallDao();
         } catch (Exception ex) {
@@ -200,7 +202,7 @@ public class DetailersActivity extends Activity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 String selected = (String) spinner.getAdapter().getItem(position);
                 LinearLayout otherwaysinfoLayout = (LinearLayout) findViewById(R.id.detailer_howdidyouhearaboutzinc_other_layout);
-                if ("No".equalsIgnoreCase(selected)) {
+                if ("Other".equalsIgnoreCase(selected)) {
                     otherwaysinfoLayout.setVisibility(View.GONE);
                 } else {
                     otherwaysinfoLayout.setVisibility(View.VISIBLE);
@@ -229,9 +231,9 @@ public class DetailersActivity extends Activity {
         detailerCall.setOrsBrandSold(((EditText) findViewById(R.id.detailers_brand_sold_ors)).getText().toString());
         detailerCall.setIfNoWhy(((EditText) findViewById(R.id.detailer_if_no_why)).getText().toString());
         detailerCall.setBuyingPrice(Double.parseDouble(((EditText) findViewById(R.id.detailer_whatpricedoyoubuy)).getText().toString()));
-        detailerCall.setAction(((EditText) findViewById(R.id.detailer_action)).getText().toString());
+//        detailerCall.setAction(((EditText) findViewById(R.id.detailer_action)).getText().toString());
         detailerCall.setPointOfsaleMaterial(((EditText) findViewById(R.id.detailer_point_of_sale)).getText().toString());
-        detailerCall.setRecommendationNextStep(((EditText) findViewById(R.id.detailer_next_step_recommendation)).getText().toString());
+        detailerCall.setRecommendationNextStep(((Spinner) findViewById(R.id.detailer_next_step_recommendation)).getSelectedItem().toString());
 
         detailerCall.setHeardAboutDiarrheaTreatmentInChildren(((Spinner) findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors)).getSelectedItem().toString());
         detailerCall.setHowDidYouHear(((Spinner) findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors)).getSelectedItem().toString());
@@ -250,13 +252,13 @@ public class DetailersActivity extends Activity {
             ((EditText) findViewById(R.id.detailer_survey_date)).setText(detailerCall.getDateOfSurvey().toString());
             ((EditText) findViewById(R.id.detailer_name)).setText(customer.getOutletName());
             ((EditText) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
-            ((EditText) findViewById(R.id.detailer_parish)).setText(customer.getParish());
-            ((EditText) findViewById(R.id.detailer_village)).setText(customer.getVillage());
+            ((EditText) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
+            ((EditText) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
             ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
-            CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getContacts());
+            CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
             ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getName());
             ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact.getContact());
-            ((EditText) findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).setText(detailerCall.getDiarrheaPatientsInFacility()+"");
+            ((EditText) findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).setText(detailerCall.getDiarrheaPatientsInFacility() + "");
             ((EditText) findViewById(R.id.detailer_other_ways_youheard_about_zinc)).setText(detailerCall.getOtherWaysHowYouHeard());
             ((EditText) findViewById(R.id.detailers_howmany_in_stock_zinc)).setText(detailerCall.getHowManyZincInStock()+"");
             ((EditText) findViewById(R.id.detailers_howmany_in_stock_ors)).setText(detailerCall.getHowmanyOrsInStock()+"");
@@ -264,16 +266,12 @@ public class DetailersActivity extends Activity {
             ((EditText) findViewById(R.id.detailers_brand_sold_ors)).setText(detailerCall.getOrsBrandSold());
             ((EditText) findViewById(R.id.detailer_if_no_why)).setText(detailerCall.getIfNoWhy());
             ((EditText) findViewById(R.id.detailer_whatpricedoyoubuy)).setText(detailerCall.getBuyingPrice() + "");
-            ((EditText) findViewById(R.id.detailer_action)).setText(detailerCall.getAction());
+//            ((EditText) findViewById(R.id.detailer_action)).setText(detailerCall.getAction());
             ((EditText) findViewById(R.id.detailer_point_of_sale)).setText(detailerCall.getPointOfsaleMaterial());
-            ((EditText) findViewById(R.id.detailer_next_step_recommendation)).setText(detailerCall.getRecommendationNextStep());
+            ((EditText) findViewById(R.id.detailer_subcounty)).setText(customer.getVillage().getParish().getSubcounty().getName());
+            ((EditText) findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
 
             //spinners
-            Spinner outletSizeSpinner = (Spinner) findViewById(R.id.detailer_outlet_size);
-            Utils.setSpinnerSelection(outletSizeSpinner, customer.getOutletSize());
-
-            Spinner subcountySpinner = (Spinner) findViewById(R.id.detailer_subcounty);
-            Utils.setSpinnerSelection(subcountySpinner, customer.getSubcounty().getName());
 
             Spinner detailerHearAboutSpinner = (Spinner) findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors);
             Utils.setSpinnerSelection(detailerHearAboutSpinner, detailerCall.getHeardAboutDiarrheaTreatmentInChildren());
@@ -296,9 +294,27 @@ public class DetailersActivity extends Activity {
             Spinner doyouStockZincSpinner = (Spinner) findViewById(R.id.detailer_do_you_stock_zinc);
             Utils.setSpinnerSelection(doyouStockZincSpinner, detailerCall.getDoYouStockOrsZinc() + "");
 
+            Spinner nextStepRecommendation = ((Spinner) findViewById(R.id.detailer_next_step_recommendation));
+            Utils.setSpinnerSelection(nextStepRecommendation,detailerCall.getRecommendationNextStep());
+
             Spinner recommendationSpinner = (Spinner) findViewById(R.id.detailer_recommendation_level);
             Utils.setSpinnerSelection(recommendationSpinner, detailerCall.getRecommendationLevel());
+        }else{
+            Calendar calendar = Calendar.getInstance();
+            ((EditText) findViewById(R.id.detailer_survey_date)).setText(calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.YEAR));
+            Customer customer = callDataTask.getCustomer();
+            ((EditText) findViewById(R.id.detailer_subcounty)).setText(customer.getVillage().getParish().getSubcounty().getName());
+            ((EditText) findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
+            ((EditText) findViewById(R.id.detailer_name)).setText(customer.getOutletName());
+            ((EditText) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
+            ((EditText) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
+            ((EditText) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
+            ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
+            CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
+            ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getName():"");
+            ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getContact():"");
         }
+        setRequiredFields();
     }
 
     private boolean saveDetailerCall() {
@@ -339,6 +355,28 @@ public class DetailersActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(menuItem);
         }
+    }
+
+    private void setRequired(TextView textView){
+      String required = "*";
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        builder.append(textView.getText().toString());
+        int start = builder.length();
+        builder.append(required);
+        int end = builder.length();
+        builder.setSpan(new ForegroundColorSpan(Color.RED),start,end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(builder);
+    }
+
+    private void setRequiredFields(){
+        setRequired((TextView)findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility_view));
+        setRequired((TextView)findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors_view));
+        setRequired((TextView)findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors_view));
+        setRequired((TextView)findViewById(R.id.detailer_how_diarrhea_affects_community_view));
+        setRequired((TextView)findViewById(R.id.detailer_effect_diarrhea_has_on_the_body_view));
+        setRequired((TextView)findViewById(R.id.detailer_how_ors_should_be_used_view));
+        setRequired((TextView)findViewById(R.id.detailer_how_zinc_should_be_used_view));
+        setRequired((TextView)findViewById(R.id.detailer_why_should_not_use_antibiotics_view));
     }
 
 }

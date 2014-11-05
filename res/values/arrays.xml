@@ -99,4 +99,16 @@
         <item>Key</item>
         <item>Ordinary</item>
     </string-array>
+    <string-array name="recommendation">
+        <item>Stock ORS</item>
+        <item>Stock Zinc</item>
+        <item>Start recommending ORS and Zinc together</item>
+        <item>Start selling ORS and Zinc at MRP</item>
+    </string-array>
+    <string-array name="turnover">
+        <item>Less than 50,000 UGX</item>
+        <item>50,000-150,000 UGX</item>
+        <item>150,000 - 300,000 UGX</item>
+        <item>Greater than 300,000 UGX</item>
+    </string-array>
 </resources>
