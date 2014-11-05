@@ -19,7 +19,12 @@ public class Task {
     private String description;
     private String status;
     private String priority;
+    private String type;
+    private java.util.Date dueDate;
+    private java.util.Date completionDate;
     private java.util.Date dateScheduled;
+    private java.util.Date dateCreated;
+    private java.util.Date lastUpdated;
     private long customerId;
 
     /** Used to resolve relations */
@@ -43,13 +48,18 @@ public class Task {
         this.id = id;
     }
 
-    public Task(Long id, String uuid, String description, String status, String priority, java.util.Date dateScheduled, long customerId) {
+    public Task(Long id, String uuid, String description, String status, String priority, String type, java.util.Date dueDate, java.util.Date completionDate, java.util.Date dateScheduled, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
         this.id = id;
         this.uuid = uuid;
         this.description = description;
         this.status = status;
         this.priority = priority;
+        this.type = type;
+        this.dueDate = dueDate;
+        this.completionDate = completionDate;
         this.dateScheduled = dateScheduled;
+        this.dateCreated = dateCreated;
+        this.lastUpdated = lastUpdated;
         this.customerId = customerId;
     }
 
@@ -101,12 +111,52 @@ public class Task {
         this.priority = priority;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public java.util.Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(java.util.Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public java.util.Date getCompletionDate() {
+        return completionDate;
+    }
+
+    public void setCompletionDate(java.util.Date completionDate) {
+        this.completionDate = completionDate;
+    }
+
     public java.util.Date getDateScheduled() {
         return dateScheduled;
     }
 
     public void setDateScheduled(java.util.Date dateScheduled) {
         this.dateScheduled = dateScheduled;
+    }
+
+    public java.util.Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(java.util.Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public java.util.Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(java.util.Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     public long getCustomerId() {

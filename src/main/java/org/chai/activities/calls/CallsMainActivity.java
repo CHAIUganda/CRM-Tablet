@@ -56,7 +56,6 @@ public class CallsMainActivity extends Activity {
                 bundle.putLong("callId",itemAtPosition.getId());
                 intent.putExtras(bundle);
                 startActivity(intent);
-//                Toast.makeText(getApplicationContext(), "Item Selected" + itemAtPosition.getTask().getDescription(), Toast.LENGTH_LONG).show();
             }
         });
     }

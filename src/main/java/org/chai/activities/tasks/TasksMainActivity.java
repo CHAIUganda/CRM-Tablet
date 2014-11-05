@@ -15,6 +15,7 @@ import org.chai.model.Task;
 import org.chai.model.TaskDao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -84,9 +85,9 @@ public class TasksMainActivity extends Activity {
         listDataHeader.add("Scheduled");
 
         //query all new tasks
-        List<Task> newTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("New task")).list();
-        List<Task> outstandingTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("Outstanding")).list();
-        List<Task> scheduledTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("Scheduled")).list();
+        List<Task> newTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("new")).list();
+        List<Task> outstandingTasks = taskDao.queryBuilder().where(TaskDao.Properties.DueDate.lt(new Date())).list();
+        List<Task> scheduledTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("cancelled")).list();
 
         taskList.put(listDataHeader.get(0), newTasks);
         taskList.put(listDataHeader.get(1), outstandingTasks);

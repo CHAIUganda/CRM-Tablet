@@ -13,10 +13,10 @@ public class TaskClient extends RestClient {
     public Task[] downloadTasks(){
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Task[]> responseEntity = restTemplate.exchange(REST_URL+"task/", HttpMethod.GET,getRequestEntity(),Task[].class);
+            ResponseEntity<Task[]> responseEntity = restTemplate.exchange(REST_URL+"task/list", HttpMethod.GET,getRequestEntity(),Task[].class);
             return responseEntity.getBody();
         }catch (Exception ex){
-            //
+           ex.printStackTrace();
         }
         return null;
     }

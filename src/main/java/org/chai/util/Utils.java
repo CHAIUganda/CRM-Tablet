@@ -20,12 +20,16 @@ public class Utils {
     }
 
     public static CustomerContact getKeyCustomerContact(List<CustomerContact> customerContacts){
-        for(int i=0;i<customerContacts.size();i++){
-            if(customerContacts.get(i).getTypeOfContact().equalsIgnoreCase("key")){
-                return customerContacts.get(i);
+        try{
+            for(int i=0;i<customerContacts.size();i++){
+                if(customerContacts.get(i).getTypeOfContact().equalsIgnoreCase("key")){
+                    return customerContacts.get(i);
+                }
             }
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
-        return customerContacts.get(0);
+        return null;
     }
 
     public static void setSpinnerSelection(Spinner spinner, String item) {

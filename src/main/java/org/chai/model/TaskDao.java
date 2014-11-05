@@ -33,8 +33,13 @@ public class TaskDao extends AbstractDao<Task, Long> {
         public final static Property Description = new Property(2, String.class, "description", false, "DESCRIPTION");
         public final static Property Status = new Property(3, String.class, "status", false, "STATUS");
         public final static Property Priority = new Property(4, String.class, "priority", false, "PRIORITY");
-        public final static Property DateScheduled = new Property(5, java.util.Date.class, "dateScheduled", false, "DATE_SCHEDULED");
-        public final static Property CustomerId = new Property(6, long.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property Type = new Property(5, String.class, "type", false, "TYPE");
+        public final static Property DueDate = new Property(6, java.util.Date.class, "dueDate", false, "DUE_DATE");
+        public final static Property CompletionDate = new Property(7, java.util.Date.class, "completionDate", false, "COMPLETION_DATE");
+        public final static Property DateScheduled = new Property(8, java.util.Date.class, "dateScheduled", false, "DATE_SCHEDULED");
+        public final static Property DateCreated = new Property(9, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(10, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
+        public final static Property CustomerId = new Property(11, long.class, "customerId", false, "CUSTOMER_ID");
     };
 
     private DaoSession daoSession;
@@ -59,8 +64,13 @@ public class TaskDao extends AbstractDao<Task, Long> {
                 "'DESCRIPTION' TEXT," + // 2: description
                 "'STATUS' TEXT," + // 3: status
                 "'PRIORITY' TEXT," + // 4: priority
-                "'DATE_SCHEDULED' INTEGER," + // 5: dateScheduled
-                "'CUSTOMER_ID' INTEGER NOT NULL );"); // 6: customerId
+                "'TYPE' TEXT," + // 5: type
+                "'DUE_DATE' INTEGER," + // 6: dueDate
+                "'COMPLETION_DATE' INTEGER," + // 7: completionDate
+                "'DATE_SCHEDULED' INTEGER," + // 8: dateScheduled
+                "'DATE_CREATED' INTEGER," + // 9: dateCreated
+                "'LAST_UPDATED' INTEGER," + // 10: lastUpdated
+                "'CUSTOMER_ID' INTEGER NOT NULL );"); // 11: customerId
     }
 
     /** Drops the underlying database table. */
@@ -95,11 +105,36 @@ public class TaskDao extends AbstractDao<Task, Long> {
             stmt.bindString(5, priority);
         }
  
+        String type = entity.getType();
+        if (type != null) {
+            stmt.bindString(6, type);
+        }
+ 
+        java.util.Date dueDate = entity.getDueDate();
+        if (dueDate != null) {
+            stmt.bindLong(7, dueDate.getTime());
+        }
+ 
+        java.util.Date completionDate = entity.getCompletionDate();
+        if (completionDate != null) {
+            stmt.bindLong(8, completionDate.getTime());
+        }
+ 
         java.util.Date dateScheduled = entity.getDateScheduled();
         if (dateScheduled != null) {
-            stmt.bindLong(6, dateScheduled.getTime());
+            stmt.bindLong(9, dateScheduled.getTime());
         }
-        stmt.bindLong(7, entity.getCustomerId());
+ 
+        java.util.Date dateCreated = entity.getDateCreated();
+        if (dateCreated != null) {
+            stmt.bindLong(10, dateCreated.getTime());
+        }
+ 
+        java.util.Date lastUpdated = entity.getLastUpdated();
+        if (lastUpdated != null) {
+            stmt.bindLong(11, lastUpdated.getTime());
+        }
+        stmt.bindLong(12, entity.getCustomerId());
     }
 
     @Override
@@ -123,8 +158,13 @@ public class TaskDao extends AbstractDao<Task, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // description
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // status
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // priority
-            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)), // dateScheduled
-            cursor.getLong(offset + 6) // customerId
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // type
+            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // dueDate
+            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)), // completionDate
+            cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // dateScheduled
+            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // dateCreated
+            cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)), // lastUpdated
+            cursor.getLong(offset + 11) // customerId
         );
         return entity;
     }
@@ -137,8 +177,13 @@ public class TaskDao extends AbstractDao<Task, Long> {
         entity.setDescription(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setStatus(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setPriority(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setDateScheduled(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
-        entity.setCustomerId(cursor.getLong(offset + 6));
+        entity.setType(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setDueDate(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setCompletionDate(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
+        entity.setDateScheduled(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
+        entity.setDateCreated(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setLastUpdated(cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)));
+        entity.setCustomerId(cursor.getLong(offset + 11));
      }
     
     /** @inheritdoc */

@@ -28,8 +28,9 @@ public class SampleData {
 
     public SampleData(Context context) {
         this.context = context;
-        initialiseGreenDao();
+//        initialiseGreenDao();
     }
+/*
 
     private void initialiseGreenDao() {
         try {
@@ -93,9 +94,9 @@ public class SampleData {
         customer1.setNumberOfEmployees(10);
         customer1.setNumberOfBranches(5);
         customer1.setNumberOfCustomersPerDay(50);
-        customer1.setNumberOfProducts(10);
+        customer1.setNumberOfProducts("less than 10");
         customer1.setRestockFrequency(2);
-        customer1.setTurnOver(3143.345);
+        customer1.setTurnOver("Less than 500,000");
         customer1.setTenureLengthYears(3);
         customer1.setTenureLengthMonths(6);
         customer1.setSubcountyId(subcountyId);
@@ -121,12 +122,12 @@ public class SampleData {
         customer2.setNumberOfEmployees(10);
         customer2.setNumberOfBranches(5);
         customer2.setNumberOfCustomersPerDay(50);
-        customer2.setNumberOfProducts(10);
+        customer2.setNumberOfProducts("less than 10");
         customer2.setRestockFrequency(2);
-        customer2.setTurnOver(3143.345);
+        customer2.setTurnOver("Less than 500,000");
         customer2.setTenureLengthYears(3);
         customer2.setTenureLengthMonths(6);
-        customer2.setSubcountyId(subcountyId);
+        customer2.setVillageId(subcountyId);
         customer2.setParish("Buranga");
         customer2.setVillage("kyonyo");
         long customerId2 = customerDao.insert(customer2);
@@ -149,9 +150,9 @@ public class SampleData {
         customer3.setNumberOfEmployees(10);
         customer3.setNumberOfBranches(5);
         customer3.setNumberOfCustomersPerDay(50);
-        customer3.setNumberOfProducts(10);
+        customer3.setNumberOfProducts("less than 10");
         customer3.setRestockFrequency(2);
-        customer3.setTurnOver(3143.345);
+        customer3.setTurnOver("Less than 500,000");
         customer3.setTenureLengthYears(3);
         customer3.setTenureLengthMonths(6);
         customer3.setSubcountyId(subcountyId);
@@ -242,9 +243,9 @@ public class SampleData {
         customer1.setNumberOfEmployees(10);
         customer1.setNumberOfBranches(5);
         customer1.setNumberOfCustomersPerDay(50);
-        customer1.setNumberOfProducts(10);
+        customer1.setNumberOfProducts("less than 10");
         customer1.setRestockFrequency(2);
-        customer1.setTurnOver(3143.345);
+        customer1.setTurnOver("Less than 500,000");
         customer1.setTenureLengthYears(3);
         customer1.setTenureLengthMonths(6);
         customer1.setSubcountyId(subcountyId);
@@ -271,5 +272,6 @@ public class SampleData {
         return customerContactDao.insert(customerContact);
     }
 
+*/
 
 }
