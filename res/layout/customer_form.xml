@@ -407,17 +407,13 @@
                         android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
-                <EditText
+                <Spinner
                         android:id="@+id/details_turn_over"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textSize="@dimen/list_sub_text_size"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:background="@drawable/bordertextfield"
-                        android:singleLine="true"
-                        android:inputType="numberDecimal"/>
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:entries="@array/yesnolist"
+                        android:background="@drawable/btn_dropdown"/>
 
             </LinearLayout>
 
