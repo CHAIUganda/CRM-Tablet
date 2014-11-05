@@ -18,7 +18,7 @@ public class Parish {
     private String uuid;
     /** Not-null value. */
     private String name;
-    private long subcountyId;
+    private long subCountyId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -41,11 +41,11 @@ public class Parish {
         this.id = id;
     }
 
-    public Parish(Long id, String uuid, String name, long subcountyId) {
+    public Parish(Long id, String uuid, String name, long subCountyId) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
-        this.subcountyId = subcountyId;
+        this.subCountyId = subCountyId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -82,17 +82,17 @@ public class Parish {
         this.name = name;
     }
 
-    public long getSubcountyId() {
-        return subcountyId;
+    public long getSubCountyId() {
+        return subCountyId;
     }
 
-    public void setSubcountyId(long subcountyId) {
-        this.subcountyId = subcountyId;
+    public void setSubCountyId(long subCountyId) {
+        this.subCountyId = subCountyId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Subcounty getSubcounty() {
-        long __key = this.subcountyId;
+        long __key = this.subCountyId;
         if (subcounty__resolvedKey == null || !subcounty__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
@@ -109,12 +109,12 @@ public class Parish {
 
     public void setSubcounty(Subcounty subcounty) {
         if (subcounty == null) {
-            throw new DaoException("To-one property 'subcountyId' has not-null constraint; cannot set to-one to null");
+            throw new DaoException("To-one property 'subCountyId' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
             this.subcounty = subcounty;
-            subcountyId = subcounty.getId();
-            subcounty__resolvedKey = subcountyId;
+            subCountyId = subcounty.getId();
+            subcounty__resolvedKey = subCountyId;
         }
     }
 

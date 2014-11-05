@@ -23,6 +23,7 @@ public class Place extends RestClient {
             RestTemplate restTemplate = getRestTemplate();
             ResponseEntity<Region[]> responseEntity = restTemplate.exchange(REST_URL+"place/regions",HttpMethod.GET,getRequestEntity(),Region[].class);
             Region[] regions = responseEntity.getBody();
+            Log.i("REST CLIENT:","found "+regions.length+" Regions");
             return regions;
         }catch (Exception ex){
             ex.printStackTrace();
@@ -30,22 +31,26 @@ public class Place extends RestClient {
         return null;
     }
 
-    public District[] downloadDistricts(Long regionId){
+    public District[] downloadDistricts(){
         try{
             RestTemplate restTemplate = getRestTemplate();
             ResponseEntity<District[]> responseEntity = restTemplate.exchange(REST_URL+"place/districts",HttpMethod.GET,getRequestEntity(),District[].class);
-            return responseEntity.getBody();
+            District[] districts = responseEntity.getBody();
+            Log.i("REST CLIENT:","found "+districts.length+" Districts");
+            return districts;
         }catch (Exception ex){
             ex.printStackTrace();
         }
         return  null;
     }
 
-    public Subcounty[] downloadSubcounties(Long districtId){
+    public Subcounty[] downloadSubcounties(){
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Subcounty[]> responseEntity = restTemplate.exchange(REST_URL+"place/subcounties",HttpMethod.GET,getRequestEntity(),Subcounty[].class);
-            return responseEntity.getBody();
+            ResponseEntity<Subcounty[]> responseEntity = restTemplate.exchange(REST_URL+"place/subCounties",HttpMethod.GET,getRequestEntity(),Subcounty[].class);
+            Subcounty[] subcounties = responseEntity.getBody();
+            Log.i("REST CLIENT:","found "+subcounties.length+" Subcounties");
+            return subcounties;
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -56,11 +61,13 @@ public class Place extends RestClient {
         //
     }
 
-    public Parish[] downloadParishes(Long subcountyId){
+    public Parish[] downloadParishes(){
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Parish[]> responseEntity = restTemplate.exchange(REST_URL+"place/subcounties",HttpMethod.GET,getRequestEntity(),Parish[].class);
-            return responseEntity.getBody();
+            ResponseEntity<Parish[]> responseEntity = restTemplate.exchange(REST_URL+"place/parishes",HttpMethod.GET,getRequestEntity(),Parish[].class);
+            Parish[] parishs = responseEntity.getBody();
+            Log.i("REST CLIENT:","found "+parishs.length+" Parishes");
+            return parishs;
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -71,11 +78,13 @@ public class Place extends RestClient {
         //
     }
 
-    public Village[] downloadVillages(Long parishId){
+    public Village[] downloadVillages(){
         try{
             RestTemplate restTemplate = getRestTemplate();
             ResponseEntity<Village[]> responseEntity = restTemplate.exchange(REST_URL+"place/villages",HttpMethod.GET,getRequestEntity(),Village[].class);
-            return responseEntity.getBody();
+            Village[] villages = responseEntity.getBody();
+            Log.i("REST CLIENT:","found "+villages.length+" Villages");
+            return villages;
         }catch (Exception ex){
             ex.printStackTrace();
         }

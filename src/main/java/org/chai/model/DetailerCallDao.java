@@ -49,11 +49,10 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
         public final static Property ZincPrice = new Property(18, Double.class, "zincPrice", false, "ZINC_PRICE");
         public final static Property OrsPrice = new Property(19, Double.class, "orsPrice", false, "ORS_PRICE");
         public final static Property BuyingPrice = new Property(20, Double.class, "buyingPrice", false, "BUYING_PRICE");
-        public final static Property Action = new Property(21, String.class, "action", false, "ACTION");
-        public final static Property PointOfsaleMaterial = new Property(22, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
-        public final static Property RecommendationNextStep = new Property(23, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
-        public final static Property RecommendationLevel = new Property(24, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
-        public final static Property TaskId = new Property(25, long.class, "taskId", false, "TASK_ID");
+        public final static Property PointOfsaleMaterial = new Property(21, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
+        public final static Property RecommendationNextStep = new Property(22, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
+        public final static Property RecommendationLevel = new Property(23, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
+        public final static Property TaskId = new Property(24, long.class, "taskId", false, "TASK_ID");
     };
 
     private DaoSession daoSession;
@@ -94,11 +93,10 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
                 "'ZINC_PRICE' REAL," + // 18: zincPrice
                 "'ORS_PRICE' REAL," + // 19: orsPrice
                 "'BUYING_PRICE' REAL," + // 20: buyingPrice
-                "'ACTION' TEXT," + // 21: action
-                "'POINT_OFSALE_MATERIAL' TEXT," + // 22: pointOfsaleMaterial
-                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 23: recommendationNextStep
-                "'RECOMMENDATION_LEVEL' TEXT," + // 24: recommendationLevel
-                "'TASK_ID' INTEGER NOT NULL );"); // 25: taskId
+                "'POINT_OFSALE_MATERIAL' TEXT," + // 21: pointOfsaleMaterial
+                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 22: recommendationNextStep
+                "'RECOMMENDATION_LEVEL' TEXT," + // 23: recommendationLevel
+                "'TASK_ID' INTEGER NOT NULL );"); // 24: taskId
     }
 
     /** Drops the underlying database table. */
@@ -213,26 +211,21 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
             stmt.bindDouble(21, buyingPrice);
         }
  
-        String action = entity.getAction();
-        if (action != null) {
-            stmt.bindString(22, action);
-        }
- 
         String pointOfsaleMaterial = entity.getPointOfsaleMaterial();
         if (pointOfsaleMaterial != null) {
-            stmt.bindString(23, pointOfsaleMaterial);
+            stmt.bindString(22, pointOfsaleMaterial);
         }
  
         String recommendationNextStep = entity.getRecommendationNextStep();
         if (recommendationNextStep != null) {
-            stmt.bindString(24, recommendationNextStep);
+            stmt.bindString(23, recommendationNextStep);
         }
  
         String recommendationLevel = entity.getRecommendationLevel();
         if (recommendationLevel != null) {
-            stmt.bindString(25, recommendationLevel);
+            stmt.bindString(24, recommendationLevel);
         }
-        stmt.bindLong(26, entity.getTaskId());
+        stmt.bindLong(25, entity.getTaskId());
     }
 
     @Override
@@ -272,11 +265,10 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
             cursor.isNull(offset + 18) ? null : cursor.getDouble(offset + 18), // zincPrice
             cursor.isNull(offset + 19) ? null : cursor.getDouble(offset + 19), // orsPrice
             cursor.isNull(offset + 20) ? null : cursor.getDouble(offset + 20), // buyingPrice
-            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // action
-            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // pointOfsaleMaterial
-            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // recommendationNextStep
-            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // recommendationLevel
-            cursor.getLong(offset + 25) // taskId
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // pointOfsaleMaterial
+            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // recommendationNextStep
+            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // recommendationLevel
+            cursor.getLong(offset + 24) // taskId
         );
         return entity;
     }
@@ -305,11 +297,10 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
         entity.setZincPrice(cursor.isNull(offset + 18) ? null : cursor.getDouble(offset + 18));
         entity.setOrsPrice(cursor.isNull(offset + 19) ? null : cursor.getDouble(offset + 19));
         entity.setBuyingPrice(cursor.isNull(offset + 20) ? null : cursor.getDouble(offset + 20));
-        entity.setAction(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
-        entity.setPointOfsaleMaterial(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
-        entity.setRecommendationNextStep(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
-        entity.setRecommendationLevel(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
-        entity.setTaskId(cursor.getLong(offset + 25));
+        entity.setPointOfsaleMaterial(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setRecommendationNextStep(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
+        entity.setRecommendationLevel(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
+        entity.setTaskId(cursor.getLong(offset + 24));
      }
     
     /** @inheritdoc */

@@ -34,7 +34,6 @@ public class DetailerCall {
     private Double zincPrice;
     private Double orsPrice;
     private Double buyingPrice;
-    private String action;
     private String pointOfsaleMaterial;
     private String recommendationNextStep;
     private String recommendationLevel;
@@ -60,7 +59,7 @@ public class DetailerCall {
         this.id = id;
     }
 
-    public DetailerCall(Long id, String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPrice, String action, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, long taskId) {
+    public DetailerCall(Long id, String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPrice, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, long taskId) {
         this.id = id;
         this.uuid = uuid;
         this.dateOfSurvey = dateOfSurvey;
@@ -82,7 +81,6 @@ public class DetailerCall {
         this.zincPrice = zincPrice;
         this.orsPrice = orsPrice;
         this.buyingPrice = buyingPrice;
-        this.action = action;
         this.pointOfsaleMaterial = pointOfsaleMaterial;
         this.recommendationNextStep = recommendationNextStep;
         this.recommendationLevel = recommendationLevel;
@@ -263,14 +261,6 @@ public class DetailerCall {
 
     public void setBuyingPrice(Double buyingPrice) {
         this.buyingPrice = buyingPrice;
-    }
-
-    public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
     }
 
     public String getPointOfsaleMaterial() {
