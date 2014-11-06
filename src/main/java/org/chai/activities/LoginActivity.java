@@ -6,8 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 import org.chai.R;
+import org.chai.model.Region;
+import org.chai.rest.Place;
 import org.chai.util.SampleData;
+
+import java.util.List;
 
 public class LoginActivity extends Activity {
 
@@ -32,8 +38,16 @@ public class LoginActivity extends Activity {
         Button loginBtn = (Button)findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(i);
+                String user = ((EditText)findViewById(R.id.userTxt)).getText().toString();
+                String pass = ((EditText)findViewById(R.id.passwordTxt)).getText().toString();
+                Place place = new Place();
+                boolean islogin = place.login(user, pass);
+                if(islogin){
+                    Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                    startActivity(i);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Couldnt Login,Please check your Username or Password",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

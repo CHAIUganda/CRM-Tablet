@@ -23,6 +23,15 @@ public class RestClient {
         return headers;
     }
 
+    public HttpHeaders getHeaders(String user,String password){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(new MediaType("application", "json")));
+        headers.set("device-imei","Samsung Galaxy S3");
+        HttpAuthentication authHeader = new HttpBasicAuthentication(user, password);
+        headers.setAuthorization(authHeader);
+        return headers;
+    }
+
     public HttpEntity<?> getRequestEntity() {
         HttpEntity<?> requestEntity = new HttpEntity<Object>(getHeaders());
         return requestEntity;
