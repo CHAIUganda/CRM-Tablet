@@ -14,7 +14,7 @@ public class CustomerClient extends RestClient {
     public Customer[] downloadCustomers() {
         try {
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Customer[]> responseEntity = restTemplate.exchange(REST_URL + "customer/list", HttpMethod.GET, getRequestEntity(), Customer[].class);
+            ResponseEntity<Customer[]> responseEntity = restTemplate.exchange(REST_URL + "customer/list?max="+Integer.MAX_VALUE, HttpMethod.GET, getRequestEntity(), Customer[].class);
             return responseEntity.getBody();
         } catch (Exception ex) {
             ex.printStackTrace();

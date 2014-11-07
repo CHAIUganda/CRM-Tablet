@@ -79,9 +79,9 @@
     </string-array>
 
     <string-array name="buildingstructure">
-        <item>Parmanent</item>
-        <item>Semi-Parmanent</item>
-        <item>Non-Parmanent</item>
+        <item>Permanent</item>
+        <item>Semi-Permanent</item>
+        <item>Non-Permanent</item>
     </string-array>
     <string-array name="sources_of_information">
         <item>Training</item>

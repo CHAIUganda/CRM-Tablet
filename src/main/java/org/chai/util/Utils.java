@@ -5,6 +5,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import org.chai.model.CustomerContact;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,5 +38,14 @@ public class Utils {
         ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
         int position = adapter.getPosition(item);
         spinner.setSelection(position);
+    }
+
+    public static Date stringToDate(String dateString){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            return simpleDateFormat.parse(dateString);
+        }catch (Exception ex){
+        }
+        return new Date();
     }
 }

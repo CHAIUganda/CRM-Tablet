@@ -29,17 +29,15 @@ public class Customer {
     private String keyWholeSalerName;
     private String keyWholeSalerContact;
     private String buildingStructure;
-    private String equipment;
     private String typeOfLicence;
     private String descriptionOfOutletLocation;
     private Integer numberOfEmployees;
-    private Integer numberOfBranches;
+    private Boolean hasSisterBranch;
     private Integer numberOfCustomersPerDay;
     private String numberOfProducts;
     private Integer restockFrequency;
     private String turnOver;
-    private Integer tenureLengthYears;
-    private Integer tenureLengthMonths;
+    private java.util.Date dateOutletOpened;
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
     private long villageId;
@@ -67,7 +65,7 @@ public class Customer {
         this.id = id;
     }
 
-    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String equipment, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfBranches, Integer numberOfCustomersPerDay, String numberOfProducts, Integer restockFrequency, String turnOver, Integer tenureLengthYears, Integer tenureLengthMonths, java.util.Date dateCreated, java.util.Date lastUpdated, long villageId) {
+    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String numberOfProducts, Integer restockFrequency, String turnOver, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, long villageId) {
         this.id = id;
         this.uuid = uuid;
         this.latitude = latitude;
@@ -82,17 +80,15 @@ public class Customer {
         this.keyWholeSalerName = keyWholeSalerName;
         this.keyWholeSalerContact = keyWholeSalerContact;
         this.buildingStructure = buildingStructure;
-        this.equipment = equipment;
         this.typeOfLicence = typeOfLicence;
         this.descriptionOfOutletLocation = descriptionOfOutletLocation;
         this.numberOfEmployees = numberOfEmployees;
-        this.numberOfBranches = numberOfBranches;
+        this.hasSisterBranch = hasSisterBranch;
         this.numberOfCustomersPerDay = numberOfCustomersPerDay;
         this.numberOfProducts = numberOfProducts;
         this.restockFrequency = restockFrequency;
         this.turnOver = turnOver;
-        this.tenureLengthYears = tenureLengthYears;
-        this.tenureLengthMonths = tenureLengthMonths;
+        this.dateOutletOpened = dateOutletOpened;
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
         this.villageId = villageId;
@@ -220,14 +216,6 @@ public class Customer {
         this.buildingStructure = buildingStructure;
     }
 
-    public String getEquipment() {
-        return equipment;
-    }
-
-    public void setEquipment(String equipment) {
-        this.equipment = equipment;
-    }
-
     public String getTypeOfLicence() {
         return typeOfLicence;
     }
@@ -252,12 +240,12 @@ public class Customer {
         this.numberOfEmployees = numberOfEmployees;
     }
 
-    public Integer getNumberOfBranches() {
-        return numberOfBranches;
+    public Boolean getHasSisterBranch() {
+        return hasSisterBranch;
     }
 
-    public void setNumberOfBranches(Integer numberOfBranches) {
-        this.numberOfBranches = numberOfBranches;
+    public void setHasSisterBranch(Boolean hasSisterBranch) {
+        this.hasSisterBranch = hasSisterBranch;
     }
 
     public Integer getNumberOfCustomersPerDay() {
@@ -292,20 +280,12 @@ public class Customer {
         this.turnOver = turnOver;
     }
 
-    public Integer getTenureLengthYears() {
-        return tenureLengthYears;
+    public java.util.Date getDateOutletOpened() {
+        return dateOutletOpened;
     }
 
-    public void setTenureLengthYears(Integer tenureLengthYears) {
-        this.tenureLengthYears = tenureLengthYears;
-    }
-
-    public Integer getTenureLengthMonths() {
-        return tenureLengthMonths;
-    }
-
-    public void setTenureLengthMonths(Integer tenureLengthMonths) {
-        this.tenureLengthMonths = tenureLengthMonths;
+    public void setDateOutletOpened(java.util.Date dateOutletOpened) {
+        this.dateOutletOpened = dateOutletOpened;
     }
 
     public java.util.Date getDateCreated() {

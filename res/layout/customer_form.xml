@@ -27,7 +27,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="New Customer Details"
+                        android:text="New Outlet Details"
                         android:textColor="@color/list_main_text_color"
                         android:textSize="25dp"
                         android:textStyle="bold"/>
@@ -44,7 +44,6 @@
                         android:layout_height="wrap_content"
                         android:text="Outlet Name:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <EditText
@@ -73,7 +72,6 @@
                         android:layout_height="wrap_content"
                         android:text="Outlet Type:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
                 <Spinner
                         android:id="@+id/details_outlet_type"
@@ -96,7 +94,6 @@
                         android:layout_height="wrap_content"
                         android:text="Outlet Size:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
                 <Spinner
                         android:id="@+id/details_size"
@@ -119,7 +116,6 @@
                         android:layout_height="wrap_content"
                         android:text="Type of licence:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <Spinner
@@ -144,7 +140,6 @@
                         android:layout_height="wrap_content"
                         android:text="Split:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
 
@@ -169,7 +164,6 @@
                         android:layout_height="wrap_content"
                         android:text="Subcounty:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <Spinner
@@ -192,7 +186,6 @@
                         android:layout_height="wrap_content"
                         android:text="Parish:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <EditText
@@ -216,9 +209,8 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Village:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
+                        android:text="Village:"
                         android:textStyle="bold"/>
 
                 <EditText
@@ -245,7 +237,6 @@
                         android:layout_height="wrap_content"
                         android:text="Description Of Outlet Location:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <EditText
@@ -298,7 +289,6 @@
                         android:layout_height="wrap_content"
                         android:text="Opening days and hours:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <Spinner
@@ -311,31 +301,31 @@
 
             </LinearLayout>
 
+
             <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp">
 
-                <TextView
+                <EditText
+                        android:id="@+id/details_date_outlet_opened"
+                        android:text=""
+                        android:minWidth="90dip"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:width="150dip"
+                        android:height="40dip"
+                        android:textColor="@color/list_main_text_color"
+                        android:background="@drawable/bordertextfield"/>
+
+                <Button
+                        android:id="@+id/details_date_outlet_opened_btn"
+                        android:text="Date the outlet opened"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tenure Length(years):"
-                        android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
-                        android:textStyle="bold"/>
-                <EditText
-                        android:id="@+id/details_tenure_length_years"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textSize="@dimen/list_sub_text_size"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:background="@drawable/bordertextfield"
-                        android:singleLine="true"
-                        android:inputType="number"/>
-
+                        android:background="#428bca"
+                        android:layout_marginLeft="5dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -347,36 +337,8 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tenure Length(months):"
+                        android:text="Number of employees who work at the outlet:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
-                        android:textStyle="bold"/>
-                <EditText
-                        android:id="@+id/details_tenure_length_months"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textSize="@dimen/list_sub_text_size"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:background="@drawable/bordertextfield"
-                        android:singleLine="true"
-                        android:inputType="number"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Number Of Employees:"
-                        android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <EditText
@@ -402,37 +364,12 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Turn Over:"
+                        android:text="Estimated monthly turnover (UGX):"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
-                        android:textStyle="bold"/>
-
-                <Spinner
-                        android:id="@+id/details_turn_over"
-                        android:layout_height="wrap_content"
-                        android:prompt="@string/selectItem"
-                        android:layout_width="fill_parent"
-                        android:entries="@array/yesnolist"
-                        android:background="@drawable/btn_dropdown"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Number Of Branches:"
-                        android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <EditText
-                        android:id="@+id/details_number_of_branches"
+                        android:id="@+id/details_turn_over"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -454,9 +391,31 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Number Of Customers/Day:"
+                        android:text="Is this Outlet linked to any other branches?"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
+                        android:textStyle="bold"/>
+
+                <Spinner
+                        android:id="@+id/details_has_sister_branches"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:entries="@array/yesnolist"
+                        android:background="@drawable/btn_dropdown"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="how many diarrhea patients under 5 years do you see a day?"
+                        android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
                 <EditText
@@ -482,9 +441,8 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Majority Sources Of Supply:"
+                        android:text="Where does the outlet source the majority of it's supply?"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <EditText
@@ -510,7 +468,6 @@
                         android:layout_height="wrap_content"
                         android:text="Key Wholesaler Name:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <EditText
@@ -537,7 +494,6 @@
                         android:layout_height="wrap_content"
                         android:text="Key Wholesaler Contact:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <EditText
@@ -564,7 +520,6 @@
                         android:layout_height="wrap_content"
                         android:text="Restock Frequency:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <EditText
@@ -590,9 +545,8 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Number Of Products:"
+                        android:text="Estimation of number of different products the retailer stock:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
 
                 <EditText
@@ -620,7 +574,6 @@
                         android:layout_height="wrap_content"
                         android:text="Building Structure:"
                         android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
                         android:textStyle="bold"/>
                 <Spinner
                         android:id="@+id/details_building_structure"
@@ -629,33 +582,6 @@
                         android:layout_width="fill_parent"
                         android:background="@drawable/btn_dropdown"
                         android:entries="@array/buildingstructure"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="How well equipped is the retailer:"
-                        android:textColor="@color/list_main_text_color"
-                        android:textSize="@dimen/list_main_text_size"
-                        android:textStyle="bold"/>
-
-                <EditText
-                        android:id="@+id/details_equipment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textSize="@dimen/list_sub_text_size"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:background="@drawable/bordertextfield"
-                        android:singleLine="true"/>
 
             </LinearLayout>
 

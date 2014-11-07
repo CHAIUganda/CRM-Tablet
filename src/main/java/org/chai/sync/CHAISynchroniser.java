@@ -1,5 +1,6 @@
 package org.chai.sync;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -14,6 +15,7 @@ import java.util.List;
 public class CHAISynchroniser {
 
     private Context context;
+    private ProgressDialog progressDialog;
     private Place place;
     private CustomerClient customerClient;
     private ProductClient productClient;
@@ -33,6 +35,15 @@ public class CHAISynchroniser {
 
     public CHAISynchroniser(Context context) {
         this.context = context;
+        place = new Place();
+        customerClient = new CustomerClient();
+        productClient = new ProductClient();
+        taskClient = new TaskClient();
+        initialiseGreenDao();
+    }
+    public CHAISynchroniser(Context context,ProgressDialog progressDialog){
+        this.context = context;
+        this.progressDialog = progressDialog;
         place = new Place();
         customerClient = new CustomerClient();
         productClient = new ProductClient();
@@ -70,8 +81,11 @@ public class CHAISynchroniser {
             customerDao.deleteAll();
             taskDao.deleteAll();
             downloadRegions();
+            progressDialog.incrementProgressBy(30);
             downloadCustomers();
+            progressDialog.incrementProgressBy(30);
             downloadTasks();
+            progressDialog.incrementProgressBy(40);
         }catch (Exception ex){
             ex.printStackTrace();
         }

@@ -60,15 +60,15 @@ public class HomeActivity extends Activity {
             public void onClick(View view) {
                 progressDialog.setMessage("Syncronising with Server:) ");
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                progressDialog.setIndeterminate(true);
+                progressDialog.setIndeterminate(false);
+                progressDialog.setMax(100);
                 progressDialog.show();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        CHAISynchroniser chaiSynchroniser = new CHAISynchroniser(HomeActivity.this);
+                        CHAISynchroniser chaiSynchroniser = new CHAISynchroniser(HomeActivity.this,progressDialog);
                         chaiSynchroniser.startSyncronisationProcess();
-                        progressDialog.setProgress(100);
-                        progressDialog.cancel();
+                        progressDialog.dismiss();
                     }
                 }).start();
             }

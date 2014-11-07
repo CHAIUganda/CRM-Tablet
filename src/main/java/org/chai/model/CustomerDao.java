@@ -42,20 +42,18 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         public final static Property KeyWholeSalerName = new Property(11, String.class, "keyWholeSalerName", false, "KEY_WHOLE_SALER_NAME");
         public final static Property KeyWholeSalerContact = new Property(12, String.class, "keyWholeSalerContact", false, "KEY_WHOLE_SALER_CONTACT");
         public final static Property BuildingStructure = new Property(13, String.class, "buildingStructure", false, "BUILDING_STRUCTURE");
-        public final static Property Equipment = new Property(14, String.class, "equipment", false, "EQUIPMENT");
-        public final static Property TypeOfLicence = new Property(15, String.class, "typeOfLicence", false, "TYPE_OF_LICENCE");
-        public final static Property DescriptionOfOutletLocation = new Property(16, String.class, "descriptionOfOutletLocation", false, "DESCRIPTION_OF_OUTLET_LOCATION");
-        public final static Property NumberOfEmployees = new Property(17, Integer.class, "numberOfEmployees", false, "NUMBER_OF_EMPLOYEES");
-        public final static Property NumberOfBranches = new Property(18, Integer.class, "numberOfBranches", false, "NUMBER_OF_BRANCHES");
-        public final static Property NumberOfCustomersPerDay = new Property(19, Integer.class, "numberOfCustomersPerDay", false, "NUMBER_OF_CUSTOMERS_PER_DAY");
-        public final static Property NumberOfProducts = new Property(20, String.class, "numberOfProducts", false, "NUMBER_OF_PRODUCTS");
-        public final static Property RestockFrequency = new Property(21, Integer.class, "restockFrequency", false, "RESTOCK_FREQUENCY");
-        public final static Property TurnOver = new Property(22, String.class, "turnOver", false, "TURN_OVER");
-        public final static Property TenureLengthYears = new Property(23, Integer.class, "tenureLengthYears", false, "TENURE_LENGTH_YEARS");
-        public final static Property TenureLengthMonths = new Property(24, Integer.class, "tenureLengthMonths", false, "TENURE_LENGTH_MONTHS");
-        public final static Property DateCreated = new Property(25, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
-        public final static Property LastUpdated = new Property(26, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
-        public final static Property VillageId = new Property(27, long.class, "villageId", false, "VILLAGE_ID");
+        public final static Property TypeOfLicence = new Property(14, String.class, "typeOfLicence", false, "TYPE_OF_LICENCE");
+        public final static Property DescriptionOfOutletLocation = new Property(15, String.class, "descriptionOfOutletLocation", false, "DESCRIPTION_OF_OUTLET_LOCATION");
+        public final static Property NumberOfEmployees = new Property(16, Integer.class, "numberOfEmployees", false, "NUMBER_OF_EMPLOYEES");
+        public final static Property HasSisterBranch = new Property(17, Boolean.class, "hasSisterBranch", false, "HAS_SISTER_BRANCH");
+        public final static Property NumberOfCustomersPerDay = new Property(18, Integer.class, "numberOfCustomersPerDay", false, "NUMBER_OF_CUSTOMERS_PER_DAY");
+        public final static Property NumberOfProducts = new Property(19, String.class, "numberOfProducts", false, "NUMBER_OF_PRODUCTS");
+        public final static Property RestockFrequency = new Property(20, Integer.class, "restockFrequency", false, "RESTOCK_FREQUENCY");
+        public final static Property TurnOver = new Property(21, String.class, "turnOver", false, "TURN_OVER");
+        public final static Property DateOutletOpened = new Property(22, java.util.Date.class, "dateOutletOpened", false, "DATE_OUTLET_OPENED");
+        public final static Property DateCreated = new Property(23, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(24, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
+        public final static Property VillageId = new Property(25, long.class, "villageId", false, "VILLAGE_ID");
     };
 
     private DaoSession daoSession;
@@ -89,20 +87,18 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
                 "'KEY_WHOLE_SALER_NAME' TEXT," + // 11: keyWholeSalerName
                 "'KEY_WHOLE_SALER_CONTACT' TEXT," + // 12: keyWholeSalerContact
                 "'BUILDING_STRUCTURE' TEXT," + // 13: buildingStructure
-                "'EQUIPMENT' TEXT," + // 14: equipment
-                "'TYPE_OF_LICENCE' TEXT," + // 15: typeOfLicence
-                "'DESCRIPTION_OF_OUTLET_LOCATION' TEXT," + // 16: descriptionOfOutletLocation
-                "'NUMBER_OF_EMPLOYEES' INTEGER," + // 17: numberOfEmployees
-                "'NUMBER_OF_BRANCHES' INTEGER," + // 18: numberOfBranches
-                "'NUMBER_OF_CUSTOMERS_PER_DAY' INTEGER," + // 19: numberOfCustomersPerDay
-                "'NUMBER_OF_PRODUCTS' TEXT," + // 20: numberOfProducts
-                "'RESTOCK_FREQUENCY' INTEGER," + // 21: restockFrequency
-                "'TURN_OVER' TEXT," + // 22: turnOver
-                "'TENURE_LENGTH_YEARS' INTEGER," + // 23: tenureLengthYears
-                "'TENURE_LENGTH_MONTHS' INTEGER," + // 24: tenureLengthMonths
-                "'DATE_CREATED' INTEGER," + // 25: dateCreated
-                "'LAST_UPDATED' INTEGER," + // 26: lastUpdated
-                "'VILLAGE_ID' INTEGER NOT NULL );"); // 27: villageId
+                "'TYPE_OF_LICENCE' TEXT," + // 14: typeOfLicence
+                "'DESCRIPTION_OF_OUTLET_LOCATION' TEXT," + // 15: descriptionOfOutletLocation
+                "'NUMBER_OF_EMPLOYEES' INTEGER," + // 16: numberOfEmployees
+                "'HAS_SISTER_BRANCH' INTEGER," + // 17: hasSisterBranch
+                "'NUMBER_OF_CUSTOMERS_PER_DAY' INTEGER," + // 18: numberOfCustomersPerDay
+                "'NUMBER_OF_PRODUCTS' TEXT," + // 19: numberOfProducts
+                "'RESTOCK_FREQUENCY' INTEGER," + // 20: restockFrequency
+                "'TURN_OVER' TEXT," + // 21: turnOver
+                "'DATE_OUTLET_OPENED' INTEGER," + // 22: dateOutletOpened
+                "'DATE_CREATED' INTEGER," + // 23: dateCreated
+                "'LAST_UPDATED' INTEGER," + // 24: lastUpdated
+                "'VILLAGE_ID' INTEGER NOT NULL );"); // 25: villageId
     }
 
     /** Drops the underlying database table. */
@@ -178,71 +174,61 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
             stmt.bindString(14, buildingStructure);
         }
  
-        String equipment = entity.getEquipment();
-        if (equipment != null) {
-            stmt.bindString(15, equipment);
-        }
- 
         String typeOfLicence = entity.getTypeOfLicence();
         if (typeOfLicence != null) {
-            stmt.bindString(16, typeOfLicence);
+            stmt.bindString(15, typeOfLicence);
         }
  
         String descriptionOfOutletLocation = entity.getDescriptionOfOutletLocation();
         if (descriptionOfOutletLocation != null) {
-            stmt.bindString(17, descriptionOfOutletLocation);
+            stmt.bindString(16, descriptionOfOutletLocation);
         }
  
         Integer numberOfEmployees = entity.getNumberOfEmployees();
         if (numberOfEmployees != null) {
-            stmt.bindLong(18, numberOfEmployees);
+            stmt.bindLong(17, numberOfEmployees);
         }
  
-        Integer numberOfBranches = entity.getNumberOfBranches();
-        if (numberOfBranches != null) {
-            stmt.bindLong(19, numberOfBranches);
+        Boolean hasSisterBranch = entity.getHasSisterBranch();
+        if (hasSisterBranch != null) {
+            stmt.bindLong(18, hasSisterBranch ? 1l: 0l);
         }
  
         Integer numberOfCustomersPerDay = entity.getNumberOfCustomersPerDay();
         if (numberOfCustomersPerDay != null) {
-            stmt.bindLong(20, numberOfCustomersPerDay);
+            stmt.bindLong(19, numberOfCustomersPerDay);
         }
  
         String numberOfProducts = entity.getNumberOfProducts();
         if (numberOfProducts != null) {
-            stmt.bindString(21, numberOfProducts);
+            stmt.bindString(20, numberOfProducts);
         }
  
         Integer restockFrequency = entity.getRestockFrequency();
         if (restockFrequency != null) {
-            stmt.bindLong(22, restockFrequency);
+            stmt.bindLong(21, restockFrequency);
         }
  
         String turnOver = entity.getTurnOver();
         if (turnOver != null) {
-            stmt.bindString(23, turnOver);
+            stmt.bindString(22, turnOver);
         }
  
-        Integer tenureLengthYears = entity.getTenureLengthYears();
-        if (tenureLengthYears != null) {
-            stmt.bindLong(24, tenureLengthYears);
-        }
- 
-        Integer tenureLengthMonths = entity.getTenureLengthMonths();
-        if (tenureLengthMonths != null) {
-            stmt.bindLong(25, tenureLengthMonths);
+        java.util.Date dateOutletOpened = entity.getDateOutletOpened();
+        if (dateOutletOpened != null) {
+            stmt.bindLong(23, dateOutletOpened.getTime());
         }
  
         java.util.Date dateCreated = entity.getDateCreated();
         if (dateCreated != null) {
-            stmt.bindLong(26, dateCreated.getTime());
+            stmt.bindLong(24, dateCreated.getTime());
         }
  
         java.util.Date lastUpdated = entity.getLastUpdated();
         if (lastUpdated != null) {
-            stmt.bindLong(27, lastUpdated.getTime());
+            stmt.bindLong(25, lastUpdated.getTime());
         }
-        stmt.bindLong(28, entity.getVillageId());
+        stmt.bindLong(26, entity.getVillageId());
     }
 
     @Override
@@ -275,20 +261,18 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
             cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // keyWholeSalerName
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // keyWholeSalerContact
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // buildingStructure
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // equipment
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // typeOfLicence
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // descriptionOfOutletLocation
-            cursor.isNull(offset + 17) ? null : cursor.getInt(offset + 17), // numberOfEmployees
-            cursor.isNull(offset + 18) ? null : cursor.getInt(offset + 18), // numberOfBranches
-            cursor.isNull(offset + 19) ? null : cursor.getInt(offset + 19), // numberOfCustomersPerDay
-            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // numberOfProducts
-            cursor.isNull(offset + 21) ? null : cursor.getInt(offset + 21), // restockFrequency
-            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // turnOver
-            cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23), // tenureLengthYears
-            cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24), // tenureLengthMonths
-            cursor.isNull(offset + 25) ? null : new java.util.Date(cursor.getLong(offset + 25)), // dateCreated
-            cursor.isNull(offset + 26) ? null : new java.util.Date(cursor.getLong(offset + 26)), // lastUpdated
-            cursor.getLong(offset + 27) // villageId
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // typeOfLicence
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // descriptionOfOutletLocation
+            cursor.isNull(offset + 16) ? null : cursor.getInt(offset + 16), // numberOfEmployees
+            cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0, // hasSisterBranch
+            cursor.isNull(offset + 18) ? null : cursor.getInt(offset + 18), // numberOfCustomersPerDay
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // numberOfProducts
+            cursor.isNull(offset + 20) ? null : cursor.getInt(offset + 20), // restockFrequency
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // turnOver
+            cursor.isNull(offset + 22) ? null : new java.util.Date(cursor.getLong(offset + 22)), // dateOutletOpened
+            cursor.isNull(offset + 23) ? null : new java.util.Date(cursor.getLong(offset + 23)), // dateCreated
+            cursor.isNull(offset + 24) ? null : new java.util.Date(cursor.getLong(offset + 24)), // lastUpdated
+            cursor.getLong(offset + 25) // villageId
         );
         return entity;
     }
@@ -310,20 +294,18 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         entity.setKeyWholeSalerName(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
         entity.setKeyWholeSalerContact(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         entity.setBuildingStructure(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setEquipment(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setTypeOfLicence(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setDescriptionOfOutletLocation(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setNumberOfEmployees(cursor.isNull(offset + 17) ? null : cursor.getInt(offset + 17));
-        entity.setNumberOfBranches(cursor.isNull(offset + 18) ? null : cursor.getInt(offset + 18));
-        entity.setNumberOfCustomersPerDay(cursor.isNull(offset + 19) ? null : cursor.getInt(offset + 19));
-        entity.setNumberOfProducts(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
-        entity.setRestockFrequency(cursor.isNull(offset + 21) ? null : cursor.getInt(offset + 21));
-        entity.setTurnOver(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
-        entity.setTenureLengthYears(cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23));
-        entity.setTenureLengthMonths(cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24));
-        entity.setDateCreated(cursor.isNull(offset + 25) ? null : new java.util.Date(cursor.getLong(offset + 25)));
-        entity.setLastUpdated(cursor.isNull(offset + 26) ? null : new java.util.Date(cursor.getLong(offset + 26)));
-        entity.setVillageId(cursor.getLong(offset + 27));
+        entity.setTypeOfLicence(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setDescriptionOfOutletLocation(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setNumberOfEmployees(cursor.isNull(offset + 16) ? null : cursor.getInt(offset + 16));
+        entity.setHasSisterBranch(cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0);
+        entity.setNumberOfCustomersPerDay(cursor.isNull(offset + 18) ? null : cursor.getInt(offset + 18));
+        entity.setNumberOfProducts(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
+        entity.setRestockFrequency(cursor.isNull(offset + 20) ? null : cursor.getInt(offset + 20));
+        entity.setTurnOver(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setDateOutletOpened(cursor.isNull(offset + 22) ? null : new java.util.Date(cursor.getLong(offset + 22)));
+        entity.setDateCreated(cursor.isNull(offset + 23) ? null : new java.util.Date(cursor.getLong(offset + 23)));
+        entity.setLastUpdated(cursor.isNull(offset + 24) ? null : new java.util.Date(cursor.getLong(offset + 24)));
+        entity.setVillageId(cursor.getLong(offset + 25));
      }
     
     /** @inheritdoc */

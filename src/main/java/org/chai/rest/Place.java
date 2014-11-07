@@ -97,8 +97,10 @@ public class Place extends RestClient {
 
     public boolean login(String user, String pass) {
         try{
+            userName = user;
+            password = pass;
             RestTemplate restTemplate = getRestTemplate();
-            HttpHeaders headers = getHeaders(user, pass);
+            HttpHeaders headers = getHeaders();
             HttpEntity<?> requestEntity = new HttpEntity<Object>(headers);
             ResponseEntity<Region[]> responseEntity = restTemplate.exchange(REST_URL+"place/regions",HttpMethod.GET, requestEntity,Region[].class);
             Region[] regions = responseEntity.getBody();

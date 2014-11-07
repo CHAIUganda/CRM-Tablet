@@ -69,8 +69,7 @@ public class CustomerDetailsActivity extends Activity {
     private void loadCustomerDetails(Customer customer) {
         ((TextView) findViewById(R.id.customer_profile_name)).setText(customer.getOutletName());
         ((TextView) findViewById(R.id.customer_profile_address)).setText(customer.getKeyWholeSalerContact());
-        ((TextView) findViewById(R.id.customer_profile_tenurestartdate)).setText(customer.getTenureLengthYears()+"");
-        ((TextView) findViewById(R.id.customer_profile_tenure_end_date)).setText(customer.getTenureLengthMonths()+"");
+        ((TextView) findViewById(R.id.customer_profile_date_outlet_opened)).setText(customer.getDateOutletOpened()+"");
         ((TextView) findViewById(R.id.customer_profile_outlet_type)).setText(customer.getOutletType());
         ((TextView) findViewById(R.id.customer_profile_size)).setText(customer.getOutletSize());
         ((TextView) findViewById(R.id.customer_profile_split)).setText(customer.getSplit());
@@ -79,10 +78,9 @@ public class CustomerDetailsActivity extends Activity {
         ((TextView) findViewById(R.id.customer_profile_key_wholesaler_name)).setText(customer.getKeyWholeSalerName());
         ((TextView) findViewById(R.id.customer_profile_key_wholesaler_contact)).setText(customer.getKeyWholeSalerContact());
         ((TextView) findViewById(R.id.customer_profile_building_structure)).setText(customer.getBuildingStructure());
-        ((TextView) findViewById(R.id.customer_profile_equipment)).setText(customer.getEquipment());
         ((TextView) findViewById(R.id.customer_profile_desc_location)).setText(customer.getDescriptionOfOutletLocation());
         ((TextView) findViewById(R.id.profile_number_of_employees)).setText(customer.getNumberOfEmployees() + "");
-        ((TextView) findViewById(R.id.customer_profile_number_of_branches)).setText(customer.getNumberOfBranches() + "");
+        ((TextView) findViewById(R.id.customer_profile_number_of_branches)).setText(customer.getHasSisterBranch() + "");
         ((TextView) findViewById(R.id.customer_profile_num_customers_per_day)).setText(customer.getNumberOfCustomersPerDay() + "");
         ((TextView) findViewById(R.id.customer_profile_num_products)).setText(customer.getNumberOfProducts() + "");
         ((TextView) findViewById(R.id.customer_profile_restock_frequency)).setText(customer.getRestockFrequency() + "");

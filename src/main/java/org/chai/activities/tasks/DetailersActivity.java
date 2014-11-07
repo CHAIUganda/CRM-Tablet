@@ -231,7 +231,6 @@ public class DetailersActivity extends Activity {
         detailerCall.setOrsBrandSold(((EditText) findViewById(R.id.detailers_brand_sold_ors)).getText().toString());
         detailerCall.setIfNoWhy(((EditText) findViewById(R.id.detailer_if_no_why)).getText().toString());
         detailerCall.setBuyingPrice(Double.parseDouble(((EditText) findViewById(R.id.detailer_whatpricedoyoubuy)).getText().toString()));
-//        detailerCall.setAction(((EditText) findViewById(R.id.detailer_action)).getText().toString());
         detailerCall.setPointOfsaleMaterial(((EditText) findViewById(R.id.detailer_point_of_sale)).getText().toString());
         detailerCall.setRecommendationNextStep(((Spinner) findViewById(R.id.detailer_next_step_recommendation)).getSelectedItem().toString());
 
@@ -303,16 +302,18 @@ public class DetailersActivity extends Activity {
             Calendar calendar = Calendar.getInstance();
             ((EditText) findViewById(R.id.detailer_survey_date)).setText(calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.YEAR));
             Customer customer = callDataTask.getCustomer();
-            ((EditText) findViewById(R.id.detailer_subcounty)).setText(customer.getVillage().getParish().getSubcounty().getName());
-            ((EditText) findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
-            ((EditText) findViewById(R.id.detailer_name)).setText(customer.getOutletName());
-            ((EditText) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
-            ((EditText) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
-            ((EditText) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
-            ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
-            CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
-            ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getName():"");
-            ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getContact():"");
+            if(customer!=null){
+                ((EditText) findViewById(R.id.detailer_subcounty)).setText(customer.getVillage().getParish().getSubcounty().getName());
+                ((EditText) findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
+                ((EditText) findViewById(R.id.detailer_name)).setText(customer.getOutletName());
+                ((EditText) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
+                ((EditText) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
+                ((EditText) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
+                ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
+                CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
+                ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getName():"");
+                ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getContact():"");
+            }
         }
         setRequiredFields();
     }
