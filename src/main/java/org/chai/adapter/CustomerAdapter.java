@@ -72,7 +72,7 @@ public class CustomerAdapter extends BaseAdapter{
         }
 
         if(customerCtct!=null){
-            telephone.setText(customerCtct.getContact());
+            telephone.setText(customerCtct.getTitle());
         }else{
             telephone.setText("No Contact Available");
         }

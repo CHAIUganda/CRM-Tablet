@@ -114,7 +114,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Type of licence:"
+                        android:text="Type of licence(Is the licence certificate visible in the outlet):"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -123,7 +123,7 @@
                         android:layout_height="wrap_content"
                         android:prompt="@string/selectItem"
                         android:layout_width="fill_parent"
-                        android:entries="@array/licencetype"
+                        android:entries="@array/yesnolist"
                         android:background="@drawable/btn_dropdown"/>
 
             </LinearLayout>
@@ -235,7 +235,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Description Of Outlet Location:"
+                        android:text="Description Of Outlet Location(please state landmark of key location point so you can find easily next time):"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -595,7 +595,7 @@
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Add Contact"
+                        android:text="Add new Contact details to this customer"
                         android:layout_marginLeft="50dp"
                         android:layout_marginRight="50dp"
                         android:background="#428bca"/>

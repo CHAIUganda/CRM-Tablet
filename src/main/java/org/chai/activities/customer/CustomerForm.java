@@ -103,20 +103,20 @@ public class CustomerForm extends Activity {
                     public void onClick(DialogInterface dialogInterface, int button) {
                         CustomerContact customerContact = new CustomerContact(null);
                         customerContact.setUuid(UUID.randomUUID().toString());
-                        customerContact.setContact(((EditText)entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
+                        customerContact.setTitle(((EditText)entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
+                        customerContact.setFirstName(((EditText)entryView.findViewById(R.id.customer_contact_firstname)).getText().toString());
+                        customerContact.setSurname(((EditText)entryView.findViewById(R.id.customer_contact_surname)).getText().toString());
                         customerContact.setGender(((Spinner)entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
-                        customerContact.setGraduationYear(Integer.parseInt(((EditText)entryView.findViewById(R.id.customer_contact_graduation_year)).getText().toString()));
-                        customerContact.setName(((EditText)entryView.findViewById(R.id.customer_contact_name)).getText().toString());
-                        customerContact.setNetworkOrAssociation(((EditText)entryView.findViewById(R.id.customer_contact_network)).getText().toString());
-                        customerContact.setQualification(((EditText)entryView.findViewById(R.id.customer_contact_qualification)).getText().toString());
-                        customerContact.setTypeOfContact(((Spinner)entryView.findViewById(R.id.customer_contact_type)).getSelectedItem().toString());
+                        customerContact.setNetworkOrAssociation(((Spinner)entryView.findViewById(R.id.customer_contact_network)).getSelectedItem().toString());
+                        customerContact.setQualification(((Spinner)entryView.findViewById(R.id.customer_contact_qualification)).getSelectedItem().toString());
+                        customerContact.setRole(((Spinner)entryView.findViewById(R.id.customer_contact_type)).getSelectedItem().toString());
                         customerContacts.add(customerContact);
                         //add to parent form
                         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.customer_contacts_layout);
 
                         TextView contactView = new TextView(CustomerForm.this);
-                        contactView.setText(customerContact.getName()+":"+customerContact.getContact());
-                        contactView.setTextSize(16);
+                        contactView.setText(customerContact.getFirstName()+":"+customerContact.getTitle());
+                        contactView.setTextSize(18);
                         contactView.setTextColor(Color.parseColor("#000000"));
                         linearLayout.addView(contactView);
 

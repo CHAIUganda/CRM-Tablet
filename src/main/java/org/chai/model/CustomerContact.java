@@ -15,14 +15,13 @@ public class CustomerContact {
     private Long id;
     /** Not-null value. */
     private String uuid;
-    private String name;
-    private String contact;
-    private String typeOfContact;
+    private String title;
+    private String firstName;
+    private String surname;
     private String gender;
+    private String networkOrAssociation;
     private String role;
     private String qualification;
-    private String networkOrAssociation;
-    private Integer graduationYear;
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
     private long customerId;
@@ -47,17 +46,16 @@ public class CustomerContact {
         this.id = id;
     }
 
-    public CustomerContact(Long id, String uuid, String name, String contact, String typeOfContact, String gender, String role, String qualification, String networkOrAssociation, Integer graduationYear, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
+    public CustomerContact(Long id, String uuid, String title, String firstName, String surname, String gender, String networkOrAssociation, String role, String qualification, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
         this.id = id;
         this.uuid = uuid;
-        this.name = name;
-        this.contact = contact;
-        this.typeOfContact = typeOfContact;
+        this.title = title;
+        this.firstName = firstName;
+        this.surname = surname;
         this.gender = gender;
+        this.networkOrAssociation = networkOrAssociation;
         this.role = role;
         this.qualification = qualification;
-        this.networkOrAssociation = networkOrAssociation;
-        this.graduationYear = graduationYear;
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
         this.customerId = customerId;
@@ -87,28 +85,28 @@ public class CustomerContact {
         this.uuid = uuid;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getContact() {
-        return contact;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getTypeOfContact() {
-        return typeOfContact;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setTypeOfContact(String typeOfContact) {
-        this.typeOfContact = typeOfContact;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getGender() {
@@ -117,6 +115,14 @@ public class CustomerContact {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getNetworkOrAssociation() {
+        return networkOrAssociation;
+    }
+
+    public void setNetworkOrAssociation(String networkOrAssociation) {
+        this.networkOrAssociation = networkOrAssociation;
     }
 
     public String getRole() {
@@ -133,22 +139,6 @@ public class CustomerContact {
 
     public void setQualification(String qualification) {
         this.qualification = qualification;
-    }
-
-    public String getNetworkOrAssociation() {
-        return networkOrAssociation;
-    }
-
-    public void setNetworkOrAssociation(String networkOrAssociation) {
-        this.networkOrAssociation = networkOrAssociation;
-    }
-
-    public Integer getGraduationYear() {
-        return graduationYear;
-    }
-
-    public void setGraduationYear(Integer graduationYear) {
-        this.graduationYear = graduationYear;
     }
 
     public java.util.Date getDateCreated() {

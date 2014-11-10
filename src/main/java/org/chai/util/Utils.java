@@ -24,7 +24,7 @@ public class Utils {
     public static CustomerContact getKeyCustomerContact(List<CustomerContact> customerContacts){
         try{
             for(int i=0;i<customerContacts.size();i++){
-                if(customerContacts.get(i).getTypeOfContact().equalsIgnoreCase("key")){
+                if(customerContacts.get(i).getRole().equalsIgnoreCase("key")){
                     return customerContacts.get(i);
                 }
             }

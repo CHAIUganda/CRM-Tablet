@@ -255,8 +255,8 @@ public class DetailersActivity extends Activity {
             ((EditText) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
             ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
             CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
-            ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getName());
-            ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact.getContact());
+            ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getFirstName());
+            ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact.getTitle());
             ((EditText) findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).setText(detailerCall.getDiarrheaPatientsInFacility() + "");
             ((EditText) findViewById(R.id.detailer_other_ways_youheard_about_zinc)).setText(detailerCall.getOtherWaysHowYouHeard());
             ((EditText) findViewById(R.id.detailers_howmany_in_stock_zinc)).setText(detailerCall.getHowManyZincInStock()+"");
@@ -311,8 +311,8 @@ public class DetailersActivity extends Activity {
                 ((EditText) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
                 ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
                 CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
-                ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getName():"");
-                ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getContact():"");
+                ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getFirstName():"");
+                ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getTitle():"");
             }
         }
         setRequiredFields();

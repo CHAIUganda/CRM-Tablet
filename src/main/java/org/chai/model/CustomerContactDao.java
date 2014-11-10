@@ -30,17 +30,16 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
-        public final static Property Contact = new Property(3, String.class, "contact", false, "CONTACT");
-        public final static Property TypeOfContact = new Property(4, String.class, "typeOfContact", false, "TYPE_OF_CONTACT");
+        public final static Property Title = new Property(2, String.class, "title", false, "TITLE");
+        public final static Property FirstName = new Property(3, String.class, "firstName", false, "FIRST_NAME");
+        public final static Property Surname = new Property(4, String.class, "surname", false, "SURNAME");
         public final static Property Gender = new Property(5, String.class, "gender", false, "GENDER");
-        public final static Property Role = new Property(6, String.class, "role", false, "ROLE");
-        public final static Property Qualification = new Property(7, String.class, "qualification", false, "QUALIFICATION");
-        public final static Property NetworkOrAssociation = new Property(8, String.class, "networkOrAssociation", false, "NETWORK_OR_ASSOCIATION");
-        public final static Property GraduationYear = new Property(9, Integer.class, "graduationYear", false, "GRADUATION_YEAR");
-        public final static Property DateCreated = new Property(10, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
-        public final static Property LastUpdated = new Property(11, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
-        public final static Property CustomerId = new Property(12, long.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property NetworkOrAssociation = new Property(6, String.class, "networkOrAssociation", false, "NETWORK_OR_ASSOCIATION");
+        public final static Property Role = new Property(7, String.class, "role", false, "ROLE");
+        public final static Property Qualification = new Property(8, String.class, "qualification", false, "QUALIFICATION");
+        public final static Property DateCreated = new Property(9, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(10, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
+        public final static Property CustomerId = new Property(11, long.class, "customerId", false, "CUSTOMER_ID");
     };
 
     private DaoSession daoSession;
@@ -62,17 +61,16 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         db.execSQL("CREATE TABLE " + constraint + "'CUSTOMER_CONTACT' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'NAME' TEXT," + // 2: name
-                "'CONTACT' TEXT," + // 3: contact
-                "'TYPE_OF_CONTACT' TEXT," + // 4: typeOfContact
+                "'TITLE' TEXT," + // 2: title
+                "'FIRST_NAME' TEXT," + // 3: firstName
+                "'SURNAME' TEXT," + // 4: surname
                 "'GENDER' TEXT," + // 5: gender
-                "'ROLE' TEXT," + // 6: role
-                "'QUALIFICATION' TEXT," + // 7: qualification
-                "'NETWORK_OR_ASSOCIATION' TEXT," + // 8: networkOrAssociation
-                "'GRADUATION_YEAR' INTEGER," + // 9: graduationYear
-                "'DATE_CREATED' INTEGER," + // 10: dateCreated
-                "'LAST_UPDATED' INTEGER," + // 11: lastUpdated
-                "'CUSTOMER_ID' INTEGER NOT NULL );"); // 12: customerId
+                "'NETWORK_OR_ASSOCIATION' TEXT," + // 6: networkOrAssociation
+                "'ROLE' TEXT," + // 7: role
+                "'QUALIFICATION' TEXT," + // 8: qualification
+                "'DATE_CREATED' INTEGER," + // 9: dateCreated
+                "'LAST_UPDATED' INTEGER," + // 10: lastUpdated
+                "'CUSTOMER_ID' INTEGER NOT NULL );"); // 11: customerId
     }
 
     /** Drops the underlying database table. */
@@ -92,19 +90,19 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         }
         stmt.bindString(2, entity.getUuid());
  
-        String name = entity.getName();
-        if (name != null) {
-            stmt.bindString(3, name);
+        String title = entity.getTitle();
+        if (title != null) {
+            stmt.bindString(3, title);
         }
  
-        String contact = entity.getContact();
-        if (contact != null) {
-            stmt.bindString(4, contact);
+        String firstName = entity.getFirstName();
+        if (firstName != null) {
+            stmt.bindString(4, firstName);
         }
  
-        String typeOfContact = entity.getTypeOfContact();
-        if (typeOfContact != null) {
-            stmt.bindString(5, typeOfContact);
+        String surname = entity.getSurname();
+        if (surname != null) {
+            stmt.bindString(5, surname);
         }
  
         String gender = entity.getGender();
@@ -112,36 +110,31 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
             stmt.bindString(6, gender);
         }
  
+        String networkOrAssociation = entity.getNetworkOrAssociation();
+        if (networkOrAssociation != null) {
+            stmt.bindString(7, networkOrAssociation);
+        }
+ 
         String role = entity.getRole();
         if (role != null) {
-            stmt.bindString(7, role);
+            stmt.bindString(8, role);
         }
  
         String qualification = entity.getQualification();
         if (qualification != null) {
-            stmt.bindString(8, qualification);
-        }
- 
-        String networkOrAssociation = entity.getNetworkOrAssociation();
-        if (networkOrAssociation != null) {
-            stmt.bindString(9, networkOrAssociation);
-        }
- 
-        Integer graduationYear = entity.getGraduationYear();
-        if (graduationYear != null) {
-            stmt.bindLong(10, graduationYear);
+            stmt.bindString(9, qualification);
         }
  
         java.util.Date dateCreated = entity.getDateCreated();
         if (dateCreated != null) {
-            stmt.bindLong(11, dateCreated.getTime());
+            stmt.bindLong(10, dateCreated.getTime());
         }
  
         java.util.Date lastUpdated = entity.getLastUpdated();
         if (lastUpdated != null) {
-            stmt.bindLong(12, lastUpdated.getTime());
+            stmt.bindLong(11, lastUpdated.getTime());
         }
-        stmt.bindLong(13, entity.getCustomerId());
+        stmt.bindLong(12, entity.getCustomerId());
     }
 
     @Override
@@ -162,17 +155,16 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         CustomerContact entity = new CustomerContact( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // uuid
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // contact
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // typeOfContact
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // title
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // firstName
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // surname
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // gender
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // role
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // qualification
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // networkOrAssociation
-            cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // graduationYear
-            cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)), // dateCreated
-            cursor.isNull(offset + 11) ? null : new java.util.Date(cursor.getLong(offset + 11)), // lastUpdated
-            cursor.getLong(offset + 12) // customerId
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // networkOrAssociation
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // role
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // qualification
+            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // dateCreated
+            cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)), // lastUpdated
+            cursor.getLong(offset + 11) // customerId
         );
         return entity;
     }
@@ -182,17 +174,16 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
     public void readEntity(Cursor cursor, CustomerContact entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setUuid(cursor.getString(offset + 1));
-        entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setContact(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setTypeOfContact(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setTitle(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setFirstName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setSurname(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setGender(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setRole(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setQualification(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setNetworkOrAssociation(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setGraduationYear(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
-        entity.setDateCreated(cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)));
-        entity.setLastUpdated(cursor.isNull(offset + 11) ? null : new java.util.Date(cursor.getLong(offset + 11)));
-        entity.setCustomerId(cursor.getLong(offset + 12));
+        entity.setNetworkOrAssociation(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setRole(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setQualification(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setDateCreated(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setLastUpdated(cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)));
+        entity.setCustomerId(cursor.getLong(offset + 11));
      }
     
     /** @inheritdoc */
