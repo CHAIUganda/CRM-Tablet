@@ -6,28 +6,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import org.chai.model.Subcounty;
+import org.chai.model.Parish;
 
 /**
  * Created by victor on 11/10/14.
  */
-public class SubcountyArrayAdapter extends ArrayAdapter<Subcounty> {
+public class ParishArrayAdapter extends ArrayAdapter<Parish> {
 
     private Context context;
-    private Subcounty[] subcounties;
+    private Parish[] parishes;
 
-    public SubcountyArrayAdapter(Context context, int textViewResourceId, Subcounty[] subcounties) {
-        super(context, textViewResourceId,subcounties);
+    public ParishArrayAdapter(Context context, int textViewResourceId, Parish[] parishes) {
+        super(context, textViewResourceId,parishes);
         this.context = context;
-        this.subcounties = subcounties;
+        this.parishes = parishes;
     }
 
     public int getCount(){
-        return subcounties.length;
+        return parishes.length;
     }
 
-    public Subcounty getItem(int position){
-        return subcounties[position];
+    public Parish getItem(int position){
+        return parishes[position];
     }
 
     public long getItemId(int position){
@@ -38,14 +38,14 @@ public class SubcountyArrayAdapter extends ArrayAdapter<Subcounty> {
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView label = new TextView(context);
         label.setTextColor(Color.BLACK);
-        label.setText(subcounties[position].getName());
+        label.setText(parishes[position].getName());
         return label;
     }
     @Override
     public View getDropDownView(int position, View convertView,ViewGroup parent) {
         TextView label = new TextView(context);
         label.setTextColor(Color.BLACK);
-        label.setText(subcounties[position].getName());
+        label.setText(parishes[position].getName());
 
         return label;
     }
