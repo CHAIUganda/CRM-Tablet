@@ -37,6 +37,7 @@ public class DetailerCall {
     private String pointOfsaleMaterial;
     private String recommendationNextStep;
     private String recommendationLevel;
+    private Integer tenureLength;
     private long taskId;
 
     /** Used to resolve relations */
@@ -59,7 +60,7 @@ public class DetailerCall {
         this.id = id;
     }
 
-    public DetailerCall(Long id, String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPrice, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, long taskId) {
+    public DetailerCall(Long id, String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPrice, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, long taskId) {
         this.id = id;
         this.uuid = uuid;
         this.dateOfSurvey = dateOfSurvey;
@@ -84,6 +85,7 @@ public class DetailerCall {
         this.pointOfsaleMaterial = pointOfsaleMaterial;
         this.recommendationNextStep = recommendationNextStep;
         this.recommendationLevel = recommendationLevel;
+        this.tenureLength = tenureLength;
         this.taskId = taskId;
     }
 
@@ -285,6 +287,14 @@ public class DetailerCall {
 
     public void setRecommendationLevel(String recommendationLevel) {
         this.recommendationLevel = recommendationLevel;
+    }
+
+    public Integer getTenureLength() {
+        return tenureLength;
+    }
+
+    public void setTenureLength(Integer tenureLength) {
+        this.tenureLength = tenureLength;
     }
 
     public long getTaskId() {

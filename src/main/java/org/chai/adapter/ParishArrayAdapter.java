@@ -37,14 +37,14 @@ public class ParishArrayAdapter extends ArrayAdapter<Parish> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView label = new TextView(context);
-        label.setTextColor(Color.BLACK);
+        label.setTextColor(Color.WHITE);
         label.setText(parishes[position].getName());
         return label;
     }
     @Override
     public View getDropDownView(int position, View convertView,ViewGroup parent) {
         TextView label = new TextView(context);
-        label.setTextColor(Color.BLACK);
+        label.setTextColor(Color.WHITE);
         label.setText(parishes[position].getName());
 
         return label;

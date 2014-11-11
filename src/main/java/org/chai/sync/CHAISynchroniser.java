@@ -72,6 +72,8 @@ public class CHAISynchroniser {
 
     public void startSyncronisationProcess() {
         try{
+//            uploadCustomers();
+            uploadTasks();
             regionDao.deleteAll();
             districtDao.deleteAll();
             subcountyDao.deleteAll();
@@ -152,6 +154,20 @@ public class CHAISynchroniser {
         Task[] tasks = taskClient.downloadTasks();
         for(Task task:tasks){
             taskDao.insert(task);
+        }
+    }
+
+    public void uploadCustomers(){
+        List<Customer> customersList = customerDao.loadAll();
+        if(!customersList.isEmpty()){
+            customerClient.uploadCustomers(customersList.toArray(new Customer[customersList.size()]));
+        }
+    }
+
+    public void uploadTasks(){
+        List<Task> taskList = taskDao.loadAll();
+        if(!taskList.isEmpty()){
+            taskClient.uploadTasks(taskList.toArray(new Task[taskList.size()]));
         }
     }
 

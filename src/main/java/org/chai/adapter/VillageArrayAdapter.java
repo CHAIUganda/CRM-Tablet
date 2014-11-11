@@ -38,14 +38,14 @@ public class VillageArrayAdapter extends ArrayAdapter<Village> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView label = new TextView(context);
-        label.setTextColor(Color.BLACK);
+        label.setTextColor(Color.WHITE);
         label.setText(villages[position].getName());
         return label;
     }
     @Override
     public View getDropDownView(int position, View convertView,ViewGroup parent) {
         TextView label = new TextView(context);
-        label.setTextColor(Color.BLACK);
+        label.setTextColor(Color.WHITE);
         label.setText(villages[position].getName());
 
         return label;

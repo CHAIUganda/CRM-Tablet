@@ -52,7 +52,8 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
         public final static Property PointOfsaleMaterial = new Property(21, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
         public final static Property RecommendationNextStep = new Property(22, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
         public final static Property RecommendationLevel = new Property(23, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
-        public final static Property TaskId = new Property(24, long.class, "taskId", false, "TASK_ID");
+        public final static Property TenureLength = new Property(24, Integer.class, "tenureLength", false, "TENURE_LENGTH");
+        public final static Property TaskId = new Property(25, long.class, "taskId", false, "TASK_ID");
     };
 
     private DaoSession daoSession;
@@ -96,7 +97,8 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
                 "'POINT_OFSALE_MATERIAL' TEXT," + // 21: pointOfsaleMaterial
                 "'RECOMMENDATION_NEXT_STEP' TEXT," + // 22: recommendationNextStep
                 "'RECOMMENDATION_LEVEL' TEXT," + // 23: recommendationLevel
-                "'TASK_ID' INTEGER NOT NULL );"); // 24: taskId
+                "'TENURE_LENGTH' INTEGER," + // 24: tenureLength
+                "'TASK_ID' INTEGER NOT NULL );"); // 25: taskId
     }
 
     /** Drops the underlying database table. */
@@ -225,7 +227,12 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
         if (recommendationLevel != null) {
             stmt.bindString(24, recommendationLevel);
         }
-        stmt.bindLong(25, entity.getTaskId());
+ 
+        Integer tenureLength = entity.getTenureLength();
+        if (tenureLength != null) {
+            stmt.bindLong(25, tenureLength);
+        }
+        stmt.bindLong(26, entity.getTaskId());
     }
 
     @Override
@@ -268,7 +275,8 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
             cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // pointOfsaleMaterial
             cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // recommendationNextStep
             cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // recommendationLevel
-            cursor.getLong(offset + 24) // taskId
+            cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24), // tenureLength
+            cursor.getLong(offset + 25) // taskId
         );
         return entity;
     }
@@ -300,7 +308,8 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
         entity.setPointOfsaleMaterial(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
         entity.setRecommendationNextStep(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
         entity.setRecommendationLevel(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
-        entity.setTaskId(cursor.getLong(offset + 24));
+        entity.setTenureLength(cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24));
+        entity.setTaskId(cursor.getLong(offset + 25));
      }
     
     /** @inheritdoc */

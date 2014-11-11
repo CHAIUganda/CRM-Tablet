@@ -1,9 +1,13 @@
 package org.chai.rest;
 
+import android.util.Log;
 import org.chai.model.Customer;
 import org.chai.model.Product;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -23,6 +27,16 @@ public class CustomerClient extends RestClient {
     }
 
     public void uploadCustomers(Customer[] customers){
-
+        try{
+            for(Customer customer:customers){
+                RestTemplate restTemplate = getRestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                HttpEntity<Customer> httpEntity = new HttpEntity<Customer>(customer,getHeaders());
+                ResponseEntity<String> responseEntity = restTemplate.exchange(REST_URL + "customer/update", HttpMethod.PUT,httpEntity, String.class);
+                Log.i("Rest post Response:","=============================================================================="+responseEntity.getBody());
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 }

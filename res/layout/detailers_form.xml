@@ -266,8 +266,7 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:editable="false"/>
+                    android:singleLine="true" />
 
         </LinearLayout>
 
@@ -293,8 +292,7 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:editable="false"/>
+                    android:singleLine="true" />
 
         </LinearLayout>
 

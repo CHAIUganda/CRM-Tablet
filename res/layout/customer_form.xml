@@ -138,7 +138,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Split:"
+                        android:text="Rural or Urban:"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -188,16 +188,12 @@
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
-                <EditText
+                <Spinner
                         android:id="@+id/details_parish"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textSize="@dimen/list_sub_text_size"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:background="@drawable/bordertextfield"
-                        android:singleLine="true"/>
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:background="@drawable/btn_dropdown"/>
 
             </LinearLayout>
             <LinearLayout
@@ -213,16 +209,12 @@
                         android:text="Village:"
                         android:textStyle="bold"/>
 
-                <EditText
+                <Spinner
                         android:id="@+id/details_village"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textSize="@dimen/list_sub_text_size"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:background="@drawable/bordertextfield"
-                        android:singleLine="true"/>
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:background="@drawable/btn_dropdown"/>
 
             </LinearLayout>
 
@@ -303,29 +295,29 @@
 
 
             <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp">
 
-                <EditText
-                        android:id="@+id/details_date_outlet_opened"
-                        android:text=""
-                        android:minWidth="90dip"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:width="150dip"
-                        android:height="40dip"
-                        android:textColor="@color/list_main_text_color"
-                        android:background="@drawable/bordertextfield"/>
-
-                <Button
-                        android:id="@+id/details_date_outlet_opened_btn"
-                        android:text="Date the outlet opened"
+                <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="#428bca"
-                        android:layout_marginLeft="5dp"/>
+                        android:text="How long has this outlet ben open(years)"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_date_outlet_opened"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:inputType="number"/>
             </LinearLayout>
 
             <LinearLayout
@@ -364,7 +356,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Estimated monthly turnover (UGX):"
+                        android:text="Estimated monthly turnover of outlet (UGX):"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -518,7 +510,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Restock Frequency:"
+                        android:text="How many times on average does the outlet stock up:"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 

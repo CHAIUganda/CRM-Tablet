@@ -1,6 +1,8 @@
 package org.chai.model;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -42,20 +44,27 @@ public class Customer {
     private java.util.Date lastUpdated;
     private long villageId;
 
+
+    // KEEP FIELDS - put your custom fields here
+
     /** Used to resolve relations */
+    @JsonIgnore
     private transient DaoSession daoSession;
 
+    @JsonIgnore
     /** Used for active entity operations. */
     private transient CustomerDao myDao;
 
+    @JsonIgnore
     private Village village;
+    @JsonIgnore
     private Long village__resolvedKey;
 
     private List<CustomerContact> customerContacts;
+    @JsonIgnore
     private List<Order> orders;
+    @JsonIgnore
     private List<Task> tasks;
-
-    // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
     public Customer() {

@@ -1,5 +1,6 @@
 package org.chai.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -19,24 +20,27 @@ public class CustomerContact {
     private String firstName;
     private String surname;
     private String gender;
-    private String networkOrAssociation;
+    private Boolean networkOrAssociation;
     private String role;
     private String qualification;
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
     private long customerId;
 
+
+    // KEEP FIELDS - put your custom fields here
+
     /** Used to resolve relations */
+    @JsonIgnore
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
+    @JsonIgnore
     private transient CustomerContactDao myDao;
-
+    @JsonIgnore
     private Customer customer;
+    @JsonIgnore
     private Long customer__resolvedKey;
-
-
-    // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
     public CustomerContact() {
@@ -46,7 +50,7 @@ public class CustomerContact {
         this.id = id;
     }
 
-    public CustomerContact(Long id, String uuid, String title, String firstName, String surname, String gender, String networkOrAssociation, String role, String qualification, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
+    public CustomerContact(Long id, String uuid, String title, String firstName, String surname, String gender, Boolean networkOrAssociation, String role, String qualification, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
         this.id = id;
         this.uuid = uuid;
         this.title = title;
@@ -117,11 +121,11 @@ public class CustomerContact {
         this.gender = gender;
     }
 
-    public String getNetworkOrAssociation() {
+    public Boolean getNetworkOrAssociation() {
         return networkOrAssociation;
     }
 
-    public void setNetworkOrAssociation(String networkOrAssociation) {
+    public void setNetworkOrAssociation(Boolean networkOrAssociation) {
         this.networkOrAssociation = networkOrAssociation;
     }
 

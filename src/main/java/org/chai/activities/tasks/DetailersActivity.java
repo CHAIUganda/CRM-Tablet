@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import org.chai.R;
-import org.chai.adapter.SubcountyArrayAdapter;
+import org.chai.adapter.VillageArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
@@ -46,7 +46,7 @@ public class DetailersActivity extends Activity {
     private DetailerCallDao detailerCallDao;
 
     private EditText subcountyTxt;
-    private SubcountyArrayAdapter adapter;
+    private VillageArrayAdapter adapter;
 
     private DetailerCall detailerCall;
     private Task callDataTask;
@@ -203,9 +203,9 @@ public class DetailersActivity extends Activity {
                 String selected = (String) spinner.getAdapter().getItem(position);
                 LinearLayout otherwaysinfoLayout = (LinearLayout) findViewById(R.id.detailer_howdidyouhearaboutzinc_other_layout);
                 if ("Other".equalsIgnoreCase(selected)) {
-                    otherwaysinfoLayout.setVisibility(View.GONE);
-                } else {
                     otherwaysinfoLayout.setVisibility(View.VISIBLE);
+                } else {
+                    otherwaysinfoLayout.setVisibility(View.GONE);
                 }
             }
 

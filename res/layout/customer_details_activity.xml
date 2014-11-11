@@ -475,7 +475,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Subcounty:"
+                        android:text="Village:"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 

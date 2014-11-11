@@ -41,11 +41,21 @@ public class Utils {
     }
 
     public static Date stringToDate(String dateString){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
         try{
             return simpleDateFormat.parse(dateString);
         }catch (Exception ex){
         }
         return new Date();
+    }
+
+    public static String dateToString(Date date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        try{
+            String datetime = simpleDateFormat.format(date);
+            return datetime;
+        }catch (Exception ex){
+        }
+        return "";
     }
 }
