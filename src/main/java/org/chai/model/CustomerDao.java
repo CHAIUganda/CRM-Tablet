@@ -53,7 +53,8 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         public final static Property DateOutletOpened = new Property(22, java.util.Date.class, "dateOutletOpened", false, "DATE_OUTLET_OPENED");
         public final static Property DateCreated = new Property(23, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
         public final static Property LastUpdated = new Property(24, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
-        public final static Property VillageId = new Property(25, long.class, "villageId", false, "VILLAGE_ID");
+        public final static Property IsDirty = new Property(25, Boolean.class, "isDirty", false, "IS_DIRTY");
+        public final static Property VillageId = new Property(26, long.class, "villageId", false, "VILLAGE_ID");
     };
 
     private DaoSession daoSession;
@@ -98,7 +99,8 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
                 "'DATE_OUTLET_OPENED' INTEGER," + // 22: dateOutletOpened
                 "'DATE_CREATED' INTEGER," + // 23: dateCreated
                 "'LAST_UPDATED' INTEGER," + // 24: lastUpdated
-                "'VILLAGE_ID' INTEGER NOT NULL );"); // 25: villageId
+                "'IS_DIRTY' INTEGER," + // 25: isDirty
+                "'VILLAGE_ID' INTEGER NOT NULL );"); // 26: villageId
     }
 
     /** Drops the underlying database table. */
@@ -228,7 +230,12 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         if (lastUpdated != null) {
             stmt.bindLong(25, lastUpdated.getTime());
         }
-        stmt.bindLong(26, entity.getVillageId());
+ 
+        Boolean isDirty = entity.getIsDirty();
+        if (isDirty != null) {
+            stmt.bindLong(26, isDirty ? 1l: 0l);
+        }
+        stmt.bindLong(27, entity.getVillageId());
     }
 
     @Override
@@ -272,7 +279,8 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
             cursor.isNull(offset + 22) ? null : new java.util.Date(cursor.getLong(offset + 22)), // dateOutletOpened
             cursor.isNull(offset + 23) ? null : new java.util.Date(cursor.getLong(offset + 23)), // dateCreated
             cursor.isNull(offset + 24) ? null : new java.util.Date(cursor.getLong(offset + 24)), // lastUpdated
-            cursor.getLong(offset + 25) // villageId
+            cursor.isNull(offset + 25) ? null : cursor.getShort(offset + 25) != 0, // isDirty
+            cursor.getLong(offset + 26) // villageId
         );
         return entity;
     }
@@ -305,7 +313,8 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         entity.setDateOutletOpened(cursor.isNull(offset + 22) ? null : new java.util.Date(cursor.getLong(offset + 22)));
         entity.setDateCreated(cursor.isNull(offset + 23) ? null : new java.util.Date(cursor.getLong(offset + 23)));
         entity.setLastUpdated(cursor.isNull(offset + 24) ? null : new java.util.Date(cursor.getLong(offset + 24)));
-        entity.setVillageId(cursor.getLong(offset + 25));
+        entity.setIsDirty(cursor.isNull(offset + 25) ? null : cursor.getShort(offset + 25) != 0);
+        entity.setVillageId(cursor.getLong(offset + 26));
      }
     
     /** @inheritdoc */

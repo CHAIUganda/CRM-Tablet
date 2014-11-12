@@ -4,9 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import org.chai.R;
+import org.chai.activities.tasks.TasksMainActivity;
 import org.chai.model.*;
 import org.chai.rest.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +35,7 @@ public class CHAISynchroniser {
     private CustomerDao customerDao;
     private CustomerContactDao customerContactDao;
     private TaskDao taskDao;
+    private DetailerCallDao detailerCallDao;
 
     public CHAISynchroniser(Context context) {
         this.context = context;
@@ -65,6 +69,7 @@ public class CHAISynchroniser {
             customerDao = daoSession.getCustomerDao();
             customerContactDao = daoSession.getCustomerContactDao();
             taskDao = daoSession.getTaskDao();
+            detailerCallDao = daoSession.getDetailerCallDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
         }
@@ -72,7 +77,7 @@ public class CHAISynchroniser {
 
     public void startSyncronisationProcess() {
         try{
-//            uploadCustomers();
+            uploadCustomers();
             uploadTasks();
             regionDao.deleteAll();
             districtDao.deleteAll();
@@ -85,9 +90,9 @@ public class CHAISynchroniser {
             downloadRegions();
             progressDialog.incrementProgressBy(30);
             downloadCustomers();
-            progressDialog.incrementProgressBy(30);
+            progressDialog.incrementProgressBy(50);
             downloadTasks();
-            progressDialog.incrementProgressBy(40);
+            progressDialog.incrementProgressBy(20);
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -139,7 +144,7 @@ public class CHAISynchroniser {
         Customer[] customers = customerClient.downloadCustomers();
         for(Customer customer:customers){
             Long id = customerDao.insert(customer);
-            saveCustomerContacts(customer.getCustomerContacts(),id);
+            saveCustomerContacts(customer.getCustomerContacts(), id);
         }
     }
 
@@ -158,16 +163,24 @@ public class CHAISynchroniser {
     }
 
     public void uploadCustomers(){
-        List<Customer> customersList = customerDao.loadAll();
+        List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
         if(!customersList.isEmpty()){
-            customerClient.uploadCustomers(customersList.toArray(new Customer[customersList.size()]));
+            progressDialog.setMessage("Uploading customers");
+            boolean uploaded = customerClient.uploadCustomers(customersList.toArray(new Customer[customersList.size()]));
+            if (uploaded) {
+                customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).buildDelete();
+            }
         }
     }
 
     public void uploadTasks(){
-        List<Task> taskList = taskDao.loadAll();
-        if(!taskList.isEmpty()){
-            taskClient.uploadTasks(taskList.toArray(new Task[taskList.size()]));
+        List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("complete")).list();
+        for (Task task : taskList) {
+            boolean uploaded = taskClient.uploadTask(task);
+            if (uploaded) {
+                detailerCallDao.queryBuilder().where(DetailerCallDao.Properties.TaskId.eq(task.getId())).buildDelete().executeDeleteWithoutDetachingEntities();
+                taskDao.delete(task);
+            }
         }
     }
 

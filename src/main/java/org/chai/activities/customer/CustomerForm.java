@@ -60,11 +60,11 @@ public class CustomerForm extends Activity {
             List<Parish> parishes = parishDao.loadAll();
             List<Village> villageData = villageDao.loadAll();
 
-            subcountySpinner = (Spinner)findViewById(R.id.details_subcounty);
-            parishSpinner = (Spinner)findViewById(R.id.details_parish);
+            subcountySpinner = (Spinner) findViewById(R.id.details_subcounty);
+            parishSpinner = (Spinner) findViewById(R.id.details_parish);
             villageSpinner = (Spinner) findViewById(R.id.details_village);
 
-            subcountySpinner.setAdapter(new SubcountyArrayAdapter(this,R.id.details_subcounty,subcountiesList.toArray(new Subcounty[subcountiesList.size()])));
+            subcountySpinner.setAdapter(new SubcountyArrayAdapter(this, R.id.details_subcounty, subcountiesList.toArray(new Subcounty[subcountiesList.size()])));
 
             adapter = new VillageArrayAdapter(this, android.R.layout.simple_spinner_item, villageData.toArray(new Village[villageData.size()]));
             villageSpinner.setAdapter(adapter);
@@ -72,9 +72,9 @@ public class CustomerForm extends Activity {
             subcountySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                    Long subcountyId = ((Subcounty)subcountySpinner.getSelectedItem()).getId();
+                    Long subcountyId = ((Subcounty) subcountySpinner.getSelectedItem()).getId();
                     List<Parish> parishList = parishDao.queryBuilder().where(ParishDao.Properties.SubCountyId.eq(subcountyId)).list();
-                    parishSpinner.setAdapter(new ParishArrayAdapter(getApplicationContext(),R.id.details_parish,parishList.toArray(new Parish[parishList.size()])));
+                    parishSpinner.setAdapter(new ParishArrayAdapter(getApplicationContext(), R.id.details_parish, parishList.toArray(new Parish[parishList.size()])));
 
                 }
 
@@ -86,9 +86,9 @@ public class CustomerForm extends Activity {
             parishSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    Long parishId = ((Parish)parishSpinner.getSelectedItem()).getId();
+                    Long parishId = ((Parish) parishSpinner.getSelectedItem()).getId();
                     List<Village> villageList = villageDao.queryBuilder().where(VillageDao.Properties.ParishId.eq(parishId)).list();
-                    villageSpinner.setAdapter(new VillageArrayAdapter(getApplicationContext(),R.id.details_village,villageList.toArray(new Village[villageList.size()])));
+                    villageSpinner.setAdapter(new VillageArrayAdapter(getApplicationContext(), R.id.details_village, villageList.toArray(new Village[villageList.size()])));
                 }
 
                 @Override
@@ -104,6 +104,8 @@ public class CustomerForm extends Activity {
                     boolean isSaved = saveCustomer();
                     if (isSaved) {
                         Toast.makeText(getApplicationContext(), "New Customer has been  successfully added!", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), CustomersMainActivity.class);
+                        startActivity(intent);
                     } else {
                         Toast.makeText(getApplicationContext(), "A problem Occured while saving a new Customer,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();
                     }
@@ -128,38 +130,38 @@ public class CustomerForm extends Activity {
             }
         });
 
-        Button newContactBtn = (Button)findViewById(R.id.menu_add_new_customer_contact);
+        Button newContactBtn = (Button) findViewById(R.id.menu_add_new_customer_contact);
         newContactBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LayoutInflater layoutInflater =  (LayoutInflater)CustomerForm.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View entryView = layoutInflater.inflate(R.layout.add_contact_layout,null);
+                LayoutInflater layoutInflater = (LayoutInflater) CustomerForm.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View entryView = layoutInflater.inflate(R.layout.add_contact_layout, null);
                 AlertDialog.Builder alert = new AlertDialog.Builder(CustomerForm.this);
-                alert.setIcon(R.drawable.icon).setTitle("New Contact").setView(entryView).setPositiveButton("Save",new DialogInterface.OnClickListener(){
+                alert.setIcon(R.drawable.icon).setTitle("New Contact").setView(entryView).setPositiveButton("Add", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int button) {
                         CustomerContact customerContact = new CustomerContact(null);
                         customerContact.setUuid(UUID.randomUUID().toString());
-                        customerContact.setTitle(((EditText)entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
-                        customerContact.setFirstName(((EditText)entryView.findViewById(R.id.customer_contact_firstname)).getText().toString());
-                        customerContact.setSurname(((EditText)entryView.findViewById(R.id.customer_contact_surname)).getText().toString());
-                        customerContact.setGender(((Spinner)entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
+                        customerContact.setTitle(((EditText) entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
+                        customerContact.setFirstName(((EditText) entryView.findViewById(R.id.customer_contact_firstname)).getText().toString());
+                        customerContact.setSurname(((EditText) entryView.findViewById(R.id.customer_contact_surname)).getText().toString());
+                        customerContact.setGender(((Spinner) entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
                         customerContact.setNetworkOrAssociation(Boolean.valueOf(((Spinner) entryView.findViewById(R.id.customer_contact_network)).getSelectedItem().toString()));
-                        customerContact.setQualification(((Spinner)entryView.findViewById(R.id.customer_contact_qualification)).getSelectedItem().toString());
-                        customerContact.setRole(((Spinner)entryView.findViewById(R.id.customer_contact_type)).getSelectedItem().toString());
+                        customerContact.setQualification(((Spinner) entryView.findViewById(R.id.customer_contact_qualification)).getSelectedItem().toString());
+                        customerContact.setRole(((Spinner) entryView.findViewById(R.id.customer_contact_type)).getSelectedItem().toString());
                         customerContacts.add(customerContact);
                         //add to parent form
-                        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.customer_contacts_layout);
+                        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.customer_contacts_layout);
 
                         TextView contactView = new TextView(CustomerForm.this);
-                        contactView.setText(customerContact.getFirstName()+":"+customerContact.getTitle());
+                        contactView.setText(customerContact.getFirstName() + ":" + customerContact.getTitle());
                         contactView.setTextSize(18);
                         contactView.setTextColor(Color.parseColor("#000000"));
                         linearLayout.addView(contactView);
 
                     }
-                }).setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int button) {
@@ -171,6 +173,7 @@ public class CustomerForm extends Activity {
         });
 //        setDateWidget();
         bindCustomerToUI();
+        setMandatoryFields();
     }
 
     private void initialiseGreenDao() {
@@ -185,7 +188,7 @@ public class CustomerForm extends Activity {
             customerContactDao = daoSession.getCustomerContactDao();
             villageDao = daoSession.getVillageDao();
         } catch (Exception ex) {
-            Log.d("Error=====================================",ex.getLocalizedMessage());
+            Log.d("Error=====================================", ex.getLocalizedMessage());
             Toast.makeText(getApplicationContext(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
@@ -286,9 +289,10 @@ public class CustomerForm extends Activity {
 
     private boolean saveCustomer() {
         boolean isSaved = false;
-        try{
+        try {
             if (customerInstance != null) {
                 bindUIToCustomer();
+                customerInstance.setIsDirty(true);
                 if (isNewCustomer()) {
                     Long customerId = customerDao.insert(customerInstance);
                     saveCustomerContacts(customerId);
@@ -297,7 +301,7 @@ public class CustomerForm extends Activity {
                 }
                 isSaved = true;
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             Toast.makeText(getApplicationContext(), "Error inserting Customer Data:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -325,10 +329,10 @@ public class CustomerForm extends Activity {
         }
     }
 
-    private void setSaveButtonText(Button saveCustomerBtn){
-        if(isNewCustomer()){
+    private void setSaveButtonText(Button saveCustomerBtn) {
+        if (isNewCustomer()) {
             saveCustomerBtn.setText("Add New Customer");
-        }else{
+        } else {
             saveCustomerBtn.setText("Update Customer");
         }
     }
@@ -339,8 +343,8 @@ public class CustomerForm extends Activity {
         spinner.setSelection(position);
     }
 
-    private void saveCustomerContacts(Long customerId){
-        for(CustomerContact customerContact:customerContacts){
+    private void saveCustomerContacts(Long customerId) {
+        for (CustomerContact customerContact : customerContacts) {
             customerContact.setCustomerId(customerId);
             customerContactDao.insert(customerContact);
         }
@@ -393,6 +397,26 @@ public class CustomerForm extends Activity {
             ((EditText) findViewById(R.id.details_date_outlet_opened)).setText(monthOfYear + "/" + dayOfMonth + "/" + year);
             datePickerDialog.hide();
         }
+    }
+
+    private void setMandatoryFields() {
+        Utils.setRequired((TextView) findViewById(R.id.detailsnameview));
+        Utils.setRequired((TextView) findViewById(R.id.details_outlet_type_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_size_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_subcounty_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_parish_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_village_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_desc_location_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_opening_hrs_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_date_outlet_opened_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_number_of_employees_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_turn_over_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_has_sister_branches_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_num_customers_per_day_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_sources_of_supply_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_restock_frequency_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_num_products_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.details_building_structure_lbl));
     }
 
 }

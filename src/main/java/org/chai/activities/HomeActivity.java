@@ -58,7 +58,7 @@ public class HomeActivity extends Activity {
 
             @Override
             public void onClick(View view) {
-                progressDialog.setMessage("Syncronising with Server:) ");
+                progressDialog.setMessage("Syncronising with Server...");
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 progressDialog.setIndeterminate(false);
                 progressDialog.setMax(100);
@@ -77,7 +77,7 @@ public class HomeActivity extends Activity {
     }
 
     public void open(View view){
-        progressDialog.setMessage("Downloading Music :) ");
+        progressDialog.setMessage("Syncronising with Server...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setIndeterminate(true);
         progressDialog.show();

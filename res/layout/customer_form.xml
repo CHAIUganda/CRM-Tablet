@@ -8,7 +8,7 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#f8f9fe">
+            android:background="@android:color/background_light">
 
         <LinearLayout
                 android:orientation="vertical"
@@ -40,6 +40,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/detailsnameview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Outlet Name:"
@@ -68,6 +69,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_outlet_type_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Outlet Type:"
@@ -90,6 +92,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_size_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Outlet Size:"
@@ -112,6 +115,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_licence_type_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Type of licence(Is the licence certificate visible in the outlet):"
@@ -160,6 +164,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_subcounty_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Subcounty:"
@@ -182,6 +187,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_parish_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Parish:"
@@ -203,6 +209,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_village_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/list_main_text_color"
@@ -225,6 +232,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_desc_location_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Description Of Outlet Location(please state landmark of key location point so you can find easily next time):"
@@ -277,6 +285,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_opening_hrs_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Opening days and hours:"
@@ -301,6 +310,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_date_outlet_opened_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="How long has this outlet ben open(years)"
@@ -327,6 +337,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_number_of_employees_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Number of employees who work at the outlet:"
@@ -354,6 +365,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_turn_over_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Estimated monthly turnover of outlet (UGX):"
@@ -381,6 +393,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_has_sister_branches_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Is this Outlet linked to any other branches?"
@@ -404,6 +417,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_num_customers_per_day_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="how many diarrhea patients under 5 years do you see a day?"
@@ -431,6 +445,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_sources_of_supply_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Where does the outlet source the majority of it's supply?"
@@ -508,9 +523,10 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_restock_frequency_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="How many times on average does the outlet stock up:"
+                        android:text="How many times on average does the outlet stock up(Per week):"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -535,6 +551,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_num_products_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Estimation of number of different products the retailer stock:"
@@ -562,6 +579,7 @@
                     android:padding="10dp">
 
                 <TextView
+                        android:id="@+id/details_building_structure_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Building Structure:"

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
+import de.greenrobot.dao.query.QueryBuilder;
 import org.chai.R;
 import org.chai.adapter.TaskListAdapter;
 import org.chai.model.DaoMaster;
@@ -24,6 +25,7 @@ import java.util.List;
  */
 public class TasksMainActivity extends Activity {
 
+    public final static String STATUS_NEW = "new", STATUS_COMPLETE = "complete",STATUS_CANCELLED = "cancelled";
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
@@ -85,15 +87,15 @@ public class TasksMainActivity extends Activity {
         listDataHeader.add("Scheduled");
 
         //query all new tasks
-        List<Task> newTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("new")).list();
-        List<Task> outstandingTasks = taskDao.queryBuilder().where(TaskDao.Properties.DueDate.lt(new Date())).list();
-        List<Task> scheduledTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("cancelled")).list();
+        List<Task> newTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq(STATUS_NEW)).list();
+        QueryBuilder<Task> taskQueryBuilder = taskDao.queryBuilder();
+        List<Task> outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()),TaskDao.Properties.Status.eq(STATUS_NEW)).list();
+        List<Task> scheduledTasks = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq(STATUS_CANCELLED)).list();
 
         taskList.put(listDataHeader.get(0), newTasks);
         taskList.put(listDataHeader.get(1), outstandingTasks);
         taskList.put(listDataHeader.get(2), scheduledTasks);
 
     }
-
 
 }

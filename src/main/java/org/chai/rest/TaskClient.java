@@ -3,6 +3,7 @@ package org.chai.rest;
 import android.util.Log;
 import org.chai.model.Customer;
 import org.chai.model.Task;
+import org.chai.util.ServerResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -25,17 +26,16 @@ public class TaskClient extends RestClient {
         return null;
     }
 
-    public void uploadTasks(Task[] tasks){
+    public boolean uploadTask(Task task) {
         try{
-            for(Task task:tasks){
-                RestTemplate restTemplate = getRestTemplate();
-                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-                HttpEntity<Task> httpEntity = new HttpEntity<Task>(task,getHeaders());
-                ResponseEntity<String> responseEntity = restTemplate.exchange(REST_URL + "task/update", HttpMethod.PUT,httpEntity, String.class);
-                Log.i("Rest post Response:","=============================================================================="+responseEntity.getBody());
-            }
+            RestTemplate restTemplate = getRestTemplate();
+            HttpEntity<Task> httpEntity = new HttpEntity<Task>(task,getHeaders());
+            ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "task/update", HttpMethod.PUT, httpEntity, ServerResponse.class);
+            Log.i("Rest Task post Response:", "==============================================================================" + responseEntity.getBody().getMessage());
+            return true;
         }catch (Exception ex){
             ex.printStackTrace();
         }
+        return false;
     }
 }

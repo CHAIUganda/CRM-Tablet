@@ -24,4 +24,5 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="savecalldata">Save Call Data</string>
+    <string name="delete_string">Delete</string>
 </resources>

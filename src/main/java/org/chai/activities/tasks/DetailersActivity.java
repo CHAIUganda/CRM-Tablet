@@ -2,6 +2,7 @@ package org.chai.activities.tasks;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import org.chai.R;
+import org.chai.activities.calls.CallsMainActivity;
 import org.chai.adapter.VillageArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.GPSTracker;
@@ -84,6 +86,8 @@ public class DetailersActivity extends Activity {
                 boolean isSaved = saveDetailerCall();
                 if (isSaved) {
                     Toast.makeText(getApplicationContext(), "Detailer Information has been  successfully added!", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), CallsMainActivity.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "A problem Occured while saving a new Detialer Information,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();
                 }
@@ -248,15 +252,17 @@ public class DetailersActivity extends Activity {
     private void bindDetailerCallToUi() {
         if (!isNewDetailerCall()) {
             Customer customer = detailerCall.getTask().getCustomer();
-            ((EditText) findViewById(R.id.detailer_survey_date)).setText(detailerCall.getDateOfSurvey().toString());
+            ((EditText) findViewById(R.id.detailer_survey_date)).setText(Utils.dateToString(detailerCall.getDateOfSurvey()));
             ((EditText) findViewById(R.id.detailer_name)).setText(customer.getOutletName());
             ((EditText) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
             ((EditText) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
             ((EditText) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
             ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
             CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
-            ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getFirstName());
-            ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact.getTitle());
+            if(keyCustomerContact!= null){
+                ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getFirstName());
+                ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact.getTitle());
+            }
             ((EditText) findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).setText(detailerCall.getDiarrheaPatientsInFacility() + "");
             ((EditText) findViewById(R.id.detailer_other_ways_youheard_about_zinc)).setText(detailerCall.getOtherWaysHowYouHeard());
             ((EditText) findViewById(R.id.detailers_howmany_in_stock_zinc)).setText(detailerCall.getHowManyZincInStock()+"");
@@ -320,14 +326,16 @@ public class DetailersActivity extends Activity {
 
     private boolean saveDetailerCall() {
         boolean isSaved = false;
-        bindUiToDetailerCall();
         try {
+            bindUiToDetailerCall();
             detailerCall.setTaskId(callDataTask.getId());
             if(isNewDetailerCall()){
                 detailerCallDao.insert(detailerCall);
             }else{
                 detailerCallDao.update(detailerCall);
             }
+            callDataTask.setStatus(TasksMainActivity.STATUS_COMPLETE);
+            taskDao.update(callDataTask);
             isSaved = true;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -345,7 +353,7 @@ public class DetailersActivity extends Activity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.call_details_edit, menu);
+        menuInflater.inflate(R.menu.new_customer_form_menu, menu);
         return true;
     }
 

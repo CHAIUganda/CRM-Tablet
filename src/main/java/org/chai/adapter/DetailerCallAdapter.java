@@ -58,10 +58,11 @@ public class DetailerCallAdapter extends BaseAdapter {
         TextView customerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
 
         DetailerCall detailerCall = detailerCalls.get(position);
-
-        taskDescription.setText(detailerCall.getTask().getDescription());
-        customerNameTxtView.setText(detailerCall.getTask().getCustomer().getOutletName());
-        customerLocationTxtView.setText(detailerCall.getTask().getCustomer().getDescriptionOfOutletLocation());
+        if(detailerCall!=null){
+            taskDescription.setText(detailerCall.getTask().getDescription());
+            customerNameTxtView.setText(detailerCall.getTask().getCustomer().getOutletName());
+            customerLocationTxtView.setText(detailerCall.getTask().getCustomer().getDescriptionOfOutletLocation());
+        }
         return convertView;
     }
 }
