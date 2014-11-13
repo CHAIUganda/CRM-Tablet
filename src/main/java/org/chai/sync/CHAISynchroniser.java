@@ -141,6 +141,7 @@ public class CHAISynchroniser {
     }
 
     public void downloadCustomers(){
+        progressDialog.setMessage("Downloading Customers..");
         Customer[] customers = customerClient.downloadCustomers();
         for(Customer customer:customers){
             Long id = customerDao.insert(customer);
@@ -156,6 +157,7 @@ public class CHAISynchroniser {
     }
 
     public void downloadTasks(){
+        progressDialog.setMessage("Downloading Tasks..");
         Task[] tasks = taskClient.downloadTasks();
         for(Task task:tasks){
             taskDao.insert(task);
@@ -165,7 +167,7 @@ public class CHAISynchroniser {
     public void uploadCustomers(){
         List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
         if(!customersList.isEmpty()){
-            progressDialog.setMessage("Uploading customers");
+            progressDialog.setMessage("Uploading Customers..");
             boolean uploaded = customerClient.uploadCustomers(customersList.toArray(new Customer[customersList.size()]));
             if (uploaded) {
                 customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).buildDelete();
@@ -174,6 +176,7 @@ public class CHAISynchroniser {
     }
 
     public void uploadTasks(){
+        progressDialog.setMessage("Uploading Tasks..");
         List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("complete")).list();
         for (Task task : taskList) {
             boolean uploaded = taskClient.uploadTask(task);
