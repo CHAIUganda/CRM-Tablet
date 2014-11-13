@@ -1,5 +1,6 @@
 package org.chai.sync;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class CHAISynchroniser {
 
-    private Context context;
+    private Activity parent;
     private ProgressDialog progressDialog;
     private Place place;
     private CustomerClient customerClient;
@@ -37,16 +38,16 @@ public class CHAISynchroniser {
     private TaskDao taskDao;
     private DetailerCallDao detailerCallDao;
 
-    public CHAISynchroniser(Context context) {
-        this.context = context;
+    public CHAISynchroniser(Activity activity) {
+        this.parent = activity;
         place = new Place();
         customerClient = new CustomerClient();
         productClient = new ProductClient();
         taskClient = new TaskClient();
         initialiseGreenDao();
     }
-    public CHAISynchroniser(Context context,ProgressDialog progressDialog){
-        this.context = context;
+    public CHAISynchroniser(Activity parent,ProgressDialog progressDialog){
+        this.parent = parent;
         this.progressDialog = progressDialog;
         place = new Place();
         customerClient = new CustomerClient();
@@ -57,7 +58,7 @@ public class CHAISynchroniser {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context, "chai-crm-db", null);
+            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(parent.getApplicationContext(), "chai-crm-db", null);
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
@@ -141,7 +142,7 @@ public class CHAISynchroniser {
     }
 
     public void downloadCustomers(){
-        progressDialog.setMessage("Downloading Customers..");
+        updatePropgress("Downloading Customers..");
         Customer[] customers = customerClient.downloadCustomers();
         for(Customer customer:customers){
             Long id = customerDao.insert(customer);
@@ -157,7 +158,7 @@ public class CHAISynchroniser {
     }
 
     public void downloadTasks(){
-        progressDialog.setMessage("Downloading Tasks..");
+        updatePropgress("Downloading Tasks..");
         Task[] tasks = taskClient.downloadTasks();
         for(Task task:tasks){
             taskDao.insert(task);
@@ -167,7 +168,7 @@ public class CHAISynchroniser {
     public void uploadCustomers(){
         List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
         if(!customersList.isEmpty()){
-            progressDialog.setMessage("Uploading Customers..");
+            updatePropgress("Uploading Customers..");
             boolean uploaded = customerClient.uploadCustomers(customersList.toArray(new Customer[customersList.size()]));
             if (uploaded) {
                 customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).buildDelete();
@@ -176,7 +177,7 @@ public class CHAISynchroniser {
     }
 
     public void uploadTasks(){
-        progressDialog.setMessage("Uploading Tasks..");
+        updatePropgress("Uploading Tasks..");
         List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("complete")).list();
         for (Task task : taskList) {
             boolean uploaded = taskClient.uploadTask(task);
@@ -185,6 +186,15 @@ public class CHAISynchroniser {
                 taskDao.delete(task);
             }
         }
+    }
+
+    private void updatePropgress(final String message){
+        parent.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.setMessage(message);
+            }
+        });
     }
 
 }

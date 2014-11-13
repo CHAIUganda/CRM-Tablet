@@ -75,11 +75,4 @@ public class HomeActivity extends Activity {
         });
 
     }
-
-    public void open(View view){
-        progressDialog.setMessage("Syncronising with Server...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setIndeterminate(true);
-        progressDialog.show();
-    }
 }
