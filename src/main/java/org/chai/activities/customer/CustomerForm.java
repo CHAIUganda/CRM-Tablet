@@ -290,7 +290,7 @@ public class CustomerForm extends Activity {
     private boolean saveCustomer() {
         boolean isSaved = false;
         try {
-            if (customerInstance != null) {
+            if (customerInstance != null && allMandatoryFieldsFilled()) {
                 bindUIToCustomer();
                 customerInstance.setIsDirty(true);
                 if (isNewCustomer()) {
@@ -303,9 +303,41 @@ public class CustomerForm extends Activity {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Error inserting Customer Data:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
         return isSaved;
+    }
+
+    private boolean allMandatoryFieldsFilled() {
+        if (((EditText) findViewById(R.id.detailsname)).getText().toString().equals("")) {
+            return false;
+        } else if (((Spinner) findViewById(R.id.details_outlet_type)).getSelectedItem().toString().equals("")) {
+            return false;
+        } else if (((Spinner) findViewById(R.id.details_size)).getSelectedItem().toString().equals("")) {
+            return false;
+        } else if (((EditText) findViewById(R.id.details_desc_location)).getText().toString().equals("")) {
+            return false;
+        } else if (((Spinner) findViewById(R.id.details_opening_hrs)).getSelectedItem().toString().equals("")) {
+            return false;
+        } else if (((EditText) findViewById(R.id.details_date_outlet_opened)).getText().toString().equals("")) {
+            return false;
+        } else if (((EditText) findViewById(R.id.details_number_of_employees)).getText().toString().equals("")) {
+            return false;
+        } else if (((EditText) findViewById(R.id.details_turn_over)).getText().toString().equals("")) {
+            return false;
+        }  else if (((Spinner) findViewById(R.id.details_has_sister_branches)).getSelectedItem().toString().equals("")) {
+            return false;
+        } else if (((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString().equals("")) {
+            return false;
+        } else if (((EditText) findViewById(R.id.details_sources_of_supply)).getText().toString().equals("")) {
+            return false;
+        } else if (((EditText) findViewById(R.id.details_restock_frequency)).getText().toString().equals("")) {
+            return false;
+        } else if (((EditText) findViewById(R.id.details_num_products)).getText().toString().equals("")) {
+            return false;
+        } else if (((Spinner) findViewById(R.id.details_building_structure)).getSelectedItem().toString().equals("")) {
+            return false;
+        }
+        return true;
     }
 
     private boolean isNewCustomer() {

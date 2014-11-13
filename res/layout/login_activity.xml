@@ -98,7 +98,7 @@
                     android:textSize="28dp"
                     android:singleLine="true"
                     android:textStyle="italic"
-                    />
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
 
@@ -131,7 +131,8 @@
                     android:textColor="@android:color/black"
                     android:textSize="28dp"
                     android:singleLine="true"
-                    android:textStyle="italic"/>
+                    android:textStyle="italic"
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
         <LinearLayout

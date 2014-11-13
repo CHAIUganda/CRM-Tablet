@@ -42,7 +42,8 @@
                     android:width="150dip"
                     android:height="40dip"
                     android:textColor="@color/list_main_text_color"
-                    android:background="@drawable/bordertextfield"/>
+                    android:background="@drawable/bordertextfield"
+                    android:textCursorDrawable="@null"/>
 
             <Button
                     android:id="@+id/detailer_survey_date_btn"
@@ -77,7 +78,8 @@
                     android:textStyle="italic"
                     android:text=""
                     android:singleLine="true"
-                    android:editable="false"/>
+                    android:editable="false"
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
 
@@ -104,7 +106,8 @@
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
                     android:singleLine="true"
-                    android:editable="false"/>
+                    android:editable="false"
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
 
@@ -131,7 +134,8 @@
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
                     android:singleLine="true"
-                    android:editable="false"/>
+                    android:editable="false"
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
 
@@ -158,7 +162,8 @@
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
                     android:singleLine="true"
-                    android:editable="false"/>
+                    android:editable="false"
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
 
@@ -185,7 +190,8 @@
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
                     android:singleLine="true"
-                    android:editable="false"/>
+                    android:editable="false"
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
 
@@ -212,7 +218,8 @@
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
                     android:singleLine="true"
-                    android:editable="false"/>
+                    android:editable="false"
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
 
@@ -233,7 +240,8 @@
                     android:height="40dip"
                     android:textColor="@color/list_main_text_color"
                     android:background="@drawable/bordertextfield"
-                    android:editable="false"/>
+                    android:editable="false"
+                    android:textCursorDrawable="@null"/>
 
             <Button
                     android:id="@+id/detailers_gps_btn"
@@ -266,7 +274,8 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null" />
 
         </LinearLayout>
 
@@ -292,7 +301,8 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null" />
 
         </LinearLayout>
 
@@ -320,7 +330,8 @@
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
                     android:singleLine="true"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
 
@@ -410,7 +421,8 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
 
@@ -588,7 +600,8 @@
                         android:textStyle="italic"
                         android:background="@drawable/bordertextfield"
                         android:singleLine="true"
-                        android:inputType="number"/>
+                        android:inputType="number"
+                        android:textCursorDrawable="@null"/>
 
             </LinearLayout>
 
@@ -616,7 +629,8 @@
                         android:textStyle="italic"
                         android:background="@drawable/bordertextfield"
                         android:singleLine="true"
-                        android:inputType="number"/>
+                        android:inputType="number"
+                        android:textCursorDrawable="@null"/>
 
             </LinearLayout>
 
@@ -644,7 +658,8 @@
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="italic"
                         android:background="@drawable/bordertextfield"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:textCursorDrawable="@null"/>
 
             </LinearLayout>
 
@@ -672,7 +687,8 @@
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="italic"
                         android:background="@drawable/bordertextfield"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:textCursorDrawable="@null"/>
 
             </LinearLayout>
 
@@ -701,7 +717,8 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
 
@@ -729,7 +746,8 @@
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
                     android:singleLine="true"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
 
@@ -755,7 +773,8 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null"/>
 
         </LinearLayout>
 
