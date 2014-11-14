@@ -48,7 +48,7 @@ public class DetailersActivity extends Activity {
     private TaskDao taskDao;
     private DetailerCallDao detailerCallDao;
 
-    private EditText subcountyTxt;
+    private TextView subcountyTxt;
     private VillageArrayAdapter adapter;
 
     private DetailerCall detailerCall;
@@ -72,13 +72,13 @@ public class DetailersActivity extends Activity {
             callDataTask = taskDao.loadDeep(taskId);
         }
         setDateWidget();
-        setGpsWidget();
         List<Village> villageData = villageDao.loadAll();
         Village[] villages = villageData.toArray(new Village[villageData.size()]);
-        subcountyTxt = (EditText) findViewById(R.id.detailer_subcounty);
+        subcountyTxt = (TextView) findViewById(R.id.detailer_subcounty);
 
         manageDoyouStockZincResponses();
         manageHowDidyouHearOtherOption();
+        manageHaveYouHeardAboutDiarheaTreatment();
 
         Button saveDetailetCallBtn = (Button) findViewById(R.id.detailer_submit_btn);
         saveDetailetCallBtn.setOnClickListener(new View.OnClickListener() {
@@ -158,24 +158,6 @@ public class DetailersActivity extends Activity {
         }
     }
 
-    private void setGpsWidget() {
-        Button showGps = (Button) findViewById(R.id.detailers_gps_btn);
-        showGps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gpsTracker = new GPSTracker(DetailersActivity.this);
-                if (gpsTracker.canGetLocation()) {
-                    capturedLatitude = gpsTracker.getLatitude();
-                    capturedLongitude = gpsTracker.getLongitude();
-                    EditText detailsGps = (EditText) findViewById(R.id.detailers_gps_text);
-                    detailsGps.setText(capturedLatitude + "," + capturedLongitude);
-                } else {
-                    gpsTracker.showSettingsAlert();
-                }
-            }
-        });
-    }
-
     private void manageDoyouStockZincResponses() {
         final Spinner spinner = (Spinner) findViewById(R.id.detailer_do_you_stock_zinc);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -190,6 +172,27 @@ public class DetailersActivity extends Activity {
                 } else {
                     stockfieldsLayout.setVisibility(View.VISIBLE);
                     ifnowhyLayout.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void  manageHaveYouHeardAboutDiarheaTreatment(){
+        final Spinner spinner = (Spinner) findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                String selected = (String) spinner.getAdapter().getItem(position);
+                LinearLayout howdidYouHearAboutTreatment = (LinearLayout) findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors_layout);
+                if ("No".equalsIgnoreCase(selected)) {
+                    howdidYouHearAboutTreatment.setVisibility(View.GONE);
+                } else {
+                    howdidYouHearAboutTreatment.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -230,10 +233,13 @@ public class DetailersActivity extends Activity {
         detailerCall.setDateOfSurvey(new Date());
         detailerCall.setDiarrheaPatientsInFacility(Integer.parseInt(((EditText) findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).getText().toString()));
         detailerCall.setOtherWaysHowYouHeard(((EditText) findViewById(R.id.detailer_other_ways_youheard_about_zinc)).getText().toString());
-        detailerCall.setHowManyZincInStock(Integer.parseInt(((EditText) findViewById(R.id.detailers_howmany_in_stock_zinc)).getText().toString()));
-        detailerCall.setHowmanyOrsInStock(Integer.parseInt(((EditText) findViewById(R.id.detailers_howmany_in_stock_ors)).getText().toString()));
-        detailerCall.setZincBrandsold(((EditText) findViewById(R.id.detailers_brand_sold_zinc)).getText().toString());
-        detailerCall.setOrsBrandSold(((EditText) findViewById(R.id.detailers_brand_sold_ors)).getText().toString());
+        if (((Spinner) findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString().equals("Yes")) {
+            detailerCall.setHowManyZincInStock(Integer.parseInt(((EditText) findViewById(R.id.detailers_howmany_in_stock_zinc)).getText().toString()));
+            detailerCall.setHowmanyOrsInStock(Integer.parseInt(((EditText) findViewById(R.id.detailers_howmany_in_stock_ors)).getText().toString()));
+            detailerCall.setZincBrandsold(((EditText) findViewById(R.id.detailers_brand_sold_zinc)).getText().toString());
+            detailerCall.setOrsBrandSold(((EditText) findViewById(R.id.detailers_brand_sold_ors)).getText().toString());
+        }
+
         detailerCall.setIfNoWhy(((EditText) findViewById(R.id.detailer_if_no_why)).getText().toString());
         detailerCall.setBuyingPrice(Double.parseDouble(((EditText) findViewById(R.id.detailer_whatpricedoyoubuy)).getText().toString()));
         detailerCall.setPointOfsaleMaterial(((EditText) findViewById(R.id.detailer_point_of_sale)).getText().toString());
@@ -254,11 +260,13 @@ public class DetailersActivity extends Activity {
         if (!isNewDetailerCall()) {
             Customer customer = detailerCall.getTask().getCustomer();
             ((EditText) findViewById(R.id.detailer_survey_date)).setText(Utils.dateToString(detailerCall.getDateOfSurvey()));
-            ((EditText) findViewById(R.id.detailer_name)).setText(customer.getOutletName());
-            ((EditText) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
-            ((EditText) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
-            ((EditText) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
-            ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
+            ((TextView) findViewById(R.id.detailer_name)).setText(customer.getOutletName());
+            ((TextView) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
+            ((TextView) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
+            ((TextView) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
+            ((TextView) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
+            ((TextView) findViewById(R.id.detailer_subcounty)).setText(customer.getVillage().getParish().getSubcounty().getName());
+            ((TextView) findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
             CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
             if(keyCustomerContact!= null){
                 ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getFirstName());
@@ -274,8 +282,6 @@ public class DetailersActivity extends Activity {
             ((EditText) findViewById(R.id.detailer_whatpricedoyoubuy)).setText(detailerCall.getBuyingPrice() + "");
 //            ((EditText) findViewById(R.id.detailer_action)).setText(detailerCall.getAction());
             ((EditText) findViewById(R.id.detailer_point_of_sale)).setText(detailerCall.getPointOfsaleMaterial());
-            ((EditText) findViewById(R.id.detailer_subcounty)).setText(customer.getVillage().getParish().getSubcounty().getName());
-            ((EditText) findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
 
             //spinners
 
@@ -310,13 +316,13 @@ public class DetailersActivity extends Activity {
             ((EditText) findViewById(R.id.detailer_survey_date)).setText(calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.YEAR));
             Customer customer = callDataTask.getCustomer();
             if(customer!=null){
-                ((EditText) findViewById(R.id.detailer_subcounty)).setText(customer.getVillage().getParish().getSubcounty().getName());
-                ((EditText) findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
-                ((EditText) findViewById(R.id.detailer_name)).setText(customer.getOutletName());
-                ((EditText) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
-                ((EditText) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
-                ((EditText) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
-                ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
+                ((TextView) findViewById(R.id.detailer_subcounty)).setText(customer.getVillage().getParish().getSubcounty().getName());
+                ((TextView) findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
+                ((TextView) findViewById(R.id.detailer_name)).setText(customer.getOutletName());
+                ((TextView) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
+                ((TextView) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
+                ((TextView) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
+                ((TextView) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
                 CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
                 ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getFirstName():"");
                 ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getTitle():"");

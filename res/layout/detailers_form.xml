@@ -67,19 +67,12 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
-            <EditText
+            <TextView
                     android:id="@+id/detailer_name"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:background="@drawable/bordertextfield"
-                    android:textStyle="italic"
                     android:text=""
-                    android:singleLine="true"
-                    android:editable="false"
-                    android:textCursorDrawable="@null"/>
+                    android:textColor="@color/list_main_text_color"/>
 
         </LinearLayout>
 
@@ -96,18 +89,12 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
-            <EditText
+            <TextView
                     android:id="@+id/detailer_outlet_size"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:editable="false"
-                    android:textCursorDrawable="@null"/>
+                    android:text=""
+                    android:textColor="@color/list_main_text_color"/>
 
         </LinearLayout>
 
@@ -124,18 +111,12 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
-            <EditText
+            <TextView
                     android:id="@+id/detailer_desc_location"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:editable="false"
-                    android:textCursorDrawable="@null"/>
+                    android:text=""
+                    android:textColor="@color/list_main_text_color"/>
 
         </LinearLayout>
 
@@ -152,18 +133,12 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
-            <EditText
+            <TextView
                     android:id="@+id/detailer_subcounty"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:editable="false"
-                    android:textCursorDrawable="@null"/>
+                    android:text=""
+                    android:textColor="@color/list_main_text_color"/>
 
         </LinearLayout>
 
@@ -180,18 +155,12 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
-            <EditText
+            <TextView
                     android:id="@+id/detailer_parish"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:editable="false"
-                    android:textCursorDrawable="@null"/>
+                    android:text=""
+                    android:textColor="@color/list_main_text_color"/>
 
         </LinearLayout>
 
@@ -208,18 +177,12 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
-            <EditText
+            <TextView
                     android:id="@+id/detailer_village"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:editable="false"
-                    android:textCursorDrawable="@null"/>
+                    android:text=""
+                    android:textColor="@color/list_main_text_color"/>
 
         </LinearLayout>
 
@@ -229,27 +192,18 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp">
 
-            <EditText
-                    android:id="@+id/detailers_gps_text"
-                    android:text=""
-                    android:minWidth="90dip"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:width="150dip"
-                    android:height="40dip"
-                    android:textColor="@color/list_main_text_color"
-                    android:background="@drawable/bordertextfield"
-                    android:editable="false"
-                    android:textCursorDrawable="@null"/>
-
-            <Button
-                    android:id="@+id/detailers_gps_btn"
-                    android:text="Record GPS Coordinates"
-                    android:layout_height="wrap_content"
+            <TextView
                     android:layout_width="wrap_content"
-                    android:background="#428bca"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_height="wrap_content"
+                    android:text="GPS Location:"
+                    android:textColor="@color/list_main_text_color"/>
+
+            <TextView
+                    android:id="@+id/detailers_gps_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/list_main_text_color"/>
         </LinearLayout>
 
         <LinearLayout
@@ -374,6 +328,7 @@
         </LinearLayout>
 
         <LinearLayout
+                android:id="@+id/detailer_how_did_you_hearabout_zinc_ors_layout"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
