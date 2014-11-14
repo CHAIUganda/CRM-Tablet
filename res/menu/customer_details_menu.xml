@@ -11,4 +11,10 @@
             android:icon="@drawable/nearby_icon"
             android:title="Mark as Inactive"/>
 
+    <item
+            android:id="@+id/details_home"
+            android:icon="@drawable/home_icon"
+            android:title="Home"
+            android:showAsAction="ifRoom"/>
+
 </menu>

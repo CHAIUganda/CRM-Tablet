@@ -17,11 +17,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import org.chai.R;
+import org.chai.activities.HomeActivity;
 import org.chai.adapter.CustomerAdapter;
 import org.chai.model.Customer;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
+import org.chai.rest.RestClient;
 import org.chai.util.SampleData;
 
 import java.util.ArrayList;
@@ -121,6 +123,9 @@ public class CustomersMainActivity extends Activity {
                 return true;
             case R.id.menu_nearby_customer:
                 return true;
+            case R.id.customer_list_home:
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(i);
             default:
                 return super.onOptionsItemSelected(menuItem);
         }

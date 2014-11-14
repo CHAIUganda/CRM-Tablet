@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import org.chai.R;
+import org.chai.activities.HomeActivity;
 import org.chai.activities.calls.CallsMainActivity;
 import org.chai.adapter.VillageArrayAdapter;
 import org.chai.model.*;
@@ -359,7 +360,9 @@ public class DetailersActivity extends Activity {
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.call_details_edit:
+            case R.id.customer_form_home:
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(i);
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);

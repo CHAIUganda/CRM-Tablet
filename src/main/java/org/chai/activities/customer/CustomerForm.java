@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import org.chai.R;
+import org.chai.activities.HomeActivity;
 import org.chai.adapter.ParishArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.adapter.VillageArrayAdapter;
@@ -201,12 +202,9 @@ public class CustomerForm extends Activity {
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.menu_add_new_customer:
-                boolean isSaved = saveCustomer();
-                if (isSaved) {
-                    Intent intent = new Intent(getApplicationContext(), CustomersMainActivity.class);
-                    startActivity(intent);
-                }
+            case R.id.customer_form_home:
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(i);
             default:
                 return super.onOptionsItemSelected(menuItem);
         }

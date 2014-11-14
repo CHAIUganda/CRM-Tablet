@@ -101,6 +101,7 @@ public class CHAISynchroniser {
     }
 
     public void downloadRegions() {
+        updatePropgress("Downloading Regions...");
         Region[] regions = place.downloadRegions();
         if (regions != null) {
             for (Region region : regions) {
@@ -177,8 +178,10 @@ public class CHAISynchroniser {
     }
 
     public void uploadTasks(){
-        updatePropgress("Uploading Tasks..");
         List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("complete")).list();
+        if(!taskList.isEmpty()){
+            updatePropgress("Uploading Tasks..");
+        }
         for (Task task : taskList) {
             boolean uploaded = taskClient.uploadTask(task);
             if (uploaded) {

@@ -10,4 +10,10 @@
                 android:id="@+id/menu_nearby_customer"
                 android:icon="@drawable/nearby_icon"
                 android:title="Find Nearby Customers"/>
+
+    <item
+            android:id="@+id/customer_list_home"
+            android:icon="@drawable/home_icon"
+            android:title="Home"
+            android:showAsAction="ifRoom"/>
 </menu>
