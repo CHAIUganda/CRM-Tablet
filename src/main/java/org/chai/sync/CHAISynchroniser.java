@@ -112,6 +112,7 @@ public class CHAISynchroniser {
     }
 
     public void downloadDistricts() {
+        updatePropgress("Downloading Districts...");
         District[] districts = place.downloadDistricts();
         for (District district : districts) {
             districtDao.insert(district);
@@ -120,6 +121,7 @@ public class CHAISynchroniser {
     }
 
     public void downloadSubcounties() {
+        updatePropgress("Downloading Subcounties...");
         Subcounty[] subcounties = place.downloadSubcounties();
         for (Subcounty subcounty : subcounties) {
              subcountyDao.insert(subcounty);
@@ -128,6 +130,7 @@ public class CHAISynchroniser {
     }
 
     public void downloadParishes() {
+        updatePropgress("Downloading Parishes...");
         Parish[] parishes = place.downloadParishes();
         for (Parish parish : parishes) {
             parishDao.insert(parish);
@@ -136,6 +139,7 @@ public class CHAISynchroniser {
     }
 
     public void downloadVillage() {
+        updatePropgress("Downloading Villages...");
         Village[] villages = place.downloadVillages();
         for (Village village : villages) {
             villageDao.insert(village);
