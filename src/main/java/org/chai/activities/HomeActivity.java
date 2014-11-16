@@ -17,7 +17,6 @@ import org.chai.sync.CHAISynchroniser;
  */
 public class HomeActivity extends Activity {
 
-    private ProgressDialog progressDialog;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard_layout);
@@ -25,7 +24,6 @@ public class HomeActivity extends Activity {
         Button btnCustomers = (Button)findViewById(R.id.btn_customers);
         Button btnCallsData = (Button)findViewById(R.id.btn_calls);
         Button btnSyncronise = (Button)findViewById(R.id.btn_sync);
-        progressDialog = new ProgressDialog(this);
 
         btnTasks.setOnClickListener(new View.OnClickListener(){
 
@@ -58,10 +56,12 @@ public class HomeActivity extends Activity {
 
             @Override
             public void onClick(View view) {
+                final ProgressDialog progressDialog  = new ProgressDialog(HomeActivity.this);
                 progressDialog.setMessage("Syncronising with Server...");
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 progressDialog.setIndeterminate(false);
                 progressDialog.setMax(100);
+                progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
                 new Thread(new Runnable() {
                     @Override

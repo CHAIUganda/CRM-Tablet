@@ -187,26 +187,6 @@
         </LinearLayout>
 
         <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="GPS Location:"
-                    android:textColor="@color/list_main_text_color"/>
-
-            <TextView
-                    android:id="@+id/detailers_gps_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/list_main_text_color"/>
-        </LinearLayout>
-
-        <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -219,17 +199,12 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
-            <EditText
+            <TextView
                     android:id="@+id/detailer_key_retailer_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:textCursorDrawable="@null" />
+                    android:text=""
+                    android:textColor="@color/list_main_text_color"/>
 
         </LinearLayout>
 
@@ -246,18 +221,42 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
-            <EditText
+            <TextView
                     android:id="@+id/detailer_key_retailer_contact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/list_main_text_color"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <EditText
+                    android:id="@+id/detailers_gps_text"
+                    android:text=""
+                    android:minWidth="90dip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
+                    android:layout_weight="1"
+                    android:width="150dip"
+                    android:height="40dip"
                     android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
                     android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:textCursorDrawable="@null" />
+                    android:editable="false"
+                    android:textCursorDrawable="@null"/>
 
+            <Button
+                    android:id="@+id/detailers_gps_btn"
+                    android:text="Record GPS Coordinates"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="#428bca"
+                    android:layout_marginLeft="5dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -511,7 +510,7 @@
                     android:id="@+id/detailer_do_you_stock_zinc_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Do you stock ORS and zinc"
+                    android:text="9.Do you stock ORS and zinc"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -541,7 +540,7 @@
                         android:id="@+id/detailers_howmany_in_stock_zinc_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="If Yes, Check how many are in stock(Zinc):"
+                        android:text="10.If Yes, Check how many are in stock(Zinc):"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -570,7 +569,7 @@
                         android:id="@+id/detailers_howmany_in_stock_ors_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="If Yes, Check how many are in stock(ORS):"
+                        android:text="11.If Yes, Check how many are in stock(ORS):"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -600,7 +599,7 @@
                         android:id="@+id/detailers_brand_sold_zinc_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Note the brands sold(Zinc):"
+                        android:text="12.Note the brands sold(Zinc):"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -629,7 +628,7 @@
                         android:id="@+id/detailers_brand_sold_ors_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Note the brands sold(ORS):"
+                        android:text="13.Note the brands sold(ORS):"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -659,7 +658,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="If No, why?"
+                    android:text="14.If No, why?"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -687,7 +686,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="What price do you buy"
+                    android:text="15.What price do you buy"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -715,7 +714,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Point of sale materials"
+                    android:text="16.Point of sale materials"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -743,7 +742,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="What did you recommend as next steps for the retailer"
+                    android:text="17.What did you recommend as next steps for the retailer"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -766,7 +765,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="What recommendation level would you give the customer"
+                    android:text="18.What recommendation level would you give the customer"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 

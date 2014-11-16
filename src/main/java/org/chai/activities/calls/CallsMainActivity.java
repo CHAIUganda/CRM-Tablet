@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import org.chai.R;
+import org.chai.activities.HomeActivity;
 import org.chai.activities.customer.CustomerForm;
 import org.chai.activities.tasks.DetailersActivity;
 import org.chai.adapter.DetailerCallAdapter;
@@ -51,8 +52,12 @@ public class CallsMainActivity extends Activity {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                DetailerCall itemAtPosition = (DetailerCall) adapterView.getItemAtPosition(position);
-                goToDetailerForm(itemAtPosition);
+                try{
+                    DetailerCall itemAtPosition = (DetailerCall) adapterView.getItemAtPosition(position);
+                    goToDetailerForm(itemAtPosition);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         });
         registerForContextMenu(findViewById(R.id.callslistview));
@@ -113,6 +118,24 @@ public class CallsMainActivity extends Activity {
         }
         return super.onContextItemSelected(menuItem);
     }
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.new_customer_form_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.customer_form_home:
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(i);
+            default:
+                return super.onOptionsItemSelected(menuItem);
+        }
+    }
+
 
     @Override
     public void  onRestart(){

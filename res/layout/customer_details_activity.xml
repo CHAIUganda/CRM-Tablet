@@ -89,6 +89,102 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="District:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_district"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text="byaruhanga Drug shop"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Subcounty:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_subcounty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text="byaruhanga Drug shop"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Parish:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_parish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text="byaruhanga Drug shop"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Village:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_village"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text="byaruhanga Drug shop"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Date Outlet Opened:"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
@@ -457,30 +553,6 @@
 
                 <TextView
                         android:id="@+id/customer_profile_turn_over"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:text="byaruhanga Drug shop"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Village:"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="bold"/>
-
-                <TextView
-                        android:id="@+id/customer_profile_subcounty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"

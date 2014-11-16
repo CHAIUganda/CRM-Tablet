@@ -2,7 +2,6 @@ package org.chai.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
@@ -33,16 +32,12 @@ public class Task {
     private long customerId;
 
     /** Used to resolve relations */
-    @JsonIgnore
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    @JsonIgnore
     private transient TaskDao myDao;
 
-    @JsonIgnore
     private Customer customer;
-    @JsonIgnore
     private Long customer__resolvedKey;
 
     private List<DetailerCall> detailers;

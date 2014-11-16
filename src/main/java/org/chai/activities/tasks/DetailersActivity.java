@@ -72,6 +72,7 @@ public class DetailersActivity extends Activity {
             callDataTask = taskDao.loadDeep(taskId);
         }
         setDateWidget();
+        setGpsWidget();
         List<Village> villageData = villageDao.loadAll();
         Village[] villages = villageData.toArray(new Village[villageData.size()]);
         subcountyTxt = (TextView) findViewById(R.id.detailer_subcounty);
@@ -147,6 +148,24 @@ public class DetailersActivity extends Activity {
             }
         });
     }
+
+    private void setGpsWidget() {
+                Button showGps = (Button) findViewById(R.id.detailers_gps_btn);
+                showGps.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                                gpsTracker = new GPSTracker(DetailersActivity.this);
+                                if (gpsTracker.canGetLocation()) {
+                                        capturedLatitude = gpsTracker.getLatitude();
+                                        capturedLongitude = gpsTracker.getLongitude();
+                                        EditText detailsGps = (EditText) findViewById(R.id.detailers_gps_text);
+                                        detailsGps.setText(capturedLatitude + "," + capturedLongitude);
+                                    } else {
+                                        gpsTracker.showSettingsAlert();
+                                    }
+                            }
+                    });
+            }
 
     private class PickDate implements DatePickerDialog.OnDateSetListener {
         @Override
@@ -254,6 +273,9 @@ public class DetailersActivity extends Activity {
         String stocksZinc = ((Spinner) findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString();
         detailerCall.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
         detailerCall.setRecommendationLevel(((Spinner) findViewById(R.id.detailer_recommendation_level)).getSelectedItem().toString());
+        detailerCall.setKnowledgeAbtZincAndUsage(((Spinner) findViewById(R.id.detailer_how_zinc_should_be_used)).getSelectedItem().toString());
+        detailerCall.setLatitude(capturedLatitude);
+        detailerCall.setLongitude(capturedLongitude);
     }
 
     private void bindDetailerCallToUi() {
@@ -264,14 +286,14 @@ public class DetailersActivity extends Activity {
             ((TextView) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
             ((TextView) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
             ((TextView) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
-            ((TextView) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
             ((TextView) findViewById(R.id.detailer_subcounty)).setText(customer.getVillage().getParish().getSubcounty().getName());
             ((TextView) findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
             CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
             if(keyCustomerContact!= null){
-                ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getFirstName());
-                ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact.getTitle());
+                ((TextView) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getFirstName());
+                ((TextView) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact.getTitle());
             }
+            ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
             ((EditText) findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).setText(detailerCall.getDiarrheaPatientsInFacility() + "");
             ((EditText) findViewById(R.id.detailer_other_ways_youheard_about_zinc)).setText(detailerCall.getOtherWaysHowYouHeard());
             ((EditText) findViewById(R.id.detailers_howmany_in_stock_zinc)).setText(detailerCall.getHowManyZincInStock()+"");
@@ -282,6 +304,7 @@ public class DetailersActivity extends Activity {
             ((EditText) findViewById(R.id.detailer_whatpricedoyoubuy)).setText(detailerCall.getBuyingPrice() + "");
 //            ((EditText) findViewById(R.id.detailer_action)).setText(detailerCall.getAction());
             ((EditText) findViewById(R.id.detailer_point_of_sale)).setText(detailerCall.getPointOfsaleMaterial());
+            ((EditText)findViewById(R.id.detailers_gps_text)).setText(detailerCall.getLatitude() == null ? "0.0,0.0" : detailerCall.getLatitude() + ","+detailerCall.getLongitude());
 
             //spinners
 
@@ -311,6 +334,9 @@ public class DetailersActivity extends Activity {
 
             Spinner recommendationSpinner = (Spinner) findViewById(R.id.detailer_recommendation_level);
             Utils.setSpinnerSelection(recommendationSpinner, detailerCall.getRecommendationLevel());
+
+            Spinner whatdoyouknowAboutZinc = (Spinner)findViewById(R.id.detailer_how_zinc_should_be_used);
+            Utils.setSpinnerSelection(whatdoyouknowAboutZinc,detailerCall.getKnowledgeAbtZincAndUsage());
         }else{
             Calendar calendar = Calendar.getInstance();
             ((EditText) findViewById(R.id.detailer_survey_date)).setText(calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.YEAR));
@@ -322,10 +348,10 @@ public class DetailersActivity extends Activity {
                 ((TextView) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
                 ((TextView) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
                 ((TextView) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
-                ((TextView) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
+                ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
                 CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
-                ((EditText) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getFirstName():"");
-                ((EditText) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getTitle():"");
+                ((TextView) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getFirstName():"");
+                ((TextView) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getTitle():"");
             }
         }
         setRequiredFields();

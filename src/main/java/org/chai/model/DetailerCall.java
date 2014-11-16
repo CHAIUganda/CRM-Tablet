@@ -41,6 +41,8 @@ public class DetailerCall {
     private String recommendationNextStep;
     private String recommendationLevel;
     private Integer tenureLength;
+    private Double latitude;
+    private Double longitude;
     private long taskId;
 
     /** Used to resolve relations */
@@ -67,7 +69,7 @@ public class DetailerCall {
         this.id = id;
     }
 
-    public DetailerCall(Long id, String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPrice, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, long taskId) {
+    public DetailerCall(Long id, String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPrice, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, long taskId) {
         this.id = id;
         this.uuid = uuid;
         this.dateOfSurvey = dateOfSurvey;
@@ -93,6 +95,8 @@ public class DetailerCall {
         this.recommendationNextStep = recommendationNextStep;
         this.recommendationLevel = recommendationLevel;
         this.tenureLength = tenureLength;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.taskId = taskId;
     }
 
@@ -302,6 +306,22 @@ public class DetailerCall {
 
     public void setTenureLength(Integer tenureLength) {
         this.tenureLength = tenureLength;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public long getTaskId() {
