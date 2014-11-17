@@ -1,7 +1,9 @@
 package org.chai.activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,12 +11,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import org.chai.R;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
+import org.chai.model.User;
+import org.chai.model.UserDao;
 import org.chai.rest.Place;
 import org.chai.rest.RestClient;
+import org.chai.util.Utils;
+
+import java.util.List;
+import java.util.UUID;
 
 public class LoginActivity extends Activity {
 
     private static String TAG = "chai-crm-android";
+    private SQLiteDatabase db;
+    private DaoMaster daoMaster;
+    private DaoSession daoSession;
+    private UserDao userDao;
 
     /**
      * Called when the activity is first created.
@@ -27,7 +41,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
 		Log.i(TAG, "onCreate");
         setContentView(R.layout.login_activity);
-
+        initialiseGreenDao();
         //create initial data incase there is none
       /*  SampleData sampleData = new SampleData(this);
         sampleData.createBaseData();
@@ -36,21 +50,37 @@ public class LoginActivity extends Activity {
         Button loginBtn = (Button)findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-
+                final ProgressDialog dialog = showProgressDialog();
                 final String user = ((EditText) findViewById(R.id.userTxt)).getText().toString();
                 final String pass = ((EditText) findViewById(R.id.passwordTxt)).getText().toString();
                 final Place place = new Place();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        boolean islogin = place.login(user, pass);
-
-                        if (islogin) {
-                            Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                            RestClient.userName = user;
-                            RestClient.password = pass;
-                            startActivity(i);
+                        boolean islogin = false;
+                        //check ofline login
+                        List<User> loggedInUser = userDao.queryBuilder().where(UserDao.Properties.Username.eq(user), UserDao.Properties.Password.eq(Utils.encrypeString(pass))).list();
+                        if (loggedInUser.isEmpty()) {
+                            //ensure we dont have more than one user on one tablet
+                            if (userDao.loadAll().isEmpty()) {
+                                islogin = place.login(user, pass);
+                                //add this user to offline db
+                                if (islogin) {
+                                    User newUser = new User(null);
+                                    newUser.setUuid(UUID.randomUUID().toString());
+                                    newUser.setUsername(user);
+                                    newUser.setPassword(Utils.encrypeString(pass));
+                                    userDao.insert(newUser);
+                                }
+                            }
                         } else {
+                            islogin = true;
+                        }
+                        if (islogin) {
+                            dialog.dismiss();
+                            onLoginSuccessfull(user, pass);
+                        } else {
+                            dialog.dismiss();
                             LoginActivity.this.runOnUiThread(
                                     new Runnable() {
                                         @Override
@@ -63,11 +93,40 @@ public class LoginActivity extends Activity {
                         }
                     }
                 }).start();
-
-
             }
         });
     }
+
+    private ProgressDialog showProgressDialog() {
+        final ProgressDialog progressDialog  = new ProgressDialog(LoginActivity.this);
+        progressDialog.setMessage("Logging in,Please wait...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+        return progressDialog;
+    }
+
+    private void onLoginSuccessfull(String user, String pass) {
+        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+        RestClient.userName = user;
+        RestClient.password = pass;
+        startActivity(i);
+    }
+
+
+    private void initialiseGreenDao() {
+        try {
+            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "chai-crm-db", null);
+            db = helper.getWritableDatabase();
+            daoMaster = new DaoMaster(db);
+            daoSession = daoMaster.newSession();
+            userDao = daoSession.getUserDao();
+        } catch (Exception ex) {
+            Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
 
 }
 
