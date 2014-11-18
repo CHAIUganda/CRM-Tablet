@@ -36,10 +36,9 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         public final static Property Gender = new Property(5, String.class, "gender", false, "GENDER");
         public final static Property NetworkOrAssociation = new Property(6, Boolean.class, "networkOrAssociation", false, "NETWORK_OR_ASSOCIATION");
         public final static Property Role = new Property(7, String.class, "role", false, "ROLE");
-        public final static Property Qualification = new Property(8, String.class, "qualification", false, "QUALIFICATION");
-        public final static Property DateCreated = new Property(9, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
-        public final static Property LastUpdated = new Property(10, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
-        public final static Property CustomerId = new Property(11, long.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property DateCreated = new Property(8, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(9, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
+        public final static Property CustomerId = new Property(10, long.class, "customerId", false, "CUSTOMER_ID");
     };
 
     private DaoSession daoSession;
@@ -67,10 +66,9 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
                 "'GENDER' TEXT," + // 5: gender
                 "'NETWORK_OR_ASSOCIATION' INTEGER," + // 6: networkOrAssociation
                 "'ROLE' TEXT," + // 7: role
-                "'QUALIFICATION' TEXT," + // 8: qualification
-                "'DATE_CREATED' INTEGER," + // 9: dateCreated
-                "'LAST_UPDATED' INTEGER," + // 10: lastUpdated
-                "'CUSTOMER_ID' INTEGER NOT NULL );"); // 11: customerId
+                "'DATE_CREATED' INTEGER," + // 8: dateCreated
+                "'LAST_UPDATED' INTEGER," + // 9: lastUpdated
+                "'CUSTOMER_ID' INTEGER NOT NULL );"); // 10: customerId
     }
 
     /** Drops the underlying database table. */
@@ -120,21 +118,16 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
             stmt.bindString(8, role);
         }
  
-        String qualification = entity.getQualification();
-        if (qualification != null) {
-            stmt.bindString(9, qualification);
-        }
- 
         java.util.Date dateCreated = entity.getDateCreated();
         if (dateCreated != null) {
-            stmt.bindLong(10, dateCreated.getTime());
+            stmt.bindLong(9, dateCreated.getTime());
         }
  
         java.util.Date lastUpdated = entity.getLastUpdated();
         if (lastUpdated != null) {
-            stmt.bindLong(11, lastUpdated.getTime());
+            stmt.bindLong(10, lastUpdated.getTime());
         }
-        stmt.bindLong(12, entity.getCustomerId());
+        stmt.bindLong(11, entity.getCustomerId());
     }
 
     @Override
@@ -161,10 +154,9 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // gender
             cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0, // networkOrAssociation
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // role
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // qualification
-            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // dateCreated
-            cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)), // lastUpdated
-            cursor.getLong(offset + 11) // customerId
+            cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // dateCreated
+            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // lastUpdated
+            cursor.getLong(offset + 10) // customerId
         );
         return entity;
     }
@@ -180,10 +172,9 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         entity.setGender(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setNetworkOrAssociation(cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0);
         entity.setRole(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setQualification(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setDateCreated(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
-        entity.setLastUpdated(cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)));
-        entity.setCustomerId(cursor.getLong(offset + 11));
+        entity.setDateCreated(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
+        entity.setLastUpdated(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setCustomerId(cursor.getLong(offset + 10));
      }
     
     /** @inheritdoc */

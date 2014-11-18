@@ -114,6 +114,21 @@
         <item>Key</item>
         <item>Ordinary</item>
     </string-array>
+    <string-array name="type_of_role">
+        <item>""</item>
+        <item>Pharmacist</item>
+        <item>Doctor</item>
+        <item>Owner</item>
+        <item>Purchasing Officer</item>
+        <item>Shop Attendant</item>
+        <item>Relative</item>
+        <item>Dispenser</item>
+        <item>Lab Technician</item>
+        <item>Nurse</item>
+        <item>Midwife</item>
+        <item>Medical Assistant</item>
+        <item>Other</item>
+    </string-array>
     <string-array name="recommendation">
         <item>""</item>
         <item>No Next Step Needed</item>

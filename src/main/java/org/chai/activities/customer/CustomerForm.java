@@ -149,7 +149,6 @@ public class CustomerForm extends Activity {
                         customerContact.setSurname(((EditText) entryView.findViewById(R.id.customer_contact_surname)).getText().toString());
                         customerContact.setGender(((Spinner) entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
                         customerContact.setNetworkOrAssociation(Boolean.valueOf(((Spinner) entryView.findViewById(R.id.customer_contact_network)).getSelectedItem().toString()));
-                        customerContact.setQualification(((Spinner) entryView.findViewById(R.id.customer_contact_qualification)).getSelectedItem().toString());
                         customerContact.setRole(((Spinner) entryView.findViewById(R.id.customer_contact_type)).getSelectedItem().toString());
                         customerContacts.add(customerContact);
                         //add to parent form

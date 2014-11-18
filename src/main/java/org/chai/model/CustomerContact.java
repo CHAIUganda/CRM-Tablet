@@ -24,10 +24,10 @@ public class CustomerContact {
     private String gender;
     private Boolean networkOrAssociation;
     private String role;
-    private String qualification;
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
     private long customerId;
+
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */
@@ -50,7 +50,7 @@ public class CustomerContact {
         this.id = id;
     }
 
-    public CustomerContact(Long id, String uuid, String title, String firstName, String surname, String gender, Boolean networkOrAssociation, String role, String qualification, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
+    public CustomerContact(Long id, String uuid, String title, String firstName, String surname, String gender, Boolean networkOrAssociation, String role, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
         this.id = id;
         this.uuid = uuid;
         this.title = title;
@@ -59,7 +59,6 @@ public class CustomerContact {
         this.gender = gender;
         this.networkOrAssociation = networkOrAssociation;
         this.role = role;
-        this.qualification = qualification;
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
         this.customerId = customerId;
@@ -135,14 +134,6 @@ public class CustomerContact {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public String getQualification() {
-        return qualification;
-    }
-
-    public void setQualification(String qualification) {
-        this.qualification = qualification;
     }
 
     public java.util.Date getDateCreated() {
