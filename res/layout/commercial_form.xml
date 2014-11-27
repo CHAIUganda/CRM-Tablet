@@ -12,7 +12,20 @@
                   android:layout_height="match_parent"
                   android:background="#f8f9fe">
 
-        <include layout="@layout/header_layout"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Commercial Form"
+                    android:textColor="@color/list_main_text_color"
+                    android:textSize="25dp"
+                    android:textStyle="bold"/>
+        </LinearLayout>
 
         <LinearLayout
                 android:orientation="horizontal"

@@ -2,7 +2,6 @@ package org.chai.activities.tasks;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,7 @@ import java.util.StringTokenizer;
 /**
  * Created by victor on 10/26/14.
  */
-public class CaptureCallDataActivity extends Activity {
+public class CommercialFormActivity extends Activity {
     static final int DATE_PICKER_ID = 1111;
     private EditText dateEditTxt;
     private DatePickerDialog datePickerDialog;
@@ -25,7 +24,7 @@ public class CaptureCallDataActivity extends Activity {
     private String initialYear;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.capture_calls_data);
+        setContentView(R.layout.commercial_form);
 
         Button dateBtn = (Button)findViewById(R.id.capture_call_data_setdate);
         dateEditTxt = (EditText)findViewById(R.id.capture_call_data_date);
