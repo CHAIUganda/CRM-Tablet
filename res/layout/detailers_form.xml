@@ -718,17 +718,13 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
-            <EditText
+            <Spinner
                     android:id="@+id/detailer_point_of_sale"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:textCursorDrawable="@null"/>
+                    android:prompt="@string/selectItem"
+                    android:layout_width="fill_parent"
+                    android:entries="@array/point_of_sale_material"
+                    android:background="@drawable/btn_dropdown"/>
 
         </LinearLayout>
 

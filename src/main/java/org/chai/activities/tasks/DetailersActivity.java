@@ -261,7 +261,7 @@ public class DetailersActivity extends Activity {
 
         detailerCall.setIfNoWhy(((EditText) findViewById(R.id.detailer_if_no_why)).getText().toString());
         detailerCall.setBuyingPrice(Double.parseDouble(((EditText) findViewById(R.id.detailer_whatpricedoyoubuy)).getText().toString()));
-        detailerCall.setPointOfsaleMaterial(((EditText) findViewById(R.id.detailer_point_of_sale)).getText().toString());
+        detailerCall.setPointOfsaleMaterial(((Spinner) findViewById(R.id.detailer_point_of_sale)).getSelectedItem().toString());
         detailerCall.setRecommendationNextStep(((Spinner) findViewById(R.id.detailer_next_step_recommendation)).getSelectedItem().toString());
 
         detailerCall.setHeardAboutDiarrheaTreatmentInChildren(((Spinner) findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors)).getSelectedItem().toString());
@@ -302,8 +302,6 @@ public class DetailersActivity extends Activity {
             ((EditText) findViewById(R.id.detailers_brand_sold_ors)).setText(detailerCall.getOrsBrandSold());
             ((EditText) findViewById(R.id.detailer_if_no_why)).setText(detailerCall.getIfNoWhy());
             ((EditText) findViewById(R.id.detailer_whatpricedoyoubuy)).setText(detailerCall.getBuyingPrice() + "");
-//            ((EditText) findViewById(R.id.detailer_action)).setText(detailerCall.getAction());
-            ((EditText) findViewById(R.id.detailer_point_of_sale)).setText(detailerCall.getPointOfsaleMaterial());
             ((EditText)findViewById(R.id.detailers_gps_text)).setText(detailerCall.getLatitude() == null ? "0.0,0.0" : detailerCall.getLatitude() + ","+detailerCall.getLongitude());
 
             //spinners
@@ -337,6 +335,10 @@ public class DetailersActivity extends Activity {
 
             Spinner whatdoyouknowAboutZinc = (Spinner)findViewById(R.id.detailer_how_zinc_should_be_used);
             Utils.setSpinnerSelection(whatdoyouknowAboutZinc,detailerCall.getKnowledgeAbtZincAndUsage());
+
+            Spinner pointOfSaleMaterial =  ((Spinner) findViewById(R.id.detailer_point_of_sale));
+            Utils.setSpinnerSelection(pointOfSaleMaterial,detailerCall.getPointOfsaleMaterial());
+
         }else{
             Calendar calendar = Calendar.getInstance();
             ((EditText) findViewById(R.id.detailer_survey_date)).setText(calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.YEAR));

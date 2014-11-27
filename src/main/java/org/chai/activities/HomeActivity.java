@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 import org.chai.R;
 import org.chai.activities.calls.CallsMainActivity;
 import org.chai.activities.customer.CustomersMainActivity;
@@ -47,8 +48,13 @@ public class HomeActivity extends Activity {
 
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), CallsMainActivity.class);
-                startActivity(i);
+                try{
+                    Intent i = new Intent(getApplicationContext(), CallsMainActivity.class);
+                    startActivity(i);
+                }catch (Exception ex){
+                    Toast.makeText(HomeActivity.this.getApplicationContext(),
+                            "Unable to View Call Data please ensure you have synchronised",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

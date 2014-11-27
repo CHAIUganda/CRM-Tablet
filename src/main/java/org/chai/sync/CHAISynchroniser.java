@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 import org.chai.R;
 import org.chai.activities.tasks.TasksMainActivity;
 import org.chai.model.*;
@@ -96,6 +97,14 @@ public class CHAISynchroniser {
             progressDialog.incrementProgressBy(20);
         }catch (Exception ex){
             ex.printStackTrace();
+            parent.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(parent.getApplicationContext(),
+                            "The Syncronisation Process is Unable to continue,Please ensure that there is a network connection",
+                            Toast.LENGTH_LONG).show();
+                }
+            });
         }
         Log.i("Synchroniser:","=============================================done");
     }
