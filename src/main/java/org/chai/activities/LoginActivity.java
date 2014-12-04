@@ -59,17 +59,18 @@ public class LoginActivity extends Activity {
                     public void run() {
                         boolean islogin = false;
                         //check ofline login
-                        List<User> loggedInUser = userDao.queryBuilder().where(UserDao.Properties.Username.eq(user), UserDao.Properties.Password.eq(Utils.encrypeString(pass))).list();
+                        List<User> loggedInUser = userDao.queryBuilder().where(UserDao.Properties.UserName.eq(user), UserDao.Properties.Password.eq(Utils.encrypeString(pass))).list();
                         if (loggedInUser.isEmpty()) {
                             //ensure we dont have more than one user on one tablet
                             if (userDao.loadAll().isEmpty()) {
-                                islogin = place.login(user, pass);
+                                User remoteUser = place.login(user, pass);
                                 //add this user to offline db
-                                if (islogin) {
+                                if (remoteUser!=null) {
                                     User newUser = new User(null);
                                     newUser.setUuid(UUID.randomUUID().toString());
-                                    newUser.setUsername(user);
-                                    newUser.setPassword(Utils.encrypeString(pass));
+                                    newUser.setUserName(remoteUser.getUserName());
+                                    newUser.setPassword(Utils.encrypeString(remoteUser.getPassword()));
+                                    newUser.setRole(remoteUser.getRole());
                                     userDao.insert(newUser);
                                 }
                             }
