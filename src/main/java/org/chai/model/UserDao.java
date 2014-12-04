@@ -25,12 +25,13 @@ public class UserDao extends AbstractDao<User, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Username = new Property(2, String.class, "username", false, "USERNAME");
+        public final static Property UserName = new Property(2, String.class, "userName", false, "USER_NAME");
         public final static Property Password = new Property(3, String.class, "password", false, "PASSWORD");
         public final static Property Enabled = new Property(4, boolean.class, "enabled", false, "ENABLED");
         public final static Property Accountexpired = new Property(5, boolean.class, "accountexpired", false, "ACCOUNTEXPIRED");
         public final static Property Accountlocked = new Property(6, boolean.class, "accountlocked", false, "ACCOUNTLOCKED");
         public final static Property Passwordexpired = new Property(7, Boolean.class, "passwordexpired", false, "PASSWORDEXPIRED");
+        public final static Property Role = new Property(8, String.class, "role", false, "ROLE");
     };
 
     private DaoSession daoSession;
@@ -51,12 +52,13 @@ public class UserDao extends AbstractDao<User, Long> {
         db.execSQL("CREATE TABLE " + constraint + "'USER' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'USERNAME' TEXT NOT NULL ," + // 2: username
+                "'USER_NAME' TEXT NOT NULL ," + // 2: userName
                 "'PASSWORD' TEXT NOT NULL ," + // 3: password
                 "'ENABLED' INTEGER NOT NULL ," + // 4: enabled
                 "'ACCOUNTEXPIRED' INTEGER NOT NULL ," + // 5: accountexpired
                 "'ACCOUNTLOCKED' INTEGER NOT NULL ," + // 6: accountlocked
-                "'PASSWORDEXPIRED' INTEGER);"); // 7: passwordexpired
+                "'PASSWORDEXPIRED' INTEGER," + // 7: passwordexpired
+                "'ROLE' TEXT);"); // 8: role
     }
 
     /** Drops the underlying database table. */
@@ -75,7 +77,7 @@ public class UserDao extends AbstractDao<User, Long> {
             stmt.bindLong(1, id);
         }
         stmt.bindString(2, entity.getUuid());
-        stmt.bindString(3, entity.getUsername());
+        stmt.bindString(3, entity.getUserName());
         stmt.bindString(4, entity.getPassword());
         stmt.bindLong(5, entity.getEnabled() ? 1l: 0l);
         stmt.bindLong(6, entity.getAccountexpired() ? 1l: 0l);
@@ -84,6 +86,11 @@ public class UserDao extends AbstractDao<User, Long> {
         Boolean passwordexpired = entity.getPasswordexpired();
         if (passwordexpired != null) {
             stmt.bindLong(8, passwordexpired ? 1l: 0l);
+        }
+ 
+        String role = entity.getRole();
+        if (role != null) {
+            stmt.bindString(9, role);
         }
     }
 
@@ -105,12 +112,13 @@ public class UserDao extends AbstractDao<User, Long> {
         User entity = new User( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // uuid
-            cursor.getString(offset + 2), // username
+            cursor.getString(offset + 2), // userName
             cursor.getString(offset + 3), // password
             cursor.getShort(offset + 4) != 0, // enabled
             cursor.getShort(offset + 5) != 0, // accountexpired
             cursor.getShort(offset + 6) != 0, // accountlocked
-            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0 // passwordexpired
+            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0, // passwordexpired
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // role
         );
         return entity;
     }
@@ -120,12 +128,13 @@ public class UserDao extends AbstractDao<User, Long> {
     public void readEntity(Cursor cursor, User entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setUuid(cursor.getString(offset + 1));
-        entity.setUsername(cursor.getString(offset + 2));
+        entity.setUserName(cursor.getString(offset + 2));
         entity.setPassword(cursor.getString(offset + 3));
         entity.setEnabled(cursor.getShort(offset + 4) != 0);
         entity.setAccountexpired(cursor.getShort(offset + 5) != 0);
         entity.setAccountlocked(cursor.getShort(offset + 6) != 0);
         entity.setPasswordexpired(cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0);
+        entity.setRole(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
      }
     
     /** @inheritdoc */

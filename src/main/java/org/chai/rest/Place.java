@@ -95,22 +95,22 @@ public class Place extends RestClient {
         //
     }
 
-    public boolean login(String user, String pass) {
+    public User login(String user, String pass) {
         try{
             userName = user;
             password = pass;
             RestTemplate restTemplate = getRestTemplate();
             HttpHeaders headers = getHeaders();
             HttpEntity<?> requestEntity = new HttpEntity<Object>(headers);
-            ResponseEntity<Region[]> responseEntity = restTemplate.exchange(REST_URL+"place/regions",HttpMethod.GET, requestEntity,Region[].class);
-            Region[] regions = responseEntity.getBody();
-            if(regions.length>0){
-                return true;
+            ResponseEntity<User> responseEntity = restTemplate.exchange(REST_URL+"info",HttpMethod.GET, requestEntity,User.class);
+            User user1 = responseEntity.getBody();
+            if(user1!=null){
+                return user1;
             }
         }catch (Exception ex){
             ex.printStackTrace();
         }
-        return false;
+        return null;
     }
 
 
