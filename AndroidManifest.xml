@@ -15,7 +15,6 @@
       </intent-filter>
     </activity>
       <activity android:name=".activities.HomeActivity"/>
-      <activity android:name=".activities.tasks.TasksMainActivity"/>
       <activity android:name=".activities.calls.CallsMainActivity"/>
       <activity android:name=".activities.customer.CustomerDetailsActivity"/>
       <activity android:name=".activities.tasks.CommercialFormActivity"/>

@@ -10,6 +10,7 @@ import org.chai.R;
 import org.chai.activities.customer.CustomersMainFragment;
 
 import android.app.ActionBar.Tab;
+import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.sync.CHAISynchroniser;
 
 /**
@@ -33,7 +34,7 @@ public class HomeActivity extends Activity{
 
         tab = actionBar.newTab()
                 .setText(tabHeaders[1])
-                .setTabListener(new HomeTabListener<CustomersMainFragment>(this,tabHeaders[1],CustomersMainFragment.class));
+                .setTabListener(new HomeTabListener<TaskMainFragment>(this,tabHeaders[1],TaskMainFragment.class));
 
         actionBar.addTab(tab);
 

@@ -152,4 +152,13 @@
         <item>Pen</item>
         <item>Others</item>
     </string-array>
+    <string-array name="task_filters">
+        <item>""</item>
+        <item>Outstanding</item>
+        <item>Today\'s Tasks</item>
+        <item>Due in one day</item>
+        <item>Due in two days</item>
+        <item>Due in three days</item>
+        <item>Due in four days</item>
+    </string-array>
 </resources>

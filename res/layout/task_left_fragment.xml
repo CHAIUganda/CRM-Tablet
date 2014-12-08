@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:background="#f8f9fe"
+              android:layout_height="match_parent">
+    <Button
+            android:id="@+id/calenderBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calender"/>
+    <Button
+            android:id="@+id/viewLocationBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View By Location"/>
+    <Button
+            android:id="@+id/viewMapBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View On Map"/>
+    <Button
+            android:id="@+id/takeOrderBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Take an Order"/>
+    <Button
+            android:id="@+id/unscheduledCallBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Unscheduled Call"/>
+
+</LinearLayout>

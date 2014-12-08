@@ -2,16 +2,12 @@ package org.chai.sync;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
-import org.chai.R;
-import org.chai.activities.tasks.TasksMainActivity;
 import org.chai.model.*;
 import org.chai.rest.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
