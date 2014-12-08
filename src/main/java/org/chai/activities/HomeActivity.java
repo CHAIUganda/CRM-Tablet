@@ -1,67 +1,61 @@
 package org.chai.activities;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
+import android.app.*;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import org.chai.R;
-import org.chai.activities.calls.CallsMainActivity;
-import org.chai.activities.customer.CustomersMainActivity;
-import org.chai.activities.tasks.TasksMainActivity;
+import org.chai.activities.customer.CustomersMainFragment;
+
+import android.app.ActionBar.Tab;
 import org.chai.sync.CHAISynchroniser;
 
 /**
  * Created by victor on 10/15/14.
  */
-public class HomeActivity extends Activity {
+public class HomeActivity extends Activity{
+
+    private String[] tabHeaders = {"Customers", "Tasks", "History"};
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dashboard_layout);
-        Button btnTasks = (Button) findViewById(R.id.btn_tasks);
-        Button btnCustomers = (Button)findViewById(R.id.btn_customers);
-        Button btnCallsData = (Button)findViewById(R.id.btn_calls);
-        Button btnSyncronise = (Button)findViewById(R.id.btn_sync);
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setDisplayShowTitleEnabled(true);
 
-        btnTasks.setOnClickListener(new View.OnClickListener(){
+        Tab tab = actionBar.newTab()
+             .setText(tabHeaders[0])
+                .setTabListener(new HomeTabListener<CustomersMainFragment>(this,tabHeaders[0],CustomersMainFragment.class));
 
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), TasksMainActivity.class);
-                startActivity(i);
-            }
-        });
+        actionBar.addTab(tab);
 
-        btnCustomers.setOnClickListener(new View.OnClickListener() {
+        tab = actionBar.newTab()
+                .setText(tabHeaders[1])
+                .setTabListener(new HomeTabListener<CustomersMainFragment>(this,tabHeaders[1],CustomersMainFragment.class));
 
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), CustomersMainActivity.class);
-                startActivity(i);
-            }
-        });
+        actionBar.addTab(tab);
 
-        btnCallsData.setOnClickListener(new View.OnClickListener(){
+        tab = actionBar.newTab()
+                .setText(tabHeaders[2])
+                .setTabListener(new HomeTabListener<CustomersMainFragment>(this,tabHeaders[2],CustomersMainFragment.class));
 
-            @Override
-            public void onClick(View view) {
-                try{
-                    Intent i = new Intent(getApplicationContext(), CallsMainActivity.class);
-                    startActivity(i);
-                }catch (Exception ex){
-                    Toast.makeText(HomeActivity.this.getApplicationContext(),
-                            "Unable to View Call Data please ensure you have synchronised",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        actionBar.addTab(tab);
+    }
 
-        btnSyncronise.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.home_sync:
                 final ProgressDialog progressDialog  = new ProgressDialog(HomeActivity.this);
                 progressDialog.setMessage("Syncronising with Server...");
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -77,9 +71,10 @@ public class HomeActivity extends Activity {
                         progressDialog.dismiss();
                     }
                 }).start();
-            }
-        });
-
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     @Override
     public void onBackPressed() {

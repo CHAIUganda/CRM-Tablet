@@ -105,7 +105,7 @@ public class CustomerForm extends Activity {
                     boolean isSaved = saveCustomer();
                     if (isSaved) {
                         Toast.makeText(getApplicationContext(), "New Customer has been  successfully added!", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getApplicationContext(), CustomersMainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), CustomersMainFragment.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(getApplicationContext(), "A problem Occured while saving a new Customer,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();

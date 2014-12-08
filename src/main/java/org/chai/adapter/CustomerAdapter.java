@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import org.chai.R;
 import org.chai.activities.customer.CustomerDetailsActivity;
 import org.chai.model.Customer;
@@ -22,95 +20,56 @@ import java.util.Locale;
 /**
  * Created by victor on 10/16/14.
  */
-public class CustomerAdapter extends BaseAdapter{
+public class CustomerAdapter extends ArrayAdapter<Customer> {
 
-    private Activity activity;
-    private LayoutInflater inflater;
     private List<Customer> customers;
-    private ArrayList<Customer> filterList;
-    private Context context;
 
-    public CustomerAdapter(Context context,Activity activity,List<Customer> customers){
-        this.activity = activity;
+    public CustomerAdapter(Activity activity, List<Customer> customers) {
+        super(activity.getApplicationContext(), R.layout.customers_main_activity, customers);
         this.customers = customers;
-        this.context = context;
-        filterList = new ArrayList<Customer>();
-        filterList.addAll(customers);
-    }
-
-    @Override
-    public int getCount() {
-        return customers.size();
-    }
-
-    @Override
-    public Object getItem(int index) {
-        return customers.get(index);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(inflater == null){
-           inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
+        ViewHolder viewHolder;
         if(convertView == null){
-            convertView = inflater.inflate(R.layout.customer_list_row,null);
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.customer_list_row, parent, false);
+
+            viewHolder = new ViewHolder();
+            TextView customerNameView = (TextView) convertView.findViewById(R.id.customername);
+            TextView customerAddressView = (TextView) convertView.findViewById(R.id.customeraddress);
+            TextView customerViewTelephone = (TextView) convertView.findViewById(R.id.customertelephone);
+
+            viewHolder.customerName = customerNameView;
+            viewHolder.customerAddress = customerAddressView;
+            viewHolder.telephone = customerViewTelephone;
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-        TextView customerName = (TextView)convertView.findViewById(R.id.customername);
-        TextView customerAddress = (TextView)convertView.findViewById(R.id.customeraddress);
-        TextView telephone = (TextView)convertView.findViewById(R.id.customertelephone);
 
         Customer customer = customers.get(position);
         CustomerContact customerCtct = null;
-        if(customer.getCustomerContacts().size()>0){
+        if (customer.getCustomerContacts().size() > 0) {
             customerCtct = Utils.getKeyCustomerContact(customer.getCustomerContacts());
         }
 
-        if(customerCtct!=null){
-            telephone.setText(customerCtct.getTitle());
-        }else{
-            telephone.setText("No Contact Available");
+        if (customerCtct != null) {
+            viewHolder.telephone.setText(customerCtct.getTitle());
+        } else {
+            viewHolder.telephone.setText("No Contact Available");
         }
 
-        customerName.setText(customer.getOutletName());
-        customerAddress.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(),50));
+        viewHolder.customerName.setText(customer.getOutletName());
+        viewHolder.customerAddress.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(), 50));
 
-/*        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try{
-                    Intent intent = new Intent(activity.getApplicationContext(), CustomerDetailsActivity.class);
-                    activity.startActivity(intent);
-                }catch (Exception ex){
-                    Toast.makeText(context, "error:" + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
         return convertView;
     }
 
-    public void filter(String term){
-        term = term.toLowerCase(Locale.getDefault());
-        customers.clear();
-        if(term.length()== 0){
-            customers.addAll(filterList);
-        }else{
-            for(Customer customer:filterList){
-                if(customer.getOutletName().toLowerCase(Locale.getDefault()).contains(term)){
-                    customers.add(customer);
-                }
-            }
-        }
-        notifyDataSetChanged();
-    }
-
-    public void updateListView(List<Customer> customersList){
-        customers = customersList;
-        notifyDataSetChanged();
+    static class ViewHolder {
+        TextView customerName;
+        TextView customerAddress;
+        TextView telephone;
     }
 }

@@ -69,7 +69,7 @@ public class LoginActivity extends Activity {
                                     User newUser = new User(null);
                                     newUser.setUuid(UUID.randomUUID().toString());
                                     newUser.setUserName(remoteUser.getUserName());
-                                    newUser.setPassword(Utils.encrypeString(remoteUser.getPassword()));
+                                    newUser.setPassword(Utils.encrypeString(pass));
                                     newUser.setRole(remoteUser.getRole());
                                     userDao.insert(newUser);
                                 }

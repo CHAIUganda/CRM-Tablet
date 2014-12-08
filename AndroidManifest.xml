@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="org.chai" android:versionCode="1" android:versionName="1.0-SNAPSHOT">
     <uses-sdk
-            android:minSdkVersion="11"
+            android:minSdkVersion="13"
             android:targetSdkVersion="16" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,7 +16,6 @@
     </activity>
       <activity android:name=".activities.HomeActivity"/>
       <activity android:name=".activities.tasks.TasksMainActivity"/>
-      <activity android:name=".activities.customer.CustomersMainActivity"/>
       <activity android:name=".activities.calls.CallsMainActivity"/>
       <activity android:name=".activities.customer.CustomerDetailsActivity"/>
       <activity android:name=".activities.tasks.CommercialFormActivity"/>

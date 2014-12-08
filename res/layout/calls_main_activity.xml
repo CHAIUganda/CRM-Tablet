@@ -9,7 +9,7 @@
                     xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:context="org.chai.activities.customer.CustomersMainActivity" >
+                    tools:context="org.chai.activities.customer.CustomersMainFragment" >
 
         <ListView
                 android:id="@+id/callslistview"
