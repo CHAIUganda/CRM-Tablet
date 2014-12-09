@@ -50,7 +50,8 @@ public class LoginActivity extends Activity {
         Button loginBtn = (Button)findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                final ProgressDialog dialog = showProgressDialog();
+                onLoginSuccessfull("crm-ecm2", "meds2");
+               /* final ProgressDialog dialog = showProgressDialog();
                 final String user = ((EditText) findViewById(R.id.userTxt)).getText().toString();
                 final String pass = ((EditText) findViewById(R.id.passwordTxt)).getText().toString();
                 final Place place = new Place();
@@ -93,7 +94,7 @@ public class LoginActivity extends Activity {
 
                         }
                     }
-                }).start();
+                }).start();*/
             }
         });
     }

@@ -1,86 +1,171 @@
 package org.chai.activities;
 
 import android.app.*;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.support.v4.app.*;
+import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import org.chai.R;
 import org.chai.activities.customer.CustomersMainFragment;
 
 import android.app.ActionBar.Tab;
 import org.chai.activities.tasks.TaskMainFragment;
+import org.chai.adapter.NavDrawerListAdapter;
 import org.chai.sync.CHAISynchroniser;
+import org.chai.util.NavDrawerItem;
+
+import java.util.ArrayList;
 
 /**
  * Created by victor on 10/15/14.
  */
 public class HomeActivity extends Activity{
 
-    private String[] tabHeaders = {"Customers", "Tasks", "History"};
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
 
-    public void onCreate(Bundle savedInstanceState) {
+    // nav drawer title
+    private CharSequence mDrawerTitle;
+
+    // used to store app title
+    private CharSequence mTitle;
+
+    // slide menu items
+    private String[] navMenuTitles;
+    private TypedArray navMenuIcons;
+
+    private ArrayList<NavDrawerItem> navDrawerItems;
+    private NavDrawerListAdapter adapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setDisplayShowTitleEnabled(true);
+        setContentView(R.layout.home_main_layout);
+        mTitle = mDrawerTitle = getTitle();
+        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+        navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView)findViewById(R.id.list_slidermenu);
 
-        Tab tab = actionBar.newTab()
-             .setText(tabHeaders[0])
-                .setTabListener(new HomeTabListener<CustomersMainFragment>(this,tabHeaders[0],CustomersMainFragment.class));
+        navDrawerItems = new ArrayList<NavDrawerItem>();
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0],navMenuIcons.getResourceId(0,-1),true,"22"));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1],navMenuIcons.getResourceId(1,-1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2],navMenuIcons.getResourceId(2,-1)));
 
-        actionBar.addTab(tab);
+        navMenuIcons.recycle();
+        adapter = new NavDrawerListAdapter(getApplicationContext(),navDrawerItems);
+        mDrawerList.setAdapter(adapter);
+        mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
-        tab = actionBar.newTab()
-                .setText(tabHeaders[1])
-                .setTabListener(new HomeTabListener<TaskMainFragment>(this,tabHeaders[1],TaskMainFragment.class));
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
-        actionBar.addTab(tab);
+        mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.drawable.ic_drawer,R.string.app_name,R.string.app_name){
+            public void onDrawerClosed(View view) {
+                getActionBar().setTitle(mTitle);
+                invalidateOptionsMenu();
+            }
 
-        tab = actionBar.newTab()
-                .setText(tabHeaders[2])
-                .setTabListener(new HomeTabListener<CustomersMainFragment>(this,tabHeaders[2],CustomersMainFragment.class));
+            public void onDrawerOpened(View drawerView) {
+                getActionBar().setTitle(mDrawerTitle);
+                invalidateOptionsMenu();
+            }
+        };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        if(savedInstanceState == null){
+            displayView(0);
+        }
+    }
 
-        actionBar.addTab(tab);
+    private class SlideMenuClickListener implements ListView.OnItemClickListener{
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
+            displayView(position);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.home_main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.home_main_menu, menu);
+        return true;
     }
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.home_sync:
-                final ProgressDialog progressDialog  = new ProgressDialog(HomeActivity.this);
-                progressDialog.setMessage("Syncronising with Server...");
-                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                progressDialog.setIndeterminate(false);
-                progressDialog.setMax(100);
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        CHAISynchroniser chaiSynchroniser = new CHAISynchroniser(HomeActivity.this,progressDialog);
-                        chaiSynchroniser.startSyncronisationProcess();
-                        progressDialog.dismiss();
-                    }
-                }).start();
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(mDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        switch (item.getItemId()){
+            case R.id.action_settings:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    /***
+     * Called when invalidateOptionsMenu() is triggered
+     */
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-        startActivity(intent);
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // if nav drawer is opened, hide the action items
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        return super.onPrepareOptionsMenu(menu);
     }
+
+    private void displayView(int position){
+       Fragment fragment = null;
+        switch (position){
+            case 0:
+                fragment = new TaskMainFragment();
+                break;
+            case 1:
+                fragment = new CustomersMainFragment();
+                break;
+            default:
+                break;
+        }
+        if(fragment !=null){
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.frame_container,fragment).commit();
+            mDrawerList.setItemChecked(position,true);
+            mDrawerList.setSelection(position);
+            setTitle(navMenuTitles[position]);
+            mDrawerLayout.closeDrawer(mDrawerList);
+        }else{
+            Log.e("HomeActivity", "Error in creating fragment");
+        }
+    }
+    @Override
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        getActionBar().setTitle(mTitle);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggls
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
 }
