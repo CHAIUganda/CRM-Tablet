@@ -27,6 +27,9 @@ public class TaskMainFragment extends Fragment {
 
         tabHost.addTab(tabHost.newTabSpec("Calender").setIndicator(getTabIndicator(tabHost.getContext(),"Calender")),TaskCalenderFragment.class,null);
         tabHost.addTab(tabHost.newTabSpec("location").setIndicator(getTabIndicator(tabHost.getContext(),"View by Location")),TaskByLocationFragment.class,null);
+        tabHost.addTab(tabHost.newTabSpec("viewonmap").setIndicator(getTabIndicator(tabHost.getContext(),"View on Map")),TaskViewOnMapFragment.class,null);
+        tabHost.addTab(tabHost.newTabSpec("takeanorder").setIndicator(getTabIndicator(tabHost.getContext(),"Take an Order")),TakeOrderFragment.class,null);
+        tabHost.addTab(tabHost.newTabSpec("unscheduledcall").setIndicator(getTabIndicator(tabHost.getContext(),"Unscheduled Call")),UnscheduledCallFragment.class,null);
 
         return tabHost;
     }
