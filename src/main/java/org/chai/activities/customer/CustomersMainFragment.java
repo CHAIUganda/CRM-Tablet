@@ -1,10 +1,10 @@
 package org.chai.activities.customer;
 
 import android.annotation.TargetApi;
-import android.app.ListFragment;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +29,6 @@ public class CustomersMainFragment extends ListFragment {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private CustomerDao customerDao;
-
 
     private List<Customer> customerList = new ArrayList<Customer>();
     private CustomerAdapter customerAdapter;

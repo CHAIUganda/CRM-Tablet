@@ -1,13 +1,14 @@
 package org.chai.activities;
 
 import android.app.*;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.*;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 /**
  * Created by victor on 10/15/14.
  */
-public class HomeActivity extends Activity{
+public class HomeActivity extends FragmentActivity{
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -139,7 +140,7 @@ public class HomeActivity extends Activity{
                 break;
         }
         if(fragment !=null){
-            FragmentManager fragmentManager = getFragmentManager();
+            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.frame_container,fragment).commit();
             mDrawerList.setItemChecked(position,true);
             mDrawerList.setSelection(position);
