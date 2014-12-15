@@ -153,9 +153,8 @@
         <item>Others</item>
     </string-array>
     <string-array name="task_filters">
-        <item>""</item>
-        <item>Outstanding</item>
         <item>Today\'s Tasks</item>
+        <item>Outstanding</item>
         <item>Due in one day</item>
         <item>Due in two days</item>
         <item>Due in three days</item>

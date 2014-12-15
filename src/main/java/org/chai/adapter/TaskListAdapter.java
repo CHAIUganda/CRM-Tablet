@@ -1,14 +1,19 @@
 package org.chai.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 import org.chai.R;
+import org.chai.model.Customer;
+import org.chai.model.CustomerContact;
 import org.chai.model.Task;
+import org.chai.util.Utils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,81 +21,49 @@ import java.util.List;
 /**
  * Created by victor on 10/23/14.
  */
-public class TaskListAdapter extends BaseExpandableListAdapter {
-    private Context context;
-    private List<String> listDataHeader;
-    private HashMap<String,List<Task>> taskList;
+public class TaskListAdapter extends ArrayAdapter<Task> {
+    private List<Task> taskList;
 
-    public TaskListAdapter(Context context,List<String> listDataHeader,HashMap<String,List<Task>> listDataChild){
-        this.context = context;
-        this.taskList = listDataChild;
-        this.listDataHeader = listDataHeader;
+    public TaskListAdapter(Activity activity,List<Task> aTaskList){
+        super(activity.getApplicationContext(), R.layout.task_calender_fragment, aTaskList);
+        this.taskList = aTaskList;
     }
 
     @Override
-    public int getGroupCount() {
-        return this.listDataHeader.size();
-    }
-
-    @Override
-    public int getChildrenCount(int groupPosition) {
-        return this.taskList.get(this.listDataHeader.get(groupPosition)).size();
-    }
-
-    @Override
-    public Object getGroup(int groupPosition) {
-        return this.listDataHeader.get(groupPosition);
-    }
-
-    @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return this.taskList.get(this.listDataHeader.get(groupPosition)).get(childPosition);
-    }
-
-    @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
-    }
-
-    @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
-    }
-
-    @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String headerTitle = (String)getGroup(groupPosition);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
         if(convertView == null){
-            LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.task_list_categories,null);
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.task_list_item, parent, false);
+
+            viewHolder = new ViewHolder();
+            TextView taskListtype = (TextView) convertView.findViewById(R.id.task_list_type);
+            TextView taskListOutlet = (TextView) convertView.findViewById(R.id.task_list_outlet);
+            TextView taskListAddress = (TextView) convertView.findViewById(R.id.task_list_address);
+
+            viewHolder.type = taskListtype;
+            viewHolder.outlet = taskListOutlet;
+            viewHolder.address = taskListAddress;
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-        TextView taskListMainHeader = (TextView)convertView.findViewById(R.id.task_list_main_header);
-        taskListMainHeader.setTypeface(null, Typeface.BOLD);
-        taskListMainHeader.setText(headerTitle);
+
+        Task task = taskList.get(position);
+        Customer customer = task.getCustomer();
+
+        viewHolder.type.setText(task.getType());
+        viewHolder.outlet.setText(","+customer.getOutletName());
+        viewHolder.address.setText(","+Utils.truncateString(customer.getDescriptionOfOutletLocation(), 50));
 
         return convertView;
     }
 
-    @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        Task task = (Task)getChild(groupPosition,childPosition);
-        if(convertView == null){
-            LayoutInflater layoutInflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.task_list_item,null);
-        }
-        TextView taskListItem = (TextView)convertView.findViewById(R.id.task_list_item_label);
-        taskListItem.setText(task.getDescription());
-
-        return convertView;
+    static class ViewHolder {
+        TextView type;
+        TextView outlet;
+        TextView address;
     }
 
-    @Override
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
-    }
+
 }

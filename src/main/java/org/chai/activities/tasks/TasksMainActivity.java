@@ -47,7 +47,7 @@ public class TasksMainActivity extends Activity {
         }
 
         expandableListView = (ExpandableListView) findViewById(R.id.task_list_main_view);
-        taskListAdapter = new TaskListAdapter(this, listDataHeader, taskList);
+//        taskListAdapter = new TaskListAdapter(this, taskList);
 
         expandableListView.setAdapter(taskListAdapter);
 

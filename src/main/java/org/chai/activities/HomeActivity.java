@@ -109,7 +109,22 @@ public class HomeActivity extends FragmentActivity{
             return true;
         }
         switch (item.getItemId()){
-            case R.id.action_settings:
+            case R.id.action_sync:
+                final ProgressDialog progressDialog  = new ProgressDialog(HomeActivity.this);
+                progressDialog.setMessage("Syncronising with Server...");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                progressDialog.setIndeterminate(false);
+                progressDialog.setMax(100);
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CHAISynchroniser chaiSynchroniser = new CHAISynchroniser(HomeActivity.this,progressDialog);
+                        chaiSynchroniser.startSyncronisationProcess();
+                        progressDialog.dismiss();
+                    }
+                }).start();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -123,7 +138,7 @@ public class HomeActivity extends FragmentActivity{
     public boolean onPrepareOptionsMenu(Menu menu) {
         // if nav drawer is opened, hide the action items
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_sync).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 

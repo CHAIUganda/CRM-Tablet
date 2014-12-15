@@ -13,7 +13,7 @@ import org.chai.R;
 public class TakeOrderFragment  extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.task_left_fragment, container, false);
+        View view = inflater.inflate(R.layout.task_calender_fragment, container, false);
         return view;
     }
 }

@@ -1,17 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+              android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="55dip">
+              android:layout_height="55dip"
+              android:background="#f8f9fe">
     <TextView
-            android:id="@+id/task_list_item_label"
-            android:layout_width="match_parent"
+            android:id="@+id/task_list_type"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/list_main_text_size"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-            android:textColor="@color/list_main_text_color"/>
+            android:textColor="@color/list_main_text_color"
+            android:text="Type of Order"/>
+    <TextView
+            android:id="@+id/task_list_outlet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/list_main_text_size"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/list_main_text_color"
+            android:text=",Outlet Name"/>
+    <TextView
+            android:id="@+id/task_list_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/list_main_text_size"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/list_main_text_color"
+            android:text=",22 wandegeya"/>
 
 </LinearLayout>
