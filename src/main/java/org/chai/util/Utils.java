@@ -12,7 +12,9 @@ import android.widget.TextView;
 import org.chai.model.CustomerContact;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -88,6 +90,22 @@ public class Utils {
     public static String decryptString(String encryptedText){
         byte[]  decrypted = Base64.decode(encryptedText.getBytes(),Base64.NO_WRAP);
         return new String(decrypted);
+    }
+
+    public static int getItemPosition(String item,String []array){
+        for(int i=0;i<array.length;++i){
+            if(item.equalsIgnoreCase(array[i])){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public static Date addToDate(Date currentDate,int toAdd){
+        Calendar cal = GregorianCalendar.getInstance();
+        cal.setTime(currentDate);
+        cal.add(Calendar.DAY_OF_YEAR, toAdd);
+        return cal.getTime();
     }
 
 }
