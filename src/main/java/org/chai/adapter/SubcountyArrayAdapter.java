@@ -37,14 +37,14 @@ public class SubcountyArrayAdapter extends ArrayAdapter<Subcounty> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView label = new TextView(context);
-        label.setTextColor(Color.WHITE);
+        label.setTextColor(Color.BLACK);
         label.setText(subcounties[position].getName());
         return label;
     }
     @Override
     public View getDropDownView(int position, View convertView,ViewGroup parent) {
         TextView label = new TextView(context);
-        label.setTextColor(Color.WHITE);
+        label.setTextColor(Color.BLACK);
         label.setText(subcounties[position].getName());
 
         return label;

@@ -1,4 +1,5 @@
 package org.chai.model;
+
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 

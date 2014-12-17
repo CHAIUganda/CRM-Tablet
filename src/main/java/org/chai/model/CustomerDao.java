@@ -54,12 +54,12 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         public final static Property DateCreated = new Property(23, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
         public final static Property LastUpdated = new Property(24, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
         public final static Property IsDirty = new Property(25, Boolean.class, "isDirty", false, "IS_DIRTY");
-        public final static Property VillageId = new Property(26, long.class, "villageId", false, "VILLAGE_ID");
+        public final static Property SubcountyId = new Property(26, long.class, "subcountyId", false, "SUBCOUNTY_ID");
     };
 
     private DaoSession daoSession;
 
-    private Query<Customer> village_CustomersQuery;
+    private Query<Customer> subcounty_CustomersQuery;
 
     public CustomerDao(DaoConfig config) {
         super(config);
@@ -100,7 +100,7 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
                 "'DATE_CREATED' INTEGER," + // 23: dateCreated
                 "'LAST_UPDATED' INTEGER," + // 24: lastUpdated
                 "'IS_DIRTY' INTEGER," + // 25: isDirty
-                "'VILLAGE_ID' INTEGER NOT NULL );"); // 26: villageId
+                "'SUBCOUNTY_ID' INTEGER NOT NULL );"); // 26: subcountyId
     }
 
     /** Drops the underlying database table. */
@@ -235,7 +235,7 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         if (isDirty != null) {
             stmt.bindLong(26, isDirty ? 1l: 0l);
         }
-        stmt.bindLong(27, entity.getVillageId());
+        stmt.bindLong(27, entity.getSubcountyId());
     }
 
     @Override
@@ -280,7 +280,7 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
             cursor.isNull(offset + 23) ? null : new java.util.Date(cursor.getLong(offset + 23)), // dateCreated
             cursor.isNull(offset + 24) ? null : new java.util.Date(cursor.getLong(offset + 24)), // lastUpdated
             cursor.isNull(offset + 25) ? null : cursor.getShort(offset + 25) != 0, // isDirty
-            cursor.getLong(offset + 26) // villageId
+            cursor.getLong(offset + 26) // subcountyId
         );
         return entity;
     }
@@ -314,7 +314,7 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         entity.setDateCreated(cursor.isNull(offset + 23) ? null : new java.util.Date(cursor.getLong(offset + 23)));
         entity.setLastUpdated(cursor.isNull(offset + 24) ? null : new java.util.Date(cursor.getLong(offset + 24)));
         entity.setIsDirty(cursor.isNull(offset + 25) ? null : cursor.getShort(offset + 25) != 0);
-        entity.setVillageId(cursor.getLong(offset + 26));
+        entity.setSubcountyId(cursor.getLong(offset + 26));
      }
     
     /** @inheritdoc */
@@ -340,17 +340,17 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         return true;
     }
     
-    /** Internal query to resolve the "customers" to-many relationship of Village. */
-    public List<Customer> _queryVillage_Customers(long villageId) {
+    /** Internal query to resolve the "customers" to-many relationship of Subcounty. */
+    public List<Customer> _querySubcounty_Customers(long subcountyId) {
         synchronized (this) {
-            if (village_CustomersQuery == null) {
+            if (subcounty_CustomersQuery == null) {
                 QueryBuilder<Customer> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.VillageId.eq(null));
-                village_CustomersQuery = queryBuilder.build();
+                queryBuilder.where(Properties.SubcountyId.eq(null));
+                subcounty_CustomersQuery = queryBuilder.build();
             }
         }
-        Query<Customer> query = village_CustomersQuery.forCurrentThread();
-        query.setParameter(0, villageId);
+        Query<Customer> query = subcounty_CustomersQuery.forCurrentThread();
+        query.setParameter(0, subcountyId);
         return query.list();
     }
 
@@ -361,9 +361,9 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
             StringBuilder builder = new StringBuilder("SELECT ");
             SqlUtils.appendColumns(builder, "T", getAllColumns());
             builder.append(',');
-            SqlUtils.appendColumns(builder, "T0", daoSession.getVillageDao().getAllColumns());
+            SqlUtils.appendColumns(builder, "T0", daoSession.getSubcountyDao().getAllColumns());
             builder.append(" FROM CUSTOMER T");
-            builder.append(" LEFT JOIN VILLAGE T0 ON T.'VILLAGE_ID'=T0.'_id'");
+            builder.append(" LEFT JOIN SUBCOUNTY T0 ON T.'SUBCOUNTY_ID'=T0.'_id'");
             builder.append(' ');
             selectDeep = builder.toString();
         }
@@ -374,9 +374,9 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         Customer entity = loadCurrent(cursor, 0, lock);
         int offset = getAllColumns().length;
 
-        Village village = loadCurrentOther(daoSession.getVillageDao(), cursor, offset);
-         if(village != null) {
-            entity.setVillage(village);
+        Subcounty subcounty = loadCurrentOther(daoSession.getSubcountyDao(), cursor, offset);
+         if(subcounty != null) {
+            entity.setSubcounty(subcounty);
         }
 
         return entity;    

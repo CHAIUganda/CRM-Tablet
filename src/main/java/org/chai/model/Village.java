@@ -1,6 +1,5 @@
 package org.chai.model;
 
-import java.util.List;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -29,7 +28,6 @@ public class Village {
     private Parish parish;
     private Long parish__resolvedKey;
 
-    private List<Customer> customers;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -116,28 +114,6 @@ public class Village {
             parishId = parish.getId();
             parish__resolvedKey = parishId;
         }
-    }
-
-    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<Customer> getCustomers() {
-        if (customers == null) {
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            CustomerDao targetDao = daoSession.getCustomerDao();
-            List<Customer> customersNew = targetDao._queryVillage_Customers(id);
-            synchronized (this) {
-                if(customers == null) {
-                    customers = customersNew;
-                }
-            }
-        }
-        return customers;
-    }
-
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    public synchronized void resetCustomers() {
-        customers = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

@@ -18,7 +18,7 @@ import android.widget.*;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
 import org.chai.activities.calls.CallsMainActivity;
-import org.chai.adapter.VillageArrayAdapter;
+import org.chai.adapter.DistrictArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
@@ -49,7 +49,7 @@ public class DetailersActivity extends Activity {
     private DetailerCallDao detailerCallDao;
 
     private TextView subcountyTxt;
-    private VillageArrayAdapter adapter;
+    private DistrictArrayAdapter adapter;
 
     private DetailerCall detailerCall;
     private Task callDataTask;
@@ -284,9 +284,9 @@ public class DetailersActivity extends Activity {
             ((EditText) findViewById(R.id.detailer_survey_date)).setText(Utils.dateToString(detailerCall.getDateOfSurvey()));
             ((TextView) findViewById(R.id.detailer_name)).setText(customer.getOutletName());
             ((TextView) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
-            ((TextView) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
-            ((TextView) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
-            ((TextView) findViewById(R.id.detailer_subcounty)).setText(customer.getVillage().getParish().getSubcounty().getName());
+            ((TextView) findViewById(R.id.detailer_parish)).setText("");
+            ((TextView) findViewById(R.id.detailer_village)).setText("");
+            ((TextView) findViewById(R.id.detailer_subcounty)).setText(customer.getSubcounty().getName());
             ((TextView) findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
             CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
             if(keyCustomerContact!= null){
@@ -344,12 +344,12 @@ public class DetailersActivity extends Activity {
             ((EditText) findViewById(R.id.detailer_survey_date)).setText(calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.YEAR));
             Customer customer = callDataTask.getCustomer();
             if(customer!=null){
-                ((TextView) findViewById(R.id.detailer_subcounty)).setText(customer.getVillage().getParish().getSubcounty().getName());
+                ((TextView) findViewById(R.id.detailer_subcounty)).setText(customer.getSubcounty().getName());
                 ((TextView) findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
                 ((TextView) findViewById(R.id.detailer_name)).setText(customer.getOutletName());
                 ((TextView) findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
-                ((TextView) findViewById(R.id.detailer_parish)).setText(customer.getVillage().getParish().getName());
-                ((TextView) findViewById(R.id.detailer_village)).setText(customer.getVillage().getName());
+                ((TextView) findViewById(R.id.detailer_parish)).setText("");
+                ((TextView) findViewById(R.id.detailer_village)).setText("");
                 ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
                 CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
                 ((TextView) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getFirstName():"");

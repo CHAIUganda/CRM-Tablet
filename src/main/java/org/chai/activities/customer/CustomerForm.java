@@ -14,9 +14,9 @@ import android.view.*;
 import android.widget.*;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
+import org.chai.adapter.DistrictArrayAdapter;
 import org.chai.adapter.ParishArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
-import org.chai.adapter.VillageArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
@@ -31,7 +31,7 @@ public class CustomerForm extends Activity {
     private Spinner subcountySpinner;
     private Spinner parishSpinner;
     private Spinner villageSpinner;
-    private VillageArrayAdapter adapter;
+    private DistrictArrayAdapter adapter;
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
@@ -67,7 +67,7 @@ public class CustomerForm extends Activity {
 
             subcountySpinner.setAdapter(new SubcountyArrayAdapter(this, R.id.details_subcounty, subcountiesList.toArray(new Subcounty[subcountiesList.size()])));
 
-            adapter = new VillageArrayAdapter(this, android.R.layout.simple_spinner_item, villageData.toArray(new Village[villageData.size()]));
+//            adapter = new DistrictArrayAdapter(this, android.R.layout.simple_spinner_item, villageData.toArray(new Village[villageData.size()]));
             villageSpinner.setAdapter(adapter);
 
             subcountySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -89,7 +89,7 @@ public class CustomerForm extends Activity {
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     Long parishId = ((Parish) parishSpinner.getSelectedItem()).getId();
                     List<Village> villageList = villageDao.queryBuilder().where(VillageDao.Properties.ParishId.eq(parishId)).list();
-                    villageSpinner.setAdapter(new VillageArrayAdapter(getApplicationContext(), R.id.details_village, villageList.toArray(new Village[villageList.size()])));
+//                    villageSpinner.setAdapter(new DistrictArrayAdapter(getApplicationContext(), R.id.details_village, villageList.toArray(new Village[villageList.size()])));
                 }
 
                 @Override
@@ -234,7 +234,7 @@ public class CustomerForm extends Activity {
             customerInstance.setTurnOver(((EditText) findViewById(R.id.details_turn_over)).getText().toString());
             customerInstance.setLongitude(capturedLongitude);
             customerInstance.setLatitude(capturedLatitude);
-            customerInstance.setVillageId(((Village) villageSpinner.getSelectedItem()).getId());
+            customerInstance.setSubcountyId(((Subcounty) villageSpinner.getSelectedItem()).getId());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -277,10 +277,10 @@ public class CustomerForm extends Activity {
             Spinner buildingStructureSpinner = (Spinner) findViewById(R.id.details_building_structure);
             setSpinnerSelection(buildingStructureSpinner, customerInstance.getBuildingStructure());
 
-            villageSpinner = (Spinner) findViewById(R.id.details_village);
-            VillageArrayAdapter adapter = (VillageArrayAdapter) villageSpinner.getAdapter();
-            int position = adapter.getPosition(customerInstance.getVillage());
-            villageSpinner.setSelection(position);
+//            villageSpinner = (Spinner) findViewById(R.id.details_village);
+//            DistrictArrayAdapter adapter = (DistrictArrayAdapter) villageSpinner.getAdapter();
+//            int position = adapter.getPosition(customerInstance.getVillage());
+//            villageSpinner.setSelection(position);
         }
     }
 

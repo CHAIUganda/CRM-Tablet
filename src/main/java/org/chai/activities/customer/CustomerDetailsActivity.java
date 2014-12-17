@@ -73,10 +73,10 @@ public class CustomerDetailsActivity extends Activity {
     private void loadCustomerDetails(Customer customer) {
         ((TextView) findViewById(R.id.customer_profile_name)).setText(customer.getOutletName());
         ((TextView) findViewById(R.id.customer_profile_address)).setText(customer.getKeyWholeSalerContact());
-        ((TextView) findViewById(R.id.customer_profile_district)).setText(customer.getVillage().getParish().getSubcounty().getDistrict().getName());
-        ((TextView) findViewById(R.id.customer_profile_subcounty)).setText(customer.getVillage().getParish().getSubcounty().getName());
-        ((TextView) findViewById(R.id.customer_profile_parish)).setText(customer.getVillage().getParish().getName());
-        ((TextView) findViewById(R.id.customer_profile_village)).setText(customer.getVillage().getName());
+        ((TextView) findViewById(R.id.customer_profile_district)).setText(customer.getSubcounty().getDistrict().getName());
+        ((TextView) findViewById(R.id.customer_profile_subcounty)).setText(customer.getSubcounty().getName());
+        ((TextView) findViewById(R.id.customer_profile_parish)).setText("");
+        ((TextView) findViewById(R.id.customer_profile_village)).setText("");
         ((TextView) findViewById(R.id.customer_profile_date_outlet_opened)).setText(customer.getDateOutletOpened()+"");
         ((TextView) findViewById(R.id.customer_profile_outlet_type)).setText(customer.getOutletType());
         ((TextView) findViewById(R.id.customer_profile_size)).setText(customer.getOutletSize());
