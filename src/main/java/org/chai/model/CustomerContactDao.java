@@ -30,7 +30,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Title = new Property(2, String.class, "title", false, "TITLE");
+        public final static Property Contact = new Property(2, String.class, "contact", false, "CONTACT");
         public final static Property FirstName = new Property(3, String.class, "firstName", false, "FIRST_NAME");
         public final static Property Surname = new Property(4, String.class, "surname", false, "SURNAME");
         public final static Property Gender = new Property(5, String.class, "gender", false, "GENDER");
@@ -60,7 +60,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         db.execSQL("CREATE TABLE " + constraint + "'CUSTOMER_CONTACT' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'TITLE' TEXT," + // 2: title
+                "'CONTACT' TEXT," + // 2: contact
                 "'FIRST_NAME' TEXT," + // 3: firstName
                 "'SURNAME' TEXT," + // 4: surname
                 "'GENDER' TEXT," + // 5: gender
@@ -88,9 +88,9 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         }
         stmt.bindString(2, entity.getUuid());
  
-        String title = entity.getTitle();
-        if (title != null) {
-            stmt.bindString(3, title);
+        String contact = entity.getContact();
+        if (contact != null) {
+            stmt.bindString(3, contact);
         }
  
         String firstName = entity.getFirstName();
@@ -148,7 +148,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         CustomerContact entity = new CustomerContact( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // uuid
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // title
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // contact
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // firstName
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // surname
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // gender
@@ -166,7 +166,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
     public void readEntity(Cursor cursor, CustomerContact entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setUuid(cursor.getString(offset + 1));
-        entity.setTitle(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setContact(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setFirstName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setSurname(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setGender(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));

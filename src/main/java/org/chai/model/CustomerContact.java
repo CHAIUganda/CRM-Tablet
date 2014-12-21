@@ -1,4 +1,5 @@
 package org.chai.model;
+
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -17,7 +18,7 @@ public class CustomerContact {
     private Long id;
     /** Not-null value. */
     private String uuid;
-    private String title;
+    private String contact;
     private String firstName;
     private String surname;
     private String gender;
@@ -49,10 +50,10 @@ public class CustomerContact {
         this.id = id;
     }
 
-    public CustomerContact(Long id, String uuid, String title, String firstName, String surname, String gender, Boolean networkOrAssociation, String role, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
+    public CustomerContact(Long id, String uuid, String contact, String firstName, String surname, String gender, Boolean networkOrAssociation, String role, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
         this.id = id;
         this.uuid = uuid;
-        this.title = title;
+        this.contact = contact;
         this.firstName = firstName;
         this.surname = surname;
         this.gender = gender;
@@ -87,12 +88,12 @@ public class CustomerContact {
         this.uuid = uuid;
     }
 
-    public String getTitle() {
-        return title;
+    public String getContact() {
+        return contact;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     public String getFirstName() {

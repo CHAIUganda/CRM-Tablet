@@ -4,6 +4,7 @@ import android.app.*;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.*;
 import android.support.v4.app.Fragment;
@@ -72,6 +73,7 @@ public class HomeActivity extends FragmentActivity{
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 
         mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.drawable.ic_drawer,R.string.app_name,R.string.app_name){
             public void onDrawerClosed(View view) {
@@ -84,6 +86,8 @@ public class HomeActivity extends FragmentActivity{
                 invalidateOptionsMenu();
             }
         };
+//        mDrawerToggle.setDrawerIndicatorEnabled(true);
+
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         if(savedInstanceState == null){
             displayView(0);

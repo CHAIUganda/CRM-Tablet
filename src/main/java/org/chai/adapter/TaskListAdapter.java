@@ -1,13 +1,10 @@
 package org.chai.adapter;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 import org.chai.R;
 import org.chai.model.Customer;
@@ -15,7 +12,6 @@ import org.chai.model.CustomerContact;
 import org.chai.model.Task;
 import org.chai.util.Utils;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,13 +33,15 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
             convertView = inflater.inflate(R.layout.task_list_item, parent, false);
 
             viewHolder = new ViewHolder();
-            TextView taskListtype = (TextView) convertView.findViewById(R.id.task_list_type);
             TextView taskListOutlet = (TextView) convertView.findViewById(R.id.task_list_outlet);
-            TextView taskListAddress = (TextView) convertView.findViewById(R.id.task_list_address);
+            TextView taskListAddress = (TextView) convertView.findViewById(R.id.task_list_outlet_contact);
+            TextView taskListSubcounty = (TextView) convertView.findViewById(R.id.task_list_subcounty);
+            TextView taskListLocationDesc = (TextView) convertView.findViewById(R.id.task_list_location_desc);
 
-            viewHolder.type = taskListtype;
+            viewHolder.subcounty = taskListSubcounty;
             viewHolder.outlet = taskListOutlet;
-            viewHolder.address = taskListAddress;
+            viewHolder.contact = taskListAddress;
+            viewHolder.locationDescription = taskListLocationDesc;
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -51,18 +49,27 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
 
         Task task = taskList.get(position);
         Customer customer = task.getCustomer();
-
-        viewHolder.type.setText(task.getType());
-        viewHolder.outlet.setText(","+customer.getOutletName());
-        viewHolder.address.setText(","+Utils.truncateString(customer.getDescriptionOfOutletLocation(), 50));
+        if(customer!=null){
+            viewHolder.subcounty.setText(customer.getSubcounty().getName());
+            viewHolder.outlet.setText(customer.getOutletName());
+            viewHolder.locationDescription.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(),20));
+        }
+        if (customer.getCustomerContacts().size() > 0) {
+            CustomerContact customerCtct = null;
+            customerCtct = Utils.getKeyCustomerContact(customer.getCustomerContacts());
+            if(customerCtct != null){
+                viewHolder.contact.setText(customerCtct.getContact()!=null?customerCtct.getContact():"No Contact");
+            }
+        }
 
         return convertView;
     }
 
     static class ViewHolder {
-        TextView type;
         TextView outlet;
-        TextView address;
+        TextView contact;
+        TextView subcounty;
+        TextView locationDescription;
     }
 
 

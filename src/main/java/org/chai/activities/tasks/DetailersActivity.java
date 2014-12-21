@@ -291,7 +291,7 @@ public class DetailersActivity extends Activity {
             CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
             if(keyCustomerContact!= null){
                 ((TextView) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getFirstName());
-                ((TextView) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact.getTitle());
+                ((TextView) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact.getContact());
             }
             ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
             ((EditText) findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).setText(detailerCall.getDiarrheaPatientsInFacility() + "");
@@ -353,7 +353,7 @@ public class DetailersActivity extends Activity {
                 ((EditText) findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
                 CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
                 ((TextView) findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getFirstName():"");
-                ((TextView) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getTitle():"");
+                ((TextView) findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getContact():"");
             }
         }
         setRequiredFields();

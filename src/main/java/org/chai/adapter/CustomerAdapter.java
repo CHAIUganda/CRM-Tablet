@@ -56,7 +56,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         }
 
         if (customerCtct != null) {
-            viewHolder.telephone.setText(customerCtct.getTitle());
+            viewHolder.telephone.setText(customerCtct.getContact());
         } else {
             viewHolder.telephone.setText("No Contact Available");
         }

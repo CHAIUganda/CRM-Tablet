@@ -35,16 +35,11 @@ public class Utils {
     }
 
     public static CustomerContact getKeyCustomerContact(List<CustomerContact> customerContacts){
-        try{
-            for(int i=0;i<customerContacts.size();i++){
-                if(customerContacts.get(i).getRole().equalsIgnoreCase("key")){
-                    return customerContacts.get(i);
-                }
-            }
-        }catch (Exception ex){
-            ex.printStackTrace();
+        if(customerContacts.size()>0){
+            return customerContacts.get(0);
+        }else{
+            return null;
         }
-        return null;
     }
 
     public static void setSpinnerSelection(Spinner spinner, String item) {

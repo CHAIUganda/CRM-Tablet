@@ -1,5 +1,6 @@
 package org.chai.activities.tasks;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,11 +14,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import de.greenrobot.dao.query.QueryBuilder;
 import org.chai.R;
+import org.chai.activities.customer.CustomerDetailsActivity;
 import org.chai.adapter.TaskListAdapter;
-import org.chai.model.DaoMaster;
-import org.chai.model.DaoSession;
-import org.chai.model.Task;
-import org.chai.model.TaskDao;
+import org.chai.model.*;
+import org.chai.rest.RestClient;
 import org.chai.util.Utils;
 
 import java.util.ArrayList;
@@ -58,6 +58,26 @@ public class TaskCalenderFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                if(RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)){
+                    Intent intent = new Intent(getActivity(), DetailersActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(getActivity(), CommercialFormActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
 
             }
         });

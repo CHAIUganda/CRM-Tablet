@@ -1,7 +1,6 @@
 package org.chai.model;
 
 import java.util.List;
-
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -45,8 +44,9 @@ public class Customer {
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
     private Boolean isDirty;
+    private String parishName;
+    private String villageName;
     private long subcountyId;
-
 
     // KEEP FIELDS - put your custom fields here
 
@@ -77,7 +77,7 @@ public class Customer {
         this.id = id;
     }
 
-    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String numberOfProducts, Integer restockFrequency, String turnOver, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, long subcountyId) {
+    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String numberOfProducts, Integer restockFrequency, String turnOver, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String parishName, String villageName, long subcountyId) {
         this.id = id;
         this.uuid = uuid;
         this.latitude = latitude;
@@ -104,6 +104,8 @@ public class Customer {
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
         this.isDirty = isDirty;
+        this.parishName = parishName;
+        this.villageName = villageName;
         this.subcountyId = subcountyId;
     }
 
@@ -323,6 +325,22 @@ public class Customer {
 
     public void setIsDirty(Boolean isDirty) {
         this.isDirty = isDirty;
+    }
+
+    public String getParishName() {
+        return parishName;
+    }
+
+    public void setParishName(String parishName) {
+        this.parishName = parishName;
+    }
+
+    public String getVillageName() {
+        return villageName;
+    }
+
+    public void setVillageName(String villageName) {
+        this.villageName = villageName;
     }
 
     public long getSubcountyId() {

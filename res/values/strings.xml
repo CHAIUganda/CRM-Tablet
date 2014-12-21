@@ -24,7 +24,7 @@
     <string name="gpscoordinates">GPS Coordinates</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="savecalldata">Save Call Data</string>
+    <string name="savecalldata">Saubmit Sale</string>
     <string name="delete_string">Delete</string>
     <string name="sync">Syncronise</string>
 </resources>

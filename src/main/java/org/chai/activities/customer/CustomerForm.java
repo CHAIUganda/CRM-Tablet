@@ -144,7 +144,7 @@ public class CustomerForm extends Activity {
                     public void onClick(DialogInterface dialogInterface, int button) {
                         CustomerContact customerContact = new CustomerContact(null);
                         customerContact.setUuid(UUID.randomUUID().toString());
-                        customerContact.setTitle(((EditText) entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
+                        customerContact.setContact(((EditText) entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
                         customerContact.setFirstName(((EditText) entryView.findViewById(R.id.customer_contact_firstname)).getText().toString());
                         customerContact.setSurname(((EditText) entryView.findViewById(R.id.customer_contact_surname)).getText().toString());
                         customerContact.setGender(((Spinner) entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
@@ -155,7 +155,7 @@ public class CustomerForm extends Activity {
                         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.customer_contacts_layout);
 
                         TextView contactView = new TextView(CustomerForm.this);
-                        contactView.setText(customerContact.getFirstName() + ":" + customerContact.getTitle());
+                        contactView.setText(customerContact.getFirstName() + ":" + customerContact.getContact());
                         contactView.setTextSize(18);
                         contactView.setTextColor(Color.parseColor("#000000"));
                         linearLayout.addView(contactView);

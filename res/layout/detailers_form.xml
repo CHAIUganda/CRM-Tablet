@@ -50,8 +50,9 @@
                     android:text="Survey Date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#428bca"
-                    android:layout_marginLeft="5dp"/>
+                    android:background="#0091CC"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#fff"/>
         </LinearLayout>
 
         <LinearLayout
@@ -255,8 +256,9 @@
                     android:text="Record GPS Coordinates"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:background="#428bca"
-                    android:layout_marginLeft="5dp"/>
+                    android:background="#0091CC"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#fff"/>
         </LinearLayout>
 
         <LinearLayout
@@ -791,7 +793,8 @@
                     android:text="Submit Data"
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="50dp"
-                    android:background="#428bca"/>
+                    android:background="#428bca"
+                    android:textColor="#fff"/>
 
         </LinearLayout>
 

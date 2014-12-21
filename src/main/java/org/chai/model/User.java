@@ -7,6 +7,8 @@ import de.greenrobot.dao.DaoException;
 
 // KEEP INCLUDES - put your custom includes here
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 // KEEP INCLUDES END
 /**
@@ -35,6 +37,8 @@ public class User {
 
 
     // KEEP FIELDS - put your custom fields here
+    public static String ROLE_DETAILER = "ROLE_DETAILER";
+    public static String ROLE_SALES = "ROLE_SALES";
     // KEEP FIELDS END
 
     public User() {
