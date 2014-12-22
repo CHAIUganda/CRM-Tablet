@@ -42,18 +42,20 @@
                     android:textStyle="bold"/>
 
 
-            <Spinner
-                    android:id="@+id/customer_spinner"
+            <AutoCompleteTextView
+                    android:id="@+id/sales_auto_complete_textview"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/selectItem"
-                    android:layout_width="fill_parent"
-                    android:entries="@array/productlist"
-                    android:background="@drawable/btn_dropdown"/>
+                    android:text=""
+                    style="@style/myEditText"
+                    android:textColor="@color/list_main_text_color"
+                    android:layout_marginRight="10dp"/>
 
         </LinearLayout>
 
 
         <TableLayout
+                android:id="@+id/orders_table"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:stretchColumns="*"

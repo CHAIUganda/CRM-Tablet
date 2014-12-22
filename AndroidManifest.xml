@@ -20,6 +20,7 @@
       <activity android:name=".activities.tasks.CommercialFormActivity"/>
       <activity android:name=".activities.customer.CustomerForm"/>
       <activity android:name=".activities.tasks.DetailersActivity"/>
+      <activity android:name=".activities.tasks.TakeOrderActivity"/>
   </application>
 
 </manifest>
