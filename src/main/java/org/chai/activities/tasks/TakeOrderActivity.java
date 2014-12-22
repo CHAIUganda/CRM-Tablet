@@ -30,7 +30,6 @@ public class TakeOrderActivity extends Activity {
     private TableLayout tableLayout;
     private List<Spinner> spinnerList;
     private List<EditText> quantityFields;
-    private List<EditText> priceFields;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +39,9 @@ public class TakeOrderActivity extends Activity {
         tableLayout = (TableLayout)findViewById(R.id.orders_table);
         spinnerList = new ArrayList<Spinner>();
         quantityFields = new ArrayList<EditText>();
-        priceFields = new ArrayList<EditText>();
 
         spinnerList.add((Spinner) findViewById(R.id.order_product));
         quantityFields.add((EditText) findViewById(R.id.order_quantity));
-        priceFields.add((EditText) findViewById(R.id.order_price));
 
         List<Customer> customersList = customerDao.loadAll();
         String[] customers = getCustomerName(customersList);
@@ -105,12 +102,6 @@ public class TakeOrderActivity extends Activity {
         quantityView.setLayoutParams(params);
         tableRow.addView(quantityView);
 
-
-        EditText priceView = (EditText)getLayoutInflater().inflate(R.layout.edit_text_style,null);
-        priceView.setTextColor(Color.BLACK);
-        priceView.setLayoutParams(params);
-        tableRow.addView(priceView);
-
         Button deleteBtn = new Button(this);
         deleteBtn.setBackgroundColor(Color.parseColor("#428bca"));
         deleteBtn.setText("Remove");
@@ -135,9 +126,6 @@ public class TakeOrderActivity extends Activity {
         }
         if (!quantityFields.isEmpty()) {
             quantityFields.remove(quantityFields.size() - 1);
-        }
-        if (!priceFields.isEmpty()) {
-            priceFields.remove(priceFields.size() - 1);
         }
     }
 
