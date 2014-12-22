@@ -66,7 +66,7 @@
                       android:padding="5dip">
 
                 <TextView
-                        android:text="Please select product and price of sale:"
+                        android:text="Please select product and quantity to order:"
                         android:textColor="@color/list_main_text_color"
                         android:textSize="@dimen/list_main_text_size"/>
 
@@ -132,7 +132,7 @@
                 android:padding="10dp">
 
             <EditText
-                    android:id="@+id/capture_call_data_date"
+                    android:id="@+id/order_delivery_date"
                     android:text=""
                     android:minWidth="20dip"
                     android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                     android:layout_marginLeft="5dp"/>
 
             <Button
-                    android:id="@+id/capture_call_data_setdate"
+                    android:id="@+id/order_delivery_date_btn"
                     android:text="Delivery Date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
         </LinearLayout>
 
         <Button
-                android:id="@+id/menu_add_new_calldata"
+                android:id="@+id/order_save_btn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"

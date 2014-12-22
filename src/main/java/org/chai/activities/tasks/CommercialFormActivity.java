@@ -161,7 +161,7 @@ public class CommercialFormActivity extends Activity {
             sale.setSalePrice(Integer.parseInt(priceFields.get(i).getText().toString()));
             sale.setOrderId(callDataTask.getId());
 //            sale.setProductId();
-            saleDao.insert(sale);
+//            saleDao.insert(sale);
         }
     }
 

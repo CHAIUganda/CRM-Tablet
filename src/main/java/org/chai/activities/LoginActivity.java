@@ -29,6 +29,7 @@ public class LoginActivity extends Activity {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private UserDao userDao;
+    private String role = User.ROLE_DETAILER;
 
     /**
      * Called when the activity is first created.
@@ -50,10 +51,11 @@ public class LoginActivity extends Activity {
         Button loginBtn = (Button)findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                onLoginSuccessfull("sales1", "pass",User.ROLE_SALES);
-               /* final ProgressDialog dialog = showProgressDialog();
+//                onLoginSuccessfull("sales1", "pass",User.ROLE_SALES);
+               final ProgressDialog dialog = showProgressDialog();
                 final String user = ((EditText) findViewById(R.id.userTxt)).getText().toString();
                 final String pass = ((EditText) findViewById(R.id.passwordTxt)).getText().toString();
+
                 final Place place = new Place();
                 new Thread(new Runnable() {
                     @Override
@@ -73,14 +75,17 @@ public class LoginActivity extends Activity {
                                     newUser.setPassword(Utils.encrypeString(pass));
                                     newUser.setRole(remoteUser.getRole());
                                     userDao.insert(newUser);
+                                    role = remoteUser.getRole();
                                 }
+
                             }
                         } else {
                             islogin = true;
+                            role = loggedInUser.get(0).getRole();
                         }
                         if (islogin) {
                             dialog.dismiss();
-                            onLoginSuccessfull(user, pass);
+                            onLoginSuccessfull(user, pass,role);
                         } else {
                             dialog.dismiss();
                             LoginActivity.this.runOnUiThread(
@@ -94,7 +99,7 @@ public class LoginActivity extends Activity {
 
                         }
                     }
-                }).start();*/
+                }).start();
             }
         });
     }

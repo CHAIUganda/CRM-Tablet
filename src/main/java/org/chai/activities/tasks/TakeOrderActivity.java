@@ -1,6 +1,7 @@
 package org.chai.activities.tasks;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,13 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import org.chai.R;
-import org.chai.model.Customer;
-import org.chai.model.CustomerDao;
-import org.chai.model.DaoMaster;
-import org.chai.model.DaoSession;
+import org.chai.model.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by victor on 12/22/14.
@@ -26,10 +23,17 @@ public class TakeOrderActivity extends Activity {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private CustomerDao customerDao;
+    private OrderDao orderDao;
 
     private TableLayout tableLayout;
     private List<Spinner> spinnerList;
     private List<EditText> quantityFields;
+
+    private EditText dateEditTxt;
+    private DatePickerDialog datePickerDialog;
+    private String initialDate;
+    private String initialMonth;
+    private String initialYear;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,48 @@ public class TakeOrderActivity extends Activity {
             }
         });
 
+        Button dateBtn = (Button)findViewById(R.id.order_delivery_date_btn);
+        dateEditTxt = (EditText)findViewById(R.id.order_delivery_date);
+
+        dateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = null;
+                String existingDate = (String)dateEditTxt.getText().toString();
+                if(existingDate!=null && !existingDate.equals("")){
+                    StringTokenizer stringTokenizer = new StringTokenizer(existingDate,"/");
+                    initialMonth = stringTokenizer.nextToken();
+                    initialDate = stringTokenizer.nextToken();
+                    initialYear = stringTokenizer.nextToken();
+                    if(datePickerDialog == null){
+                        datePickerDialog = new DatePickerDialog(view.getContext(),new PickDate(),Integer.parseInt(initialYear),
+                                Integer.parseInt(initialMonth)-1,
+                                Integer.parseInt(initialDate));
+
+                        datePickerDialog.updateDate(Integer.parseInt(initialYear),
+                                Integer.parseInt(initialMonth)-1,
+                                Integer.parseInt(initialDate));
+                    }
+                }else{
+                    calendar = Calendar.getInstance();
+                    if(datePickerDialog == null){
+                        datePickerDialog = new DatePickerDialog(view.getContext(),new PickDate(),calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+                        datePickerDialog.updateDate(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+                    }
+                }
+                datePickerDialog.show();
+
+            }
+        });
+
+        Button saveBtn = (Button)findViewById(R.id.order_save_btn);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitOrder();
+            }
+        });
+
     }
 
     private String[] getCustomerName(List<Customer> customers) {
@@ -74,6 +120,7 @@ public class TakeOrderActivity extends Activity {
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
             customerDao = daoSession.getCustomerDao();
+            orderDao = daoSession.getOrderDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
             Toast.makeText(getApplicationContext(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -126,6 +173,28 @@ public class TakeOrderActivity extends Activity {
         }
         if (!quantityFields.isEmpty()) {
             quantityFields.remove(quantityFields.size() - 1);
+        }
+    }
+
+    private class PickDate implements DatePickerDialog.OnDateSetListener{
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            view.updateDate(year, monthOfYear, dayOfMonth);
+            dateEditTxt.setText(monthOfYear+"/"+dayOfMonth+"/"+year);
+            datePickerDialog.hide();
+        }
+    }
+
+    private void  submitOrder(){
+        for (int i = 0; i < spinnerList.size(); ++i) {
+            Order order = new Order(null);
+            order.setQuantity(Double.parseDouble(quantityFields.get(i).getText().toString()));
+            order.setCustomerId(4L);
+            order.setProductId(2L);
+            order.setDeliveryDate(new Date());
+            order.setOrderDate(new Date());
+//            orderDao.insert(order)
         }
     }
 

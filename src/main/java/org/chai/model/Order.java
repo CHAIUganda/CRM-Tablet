@@ -21,10 +21,6 @@ public class Order {
     private java.util.Date deliveryDate;
     /** Not-null value. */
     private java.util.Date orderDate;
-    /** Not-null value. */
-    private String contactTel;
-    /** Not-null value. */
-    private String contactName;
     private long customerId;
     private long productId;
 
@@ -52,14 +48,12 @@ public class Order {
         this.id = id;
     }
 
-    public Order(Long id, String uuid, double quantity, java.util.Date deliveryDate, java.util.Date orderDate, String contactTel, String contactName, long customerId, long productId) {
+    public Order(Long id, String uuid, double quantity, java.util.Date deliveryDate, java.util.Date orderDate, long customerId, long productId) {
         this.id = id;
         this.uuid = uuid;
         this.quantity = quantity;
         this.deliveryDate = deliveryDate;
         this.orderDate = orderDate;
-        this.contactTel = contactTel;
-        this.contactName = contactName;
         this.customerId = customerId;
         this.productId = productId;
     }
@@ -114,26 +108,6 @@ public class Order {
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setOrderDate(java.util.Date orderDate) {
         this.orderDate = orderDate;
-    }
-
-    /** Not-null value. */
-    public String getContactTel() {
-        return contactTel;
-    }
-
-    /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setContactTel(String contactTel) {
-        this.contactTel = contactTel;
-    }
-
-    /** Not-null value. */
-    public String getContactName() {
-        return contactName;
-    }
-
-    /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
     }
 
     public long getCustomerId() {
