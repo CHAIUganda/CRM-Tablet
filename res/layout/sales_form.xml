@@ -80,6 +80,7 @@
         </LinearLayout>
 
         <TableLayout
+                android:id="@+id/sales_table"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:stretchColumns="*"
@@ -140,26 +141,31 @@
                           style="@style/myEditText"
                           android:textColor="@color/list_main_text_color"
                           android:layout_marginRight="10dp"/>
-
-
-            </TableRow>
-
-            <TableRow
-                    android:id="@+id/tableRow7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dip">
-
                 <Button
-                        android:id="@+id/capture_call_data_setdate"
-                        android:text="Add"
+                        android:id="@+id/sales_remove_btn"
+                        android:text="Remove"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="#428bca"
                         android:layout_marginLeft="5dp"/>
+
+
             </TableRow>
 
         </TableLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <Button
+                    android:id="@+id/sales_add_more"
+                    android:text="Add Row"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#428bca"
+                    android:layout_marginLeft="5dp"/>
+        </LinearLayout>
         <Button
                 android:id="@+id/menu_add_new_calldata"
                 android:layout_width="match_parent"
