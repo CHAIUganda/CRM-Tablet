@@ -42,7 +42,7 @@
                     android:textStyle="bold"/>
 
             <TextView
-                    android:id="@+id/capture_calls_data_customer"
+                    android:id="@+id/sales_customer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -68,7 +68,7 @@
                     android:textStyle="bold"/>
 
             <TextView
-                    android:id="@+id/capture_calls_data_location"
+                    android:id="@+id/sales_customer_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -78,6 +78,125 @@
                     android:text="plot 22 Wandegs"/>
 
         </LinearLayout>
+
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:id="@+id/sales_do_you_stock_zinc_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Do you stock ORS and zinc"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <Spinner
+                    android:id="@+id/sales_do_you_stock_zinc"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/selectItem"
+                    android:layout_width="fill_parent"
+                    android:entries="@array/yesnolist"
+                    android:background="@drawable/btn_dropdown"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/sales_zinc_stock_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/sales_howmany_in_stock_zinc_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="If Yes, Check how many are in stock(Zinc):"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/sales_howmany_in_stock_zinc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:textCursorDrawable="@null"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/sales_howmany_in_stock_ors_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="If Yes, Check how many are in stock(ORS):"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/sales_howmany_in_stock_ors"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:textCursorDrawable="@null"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/sales_ifnowhy_layout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14.If No, why?"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <EditText
+                    android:id="@+id/detailer_if_no_why"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="@dimen/list_sub_text_size"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:background="@drawable/bordertextfield"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null"/>
+
+        </LinearLayout>
+
 
         <TableLayout
                 android:id="@+id/sales_table"
@@ -91,7 +210,7 @@
                       android:padding="5dip">
 
                 <TextView
-                        android:text="Please select product and price of sale:"
+                        android:text="Note the brands sold:"
                         android:textColor="@color/list_main_text_color"
                         android:textSize="@dimen/list_main_text_size"/>
 
@@ -134,13 +253,15 @@
                           android:text=""
                           style="@style/myEditText"
                           android:textColor="@color/list_main_text_color"
-                          android:layout_marginRight="10dp"/>
+                          android:layout_marginRight="10dp"
+                          android:inputType="number"/>
 
                 <EditText android:id="@+id/sales_price"
                           android:text="500000"
                           style="@style/myEditText"
                           android:textColor="@color/list_main_text_color"
-                          android:layout_marginRight="10dp"/>
+                          android:layout_marginRight="10dp"
+                          android:inputType="number"/>
                 <Button
                         android:id="@+id/sales_remove_btn"
                         android:text="Remove"
@@ -168,6 +289,99 @@
                     android:paddingRight="5dp"
                     android:paddingLeft="5dp"/>
         </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Did you describe the new government approved MRP of 1500UGX?"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <Spinner
+                    android:id="@+id/sales_government_approval"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/selectItem"
+                    android:layout_width="fill_parent"
+                    android:entries="@array/yesnolist"
+                    android:background="@drawable/btn_dropdown"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Point of sale materials"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <Spinner
+                    android:id="@+id/sales_point_of_sale"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/selectItem"
+                    android:layout_width="fill_parent"
+                    android:entries="@array/point_of_sale_material"
+                    android:background="@drawable/btn_dropdown"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="What did you recommend as next steps for the retailer"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <Spinner
+                    android:id="@+id/sales_next_step_recommendation"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/selectItem"
+                    android:layout_width="fill_parent"
+                    android:entries="@array/recommendation"
+                    android:background="@drawable/btn_dropdown"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="What recommendation level would you give the customer"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <Spinner
+                    android:id="@+id/sales_recommendation_level"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/selectItem"
+                    android:layout_width="fill_parent"
+                    android:entries="@array/ratings"
+                    android:background="@drawable/btn_dropdown"/>
+
+        </LinearLayout>
+
+
         <Button
                 android:id="@+id/sales_save_sale"
                 android:layout_width="match_parent"
@@ -177,7 +391,8 @@
                 android:text="@string/savecalldata"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:background="#428bca"/>
+                android:background="#428bca"
+                android:textColor="#fff"/>
         <Button
                 android:id="@+id/sales_take_order"
                 android:layout_width="match_parent"
@@ -187,7 +402,8 @@
                 android:text="Take an Order"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:background="#428bca"/>
+                android:background="#428bca"
+                android:textColor="#fff"/>
 
 
     </LinearLayout>

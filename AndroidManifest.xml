@@ -20,7 +20,7 @@
       <activity android:name=".activities.tasks.CommercialFormActivity"/>
       <activity android:name=".activities.customer.CustomerForm"/>
       <activity android:name=".activities.tasks.DetailersActivity"/>
-      <activity android:name=".activities.tasks.TakeOrderActivity"/>
+      <activity android:name=".activities.tasks.TakeOrderActivity" android:theme="@android:style/Theme.Dialog" android:excludeFromRecents="true"/>
   </application>
 
 </manifest>

@@ -2,12 +2,16 @@ package org.chai.activities.tasks;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -20,6 +24,7 @@ import org.chai.rest.RestClient;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by victor on 10/26/14.
@@ -38,6 +43,7 @@ public class CommercialFormActivity extends Activity {
     private List<EditText> quantityFields;
     private List<EditText> priceFields;
     private Task callDataTask;
+    private Customer salesCustomer;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +56,9 @@ public class CommercialFormActivity extends Activity {
         Bundle bundle = getIntent().getExtras();
         Long taskId = bundle.getLong("taskId");
         callDataTask = taskDao.loadDeep(taskId);
+        salesCustomer = callDataTask.getCustomer();
+        ((TextView)findViewById(R.id.sales_customer)).setText(salesCustomer.getOutletName());
+        ((TextView)findViewById(R.id.sales_customer_location)).setText(salesCustomer.getDescriptionOfOutletLocation());
 
         spinnerList.add((Spinner) findViewById(R.id.sales_product));
         quantityFields.add((EditText) findViewById(R.id.sales_quantity));
@@ -69,6 +78,40 @@ public class CommercialFormActivity extends Activity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),TakeOrderActivity.class);
                 startActivity(intent);
+               /* LayoutInflater layoutInflater = (LayoutInflater) CommercialFormActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View entryView = layoutInflater.inflate(R.layout.order_form, null);
+                AlertDialog.Builder alert = new AlertDialog.Builder(CommercialFormActivity.this);
+                alert.setIcon(R.drawable.icon).setTitle("New Order").setView(entryView).setPositiveButton("Add", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int button) {
+                       *//* CustomerContact customerContact = new CustomerContact(null);
+                        customerContact.setUuid(UUID.randomUUID().toString());
+                        customerContact.setContact(((EditText) entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
+                        customerContact.setFirstName(((EditText) entryView.findViewById(R.id.customer_contact_firstname)).getText().toString());
+                        customerContact.setSurname(((EditText) entryView.findViewById(R.id.customer_contact_surname)).getText().toString());
+                        customerContact.setGender(((Spinner) entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
+                        customerContact.setNetworkOrAssociation(Boolean.valueOf(((Spinner) entryView.findViewById(R.id.customer_contact_network)).getSelectedItem().toString()));
+                        customerContact.setRole(((Spinner) entryView.findViewById(R.id.customer_contact_type)).getSelectedItem().toString());
+                        customerContacts.add(customerContact);
+                        //add to parent form
+                        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.customer_contacts_layout);
+
+                        TextView contactView = new TextView(CustomerForm.this);
+                        contactView.setText(customerContact.getFirstName() + ":" + customerContact.getContact());
+                        contactView.setTextSize(18);
+                        contactView.setTextColor(Color.parseColor("#000000"));
+                        linearLayout.addView(contactView);*//*
+
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int button) {
+
+                    }
+                });
+                alert.show();*/
             }
         });
 
@@ -81,6 +124,7 @@ public class CommercialFormActivity extends Activity {
                 startActivity(i);
             }
         });
+        manageDoyouStockZincResponses();
 
     }
 
@@ -116,7 +160,7 @@ public class CommercialFormActivity extends Activity {
 
         LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.setMargins(10,10,10,10);
-        EditText quantityView =(EditText)getLayoutInflater().inflate(R.layout.edit_text_style,null);
+        EditText quantityView =(EditText)getLayoutInflater().inflate(R.layout.edit_text_style, null);
         quantityView.setTextColor(Color.BLACK);
         quantityView.setLayoutParams(params);
         tableRow.addView(quantityView);
@@ -167,6 +211,31 @@ public class CommercialFormActivity extends Activity {
 //            sale.setProductId();
 //            saleDao.insert(sale);
         }
+    }
+
+
+    private void manageDoyouStockZincResponses() {
+        final Spinner spinner = (Spinner) findViewById(R.id.sales_do_you_stock_zinc);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                String selected = (String) spinner.getAdapter().getItem(position);
+                LinearLayout stockfieldsLayout = (LinearLayout) findViewById(R.id.sales_zinc_stock_layout);
+                LinearLayout ifnowhyLayout = (LinearLayout) findViewById(R.id.sales_ifnowhy_layout);
+                if ("No".equalsIgnoreCase(selected)) {
+                    stockfieldsLayout.setVisibility(View.GONE);
+                    ifnowhyLayout.setVisibility(View.VISIBLE);
+                } else {
+                    stockfieldsLayout.setVisibility(View.VISIBLE);
+                    ifnowhyLayout.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
 

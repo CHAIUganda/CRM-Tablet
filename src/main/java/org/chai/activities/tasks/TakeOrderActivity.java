@@ -106,7 +106,7 @@ public class TakeOrderActivity extends Activity {
                 startActivity(i);
             }
         });
-
+        this.setFinishOnTouchOutside(false);
     }
 
     private String[] getCustomerName(List<Customer> customers) {

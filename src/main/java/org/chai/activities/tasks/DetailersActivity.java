@@ -96,6 +96,14 @@ public class DetailersActivity extends Activity {
             }
         });
         bindDetailerCallToUi();
+        Button takeOrder = (Button)findViewById(R.id.detailer_take_order);
+        takeOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),TakeOrderActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initialiseGreenDao() {
