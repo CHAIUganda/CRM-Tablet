@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.*;
 import org.chai.R;
 import android.widget.TableRow.LayoutParams;
+import org.chai.activities.HomeActivity;
 import org.chai.model.*;
+import org.chai.rest.RestClient;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,6 +77,8 @@ public class CommercialFormActivity extends Activity {
             @Override
             public void onClick(View view) {
                 submitSale();
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(i);
             }
         });
 

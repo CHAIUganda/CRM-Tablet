@@ -2,6 +2,7 @@ package org.chai.activities.tasks;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import org.chai.R;
+import org.chai.activities.HomeActivity;
 import org.chai.model.*;
 
 import java.util.*;
@@ -100,6 +102,8 @@ public class TakeOrderActivity extends Activity {
             @Override
             public void onClick(View view) {
                 submitOrder();
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(i);
             }
         });
 
