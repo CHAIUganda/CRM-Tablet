@@ -1,5 +1,6 @@
 package org.chai.activities.tasks;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import org.chai.adapter.ParishArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.adapter.TaskListAdapter;
 import org.chai.model.*;
+import org.chai.rest.RestClient;
 
 import java.util.List;
 
@@ -76,6 +78,25 @@ public class TaskByLocationFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                if(RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)){
+                    Intent intent = new Intent(getActivity(), DetailersActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }else{
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
+                    Intent intent = new Intent(getActivity(), CommercialFormActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
 
             }
         });
