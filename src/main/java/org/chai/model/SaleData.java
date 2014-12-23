@@ -17,6 +17,8 @@ public class SaleData {
     private Long id;
     /** Not-null value. */
     private String uuid;
+    private int quantity;
+    private int price;
     private long saleId;
     private long productId;
 
@@ -43,9 +45,11 @@ public class SaleData {
         this.id = id;
     }
 
-    public SaleData(Long id, String uuid, long saleId, long productId) {
+    public SaleData(Long id, String uuid, int quantity, int price, long saleId, long productId) {
         this.id = id;
         this.uuid = uuid;
+        this.quantity = quantity;
+        this.price = price;
         this.saleId = saleId;
         this.productId = productId;
     }
@@ -72,6 +76,22 @@ public class SaleData {
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public long getSaleId() {

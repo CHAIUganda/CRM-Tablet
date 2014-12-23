@@ -40,8 +40,6 @@ public class SaleDao extends AbstractDao<Sale, Long> {
         public final static Property RecommendationLevel = new Property(9, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
         public final static Property GovernmentApproval = new Property(10, String.class, "governmentApproval", false, "GOVERNMENT_APPROVAL");
         public final static Property OrderId = new Property(11, long.class, "orderId", false, "ORDER_ID");
-        public final static Property Quantity = new Property(12, int.class, "quantity", false, "QUANTITY");
-        public final static Property SalePrice = new Property(13, int.class, "salePrice", false, "SALE_PRICE");
     };
 
     private DaoSession daoSession;
@@ -72,9 +70,7 @@ public class SaleDao extends AbstractDao<Sale, Long> {
                 "'RECOMMENDATION_NEXT_STEP' TEXT," + // 8: recommendationNextStep
                 "'RECOMMENDATION_LEVEL' TEXT," + // 9: recommendationLevel
                 "'GOVERNMENT_APPROVAL' TEXT," + // 10: governmentApproval
-                "'ORDER_ID' INTEGER NOT NULL ," + // 11: orderId
-                "'QUANTITY' INTEGER NOT NULL ," + // 12: quantity
-                "'SALE_PRICE' INTEGER NOT NULL );"); // 13: salePrice
+                "'ORDER_ID' INTEGER NOT NULL );"); // 11: orderId
     }
 
     /** Drops the underlying database table. */
@@ -135,8 +131,6 @@ public class SaleDao extends AbstractDao<Sale, Long> {
             stmt.bindString(11, governmentApproval);
         }
         stmt.bindLong(12, entity.getOrderId());
-        stmt.bindLong(13, entity.getQuantity());
-        stmt.bindLong(14, entity.getSalePrice());
     }
 
     @Override
@@ -166,9 +160,7 @@ public class SaleDao extends AbstractDao<Sale, Long> {
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // recommendationNextStep
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // recommendationLevel
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // governmentApproval
-            cursor.getLong(offset + 11), // orderId
-            cursor.getInt(offset + 12), // quantity
-            cursor.getInt(offset + 13) // salePrice
+            cursor.getLong(offset + 11) // orderId
         );
         return entity;
     }
@@ -188,8 +180,6 @@ public class SaleDao extends AbstractDao<Sale, Long> {
         entity.setRecommendationLevel(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setGovernmentApproval(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
         entity.setOrderId(cursor.getLong(offset + 11));
-        entity.setQuantity(cursor.getInt(offset + 12));
-        entity.setSalePrice(cursor.getInt(offset + 13));
      }
     
     /** @inheritdoc */

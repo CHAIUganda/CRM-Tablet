@@ -29,8 +29,6 @@ public class Sale {
     private String recommendationLevel;
     private String governmentApproval;
     private long orderId;
-    private int quantity;
-    private int salePrice;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -53,7 +51,7 @@ public class Sale {
         this.id = id;
     }
 
-    public Sale(Long id, String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, long orderId, int quantity, int salePrice) {
+    public Sale(Long id, String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, long orderId) {
         this.id = id;
         this.uuid = uuid;
         this.dateOfSale = dateOfSale;
@@ -66,8 +64,6 @@ public class Sale {
         this.recommendationLevel = recommendationLevel;
         this.governmentApproval = governmentApproval;
         this.orderId = orderId;
-        this.quantity = quantity;
-        this.salePrice = salePrice;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -174,22 +170,6 @@ public class Sale {
 
     public void setOrderId(long orderId) {
         this.orderId = orderId;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(int salePrice) {
-        this.salePrice = salePrice;
     }
 
     /** To-one relationship, resolved on first access. */

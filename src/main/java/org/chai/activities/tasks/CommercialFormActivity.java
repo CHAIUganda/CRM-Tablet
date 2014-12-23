@@ -204,9 +204,7 @@ public class CommercialFormActivity extends Activity {
     private void submitSale() {
         for (int i = 0; i < spinnerList.size(); ++i) {
             Sale sale = new Sale(null);
-            sale.setDateOfSale(new Date());
-            sale.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
-            sale.setSalePrice(Integer.parseInt(priceFields.get(i).getText().toString()));
+            sale.setDateOfSale(new Date()); 
             sale.setOrderId(callDataTask.getId());
 //            sale.setProductId();
 //            saleDao.insert(sale);

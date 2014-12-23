@@ -30,8 +30,10 @@ public class SaleDataDao extends AbstractDao<SaleData, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property SaleId = new Property(2, long.class, "saleId", false, "SALE_ID");
-        public final static Property ProductId = new Property(3, long.class, "productId", false, "PRODUCT_ID");
+        public final static Property Quantity = new Property(2, int.class, "quantity", false, "QUANTITY");
+        public final static Property Price = new Property(3, int.class, "price", false, "PRICE");
+        public final static Property SaleId = new Property(4, long.class, "saleId", false, "SALE_ID");
+        public final static Property ProductId = new Property(5, long.class, "productId", false, "PRODUCT_ID");
     };
 
     private DaoSession daoSession;
@@ -54,8 +56,10 @@ public class SaleDataDao extends AbstractDao<SaleData, Long> {
         db.execSQL("CREATE TABLE " + constraint + "'SALE_DATA' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'SALE_ID' INTEGER NOT NULL ," + // 2: saleId
-                "'PRODUCT_ID' INTEGER NOT NULL );"); // 3: productId
+                "'QUANTITY' INTEGER NOT NULL ," + // 2: quantity
+                "'PRICE' INTEGER NOT NULL ," + // 3: price
+                "'SALE_ID' INTEGER NOT NULL ," + // 4: saleId
+                "'PRODUCT_ID' INTEGER NOT NULL );"); // 5: productId
     }
 
     /** Drops the underlying database table. */
@@ -74,8 +78,10 @@ public class SaleDataDao extends AbstractDao<SaleData, Long> {
             stmt.bindLong(1, id);
         }
         stmt.bindString(2, entity.getUuid());
-        stmt.bindLong(3, entity.getSaleId());
-        stmt.bindLong(4, entity.getProductId());
+        stmt.bindLong(3, entity.getQuantity());
+        stmt.bindLong(4, entity.getPrice());
+        stmt.bindLong(5, entity.getSaleId());
+        stmt.bindLong(6, entity.getProductId());
     }
 
     @Override
@@ -96,8 +102,10 @@ public class SaleDataDao extends AbstractDao<SaleData, Long> {
         SaleData entity = new SaleData( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // uuid
-            cursor.getLong(offset + 2), // saleId
-            cursor.getLong(offset + 3) // productId
+            cursor.getInt(offset + 2), // quantity
+            cursor.getInt(offset + 3), // price
+            cursor.getLong(offset + 4), // saleId
+            cursor.getLong(offset + 5) // productId
         );
         return entity;
     }
@@ -107,8 +115,10 @@ public class SaleDataDao extends AbstractDao<SaleData, Long> {
     public void readEntity(Cursor cursor, SaleData entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setUuid(cursor.getString(offset + 1));
-        entity.setSaleId(cursor.getLong(offset + 2));
-        entity.setProductId(cursor.getLong(offset + 3));
+        entity.setQuantity(cursor.getInt(offset + 2));
+        entity.setPrice(cursor.getInt(offset + 3));
+        entity.setSaleId(cursor.getLong(offset + 4));
+        entity.setProductId(cursor.getLong(offset + 5));
      }
     
     /** @inheritdoc */

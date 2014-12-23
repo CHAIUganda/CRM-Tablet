@@ -28,6 +28,7 @@ public class CustomerContact {
     private java.util.Date lastUpdated;
     private long customerId;
 
+
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */
