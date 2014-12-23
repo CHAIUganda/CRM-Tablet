@@ -36,7 +36,7 @@ public class Product {
 
     private List<Order> orders;
     private List<Promotion> promotions;
-    private List<Sale> sales;
+    private List<SaleData> salesDatas;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -186,25 +186,25 @@ public class Product {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<Sale> getSales() {
-        if (sales == null) {
+    public List<SaleData> getSalesDatas() {
+        if (salesDatas == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            SaleDao targetDao = daoSession.getSaleDao();
-            List<Sale> salesNew = targetDao._queryProduct_Sales(id);
+            SaleDataDao targetDao = daoSession.getSaleDataDao();
+            List<SaleData> salesDatasNew = targetDao._queryProduct_SalesDatas(id);
             synchronized (this) {
-                if(sales == null) {
-                    sales = salesNew;
+                if(salesDatas == null) {
+                    salesDatas = salesDatasNew;
                 }
             }
         }
-        return sales;
+        return salesDatas;
     }
 
     /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    public synchronized void resetSales() {
-        sales = null;
+    public synchronized void resetSalesDatas() {
+        salesDatas = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

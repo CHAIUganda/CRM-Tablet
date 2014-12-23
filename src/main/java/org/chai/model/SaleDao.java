@@ -30,17 +30,23 @@ public class SaleDao extends AbstractDao<Sale, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Quantity = new Property(2, int.class, "quantity", false, "QUANTITY");
-        public final static Property SalePrice = new Property(3, int.class, "salePrice", false, "SALE_PRICE");
-        public final static Property DateOfSale = new Property(4, java.util.Date.class, "dateOfSale", false, "DATE_OF_SALE");
-        public final static Property OrderId = new Property(5, long.class, "orderId", false, "ORDER_ID");
-        public final static Property ProductId = new Property(6, long.class, "productId", false, "PRODUCT_ID");
+        public final static Property DateOfSale = new Property(2, java.util.Date.class, "dateOfSale", false, "DATE_OF_SALE");
+        public final static Property DoYouStockOrsZinc = new Property(3, Boolean.class, "doYouStockOrsZinc", false, "DO_YOU_STOCK_ORS_ZINC");
+        public final static Property HowManyZincInStock = new Property(4, Integer.class, "howManyZincInStock", false, "HOW_MANY_ZINC_IN_STOCK");
+        public final static Property HowmanyOrsInStock = new Property(5, Integer.class, "howmanyOrsInStock", false, "HOWMANY_ORS_IN_STOCK");
+        public final static Property IfNoWhy = new Property(6, String.class, "ifNoWhy", false, "IF_NO_WHY");
+        public final static Property PointOfsaleMaterial = new Property(7, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
+        public final static Property RecommendationNextStep = new Property(8, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
+        public final static Property RecommendationLevel = new Property(9, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
+        public final static Property GovernmentApproval = new Property(10, String.class, "governmentApproval", false, "GOVERNMENT_APPROVAL");
+        public final static Property OrderId = new Property(11, long.class, "orderId", false, "ORDER_ID");
+        public final static Property Quantity = new Property(12, int.class, "quantity", false, "QUANTITY");
+        public final static Property SalePrice = new Property(13, int.class, "salePrice", false, "SALE_PRICE");
     };
 
     private DaoSession daoSession;
 
     private Query<Sale> order_SalesQuery;
-    private Query<Sale> product_SalesQuery;
 
     public SaleDao(DaoConfig config) {
         super(config);
@@ -57,11 +63,18 @@ public class SaleDao extends AbstractDao<Sale, Long> {
         db.execSQL("CREATE TABLE " + constraint + "'SALE' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'QUANTITY' INTEGER NOT NULL ," + // 2: quantity
-                "'SALE_PRICE' INTEGER NOT NULL ," + // 3: salePrice
-                "'DATE_OF_SALE' INTEGER NOT NULL ," + // 4: dateOfSale
-                "'ORDER_ID' INTEGER NOT NULL ," + // 5: orderId
-                "'PRODUCT_ID' INTEGER NOT NULL );"); // 6: productId
+                "'DATE_OF_SALE' INTEGER NOT NULL ," + // 2: dateOfSale
+                "'DO_YOU_STOCK_ORS_ZINC' INTEGER," + // 3: doYouStockOrsZinc
+                "'HOW_MANY_ZINC_IN_STOCK' INTEGER," + // 4: howManyZincInStock
+                "'HOWMANY_ORS_IN_STOCK' INTEGER," + // 5: howmanyOrsInStock
+                "'IF_NO_WHY' TEXT," + // 6: ifNoWhy
+                "'POINT_OFSALE_MATERIAL' TEXT," + // 7: pointOfsaleMaterial
+                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 8: recommendationNextStep
+                "'RECOMMENDATION_LEVEL' TEXT," + // 9: recommendationLevel
+                "'GOVERNMENT_APPROVAL' TEXT," + // 10: governmentApproval
+                "'ORDER_ID' INTEGER NOT NULL ," + // 11: orderId
+                "'QUANTITY' INTEGER NOT NULL ," + // 12: quantity
+                "'SALE_PRICE' INTEGER NOT NULL );"); // 13: salePrice
     }
 
     /** Drops the underlying database table. */
@@ -80,11 +93,50 @@ public class SaleDao extends AbstractDao<Sale, Long> {
             stmt.bindLong(1, id);
         }
         stmt.bindString(2, entity.getUuid());
-        stmt.bindLong(3, entity.getQuantity());
-        stmt.bindLong(4, entity.getSalePrice());
-        stmt.bindLong(5, entity.getDateOfSale().getTime());
-        stmt.bindLong(6, entity.getOrderId());
-        stmt.bindLong(7, entity.getProductId());
+        stmt.bindLong(3, entity.getDateOfSale().getTime());
+ 
+        Boolean doYouStockOrsZinc = entity.getDoYouStockOrsZinc();
+        if (doYouStockOrsZinc != null) {
+            stmt.bindLong(4, doYouStockOrsZinc ? 1l: 0l);
+        }
+ 
+        Integer howManyZincInStock = entity.getHowManyZincInStock();
+        if (howManyZincInStock != null) {
+            stmt.bindLong(5, howManyZincInStock);
+        }
+ 
+        Integer howmanyOrsInStock = entity.getHowmanyOrsInStock();
+        if (howmanyOrsInStock != null) {
+            stmt.bindLong(6, howmanyOrsInStock);
+        }
+ 
+        String ifNoWhy = entity.getIfNoWhy();
+        if (ifNoWhy != null) {
+            stmt.bindString(7, ifNoWhy);
+        }
+ 
+        String pointOfsaleMaterial = entity.getPointOfsaleMaterial();
+        if (pointOfsaleMaterial != null) {
+            stmt.bindString(8, pointOfsaleMaterial);
+        }
+ 
+        String recommendationNextStep = entity.getRecommendationNextStep();
+        if (recommendationNextStep != null) {
+            stmt.bindString(9, recommendationNextStep);
+        }
+ 
+        String recommendationLevel = entity.getRecommendationLevel();
+        if (recommendationLevel != null) {
+            stmt.bindString(10, recommendationLevel);
+        }
+ 
+        String governmentApproval = entity.getGovernmentApproval();
+        if (governmentApproval != null) {
+            stmt.bindString(11, governmentApproval);
+        }
+        stmt.bindLong(12, entity.getOrderId());
+        stmt.bindLong(13, entity.getQuantity());
+        stmt.bindLong(14, entity.getSalePrice());
     }
 
     @Override
@@ -105,11 +157,18 @@ public class SaleDao extends AbstractDao<Sale, Long> {
         Sale entity = new Sale( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // uuid
-            cursor.getInt(offset + 2), // quantity
-            cursor.getInt(offset + 3), // salePrice
-            new java.util.Date(cursor.getLong(offset + 4)), // dateOfSale
-            cursor.getLong(offset + 5), // orderId
-            cursor.getLong(offset + 6) // productId
+            new java.util.Date(cursor.getLong(offset + 2)), // dateOfSale
+            cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0, // doYouStockOrsZinc
+            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // howManyZincInStock
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // howmanyOrsInStock
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // ifNoWhy
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // pointOfsaleMaterial
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // recommendationNextStep
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // recommendationLevel
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // governmentApproval
+            cursor.getLong(offset + 11), // orderId
+            cursor.getInt(offset + 12), // quantity
+            cursor.getInt(offset + 13) // salePrice
         );
         return entity;
     }
@@ -119,11 +178,18 @@ public class SaleDao extends AbstractDao<Sale, Long> {
     public void readEntity(Cursor cursor, Sale entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setUuid(cursor.getString(offset + 1));
-        entity.setQuantity(cursor.getInt(offset + 2));
-        entity.setSalePrice(cursor.getInt(offset + 3));
-        entity.setDateOfSale(new java.util.Date(cursor.getLong(offset + 4)));
-        entity.setOrderId(cursor.getLong(offset + 5));
-        entity.setProductId(cursor.getLong(offset + 6));
+        entity.setDateOfSale(new java.util.Date(cursor.getLong(offset + 2)));
+        entity.setDoYouStockOrsZinc(cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0);
+        entity.setHowManyZincInStock(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
+        entity.setHowmanyOrsInStock(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setIfNoWhy(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setPointOfsaleMaterial(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setRecommendationNextStep(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setRecommendationLevel(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setGovernmentApproval(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setOrderId(cursor.getLong(offset + 11));
+        entity.setQuantity(cursor.getInt(offset + 12));
+        entity.setSalePrice(cursor.getInt(offset + 13));
      }
     
     /** @inheritdoc */
@@ -164,21 +230,6 @@ public class SaleDao extends AbstractDao<Sale, Long> {
         return query.list();
     }
 
-    /** Internal query to resolve the "sales" to-many relationship of Product. */
-    public List<Sale> _queryProduct_Sales(long productId) {
-        synchronized (this) {
-            if (product_SalesQuery == null) {
-                QueryBuilder<Sale> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.ProductId.eq(null));
-                queryBuilder.orderRaw("DATE_OF_SALE ASC");
-                product_SalesQuery = queryBuilder.build();
-            }
-        }
-        Query<Sale> query = product_SalesQuery.forCurrentThread();
-        query.setParameter(0, productId);
-        return query.list();
-    }
-
     private String selectDeep;
 
     protected String getSelectDeep() {
@@ -187,11 +238,8 @@ public class SaleDao extends AbstractDao<Sale, Long> {
             SqlUtils.appendColumns(builder, "T", getAllColumns());
             builder.append(',');
             SqlUtils.appendColumns(builder, "T0", daoSession.getOrderDao().getAllColumns());
-            builder.append(',');
-            SqlUtils.appendColumns(builder, "T1", daoSession.getProductDao().getAllColumns());
             builder.append(" FROM SALE T");
             builder.append(" LEFT JOIN orders T0 ON T.'ORDER_ID'=T0.'_id'");
-            builder.append(" LEFT JOIN PRODUCT T1 ON T.'PRODUCT_ID'=T1.'_id'");
             builder.append(' ');
             selectDeep = builder.toString();
         }
@@ -205,12 +253,6 @@ public class SaleDao extends AbstractDao<Sale, Long> {
         Order order = loadCurrentOther(daoSession.getOrderDao(), cursor, offset);
          if(order != null) {
             entity.setOrder(order);
-        }
-        offset += daoSession.getOrderDao().getAllColumns().length;
-
-        Product product = loadCurrentOther(daoSession.getProductDao(), cursor, offset);
-         if(product != null) {
-            entity.setProduct(product);
         }
 
         return entity;    
