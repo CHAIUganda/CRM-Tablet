@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ import java.util.UUID;
 /**
  * Created by victor on 10/26/14.
  */
-public class CommercialFormActivity extends Activity {
+public class CommercialFormActivity extends Fragment {
 
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
@@ -44,6 +45,13 @@ public class CommercialFormActivity extends Activity {
     private List<EditText> priceFields;
     private Task callDataTask;
     private Customer salesCustomer;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
+        View view = inflater.inflate(R.layout.sales_form,container, false);
+        return view ;
+    }
+/*
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,14 +86,17 @@ public class CommercialFormActivity extends Activity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),TakeOrderActivity.class);
                 startActivity(intent);
-               /* LayoutInflater layoutInflater = (LayoutInflater) CommercialFormActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+               */
+/* LayoutInflater layoutInflater = (LayoutInflater) CommercialFormActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View entryView = layoutInflater.inflate(R.layout.order_form, null);
                 AlertDialog.Builder alert = new AlertDialog.Builder(CommercialFormActivity.this);
                 alert.setIcon(R.drawable.icon).setTitle("New Order").setView(entryView).setPositiveButton("Add", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int button) {
-                       *//* CustomerContact customerContact = new CustomerContact(null);
+                       *//*
+*/
+/* CustomerContact customerContact = new CustomerContact(null);
                         customerContact.setUuid(UUID.randomUUID().toString());
                         customerContact.setContact(((EditText) entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
                         customerContact.setFirstName(((EditText) entryView.findViewById(R.id.customer_contact_firstname)).getText().toString());
@@ -102,6 +113,8 @@ public class CommercialFormActivity extends Activity {
                         contactView.setTextSize(18);
                         contactView.setTextColor(Color.parseColor("#000000"));
                         linearLayout.addView(contactView);*//*
+*/
+/*
 
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -111,7 +124,8 @@ public class CommercialFormActivity extends Activity {
 
                     }
                 });
-                alert.show();*/
+                alert.show();*//*
+
             }
         });
 
@@ -255,6 +269,7 @@ public class CommercialFormActivity extends Activity {
             }
         });
     }
+*/
 
 
 }
