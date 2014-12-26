@@ -165,10 +165,14 @@
         <item >Tasks</item>
         <item >Customers</item>
         <item >History</item>
+        <item >Take an Order</item>
+        <item >Products</item>
     </string-array>
     <array name="nav_drawer_icons">
         <item>@drawable/task_default</item>
         <item>@drawable/customer_default</item>
         <item>@drawable/call_selected</item>
+        <item>@drawable/cart</item>
+        <item>@drawable/open_box</item>
     </array>
 </resources>

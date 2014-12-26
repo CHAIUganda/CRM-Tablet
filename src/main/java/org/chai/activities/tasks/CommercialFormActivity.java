@@ -201,13 +201,33 @@ public class CommercialFormActivity extends Activity {
         }
     }
 
-    private void submitSale() {
+    private void submitSale(){
+        Sale sale = new Sale(null);
+        sale.setUuid(UUID.randomUUID().toString());
+        sale.setDateOfSale(new Date());
+        String stocksZinc = ((Spinner) findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString();
+        sale.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
+        sale.setHowmanyOrsInStock(Integer.parseInt(((EditText)findViewById(R.id.sales_howmany_in_stock_ors)).getText().toString()));
+        sale.setHowManyZincInStock(Integer.parseInt(((EditText)findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString()));
+        sale.setIfNoWhy(((EditText)findViewById(R.id.sales_if_no_why)).getText().toString());
+        sale.setPointOfsaleMaterial(((Spinner)findViewById(R.id.sales_point_of_sale)).getSelectedItem().toString());
+        sale.setRecommendationNextStep(((Spinner)findViewById(R.id.sales_next_step_recommendation)).getSelectedItem().toString());
+        sale.setRecommendationLevel(((Spinner)findViewById(R.id.sales_recommendation_level)).getSelectedItem().toString());
+        sale.setGovernmentApproval(((Spinner)findViewById(R.id.sales_government_approval)).getSelectedItem().toString());
+        sale.setOrderId(callDataTask.getId());
+        Long saleId = saleDao.insert(sale);
+        //add the different sales.
+        submitSaleData(saleId);
+    }
+
+    private void submitSaleData(Long saleId) {
         for (int i = 0; i < spinnerList.size(); ++i) {
-            Sale sale = new Sale(null);
-            sale.setDateOfSale(new Date()); 
-            sale.setOrderId(callDataTask.getId());
-//            sale.setProductId();
-//            saleDao.insert(sale);
+            SaleData saleData = new SaleData(null);
+            saleData.setUuid(UUID.randomUUID().toString());
+            saleData.setSaleId(saleId);
+            saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
+            saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
+            saleData.setProductId(2l);
         }
     }
 

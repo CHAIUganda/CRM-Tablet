@@ -184,7 +184,7 @@
                     android:textStyle="bold"/>
 
             <EditText
-                    android:id="@+id/detailer_if_no_why"
+                    android:id="@+id/sales_if_no_why"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
