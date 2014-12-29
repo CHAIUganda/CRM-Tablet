@@ -15,6 +15,7 @@ import de.greenrobot.dao.query.Query;
 import de.greenrobot.dao.query.QueryBuilder;
 import de.greenrobot.dao.query.WhereCondition;
 import org.chai.R;
+import org.chai.activities.BaseContainerFragment;
 import org.chai.adapter.DistrictArrayAdapter;
 import org.chai.adapter.ParishArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
@@ -84,20 +85,19 @@ public class TaskByLocationFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                if(RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)){
-                    Intent intent = new Intent(getActivity(), DetailersActivity.class);
+                if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+                    CommercialFormActivity commercialFormActivity = new CommercialFormActivity();
                     Bundle bundle = new Bundle();
                     bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    commercialFormActivity.setArguments(bundle);
+                    ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity,true);
                 }else{
                     Bundle bundle = new Bundle();
                     bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
-                    Intent intent = new Intent(getActivity(), CommercialFormActivity.class);
+                    Intent intent = new Intent(getActivity(), DetailersActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
-
             }
         });
         return view;
