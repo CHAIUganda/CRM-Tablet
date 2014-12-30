@@ -29,7 +29,7 @@ public class TaskMapFragmentContainer extends BaseContainerFragment {
     }
 
     private void initView() {
-        replaceFragment(new TaskViewOnMapFragment(), false);
+        replaceFragment(new TaskViewOnMapFragment(), true);
     }
 
 }

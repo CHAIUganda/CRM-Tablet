@@ -49,102 +49,107 @@ public class CommercialFormActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.sales_form,container, false);
+        try {
+            initialiseGreenDao();
+            tableLayout = (TableLayout)view.findViewById(R.id.sales_table);
+            spinnerList = new ArrayList<Spinner>();
+            quantityFields = new ArrayList<EditText>();
+            priceFields = new ArrayList<EditText>();
+            Bundle bundle = getArguments();
+            Long taskId = bundle.getLong("taskId");
+            callDataTask = taskDao.loadDeep(taskId);
+            salesCustomer = callDataTask.getCustomer();
+            ((TextView) view.findViewById(R.id.sales_customer)).setText(salesCustomer.getOutletName());
+            ((TextView)view.findViewById(R.id.sales_customer_location)).setText(salesCustomer.getDescriptionOfOutletLocation());
+
+            spinnerList.add((Spinner)view.findViewById(R.id.sales_product));
+            quantityFields.add((EditText)view.findViewById(R.id.sales_quantity));
+            priceFields.add((EditText)view.findViewById(R.id.sales_price));
+
+            Button addButton = (Button)view.findViewById(R.id.sales_add_more);
+            addButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    addRowToTable();
+                }
+            });
+
+            Button takeOrder = (Button)view.findViewById(R.id.sales_take_order);
+            takeOrder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), TakeOrderActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            Button saveBtn = (Button)view.findViewById(R.id.sales_save_sale);
+            saveBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    submitSale();
+                    Intent i = new Intent(getActivity(), HomeActivity.class);
+                    startActivity(i);
+                }
+            });
+//            manageDoyouStockZincResponses();
+
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), "Error in oncreate view:" + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        }
         return view ;
     }
-/*
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.sales_form);
-        initialiseGreenDao();
-        tableLayout = (TableLayout)findViewById(R.id.sales_table);
-        spinnerList = new ArrayList<Spinner>();
-        quantityFields = new ArrayList<EditText>();
-        priceFields = new ArrayList<EditText>();
-        Bundle bundle = getIntent().getExtras();
-        Long taskId = bundle.getLong("taskId");
-        callDataTask = taskDao.loadDeep(taskId);
-        salesCustomer = callDataTask.getCustomer();
-        ((TextView)findViewById(R.id.sales_customer)).setText(salesCustomer.getOutletName());
-        ((TextView)findViewById(R.id.sales_customer_location)).setText(salesCustomer.getDescriptionOfOutletLocation());
+    /* public void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         initialiseGreenDao();
+         tableLayout = (TableLayout)getActivity().findViewById(R.id.sales_table);
+         spinnerList = new ArrayList<Spinner>();
+         quantityFields = new ArrayList<EditText>();
+         priceFields = new ArrayList<EditText>();
+         Bundle bundle = getArguments();
+         Long taskId = bundle.getLong("taskId");
+         callDataTask = taskDao.loadDeep(taskId);
+         salesCustomer = callDataTask.getCustomer();
+         ((TextView)getActivity().findViewById(R.id.sales_customer)).setText(salesCustomer.getOutletName());
+         ((TextView)getActivity().findViewById(R.id.sales_customer_location)).setText(salesCustomer.getDescriptionOfOutletLocation());
 
-        spinnerList.add((Spinner) findViewById(R.id.sales_product));
-        quantityFields.add((EditText) findViewById(R.id.sales_quantity));
-        priceFields.add((EditText) findViewById(R.id.sales_price));
+         spinnerList.add((Spinner)getActivity(). findViewById(R.id.sales_product));
+         quantityFields.add((EditText)getActivity(). findViewById(R.id.sales_quantity));
+         priceFields.add((EditText)getActivity(). findViewById(R.id.sales_price));
 
-        Button addButton = (Button)findViewById(R.id.sales_add_more);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addRowToTable();
-            }
-        });
+         Button addButton = (Button)getActivity().findViewById(R.id.sales_add_more);
+         addButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 addRowToTable();
+             }
+         });
 
-        Button takeOrder = (Button)findViewById(R.id.sales_take_order);
-        takeOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),TakeOrderActivity.class);
-                startActivity(intent);
-               */
-/* LayoutInflater layoutInflater = (LayoutInflater) CommercialFormActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View entryView = layoutInflater.inflate(R.layout.order_form, null);
-                AlertDialog.Builder alert = new AlertDialog.Builder(CommercialFormActivity.this);
-                alert.setIcon(R.drawable.icon).setTitle("New Order").setView(entryView).setPositiveButton("Add", new DialogInterface.OnClickListener() {
+         Button takeOrder = (Button)getActivity().findViewById(R.id.sales_take_order);
+         takeOrder.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 Intent intent = new Intent(getActivity(),TakeOrderActivity.class);
+                 startActivity(intent);
+             }} );
 
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int button) {
-                       *//*
-*/
-/* CustomerContact customerContact = new CustomerContact(null);
-                        customerContact.setUuid(UUID.randomUUID().toString());
-                        customerContact.setContact(((EditText) entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
-                        customerContact.setFirstName(((EditText) entryView.findViewById(R.id.customer_contact_firstname)).getText().toString());
-                        customerContact.setSurname(((EditText) entryView.findViewById(R.id.customer_contact_surname)).getText().toString());
-                        customerContact.setGender(((Spinner) entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
-                        customerContact.setNetworkOrAssociation(Boolean.valueOf(((Spinner) entryView.findViewById(R.id.customer_contact_network)).getSelectedItem().toString()));
-                        customerContact.setRole(((Spinner) entryView.findViewById(R.id.customer_contact_type)).getSelectedItem().toString());
-                        customerContacts.add(customerContact);
-                        //add to parent form
-                        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.customer_contacts_layout);
+         Button saveBtn = (Button)getActivity(). findViewById(R.id.sales_save_sale);
+         saveBtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 submitSale();
+                 Intent i = new Intent(getActivity(), HomeActivity.class);
+                 startActivity(i);
+             }
+         });
+         manageDoyouStockZincResponses();
 
-                        TextView contactView = new TextView(CustomerForm.this);
-                        contactView.setText(customerContact.getFirstName() + ":" + customerContact.getContact());
-                        contactView.setTextSize(18);
-                        contactView.setTextColor(Color.parseColor("#000000"));
-                        linearLayout.addView(contactView);*//*
-*/
-/*
-
-                    }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int button) {
-
-                    }
-                });
-                alert.show();*//*
-
-            }
-        });
-
-        Button saveBtn = (Button) findViewById(R.id.sales_save_sale);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                submitSale();
-                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(i);
-            }
-        });
-        manageDoyouStockZincResponses();
-
-    }
-
+     }
+ */
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "chai-crm-db", null);
+            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
@@ -152,19 +157,19 @@ public class CommercialFormActivity extends Fragment {
             saleDao = daoSession.getSaleDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
-            Toast.makeText(getApplicationContext(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
 
     private void addRowToTable(){
-        TableRow tableRow = new TableRow(this);
+        TableRow tableRow = new TableRow(getActivity());
         tableRow.setLayoutParams(new LayoutParams( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-        Spinner spinner  = new Spinner(this);
+        Spinner spinner = new Spinner(getActivity());
         LayoutParams spinnerParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         spinner.setLayoutParams(spinnerParams);
-        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
+        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item,
                 new String[] { "Zinc", "ORS"});
         spinner.setAdapter(spinnerArrayAdapter);
@@ -174,18 +179,18 @@ public class CommercialFormActivity extends Fragment {
 
         LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.setMargins(10,10,10,10);
-        EditText quantityView =(EditText)getLayoutInflater().inflate(R.layout.edit_text_style, null);
+        EditText quantityView = (EditText) getActivity().getLayoutInflater().inflate(R.layout.edit_text_style, null);
         quantityView.setTextColor(Color.BLACK);
         quantityView.setLayoutParams(params);
         tableRow.addView(quantityView);
 
 
-        EditText priceView = (EditText)getLayoutInflater().inflate(R.layout.edit_text_style,null);
+        EditText priceView = (EditText) getActivity().getLayoutInflater().inflate(R.layout.edit_text_style, null);
         priceView.setTextColor(Color.BLACK);
         priceView.setLayoutParams(params);
         tableRow.addView(priceView);
 
-        Button deleteBtn = new Button(this);
+        Button deleteBtn = new Button(getActivity());
         deleteBtn.setBackgroundColor(Color.parseColor("#428bca"));
         deleteBtn.setText("Remove");
         deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -219,15 +224,15 @@ public class CommercialFormActivity extends Fragment {
         Sale sale = new Sale(null);
         sale.setUuid(UUID.randomUUID().toString());
         sale.setDateOfSale(new Date());
-        String stocksZinc = ((Spinner) findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString();
+        String stocksZinc = ((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString();
         sale.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
-        sale.setHowmanyOrsInStock(Integer.parseInt(((EditText)findViewById(R.id.sales_howmany_in_stock_ors)).getText().toString()));
-        sale.setHowManyZincInStock(Integer.parseInt(((EditText)findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString()));
-        sale.setIfNoWhy(((EditText)findViewById(R.id.sales_if_no_why)).getText().toString());
-        sale.setPointOfsaleMaterial(((Spinner)findViewById(R.id.sales_point_of_sale)).getSelectedItem().toString());
-        sale.setRecommendationNextStep(((Spinner)findViewById(R.id.sales_next_step_recommendation)).getSelectedItem().toString());
-        sale.setRecommendationLevel(((Spinner)findViewById(R.id.sales_recommendation_level)).getSelectedItem().toString());
-        sale.setGovernmentApproval(((Spinner)findViewById(R.id.sales_government_approval)).getSelectedItem().toString());
+        sale.setHowmanyOrsInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_ors)).getText().toString()));
+        sale.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString()));
+        sale.setIfNoWhy(((EditText) getActivity().findViewById(R.id.sales_if_no_why)).getText().toString());
+        sale.setPointOfsaleMaterial(((Spinner) getActivity().findViewById(R.id.sales_point_of_sale)).getSelectedItem().toString());
+        sale.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.sales_next_step_recommendation)).getSelectedItem().toString());
+        sale.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.sales_recommendation_level)).getSelectedItem().toString());
+        sale.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.sales_government_approval)).getSelectedItem().toString());
         sale.setOrderId(callDataTask.getId());
         Long saleId = saleDao.insert(sale);
         //add the different sales.
@@ -247,13 +252,13 @@ public class CommercialFormActivity extends Fragment {
 
 
     private void manageDoyouStockZincResponses() {
-        final Spinner spinner = (Spinner) findViewById(R.id.sales_do_you_stock_zinc);
+        final Spinner spinner = (Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 String selected = (String) spinner.getAdapter().getItem(position);
-                LinearLayout stockfieldsLayout = (LinearLayout) findViewById(R.id.sales_zinc_stock_layout);
-                LinearLayout ifnowhyLayout = (LinearLayout) findViewById(R.id.sales_ifnowhy_layout);
+                LinearLayout stockfieldsLayout = (LinearLayout) getActivity().findViewById(R.id.sales_zinc_stock_layout);
+                LinearLayout ifnowhyLayout = (LinearLayout) getActivity().findViewById(R.id.sales_ifnowhy_layout);
                 if ("No".equalsIgnoreCase(selected)) {
                     stockfieldsLayout.setVisibility(View.GONE);
                     ifnowhyLayout.setVisibility(View.VISIBLE);
@@ -269,7 +274,6 @@ public class CommercialFormActivity extends Fragment {
             }
         });
     }
-*/
 
 
 }

@@ -29,7 +29,7 @@ public class CalenderFragmentContainer extends BaseContainerFragment {
     }
 
     private void initView() {
-        replaceFragment(new TaskCalenderFragment(), false);
+        replaceFragment(new TaskCalenderFragment(), true);
     }
 
 }
