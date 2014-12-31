@@ -190,5 +190,12 @@ public class HomeActivity extends FragmentActivity{
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+    @Override
+    public void onBackPressed(){
+        Log.i("Back Button Pressed:","==============================================================");
+        if(!BaseContainerFragment.handleBackPressed(getSupportFragmentManager())){
+            super.onBackPressed();
+        }
+    }
 
 }

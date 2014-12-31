@@ -53,23 +53,31 @@ public class TaskViewOnMapFragment extends Fragment {
                   Long taskId = markers.get(marker.getId());
                   Task task = taskDao.load(taskId);
                   if(task!= null){
-                      if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
-                          CommercialFormActivity commercialFormActivity = new CommercialFormActivity();
-                          Bundle bundle = new Bundle();
-                          bundle.putLong("taskId",taskId);
-                          commercialFormActivity.setArguments(bundle);
-                          ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity,true);
-                      }else{
-                          Bundle bundle = new Bundle();
-                          bundle.putLong("taskId",taskId);
-                          Intent intent = new Intent(getActivity(), DetailersActivity.class);
-                          intent.putExtras(bundle);
-                          startActivity(intent);
-                      }
+                      marker.showInfoWindow();
                   }else{
                       Toast.makeText(getActivity(),"Task is unknown",Toast.LENGTH_LONG).show();
                   }
                   return false;
+              }
+          });
+          googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+              @Override
+              public void onInfoWindowClick(Marker marker) {
+                  Long taskId = markers.get(marker.getId());
+                  if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
+//                        Toast.makeText(getActivity(),"Task id:"+taskId,Toast.LENGTH_LONG).show();
+                      CommercialFormActivity commercialFormActivity = new CommercialFormActivity();
+                      Bundle bundle = new Bundle();
+                      bundle.putLong("taskId", taskId);
+                      commercialFormActivity.setArguments(bundle);
+                      ((BaseContainerFragment) getParentFragment()).replaceFragment(commercialFormActivity, true);
+                  } else {
+                      Bundle bundle = new Bundle();
+                      bundle.putLong("taskId", taskId);
+                      Intent intent = new Intent(getActivity(), DetailersActivity.class);
+                      intent.putExtras(bundle);
+                      startActivity(intent);
+                  }
               }
           });
       }
@@ -107,7 +115,7 @@ public class TaskViewOnMapFragment extends Fragment {
                 Log.i("Latitude============",latitude+"");
                 Log.i("Longitude===========",longitude+"");
                 if(longitude != 0&&latitude!= 0){
-                    MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(latitude,longitude));
+                    MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(latitude, longitude)).title(task.getDescription());
                     Marker marker = map.addMarker(markerOptions);
                     markers.put(marker.getId(),task.getId());
                 }

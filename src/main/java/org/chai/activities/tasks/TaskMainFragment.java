@@ -12,11 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import org.chai.R;
+import org.chai.activities.BaseContainerFragment;
 
 /**
  * Created by victor on 12/8/14.
  */
-public class TaskMainFragment extends Fragment {
+public class TaskMainFragment extends BaseContainerFragment {
    private FragmentTabHost tabHost;
 
     @Override

@@ -72,7 +72,7 @@ public class TaskCalenderFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
                     commercialFormActivity.setArguments(bundle);
-                    ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity,true);
+                    ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity, true);
                 }else{
                     Bundle bundle = new Bundle();
                     bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
@@ -112,5 +112,5 @@ public class TaskCalenderFragment extends Fragment {
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.eq(dueDate)).list();
         }
         return outstandingTasks;
-    }
+    } 
 }
