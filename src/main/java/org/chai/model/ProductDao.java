@@ -25,12 +25,11 @@ public class ProductDao extends AbstractDao<Product, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property ProductGroup = new Property(2, String.class, "productGroup", false, "PRODUCT_GROUP");
-        public final static Property ProductName = new Property(3, String.class, "productName", false, "PRODUCT_NAME");
-        public final static Property BrandName = new Property(4, String.class, "brandName", false, "BRAND_NAME");
-        public final static Property Formulation = new Property(5, String.class, "formulation", false, "FORMULATION");
-        public final static Property UnitOfMeasure = new Property(6, String.class, "unitOfMeasure", false, "UNIT_OF_MEASURE");
-        public final static Property UnitPrice = new Property(7, double.class, "unitPrice", false, "UNIT_PRICE");
+        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
+        public final static Property UnitOfMeasure = new Property(3, String.class, "unitOfMeasure", false, "UNIT_OF_MEASURE");
+        public final static Property Formulation = new Property(4, String.class, "formulation", false, "FORMULATION");
+        public final static Property UnitPrice = new Property(5, String.class, "unitPrice", false, "UNIT_PRICE");
+        public final static Property GroupName = new Property(6, String.class, "groupName", false, "GROUP_NAME");
     };
 
     private DaoSession daoSession;
@@ -51,12 +50,11 @@ public class ProductDao extends AbstractDao<Product, Long> {
         db.execSQL("CREATE TABLE " + constraint + "'PRODUCT' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'PRODUCT_GROUP' TEXT NOT NULL ," + // 2: productGroup
-                "'PRODUCT_NAME' TEXT NOT NULL ," + // 3: productName
-                "'BRAND_NAME' TEXT NOT NULL ," + // 4: brandName
-                "'FORMULATION' TEXT NOT NULL ," + // 5: formulation
-                "'UNIT_OF_MEASURE' TEXT NOT NULL ," + // 6: unitOfMeasure
-                "'UNIT_PRICE' REAL NOT NULL );"); // 7: unitPrice
+                "'NAME' TEXT NOT NULL ," + // 2: name
+                "'UNIT_OF_MEASURE' TEXT NOT NULL ," + // 3: unitOfMeasure
+                "'FORMULATION' TEXT NOT NULL ," + // 4: formulation
+                "'UNIT_PRICE' TEXT NOT NULL ," + // 5: unitPrice
+                "'GROUP_NAME' TEXT);"); // 6: groupName
     }
 
     /** Drops the underlying database table. */
@@ -75,12 +73,15 @@ public class ProductDao extends AbstractDao<Product, Long> {
             stmt.bindLong(1, id);
         }
         stmt.bindString(2, entity.getUuid());
-        stmt.bindString(3, entity.getProductGroup());
-        stmt.bindString(4, entity.getProductName());
-        stmt.bindString(5, entity.getBrandName());
-        stmt.bindString(6, entity.getFormulation());
-        stmt.bindString(7, entity.getUnitOfMeasure());
-        stmt.bindDouble(8, entity.getUnitPrice());
+        stmt.bindString(3, entity.getName());
+        stmt.bindString(4, entity.getUnitOfMeasure());
+        stmt.bindString(5, entity.getFormulation());
+        stmt.bindString(6, entity.getUnitPrice());
+ 
+        String groupName = entity.getGroupName();
+        if (groupName != null) {
+            stmt.bindString(7, groupName);
+        }
     }
 
     @Override
@@ -101,12 +102,11 @@ public class ProductDao extends AbstractDao<Product, Long> {
         Product entity = new Product( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // uuid
-            cursor.getString(offset + 2), // productGroup
-            cursor.getString(offset + 3), // productName
-            cursor.getString(offset + 4), // brandName
-            cursor.getString(offset + 5), // formulation
-            cursor.getString(offset + 6), // unitOfMeasure
-            cursor.getDouble(offset + 7) // unitPrice
+            cursor.getString(offset + 2), // name
+            cursor.getString(offset + 3), // unitOfMeasure
+            cursor.getString(offset + 4), // formulation
+            cursor.getString(offset + 5), // unitPrice
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // groupName
         );
         return entity;
     }
@@ -116,12 +116,11 @@ public class ProductDao extends AbstractDao<Product, Long> {
     public void readEntity(Cursor cursor, Product entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setUuid(cursor.getString(offset + 1));
-        entity.setProductGroup(cursor.getString(offset + 2));
-        entity.setProductName(cursor.getString(offset + 3));
-        entity.setBrandName(cursor.getString(offset + 4));
-        entity.setFormulation(cursor.getString(offset + 5));
-        entity.setUnitOfMeasure(cursor.getString(offset + 6));
-        entity.setUnitPrice(cursor.getDouble(offset + 7));
+        entity.setName(cursor.getString(offset + 2));
+        entity.setUnitOfMeasure(cursor.getString(offset + 3));
+        entity.setFormulation(cursor.getString(offset + 4));
+        entity.setUnitPrice(cursor.getString(offset + 5));
+        entity.setGroupName(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     /** @inheritdoc */
