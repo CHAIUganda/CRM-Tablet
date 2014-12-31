@@ -34,6 +34,7 @@ public class CHAISynchroniser {
     private CustomerContactDao customerContactDao;
     private TaskDao taskDao;
     private DetailerCallDao detailerCallDao;
+    private ProductDao productDao;
 
     public CHAISynchroniser(Activity activity) {
         this.parent = activity;
@@ -68,6 +69,7 @@ public class CHAISynchroniser {
             customerContactDao = daoSession.getCustomerContactDao();
             taskDao = daoSession.getTaskDao();
             detailerCallDao = daoSession.getDetailerCallDao();
+            productDao = daoSession.getProductDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
         }
@@ -90,6 +92,8 @@ public class CHAISynchroniser {
             downloadCustomers();
             progressDialog.incrementProgressBy(50);
             downloadTasks();
+            downloadProducts();
+
             progressDialog.incrementProgressBy(20);
         }catch (Exception ex){
             ex.printStackTrace();
@@ -197,6 +201,14 @@ public class CHAISynchroniser {
                 detailerCallDao.queryBuilder().where(DetailerCallDao.Properties.TaskId.eq(task.getId())).buildDelete().executeDeleteWithoutDetachingEntities();
                 taskDao.delete(task);
             }
+        }
+    }
+
+    private void downloadProducts(){
+        productDao.deleteAll();
+        Product[] products = productClient.downloadProducts();
+        for(Product product:products){
+            productDao.insert(product);
         }
     }
 
