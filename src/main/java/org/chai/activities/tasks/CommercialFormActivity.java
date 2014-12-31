@@ -20,6 +20,7 @@ import android.widget.*;
 import org.chai.R;
 import android.widget.TableRow.LayoutParams;
 import org.chai.activities.HomeActivity;
+import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
 import org.chai.rest.RestClient;
 
@@ -38,6 +39,7 @@ public class CommercialFormActivity extends Fragment {
     private DaoSession daoSession;
     private TaskDao taskDao;
     private SaleDao saleDao;
+    private ProductDao productDao;
 
 
     private TableLayout tableLayout;
@@ -46,6 +48,7 @@ public class CommercialFormActivity extends Fragment {
     private List<EditText> priceFields;
     private Task callDataTask;
     private Customer salesCustomer;
+    private List<Product> products;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
@@ -63,7 +66,10 @@ public class CommercialFormActivity extends Fragment {
             ((TextView) view.findViewById(R.id.sales_customer)).setText(salesCustomer.getOutletName());
             ((TextView)view.findViewById(R.id.sales_customer_location)).setText(salesCustomer.getDescriptionOfOutletLocation());
 
-            spinnerList.add((Spinner)view.findViewById(R.id.sales_product));
+            Spinner productSpinner = (Spinner) view.findViewById(R.id.sales_product);
+            products = productDao.loadAll();
+            productSpinner.setAdapter(new ProductArrayAdapter(getActivity(),R.id.sales_product,products.toArray(new Product[products.size()])));
+            spinnerList.add(productSpinner);
             quantityFields.add((EditText)view.findViewById(R.id.sales_quantity));
             priceFields.add((EditText)view.findViewById(R.id.sales_price));
 
@@ -93,7 +99,7 @@ public class CommercialFormActivity extends Fragment {
                     startActivity(i);
                 }
             });
-//            manageDoyouStockZincResponses();
+            manageDoyouStockZincResponses();
 
         } catch (Exception ex) {
             Toast.makeText(getActivity(), "Error in oncreate view:" + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
@@ -101,53 +107,6 @@ public class CommercialFormActivity extends Fragment {
         return view ;
     }
 
-    /* public void onCreate(Bundle savedInstanceState) {
-         super.onCreate(savedInstanceState);
-         initialiseGreenDao();
-         tableLayout = (TableLayout)getActivity().findViewById(R.id.sales_table);
-         spinnerList = new ArrayList<Spinner>();
-         quantityFields = new ArrayList<EditText>();
-         priceFields = new ArrayList<EditText>();
-         Bundle bundle = getArguments();
-         Long taskId = bundle.getLong("taskId");
-         callDataTask = taskDao.loadDeep(taskId);
-         salesCustomer = callDataTask.getCustomer();
-         ((TextView)getActivity().findViewById(R.id.sales_customer)).setText(salesCustomer.getOutletName());
-         ((TextView)getActivity().findViewById(R.id.sales_customer_location)).setText(salesCustomer.getDescriptionOfOutletLocation());
-
-         spinnerList.add((Spinner)getActivity(). findViewById(R.id.sales_product));
-         quantityFields.add((EditText)getActivity(). findViewById(R.id.sales_quantity));
-         priceFields.add((EditText)getActivity(). findViewById(R.id.sales_price));
-
-         Button addButton = (Button)getActivity().findViewById(R.id.sales_add_more);
-         addButton.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 addRowToTable();
-             }
-         });
-
-         Button takeOrder = (Button)getActivity().findViewById(R.id.sales_take_order);
-         takeOrder.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 Intent intent = new Intent(getActivity(),TakeOrderActivity.class);
-                 startActivity(intent);
-             }} );
-
-         Button saveBtn = (Button)getActivity(). findViewById(R.id.sales_save_sale);
-         saveBtn.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 submitSale();
-                 Intent i = new Intent(getActivity(), HomeActivity.class);
-                 startActivity(i);
-             }
-         });
-         manageDoyouStockZincResponses();
-
-     }
- */
     private void initialiseGreenDao() {
         try {
             DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
@@ -156,6 +115,7 @@ public class CommercialFormActivity extends Fragment {
             daoSession = daoMaster.newSession();
             taskDao = daoSession.getTaskDao();
             saleDao = daoSession.getSaleDao();
+            productDao = daoSession.getProductDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -170,10 +130,7 @@ public class CommercialFormActivity extends Fragment {
         Spinner spinner = new Spinner(getActivity());
         LayoutParams spinnerParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         spinner.setLayoutParams(spinnerParams);
-        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getActivity(),
-                android.R.layout.simple_spinner_dropdown_item,
-                new String[] { "Zinc", "ORS"});
-        spinner.setAdapter(spinnerArrayAdapter);
+        spinner.setAdapter(new ProductArrayAdapter(getActivity(),android.R.layout.simple_spinner_dropdown_item,products.toArray(new Product[products.size()])));
         spinner.setBackgroundResource(R.drawable.btn_dropdown);
 
         tableRow.addView(spinner);
@@ -247,7 +204,7 @@ public class CommercialFormActivity extends Fragment {
             saleData.setSaleId(saleId);
             saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
             saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
-            saleData.setProductId(2l);
+            saleData.setProductId( ((Product) spinnerList.get(i).getSelectedItem()).getId());
         }
     }
 
