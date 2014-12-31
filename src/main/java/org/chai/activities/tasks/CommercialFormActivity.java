@@ -99,9 +99,10 @@ public class CommercialFormActivity extends Fragment {
                     startActivity(i);
                 }
             });
-            manageDoyouStockZincResponses();
+            manageDoyouStockZincResponses(view);
 
         } catch (Exception ex) {
+            ex.printStackTrace();
             Toast.makeText(getActivity(), "Error in oncreate view:" + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
         return view ;
@@ -209,8 +210,8 @@ public class CommercialFormActivity extends Fragment {
     }
 
 
-    private void manageDoyouStockZincResponses() {
-        final Spinner spinner = (Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc);
+    private void manageDoyouStockZincResponses(View view) {
+        final Spinner spinner = (Spinner) view.findViewById(R.id.sales_do_you_stock_zinc);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
