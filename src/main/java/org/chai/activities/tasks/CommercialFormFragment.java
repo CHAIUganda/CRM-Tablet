@@ -212,6 +212,10 @@ public class CommercialFormFragment extends Fragment {
         });
         tableRow.addView(deleteBtn);
 
+        spinnerList.add(spinner);
+        quantityFields.add(quantityView);
+        priceFields.add(priceView);
+
         tableLayout.addView(tableRow, new TableLayout.LayoutParams( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
     }
 
