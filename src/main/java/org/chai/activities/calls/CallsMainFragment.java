@@ -39,6 +39,7 @@ public class CallsMainFragment extends BaseContainerFragment {
     private List<Sale> sales = null;
     private ListView listView;
     private DetailerCallAdapter detailerCallAdapter;
+    private SalesAdapter salesAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -48,7 +49,8 @@ public class CallsMainFragment extends BaseContainerFragment {
         if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
             sales = new ArrayList<Sale>();
             sales.addAll(saleDao.loadAll());
-            listView.setAdapter(new SalesAdapter(getActivity(),getActivity(),sales));
+            salesAdapter = new SalesAdapter(getActivity(),getActivity(),sales);
+            listView.setAdapter(salesAdapter);
         }else {
             detailerCalls = new ArrayList<DetailerCall>();
             detailerCalls.addAll(detailerCallDao.loadAll());
@@ -126,9 +128,15 @@ public class CallsMainFragment extends BaseContainerFragment {
                 try{
                     AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
                     int position = (int) info.id;
-                    detailerCalls.remove(position);
-                    detailerCallDao.delete(detailerCalls.get(position));
-                    detailerCallAdapter.notifyDataSetChanged();
+                    if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+                        saleDao.delete(sales.get(position));
+                        sales.remove(position);
+                        salesAdapter.notifyDataSetChanged();
+                    }else{
+                        detailerCalls.remove(position);
+                        detailerCallDao.delete(detailerCalls.get(position));
+                        detailerCallAdapter.notifyDataSetChanged();
+                    }
                 }catch (Exception ex){
 
                 }
