@@ -39,6 +39,7 @@ public class Task {
     private Customer customer;
     private Long customer__resolvedKey;
 
+    private List<Sale> sales;
     private List<DetailerCall> detailers;
 
     // KEEP FIELDS - put your custom fields here
@@ -205,6 +206,28 @@ public class Task {
             customerId = customer.getId();
             customer__resolvedKey = customerId;
         }
+    }
+
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<Sale> getSales() {
+        if (sales == null) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            SaleDao targetDao = daoSession.getSaleDao();
+            List<Sale> salesNew = targetDao._queryTask_Sales(id);
+            synchronized (this) {
+                if(sales == null) {
+                    sales = salesNew;
+                }
+            }
+        }
+        return sales;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetSales() {
+        sales = null;
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

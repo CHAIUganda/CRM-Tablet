@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.*;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
-import org.chai.activities.calls.CallsMainActivity;
+import org.chai.activities.calls.CallsMainFragment;
 import org.chai.adapter.DistrictArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.GPSTracker;
@@ -88,7 +88,7 @@ public class DetailersActivity extends Activity {
                 boolean isSaved = saveDetailerCall();
                 if (isSaved) {
                     Toast.makeText(getApplicationContext(), "Detailer Information has been  successfully added!", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), CallsMainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), CallsMainFragment.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "A problem Occured while saving a new Detialer Information,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();

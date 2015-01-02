@@ -29,6 +29,7 @@ public class Sale {
     private String recommendationLevel;
     private String governmentApproval;
     private long orderId;
+    private long taskId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -38,6 +39,9 @@ public class Sale {
 
     private Order order;
     private Long order__resolvedKey;
+
+    private Task task;
+    private Long task__resolvedKey;
 
     private List<SaleData> salesDatas;
 
@@ -51,7 +55,7 @@ public class Sale {
         this.id = id;
     }
 
-    public Sale(Long id, String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, long orderId) {
+    public Sale(Long id, String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, long orderId, long taskId) {
         this.id = id;
         this.uuid = uuid;
         this.dateOfSale = dateOfSale;
@@ -64,6 +68,7 @@ public class Sale {
         this.recommendationLevel = recommendationLevel;
         this.governmentApproval = governmentApproval;
         this.orderId = orderId;
+        this.taskId = taskId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -172,6 +177,14 @@ public class Sale {
         this.orderId = orderId;
     }
 
+    public long getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(long taskId) {
+        this.taskId = taskId;
+    }
+
     /** To-one relationship, resolved on first access. */
     public Order getOrder() {
         long __key = this.orderId;
@@ -197,6 +210,34 @@ public class Sale {
             this.order = order;
             orderId = order.getId();
             order__resolvedKey = orderId;
+        }
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public Task getTask() {
+        long __key = this.taskId;
+        if (task__resolvedKey == null || !task__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            TaskDao targetDao = daoSession.getTaskDao();
+            Task taskNew = targetDao.load(__key);
+            synchronized (this) {
+                task = taskNew;
+            	task__resolvedKey = __key;
+            }
+        }
+        return task;
+    }
+
+    public void setTask(Task task) {
+        if (task == null) {
+            throw new DaoException("To-one property 'taskId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.task = task;
+            taskId = task.getId();
+            task__resolvedKey = taskId;
         }
     }
 

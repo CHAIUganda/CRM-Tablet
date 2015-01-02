@@ -12,12 +12,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import de.greenrobot.dao.query.Query;
-import de.greenrobot.dao.query.QueryBuilder;
 import de.greenrobot.dao.query.WhereCondition;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.adapter.DistrictArrayAdapter;
-import org.chai.adapter.ParishArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.adapter.TaskListAdapter;
 import org.chai.model.*;
@@ -86,7 +84,7 @@ public class TaskByLocationFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
-                    CommercialFormActivity commercialFormActivity = new CommercialFormActivity();
+                    CommercialFormFragment commercialFormActivity = new CommercialFormFragment();
                     Bundle bundle = new Bundle();
                     bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
                     commercialFormActivity.setArguments(bundle);

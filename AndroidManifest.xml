@@ -29,7 +29,7 @@
       </intent-filter>
     </activity>
       <activity android:name=".activities.HomeActivity"/>
-      <activity android:name=".activities.calls.CallsMainActivity"/>
+      <activity android:name=".activities.calls.CallsMainFragment"/>
       <activity android:name=".activities.customer.CustomerDetailsActivity"/>
       <activity android:name=".activities.customer.CustomerForm"/>
       <activity android:name=".activities.tasks.DetailersActivity"/>

@@ -18,6 +18,7 @@ import org.chai.activities.BaseContainerFragment;
  * Created by victor on 12/8/14.
  */
 public class TaskMainFragment extends BaseContainerFragment {
+    public final static String STATUS_NEW = "new", STATUS_COMPLETE = "complete",STATUS_CANCELLED = "cancelled";
    private FragmentTabHost tabHost;
 
     @Override

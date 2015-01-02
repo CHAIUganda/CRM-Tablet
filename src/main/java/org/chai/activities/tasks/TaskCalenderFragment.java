@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +15,12 @@ import android.widget.Toast;
 import de.greenrobot.dao.query.QueryBuilder;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
-import org.chai.activities.customer.CustomerDetailsActivity;
 import org.chai.adapter.TaskListAdapter;
 import org.chai.model.*;
 import org.chai.rest.RestClient;
 import org.chai.util.Utils;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -68,7 +64,7 @@ public class TaskCalenderFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
-                    CommercialFormActivity commercialFormActivity = new CommercialFormActivity();
+                    CommercialFormFragment commercialFormActivity = new CommercialFormFragment();
                     Bundle bundle = new Bundle();
                     bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
                     commercialFormActivity.setArguments(bundle);
@@ -105,11 +101,11 @@ public class TaskCalenderFragment extends Fragment {
         QueryBuilder<Task> taskQueryBuilder = taskDao.queryBuilder();
         List<Task> outstandingTasks=null;
         if(itemPosition==1){
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date())).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
         }else{
             Date dueDate = Utils.addToDate(new Date(),itemPosition);
             Log.i("Due Date:",dueDate.toString());
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.eq(dueDate)).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.eq(dueDate),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
         }
         return outstandingTasks;
     } 

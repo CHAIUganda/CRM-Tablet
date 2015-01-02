@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -66,7 +65,7 @@ public class TaskViewOnMapFragment extends Fragment {
                   Long taskId = markers.get(marker.getId());
                   if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
 //                        Toast.makeText(getActivity(),"Task id:"+taskId,Toast.LENGTH_LONG).show();
-                      CommercialFormActivity commercialFormActivity = new CommercialFormActivity();
+                      CommercialFormFragment commercialFormActivity = new CommercialFormFragment();
                       Bundle bundle = new Bundle();
                       bundle.putLong("taskId", taskId);
                       commercialFormActivity.setArguments(bundle);

@@ -40,11 +40,13 @@ public class SaleDao extends AbstractDao<Sale, Long> {
         public final static Property RecommendationLevel = new Property(9, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
         public final static Property GovernmentApproval = new Property(10, String.class, "governmentApproval", false, "GOVERNMENT_APPROVAL");
         public final static Property OrderId = new Property(11, long.class, "orderId", false, "ORDER_ID");
+        public final static Property TaskId = new Property(12, long.class, "taskId", false, "TASK_ID");
     };
 
     private DaoSession daoSession;
 
     private Query<Sale> order_SalesQuery;
+    private Query<Sale> task_SalesQuery;
 
     public SaleDao(DaoConfig config) {
         super(config);
@@ -70,7 +72,8 @@ public class SaleDao extends AbstractDao<Sale, Long> {
                 "'RECOMMENDATION_NEXT_STEP' TEXT," + // 8: recommendationNextStep
                 "'RECOMMENDATION_LEVEL' TEXT," + // 9: recommendationLevel
                 "'GOVERNMENT_APPROVAL' TEXT," + // 10: governmentApproval
-                "'ORDER_ID' INTEGER NOT NULL );"); // 11: orderId
+                "'ORDER_ID' INTEGER NOT NULL ," + // 11: orderId
+                "'TASK_ID' INTEGER NOT NULL );"); // 12: taskId
     }
 
     /** Drops the underlying database table. */
@@ -131,6 +134,7 @@ public class SaleDao extends AbstractDao<Sale, Long> {
             stmt.bindString(11, governmentApproval);
         }
         stmt.bindLong(12, entity.getOrderId());
+        stmt.bindLong(13, entity.getTaskId());
     }
 
     @Override
@@ -160,7 +164,8 @@ public class SaleDao extends AbstractDao<Sale, Long> {
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // recommendationNextStep
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // recommendationLevel
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // governmentApproval
-            cursor.getLong(offset + 11) // orderId
+            cursor.getLong(offset + 11), // orderId
+            cursor.getLong(offset + 12) // taskId
         );
         return entity;
     }
@@ -180,6 +185,7 @@ public class SaleDao extends AbstractDao<Sale, Long> {
         entity.setRecommendationLevel(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setGovernmentApproval(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
         entity.setOrderId(cursor.getLong(offset + 11));
+        entity.setTaskId(cursor.getLong(offset + 12));
      }
     
     /** @inheritdoc */
@@ -220,6 +226,21 @@ public class SaleDao extends AbstractDao<Sale, Long> {
         return query.list();
     }
 
+    /** Internal query to resolve the "sales" to-many relationship of Task. */
+    public List<Sale> _queryTask_Sales(long taskId) {
+        synchronized (this) {
+            if (task_SalesQuery == null) {
+                QueryBuilder<Sale> queryBuilder = queryBuilder();
+                queryBuilder.where(Properties.TaskId.eq(null));
+                queryBuilder.orderRaw("DATE_OF_SALE ASC");
+                task_SalesQuery = queryBuilder.build();
+            }
+        }
+        Query<Sale> query = task_SalesQuery.forCurrentThread();
+        query.setParameter(0, taskId);
+        return query.list();
+    }
+
     private String selectDeep;
 
     protected String getSelectDeep() {
@@ -228,8 +249,11 @@ public class SaleDao extends AbstractDao<Sale, Long> {
             SqlUtils.appendColumns(builder, "T", getAllColumns());
             builder.append(',');
             SqlUtils.appendColumns(builder, "T0", daoSession.getOrderDao().getAllColumns());
+            builder.append(',');
+            SqlUtils.appendColumns(builder, "T1", daoSession.getTaskDao().getAllColumns());
             builder.append(" FROM SALE T");
             builder.append(" LEFT JOIN orders T0 ON T.'ORDER_ID'=T0.'_id'");
+            builder.append(" LEFT JOIN TASK T1 ON T.'TASK_ID'=T1.'_id'");
             builder.append(' ');
             selectDeep = builder.toString();
         }
@@ -243,6 +267,12 @@ public class SaleDao extends AbstractDao<Sale, Long> {
         Order order = loadCurrentOther(daoSession.getOrderDao(), cursor, offset);
          if(order != null) {
             entity.setOrder(order);
+        }
+        offset += daoSession.getOrderDao().getAllColumns().length;
+
+        Task task = loadCurrentOther(daoSession.getTaskDao(), cursor, offset);
+         if(task != null) {
+            entity.setTask(task);
         }
 
         return entity;    

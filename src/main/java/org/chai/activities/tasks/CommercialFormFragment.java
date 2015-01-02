@@ -1,17 +1,11 @@
 package org.chai.activities.tasks;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +16,7 @@ import android.widget.TableRow.LayoutParams;
 import org.chai.activities.HomeActivity;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
-import org.chai.rest.RestClient;
+import org.chai.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,13 +26,14 @@ import java.util.UUID;
 /**
  * Created by victor on 10/26/14.
  */
-public class CommercialFormActivity extends Fragment {
+public class CommercialFormFragment extends Fragment {
 
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private TaskDao taskDao;
     private SaleDao saleDao;
+    private SaleDataDao saleDataDao;
     private ProductDao productDao;
 
 
@@ -47,6 +42,7 @@ public class CommercialFormActivity extends Fragment {
     private List<EditText> quantityFields;
     private List<EditText> priceFields;
     private Task callDataTask;
+    private Sale saleCallData;
     private Customer salesCustomer;
     private List<Product> products;
 
@@ -60,9 +56,17 @@ public class CommercialFormActivity extends Fragment {
             quantityFields = new ArrayList<EditText>();
             priceFields = new ArrayList<EditText>();
             Bundle bundle = getArguments();
-            Long taskId = bundle.getLong("taskId");
-            callDataTask = taskDao.loadDeep(taskId);
-            salesCustomer = callDataTask.getCustomer();
+            Long callId = bundle.getLong("callId");
+            if (callId != 0 && callId != null) {
+                saleCallData = saleDao.loadDeep(callId);
+                callDataTask = saleCallData.getTask();
+                salesCustomer = callDataTask.getCustomer();
+            } else {
+                //from task list view
+                Long taskId = bundle.getLong("taskId");
+                callDataTask = taskDao.loadDeep(taskId);
+                salesCustomer = callDataTask.getCustomer();
+            }
             ((TextView) view.findViewById(R.id.sales_customer)).setText(salesCustomer.getOutletName());
             ((TextView)view.findViewById(R.id.sales_customer_location)).setText(salesCustomer.getDescriptionOfOutletLocation());
 
@@ -77,7 +81,7 @@ public class CommercialFormActivity extends Fragment {
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    addRowToTable();
+                    addRowToTable(null, view);
                 }
             });
 
@@ -100,6 +104,7 @@ public class CommercialFormActivity extends Fragment {
                 }
             });
             manageDoyouStockZincResponses(view);
+            bindSalesInfoToUI(view);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -116,6 +121,7 @@ public class CommercialFormActivity extends Fragment {
             daoSession = daoMaster.newSession();
             taskDao = daoSession.getTaskDao();
             saleDao = daoSession.getSaleDao();
+            saleDataDao = daoSession.getSaleDataDao();
             productDao = daoSession.getProductDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
@@ -123,8 +129,44 @@ public class CommercialFormActivity extends Fragment {
         }
     }
 
+    private void bindSalesInfoToUI(View view) {
+        if (!isNewSalesCall()) {
+            ((EditText) view.findViewById(R.id.sales_howmany_in_stock_ors)).setText(saleCallData.getHowmanyOrsInStock() + "");
+            ((EditText) view.findViewById(R.id.sales_howmany_in_stock_zinc)).setText(saleCallData.getHowManyZincInStock() + "");
+            ((EditText) view.findViewById(R.id.sales_if_no_why)).setText(saleCallData.getIfNoWhy());
 
-    private void addRowToTable(){
+            Spinner doyouStockZincSpinner = (Spinner) view.findViewById(R.id.sales_do_you_stock_zinc);
+            Utils.setSpinnerSelection(doyouStockZincSpinner, (saleCallData.getDoYouStockOrsZinc() == true) ? "Yes" : "No");
+
+            Spinner governmentApprovalSpinner = (Spinner) view.findViewById(R.id.sales_government_approval);
+            Utils.setSpinnerSelection(governmentApprovalSpinner, saleCallData.getGovernmentApproval());
+
+            Spinner pointOfSaleMaterial = (Spinner) view.findViewById(R.id.sales_point_of_sale);
+            Utils.setSpinnerSelection(pointOfSaleMaterial, saleCallData.getPointOfsaleMaterial());
+
+            Spinner recommendationNextStep = (Spinner) view.findViewById(R.id.sales_next_step_recommendation);
+            Utils.setSpinnerSelection(recommendationNextStep, saleCallData.getRecommendationNextStep());
+
+            Spinner recommendationNextLevel = (Spinner) view.findViewById(R.id.sales_recommendation_level);
+            Utils.setSpinnerSelection(recommendationNextLevel, saleCallData.getRecommendationLevel());
+            bindSalesDataToUi(view);
+        }
+    }
+
+    private void bindSalesDataToUi(View view) {
+        List<SaleData> salesDatas = saleCallData.getSalesDatas();
+        for (int i = 0; i < salesDatas.size(); ++i) {
+            if (i == 0) {
+                ((EditText)view.findViewById(R.id.sales_quantity)).setText(salesDatas.get(i).getQuantity()+"");
+                ((EditText)view.findViewById(R.id.sales_price)).setText(salesDatas.get(i).getPrice()+"");
+                ((Spinner)view.findViewById(R.id.sales_product)).setSelection(getProductPosition(salesDatas.get(i).getProduct()));
+            }else {
+                addRowToTable(salesDatas.get(i), view);
+            }
+        }
+    }
+
+    private void addRowToTable(SaleData saleData, View view) {
         TableRow tableRow = new TableRow(getActivity());
         tableRow.setLayoutParams(new LayoutParams( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
@@ -141,14 +183,20 @@ public class CommercialFormActivity extends Fragment {
         EditText quantityView = (EditText) getActivity().getLayoutInflater().inflate(R.layout.edit_text_style, null);
         quantityView.setTextColor(Color.BLACK);
         quantityView.setLayoutParams(params);
+        quantityView.setInputType(InputType.TYPE_CLASS_NUMBER);
         tableRow.addView(quantityView);
-
 
         EditText priceView = (EditText) getActivity().getLayoutInflater().inflate(R.layout.edit_text_style, null);
         priceView.setTextColor(Color.BLACK);
         priceView.setLayoutParams(params);
+        priceView.setInputType(InputType.TYPE_CLASS_NUMBER);
         tableRow.addView(priceView);
 
+        if (saleData != null) {
+            quantityView.setText(saleData.getQuantity() + "");
+            priceView.setText(saleData.getPrice() + "");
+            spinner.setSelection(getProductPosition(saleData.getProduct()));
+        }
         Button deleteBtn = new Button(getActivity());
         deleteBtn.setBackgroundColor(Color.parseColor("#428bca"));
         deleteBtn.setText("Remove");
@@ -192,10 +240,13 @@ public class CommercialFormActivity extends Fragment {
         sale.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.sales_next_step_recommendation)).getSelectedItem().toString());
         sale.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.sales_recommendation_level)).getSelectedItem().toString());
         sale.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.sales_government_approval)).getSelectedItem().toString());
+        sale.setTaskId(callDataTask.getId());
         sale.setOrderId(callDataTask.getId());
         Long saleId = saleDao.insert(sale);
         //add the different sales.
         submitSaleData(saleId);
+        callDataTask.setStatus(TaskMainFragment.STATUS_COMPLETE);
+        taskDao.update(callDataTask);
     }
 
     private void submitSaleData(Long saleId) {
@@ -206,9 +257,9 @@ public class CommercialFormActivity extends Fragment {
             saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
             saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
             saleData.setProductId( ((Product) spinnerList.get(i).getSelectedItem()).getId());
+            saleDataDao.insert(saleData);
         }
     }
-
 
     private void manageDoyouStockZincResponses(View view) {
         final Spinner spinner = (Spinner) view.findViewById(R.id.sales_do_you_stock_zinc);
@@ -234,6 +285,22 @@ public class CommercialFormActivity extends Fragment {
         });
     }
 
+    private boolean isNewSalesCall() {
+        if (saleCallData.getId() == null || saleCallData.getId() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private int getProductPosition(Product product) {
+        for (int i = 0; i < products.size(); ++i) {
+            if (products.get(i).getId() == product.getId()) {
+                return i;
+            }
+        }
+        return 0;
+    }
 
 
 }

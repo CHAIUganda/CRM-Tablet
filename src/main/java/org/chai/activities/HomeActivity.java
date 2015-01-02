@@ -1,7 +1,6 @@
 package org.chai.activities;
 
 import android.app.*;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
@@ -13,15 +12,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import org.chai.R;
+import org.chai.activities.calls.CallsMainFragment;
 import org.chai.activities.customer.CustomersMainFragment;
 
-import android.app.ActionBar.Tab;
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.adapter.NavDrawerListAdapter;
 import org.chai.sync.CHAISynchroniser;
@@ -157,6 +155,8 @@ public class HomeActivity extends FragmentActivity{
             case 1:
                 fragment = new CustomersMainFragment();
                 break;
+            case 2:
+                fragment = new CallsMainFragment();
             default:
                 break;
         }
