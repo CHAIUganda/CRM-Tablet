@@ -98,6 +98,7 @@
                     android:textSize="28dp"
                     android:singleLine="true"
                     android:textStyle="italic"
+                    android:text="sales1"
                     android:textCursorDrawable="@null"/>
 
         </LinearLayout>
@@ -132,6 +133,7 @@
                     android:textSize="28dp"
                     android:singleLine="true"
                     android:textStyle="italic"
+                    android:text="pass"
                     android:textCursorDrawable="@null"/>
 
         </LinearLayout>
