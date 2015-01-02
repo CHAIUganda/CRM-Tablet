@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import de.greenrobot.dao.query.Query;
 import de.greenrobot.dao.query.QueryBuilder;
+import de.greenrobot.dao.query.WhereCondition;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.adapter.TaskListAdapter;
@@ -20,6 +23,7 @@ import org.chai.model.*;
 import org.chai.rest.RestClient;
 import org.chai.util.Utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -103,9 +107,10 @@ public class TaskCalenderFragment extends Fragment {
         if(itemPosition==1){
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
         }else{
-            Date dueDate = Utils.addToDate(new Date(),itemPosition);
-            Log.i("Due Date:",dueDate.toString());
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.eq(dueDate),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
+            Date dueDateOffset = Utils.addToDate(new Date(),itemPosition);
+            Date dueDatemax = Utils.addToDate(new Date(),itemPosition+1);
+            Log.i("Due Date:",dueDateOffset.toString()+":max-"+dueDatemax.toString());
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
         }
         return outstandingTasks;
     } 
