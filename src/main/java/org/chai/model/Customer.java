@@ -470,6 +470,10 @@ public class Customer {
     }
 
     // KEEP METHODS - put your custom methods here
+    @Override
+    public String toString() {
+        return outletName;
+    }
     // KEEP METHODS END
 
 }

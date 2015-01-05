@@ -81,11 +81,15 @@ public class CallsMainFragment extends BaseContainerFragment {
     }
 
     private void goToDetailerForm(DetailerCall itemAtPosition) {
-        Intent intent = new Intent(getActivity(), DetailersActivity.class);
+        DetailersActivity detailersActivity = new DetailersActivity();
         Bundle bundle = new Bundle();
         bundle.putLong("callId", itemAtPosition.getId());
-        intent.putExtras(bundle);
-        startActivity(intent);
+        detailersActivity.setArguments(bundle);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction =  fragmentManager.beginTransaction();
+        transaction.replace(R.id.frame_container, detailersActivity);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     private void goToSalesForm(Sale sale){

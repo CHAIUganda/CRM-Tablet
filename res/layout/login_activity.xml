@@ -98,7 +98,7 @@
                     android:textSize="28dp"
                     android:singleLine="true"
                     android:textStyle="italic"
-                    android:text="sales1"
+                    android:text="detailer"
                     android:textCursorDrawable="@null"/>
 
         </LinearLayout>

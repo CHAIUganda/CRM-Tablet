@@ -34,9 +34,9 @@ public class Product {
     /** Used for active entity operations. */
     private transient ProductDao myDao;
 
-    private List<Order> orders;
     private List<Promotion> promotions;
     private List<SaleData> salesDatas;
+    private List<OrderData> orderDatas;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -131,28 +131,6 @@ public class Product {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<Order> getOrders() {
-        if (orders == null) {
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            OrderDao targetDao = daoSession.getOrderDao();
-            List<Order> ordersNew = targetDao._queryProduct_Orders(id);
-            synchronized (this) {
-                if(orders == null) {
-                    orders = ordersNew;
-                }
-            }
-        }
-        return orders;
-    }
-
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    public synchronized void resetOrders() {
-        orders = null;
-    }
-
-    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
     public List<Promotion> getPromotions() {
         if (promotions == null) {
             if (daoSession == null) {
@@ -194,6 +172,28 @@ public class Product {
     /** Resets a to-many relationship, making the next get call to query for a fresh result. */
     public synchronized void resetSalesDatas() {
         salesDatas = null;
+    }
+
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<OrderData> getOrderDatas() {
+        if (orderDatas == null) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            OrderDataDao targetDao = daoSession.getOrderDataDao();
+            List<OrderData> orderDatasNew = targetDao._queryProduct_OrderDatas(id);
+            synchronized (this) {
+                if(orderDatas == null) {
+                    orderDatas = orderDatasNew;
+                }
+            }
+        }
+        return orderDatas;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetOrderDatas() {
+        orderDatas = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

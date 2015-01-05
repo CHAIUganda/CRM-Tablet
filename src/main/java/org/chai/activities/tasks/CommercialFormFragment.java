@@ -16,6 +16,7 @@ import android.widget.TableRow.LayoutParams;
 import org.chai.activities.HomeActivity;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
+import org.chai.util.SampleData;
 import org.chai.util.Utils;
 
 import java.util.ArrayList;
@@ -45,12 +46,14 @@ public class CommercialFormFragment extends Fragment {
     private Sale saleCallData;
     private Customer salesCustomer;
     private List<Product> products;
+    private SampleData sampleData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.sales_form,container, false);
         try {
             initialiseGreenDao();
+            sampleData = new SampleData(getActivity());
             tableLayout = (TableLayout)view.findViewById(R.id.sales_table);
             spinnerList = new ArrayList<Spinner>();
             quantityFields = new ArrayList<EditText>();
@@ -58,6 +61,7 @@ public class CommercialFormFragment extends Fragment {
             Bundle bundle = getArguments();
             Long callId = bundle.getLong("callId");
             if (callId != 0 && callId != null) {
+                //from call list
                 saleCallData = saleDao.loadDeep(callId);
                 callDataTask = saleCallData.getTask();
                 salesCustomer = callDataTask.getCustomer();
@@ -82,15 +86,6 @@ public class CommercialFormFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     addRowToTable(null, view);
-                }
-            });
-
-            Button takeOrder = (Button)view.findViewById(R.id.sales_take_order);
-            takeOrder.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getActivity(), TakeOrderActivity.class);
-                    startActivity(intent);
                 }
             });
 
@@ -232,6 +227,7 @@ public class CommercialFormFragment extends Fragment {
     }
 
     private void submitSale(){
+//        sampleData.insertSampleSales(callDataTask.getId(),callDataTask.getUuid());
         Sale sale = new Sale(null);
         sale.setUuid(UUID.randomUUID().toString());
         sale.setDateOfSale(new Date());
@@ -245,7 +241,8 @@ public class CommercialFormFragment extends Fragment {
         sale.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.sales_recommendation_level)).getSelectedItem().toString());
         sale.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.sales_government_approval)).getSelectedItem().toString());
         sale.setTaskId(callDataTask.getId());
-        sale.setOrderId(callDataTask.getId());
+        sale.setOrderRefid(callDataTask.getId());
+        sale.setOrderId(callDataTask.getUuid());
         Long saleId = saleDao.insert(sale);
         //add the different sales.
         submitSaleData(saleId);
@@ -260,7 +257,9 @@ public class CommercialFormFragment extends Fragment {
             saleData.setSaleId(saleId);
             saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
             saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
-            saleData.setProductId( ((Product) spinnerList.get(i).getSelectedItem()).getId());
+            Product product = (Product) spinnerList.get(i).getSelectedItem();
+            saleData.setProductRefId(product.getId());
+            saleData.setProductId(product.getUuid());
             saleDataDao.insert(saleData);
         }
     }
@@ -290,7 +289,7 @@ public class CommercialFormFragment extends Fragment {
     }
 
     private boolean isNewSalesCall() {
-        if (saleCallData.getId() == null || saleCallData.getId() == 0) {
+        if (saleCallData == null || saleCallData.getId() == null) {
             return true;
         } else {
             return false;

@@ -166,6 +166,7 @@
         <item >Customers</item>
         <item >History</item>
         <item >Take an Order</item>
+        <item >Adhock Sale</item>
     </string-array>
     <array name="nav_drawer_icons">
         <item>@drawable/task_default</item>

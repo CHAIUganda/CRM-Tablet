@@ -90,11 +90,11 @@ public class TaskByLocationFragment extends Fragment {
                     commercialFormActivity.setArguments(bundle);
                     ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity,true);
                 }else{
+                    DetailersActivity detailersActivity = new DetailersActivity();
                     Bundle bundle = new Bundle();
                     bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
-                    Intent intent = new Intent(getActivity(), DetailersActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    detailersActivity.setArguments(bundle);
+                    ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);
                 }
             }
         });

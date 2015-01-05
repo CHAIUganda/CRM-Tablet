@@ -21,6 +21,7 @@ public class CHAISynchroniser {
     private CustomerClient customerClient;
     private ProductClient productClient;
     private TaskClient taskClient;
+    private SalesClient salesClient;
 
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
@@ -35,6 +36,9 @@ public class CHAISynchroniser {
     private TaskDao taskDao;
     private DetailerCallDao detailerCallDao;
     private ProductDao productDao;
+    private SaleDao saleDao;
+    private SaleDataDao saleDataDao;
+    private OrderDao orderDao;
 
     public CHAISynchroniser(Activity activity) {
         this.parent = activity;
@@ -42,6 +46,7 @@ public class CHAISynchroniser {
         customerClient = new CustomerClient();
         productClient = new ProductClient();
         taskClient = new TaskClient();
+        salesClient = new SalesClient();
         initialiseGreenDao();
     }
     public CHAISynchroniser(Activity parent,ProgressDialog progressDialog){
@@ -51,6 +56,7 @@ public class CHAISynchroniser {
         customerClient = new CustomerClient();
         productClient = new ProductClient();
         taskClient = new TaskClient();
+        salesClient = new SalesClient();
         initialiseGreenDao();
     }
 
@@ -70,6 +76,9 @@ public class CHAISynchroniser {
             taskDao = daoSession.getTaskDao();
             detailerCallDao = daoSession.getDetailerCallDao();
             productDao = daoSession.getProductDao();
+            saleDao = daoSession.getSaleDao();
+            saleDataDao = daoSession.getSaleDataDao();
+            orderDao = daoSession.getOrderDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
         }
@@ -77,8 +86,11 @@ public class CHAISynchroniser {
 
     public void startSyncronisationProcess() {
         try{
+            uploadSales();
             uploadCustomers();
             uploadTasks();
+            uploadOrders();
+            progressDialog.incrementProgressBy(20);
             regionDao.deleteAll();
             districtDao.deleteAll();
             subcountyDao.deleteAll();
@@ -88,10 +100,11 @@ public class CHAISynchroniser {
             customerDao.deleteAll();
             taskDao.deleteAll();
             downloadRegions();
-            progressDialog.incrementProgressBy(30);
+            progressDialog.incrementProgressBy(20);
             downloadCustomers();
-            progressDialog.incrementProgressBy(50);
+            progressDialog.incrementProgressBy(20);
             downloadTasks();
+            progressDialog.incrementProgressBy(20);
             downloadProducts();
 
             progressDialog.incrementProgressBy(20);
@@ -173,6 +186,7 @@ public class CHAISynchroniser {
 
     public void downloadTasks(){
         updatePropgress("Downloading Tasks..");
+
         Task[] tasks = taskClient.downloadTasks();
         for(Task task:tasks){
             taskDao.insert(task);
@@ -209,6 +223,28 @@ public class CHAISynchroniser {
         Product[] products = productClient.downloadProducts();
         for(Product product:products){
             productDao.insert(product);
+        }
+    }
+
+    private void uploadSales(){
+        List<Sale> saleList = saleDao.loadAll();
+        if(!saleList.isEmpty()){
+            updatePropgress("Uploading Sales...");
+            boolean uploaded = salesClient.uploadSales(saleList.toArray(new Sale[saleList.size()]));
+            if(uploaded){
+                saleDao.deleteAll();
+            }
+        }
+    }
+
+    private void uploadOrders(){
+        List<Order> orderList = orderDao.loadAll();
+        if(!orderList.isEmpty()){
+            updatePropgress("Uploading Orders...");
+            boolean uploaded = salesClient.uploadOrders(orderList.toArray(new Order[orderList.size()]));
+            if(uploaded){
+                orderDao.deleteAll();
+            }
         }
     }
 

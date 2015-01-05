@@ -8,6 +8,7 @@ import de.greenrobot.dao.DaoException;
 
 // KEEP INCLUDES - put your custom includes here
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @JsonIgnoreProperties(ignoreUnknown = true)
 // KEEP INCLUDES END
 /**
@@ -28,24 +29,33 @@ public class Sale {
     private String recommendationNextStep;
     private String recommendationLevel;
     private String governmentApproval;
-    private long orderId;
-    private long taskId;
-
-    /** Used to resolve relations */
-    private transient DaoSession daoSession;
-
-    /** Used for active entity operations. */
-    private transient SaleDao myDao;
-
-    private Order order;
-    private Long order__resolvedKey;
-
-    private Task task;
-    private Long task__resolvedKey;
+    private String orderId;
 
     private List<SaleData> salesDatas;
 
     // KEEP FIELDS - put your custom fields here
+
+    /** Used to resolve relations */
+    @JsonIgnore
+    private long taskId;
+    @JsonIgnore
+    private long orderRefid;
+    @JsonIgnore
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    @JsonIgnore
+    private transient SaleDao myDao;
+
+    @JsonIgnore
+    private Order order;
+    @JsonIgnore
+    private Long order__resolvedKey;
+
+    @JsonIgnore
+    private Task task;
+    @JsonIgnore
+    private Long task__resolvedKey;
     // KEEP FIELDS END
 
     public Sale() {
@@ -55,7 +65,7 @@ public class Sale {
         this.id = id;
     }
 
-    public Sale(Long id, String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, long orderId, long taskId) {
+    public Sale(Long id, String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, String orderId, long orderRefid, long taskId) {
         this.id = id;
         this.uuid = uuid;
         this.dateOfSale = dateOfSale;
@@ -68,6 +78,7 @@ public class Sale {
         this.recommendationLevel = recommendationLevel;
         this.governmentApproval = governmentApproval;
         this.orderId = orderId;
+        this.orderRefid = orderRefid;
         this.taskId = taskId;
     }
 
@@ -169,12 +180,20 @@ public class Sale {
         this.governmentApproval = governmentApproval;
     }
 
-    public long getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(long orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
+    }
+
+    public long getOrderRefid() {
+        return orderRefid;
+    }
+
+    public void setOrderRefid(long orderRefid) {
+        this.orderRefid = orderRefid;
     }
 
     public long getTaskId() {
@@ -187,7 +206,7 @@ public class Sale {
 
     /** To-one relationship, resolved on first access. */
     public Order getOrder() {
-        long __key = this.orderId;
+        long __key = this.orderRefid;
         if (order__resolvedKey == null || !order__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
@@ -204,12 +223,12 @@ public class Sale {
 
     public void setOrder(Order order) {
         if (order == null) {
-            throw new DaoException("To-one property 'orderId' has not-null constraint; cannot set to-one to null");
+            throw new DaoException("To-one property 'orderRefid' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
             this.order = order;
-            orderId = order.getId();
-            order__resolvedKey = orderId;
+            orderRefid = order.getId();
+            order__resolvedKey = orderRefid;
         }
     }
 

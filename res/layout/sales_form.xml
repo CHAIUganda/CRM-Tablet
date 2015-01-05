@@ -393,17 +393,6 @@
                 android:layout_marginRight="50dp"
                 android:background="#428bca"
                 android:textColor="#fff"/>
-        <Button
-                android:id="@+id/sales_take_order"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="Take an Order"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:background="#428bca"
-                android:textColor="#fff"/>
 
 
     </LinearLayout>

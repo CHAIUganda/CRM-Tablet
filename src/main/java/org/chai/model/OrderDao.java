@@ -29,18 +29,16 @@ public class OrderDao extends AbstractDao<Order, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Quantity = new Property(2, double.class, "quantity", false, "QUANTITY");
-        public final static Property DeliveryDate = new Property(3, java.util.Date.class, "deliveryDate", false, "DELIVERY_DATE");
+        public final static Property ClientRefId = new Property(1, String.class, "clientRefId", false, "CLIENT_REF_ID");
+        public final static Property DeliveryDate = new Property(2, java.util.Date.class, "deliveryDate", false, "DELIVERY_DATE");
+        public final static Property CustomerId = new Property(3, String.class, "customerId", false, "CUSTOMER_ID");
         public final static Property OrderDate = new Property(4, java.util.Date.class, "orderDate", false, "ORDER_DATE");
-        public final static Property CustomerId = new Property(5, long.class, "customerId", false, "CUSTOMER_ID");
-        public final static Property ProductId = new Property(6, long.class, "productId", false, "PRODUCT_ID");
+        public final static Property CustomerRefId = new Property(5, long.class, "customerRefId", false, "CUSTOMER_REF_ID");
     };
 
     private DaoSession daoSession;
 
     private Query<Order> customer_OrdersQuery;
-    private Query<Order> product_OrdersQuery;
 
     public OrderDao(DaoConfig config) {
         super(config);
@@ -56,12 +54,11 @@ public class OrderDao extends AbstractDao<Order, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'orders' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'QUANTITY' REAL NOT NULL ," + // 2: quantity
-                "'DELIVERY_DATE' INTEGER NOT NULL ," + // 3: deliveryDate
+                "'CLIENT_REF_ID' TEXT NOT NULL UNIQUE ," + // 1: clientRefId
+                "'DELIVERY_DATE' INTEGER NOT NULL ," + // 2: deliveryDate
+                "'CUSTOMER_ID' TEXT," + // 3: customerId
                 "'ORDER_DATE' INTEGER NOT NULL ," + // 4: orderDate
-                "'CUSTOMER_ID' INTEGER NOT NULL ," + // 5: customerId
-                "'PRODUCT_ID' INTEGER NOT NULL );"); // 6: productId
+                "'CUSTOMER_REF_ID' INTEGER NOT NULL );"); // 5: customerRefId
     }
 
     /** Drops the underlying database table. */
@@ -79,12 +76,15 @@ public class OrderDao extends AbstractDao<Order, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getUuid());
-        stmt.bindDouble(3, entity.getQuantity());
-        stmt.bindLong(4, entity.getDeliveryDate().getTime());
+        stmt.bindString(2, entity.getClientRefId());
+        stmt.bindLong(3, entity.getDeliveryDate().getTime());
+ 
+        String customerId = entity.getCustomerId();
+        if (customerId != null) {
+            stmt.bindString(4, customerId);
+        }
         stmt.bindLong(5, entity.getOrderDate().getTime());
-        stmt.bindLong(6, entity.getCustomerId());
-        stmt.bindLong(7, entity.getProductId());
+        stmt.bindLong(6, entity.getCustomerRefId());
     }
 
     @Override
@@ -104,12 +104,11 @@ public class OrderDao extends AbstractDao<Order, Long> {
     public Order readEntity(Cursor cursor, int offset) {
         Order entity = new Order( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // uuid
-            cursor.getDouble(offset + 2), // quantity
-            new java.util.Date(cursor.getLong(offset + 3)), // deliveryDate
+            cursor.getString(offset + 1), // clientRefId
+            new java.util.Date(cursor.getLong(offset + 2)), // deliveryDate
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // customerId
             new java.util.Date(cursor.getLong(offset + 4)), // orderDate
-            cursor.getLong(offset + 5), // customerId
-            cursor.getLong(offset + 6) // productId
+            cursor.getLong(offset + 5) // customerRefId
         );
         return entity;
     }
@@ -118,12 +117,11 @@ public class OrderDao extends AbstractDao<Order, Long> {
     @Override
     public void readEntity(Cursor cursor, Order entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUuid(cursor.getString(offset + 1));
-        entity.setQuantity(cursor.getDouble(offset + 2));
-        entity.setDeliveryDate(new java.util.Date(cursor.getLong(offset + 3)));
+        entity.setClientRefId(cursor.getString(offset + 1));
+        entity.setDeliveryDate(new java.util.Date(cursor.getLong(offset + 2)));
+        entity.setCustomerId(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setOrderDate(new java.util.Date(cursor.getLong(offset + 4)));
-        entity.setCustomerId(cursor.getLong(offset + 5));
-        entity.setProductId(cursor.getLong(offset + 6));
+        entity.setCustomerRefId(cursor.getLong(offset + 5));
      }
     
     /** @inheritdoc */
@@ -150,32 +148,17 @@ public class OrderDao extends AbstractDao<Order, Long> {
     }
     
     /** Internal query to resolve the "orders" to-many relationship of Customer. */
-    public List<Order> _queryCustomer_Orders(long customerId) {
+    public List<Order> _queryCustomer_Orders(long customerRefId) {
         synchronized (this) {
             if (customer_OrdersQuery == null) {
                 QueryBuilder<Order> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.CustomerId.eq(null));
+                queryBuilder.where(Properties.CustomerRefId.eq(null));
                 queryBuilder.orderRaw("ORDER_DATE ASC");
                 customer_OrdersQuery = queryBuilder.build();
             }
         }
         Query<Order> query = customer_OrdersQuery.forCurrentThread();
-        query.setParameter(0, customerId);
-        return query.list();
-    }
-
-    /** Internal query to resolve the "orders" to-many relationship of Product. */
-    public List<Order> _queryProduct_Orders(long productId) {
-        synchronized (this) {
-            if (product_OrdersQuery == null) {
-                QueryBuilder<Order> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.ProductId.eq(null));
-                queryBuilder.orderRaw("ORDER_DATE ASC");
-                product_OrdersQuery = queryBuilder.build();
-            }
-        }
-        Query<Order> query = product_OrdersQuery.forCurrentThread();
-        query.setParameter(0, productId);
+        query.setParameter(0, customerRefId);
         return query.list();
     }
 
@@ -187,11 +170,8 @@ public class OrderDao extends AbstractDao<Order, Long> {
             SqlUtils.appendColumns(builder, "T", getAllColumns());
             builder.append(',');
             SqlUtils.appendColumns(builder, "T0", daoSession.getCustomerDao().getAllColumns());
-            builder.append(',');
-            SqlUtils.appendColumns(builder, "T1", daoSession.getProductDao().getAllColumns());
             builder.append(" FROM orders T");
-            builder.append(" LEFT JOIN CUSTOMER T0 ON T.'CUSTOMER_ID'=T0.'_id'");
-            builder.append(" LEFT JOIN PRODUCT T1 ON T.'PRODUCT_ID'=T1.'_id'");
+            builder.append(" LEFT JOIN CUSTOMER T0 ON T.'CUSTOMER_REF_ID'=T0.'_id'");
             builder.append(' ');
             selectDeep = builder.toString();
         }
@@ -205,12 +185,6 @@ public class OrderDao extends AbstractDao<Order, Long> {
         Customer customer = loadCurrentOther(daoSession.getCustomerDao(), cursor, offset);
          if(customer != null) {
             entity.setCustomer(customer);
-        }
-        offset += daoSession.getCustomerDao().getAllColumns().length;
-
-        Product product = loadCurrentOther(daoSession.getProductDao(), cursor, offset);
-         if(product != null) {
-            entity.setProduct(product);
         }
 
         return entity;    

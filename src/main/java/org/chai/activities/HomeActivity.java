@@ -20,6 +20,8 @@ import org.chai.R;
 import org.chai.activities.calls.CallsMainFragment;
 import org.chai.activities.customer.CustomersMainFragment;
 
+import org.chai.activities.tasks.CommercialFormFragment;
+import org.chai.activities.tasks.TakeOrderFragment;
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.adapter.NavDrawerListAdapter;
 import org.chai.sync.CHAISynchroniser;
@@ -157,6 +159,10 @@ public class HomeActivity extends FragmentActivity{
                 break;
             case 2:
                 fragment = new CallsMainFragment();
+                break;
+            case 3:
+                fragment = new TakeOrderFragment();
+                break;
             default:
                 break;
         }
