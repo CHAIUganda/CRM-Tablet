@@ -27,7 +27,7 @@ import org.chai.rest.RestClient;
 /**
  * Created by victor on 10/15/14.
  */
-public class CallsMainFragment extends BaseContainerFragment {
+public class CallMainFragment extends BaseContainerFragment {
 
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
