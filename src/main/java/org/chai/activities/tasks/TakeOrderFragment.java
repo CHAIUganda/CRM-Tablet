@@ -45,6 +45,8 @@ public class TakeOrderFragment extends BaseContainerFragment {
     private String initialYear;
     private List<Product> products;
     private Customer selectedCustomer;
+    private boolean isUpdate = false;
+    private Order orderInstance;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -63,7 +65,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
         quantityFields.add((EditText)view. findViewById(R.id.order_quantity));
 
         List<Customer> customersList = customerDao.loadAll();
-        AutoCompleteTextView textView = (AutoCompleteTextView)view.findViewById(R.id.sales_auto_complete_textview);
+        AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.order_auto_complete_textview);
         ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(getActivity(),android.R.layout.simple_dropdown_item_1line,customersList);
         textView.setAdapter(adapter);
 
@@ -79,7 +81,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addRowToTable();
+                addRowToTable(null, view);
             }
         });
 
@@ -126,6 +128,13 @@ public class TakeOrderFragment extends BaseContainerFragment {
                 startActivity(i);
             }
         });
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            isUpdate = true;
+            Long orderId = bundle.getLong("orderId");
+            bindOrderToUi(orderId, view);
+        }
         return view;
     }
 
@@ -145,7 +154,30 @@ public class TakeOrderFragment extends BaseContainerFragment {
         }
     }
 
-    private void addRowToTable(){
+    private void bindOrderToUi(Long orderId, View view) {
+        orderInstance = orderDao.loadDeep(orderId);
+        if (orderInstance != null) {
+            ((AutoCompleteTextView) view.findViewById(R.id.order_auto_complete_textview)).setText(orderInstance.getCustomer().getOutletName());
+            selectedCustomer = orderInstance.getCustomer();
+            dateEditTxt.setText(Utils.dateToString(orderInstance.getOrderDate()));
+            bindOrderDataToUi(view, orderInstance);
+        }
+
+    }
+
+    private void bindOrderDataToUi(View view, Order order) {
+        List<OrderData> orderDatas = order.getOrderDatas();
+        for (int i = 0; i < orderDatas.size(); ++i) {
+            if (i == 0) {
+                ((EditText) view.findViewById(R.id.order_quantity)).setText(orderDatas.get(i).getQuantity() + "");
+                ((Spinner) view.findViewById(R.id.order_product)).setSelection(getProductPosition(orderDatas.get(i).getProduct()));
+            } else {
+                addRowToTable(orderDatas.get(i), view);
+            }
+        }
+    }
+
+    private void addRowToTable(OrderData orderData, View view) {
         TableRow tableRow = new TableRow(getActivity());
         tableRow.setLayoutParams(new TableRow.LayoutParams( TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
@@ -164,6 +196,10 @@ public class TakeOrderFragment extends BaseContainerFragment {
         quantityView.setLayoutParams(params);
         quantityView.setInputType(InputType.TYPE_CLASS_NUMBER);
         tableRow.addView(quantityView);
+        if (orderData != null) {
+            quantityView.setText(orderData.getQuantity() + "");
+            spinner.setSelection(getProductPosition(orderData.getProduct()));
+        }
 
         Button deleteBtn = new Button(getActivity());
         deleteBtn.setBackgroundColor(Color.parseColor("#428bca"));
@@ -205,31 +241,60 @@ public class TakeOrderFragment extends BaseContainerFragment {
     }
 
     private void  submitOrder(){
-        for (int i = 0; i < spinnerList.size(); ++i) {
-            Order order = new Order(null);
-            order.setClientRefId(UUID.randomUUID().toString());
-            order.setCustomerId(selectedCustomer.getUuid());
-            order.setCustomerRefId(selectedCustomer.getId());
-            order.setDeliveryDate(Utils.stringToDate(((EditText) getActivity().findViewById(R.id.order_delivery_date)).getText().toString()));
-            order.setOrderDate(new Date());
-            Long orderId = orderDao.insert(order);
+        if (!isUpdate) {
+            orderInstance = new Order(null);
+        }
+        orderInstance.setClientRefId(UUID.randomUUID().toString());
+        orderInstance.setCustomerId(selectedCustomer.getUuid());
+        orderInstance.setCustomerRefId(selectedCustomer.getId());
+        orderInstance.setDeliveryDate(Utils.stringToDate(((EditText) getActivity().findViewById(R.id.order_delivery_date)).getText().toString()));
+        orderInstance.setOrderDate(new Date());
+        if (isUpdate) {
+            orderDao.update(orderInstance);
+            submitOrderData(orderInstance.getId());
+        } else {
+            Long orderId = orderDao.insert(orderInstance);
+            orderInstance.setId(orderId);
             submitOrderData(orderId);
         }
     }
 
     private void submitOrderData(Long orderId){
         for (int i = 0; i < spinnerList.size(); ++i) {
-            OrderData orderData = new OrderData(null);
+            OrderData orderData = instantiateOrder(i);
             orderData.setOrderId(orderId);
             orderData.setUuid(UUID.randomUUID().toString());
             orderData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
             Product product = (Product) spinnerList.get(i).getSelectedItem();
             orderData.setProductId(product.getUuid());
             orderData.setProductRefId(product.getId());
-            orderDataDao.insert(orderData);
+            if(orderData.getId()!=null){
+                orderDataDao.update(orderData);
+            }else{
+                orderDataDao.insert(orderData);
+            }
         }
     }
 
 
+    private int getProductPosition(Product product) {
+        for (int i = 0; i < products.size(); ++i) {
+            if (products.get(i).getId() == product.getId()) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private OrderData instantiateOrder(int index){
+        List<OrderData> orderDatas = orderInstance.getOrderDatas();
+        OrderData orderData;
+        if(index < orderDatas.size()){
+            orderData = orderDatas.get(index);
+        }else{
+            orderData = new OrderData(null);
+        }
+        return orderData;
+    }
 
 }

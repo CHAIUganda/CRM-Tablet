@@ -1,6 +1,5 @@
 package org.chai.activities.tasks;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,9 +13,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import org.chai.R;
-import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
-import org.chai.activities.calls.CallsMainFragment;
 import org.chai.adapter.DistrictArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.GPSTracker;

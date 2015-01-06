@@ -7,7 +7,7 @@
 
     <!-- Thumbnail Image -->
     <ImageView
-            android:id="@+id/thumbnail"
+            android:id="@+id/callthumbnail"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentLeft="true"
@@ -19,8 +19,8 @@
             android:id="@+id/call_task_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/thumbnail"
-            android:layout_toRightOf="@+id/thumbnail"
+            android:layout_alignTop="@+id/callthumbnail"
+            android:layout_toRightOf="@+id/callthumbnail"
             android:textColor="@color/list_main_text_color"
             android:textSize="@dimen/list_main_text_size"
             android:text="kakama victor"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/call_task_description"
             android:layout_marginTop="1dip"
-            android:layout_toRightOf="@+id/thumbnail"
+            android:layout_toRightOf="@+id/callthumbnail"
             android:textColor="@color/list_main_text_color"
             android:text="kakama victor"
             android:textStyle="bold"/>
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/call_customername"
             android:layout_marginTop="5dp"
-            android:layout_toRightOf="@+id/thumbnail"
+            android:layout_toRightOf="@+id/callthumbnail"
             android:textColor="@color/list_sub_subtext_color"
             android:textSize="@dimen/list_sub_sub_text_size"
             android:text="0777505033"
