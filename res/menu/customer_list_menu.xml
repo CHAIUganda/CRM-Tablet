@@ -6,14 +6,14 @@
                 android:icon="@drawable/new_icon"
                 android:title="Add New Customer"/>
 
-        <item
+       <!-- <item
                 android:id="@+id/menu_nearby_customer"
                 android:icon="@drawable/nearby_icon"
-                android:title="Find Nearby Customers"/>
+                android:title="Find Nearby Customers"/>-->
 
-    <item
+<!--    <item
             android:id="@+id/customer_list_home"
             android:icon="@drawable/home_icon"
             android:title="Home"
-            android:showAsAction="ifRoom"/>
+            android:showAsAction="ifRoom"/>-->
 </menu>

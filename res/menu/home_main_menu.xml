@@ -5,6 +5,11 @@
             android:id="@+id/action_sync"
             android:icon="@drawable/btn_sync"
             android:orderInCategory="100"
-            android:showAsAction="ifRoom"
+            android:showAsAction="always|withText"
             android:title="@string/sync"/>
+    <item
+            android:id="@+id/action_logout"
+            android:orderInCategory="100"
+            android:showAsAction="ifRoom"
+            android:title="Logout"/>
 </menu>
