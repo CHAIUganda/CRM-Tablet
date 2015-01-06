@@ -105,7 +105,7 @@ public class TaskCalenderFragment extends Fragment {
         QueryBuilder<Task> taskQueryBuilder = taskDao.queryBuilder();
         List<Task> outstandingTasks=null;
         if(itemPosition==1){
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(Utils.addToDate(new Date(),0)),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
         }else{
             Date dueDateOffset = Utils.addToDate(new Date(),itemPosition);
             Date dueDatemax = Utils.addToDate(new Date(),itemPosition+1);

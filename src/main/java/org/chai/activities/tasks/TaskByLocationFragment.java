@@ -69,7 +69,7 @@ public class TaskByLocationFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 Long subcountyId = ((Subcounty) subcountySpinner.getSelectedItem()).getId();
 
-                Query query = taskDao.queryBuilder().where(new WhereCondition.StringCondition("T.'"+TaskDao.Properties.
+                Query query = taskDao.queryBuilder().where(new WhereCondition.StringCondition("T.'"+TaskDao.Properties.Status.columnName+"' != '"+TaskMainFragment.STATUS_COMPLETE+"' and T.'"+TaskDao.Properties.
                         CustomerId.columnName + "' IN " + "(SELECT " + CustomerDao.Properties.Id.columnName + " FROM " + CustomerDao.TABLENAME + " C WHERE C.'" + CustomerDao.Properties.SubcountyId.columnName + "' = " + subcountyId+")")).build();
                 List<Task> taskList = query.list();
                 listView.setAdapter(new TaskListAdapter(getActivity(),taskList));

@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.ListView;
 import android.widget.Toast;
 import org.chai.R;
@@ -50,7 +48,7 @@ public class CustomersMainFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.customer_list_fragment, container, false);
-
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -74,6 +72,27 @@ public class CustomersMainFragment extends ListFragment {
             customerDao = daoSession.getCustomerDao();
         } catch (Exception ex) {
             Toast.makeText(getActivity().getApplicationContext(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.customer_list_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.menu_new_customer:
+                Intent intent = new Intent(getActivity(), CustomerForm.class);
+                Bundle bundle = new Bundle();
+                bundle.putLong("id", 0);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
