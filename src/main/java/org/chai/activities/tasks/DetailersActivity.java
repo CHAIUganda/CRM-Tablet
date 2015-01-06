@@ -116,6 +116,7 @@ public class DetailersActivity extends Fragment {
     private void setDateWidget(View view) {
         Button dateBtn = (Button)view.findViewById(R.id.detailer_survey_date_btn);
         dateEditTxt = (EditText)view.findViewById(R.id.detailer_survey_date);
+        dateEditTxt.setEnabled(false);
 
         dateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,11 +130,11 @@ public class DetailersActivity extends Fragment {
                     initialYear = stringTokenizer.nextToken();
                     if (datePickerDialog == null) {
                         datePickerDialog = new DatePickerDialog(view.getContext(), new PickDate(), Integer.parseInt(initialYear),
-                                Integer.parseInt(initialMonth) - 1,
+                                Integer.parseInt(initialMonth),
                                 Integer.parseInt(initialDate));
 
                         datePickerDialog.updateDate(Integer.parseInt(initialYear),
-                                Integer.parseInt(initialMonth) - 1,
+                                Integer.parseInt(initialMonth),
                                 Integer.parseInt(initialDate));
                     }
                 } else {
@@ -172,7 +173,7 @@ public class DetailersActivity extends Fragment {
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
             view.updateDate(year, monthOfYear, dayOfMonth);
-            dateEditTxt.setText(monthOfYear + "/" + dayOfMonth + "/" + year);
+            dateEditTxt.setText(dayOfMonth+ "/"+(monthOfYear+1) + "/" + year);
             datePickerDialog.hide();
         }
     }
