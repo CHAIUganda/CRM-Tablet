@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.sun.swing.internal.plaf.synth.resources.synth_sv;
 import org.chai.R;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
@@ -138,7 +139,7 @@ public class LoginActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        // Do nothing
+        finish();
     }
 
 
