@@ -1,6 +1,7 @@
 package org.chai.activities;
 
 import android.app.*;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
@@ -132,6 +133,9 @@ public class HomeActivity extends FragmentActivity{
                     }
                 }).start();
                 return true;
+            case R.id.action_logout:
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }
