@@ -3,6 +3,7 @@ package org.chai.activities.calls;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.*;
@@ -27,7 +28,7 @@ import org.chai.rest.RestClient;
 /**
  * Created by victor on 10/15/14.
  */
-public class CallMainFragment extends BaseContainerFragment {
+public class CallMainFragment extends Fragment {
 
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
@@ -85,11 +86,7 @@ public class CallMainFragment extends BaseContainerFragment {
         Bundle bundle = new Bundle();
         bundle.putLong("callId", itemAtPosition.getId());
         detailersActivity.setArguments(bundle);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction transaction =  fragmentManager.beginTransaction();
-        transaction.replace(R.id.frame_container, detailersActivity);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);
     }
 
     private void goToSalesForm(Sale sale){
@@ -97,11 +94,7 @@ public class CallMainFragment extends BaseContainerFragment {
         Bundle bundle = new Bundle();
         bundle.putLong("callId", sale.getId());
         commercialFormActivity.setArguments(bundle);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction transaction =  fragmentManager.beginTransaction();
-        transaction.replace(R.id.frame_container,commercialFormActivity);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity,true);
     }
 
     private void initialiseGreenDao() {
