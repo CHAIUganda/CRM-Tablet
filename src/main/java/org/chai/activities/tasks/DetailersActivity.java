@@ -149,8 +149,8 @@ public class DetailersActivity extends Fragment {
         });
     }
 
-    private void setGpsWidget(View view) {
-                Button showGps = (Button)view.findViewById(R.id.detailers_gps_btn);
+    private void setGpsWidget(final View view1) {
+                Button showGps = (Button)view1.findViewById(R.id.detailers_gps_btn);
                 showGps.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -158,7 +158,7 @@ public class DetailersActivity extends Fragment {
                                 if (gpsTracker.canGetLocation()) {
                                         capturedLatitude = gpsTracker.getLatitude();
                                         capturedLongitude = gpsTracker.getLongitude();
-                                        EditText detailsGps = (EditText)view.findViewById(R.id.detailers_gps_text);
+                                        EditText detailsGps = (EditText)view1.findViewById(R.id.detailers_gps_text);
                                         detailsGps.setText(capturedLatitude + "," + capturedLongitude);
                                     } else {
                                         gpsTracker.showSettingsAlert();
