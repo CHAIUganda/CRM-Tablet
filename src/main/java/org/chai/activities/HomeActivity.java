@@ -18,10 +18,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import org.chai.R;
-import org.chai.activities.calls.CallsMainFragment;
+import org.chai.activities.calls.CallMainFragment;
+import org.chai.activities.calls.HistoryMainFragment;
 import org.chai.activities.customer.CustomersMainFragment;
 
-import org.chai.activities.tasks.CommercialFormFragment;
 import org.chai.activities.tasks.TakeOrderFragment;
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.adapter.NavDrawerListAdapter;
@@ -162,7 +162,7 @@ public class HomeActivity extends FragmentActivity{
                 fragment = new CustomersMainFragment();
                 break;
             case 2:
-                fragment = new CallsMainFragment();
+                fragment = new HistoryMainFragment();
                 break;
             case 3:
                 fragment = new TakeOrderFragment();
