@@ -158,6 +158,30 @@
 
             </LinearLayout>
 
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_district_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="District:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <Spinner
+                        android:id="@+id/details_district"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:background="@drawable/btn_dropdown"/>
+
+            </LinearLayout>
+
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -188,41 +212,25 @@
                     android:padding="10dp">
 
                 <TextView
-                        android:id="@+id/details_parish_lbl"
+                        android:id="@+id/details_trading_center_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Parish:"
+                        android:text="Trading Center:"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
-                <Spinner
-                        android:id="@+id/details_parish"
-                        android:layout_height="wrap_content"
-                        android:prompt="@string/selectItem"
+                <EditText
+                        android:id="@+id/details_trading_center"
                         android:layout_width="fill_parent"
-                        android:background="@drawable/btn_dropdown"/>
-
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:id="@+id/details_village_lbl"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
                         android:textColor="@color/list_main_text_color"
-                        android:text="Village:"
-                        android:textStyle="bold"/>
-
-                <Spinner
-                        android:id="@+id/details_village"
-                        android:layout_height="wrap_content"
-                        android:prompt="@string/selectItem"
-                        android:layout_width="fill_parent"
-                        android:background="@drawable/btn_dropdown"/>
+                        android:background="@drawable/bordertextfield"
+                        android:textStyle="italic"
+                        android:text=""
+                        android:singleLine="true"
+                        android:textCursorDrawable="@null"/>
 
             </LinearLayout>
 
