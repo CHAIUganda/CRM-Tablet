@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
+import org.chai.model.User;
+import org.chai.rest.RestClient;
 
 /**
  * Created by victor on 1/6/15.
@@ -25,6 +27,9 @@ public class HistoryMainFragment extends BaseContainerFragment {
 
         tabHost.addTab(tabHost.newTabSpec("calldata").setIndicator(getTabIndicator(tabHost.getContext(),"Call Data")),CallDataContainer.class,null);
         tabHost.addTab(tabHost.newTabSpec("orders").setIndicator(getTabIndicator(tabHost.getContext(),"Orders")),OrderCallsContainer.class,null);
+        if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+            tabHost.addTab(tabHost.newTabSpec("adhocksales").setIndicator(getTabIndicator(tabHost.getContext(),"Adhock Sales")),AdhockSalesContainer.class,null);
+        }
 
         return tabHost;
     }

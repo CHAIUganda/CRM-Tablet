@@ -18,14 +18,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import org.chai.R;
-import org.chai.activities.calls.CallMainFragment;
 import org.chai.activities.calls.HistoryMainFragment;
 import org.chai.activities.customer.CustomersMainFragment;
 
-import org.chai.activities.tasks.AdhockSaleFragment;
+import org.chai.activities.tasks.MakeAdhockSaleFragment;
 import org.chai.activities.tasks.TakeOrderFragment;
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.adapter.NavDrawerListAdapter;
+import org.chai.model.User;
+import org.chai.rest.RestClient;
 import org.chai.sync.CHAISynchroniser;
 import org.chai.util.NavDrawerItem;
 
@@ -68,7 +69,9 @@ public class HomeActivity extends FragmentActivity{
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1],navMenuIcons.getResourceId(1,-1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[2],navMenuIcons.getResourceId(2,-1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[3],navMenuIcons.getResourceId(3,-1)));
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],navMenuIcons.getResourceId(3,-1)));
+        if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
+            navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],navMenuIcons.getResourceId(3,-1)));
+        }
 
 
         navMenuIcons.recycle();
@@ -170,7 +173,7 @@ public class HomeActivity extends FragmentActivity{
                 fragment = new TakeOrderFragment();
                 break;
             case 4:
-                fragment = new AdhockSaleFragment();
+                fragment = new MakeAdhockSaleFragment();
                 break;
             default:
                 break;
