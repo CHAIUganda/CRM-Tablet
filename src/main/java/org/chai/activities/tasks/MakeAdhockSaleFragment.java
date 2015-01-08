@@ -24,7 +24,7 @@ import java.util.UUID;
 /**
  * Created by victor on 1/7/15.
  */
-public class AdhockSaleFragment extends BaseContainerFragment {
+public class MakeAdhockSaleFragment extends BaseContainerFragment {
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
