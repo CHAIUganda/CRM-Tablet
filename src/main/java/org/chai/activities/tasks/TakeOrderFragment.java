@@ -87,6 +87,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
 
         Button dateBtn = (Button)view.findViewById(R.id.order_delivery_date_btn);
         dateEditTxt = (EditText)view.findViewById(R.id.order_delivery_date);
+        dateEditTxt.setEnabled(false);
 
         dateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,11 +101,11 @@ public class TakeOrderFragment extends BaseContainerFragment {
                     initialYear = stringTokenizer.nextToken();
                     if(datePickerDialog == null){
                         datePickerDialog = new DatePickerDialog(view.getContext(),new PickDate(),Integer.parseInt(initialYear),
-                                Integer.parseInt(initialMonth)-1,
+                                Integer.parseInt(initialMonth)+1,
                                 Integer.parseInt(initialDate));
 
                         datePickerDialog.updateDate(Integer.parseInt(initialYear),
-                                Integer.parseInt(initialMonth)-1,
+                                Integer.parseInt(initialMonth)+1,
                                 Integer.parseInt(initialDate));
                     }
                 }else{
@@ -235,7 +236,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
             view.updateDate(year, monthOfYear, dayOfMonth);
-            dateEditTxt.setText(monthOfYear+"/"+dayOfMonth+"/"+year);
+            dateEditTxt.setText((monthOfYear+1)+"/"+dayOfMonth+"/"+year);
             datePickerDialog.hide();
         }
     }

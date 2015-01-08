@@ -1,6 +1,7 @@
 package org.chai.rest;
 
 import android.util.Log;
+import org.chai.model.AdhockSale;
 import org.chai.model.Order;
 import org.chai.model.Sale;
 import org.chai.model.SaleData;
@@ -8,6 +9,7 @@ import org.chai.util.ServerResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -45,12 +47,12 @@ public class SalesClient extends RestClient {
         }
         return false;
     }
-    public boolean uploadDirectSale(Sale[] sales){
+    public boolean uploadDirectSale(AdhockSale[] sales){
         try{
-            for(Sale sale:sales){
+            for(AdhockSale sale:sales){
                 RestTemplate restTemplate = getRestTemplate();
-                HttpEntity<Sale> httpEntity = new HttpEntity<Sale>(sale,getHeaders());
-                ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL+"sale/saleOrder", HttpMethod.PUT,httpEntity,ServerResponse.class);
+                HttpEntity<AdhockSale> httpEntity = new HttpEntity<AdhockSale>(sale,getHeaders());
+                ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL+"sale/directSale", HttpMethod.PUT,httpEntity,ServerResponse.class);
                 Log.i("Rest Sales post Response:", "==============================================================================" + responseEntity.getBody().getMessage());
             }
             return true;

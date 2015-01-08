@@ -59,7 +59,7 @@
                 android:padding="10dp">
 
             <TextView
-                    android:id="@+id/sales_do_you_stock_zinc_view"
+                    android:id="@+id/adhock_sale_do_you_stock_zinc_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Do you stock ORS and zinc"
@@ -67,7 +67,7 @@
                     android:textStyle="bold"/>
 
             <Spinner
-                    android:id="@+id/sales_do_you_stock_zinc"
+                    android:id="@+id/adhock_sale_do_you_stock_zinc"
                     android:layout_height="wrap_content"
                     android:prompt="@string/selectItem"
                     android:layout_width="fill_parent"
@@ -77,7 +77,7 @@
         </LinearLayout>
 
         <LinearLayout
-                android:id="@+id/sales_zinc_stock_layout"
+                android:id="@+id/adhock_sale_zinc_stock_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -89,7 +89,7 @@
                     android:padding="10dp">
 
                 <TextView
-                        android:id="@+id/sales_howmany_in_stock_zinc_view"
+                        android:id="@+id/adhock_sale_howmany_in_stock_zinc_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="If Yes, Check how many are in stock(Zinc):"
@@ -97,7 +97,7 @@
                         android:textStyle="bold"/>
 
                 <EditText
-                        android:id="@+id/sales_howmany_in_stock_zinc"
+                        android:id="@+id/adhock_sale_howmany_in_stock_zinc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -118,7 +118,7 @@
                     android:padding="10dp">
 
                 <TextView
-                        android:id="@+id/sales_howmany_in_stock_ors_view"
+                        android:id="@+id/adhock_sale_howmany_in_stock_ors_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="If Yes, Check how many are in stock(ORS):"
@@ -126,7 +126,7 @@
                         android:textStyle="bold"/>
 
                 <EditText
-                        android:id="@+id/sales_howmany_in_stock_ors"
+                        android:id="@+id/adhock_sale_howmany_in_stock_ors"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -142,7 +142,7 @@
         </LinearLayout>
 
         <LinearLayout
-                android:id="@+id/sales_ifnowhy_layout"
+                android:id="@+id/adhock_sale_ifnowhy_layout"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -156,7 +156,7 @@
                     android:textStyle="bold"/>
 
             <EditText
-                    android:id="@+id/sales_if_no_why"
+                    android:id="@+id/adhock_sale_if_no_why"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -171,12 +171,12 @@
 
 
         <TableLayout
-                android:id="@+id/sales_table"
+                android:id="@+id/adhock_sale_table"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:stretchColumns="*"
                 android:padding="10dp">
-            <TableRow android:id="@+id/tableRow22"
+            <TableRow android:id="@+id/adhock_sale_tableRow22"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:padding="5dip">
@@ -189,7 +189,7 @@
             </TableRow>
 
             <TableRow
-                    android:id="@+id/tableRow2"
+                    android:id="@+id/adhock_sale_tableRow2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dip">
@@ -214,14 +214,14 @@
                     android:padding="5dip">
 
                 <Spinner
-                        android:id="@+id/sales_product"
+                        android:id="@+id/adhock_sale_product"
                         android:layout_height="wrap_content"
                         android:prompt="@string/selectItem"
                         android:layout_width="fill_parent"
                         android:entries="@array/productlist"
                         android:background="@drawable/btn_dropdown"/>
 
-                <EditText android:id="@+id/sales_quantity"
+                <EditText android:id="@+id/adhock_sale_quantity"
                           style="@style/myEditText"
                           android:layout_marginRight="10dp"
                           android:inputType="number"
@@ -235,7 +235,7 @@
                           android:singleLine="true"
                           android:textCursorDrawable="@null"/>
 
-                <EditText android:id="@+id/sales_price"
+                <EditText android:id="@+id/adhock_sale_price"
                           style="@style/myEditText"
                           android:layout_marginRight="10dp"
                           android:inputType="number"
@@ -266,7 +266,7 @@
                 android:padding="10dp">
 
             <Button
-                    android:id="@+id/sales_add_more"
+                    android:id="@+id/adhock_sale_add_more"
                     android:text="Add Row"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -290,7 +290,7 @@
                     android:textStyle="bold"/>
 
             <Spinner
-                    android:id="@+id/sales_government_approval"
+                    android:id="@+id/adhock_sale_government_approval"
                     android:layout_height="wrap_content"
                     android:prompt="@string/selectItem"
                     android:layout_width="fill_parent"
@@ -312,7 +312,7 @@
                     android:textStyle="bold"/>
 
             <Spinner
-                    android:id="@+id/sales_point_of_sale"
+                    android:id="@+id/adhock_sale_point_of_sale"
                     android:layout_height="wrap_content"
                     android:prompt="@string/selectItem"
                     android:layout_width="fill_parent"
@@ -335,7 +335,7 @@
                     android:textStyle="bold"/>
 
             <Spinner
-                    android:id="@+id/sales_next_step_recommendation"
+                    android:id="@+id/adhock_sale_next_step_recommendation"
                     android:layout_height="wrap_content"
                     android:prompt="@string/selectItem"
                     android:layout_width="fill_parent"
@@ -358,7 +358,7 @@
                     android:textStyle="bold"/>
 
             <Spinner
-                    android:id="@+id/sales_recommendation_level"
+                    android:id="@+id/adhock_sale_recommendation_level"
                     android:layout_height="wrap_content"
                     android:prompt="@string/selectItem"
                     android:layout_width="fill_parent"
@@ -369,7 +369,7 @@
 
 
         <Button
-                android:id="@+id/sales_save_sale"
+                android:id="@+id/adhock_sale_save_sale"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"

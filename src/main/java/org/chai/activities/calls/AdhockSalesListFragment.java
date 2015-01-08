@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
+import org.chai.activities.tasks.MakeAdhockSaleFragment;
 import org.chai.activities.tasks.TakeOrderFragment;
 import org.chai.adapter.AdhockSalesAdapter;
 import org.chai.model.*;
@@ -44,12 +45,12 @@ public class AdhockSalesListFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Order order =  (Order)adapterView.getItemAtPosition(position);
-                TakeOrderFragment takeOrderFragment = new TakeOrderFragment();
+                AdhockSale sale =  (AdhockSale)adapterView.getItemAtPosition(position);
+                MakeAdhockSaleFragment makeAdhockSaleFragment = new MakeAdhockSaleFragment();
                 Bundle bundle = new Bundle();
-                bundle.putLong("orderId",order.getId());
-                takeOrderFragment.setArguments(bundle);
-                ((BaseContainerFragment)getParentFragment()).replaceFragment(takeOrderFragment,true);
+                bundle.putLong("saleId",sale.getId());
+                makeAdhockSaleFragment.setArguments(bundle);
+                ((BaseContainerFragment)getParentFragment()).replaceFragment(makeAdhockSaleFragment,true);
             }
         });
         registerForContextMenu(view.findViewById(R.id.orderslistview));

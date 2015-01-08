@@ -39,6 +39,7 @@ public class CHAISynchroniser {
     private SaleDao saleDao;
     private SaleDataDao saleDataDao;
     private OrderDao orderDao;
+    private AdhockSaleDao adhockSaleDao;
 
     public CHAISynchroniser(Activity activity) {
         this.parent = activity;
@@ -79,6 +80,7 @@ public class CHAISynchroniser {
             saleDao = daoSession.getSaleDao();
             saleDataDao = daoSession.getSaleDataDao();
             orderDao = daoSession.getOrderDao();
+            adhockSaleDao = daoSession.getAdhockSaleDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
         }
@@ -86,11 +88,12 @@ public class CHAISynchroniser {
 
     public void startSyncronisationProcess() {
         try{
+            uploadDirectSales();
             uploadSales();
             uploadCustomers();
             uploadTasks();
             uploadOrders();
-            progressDialog.incrementProgressBy(20);
+            progressDialog.incrementProgressBy(30);
             regionDao.deleteAll();
             districtDao.deleteAll();
             subcountyDao.deleteAll();
@@ -100,7 +103,7 @@ public class CHAISynchroniser {
             customerDao.deleteAll();
             taskDao.deleteAll();
             downloadRegions();
-            progressDialog.incrementProgressBy(20);
+            progressDialog.incrementProgressBy(10);
             downloadCustomers();
             progressDialog.incrementProgressBy(20);
             downloadTasks();
@@ -233,6 +236,16 @@ public class CHAISynchroniser {
             boolean uploaded = salesClient.uploadSales(saleList.toArray(new Sale[saleList.size()]));
             if(uploaded){
                 saleDao.deleteAll();
+            }
+        }
+    }
+    private void uploadDirectSales(){
+        List<AdhockSale> saleList = adhockSaleDao.loadAll();
+        if(!saleList.isEmpty()){
+            updatePropgress("Uploading Sales...");
+            boolean uploaded = salesClient.uploadDirectSale(saleList.toArray(new AdhockSale[saleList.size()]));
+            if(uploaded){
+                adhockSaleDao.deleteAll();
             }
         }
     }

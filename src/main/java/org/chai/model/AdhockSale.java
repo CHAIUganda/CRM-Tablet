@@ -23,7 +23,7 @@ public class AdhockSale {
     private java.util.Date dateOfSale;
     private Boolean doYouStockOrsZinc;
     private Integer howManyZincInStock;
-    private Integer howmanyOrsInStock;
+    private Integer howManyOrsInStock;
     private String ifNoWhy;
     private String pointOfsaleMaterial;
     private String recommendationNextStep;
@@ -58,13 +58,13 @@ public class AdhockSale {
         this.id = id;
     }
 
-    public AdhockSale(Long id, String clientRefId, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, String customerId, long customerRefId) {
+    public AdhockSale(Long id, String clientRefId, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howManyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, String customerId, long customerRefId) {
         this.id = id;
         this.clientRefId = clientRefId;
         this.dateOfSale = dateOfSale;
         this.doYouStockOrsZinc = doYouStockOrsZinc;
         this.howManyZincInStock = howManyZincInStock;
-        this.howmanyOrsInStock = howmanyOrsInStock;
+        this.howManyOrsInStock = howManyOrsInStock;
         this.ifNoWhy = ifNoWhy;
         this.pointOfsaleMaterial = pointOfsaleMaterial;
         this.recommendationNextStep = recommendationNextStep;
@@ -124,12 +124,12 @@ public class AdhockSale {
         this.howManyZincInStock = howManyZincInStock;
     }
 
-    public Integer getHowmanyOrsInStock() {
-        return howmanyOrsInStock;
+    public Integer getHowManyOrsInStock() {
+        return howManyOrsInStock;
     }
 
-    public void setHowmanyOrsInStock(Integer howmanyOrsInStock) {
-        this.howmanyOrsInStock = howmanyOrsInStock;
+    public void setHowManyOrsInStock(Integer howManyOrsInStock) {
+        this.howManyOrsInStock = howManyOrsInStock;
     }
 
     public String getIfNoWhy() {

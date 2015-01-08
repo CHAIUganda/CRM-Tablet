@@ -33,7 +33,7 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, Long> {
         public final static Property DateOfSale = new Property(2, java.util.Date.class, "dateOfSale", false, "DATE_OF_SALE");
         public final static Property DoYouStockOrsZinc = new Property(3, Boolean.class, "doYouStockOrsZinc", false, "DO_YOU_STOCK_ORS_ZINC");
         public final static Property HowManyZincInStock = new Property(4, Integer.class, "howManyZincInStock", false, "HOW_MANY_ZINC_IN_STOCK");
-        public final static Property HowmanyOrsInStock = new Property(5, Integer.class, "howmanyOrsInStock", false, "HOWMANY_ORS_IN_STOCK");
+        public final static Property HowManyOrsInStock = new Property(5, Integer.class, "howManyOrsInStock", false, "HOW_MANY_ORS_IN_STOCK");
         public final static Property IfNoWhy = new Property(6, String.class, "ifNoWhy", false, "IF_NO_WHY");
         public final static Property PointOfsaleMaterial = new Property(7, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
         public final static Property RecommendationNextStep = new Property(8, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
@@ -65,7 +65,7 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, Long> {
                 "'DATE_OF_SALE' INTEGER NOT NULL ," + // 2: dateOfSale
                 "'DO_YOU_STOCK_ORS_ZINC' INTEGER," + // 3: doYouStockOrsZinc
                 "'HOW_MANY_ZINC_IN_STOCK' INTEGER," + // 4: howManyZincInStock
-                "'HOWMANY_ORS_IN_STOCK' INTEGER," + // 5: howmanyOrsInStock
+                "'HOW_MANY_ORS_IN_STOCK' INTEGER," + // 5: howManyOrsInStock
                 "'IF_NO_WHY' TEXT," + // 6: ifNoWhy
                 "'POINT_OFSALE_MATERIAL' TEXT," + // 7: pointOfsaleMaterial
                 "'RECOMMENDATION_NEXT_STEP' TEXT," + // 8: recommendationNextStep
@@ -103,9 +103,9 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, Long> {
             stmt.bindLong(5, howManyZincInStock);
         }
  
-        Integer howmanyOrsInStock = entity.getHowmanyOrsInStock();
-        if (howmanyOrsInStock != null) {
-            stmt.bindLong(6, howmanyOrsInStock);
+        Integer howManyOrsInStock = entity.getHowManyOrsInStock();
+        if (howManyOrsInStock != null) {
+            stmt.bindLong(6, howManyOrsInStock);
         }
  
         String ifNoWhy = entity.getIfNoWhy();
@@ -161,7 +161,7 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, Long> {
             new java.util.Date(cursor.getLong(offset + 2)), // dateOfSale
             cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0, // doYouStockOrsZinc
             cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // howManyZincInStock
-            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // howmanyOrsInStock
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // howManyOrsInStock
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // ifNoWhy
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // pointOfsaleMaterial
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // recommendationNextStep
@@ -181,7 +181,7 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, Long> {
         entity.setDateOfSale(new java.util.Date(cursor.getLong(offset + 2)));
         entity.setDoYouStockOrsZinc(cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0);
         entity.setHowManyZincInStock(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setHowmanyOrsInStock(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setHowManyOrsInStock(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
         entity.setIfNoWhy(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setPointOfsaleMaterial(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setRecommendationNextStep(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));

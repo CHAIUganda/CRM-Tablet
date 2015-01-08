@@ -73,7 +73,6 @@ public class HomeActivity extends FragmentActivity{
             navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],navMenuIcons.getResourceId(3,-1)));
         }
 
-
         navMenuIcons.recycle();
         adapter = new NavDrawerListAdapter(getApplicationContext(),navDrawerItems);
         mDrawerList.setAdapter(adapter);
