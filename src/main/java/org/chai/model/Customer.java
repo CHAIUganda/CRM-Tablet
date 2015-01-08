@@ -44,9 +44,10 @@ public class Customer {
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
     private Boolean isDirty;
-    private String parishName;
-    private String villageName;
+    private String tradingCenter;
     private long subcountyId;
+
+    private List<AdhockSale> adhockSales;
 
     // KEEP FIELDS - put your custom fields here
 
@@ -77,7 +78,7 @@ public class Customer {
         this.id = id;
     }
 
-    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String numberOfProducts, Integer restockFrequency, String turnOver, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String parishName, String villageName, long subcountyId) {
+    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String numberOfProducts, Integer restockFrequency, String turnOver, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, long subcountyId) {
         this.id = id;
         this.uuid = uuid;
         this.latitude = latitude;
@@ -104,8 +105,7 @@ public class Customer {
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
         this.isDirty = isDirty;
-        this.parishName = parishName;
-        this.villageName = villageName;
+        this.tradingCenter = tradingCenter;
         this.subcountyId = subcountyId;
     }
 
@@ -327,20 +327,12 @@ public class Customer {
         this.isDirty = isDirty;
     }
 
-    public String getParishName() {
-        return parishName;
+    public String getTradingCenter() {
+        return tradingCenter;
     }
 
-    public void setParishName(String parishName) {
-        this.parishName = parishName;
-    }
-
-    public String getVillageName() {
-        return villageName;
-    }
-
-    public void setVillageName(String villageName) {
-        this.villageName = villageName;
+    public void setTradingCenter(String tradingCenter) {
+        this.tradingCenter = tradingCenter;
     }
 
     public long getSubcountyId() {
@@ -443,6 +435,28 @@ public class Customer {
     /** Resets a to-many relationship, making the next get call to query for a fresh result. */
     public synchronized void resetTasks() {
         tasks = null;
+    }
+
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<AdhockSale> getAdhockSales() {
+        if (adhockSales == null) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            AdhockSaleDao targetDao = daoSession.getAdhockSaleDao();
+            List<AdhockSale> adhockSalesNew = targetDao._queryCustomer_AdhockSales(id);
+            synchronized (this) {
+                if(adhockSales == null) {
+                    adhockSales = adhockSalesNew;
+                }
+            }
+        }
+        return adhockSales;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetAdhockSales() {
+        adhockSales = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

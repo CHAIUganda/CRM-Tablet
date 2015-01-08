@@ -21,8 +21,8 @@ public class SaleData {
     private int quantity;
     private int price;
     private String productId;
+    private Long adhockSaleId;
     private long productRefId;
-
 
 
     // KEEP FIELDS - put your custom fields here
@@ -46,6 +46,11 @@ public class SaleData {
     private Product product;
     @JsonIgnore
     private Long product__resolvedKey;
+
+    @JsonIgnore
+    private AdhockSale adhockSale;
+    @JsonIgnore
+    private Long adhockSale__resolvedKey;
     // KEEP FIELDS END
 
     public SaleData() {
@@ -55,13 +60,14 @@ public class SaleData {
         this.id = id;
     }
 
-    public SaleData(Long id, String uuid, int quantity, int price, String productId, long saleId, long productRefId) {
+    public SaleData(Long id, String uuid, int quantity, int price, String productId, Long saleId, Long adhockSaleId, long productRefId) {
         this.id = id;
         this.uuid = uuid;
         this.quantity = quantity;
         this.price = price;
         this.productId = productId;
         this.saleId = saleId;
+        this.adhockSaleId = adhockSaleId;
         this.productRefId = productRefId;
     }
 
@@ -113,12 +119,20 @@ public class SaleData {
         this.productId = productId;
     }
 
-    public long getSaleId() {
+    public Long getSaleId() {
         return saleId;
     }
 
-    public void setSaleId(long saleId) {
+    public void setSaleId(Long saleId) {
         this.saleId = saleId;
+    }
+
+    public Long getAdhockSaleId() {
+        return adhockSaleId;
+    }
+
+    public void setAdhockSaleId(Long adhockSaleId) {
+        this.adhockSaleId = adhockSaleId;
     }
 
     public long getProductRefId() {
@@ -131,7 +145,7 @@ public class SaleData {
 
     /** To-one relationship, resolved on first access. */
     public Sale getSale() {
-        long __key = this.saleId;
+        Long __key = this.saleId;
         if (sale__resolvedKey == null || !sale__resolvedKey.equals(__key)) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
@@ -147,12 +161,9 @@ public class SaleData {
     }
 
     public void setSale(Sale sale) {
-        if (sale == null) {
-            throw new DaoException("To-one property 'saleId' has not-null constraint; cannot set to-one to null");
-        }
         synchronized (this) {
             this.sale = sale;
-            saleId = sale.getId();
+            saleId = sale == null ? null : sale.getId();
             sale__resolvedKey = saleId;
         }
     }
@@ -182,6 +193,31 @@ public class SaleData {
             this.product = product;
             productRefId = product.getId();
             product__resolvedKey = productRefId;
+        }
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public AdhockSale getAdhockSale() {
+        Long __key = this.adhockSaleId;
+        if (adhockSale__resolvedKey == null || !adhockSale__resolvedKey.equals(__key)) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            AdhockSaleDao targetDao = daoSession.getAdhockSaleDao();
+            AdhockSale adhockSaleNew = targetDao.load(__key);
+            synchronized (this) {
+                adhockSale = adhockSaleNew;
+            	adhockSale__resolvedKey = __key;
+            }
+        }
+        return adhockSale;
+    }
+
+    public void setAdhockSale(AdhockSale adhockSale) {
+        synchronized (this) {
+            this.adhockSale = adhockSale;
+            adhockSaleId = adhockSale == null ? null : adhockSale.getId();
+            adhockSale__resolvedKey = adhockSaleId;
         }
     }
 

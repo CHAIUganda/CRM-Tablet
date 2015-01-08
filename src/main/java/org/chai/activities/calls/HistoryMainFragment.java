@@ -24,7 +24,7 @@ public class HistoryMainFragment extends BaseContainerFragment {
         tabHost.setup(getActivity(),getChildFragmentManager(), R.layout.task_main_fragment);
 
         tabHost.addTab(tabHost.newTabSpec("calldata").setIndicator(getTabIndicator(tabHost.getContext(),"Call Data")),CallDataContainer.class,null);
-        tabHost.addTab(tabHost.newTabSpec("orders").setIndicator(getTabIndicator(tabHost.getContext(),"Orders")),OrdersContainer.class,null);
+        tabHost.addTab(tabHost.newTabSpec("orders").setIndicator(getTabIndicator(tabHost.getContext(),"Orders")),OrderCallsContainer.class,null);
 
         return tabHost;
     }

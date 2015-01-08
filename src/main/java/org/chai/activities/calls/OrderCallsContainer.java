@@ -10,7 +10,7 @@ import org.chai.activities.BaseContainerFragment;
 /**
  * Created by victor on 1/6/15.
  */
-public class OrdersContainer extends BaseContainerFragment {
+public class OrderCallsContainer extends BaseContainerFragment {
     private boolean mIsViewInited;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -59,7 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:stretchColumns="*"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:layout_marginRight="10dp">
             <TableRow android:id="@+id/tableRow22"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
@@ -103,11 +104,18 @@
                         android:background="@drawable/btn_dropdown"/>
 
                 <EditText android:id="@+id/order_quantity"
-                          android:text=""
                           style="@style/myEditText"
-                          android:textColor="@color/list_main_text_color"
                           android:layout_marginRight="10dp"
-                        android:inputType="number"/>
+                          android:inputType="number"
+                          android:textColor="@color/list_main_text_color"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:padding="10dp"
+                          android:textSize="@dimen/list_sub_text_size"
+                          android:background="@drawable/bordertextfield"
+                          android:text="500000"
+                          android:singleLine="true"
+                          android:textCursorDrawable="@null"/>
 
 
             </TableRow>

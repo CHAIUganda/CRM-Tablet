@@ -21,14 +21,14 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Commercial Form"
+                    android:text="Make Adhock Sale"
                     android:textColor="@color/list_main_text_color"
                     android:textSize="25dp"
                     android:textStyle="bold"/>
         </LinearLayout>
 
         <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp">
@@ -41,45 +41,16 @@
                     android:textSize="@dimen/list_main_text_size"
                     android:textStyle="bold"/>
 
-            <TextView
-                    android:id="@+id/sales_customer"
-                    android:layout_width="wrap_content"
+            <AutoCompleteTextView
+                    android:id="@+id/adhock_sale_customer"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
+                    android:text=""
+                    style="@style/myEditText"
                     android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:text="byaruhanga Drug shop"/>
-
+                    android:layout_marginRight="10dp"/>
 
         </LinearLayout>
-
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Location:"
-                    android:textColor="@color/list_main_text_color"
-                    android:textSize="@dimen/list_main_text_size"
-                    android:textStyle="bold"/>
-
-            <TextView
-                    android:id="@+id/sales_customer_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:text="plot 22 Wandegs"/>
-
-        </LinearLayout>
-
 
         <LinearLayout
                 android:orientation="vertical"
@@ -231,8 +202,8 @@
                         android:text="Quantity:"
                         android:textColor="@color/list_main_text_color"/>
                 <TextView
-                    android:text="Price:"
-                    android:textColor="@color/list_main_text_color"/>
+                        android:text="Price:"
+                        android:textColor="@color/list_main_text_color"/>
 
             </TableRow>
 

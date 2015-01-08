@@ -190,7 +190,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
         tableRow.addView(spinner);
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
-        params.setMargins(10,10,10,10);
+        params.setMargins(10,0,10,0);
         EditText quantityView =(EditText)getActivity().getLayoutInflater().inflate(R.layout.edit_text_style,null);
         quantityView.setTextColor(Color.BLACK);
         quantityView.setLayoutParams(params);

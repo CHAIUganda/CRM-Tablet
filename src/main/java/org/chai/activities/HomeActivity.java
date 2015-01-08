@@ -22,6 +22,7 @@ import org.chai.activities.calls.CallMainFragment;
 import org.chai.activities.calls.HistoryMainFragment;
 import org.chai.activities.customer.CustomersMainFragment;
 
+import org.chai.activities.tasks.AdhockSaleFragment;
 import org.chai.activities.tasks.TakeOrderFragment;
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.adapter.NavDrawerListAdapter;
@@ -67,6 +68,7 @@ public class HomeActivity extends FragmentActivity{
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1],navMenuIcons.getResourceId(1,-1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[2],navMenuIcons.getResourceId(2,-1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[3],navMenuIcons.getResourceId(3,-1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],navMenuIcons.getResourceId(3,-1)));
 
 
         navMenuIcons.recycle();
@@ -166,6 +168,9 @@ public class HomeActivity extends FragmentActivity{
                 break;
             case 3:
                 fragment = new TakeOrderFragment();
+                break;
+            case 4:
+                fragment = new AdhockSaleFragment();
                 break;
             default:
                 break;
