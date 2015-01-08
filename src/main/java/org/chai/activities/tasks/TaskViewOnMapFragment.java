@@ -69,8 +69,7 @@ public class TaskViewOnMapFragment extends Fragment {
               @Override
               public void onInfoWindowClick(Marker marker) {
                   Long taskId = markers.get(marker.getId());
-                  if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
-//                        Toast.makeText(getActivity(),"Task id:"+taskId,Toast.LENGTH_LONG).show();
+                  if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) { 
                       CommercialFormFragment commercialFormActivity = new CommercialFormFragment();
                       Bundle bundle = new Bundle();
                       bundle.putLong("taskId", taskId);
@@ -104,7 +103,7 @@ public class TaskViewOnMapFragment extends Fragment {
         return view;
     }
 
-    @Override
+  /*  @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (googleMap != null) {
@@ -113,7 +112,7 @@ public class TaskViewOnMapFragment extends Fragment {
             googleMap = null;
         }
     }
-
+*/
     private void initialiseGreenDao() {
         try {
             DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
@@ -135,7 +134,7 @@ public class TaskViewOnMapFragment extends Fragment {
                 Log.i("Latitude============",latitude+"");
                 Log.i("Longitude===========",longitude+"");
                 if(longitude != 0&&latitude!= 0){
-                    MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(latitude, longitude)).title(task.getDescription());
+                    MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(latitude, longitude)).title(task.getDescription()+latitude+","+longitude);
                     Marker marker = map.addMarker(markerOptions);
                     markers.put(marker.getId(),task.getId());
                 }

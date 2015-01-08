@@ -28,10 +28,9 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-      <activity android:name=".activities.HomeActivity"/>
+      <activity android:name=".activities.HomeActivity" android:configChanges="orientation|screenSize"/>
       <activity android:name=".activities.customer.CustomerDetailsActivity"/>
       <activity android:name=".activities.customer.CustomerForm"/>
-      <activity android:name=".activities.tasks.DetailersActivity"/>
       <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyC734nYWloXJZ-f7AIFvjOe5zHDfzWiNWY"/>
       <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
   </application>
