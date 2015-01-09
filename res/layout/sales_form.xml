@@ -36,7 +36,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Customer:"
+                    android:text="1.Customer:"
                     android:textColor="@color/list_main_text_color"
                     android:textSize="@dimen/list_main_text_size"
                     android:textStyle="bold"/>
@@ -63,7 +63,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Location:"
+                    android:text="2.Location:"
                     android:textColor="@color/list_main_text_color"
                     android:textSize="@dimen/list_main_text_size"
                     android:textStyle="bold"/>
@@ -91,7 +91,7 @@
                     android:id="@+id/sales_do_you_stock_zinc_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Do you stock ORS and zinc"
+                    android:text="3.Do you stock ORS and zinc"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -121,7 +121,7 @@
                         android:id="@+id/sales_howmany_in_stock_zinc_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="If Yes, Check how many are in stock(Zinc):"
+                        android:text="3.a)If Yes, Check how many are in stock(Zinc):"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -150,7 +150,7 @@
                         android:id="@+id/sales_howmany_in_stock_ors_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="If Yes, Check how many are in stock(ORS):"
+                        android:text="3.b)If Yes, Check how many are in stock(ORS):"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -180,7 +180,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="14.If No, why?"
+                    android:text="3.c)If No, why?"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -211,7 +211,7 @@
                       android:padding="5dip">
 
                 <TextView
-                        android:text="Note the brands sold:"
+                        android:text="4.Note the brands sold:"
                         android:textColor="@color/list_main_text_color"
                         android:textSize="@dimen/list_main_text_size"/>
 
@@ -260,7 +260,7 @@
                           android:padding="10dp"
                           android:textSize="@dimen/list_sub_text_size"
                           android:background="@drawable/bordertextfield"
-                          android:text="500000"
+                          android:text=""
                           android:singleLine="true"
                           android:textCursorDrawable="@null"/>
 
@@ -274,16 +274,9 @@
                           android:padding="10dp"
                           android:textSize="@dimen/list_sub_text_size"
                           android:background="@drawable/bordertextfield"
-                          android:text="500000"
+                          android:text=""
                           android:singleLine="true"
                           android:textCursorDrawable="@null"/>
-                <Button
-                        android:id="@+id/sales_remove_btn"
-                        android:text="Remove"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="#428bca"
-                        android:layout_marginLeft="5dp"/>
 
 
             </TableRow>
@@ -312,9 +305,10 @@
                 android:padding="10dp">
 
             <TextView
+                    android:id="@+id/sales_government_approval_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Did you describe the new government approved MRP of 1500UGX?"
+                    android:text="5.Did you describe the new government approved MRP of 1500UGX?"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -336,7 +330,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Point of sale materials"
+                    android:text="6.Point of sale materials"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -359,7 +353,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="What did you recommend as next steps for the retailer"
+                    android:text="7.What did you recommend as next steps for the retailer"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -382,7 +376,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="What recommendation level would you give the customer"
+                    android:text="8.What recommendation level would you give the customer"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 

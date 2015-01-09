@@ -36,7 +36,8 @@ public class DetailerCall {
     private String ifNoWhy;
     private Double zincPrice;
     private Double orsPrice;
-    private Double buyingPrice;
+    private Double buyingPriceZinc;
+    private Double buyingPriceOrs;
     private String pointOfsaleMaterial;
     private String recommendationNextStep;
     private String recommendationLevel;
@@ -44,6 +45,7 @@ public class DetailerCall {
     private Double latitude;
     private Double longitude;
     private long taskId;
+
 
 
     // KEEP FIELDS - put your custom fields here
@@ -68,7 +70,7 @@ public class DetailerCall {
         this.id = id;
     }
 
-    public DetailerCall(Long id, String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPrice, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, long taskId) {
+    public DetailerCall(Long id, String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPriceZinc, Double buyingPriceOrs, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, long taskId) {
         this.id = id;
         this.uuid = uuid;
         this.dateOfSurvey = dateOfSurvey;
@@ -89,7 +91,8 @@ public class DetailerCall {
         this.ifNoWhy = ifNoWhy;
         this.zincPrice = zincPrice;
         this.orsPrice = orsPrice;
-        this.buyingPrice = buyingPrice;
+        this.buyingPriceZinc = buyingPriceZinc;
+        this.buyingPriceOrs = buyingPriceOrs;
         this.pointOfsaleMaterial = pointOfsaleMaterial;
         this.recommendationNextStep = recommendationNextStep;
         this.recommendationLevel = recommendationLevel;
@@ -267,12 +270,20 @@ public class DetailerCall {
         this.orsPrice = orsPrice;
     }
 
-    public Double getBuyingPrice() {
-        return buyingPrice;
+    public Double getBuyingPriceZinc() {
+        return buyingPriceZinc;
     }
 
-    public void setBuyingPrice(Double buyingPrice) {
-        this.buyingPrice = buyingPrice;
+    public void setBuyingPriceZinc(Double buyingPriceZinc) {
+        this.buyingPriceZinc = buyingPriceZinc;
+    }
+
+    public Double getBuyingPriceOrs() {
+        return buyingPriceOrs;
+    }
+
+    public void setBuyingPriceOrs(Double buyingPriceOrs) {
+        this.buyingPriceOrs = buyingPriceOrs;
     }
 
     public String getPointOfsaleMaterial() {

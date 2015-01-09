@@ -56,7 +56,7 @@
         </LinearLayout>
 
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp">
@@ -78,7 +78,7 @@
         </LinearLayout>
 
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp">
@@ -100,7 +100,7 @@
         </LinearLayout>
 
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp">
@@ -108,7 +108,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Outlet Location:"
+                    android:text="Location Description:"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -122,7 +122,7 @@
         </LinearLayout>
 
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp">
@@ -143,52 +143,9 @@
 
         </LinearLayout>
 
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Parish:"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="bold"/>
-
-            <TextView
-                    android:id="@+id/detailer_parish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/list_main_text_color"/>
-
-        </LinearLayout>
 
         <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Village:"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="bold"/>
-
-            <TextView
-                    android:id="@+id/detailer_village"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/list_main_text_color"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp">
@@ -210,7 +167,7 @@
         </LinearLayout>
 
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp">
@@ -647,6 +604,57 @@
                         android:textCursorDrawable="@null"/>
 
             </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/detailer_whatpricedoyoubuy_layout"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="14.What price do you buy Zinc"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/detailer_whatpricedoyoubuyzinc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:textCursorDrawable="@null"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="15.What price do you buy ORS"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"/>
+
+                <EditText
+                        android:id="@+id/detailer_whatpricedoyoubuyors"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:textCursorDrawable="@null"/>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
@@ -660,7 +668,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="14.If No, why?"
+                    android:text="16.If No, why?"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -678,34 +686,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-                android:id="@+id/detailer_whatpricedoyoubuy_layout"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15.What price do you buy"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="bold"/>
-
-            <EditText
-                    android:id="@+id/detailer_whatpricedoyoubuy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:inputType="number"
-                    android:textCursorDrawable="@null"/>
-
-        </LinearLayout>
 
         <LinearLayout
                 android:orientation="vertical"
@@ -716,7 +696,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="16.Point of sale materials"
+                    android:text="17.Point of sale materials"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -740,7 +720,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="17.What did you recommend as next steps for the retailer"
+                    android:text="18.What did you recommend as next steps for the retailer"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -763,7 +743,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="18.What recommendation level would you give the customer"
+                    android:text="19.What recommendation level would you give the customer"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -776,6 +756,18 @@
                     android:background="@drawable/btn_dropdown"/>
 
         </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Please Remember to ask if the customer would like to take an order"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+                </LinearLayout>
 
 
         <LinearLayout

@@ -69,7 +69,7 @@ public class TaskViewOnMapFragment extends Fragment {
               @Override
               public void onInfoWindowClick(Marker marker) {
                   Long taskId = markers.get(marker.getId());
-                  if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) { 
+                  if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
                       CommercialFormFragment commercialFormActivity = new CommercialFormFragment();
                       Bundle bundle = new Bundle();
                       bundle.putLong("taskId", taskId);

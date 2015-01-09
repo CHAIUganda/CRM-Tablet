@@ -23,6 +23,7 @@ public class OrderData {
     private long productRefId;
 
 
+
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */

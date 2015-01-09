@@ -183,12 +183,15 @@ public class DetailersActivity extends Fragment {
                 String selected = (String) spinner.getAdapter().getItem(position);
                 LinearLayout stockfieldsLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_zinc_stock_layout);
                 LinearLayout ifnowhyLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_ifnowhy_layout);
+                LinearLayout atWhatPriceDoYouBuyLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_whatpricedoyoubuy_layout);
                 if ("No".equalsIgnoreCase(selected)) {
                     stockfieldsLayout.setVisibility(View.GONE);
                     ifnowhyLayout.setVisibility(View.VISIBLE);
+                    atWhatPriceDoYouBuyLayout.setVisibility(View.GONE);
                 } else {
                     stockfieldsLayout.setVisibility(View.VISIBLE);
                     ifnowhyLayout.setVisibility(View.GONE);
+                    atWhatPriceDoYouBuyLayout.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -258,7 +261,8 @@ public class DetailersActivity extends Fragment {
         }
 
         detailerCall.setIfNoWhy(((EditText)getActivity(). findViewById(R.id.detailer_if_no_why)).getText().toString());
-        detailerCall.setBuyingPrice(Double.parseDouble(((EditText)getActivity(). findViewById(R.id.detailer_whatpricedoyoubuy)).getText().toString()));
+        detailerCall.setBuyingPriceZinc(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyzinc)).getText().toString()));
+        detailerCall.setBuyingPriceOrs(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyors)).getText().toString()));
         detailerCall.setPointOfsaleMaterial(((Spinner)getActivity(). findViewById(R.id.detailer_point_of_sale)).getSelectedItem().toString());
         detailerCall.setRecommendationNextStep(((Spinner)getActivity(). findViewById(R.id.detailer_next_step_recommendation)).getSelectedItem().toString());
 
@@ -282,10 +286,9 @@ public class DetailersActivity extends Fragment {
             ((EditText)view. findViewById(R.id.detailer_survey_date)).setText(Utils.dateToString(detailerCall.getDateOfSurvey()));
             ((TextView) view.findViewById(R.id.detailer_name)).setText(customer.getOutletName());
             ((TextView)view. findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
-            ((TextView)view. findViewById(R.id.detailer_parish)).setText("");
-            ((TextView)view. findViewById(R.id.detailer_village)).setText("");
             ((TextView)view. findViewById(R.id.detailer_subcounty)).setText(customer.getSubcounty().getName());
             ((TextView)view. findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
+            ((TextView)view. findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude()+","+customer.getLongitude());
             CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
             if(keyCustomerContact!= null){
                 ((TextView)view. findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getFirstName());
@@ -299,7 +302,8 @@ public class DetailersActivity extends Fragment {
             ((EditText)view. findViewById(R.id.detailers_brand_sold_zinc)).setText(detailerCall.getZincBrandsold());
             ((EditText)view.findViewById(R.id.detailers_brand_sold_ors)).setText(detailerCall.getOrsBrandSold());
             ((EditText)view. findViewById(R.id.detailer_if_no_why)).setText(detailerCall.getIfNoWhy());
-            ((EditText)view.findViewById(R.id.detailer_whatpricedoyoubuy)).setText(detailerCall.getBuyingPrice() + "");
+            ((EditText)view.findViewById(R.id.detailer_whatpricedoyoubuyzinc)).setText(detailerCall.getBuyingPriceZinc() + "");
+            ((EditText)view.findViewById(R.id.detailer_whatpricedoyoubuyors)).setText(detailerCall.getBuyingPriceOrs() + "");
             ((EditText)view.findViewById(R.id.detailers_gps_text)).setText(detailerCall.getLatitude() == null ? "0.0,0.0" : detailerCall.getLatitude() + ","+detailerCall.getLongitude());
 
             //spinners
@@ -323,7 +327,8 @@ public class DetailersActivity extends Fragment {
             Utils.setSpinnerSelection(dontUseAntiBioticsSpinner, detailerCall.getWhyNotUseAntibiotics());
 
             Spinner doyouStockZincSpinner = (Spinner)view. findViewById(R.id.detailer_do_you_stock_zinc);
-            Utils.setSpinnerSelection(doyouStockZincSpinner, detailerCall.getDoYouStockOrsZinc() + "");
+            Boolean doYouStockOrsZinc = detailerCall.getDoYouStockOrsZinc();
+            Utils.setSpinnerSelection(doyouStockZincSpinner, doYouStockOrsZinc?"Yes":"");
 
             Spinner nextStepRecommendation = ((Spinner)view. findViewById(R.id.detailer_next_step_recommendation));
             Utils.setSpinnerSelection(nextStepRecommendation,detailerCall.getRecommendationNextStep());
@@ -346,8 +351,6 @@ public class DetailersActivity extends Fragment {
                 ((TextView)view. findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
                 ((TextView)view. findViewById(R.id.detailer_name)).setText(customer.getOutletName());
                 ((TextView)view. findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
-                ((TextView)view.findViewById(R.id.detailer_parish)).setText("");
-                ((TextView)view. findViewById(R.id.detailer_village)).setText("");
                 ((EditText)view. findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
                 CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
                 ((TextView)view. findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getFirstName():"");

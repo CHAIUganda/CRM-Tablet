@@ -48,14 +48,15 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
         public final static Property IfNoWhy = new Property(17, String.class, "ifNoWhy", false, "IF_NO_WHY");
         public final static Property ZincPrice = new Property(18, Double.class, "zincPrice", false, "ZINC_PRICE");
         public final static Property OrsPrice = new Property(19, Double.class, "orsPrice", false, "ORS_PRICE");
-        public final static Property BuyingPrice = new Property(20, Double.class, "buyingPrice", false, "BUYING_PRICE");
-        public final static Property PointOfsaleMaterial = new Property(21, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
-        public final static Property RecommendationNextStep = new Property(22, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
-        public final static Property RecommendationLevel = new Property(23, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
-        public final static Property TenureLength = new Property(24, Integer.class, "tenureLength", false, "TENURE_LENGTH");
-        public final static Property Latitude = new Property(25, Double.class, "latitude", false, "LATITUDE");
-        public final static Property Longitude = new Property(26, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property TaskId = new Property(27, long.class, "taskId", false, "TASK_ID");
+        public final static Property BuyingPriceZinc = new Property(20, Double.class, "buyingPriceZinc", false, "BUYING_PRICE_ZINC");
+        public final static Property BuyingPriceOrs = new Property(21, Double.class, "buyingPriceOrs", false, "BUYING_PRICE_ORS");
+        public final static Property PointOfsaleMaterial = new Property(22, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
+        public final static Property RecommendationNextStep = new Property(23, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
+        public final static Property RecommendationLevel = new Property(24, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
+        public final static Property TenureLength = new Property(25, Integer.class, "tenureLength", false, "TENURE_LENGTH");
+        public final static Property Latitude = new Property(26, Double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(27, Double.class, "longitude", false, "LONGITUDE");
+        public final static Property TaskId = new Property(28, long.class, "taskId", false, "TASK_ID");
     };
 
     private DaoSession daoSession;
@@ -95,14 +96,15 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
                 "'IF_NO_WHY' TEXT," + // 17: ifNoWhy
                 "'ZINC_PRICE' REAL," + // 18: zincPrice
                 "'ORS_PRICE' REAL," + // 19: orsPrice
-                "'BUYING_PRICE' REAL," + // 20: buyingPrice
-                "'POINT_OFSALE_MATERIAL' TEXT," + // 21: pointOfsaleMaterial
-                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 22: recommendationNextStep
-                "'RECOMMENDATION_LEVEL' TEXT," + // 23: recommendationLevel
-                "'TENURE_LENGTH' INTEGER," + // 24: tenureLength
-                "'LATITUDE' REAL," + // 25: latitude
-                "'LONGITUDE' REAL," + // 26: longitude
-                "'TASK_ID' INTEGER NOT NULL );"); // 27: taskId
+                "'BUYING_PRICE_ZINC' REAL," + // 20: buyingPriceZinc
+                "'BUYING_PRICE_ORS' REAL," + // 21: buyingPriceOrs
+                "'POINT_OFSALE_MATERIAL' TEXT," + // 22: pointOfsaleMaterial
+                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 23: recommendationNextStep
+                "'RECOMMENDATION_LEVEL' TEXT," + // 24: recommendationLevel
+                "'TENURE_LENGTH' INTEGER," + // 25: tenureLength
+                "'LATITUDE' REAL," + // 26: latitude
+                "'LONGITUDE' REAL," + // 27: longitude
+                "'TASK_ID' INTEGER NOT NULL );"); // 28: taskId
     }
 
     /** Drops the underlying database table. */
@@ -212,41 +214,46 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
             stmt.bindDouble(20, orsPrice);
         }
  
-        Double buyingPrice = entity.getBuyingPrice();
-        if (buyingPrice != null) {
-            stmt.bindDouble(21, buyingPrice);
+        Double buyingPriceZinc = entity.getBuyingPriceZinc();
+        if (buyingPriceZinc != null) {
+            stmt.bindDouble(21, buyingPriceZinc);
+        }
+ 
+        Double buyingPriceOrs = entity.getBuyingPriceOrs();
+        if (buyingPriceOrs != null) {
+            stmt.bindDouble(22, buyingPriceOrs);
         }
  
         String pointOfsaleMaterial = entity.getPointOfsaleMaterial();
         if (pointOfsaleMaterial != null) {
-            stmt.bindString(22, pointOfsaleMaterial);
+            stmt.bindString(23, pointOfsaleMaterial);
         }
  
         String recommendationNextStep = entity.getRecommendationNextStep();
         if (recommendationNextStep != null) {
-            stmt.bindString(23, recommendationNextStep);
+            stmt.bindString(24, recommendationNextStep);
         }
  
         String recommendationLevel = entity.getRecommendationLevel();
         if (recommendationLevel != null) {
-            stmt.bindString(24, recommendationLevel);
+            stmt.bindString(25, recommendationLevel);
         }
  
         Integer tenureLength = entity.getTenureLength();
         if (tenureLength != null) {
-            stmt.bindLong(25, tenureLength);
+            stmt.bindLong(26, tenureLength);
         }
  
         Double latitude = entity.getLatitude();
         if (latitude != null) {
-            stmt.bindDouble(26, latitude);
+            stmt.bindDouble(27, latitude);
         }
  
         Double longitude = entity.getLongitude();
         if (longitude != null) {
-            stmt.bindDouble(27, longitude);
+            stmt.bindDouble(28, longitude);
         }
-        stmt.bindLong(28, entity.getTaskId());
+        stmt.bindLong(29, entity.getTaskId());
     }
 
     @Override
@@ -285,14 +292,15 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
             cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // ifNoWhy
             cursor.isNull(offset + 18) ? null : cursor.getDouble(offset + 18), // zincPrice
             cursor.isNull(offset + 19) ? null : cursor.getDouble(offset + 19), // orsPrice
-            cursor.isNull(offset + 20) ? null : cursor.getDouble(offset + 20), // buyingPrice
-            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // pointOfsaleMaterial
-            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // recommendationNextStep
-            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // recommendationLevel
-            cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24), // tenureLength
-            cursor.isNull(offset + 25) ? null : cursor.getDouble(offset + 25), // latitude
-            cursor.isNull(offset + 26) ? null : cursor.getDouble(offset + 26), // longitude
-            cursor.getLong(offset + 27) // taskId
+            cursor.isNull(offset + 20) ? null : cursor.getDouble(offset + 20), // buyingPriceZinc
+            cursor.isNull(offset + 21) ? null : cursor.getDouble(offset + 21), // buyingPriceOrs
+            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // pointOfsaleMaterial
+            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // recommendationNextStep
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // recommendationLevel
+            cursor.isNull(offset + 25) ? null : cursor.getInt(offset + 25), // tenureLength
+            cursor.isNull(offset + 26) ? null : cursor.getDouble(offset + 26), // latitude
+            cursor.isNull(offset + 27) ? null : cursor.getDouble(offset + 27), // longitude
+            cursor.getLong(offset + 28) // taskId
         );
         return entity;
     }
@@ -320,14 +328,15 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, Long> {
         entity.setIfNoWhy(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
         entity.setZincPrice(cursor.isNull(offset + 18) ? null : cursor.getDouble(offset + 18));
         entity.setOrsPrice(cursor.isNull(offset + 19) ? null : cursor.getDouble(offset + 19));
-        entity.setBuyingPrice(cursor.isNull(offset + 20) ? null : cursor.getDouble(offset + 20));
-        entity.setPointOfsaleMaterial(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
-        entity.setRecommendationNextStep(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
-        entity.setRecommendationLevel(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
-        entity.setTenureLength(cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24));
-        entity.setLatitude(cursor.isNull(offset + 25) ? null : cursor.getDouble(offset + 25));
-        entity.setLongitude(cursor.isNull(offset + 26) ? null : cursor.getDouble(offset + 26));
-        entity.setTaskId(cursor.getLong(offset + 27));
+        entity.setBuyingPriceZinc(cursor.isNull(offset + 20) ? null : cursor.getDouble(offset + 20));
+        entity.setBuyingPriceOrs(cursor.isNull(offset + 21) ? null : cursor.getDouble(offset + 21));
+        entity.setPointOfsaleMaterial(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
+        entity.setRecommendationNextStep(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
+        entity.setRecommendationLevel(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setTenureLength(cursor.isNull(offset + 25) ? null : cursor.getInt(offset + 25));
+        entity.setLatitude(cursor.isNull(offset + 26) ? null : cursor.getDouble(offset + 26));
+        entity.setLongitude(cursor.isNull(offset + 27) ? null : cursor.getDouble(offset + 27));
+        entity.setTaskId(cursor.getLong(offset + 28));
      }
     
     /** @inheritdoc */

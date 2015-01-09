@@ -133,7 +133,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#428bca"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginLeft="5dp"
+                    android:padding="10dp"/>
         </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
@@ -154,7 +155,7 @@
 
             <Button
                     android:id="@+id/order_delivery_date_btn"
-                    android:text="Delivery Date"
+                    android:text="Due Date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#428bca"
@@ -167,7 +168,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="Save Order"
+                android:text="Submit"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:background="#428bca"/>

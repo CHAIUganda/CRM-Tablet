@@ -11,12 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import org.chai.R;
 import android.widget.TableRow.LayoutParams;
+import org.chai.R;
 import org.chai.activities.HomeActivity;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
-import org.chai.util.SampleData;
 import org.chai.util.Utils;
 
 import java.util.ArrayList;
@@ -46,14 +45,13 @@ public class CommercialFormFragment extends Fragment {
     private Sale saleCallData;
     private Customer salesCustomer;
     private List<Product> products;
-    private SampleData sampleData;
+    private boolean isUpdate = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.sales_form,container, false);
         try {
             initialiseGreenDao();
-            sampleData = new SampleData(getActivity());
             tableLayout = (TableLayout)view.findViewById(R.id.sales_table);
             spinnerList = new ArrayList<Spinner>();
             quantityFields = new ArrayList<EditText>();
@@ -65,6 +63,7 @@ public class CommercialFormFragment extends Fragment {
                 saleCallData = saleDao.loadDeep(callId);
                 callDataTask = saleCallData.getTask();
                 salesCustomer = callDataTask.getCustomer();
+                isUpdate = true;
             } else {
                 //from task list view
                 Long taskId = bundle.getLong("taskId");
@@ -93,11 +92,16 @@ public class CommercialFormFragment extends Fragment {
             saveBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    submitSale();
-                    Intent i = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(i);
+                    if (allMandatoryFieldsFilled(view) && submitSale()) {
+                        Toast.makeText(getActivity(), "Your Data has been successfully saved.", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(getActivity(), HomeActivity.class);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(getActivity(), "Unable to save data,Please ensure that all mandatory fields are entered", Toast.LENGTH_LONG).show();
+                    }
                 }
             });
+            setRequiredFields(view);
             manageDoyouStockZincResponses(view);
             bindSalesInfoToUI(view);
 
@@ -165,7 +169,7 @@ public class CommercialFormFragment extends Fragment {
         TableRow tableRow = new TableRow(getActivity());
         tableRow.setLayoutParams(new LayoutParams( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-        Spinner spinner = new Spinner(getActivity());
+        final Spinner spinner = new Spinner(getActivity());
         LayoutParams spinnerParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         spinner.setLayoutParams(spinnerParams);
         spinner.setAdapter(new ProductArrayAdapter(getActivity(),android.R.layout.simple_spinner_dropdown_item,products.toArray(new Product[products.size()])));
@@ -175,13 +179,13 @@ public class CommercialFormFragment extends Fragment {
 
         LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.setMargins(10,0,10,0);
-        EditText quantityView = (EditText) getActivity().getLayoutInflater().inflate(R.layout.edit_text_style, null);
+        final EditText quantityView = (EditText) getActivity().getLayoutInflater().inflate(R.layout.edit_text_style, null);
         quantityView.setTextColor(Color.BLACK);
         quantityView.setLayoutParams(params);
         quantityView.setInputType(InputType.TYPE_CLASS_NUMBER);
         tableRow.addView(quantityView);
 
-        EditText priceView = (EditText) getActivity().getLayoutInflater().inflate(R.layout.edit_text_style, null);
+        final EditText priceView = (EditText) getActivity().getLayoutInflater().inflate(R.layout.edit_text_style, null);
         priceView.setTextColor(Color.BLACK);
         priceView.setLayoutParams(params);
         priceView.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -192,17 +196,18 @@ public class CommercialFormFragment extends Fragment {
             priceView.setText(saleData.getPrice() + "");
             spinner.setSelection(getProductPosition(saleData.getProduct()));
         }
-        Button deleteBtn = new Button(getActivity());
-        deleteBtn.setBackgroundColor(Color.parseColor("#428bca"));
-        deleteBtn.setText("Remove");
+        Button deleteBtn = (Button) getActivity().getLayoutInflater().inflate(R.layout.delete_icon, null);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 View row = (View) view.getParent();
                 ViewGroup container = ((ViewGroup)row.getParent());
                 container.removeView(row);
-                container.invalidate();
+               /* spinnerList.remove(spinner);
+                quantityFields.remove(quantityView);
+                priceFields.remove(priceView);*/
                 removeRow();
+                container.invalidate();
             }
         });
         tableRow.addView(deleteBtn);
@@ -226,33 +231,46 @@ public class CommercialFormFragment extends Fragment {
         }
     }
 
-    private void submitSale(){
-//        sampleData.insertSampleSales(callDataTask.getId(),callDataTask.getUuid());
-        Sale sale = new Sale(null);
-        sale.setUuid(UUID.randomUUID().toString());
-        sale.setDateOfSale(new Date());
-        String stocksZinc = ((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString();
-        sale.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
-        sale.setHowmanyOrsInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_ors)).getText().toString()));
-        sale.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString()));
-        sale.setIfNoWhy(((EditText) getActivity().findViewById(R.id.sales_if_no_why)).getText().toString());
-        sale.setPointOfsaleMaterial(((Spinner) getActivity().findViewById(R.id.sales_point_of_sale)).getSelectedItem().toString());
-        sale.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.sales_next_step_recommendation)).getSelectedItem().toString());
-        sale.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.sales_recommendation_level)).getSelectedItem().toString());
-        sale.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.sales_government_approval)).getSelectedItem().toString());
-        sale.setTaskId(callDataTask.getId());
-        sale.setOrderRefid(callDataTask.getId());
-        sale.setOrderId(callDataTask.getUuid());
-        Long saleId = saleDao.insert(sale);
-        //add the different sales.
-        submitSaleData(saleId);
-        callDataTask.setStatus(TaskMainFragment.STATUS_COMPLETE);
-        taskDao.update(callDataTask);
+    private boolean submitSale(){
+        boolean isSaved = false;
+        try {
+            if (!isUpdate) {
+                saleCallData = new Sale(null);
+            }
+            saleCallData.setUuid(UUID.randomUUID().toString());
+            saleCallData.setDateOfSale(new Date());
+            String stocksZinc = ((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString();
+            saleCallData.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
+            saleCallData.setHowmanyOrsInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_ors)).getText().toString()));
+            saleCallData.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString()));
+            saleCallData.setIfNoWhy(((EditText) getActivity().findViewById(R.id.sales_if_no_why)).getText().toString());
+            saleCallData.setPointOfsaleMaterial(((Spinner) getActivity().findViewById(R.id.sales_point_of_sale)).getSelectedItem().toString());
+            saleCallData.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.sales_next_step_recommendation)).getSelectedItem().toString());
+            saleCallData.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.sales_recommendation_level)).getSelectedItem().toString());
+            saleCallData.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.sales_government_approval)).getSelectedItem().toString());
+            saleCallData.setTaskId(callDataTask.getId());
+            saleCallData.setOrderRefid(callDataTask.getId());
+            saleCallData.setOrderId(callDataTask.getUuid());
+            if(isUpdate){
+                saleDao.update(saleCallData);
+                submitSaleData(saleCallData.getId());
+            }else {
+                Long saleId = saleDao.insert(saleCallData);
+                //add the different sales.
+                submitSaleData(saleId);
+                callDataTask.setStatus(TaskMainFragment.STATUS_COMPLETE);
+                taskDao.update(callDataTask);
+            }
+            isSaved = true;
+        } catch (Exception ex) {
+
+        }
+        return isSaved;
     }
 
     private void submitSaleData(Long saleId) {
         for (int i = 0; i < spinnerList.size(); ++i) {
-            SaleData saleData = new SaleData(null);
+            SaleData saleData = instantiateSaleData(i);
             saleData.setUuid(UUID.randomUUID().toString());
             saleData.setSaleId(saleId);
             saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
@@ -260,9 +278,26 @@ public class CommercialFormFragment extends Fragment {
             Product product = (Product) spinnerList.get(i).getSelectedItem();
             saleData.setProductRefId(product.getId());
             saleData.setProductId(product.getUuid());
-            saleDataDao.insert(saleData);
+
+            if(saleData.getId()!=null){
+                saleDataDao.update(saleData);
+            }else{
+                saleDataDao.insert(saleData);
+            }
         }
     }
+
+    private SaleData instantiateSaleData(int index){
+        List<SaleData> saleDatas = saleCallData.getSalesDatas();
+        SaleData saleData;
+        if(index < saleDatas.size()){
+            saleData = saleDatas.get(index);
+        }else{
+            saleData = new SaleData(null);
+        }
+        return saleData;
+    }
+
 
     private void manageDoyouStockZincResponses(View view) {
         final Spinner spinner = (Spinner) view.findViewById(R.id.sales_do_you_stock_zinc);
@@ -305,5 +340,18 @@ public class CommercialFormFragment extends Fragment {
         return 0;
     }
 
+    private void setRequiredFields(View view) {
+        Utils.setRequired((TextView) view.findViewById(R.id.sales_do_you_stock_zinc_view));
+        Utils.setRequired((TextView) view.findViewById(R.id.sales_government_approval_lbl));
+        Utils.setRequired((TextView) view.findViewById(R.id.sales_howmany_in_stock_ors_view));
+        Utils.setRequired((TextView) view.findViewById(R.id.sales_howmany_in_stock_zinc_view));
+    }
+
+    private boolean allMandatoryFieldsFilled(View view) {
+        if (((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString().equals("")) {
+            return false;
+        }
+        return true;
+    }
 
 }
