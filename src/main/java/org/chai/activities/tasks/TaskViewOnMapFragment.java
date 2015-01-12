@@ -184,10 +184,5 @@ public class TaskViewOnMapFragment extends Fragment {
            showForm(taskId);
         }
     }
-    @Override
-    public void onStop() {
-        super.onStop();
-        //check the state of the task
-            runner.cancel(true);
-    }
+
 }

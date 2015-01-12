@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import android.widget.TableRow.LayoutParams;
 import org.chai.R;
+import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
@@ -94,8 +95,8 @@ public class CommercialFormFragment extends Fragment {
                 public void onClick(View view) {
                     if (allMandatoryFieldsFilled(view) && submitSale()) {
                         Toast.makeText(getActivity(), "Your Data has been successfully saved.", Toast.LENGTH_LONG).show();
-                        Intent i = new Intent(getActivity(), HomeActivity.class);
-                        startActivity(i);
+//                        Intent i = new Intent(getActivity(), HomeActivity.class);
+                        ((BaseContainerFragment)getParentFragment()).popFragment();
                     } else {
                         Toast.makeText(getActivity(), "Unable to save data,Please ensure that all mandatory fields are entered", Toast.LENGTH_LONG).show();
                     }
