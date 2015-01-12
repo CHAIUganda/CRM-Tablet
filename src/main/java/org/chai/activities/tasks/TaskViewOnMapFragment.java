@@ -2,9 +2,11 @@ package org.chai.activities.tasks;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,7 @@ import java.util.List;
  * Created by victor on 12/11/14.
  */
 public class TaskViewOnMapFragment extends Fragment {
+    private static View view;
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
@@ -39,9 +42,20 @@ public class TaskViewOnMapFragment extends Fragment {
     private GoogleMap googleMap;
     private HashMap<String,Long> markers = new HashMap<String, Long>();
     private Spinner calenderSpinner;
+    private AsyncTaskRunner runner;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.task_map_layout, container, false);
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null)
+                parent.removeView(view);
+        }
+        try{
+            view = inflater.inflate(R.layout.task_map_layout, container, false);
+        }catch (InflateException ex){
+
+        }
         initialiseGreenDao();
         googleMap =   ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
       if(googleMap!=null){
@@ -69,19 +83,9 @@ public class TaskViewOnMapFragment extends Fragment {
               @Override
               public void onInfoWindowClick(Marker marker) {
                   Long taskId = markers.get(marker.getId());
-                  if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
-                      CommercialFormFragment commercialFormActivity = new CommercialFormFragment();
-                      Bundle bundle = new Bundle();
-                      bundle.putLong("taskId", taskId);
-                      commercialFormActivity.setArguments(bundle);
-                      ((BaseContainerFragment) getParentFragment()).replaceFragment(commercialFormActivity, true);
-                  } else {
-                      DetailersActivity detailersActivity = new DetailersActivity();
-                      Bundle bundle = new Bundle();
-                      bundle.putLong("taskId", taskId);
-                      detailersActivity.setArguments(bundle);
-                      ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);
-                  }
+                  runner = new AsyncTaskRunner();
+                  runner.execute(taskId);
+                  marker.hideInfoWindow();
               }
           });
       }
@@ -103,16 +107,6 @@ public class TaskViewOnMapFragment extends Fragment {
         return view;
     }
 
-  /*  @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (googleMap != null) {
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).commit();
-            googleMap = null;
-        }
-    }
-*/
     private void initialiseGreenDao() {
         try {
             DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
@@ -134,7 +128,7 @@ public class TaskViewOnMapFragment extends Fragment {
                 Log.i("Latitude============",latitude+"");
                 Log.i("Longitude===========",longitude+"");
                 if(longitude != 0&&latitude!= 0){
-                    MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(latitude, longitude)).title(task.getDescription()+latitude+","+longitude);
+                    MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(latitude, longitude)).title(task.getDescription());
                     Marker marker = map.addMarker(markerOptions);
                     markers.put(marker.getId(),task.getId());
                 }
@@ -157,5 +151,43 @@ public class TaskViewOnMapFragment extends Fragment {
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
         }
         return outstandingTasks;
+    }
+
+    private void showForm(Long taskId){
+        if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
+            CommercialFormFragment commercialFormActivity = new CommercialFormFragment();
+            Bundle bundle = new Bundle();
+            bundle.putLong("taskId", taskId);
+            commercialFormActivity.setArguments(bundle);
+            ((BaseContainerFragment) getParentFragment()).replaceFragment(commercialFormActivity, true);
+        } else {
+            DetailersActivity detailersActivity = new DetailersActivity();
+            Bundle bundle = new Bundle();
+            bundle.putLong("taskId", taskId);
+            detailersActivity.setArguments(bundle);
+            ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);
+        }
+        runner = null;
+    }
+    private class AsyncTaskRunner extends AsyncTask<Long, String, String>{
+
+        private Long taskId;
+
+        @Override
+        protected String doInBackground(Long... longs) {
+            taskId = longs[0];
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+           showForm(taskId);
+        }
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        //check the state of the task
+            runner.cancel(true);
     }
 }

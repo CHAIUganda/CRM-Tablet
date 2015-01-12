@@ -98,7 +98,7 @@
                     android:textSize="28dp"
                     android:singleLine="true"
                     android:textStyle="italic"
-                    android:text="detailer1"
+                    android:text="DET40"
                     android:textCursorDrawable="@null"/>
 
         </LinearLayout>
@@ -133,7 +133,7 @@
                     android:textSize="28dp"
                     android:singleLine="true"
                     android:textStyle="italic"
-                    android:text="pass"
+                    android:text="wawada"
                     android:textCursorDrawable="@null"/>
 
         </LinearLayout>

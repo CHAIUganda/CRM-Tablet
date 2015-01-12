@@ -196,9 +196,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             priceView.setText(saleData.getPrice() + "");
             spinner.setSelection(getProductPosition(saleData.getProduct()));
         }
-        Button deleteBtn = new Button(getActivity());
-        deleteBtn.setBackgroundColor(Color.parseColor("#428bca"));
-        deleteBtn.setText("Remove");
+        Button deleteBtn = (Button) getActivity().getLayoutInflater().inflate(R.layout.delete_icon, null);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

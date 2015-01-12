@@ -288,7 +288,7 @@ public class DetailersActivity extends Fragment {
             ((TextView)view. findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
             ((TextView)view. findViewById(R.id.detailer_subcounty)).setText(customer.getSubcounty().getName());
             ((TextView)view. findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
-            ((TextView)view. findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude()+","+customer.getLongitude());
+            ((TextView)view. findViewById(R.id.detailers_gps_text)).setText(detailerCall.getLatitude()+","+detailerCall.getLongitude());
             CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
             if(keyCustomerContact!= null){
                 ((TextView)view. findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getFirstName());

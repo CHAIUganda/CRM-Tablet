@@ -248,13 +248,6 @@
                           android:text="500000"
                           android:singleLine="true"
                           android:textCursorDrawable="@null"/>
-                <Button
-                        android:id="@+id/sales_remove_btn"
-                        android:text="Remove"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="#428bca"
-                        android:layout_marginLeft="5dp"/>
 
 
             </TableRow>

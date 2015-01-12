@@ -349,7 +349,7 @@ public class CommercialFormFragment extends Fragment {
 
     private boolean allMandatoryFieldsFilled(View view) {
         if (((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString().equals("")) {
-            return false;
+            return true;
         }
         return true;
     }
