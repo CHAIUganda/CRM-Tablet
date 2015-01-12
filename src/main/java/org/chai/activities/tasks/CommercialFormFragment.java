@@ -95,7 +95,6 @@ public class CommercialFormFragment extends Fragment {
                 public void onClick(View view) {
                     if (allMandatoryFieldsFilled(view) && submitSale()) {
                         Toast.makeText(getActivity(), "Your Data has been successfully saved.", Toast.LENGTH_LONG).show();
-//                        Intent i = new Intent(getActivity(), HomeActivity.class);
                         ((BaseContainerFragment)getParentFragment()).popFragment();
                     } else {
                         Toast.makeText(getActivity(), "Unable to save data,Please ensure that all mandatory fields are entered", Toast.LENGTH_LONG).show();
@@ -242,8 +241,10 @@ public class CommercialFormFragment extends Fragment {
             saleCallData.setDateOfSale(new Date());
             String stocksZinc = ((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString();
             saleCallData.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
-            saleCallData.setHowmanyOrsInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_ors)).getText().toString()));
-            saleCallData.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString()));
+            if (((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString().equals("Yes")) {
+                saleCallData.setHowmanyOrsInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_ors)).getText().toString()));
+                saleCallData.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString()));
+            }
             saleCallData.setIfNoWhy(((EditText) getActivity().findViewById(R.id.sales_if_no_why)).getText().toString());
             saleCallData.setPointOfsaleMaterial(((Spinner) getActivity().findViewById(R.id.sales_point_of_sale)).getSelectedItem().toString());
             saleCallData.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.sales_next_step_recommendation)).getSelectedItem().toString());
@@ -264,7 +265,7 @@ public class CommercialFormFragment extends Fragment {
             }
             isSaved = true;
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
         return isSaved;
     }
@@ -350,7 +351,12 @@ public class CommercialFormFragment extends Fragment {
 
     private boolean allMandatoryFieldsFilled(View view) {
         if (((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString().equals("")) {
-            return true;
+            if(((EditText)getActivity().findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString().equalsIgnoreCase("")){
+                return false;
+            }
+            if(((EditText)getActivity().findViewById(R.id.sales_howmany_in_stock_ors)).getText().toString().equalsIgnoreCase("")){
+                return false;
+            }
         }
         return true;
     }
