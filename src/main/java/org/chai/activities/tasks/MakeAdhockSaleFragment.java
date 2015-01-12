@@ -92,7 +92,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
                 }
             });
             manageDoyouStockZincResponses(view);
-//            bindSalesInfoToUI(view);
+            setRequiredFields(view);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -316,6 +316,14 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             saleData = new SaleData(null);
         }
         return saleData;
+    }
+
+    private void setRequiredFields(View view) {
+        Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_do_you_stock_zinc_view));
+        Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_government_approval_lbl));
+        Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_howmany_in_stock_zinc_view));
+        Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_howmany_in_stock_ors_view));
+        Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_customer_lbl));
     }
 
 }
