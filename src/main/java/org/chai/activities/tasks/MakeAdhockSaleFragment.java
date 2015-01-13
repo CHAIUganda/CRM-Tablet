@@ -86,9 +86,13 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             saveBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    submitSale();
-                    Intent i = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(i);
+                    try{
+                        submitSale();
+                        Intent i = new Intent(getActivity(), HomeActivity.class);
+                        startActivity(i);
+                    }catch (Exception ex){
+                        Toast.makeText(getActivity(),"A problem Occured while saving a new Sale,please ensure that data is entered correctly",Toast.LENGTH_LONG).show();
+                    }
                 }
             });
             manageDoyouStockZincResponses(view);
