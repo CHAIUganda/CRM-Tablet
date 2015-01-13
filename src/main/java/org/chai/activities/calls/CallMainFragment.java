@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,7 +11,7 @@ import android.widget.Toast;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
-import org.chai.activities.tasks.CommercialFormFragment;
+import org.chai.activities.tasks.SaleslFormFragment;
 import org.chai.activities.tasks.DetailersActivity;
 import org.chai.adapter.DetailerCallAdapter;
 import org.chai.adapter.SalesAdapter;
@@ -90,7 +88,7 @@ public class CallMainFragment extends Fragment {
     }
 
     private void goToSalesForm(Sale sale){
-        CommercialFormFragment commercialFormActivity = new CommercialFormFragment();
+        SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
         Bundle bundle = new Bundle();
         bundle.putLong("callId", sale.getId());
         commercialFormActivity.setArguments(bundle);

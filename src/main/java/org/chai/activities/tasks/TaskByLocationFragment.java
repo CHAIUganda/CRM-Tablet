@@ -1,6 +1,5 @@
 package org.chai.activities.tasks;
 
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -84,7 +83,7 @@ public class TaskByLocationFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
-                    CommercialFormFragment commercialFormActivity = new CommercialFormFragment();
+                    SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
                     Bundle bundle = new Bundle();
                     bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
                     commercialFormActivity.setArguments(bundle);

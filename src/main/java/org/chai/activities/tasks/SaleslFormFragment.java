@@ -27,7 +27,7 @@ import java.util.UUID;
 /**
  * Created by victor on 10/26/14.
  */
-public class CommercialFormFragment extends Fragment {
+public class SaleslFormFragment extends Fragment {
 
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
@@ -272,19 +272,23 @@ public class CommercialFormFragment extends Fragment {
 
     private void submitSaleData(Long saleId) {
         for (int i = 0; i < spinnerList.size(); ++i) {
-            SaleData saleData = instantiateSaleData(i);
-            saleData.setUuid(UUID.randomUUID().toString());
-            saleData.setSaleId(saleId);
-            saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
-            saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
-            Product product = (Product) spinnerList.get(i).getSelectedItem();
-            saleData.setProductRefId(product.getId());
-            saleData.setProductId(product.getUuid());
+            try{
+                SaleData saleData = instantiateSaleData(i);
+                saleData.setUuid(UUID.randomUUID().toString());
+                saleData.setSaleId(saleId);
+                saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
+                saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
+                Product product = (Product) spinnerList.get(i).getSelectedItem();
+                saleData.setProductRefId(product.getId());
+                saleData.setProductId(product.getUuid());
 
-            if(saleData.getId()!=null){
-                saleDataDao.update(saleData);
-            }else{
-                saleDataDao.insert(saleData);
+                if(saleData.getId()!=null){
+                    saleDataDao.update(saleData);
+                }else{
+                    saleDataDao.insert(saleData);
+                }
+            }catch (Exception ex){
+                //ignore
             }
         }
     }

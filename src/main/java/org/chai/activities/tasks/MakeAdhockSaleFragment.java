@@ -296,18 +296,22 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
 
     private void submitSaleData(Long saleId) {
         for (int i = 0; i < spinnerList.size(); ++i) {
-            SaleData saleData = instantiateSaleData(i);
-            saleData.setUuid(UUID.randomUUID().toString());
-            saleData.setAdhockSaleId(saleId);
-            saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
-            saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
-            Product product = (Product) spinnerList.get(i).getSelectedItem();
-            saleData.setProductRefId(product.getId());
-            saleData.setProductId(product.getUuid());
-            if(saleData.getId()!=null){
-                saleDataDao.update(saleData);
-            }else{
-                saleDataDao.insert(saleData);
+            try {
+                SaleData saleData = instantiateSaleData(i);
+                saleData.setUuid(UUID.randomUUID().toString());
+                saleData.setAdhockSaleId(saleId);
+                saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
+                saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
+                Product product = (Product) spinnerList.get(i).getSelectedItem();
+                saleData.setProductRefId(product.getId());
+                saleData.setProductId(product.getUuid());
+                if(saleData.getId()!=null){
+                    saleDataDao.update(saleData);
+                }else{
+                    saleDataDao.insert(saleData);
+                }
+            }catch (Exception ex){
+                //ignore
             }
         }
     }

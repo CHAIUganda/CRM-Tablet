@@ -1,6 +1,5 @@
 package org.chai.activities.tasks;
 
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -155,7 +154,7 @@ public class TaskViewOnMapFragment extends Fragment {
 
     private void showForm(Long taskId){
         if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
-            CommercialFormFragment commercialFormActivity = new CommercialFormFragment();
+            SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
             Bundle bundle = new Bundle();
             bundle.putLong("taskId", taskId);
             commercialFormActivity.setArguments(bundle);
