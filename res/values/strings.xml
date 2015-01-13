@@ -27,4 +27,6 @@
     <string name="savecalldata">Submit Sale</string>
     <string name="delete_string">Delete</string>
     <string name="sync">Syncronise</string>
+    <string name="action_search">Search</string>
+    <string name="search_hint">Search for Customer</string>
 </resources>

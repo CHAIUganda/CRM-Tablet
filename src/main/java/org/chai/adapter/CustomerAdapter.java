@@ -23,10 +23,13 @@ import java.util.Locale;
 public class CustomerAdapter extends ArrayAdapter<Customer> {
 
     private List<Customer> customers;
+    private ArrayList<Customer> filterList;
 
     public CustomerAdapter(Activity activity, List<Customer> customers) {
         super(activity.getApplicationContext(), R.layout.customers_main_activity, customers);
         this.customers = customers;
+        filterList = new ArrayList<Customer>();
+        filterList.addAll(customers);
     }
 
     @Override
@@ -65,6 +68,21 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         viewHolder.customerAddress.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(), 50));
 
         return convertView;
+    }
+
+    public void filter(String term){
+        term = term.toLowerCase(Locale.getDefault());
+        customers.clear();
+        if(term.length()== 0){
+            customers.addAll(filterList);
+        }else{
+            for(Customer customer:filterList){
+                if(customer.getOutletName().toLowerCase(Locale.getDefault()).contains(term)){
+                    customers.add(customer);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     static class ViewHolder {
