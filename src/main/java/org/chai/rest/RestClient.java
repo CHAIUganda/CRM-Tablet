@@ -14,8 +14,8 @@ public class RestClient {
     public static String userName ;
     public static String password  ;
     public static String role;
-//    public static String REST_URL = "http://23.239.27.196:8080/web-crm/rest/";
-    public static String REST_URL = "http://192.168.1.104:8080/chai-crm/rest/";
+    public static String REST_URL = "http://23.239.27.196:8080/web-crm/rest/";
+//    public static String REST_URL = "http://192.168.1.104:8080/chai-crm/rest/";
 
     public HttpHeaders getHeaders() {
         HttpHeaders headers = new HttpHeaders();
