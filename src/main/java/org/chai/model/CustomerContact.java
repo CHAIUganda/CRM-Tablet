@@ -29,7 +29,6 @@ public class CustomerContact {
     private long customerId;
 
 
-
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */

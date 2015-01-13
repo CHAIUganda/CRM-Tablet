@@ -32,7 +32,6 @@ public class AdhockSale {
     private String customerId;
     private long customerRefId;
 
-
     private List<SaleData> adhockSalesDatas;
 
     // KEEP FIELDS - put your custom fields here

@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.Toast;
 import org.chai.model.*;
 import org.chai.rest.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 
@@ -97,11 +99,11 @@ public class CHAISynchroniser {
             regionDao.deleteAll();
             districtDao.deleteAll();
             subcountyDao.deleteAll();
-            parishDao.deleteAll();
-            villageDao.deleteAll();
             customerContactDao.deleteAll();
             customerDao.deleteAll();
             taskDao.deleteAll();
+            detailerCallDao.deleteAll();
+            saleDao.deleteAll();
             downloadRegions();
             progressDialog.incrementProgressBy(10);
             downloadCustomers();
@@ -111,6 +113,11 @@ public class CHAISynchroniser {
             downloadProducts();
 
             progressDialog.incrementProgressBy(20);
+        }catch (HttpClientErrorException e){
+            Log.i("Error:============================================",e.getResponseBodyAsString());
+            e.printStackTrace();
+        }catch (HttpServerErrorException se){
+            Log.i("Error:============================================",se.getResponseBodyAsString());
         }catch (Exception ex){
             ex.printStackTrace();
             parent.runOnUiThread(new Runnable() {
@@ -151,7 +158,6 @@ public class CHAISynchroniser {
         for (Subcounty subcounty : subcounties) {
              subcountyDao.insert(subcounty);
         }
-        downloadParishes();
     }
 
     public void downloadParishes() {
@@ -199,7 +205,7 @@ public class CHAISynchroniser {
     public void uploadCustomers(){
         List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
         if(!customersList.isEmpty()){
-            updatePropgress("Uploading Customers..");
+            updatePropgress("Uploading Customers...");
             boolean uploaded = customerClient.uploadCustomers(customersList.toArray(new Customer[customersList.size()]));
             if (uploaded) {
                 customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).buildDelete();

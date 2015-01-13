@@ -55,7 +55,8 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         public final static Property LastUpdated = new Property(24, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
         public final static Property IsDirty = new Property(25, Boolean.class, "isDirty", false, "IS_DIRTY");
         public final static Property TradingCenter = new Property(26, String.class, "tradingCenter", false, "TRADING_CENTER");
-        public final static Property SubcountyId = new Property(27, long.class, "subcountyId", false, "SUBCOUNTY_ID");
+        public final static Property SubcountyUuid = new Property(27, String.class, "subcountyUuid", false, "SUBCOUNTY_UUID");
+        public final static Property SubcountyId = new Property(28, long.class, "subcountyId", false, "SUBCOUNTY_ID");
     };
 
     private DaoSession daoSession;
@@ -102,7 +103,8 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
                 "'LAST_UPDATED' INTEGER," + // 24: lastUpdated
                 "'IS_DIRTY' INTEGER," + // 25: isDirty
                 "'TRADING_CENTER' TEXT," + // 26: tradingCenter
-                "'SUBCOUNTY_ID' INTEGER NOT NULL );"); // 27: subcountyId
+                "'SUBCOUNTY_UUID' TEXT," + // 27: subcountyUuid
+                "'SUBCOUNTY_ID' INTEGER NOT NULL );"); // 28: subcountyId
     }
 
     /** Drops the underlying database table. */
@@ -242,7 +244,12 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         if (tradingCenter != null) {
             stmt.bindString(27, tradingCenter);
         }
-        stmt.bindLong(28, entity.getSubcountyId());
+ 
+        String subcountyUuid = entity.getSubcountyUuid();
+        if (subcountyUuid != null) {
+            stmt.bindString(28, subcountyUuid);
+        }
+        stmt.bindLong(29, entity.getSubcountyId());
     }
 
     @Override
@@ -288,7 +295,8 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
             cursor.isNull(offset + 24) ? null : new java.util.Date(cursor.getLong(offset + 24)), // lastUpdated
             cursor.isNull(offset + 25) ? null : cursor.getShort(offset + 25) != 0, // isDirty
             cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // tradingCenter
-            cursor.getLong(offset + 27) // subcountyId
+            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // subcountyUuid
+            cursor.getLong(offset + 28) // subcountyId
         );
         return entity;
     }
@@ -323,7 +331,8 @@ public class CustomerDao extends AbstractDao<Customer, Long> {
         entity.setLastUpdated(cursor.isNull(offset + 24) ? null : new java.util.Date(cursor.getLong(offset + 24)));
         entity.setIsDirty(cursor.isNull(offset + 25) ? null : cursor.getShort(offset + 25) != 0);
         entity.setTradingCenter(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
-        entity.setSubcountyId(cursor.getLong(offset + 27));
+        entity.setSubcountyUuid(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
+        entity.setSubcountyId(cursor.getLong(offset + 28));
      }
     
     /** @inheritdoc */

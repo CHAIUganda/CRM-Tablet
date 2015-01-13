@@ -6,6 +6,7 @@ import android.view.View;
 import org.chai.model.*;
 import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
@@ -25,7 +26,7 @@ public class Place extends RestClient {
             Region[] regions = responseEntity.getBody();
             Log.i("REST CLIENT:","found "+regions.length+" Regions");
             return regions;
-        }catch (Exception ex){
+        }catch (HttpClientErrorException ex){
             ex.printStackTrace();
         }
         return null;

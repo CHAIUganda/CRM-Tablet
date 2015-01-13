@@ -113,7 +113,7 @@
                           android:padding="10dp"
                           android:textSize="@dimen/list_sub_text_size"
                           android:background="@drawable/bordertextfield"
-                          android:text="500000"
+                          android:text=""
                           android:singleLine="true"
                           android:textCursorDrawable="@null"/>
 

@@ -216,6 +216,7 @@ public class CustomerForm extends Activity {
             customerInstance.setLongitude(capturedLongitude);
             customerInstance.setLatitude(capturedLatitude);
             customerInstance.setSubcountyId(((Subcounty) subcountySpinner.getSelectedItem()).getId());
+            customerInstance.setSubcountyUuid(((Subcounty) subcountySpinner.getSelectedItem()).getUuid());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -237,6 +238,7 @@ public class CustomerForm extends Activity {
             ((EditText) findViewById(R.id.details_num_customers_per_day)).setText(customerInstance.getNumberOfCustomersPerDay() == null ? "" : customerInstance.getNumberOfCustomersPerDay() + "");
             ((EditText) findViewById(R.id.details_num_products)).setText(customerInstance.getNumberOfProducts() == null ? "" : customerInstance.getNumberOfProducts() + "");
             ((EditText) findViewById(R.id.details_restock_frequency)).setText(customerInstance.getRestockFrequency() == null ? "" : customerInstance.getRestockFrequency() + "");
+            ((EditText) findViewById(R.id.details_gps)).setText(customerInstance.getLatitude()+","+customerInstance.getLongitude());
 
             ((EditText) findViewById(R.id.details_turn_over)).setText(customerInstance.getTurnOver() == null ? "" : customerInstance.getTurnOver() + "");
 

@@ -124,9 +124,13 @@ public class TakeOrderFragment extends BaseContainerFragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submitOrder();
-                Intent i = new Intent(getActivity(), HomeActivity.class);
-                startActivity(i);
+                try{
+                    submitOrder();
+                    Intent i = new Intent(getActivity(), HomeActivity.class);
+                    startActivity(i);
+                }catch (Exception ex){
+                    Toast.makeText(getActivity(),"A problem Occured while saving a new Order,please ensure that data is entered correctly",Toast.LENGTH_LONG).show();
+                }
             }
         });
 

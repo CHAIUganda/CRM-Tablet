@@ -45,6 +45,7 @@ public class Customer {
     private java.util.Date lastUpdated;
     private Boolean isDirty;
     private String tradingCenter;
+    private String subcountyUuid;
     private long subcountyId;
 
     private List<AdhockSale> adhockSales;
@@ -78,7 +79,7 @@ public class Customer {
         this.id = id;
     }
 
-    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String numberOfProducts, Integer restockFrequency, String turnOver, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, long subcountyId) {
+    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String numberOfProducts, Integer restockFrequency, String turnOver, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, long subcountyId) {
         this.id = id;
         this.uuid = uuid;
         this.latitude = latitude;
@@ -106,6 +107,7 @@ public class Customer {
         this.lastUpdated = lastUpdated;
         this.isDirty = isDirty;
         this.tradingCenter = tradingCenter;
+        this.subcountyUuid = subcountyUuid;
         this.subcountyId = subcountyId;
     }
 
@@ -333,6 +335,14 @@ public class Customer {
 
     public void setTradingCenter(String tradingCenter) {
         this.tradingCenter = tradingCenter;
+    }
+
+    public String getSubcountyUuid() {
+        return subcountyUuid;
+    }
+
+    public void setSubcountyUuid(String subcountyUuid) {
+        this.subcountyUuid = subcountyUuid;
     }
 
     public long getSubcountyId() {
