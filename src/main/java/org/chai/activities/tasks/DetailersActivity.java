@@ -1,6 +1,8 @@
 package org.chai.activities.tasks;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -49,6 +51,9 @@ public class DetailersActivity extends Fragment {
 
     private DetailerCall detailerCall;
     private Task callDataTask;
+    private Button pointOfSalesOptionsButton;
+    private CharSequence[] pointOfSalesOptions;
+    private boolean[] selections;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
@@ -76,6 +81,19 @@ public class DetailersActivity extends Fragment {
         manageDoyouStockZincResponses(view);
         manageHowDidyouHearOtherOption(view);
         manageHaveYouHeardAboutDiarheaTreatment(view);
+
+        pointOfSalesOptionsButton = (Button)view.findViewById(R.id.detailer_point_of_sale);
+        pointOfSalesOptions = getResources().getStringArray(R.array.point_of_sale_material);
+        selections = new boolean[pointOfSalesOptions.length];
+
+        pointOfSalesOptionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPointOfSaleDialog();
+            }
+        });
+
+
 
         Button saveDetailetCallBtn = (Button)view.findViewById(R.id.detailer_submit_btn);
         saveDetailetCallBtn.setOnClickListener(new View.OnClickListener() {
@@ -263,7 +281,7 @@ public class DetailersActivity extends Fragment {
         detailerCall.setIfNoWhy(((EditText)getActivity(). findViewById(R.id.detailer_if_no_why)).getText().toString());
         detailerCall.setBuyingPriceZinc(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyzinc)).getText().toString()));
         detailerCall.setBuyingPriceOrs(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyors)).getText().toString()));
-        detailerCall.setPointOfsaleMaterial(((Spinner)getActivity(). findViewById(R.id.detailer_point_of_sale)).getSelectedItem().toString());
+        detailerCall.setPointOfsaleMaterial(((Button)getActivity(). findViewById(R.id.detailer_point_of_sale)).getText().toString());
         detailerCall.setRecommendationNextStep(((Spinner)getActivity(). findViewById(R.id.detailer_next_step_recommendation)).getSelectedItem().toString());
 
         detailerCall.setHeardAboutDiarrheaTreatmentInChildren(((Spinner)getActivity(). findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors)).getSelectedItem().toString());
@@ -339,8 +357,8 @@ public class DetailersActivity extends Fragment {
             Spinner whatdoyouknowAboutZinc = (Spinner)view.findViewById(R.id.detailer_how_zinc_should_be_used);
             Utils.setSpinnerSelection(whatdoyouknowAboutZinc,detailerCall.getKnowledgeAbtZincAndUsage());
 
-            Spinner pointOfSaleMaterial =  ((Spinner)view. findViewById(R.id.detailer_point_of_sale));
-            Utils.setSpinnerSelection(pointOfSaleMaterial,detailerCall.getPointOfsaleMaterial());
+            Button pointOfSaleMaterial =  ((Button)view. findViewById(R.id.detailer_point_of_sale));
+            pointOfSaleMaterial.setText(detailerCall.getPointOfsaleMaterial());
 
         }else{
             Calendar calendar = Calendar.getInstance();
@@ -424,6 +442,48 @@ public class DetailersActivity extends Fragment {
         setRequired((TextView)view.findViewById(R.id.detailer_how_ors_should_be_used_view));
         setRequired((TextView)view.findViewById(R.id.detailer_how_zinc_should_be_used_view));
         setRequired((TextView)view.findViewById(R.id.detailer_why_should_not_use_antibiotics_view));
+    }
+
+
+    protected void showPointOfSaleDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        dialog.setTitle("Point of Sale Material")
+                .setMultiChoiceItems(pointOfSalesOptions,selections,new DialogSelectionClickHandler())
+                .setPositiveButton("OK", new DialogButtonClickHandler());
+        dialog.show();
+    }
+
+
+    public class DialogButtonClickHandler implements DialogInterface.OnClickListener
+    {
+        public void onClick( DialogInterface dialog, int clicked )
+        {
+            switch( clicked )
+            {
+                case DialogInterface.BUTTON_POSITIVE:
+                    setSelectedOptions();
+                    break;
+            }
+        }
+    }
+
+    public class DialogSelectionClickHandler implements DialogInterface.OnMultiChoiceClickListener
+    {
+        public void onClick( DialogInterface dialog, int clicked, boolean selected )
+        {
+            Log.i( "ME================================", pointOfSalesOptions[clicked] + " selected: " + selected );
+        }
+
+    }
+
+    private void setSelectedOptions() {
+        pointOfSalesOptionsButton.setText("");
+        for( int i = 0; i < pointOfSalesOptions.length; i++ ){
+            Log.i( "ME", pointOfSalesOptions[ i ] + " selected: " + selections[i] );
+            if(selections[i]){
+                pointOfSalesOptionsButton.setText((pointOfSalesOptionsButton.getText().toString().equals("")?"":pointOfSalesOptionsButton.getText() + ",") + pointOfSalesOptions[i]);
+            }
+        }
     }
 
 }

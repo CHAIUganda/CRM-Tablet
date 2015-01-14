@@ -1,5 +1,7 @@
 package org.chai.activities.tasks;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -47,6 +49,9 @@ public class SaleslFormFragment extends Fragment {
     private Customer salesCustomer;
     private List<Product> products;
     private boolean isUpdate = false;
+    private Button pointOfSalesOptionsButton;
+    private CharSequence[] pointOfSalesOptions;
+    private boolean[] selections;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
@@ -81,6 +86,16 @@ public class SaleslFormFragment extends Fragment {
             quantityFields.add((EditText)view.findViewById(R.id.sales_quantity));
             priceFields.add((EditText)view.findViewById(R.id.sales_price));
 
+            pointOfSalesOptionsButton = (Button)view.findViewById(R.id.sales_point_of_sale);
+            pointOfSalesOptions = getResources().getStringArray(R.array.point_of_sale_material);
+            selections = new boolean[pointOfSalesOptions.length];
+
+            pointOfSalesOptionsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showPointOfSaleDialog();
+                }
+            });
             Button addButton = (Button)view.findViewById(R.id.sales_add_more);
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -140,8 +155,8 @@ public class SaleslFormFragment extends Fragment {
             Spinner governmentApprovalSpinner = (Spinner) view.findViewById(R.id.sales_government_approval);
             Utils.setSpinnerSelection(governmentApprovalSpinner, saleCallData.getGovernmentApproval());
 
-            Spinner pointOfSaleMaterial = (Spinner) view.findViewById(R.id.sales_point_of_sale);
-            Utils.setSpinnerSelection(pointOfSaleMaterial, saleCallData.getPointOfsaleMaterial());
+            Button pointOfSaleMaterial = (Button) view.findViewById(R.id.sales_point_of_sale);
+            pointOfSaleMaterial.setText(saleCallData.getPointOfsaleMaterial());
 
             Spinner recommendationNextStep = (Spinner) view.findViewById(R.id.sales_next_step_recommendation);
             Utils.setSpinnerSelection(recommendationNextStep, saleCallData.getRecommendationNextStep());
@@ -246,7 +261,7 @@ public class SaleslFormFragment extends Fragment {
                 saleCallData.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString()));
             }
             saleCallData.setIfNoWhy(((EditText) getActivity().findViewById(R.id.sales_if_no_why)).getText().toString());
-            saleCallData.setPointOfsaleMaterial(((Spinner) getActivity().findViewById(R.id.sales_point_of_sale)).getSelectedItem().toString());
+            saleCallData.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.sales_point_of_sale)).getText().toString());
             saleCallData.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.sales_next_step_recommendation)).getSelectedItem().toString());
             saleCallData.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.sales_recommendation_level)).getSelectedItem().toString());
             saleCallData.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.sales_government_approval)).getSelectedItem().toString());
@@ -363,6 +378,47 @@ public class SaleslFormFragment extends Fragment {
             }
         }
         return true;
+    }
+
+    protected void showPointOfSaleDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        dialog.setTitle("Point of Sale Material")
+                .setMultiChoiceItems(pointOfSalesOptions,selections,new DialogSelectionClickHandler())
+                .setPositiveButton("OK",new DialogButtonClickHandler());
+        dialog.show();
+    }
+
+
+    public class DialogButtonClickHandler implements DialogInterface.OnClickListener
+    {
+        public void onClick( DialogInterface dialog, int clicked )
+        {
+            switch( clicked )
+            {
+                case DialogInterface.BUTTON_POSITIVE:
+                    setSelectedOptions();
+                    break;
+            }
+        }
+    }
+
+    public class DialogSelectionClickHandler implements DialogInterface.OnMultiChoiceClickListener
+    {
+        public void onClick( DialogInterface dialog, int clicked, boolean selected )
+        {
+            Log.i( "ME================================", pointOfSalesOptions[clicked] + " selected: " + selected );
+        }
+
+    }
+
+    private void setSelectedOptions() {
+        pointOfSalesOptionsButton.setText("");
+        for( int i = 0; i < pointOfSalesOptions.length; i++ ){
+            Log.i( "ME", pointOfSalesOptions[ i ] + " selected: " + selections[i] );
+            if(selections[i]){
+                pointOfSalesOptionsButton.setText((pointOfSalesOptionsButton.getText().toString().equals("")?"":pointOfSalesOptionsButton.getText() + ",") + pointOfSalesOptions[i]);
+            }
+        }
     }
 
 }

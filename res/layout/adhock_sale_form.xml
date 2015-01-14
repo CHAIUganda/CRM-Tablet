@@ -306,12 +306,10 @@
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
-            <Spinner
+            <Button
                     android:id="@+id/adhock_sale_point_of_sale"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/selectItem"
-                    android:layout_width="fill_parent"
-                    android:entries="@array/point_of_sale_material"
+                    android:layout_width="match_parent"
                     android:background="@drawable/btn_dropdown"/>
 
         </LinearLayout>

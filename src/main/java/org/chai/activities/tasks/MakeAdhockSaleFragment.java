@@ -1,5 +1,7 @@
 package org.chai.activities.tasks;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -42,6 +44,9 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
     private Customer salesCustomer;
     private List<Product> products;
     private boolean isUpdate = false;
+    private Button pointOfSalesOptionsButton;
+    private CharSequence[] pointOfSalesOptions;
+    private boolean[] selections;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
@@ -72,6 +77,18 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
                     salesCustomer = selected;
                 }
             });
+
+            pointOfSalesOptionsButton = (Button)view.findViewById(R.id.adhock_sale_point_of_sale);
+            pointOfSalesOptions = getResources().getStringArray(R.array.point_of_sale_material);
+            selections = new boolean[pointOfSalesOptions.length];
+
+            pointOfSalesOptionsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                  showPointOfSaleDialog();
+                }
+            });
+
 
 
             Button addButton = (Button)view.findViewById(R.id.adhock_sale_add_more);
@@ -112,6 +129,14 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         return view ;
     }
 
+    protected void showPointOfSaleDialog() {
+       AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        dialog.setTitle("Point of Sale Material")
+                .setMultiChoiceItems(pointOfSalesOptions,selections,new DialogSelectionClickHandler())
+                .setPositiveButton("OK",new DialogButtonClickHandler());
+        dialog.show();
+    }
+
     private void initialiseGreenDao() {
         try {
             DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
@@ -143,8 +168,8 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             Spinner governmentApprovalSpinner = (Spinner) view.findViewById(R.id.adhock_sale_government_approval);
             Utils.setSpinnerSelection(governmentApprovalSpinner, saleInstance.getGovernmentApproval());
 
-            Spinner pointOfSaleMaterial = (Spinner) view.findViewById(R.id.adhock_sale_point_of_sale);
-            Utils.setSpinnerSelection(pointOfSaleMaterial, saleInstance.getPointOfsaleMaterial());
+            Button pointOfSaleMaterial = (Button) view.findViewById(R.id.adhock_sale_point_of_sale);
+           pointOfSaleMaterial.setText(saleInstance.getPointOfsaleMaterial());
 
             Spinner recommendationNextStep = (Spinner) view.findViewById(R.id.adhock_sale_next_step_recommendation);
             Utils.setSpinnerSelection(recommendationNextStep, saleInstance.getRecommendationNextStep());
@@ -274,10 +299,13 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         saleInstance.setDateOfSale(new Date());
         String stocksZinc = ((Spinner) getActivity().findViewById(R.id.adhock_sale_do_you_stock_zinc)).getSelectedItem().toString();
         saleInstance.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
-        saleInstance.setHowManyOrsInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.adhock_sale_howmany_in_stock_ors)).getText().toString()));
-        saleInstance.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.adhock_sale_howmany_in_stock_zinc)).getText().toString()));
-        saleInstance.setIfNoWhy(((EditText) getActivity().findViewById(R.id.adhock_sale_if_no_why)).getText().toString());
-        saleInstance.setPointOfsaleMaterial(((Spinner) getActivity().findViewById(R.id.adhock_sale_point_of_sale)).getSelectedItem().toString());
+        if (stocksZinc.equals("Yes")) {
+            saleInstance.setHowManyOrsInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.adhock_sale_howmany_in_stock_ors)).getText().toString()));
+            saleInstance.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.adhock_sale_howmany_in_stock_zinc)).getText().toString()));
+        }else{
+            saleInstance.setIfNoWhy(((EditText) getActivity().findViewById(R.id.adhock_sale_if_no_why)).getText().toString());
+        }
+        saleInstance.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.adhock_sale_point_of_sale)).getText().toString());
         saleInstance.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.adhock_sale_next_step_recommendation)).getSelectedItem().toString());
         saleInstance.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.adhock_sale_recommendation_level)).getSelectedItem().toString());
         saleInstance.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.adhock_sale_government_approval)).getSelectedItem().toString());
@@ -332,6 +360,38 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_howmany_in_stock_zinc_view));
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_howmany_in_stock_ors_view));
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_customer_lbl));
+    }
+
+    public class DialogButtonClickHandler implements DialogInterface.OnClickListener
+    {
+        public void onClick( DialogInterface dialog, int clicked )
+        {
+            switch( clicked )
+            {
+                case DialogInterface.BUTTON_POSITIVE:
+                    setSelectedOptions();
+                    break;
+            }
+        }
+    }
+
+    public class DialogSelectionClickHandler implements DialogInterface.OnMultiChoiceClickListener
+    {
+        public void onClick( DialogInterface dialog, int clicked, boolean selected )
+        {
+            Log.i( "ME================================", pointOfSalesOptions[clicked] + " selected: " + selected );
+        }
+
+    }
+
+    private void setSelectedOptions() {
+        pointOfSalesOptionsButton.setText("");
+        for( int i = 0; i < pointOfSalesOptions.length; i++ ){
+            Log.i( "ME", pointOfSalesOptions[ i ] + " selected: " + selections[i] );
+            if(selections[i]){
+                pointOfSalesOptionsButton.setText((pointOfSalesOptionsButton.getText().toString().equals("")?"":pointOfSalesOptionsButton.getText() + ",") + pointOfSalesOptions[i]);
+            }
+        }
     }
 
 }

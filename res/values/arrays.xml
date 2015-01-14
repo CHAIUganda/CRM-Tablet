@@ -145,7 +145,6 @@
         <item>Greater than 300,000 UGX</item>
     </string-array>
     <string-array name="point_of_sale_material">
-        <item>""</item>
         <item>Poster</item>
         <item>Flyer</item>
         <item>T-shirt</item>
