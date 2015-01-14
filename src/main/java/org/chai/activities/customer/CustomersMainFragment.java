@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.text.TextUtils;
 import android.view.*;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -54,6 +55,17 @@ public class CustomersMainFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.customer_list_fragment, container, false);
+        Button newCustomerBtn = (Button)view.findViewById(R.id.btn_add_new_customer);
+        newCustomerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CustomerForm.class);
+                Bundle bundle = new Bundle();
+                bundle.putLong("id", 0);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         setHasOptionsMenu(true);
         return view;
     }
@@ -91,13 +103,6 @@ public class CustomersMainFragment extends ListFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_new_customer:
-                Intent intent = new Intent(getActivity(), CustomerForm.class);
-                Bundle bundle = new Bundle();
-                bundle.putLong("id", 0);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
