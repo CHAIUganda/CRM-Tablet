@@ -3,9 +3,7 @@ package org.chai.activities.calls;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -30,6 +28,7 @@ public class AdhockSalesListFragment extends Fragment {
 
     private List<AdhockSale> adhockSales;
     private ListView salesListView;
+    private AdhockSalesAdapter salesAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -38,7 +37,8 @@ public class AdhockSalesListFragment extends Fragment {
         adhockSales = new ArrayList<AdhockSale>();
         adhockSales.addAll(adhockSaleDao.loadAll());
         salesListView = (ListView)view.findViewById(R.id.orderslistview);
-        salesListView.setAdapter(new AdhockSalesAdapter(getActivity(),adhockSales));
+        salesAdapter = new AdhockSalesAdapter(getActivity(), adhockSales);
+        salesListView.setAdapter(salesAdapter);
 
 
         salesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -69,5 +69,34 @@ public class AdhockSalesListFragment extends Fragment {
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
+
+    @Override
+      public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.delete_context_menu, menu);
+
+    }
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.delete_menu_item:
+                try{
+                    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
+                    int position = (int) info.id;
+                    adhockSaleDao.delete(adhockSales.get(position));
+                    adhockSales.remove(position);
+                    salesAdapter.notifyDataSetChanged();
+                }catch (Exception ex){
+
+                }
+                return true;
+
+        }
+        return super.onContextItemSelected(menuItem);
+    }
+
 
 }
