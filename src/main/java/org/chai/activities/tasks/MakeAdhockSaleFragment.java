@@ -89,8 +89,6 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
                 }
             });
 
-
-
             Button addButton = (Button)view.findViewById(R.id.adhock_sale_add_more);
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -126,6 +124,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             Long saleId = bundle.getLong("saleId");
             bindSalesInfoToUI(saleId, view);
         }
+        managePointOfSaleOthers(view,false);
         return view ;
     }
 
@@ -305,7 +304,8 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         }else{
             saleInstance.setIfNoWhy(((EditText) getActivity().findViewById(R.id.adhock_sale_if_no_why)).getText().toString());
         }
-        saleInstance.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.adhock_sale_point_of_sale)).getText().toString());
+        saleInstance.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.adhock_sale_point_of_sale)).getText().toString()
+                +","+((EditText)getActivity().findViewById(R.id.adhoc_point_of_sale_others)).getText().toString());
         saleInstance.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.adhock_sale_next_step_recommendation)).getSelectedItem().toString());
         saleInstance.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.adhock_sale_recommendation_level)).getSelectedItem().toString());
         saleInstance.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.adhock_sale_government_approval)).getSelectedItem().toString());
@@ -385,12 +385,24 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
     }
 
     private void setSelectedOptions() {
+        managePointOfSaleOthers(getView(),false);
         pointOfSalesOptionsButton.setText("");
         for( int i = 0; i < pointOfSalesOptions.length; i++ ){
             Log.i( "ME", pointOfSalesOptions[ i ] + " selected: " + selections[i] );
-            if(selections[i]){
+            if (selections[i] && !pointOfSalesOptions[i].toString().equalsIgnoreCase("others")) {
                 pointOfSalesOptionsButton.setText((pointOfSalesOptionsButton.getText().toString().equals("")?"":pointOfSalesOptionsButton.getText() + ",") + pointOfSalesOptions[i]);
+            }else  if (selections[i] && pointOfSalesOptions[i].toString().equalsIgnoreCase("others")){
+                managePointOfSaleOthers(getView(),true);
             }
+        }
+    }
+
+    private void managePointOfSaleOthers(View view,boolean isShow) {
+        LinearLayout pointOfSalesOthersLayout = (LinearLayout)view.findViewById(R.id.adhoc_point_of_sale_others_layout);
+        if (isShow) {
+            pointOfSalesOthersLayout.setVisibility(View.VISIBLE);
+        } else {
+            pointOfSalesOthersLayout.setVisibility(View.GONE);
         }
     }
 

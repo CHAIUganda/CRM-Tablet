@@ -118,6 +118,7 @@ public class SaleslFormFragment extends Fragment {
             });
             setRequiredFields(view);
             manageDoyouStockZincResponses(view);
+            managePointOfSaleOthers(view,false);
             bindSalesInfoToUI(view);
 
         } catch (Exception ex) {
@@ -260,7 +261,8 @@ public class SaleslFormFragment extends Fragment {
                 saleCallData.setHowmanyOrsInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_ors)).getText().toString()));
                 saleCallData.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString()));
             }
-            saleCallData.setIfNoWhy(((EditText) getActivity().findViewById(R.id.sales_if_no_why)).getText().toString());
+            saleCallData.setIfNoWhy(((EditText) getActivity().findViewById(R.id.sales_if_no_why)).getText().toString()
+                    +","+((EditText)getActivity().findViewById(R.id.sales_point_of_sale_others)).getText().toString());
             saleCallData.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.sales_point_of_sale)).getText().toString());
             saleCallData.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.sales_next_step_recommendation)).getSelectedItem().toString());
             saleCallData.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.sales_recommendation_level)).getSelectedItem().toString());
@@ -344,6 +346,15 @@ public class SaleslFormFragment extends Fragment {
         });
     }
 
+    private void managePointOfSaleOthers(View view,boolean isShow) {
+        LinearLayout pointOfSalesOthersLayout = (LinearLayout)view.findViewById(R.id.sales_point_of_sale_others_layout);
+        if (isShow) {
+            pointOfSalesOthersLayout.setVisibility(View.VISIBLE);
+        } else {
+            pointOfSalesOthersLayout.setVisibility(View.GONE);
+        }
+    }
+
     private boolean isNewSalesCall() {
         if (saleCallData == null || saleCallData.getId() == null) {
             return true;
@@ -412,11 +423,14 @@ public class SaleslFormFragment extends Fragment {
     }
 
     private void setSelectedOptions() {
+        managePointOfSaleOthers(getView(),false);
         pointOfSalesOptionsButton.setText("");
         for( int i = 0; i < pointOfSalesOptions.length; i++ ){
             Log.i( "ME", pointOfSalesOptions[ i ] + " selected: " + selections[i] );
-            if(selections[i]){
+            if (selections[i] && !pointOfSalesOptions[i].toString().equalsIgnoreCase("others")) {
                 pointOfSalesOptionsButton.setText((pointOfSalesOptionsButton.getText().toString().equals("")?"":pointOfSalesOptionsButton.getText() + ",") + pointOfSalesOptions[i]);
+            }else  if (selections[i] && pointOfSalesOptions[i].toString().equalsIgnoreCase("others")){
+                managePointOfSaleOthers(getView(),true);
             }
         }
     }

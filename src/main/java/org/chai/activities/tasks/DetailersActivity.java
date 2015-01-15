@@ -110,6 +110,7 @@ public class DetailersActivity extends Fragment {
             }
         });
         bindDetailerCallToUi(view);
+        managePointOfSaleOthers(view,false);
         return  view;
     }
 
@@ -281,7 +282,8 @@ public class DetailersActivity extends Fragment {
         detailerCall.setIfNoWhy(((EditText)getActivity(). findViewById(R.id.detailer_if_no_why)).getText().toString());
         detailerCall.setBuyingPriceZinc(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyzinc)).getText().toString()));
         detailerCall.setBuyingPriceOrs(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyors)).getText().toString()));
-        detailerCall.setPointOfsaleMaterial(((Button)getActivity(). findViewById(R.id.detailer_point_of_sale)).getText().toString());
+        detailerCall.setPointOfsaleMaterial(((Button)getActivity(). findViewById(R.id.detailer_point_of_sale)).getText().toString()
+                +","+((EditText)getActivity().findViewById(R.id.detailer_point_of_sale_others)).getText().toString());
         detailerCall.setRecommendationNextStep(((Spinner)getActivity(). findViewById(R.id.detailer_next_step_recommendation)).getSelectedItem().toString());
 
         detailerCall.setHeardAboutDiarrheaTreatmentInChildren(((Spinner)getActivity(). findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors)).getSelectedItem().toString());
@@ -480,9 +482,20 @@ public class DetailersActivity extends Fragment {
         pointOfSalesOptionsButton.setText("");
         for( int i = 0; i < pointOfSalesOptions.length; i++ ){
             Log.i( "ME", pointOfSalesOptions[ i ] + " selected: " + selections[i] );
-            if(selections[i]){
+            if (selections[i] && !pointOfSalesOptions[i].toString().equalsIgnoreCase("others")) {
                 pointOfSalesOptionsButton.setText((pointOfSalesOptionsButton.getText().toString().equals("")?"":pointOfSalesOptionsButton.getText() + ",") + pointOfSalesOptions[i]);
+            }else  if (selections[i] && pointOfSalesOptions[i].toString().equalsIgnoreCase("others")){
+                managePointOfSaleOthers(getView(),true);
             }
+        }
+    }
+
+    private void managePointOfSaleOthers(View view,boolean isShow) {
+        LinearLayout pointOfSalesOthersLayout = (LinearLayout)view.findViewById(R.id.detailer_point_of_sale_others_layout);
+        if (isShow) {
+            pointOfSalesOthersLayout.setVisibility(View.VISIBLE);
+        } else {
+            pointOfSalesOthersLayout.setVisibility(View.GONE);
         }
     }
 

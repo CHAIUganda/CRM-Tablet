@@ -146,8 +146,6 @@ public class TakeOrderFragment extends BaseContainerFragment {
         return view;
     }
 
-
-
     private void initialiseGreenDao() {
         try {
             DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);

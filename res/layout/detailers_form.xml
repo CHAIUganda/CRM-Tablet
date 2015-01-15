@@ -708,6 +708,32 @@
 
         </LinearLayout>
 
+        <LinearLayout
+                android:id="@+id/detailer_point_of_sale_others_layout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Others Specify"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+            <EditText
+                    android:id="@+id/detailer_point_of_sale_others"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="@dimen/list_sub_text_size"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:background="@drawable/bordertextfield"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null"/>
+        </LinearLayout>
+
 
         <LinearLayout
                 android:orientation="vertical"
