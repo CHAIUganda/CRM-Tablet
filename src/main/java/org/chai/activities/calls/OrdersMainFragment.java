@@ -1,5 +1,7 @@
 package org.chai.activities.calls;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -86,9 +88,7 @@ public class OrdersMainFragment extends Fragment {
                 try{
                     AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
                     int position = (int) info.id;
-                    orderDao.delete(orderList.get(position));
-                    orderList.remove(position);
-                    orderListAdapter.notifyDataSetChanged();
+                   askBeforeDelete(position).show();
                 }catch (Exception ex){
 
                 }
@@ -96,6 +96,35 @@ public class OrdersMainFragment extends Fragment {
 
         }
         return super.onContextItemSelected(menuItem);
+    }
+
+    private AlertDialog askBeforeDelete(final int position)
+    {
+        AlertDialog dialog =new AlertDialog.Builder(getActivity())
+                .setTitle("Delete")
+                .setMessage("Are you sure you want to Delete the selected Item")
+                .setIcon(R.drawable.delete_icon)
+
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        orderDao.delete(orderList.get(position));
+                        orderList.remove(position);
+                        orderListAdapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+        return dialog;
+
     }
 
 

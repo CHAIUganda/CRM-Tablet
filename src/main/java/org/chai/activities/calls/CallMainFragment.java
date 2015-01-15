@@ -1,5 +1,7 @@
 package org.chai.activities.calls;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -123,15 +125,7 @@ public class CallMainFragment extends Fragment {
                 try{
                     AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
                     int position = (int) info.id;
-                    if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
-                        saleDao.delete(sales.get(position));
-                        sales.remove(position);
-                        salesAdapter.notifyDataSetChanged();
-                    }else{
-                        detailerCallDao.delete(detailerCalls.get(position));
-                        detailerCalls.remove(position);
-                        detailerCallAdapter.notifyDataSetChanged();
-                    }
+                    askBeforeDelete(position).show();
                 }catch (Exception ex){
 
                 }
@@ -157,4 +151,40 @@ public class CallMainFragment extends Fragment {
                 return super.onOptionsItemSelected(menuItem);
         }
     }
+
+    private AlertDialog askBeforeDelete(final int position) {
+        AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                .setTitle("Delete")
+                .setMessage("Are you sure you want to Delete the selected Item")
+                .setIcon(R.drawable.delete_icon)
+
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
+                            saleDao.delete(sales.get(position));
+                            sales.remove(position);
+                            salesAdapter.notifyDataSetChanged();
+                        } else {
+                            detailerCallDao.delete(detailerCalls.get(position));
+                            detailerCalls.remove(position);
+                            detailerCallAdapter.notifyDataSetChanged();
+                        }
+                        salesAdapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+        return dialog;
+
+    }
+
 }
