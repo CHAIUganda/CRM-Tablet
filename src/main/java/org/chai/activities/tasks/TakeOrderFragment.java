@@ -127,6 +127,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
                 try{
                     if(validateFieldValues()){
                         submitOrder();
+                        Toast.makeText(getActivity(),"Thank you,your Order has been submitted.",Toast.LENGTH_LONG).show();
                         Intent i = new Intent(getActivity(), HomeActivity.class);
                         startActivity(i);
                     }
