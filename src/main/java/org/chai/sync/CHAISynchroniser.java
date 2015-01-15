@@ -90,9 +90,9 @@ public class CHAISynchroniser {
 
     public void startSyncronisationProcess() {
         try{
+            uploadCustomers();
             uploadDirectSales();
             uploadSales();
-            uploadCustomers();
             uploadTasks();
             uploadOrders();
             progressDialog.incrementProgressBy(30);
