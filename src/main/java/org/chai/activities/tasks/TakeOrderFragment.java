@@ -125,9 +125,11 @@ public class TakeOrderFragment extends BaseContainerFragment {
             @Override
             public void onClick(View view) {
                 try{
-                    submitOrder();
-                    Intent i = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(i);
+                    if(validateFieldValues()){
+                        submitOrder();
+                        Intent i = new Intent(getActivity(), HomeActivity.class);
+                        startActivity(i);
+                    }
                 }catch (Exception ex){
                     Toast.makeText(getActivity(),"A problem Occured while saving a new Order,please ensure that data is entered correctly",Toast.LENGTH_LONG).show();
                 }
@@ -142,6 +144,8 @@ public class TakeOrderFragment extends BaseContainerFragment {
         }
         return view;
     }
+
+
 
     private void initialiseGreenDao() {
         try {
@@ -167,7 +171,6 @@ public class TakeOrderFragment extends BaseContainerFragment {
             dateEditTxt.setText(Utils.dateToString(orderInstance.getOrderDate()));
             bindOrderDataToUi(view, orderInstance);
         }
-
     }
 
     private void bindOrderDataToUi(View view, Order order) {
@@ -300,4 +303,18 @@ public class TakeOrderFragment extends BaseContainerFragment {
         return orderData;
     }
 
+    private boolean validateFieldValues() {
+        if(selectedCustomer == null){
+            Toast.makeText(getActivity(),"Please enter valid customer",Toast.LENGTH_LONG).show();
+            return false;
+        }else if(((EditText) getActivity().findViewById(R.id.order_delivery_date)).getText().toString().equalsIgnoreCase("")){
+            Toast.makeText(getActivity(),"Please enter a delivery date",Toast.LENGTH_LONG).show();
+            return false;
+        }else if(quantityFields.get(0).getText().toString().equalsIgnoreCase("")){
+            Toast.makeText(getActivity(),"Please enter atleast a product and qunatity ordered",Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
+    }
 }
