@@ -4,8 +4,4 @@
     <item
             android:id="@+id/delete_menu_item"
             android:title="@string/delete_string"/>
-    <item
-            android:id="@+id/call_details_edit"
-            android:icon="@drawable/edit_icon"
-            android:title="Edit Call Data"/>
 </menu>

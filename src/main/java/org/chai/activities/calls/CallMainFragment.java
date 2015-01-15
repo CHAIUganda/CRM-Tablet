@@ -128,24 +128,15 @@ public class CallMainFragment extends Fragment {
                         sales.remove(position);
                         salesAdapter.notifyDataSetChanged();
                     }else{
-                        detailerCalls.remove(position);
                         detailerCallDao.delete(detailerCalls.get(position));
+                        detailerCalls.remove(position);
                         detailerCallAdapter.notifyDataSetChanged();
                     }
                 }catch (Exception ex){
 
                 }
                 return true;
-            case R.id.call_details_edit:
-                try{
-                    AdapterView.AdapterContextMenuInfo info2 = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
-                    int position2 = (int) info2.id;
-                    DetailerCall detailerCall = detailerCalls.get(position2);
-                    goToDetailerForm(detailerCall);
-                }catch (Exception ex){
 
-                }
-                return true;
         }
         return super.onContextItemSelected(menuItem);
     }
