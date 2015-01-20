@@ -311,7 +311,7 @@ public class DetailersActivity extends Fragment {
             ((TextView)view. findViewById(R.id.detailers_gps_text)).setText(detailerCall.getLatitude()+","+detailerCall.getLongitude());
             CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
             if(keyCustomerContact!= null){
-                ((TextView)view. findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getFirstName());
+                ((TextView)view. findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getNames());
                 ((TextView)view. findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact.getContact());
             }
             ((EditText)view. findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
@@ -373,7 +373,7 @@ public class DetailersActivity extends Fragment {
                 ((TextView)view. findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
                 ((EditText)view. findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
                 CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
-                ((TextView)view. findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getFirstName():"");
+                ((TextView)view. findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getNames():"");
                 ((TextView)view.findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getContact():"");
             }
         }

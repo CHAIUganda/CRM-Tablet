@@ -19,10 +19,8 @@ public class CustomerContact {
     /** Not-null value. */
     private String uuid;
     private String contact;
-    private String firstName;
-    private String surname;
+    private String names;
     private String gender;
-    private Boolean networkOrAssociation;
     private String role;
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
@@ -51,14 +49,12 @@ public class CustomerContact {
         this.id = id;
     }
 
-    public CustomerContact(Long id, String uuid, String contact, String firstName, String surname, String gender, Boolean networkOrAssociation, String role, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
+    public CustomerContact(Long id, String uuid, String contact, String names, String gender, String role, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
         this.id = id;
         this.uuid = uuid;
         this.contact = contact;
-        this.firstName = firstName;
-        this.surname = surname;
+        this.names = names;
         this.gender = gender;
-        this.networkOrAssociation = networkOrAssociation;
         this.role = role;
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
@@ -97,20 +93,12 @@ public class CustomerContact {
         this.contact = contact;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getNames() {
+        return names;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setNames(String names) {
+        this.names = names;
     }
 
     public String getGender() {
@@ -119,14 +107,6 @@ public class CustomerContact {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public Boolean getNetworkOrAssociation() {
-        return networkOrAssociation;
-    }
-
-    public void setNetworkOrAssociation(Boolean networkOrAssociation) {
-        this.networkOrAssociation = networkOrAssociation;
     }
 
     public String getRole() {

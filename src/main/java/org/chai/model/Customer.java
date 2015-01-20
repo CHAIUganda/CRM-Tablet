@@ -27,7 +27,6 @@ public class Customer {
     private String outletSize;
     private byte[] outletPicture;
     private String split;
-    private String openingHours;
     private String majoritySourceOfSupply;
     private String keyWholeSalerName;
     private String keyWholeSalerContact;
@@ -39,7 +38,6 @@ public class Customer {
     private Integer numberOfCustomersPerDay;
     private String numberOfProducts;
     private Integer restockFrequency;
-    private String turnOver;
     private java.util.Date dateOutletOpened;
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
@@ -79,7 +77,7 @@ public class Customer {
         this.id = id;
     }
 
-    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String openingHours, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String numberOfProducts, Integer restockFrequency, String turnOver, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, long subcountyId) {
+    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String numberOfProducts, Integer restockFrequency, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, long subcountyId) {
         this.id = id;
         this.uuid = uuid;
         this.latitude = latitude;
@@ -89,7 +87,6 @@ public class Customer {
         this.outletSize = outletSize;
         this.outletPicture = outletPicture;
         this.split = split;
-        this.openingHours = openingHours;
         this.majoritySourceOfSupply = majoritySourceOfSupply;
         this.keyWholeSalerName = keyWholeSalerName;
         this.keyWholeSalerContact = keyWholeSalerContact;
@@ -101,7 +98,6 @@ public class Customer {
         this.numberOfCustomersPerDay = numberOfCustomersPerDay;
         this.numberOfProducts = numberOfProducts;
         this.restockFrequency = restockFrequency;
-        this.turnOver = turnOver;
         this.dateOutletOpened = dateOutletOpened;
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
@@ -193,14 +189,6 @@ public class Customer {
         this.split = split;
     }
 
-    public String getOpeningHours() {
-        return openingHours;
-    }
-
-    public void setOpeningHours(String openingHours) {
-        this.openingHours = openingHours;
-    }
-
     public String getMajoritySourceOfSupply() {
         return majoritySourceOfSupply;
     }
@@ -287,14 +275,6 @@ public class Customer {
 
     public void setRestockFrequency(Integer restockFrequency) {
         this.restockFrequency = restockFrequency;
-    }
-
-    public String getTurnOver() {
-        return turnOver;
-    }
-
-    public void setTurnOver(String turnOver) {
-        this.turnOver = turnOver;
     }
 
     public java.util.Date getDateOutletOpened() {

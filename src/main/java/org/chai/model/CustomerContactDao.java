@@ -31,14 +31,12 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
         public final static Property Contact = new Property(2, String.class, "contact", false, "CONTACT");
-        public final static Property FirstName = new Property(3, String.class, "firstName", false, "FIRST_NAME");
-        public final static Property Surname = new Property(4, String.class, "surname", false, "SURNAME");
-        public final static Property Gender = new Property(5, String.class, "gender", false, "GENDER");
-        public final static Property NetworkOrAssociation = new Property(6, Boolean.class, "networkOrAssociation", false, "NETWORK_OR_ASSOCIATION");
-        public final static Property Role = new Property(7, String.class, "role", false, "ROLE");
-        public final static Property DateCreated = new Property(8, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
-        public final static Property LastUpdated = new Property(9, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
-        public final static Property CustomerId = new Property(10, long.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property Names = new Property(3, String.class, "names", false, "NAMES");
+        public final static Property Gender = new Property(4, String.class, "gender", false, "GENDER");
+        public final static Property Role = new Property(5, String.class, "role", false, "ROLE");
+        public final static Property DateCreated = new Property(6, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(7, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
+        public final static Property CustomerId = new Property(8, long.class, "customerId", false, "CUSTOMER_ID");
     };
 
     private DaoSession daoSession;
@@ -61,14 +59,12 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
                 "'CONTACT' TEXT," + // 2: contact
-                "'FIRST_NAME' TEXT," + // 3: firstName
-                "'SURNAME' TEXT," + // 4: surname
-                "'GENDER' TEXT," + // 5: gender
-                "'NETWORK_OR_ASSOCIATION' INTEGER," + // 6: networkOrAssociation
-                "'ROLE' TEXT," + // 7: role
-                "'DATE_CREATED' INTEGER," + // 8: dateCreated
-                "'LAST_UPDATED' INTEGER," + // 9: lastUpdated
-                "'CUSTOMER_ID' INTEGER NOT NULL );"); // 10: customerId
+                "'NAMES' TEXT," + // 3: names
+                "'GENDER' TEXT," + // 4: gender
+                "'ROLE' TEXT," + // 5: role
+                "'DATE_CREATED' INTEGER," + // 6: dateCreated
+                "'LAST_UPDATED' INTEGER," + // 7: lastUpdated
+                "'CUSTOMER_ID' INTEGER NOT NULL );"); // 8: customerId
     }
 
     /** Drops the underlying database table. */
@@ -93,41 +89,31 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
             stmt.bindString(3, contact);
         }
  
-        String firstName = entity.getFirstName();
-        if (firstName != null) {
-            stmt.bindString(4, firstName);
-        }
- 
-        String surname = entity.getSurname();
-        if (surname != null) {
-            stmt.bindString(5, surname);
+        String names = entity.getNames();
+        if (names != null) {
+            stmt.bindString(4, names);
         }
  
         String gender = entity.getGender();
         if (gender != null) {
-            stmt.bindString(6, gender);
-        }
- 
-        Boolean networkOrAssociation = entity.getNetworkOrAssociation();
-        if (networkOrAssociation != null) {
-            stmt.bindLong(7, networkOrAssociation ? 1l: 0l);
+            stmt.bindString(5, gender);
         }
  
         String role = entity.getRole();
         if (role != null) {
-            stmt.bindString(8, role);
+            stmt.bindString(6, role);
         }
  
         java.util.Date dateCreated = entity.getDateCreated();
         if (dateCreated != null) {
-            stmt.bindLong(9, dateCreated.getTime());
+            stmt.bindLong(7, dateCreated.getTime());
         }
  
         java.util.Date lastUpdated = entity.getLastUpdated();
         if (lastUpdated != null) {
-            stmt.bindLong(10, lastUpdated.getTime());
+            stmt.bindLong(8, lastUpdated.getTime());
         }
-        stmt.bindLong(11, entity.getCustomerId());
+        stmt.bindLong(9, entity.getCustomerId());
     }
 
     @Override
@@ -149,14 +135,12 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // uuid
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // contact
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // firstName
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // surname
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // gender
-            cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0, // networkOrAssociation
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // role
-            cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // dateCreated
-            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // lastUpdated
-            cursor.getLong(offset + 10) // customerId
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // names
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // gender
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // role
+            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // dateCreated
+            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)), // lastUpdated
+            cursor.getLong(offset + 8) // customerId
         );
         return entity;
     }
@@ -167,14 +151,12 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setUuid(cursor.getString(offset + 1));
         entity.setContact(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setFirstName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setSurname(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setGender(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setNetworkOrAssociation(cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0);
-        entity.setRole(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setDateCreated(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
-        entity.setLastUpdated(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
-        entity.setCustomerId(cursor.getLong(offset + 10));
+        entity.setNames(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setGender(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setRole(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setDateCreated(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setLastUpdated(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
+        entity.setCustomerId(cursor.getLong(offset + 8));
      }
     
     /** @inheritdoc */

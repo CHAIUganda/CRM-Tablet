@@ -30,6 +30,7 @@ public class Sale {
     private String recommendationLevel;
     private String governmentApproval;
     private String orderId;
+
     private List<SaleData> salesDatas;
 
     // KEEP FIELDS - put your custom fields here

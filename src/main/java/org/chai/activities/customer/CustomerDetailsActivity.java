@@ -82,7 +82,6 @@ public class CustomerDetailsActivity extends Activity {
         ((TextView) findViewById(R.id.customer_profile_outlet_type)).setText(customer.getOutletType());
         ((TextView) findViewById(R.id.customer_profile_size)).setText(customer.getOutletSize());
         ((TextView) findViewById(R.id.customer_profile_split)).setText(customer.getSplit());
-        ((TextView) findViewById(R.id.customer_profile_opening_hrs)).setText(customer.getOpeningHours());
         ((TextView) findViewById(R.id.customer_profile_sources_of_supply)).setText(customer.getMajoritySourceOfSupply());
         ((TextView) findViewById(R.id.customer_profile_key_wholesaler_name)).setText(customer.getKeyWholeSalerName());
         ((TextView) findViewById(R.id.customer_profile_key_wholesaler_contact)).setText(customer.getKeyWholeSalerContact());
@@ -93,7 +92,6 @@ public class CustomerDetailsActivity extends Activity {
         ((TextView) findViewById(R.id.customer_profile_num_customers_per_day)).setText(customer.getNumberOfCustomersPerDay() + "");
         ((TextView) findViewById(R.id.customer_profile_num_products)).setText(customer.getNumberOfProducts() + "");
         ((TextView) findViewById(R.id.customer_profile_restock_frequency)).setText(customer.getRestockFrequency() + "");
-        ((TextView) findViewById(R.id.customer_profile_turn_over)).setText(customer.getTurnOver() + "");
 
     }
 

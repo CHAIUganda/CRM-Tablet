@@ -130,7 +130,7 @@ public class CustomerForm extends Activity {
                         CustomerContact customerContact = new CustomerContact(null);
                         customerContact.setUuid(UUID.randomUUID().toString());
                         customerContact.setContact(((EditText) entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
-                        customerContact.setFirstName(((EditText) entryView.findViewById(R.id.customer_contact_names)).getText().toString());
+                        customerContact.setNames(((EditText) entryView.findViewById(R.id.customer_contact_names)).getText().toString());
                         customerContact.setGender(((Spinner) entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
                         customerContact.setRole(((Spinner) entryView.findViewById(R.id.customer_contact_type)).getSelectedItem().toString());
                         customerContacts.add(customerContact);
@@ -138,7 +138,7 @@ public class CustomerForm extends Activity {
                         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.customer_contacts_layout);
 
                         TextView contactView = new TextView(CustomerForm.this);
-                        contactView.setText(customerContact.getFirstName() + ":" + customerContact.getContact());
+                        contactView.setText(customerContact.getNames() + ":" + customerContact.getContact());
                         contactView.setTextSize(18);
                         contactView.setTextColor(Color.parseColor("#000000"));
                         linearLayout.addView(contactView);
@@ -154,7 +154,6 @@ public class CustomerForm extends Activity {
                 alert.show();
             }
         });
-//        setDateWidget();
         bindCustomerToUI();
         setMandatoryFields();
     }

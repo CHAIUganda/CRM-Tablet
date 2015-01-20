@@ -46,7 +46,6 @@ public class DetailerCall {
     private Double longitude;
     private long taskId;
 
-
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */
