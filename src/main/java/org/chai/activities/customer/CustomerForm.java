@@ -133,7 +133,6 @@ public class CustomerForm extends Activity {
                         customerContact.setFirstName(((EditText) entryView.findViewById(R.id.customer_contact_firstname)).getText().toString());
                         customerContact.setSurname(((EditText) entryView.findViewById(R.id.customer_contact_surname)).getText().toString());
                         customerContact.setGender(((Spinner) entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
-                        customerContact.setNetworkOrAssociation(Boolean.valueOf(((Spinner) entryView.findViewById(R.id.customer_contact_network)).getSelectedItem().toString()));
                         customerContact.setRole(((Spinner) entryView.findViewById(R.id.customer_contact_type)).getSelectedItem().toString());
                         customerContacts.add(customerContact);
                         //add to parent form
@@ -201,7 +200,6 @@ public class CustomerForm extends Activity {
             customerInstance.setOutletType(((Spinner) findViewById(R.id.details_outlet_type)).getSelectedItem().toString());
             customerInstance.setOutletSize(((Spinner) findViewById(R.id.details_size)).getSelectedItem().toString());
             customerInstance.setSplit(((Spinner) findViewById(R.id.details_split)).getSelectedItem().toString());
-            customerInstance.setOpeningHours(((Spinner) findViewById(R.id.details_opening_hrs)).getSelectedItem().toString());
 
             customerInstance.setMajoritySourceOfSupply(((EditText) findViewById(R.id.details_sources_of_supply)).getText().toString());
             customerInstance.setKeyWholeSalerName(((EditText) findViewById(R.id.details_key_wholesaler_name)).getText().toString());
@@ -215,7 +213,6 @@ public class CustomerForm extends Activity {
             customerInstance.setNumberOfCustomersPerDay(Integer.parseInt(((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString()));
             customerInstance.setNumberOfProducts(((EditText) findViewById(R.id.details_num_products)).getText().toString());
             customerInstance.setRestockFrequency(Integer.parseInt(((EditText) findViewById(R.id.details_restock_frequency)).getText().toString()));
-            customerInstance.setTurnOver(((EditText) findViewById(R.id.details_turn_over)).getText().toString());
             customerInstance.setLongitude(capturedLongitude);
             customerInstance.setLatitude(capturedLatitude);
             customerInstance.setSubcountyId(((Subcounty) subcountySpinner.getSelectedItem()).getId());
@@ -243,8 +240,6 @@ public class CustomerForm extends Activity {
             ((EditText) findViewById(R.id.details_restock_frequency)).setText(customerInstance.getRestockFrequency() == null ? "" : customerInstance.getRestockFrequency() + "");
             ((EditText) findViewById(R.id.details_gps)).setText(customerInstance.getLatitude()+","+customerInstance.getLongitude());
 
-            ((EditText) findViewById(R.id.details_turn_over)).setText(customerInstance.getTurnOver() == null ? "" : customerInstance.getTurnOver() + "");
-
             Spinner hasSisterBranches = ((Spinner) findViewById(R.id.details_has_sister_branches));
             setSpinnerSelection(hasSisterBranches, customerInstance.getHasSisterBranch() == null ? "no" : "yes");
 
@@ -256,9 +251,6 @@ public class CustomerForm extends Activity {
 
             Spinner splitSpinner = (Spinner) findViewById(R.id.details_split);
             setSpinnerSelection(splitSpinner, customerInstance.getSplit());
-
-            Spinner openingHrsSpinner = (Spinner) findViewById(R.id.details_opening_hrs);
-            setSpinnerSelection(openingHrsSpinner, customerInstance.getOpeningHours());
 
             Spinner buildingStructureSpinner = (Spinner) findViewById(R.id.details_building_structure);
             setSpinnerSelection(buildingStructureSpinner, customerInstance.getBuildingStructure());
@@ -295,15 +287,11 @@ public class CustomerForm extends Activity {
             return false;
         } else if (((EditText) findViewById(R.id.details_desc_location)).getText().toString().equals("")) {
             return false;
-        } else if (((Spinner) findViewById(R.id.details_opening_hrs)).getSelectedItem().toString().equals("")) {
-            return false;
         } else if (((EditText) findViewById(R.id.details_date_outlet_opened)).getText().toString().equals("")) {
             return false;
         } else if (((EditText) findViewById(R.id.details_number_of_employees)).getText().toString().equals("")) {
             return false;
-        } else if (((EditText) findViewById(R.id.details_turn_over)).getText().toString().equals("")) {
-            return false;
-        }  else if (((Spinner) findViewById(R.id.details_has_sister_branches)).getSelectedItem().toString().equals("")) {
+        }else if (((Spinner) findViewById(R.id.details_has_sister_branches)).getSelectedItem().toString().equals("")) {
             return false;
         } else if (((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString().equals("")) {
             return false;
@@ -417,10 +405,8 @@ public class CustomerForm extends Activity {
         Utils.setRequired((TextView) findViewById(R.id.details_subcounty_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_district_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_desc_location_lbl));
-        Utils.setRequired((TextView) findViewById(R.id.details_opening_hrs_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_date_outlet_opened_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_number_of_employees_lbl));
-        Utils.setRequired((TextView) findViewById(R.id.details_turn_over_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_has_sister_branches_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_num_customers_per_day_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_sources_of_supply_lbl));

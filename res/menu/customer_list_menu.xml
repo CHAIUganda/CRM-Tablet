@@ -7,4 +7,5 @@
           android:title="@string/action_search"
           android:showAsAction="always|withText"
           android:actionViewClass="android.widget.SearchView"/>
+
 </menu>

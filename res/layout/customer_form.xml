@@ -288,30 +288,6 @@
                         android:layout_marginLeft="5dp"/>
             </LinearLayout>
 
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:id="@+id/details_opening_hrs_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="11.Opening days and hours:"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="bold"/>
-
-                <Spinner
-                        android:id="@+id/details_opening_hrs"
-                        android:layout_height="wrap_content"
-                        android:prompt="@string/selectItem"
-                        android:layout_width="fill_parent"
-                        android:entries="@array/openingdays"
-                        android:background="@drawable/btn_dropdown"/>
-
-            </LinearLayout>
-
 
             <LinearLayout
                     android:orientation="vertical"
@@ -323,7 +299,7 @@
                         android:id="@+id/details_date_outlet_opened_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12.How long has this outlet been open(years)"
+                        android:text="12.How long has this outlet been open(Months)"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -370,34 +346,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
 
-                <TextView
-                        android:id="@+id/details_turn_over_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="14.Estimated monthly turnover of outlet (UGX):"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="bold"/>
-
-                <EditText
-                        android:id="@+id/details_turn_over"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textSize="@dimen/list_sub_text_size"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:background="@drawable/bordertextfield"
-                        android:singleLine="true"
-                        android:inputType="number"
-                        android:textCursorDrawable="@null"/>
-
-            </LinearLayout>
 
             <LinearLayout
                     android:orientation="vertical"

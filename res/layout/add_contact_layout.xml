@@ -84,23 +84,7 @@
             android:entries="@array/gender"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Does this person belong to a network or association:"
-            android:textColor="@color/list_main_text_color"
-            android:textStyle="bold"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
-    <Spinner
-            android:id="@+id/customer_contact_network"
-            android:layout_height="wrap_content"
-            android:prompt="@string/selectItem"
-            android:layout_width="fill_parent"
-            android:background="@drawable/btn_dropdown"
-            android:entries="@array/yesnolist"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
+
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
