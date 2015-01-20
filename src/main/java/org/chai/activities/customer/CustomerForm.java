@@ -130,8 +130,7 @@ public class CustomerForm extends Activity {
                         CustomerContact customerContact = new CustomerContact(null);
                         customerContact.setUuid(UUID.randomUUID().toString());
                         customerContact.setContact(((EditText) entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
-                        customerContact.setFirstName(((EditText) entryView.findViewById(R.id.customer_contact_firstname)).getText().toString());
-                        customerContact.setSurname(((EditText) entryView.findViewById(R.id.customer_contact_surname)).getText().toString());
+                        customerContact.setFirstName(((EditText) entryView.findViewById(R.id.customer_contact_names)).getText().toString());
                         customerContact.setGender(((Spinner) entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
                         customerContact.setRole(((Spinner) entryView.findViewById(R.id.customer_contact_type)).getSelectedItem().toString());
                         customerContacts.add(customerContact);
