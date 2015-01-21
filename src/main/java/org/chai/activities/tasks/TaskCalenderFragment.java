@@ -65,7 +65,8 @@ public class TaskCalenderFragment extends Fragment {
                 if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
                     SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
+                    Task itemAtPosition = (Task) adapterView.getItemAtPosition(position);
+                    bundle.putLong("taskId", itemAtPosition.getId());
                     commercialFormActivity.setArguments(bundle);
                     ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity, true);
                 }else{

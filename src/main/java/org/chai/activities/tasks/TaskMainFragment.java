@@ -24,7 +24,6 @@ public class TaskMainFragment extends BaseContainerFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         tabHost = new FragmentTabHost(getActivity());
-//        tabHost.setBackgroundColor(Color.parseColor("#f8f9fe"));
         tabHost.setup(getActivity(),getChildFragmentManager(),R.layout.task_main_fragment);
 
         tabHost.addTab(tabHost.newTabSpec("Calender").setIndicator(getTabIndicator(tabHost.getContext(),"Calender")),CalenderFragmentContainer.class,null);
