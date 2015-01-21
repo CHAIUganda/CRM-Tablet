@@ -65,7 +65,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Address:"
+                        android:text="Contact:"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -128,29 +128,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Parish:"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="bold"/>
-
-                <TextView
-                        android:id="@+id/customer_profile_parish"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:text="byaruhanga Drug shop"/>
-
-            </LinearLayout>
 
             <LinearLayout
                     android:orientation="horizontal"
@@ -161,31 +138,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Village:"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="bold"/>
-
-                <TextView
-                        android:id="@+id/customer_profile_village"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:text="byaruhanga Drug shop"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Date Outlet Opened:"
+                        android:text="How long in existence(months):"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -196,7 +149,7 @@
                         android:padding="10dp"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="italic"
-                        android:text="05/05/2014"/>
+                        android:text="12"/>
 
             </LinearLayout>
 
@@ -475,7 +428,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="how many diarrhea patients under 5 years do you see a day?"
+                        android:text="how many diarrhea patients under 5 years do you see per week?"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -490,29 +443,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Estimation of number of different products the retailer stock:"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="bold"/>
-
-                <TextView
-                        android:id="@+id/customer_profile_num_products"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:text="byaruhanga Drug shop"/>
-
-            </LinearLayout>
 
             <LinearLayout
                     android:orientation="horizontal"
@@ -538,29 +468,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Estmated monthly turn over:"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="bold"/>
-
-                <TextView
-                        android:id="@+id/customer_profile_turn_over"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:text="byaruhanga Drug shop"/>
-
-            </LinearLayout>
 
         </LinearLayout>
 

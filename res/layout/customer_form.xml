@@ -382,7 +382,7 @@
                         android:id="@+id/details_num_customers_per_day_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="16.how many diarrhea patients under 5 years do you see a day?"
+                        android:text="16.how many diarrhea patients under 5 years do you see per week?"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -497,47 +497,13 @@
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
-                <EditText
+                <Spinner
                         android:id="@+id/details_restock_frequency"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textSize="@dimen/list_sub_text_size"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:background="@drawable/bordertextfield"
-                        android:singleLine="true"
-                        android:inputType="number"
-                        android:textCursorDrawable="@null"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:id="@+id/details_num_products_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="21.Estimation of number of different products the retailer stock:"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="bold"/>
-
-                <EditText
-                        android:id="@+id/details_num_products"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textSize="@dimen/list_sub_text_size"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="italic"
-                        android:background="@drawable/bordertextfield"
-                        android:singleLine="true"
-                        android:inputType="number"
-                        android:textCursorDrawable="@null"/>
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:background="@drawable/btn_dropdown"
+                        android:entries="@array/restock_frequency"/>
 
             </LinearLayout>
 

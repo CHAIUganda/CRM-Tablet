@@ -46,7 +46,6 @@ public class CustomerForm extends Activity {
 
     private Customer customerInstance;
     private List<CustomerContact> customerContacts = new ArrayList<CustomerContact>();
-    private DatePickerDialog datePickerDialog;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +83,7 @@ public class CustomerForm extends Activity {
             saveCustomerBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(customerContacts.isEmpty()){
+                    if(customerInstance.getCustomerContacts().isEmpty() && customerContacts.isEmpty()){
                         Toast.makeText(getApplicationContext(), "Please enter atleast one contact!", Toast.LENGTH_LONG).show();
                     }else{
                         boolean isSaved = saveCustomer();
@@ -209,8 +208,7 @@ public class CustomerForm extends Activity {
             customerInstance.setNumberOfEmployees(Integer.parseInt(((EditText) findViewById(R.id.details_number_of_employees)).getText().toString()));
             customerInstance.setHasSisterBranch(Boolean.valueOf(((Spinner) findViewById(R.id.details_has_sister_branches)).getSelectedItem().toString().toLowerCase()));
             customerInstance.setNumberOfCustomersPerDay(Integer.parseInt(((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString()));
-            customerInstance.setNumberOfProducts(((EditText) findViewById(R.id.details_num_products)).getText().toString());
-            customerInstance.setRestockFrequency(Integer.parseInt(((EditText) findViewById(R.id.details_restock_frequency)).getText().toString()));
+            customerInstance.setRestockFrequency(((Spinner) findViewById(R.id.details_restock_frequency)).getSelectedItem().toString().toLowerCase());
             customerInstance.setLongitude(capturedLongitude);
             customerInstance.setLatitude(capturedLatitude);
             customerInstance.setSubcountyId(((Subcounty) subcountySpinner.getSelectedItem()).getId());
@@ -234,10 +232,10 @@ public class CustomerForm extends Activity {
             ((EditText) findViewById(R.id.details_desc_location)).setText(customerInstance.getDescriptionOfOutletLocation() == null ? "" : customerInstance.getDescriptionOfOutletLocation());
             ((EditText) findViewById(R.id.details_number_of_employees)).setText(customerInstance.getNumberOfEmployees() == null ? "" : customerInstance.getNumberOfEmployees() + "");
             ((EditText) findViewById(R.id.details_num_customers_per_day)).setText(customerInstance.getNumberOfCustomersPerDay() == null ? "" : customerInstance.getNumberOfCustomersPerDay() + "");
-            ((EditText) findViewById(R.id.details_num_products)).setText(customerInstance.getNumberOfProducts() == null ? "" : customerInstance.getNumberOfProducts() + "");
-            ((EditText) findViewById(R.id.details_restock_frequency)).setText(customerInstance.getRestockFrequency() == null ? "" : customerInstance.getRestockFrequency() + "");
             ((EditText) findViewById(R.id.details_gps)).setText(customerInstance.getLatitude()+","+customerInstance.getLongitude());
 
+            Spinner restockFreq = (Spinner)findViewById(R.id.details_restock_frequency);
+            setSpinnerSelection(restockFreq,customerInstance.getRestockFrequency() == null ? "" : customerInstance.getRestockFrequency() + "");
             Spinner hasSisterBranches = ((Spinner) findViewById(R.id.details_has_sister_branches));
             setSpinnerSelection(hasSisterBranches, customerInstance.getHasSisterBranch() == null ? "no" : "yes");
 
@@ -295,9 +293,7 @@ public class CustomerForm extends Activity {
             return false;
         } else if (((EditText) findViewById(R.id.details_sources_of_supply)).getText().toString().equals("")) {
             return false;
-        } else if (((EditText) findViewById(R.id.details_restock_frequency)).getText().toString().equals("")) {
-            return false;
-        } else if (((EditText) findViewById(R.id.details_num_products)).getText().toString().equals("")) {
+        } else if (((Spinner) findViewById(R.id.details_restock_frequency)).getSelectedItem().toString().equals("")) {
             return false;
         } else if (((Spinner) findViewById(R.id.details_building_structure)).getSelectedItem().toString().equals("")) {
             return false;
@@ -347,55 +343,6 @@ public class CustomerForm extends Activity {
         }
     }
 
-    private void setDateWidget() {
-       /* Button dateBtn = (Button) findViewById(R.id.details_date_outlet_opened_btn);
-        final EditText dateEditTxt = (EditText) findViewById(R.id.details_date_outlet_opened);
-
-        dateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar calendar = null;
-                String existingDate = (String) dateEditTxt.getText().toString();
-                if (existingDate != null && !existingDate.equals("")) {
-                    String initialDate;
-                    String initialMonth;
-                    String initialYear;
-                    StringTokenizer stringTokenizer = new StringTokenizer(existingDate, "/");
-                    initialMonth = stringTokenizer.nextToken();
-                    initialDate = stringTokenizer.nextToken();
-                    initialYear = stringTokenizer.nextToken();
-                    if (datePickerDialog == null) {
-                        datePickerDialog = new DatePickerDialog(view.getContext(), new PickDate(), Integer.parseInt(initialYear),
-                                Integer.parseInt(initialMonth) - 1,
-                                Integer.parseInt(initialDate));
-
-                        datePickerDialog.updateDate(Integer.parseInt(initialYear),
-                                Integer.parseInt(initialMonth) - 1,
-                                Integer.parseInt(initialDate));
-                    }
-                } else {
-                    calendar = Calendar.getInstance();
-                    if (datePickerDialog == null) {
-                        datePickerDialog = new DatePickerDialog(view.getContext(), new PickDate(), calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                        datePickerDialog.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                    }
-                }
-                datePickerDialog.show();
-
-            }
-        });*/
-    }
-
-    private class PickDate implements DatePickerDialog.OnDateSetListener {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            view.updateDate(year, monthOfYear, dayOfMonth);
-            ((EditText) findViewById(R.id.details_date_outlet_opened)).setText(monthOfYear + "/" + dayOfMonth + "/" + year);
-            datePickerDialog.hide();
-        }
-    }
-
     private void setMandatoryFields() {
         Utils.setRequired((TextView) findViewById(R.id.detailsnameview));
         Utils.setRequired((TextView) findViewById(R.id.details_outlet_type_lbl));
@@ -409,7 +356,6 @@ public class CustomerForm extends Activity {
         Utils.setRequired((TextView) findViewById(R.id.details_num_customers_per_day_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_sources_of_supply_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_restock_frequency_lbl));
-        Utils.setRequired((TextView) findViewById(R.id.details_num_products_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_building_structure_lbl));
     }
 

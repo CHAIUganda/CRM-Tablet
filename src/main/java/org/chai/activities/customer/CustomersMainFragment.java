@@ -1,8 +1,5 @@
 package org.chai.activities.customer;
 
-import android.annotation.TargetApi;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -20,9 +17,7 @@ import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Created by victor on 10/15/14.
@@ -44,6 +39,12 @@ public class CustomersMainFragment extends ListFragment {
         initialiseGreenDao();
         try {
             customerList.addAll(customerDao.loadAll());
+            Collections.sort(customerList,new Comparator<Customer>() {
+                @Override
+                public int compare(Customer customer1, Customer customer2) {
+                    return customer1.getOutletName().compareToIgnoreCase(customer2.getOutletName());
+                }
+            });
             customerAdapter = new CustomerAdapter(getActivity(), customerList);
             setListAdapter(customerAdapter);
         } catch (Exception exception) {

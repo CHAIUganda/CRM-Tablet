@@ -36,8 +36,7 @@ public class Customer {
     private Integer numberOfEmployees;
     private Boolean hasSisterBranch;
     private Integer numberOfCustomersPerDay;
-    private String numberOfProducts;
-    private Integer restockFrequency;
+    private String restockFrequency;
     private java.util.Date dateOutletOpened;
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
@@ -77,7 +76,7 @@ public class Customer {
         this.id = id;
     }
 
-    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String numberOfProducts, Integer restockFrequency, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, long subcountyId) {
+    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String restockFrequency, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, long subcountyId) {
         this.id = id;
         this.uuid = uuid;
         this.latitude = latitude;
@@ -96,7 +95,6 @@ public class Customer {
         this.numberOfEmployees = numberOfEmployees;
         this.hasSisterBranch = hasSisterBranch;
         this.numberOfCustomersPerDay = numberOfCustomersPerDay;
-        this.numberOfProducts = numberOfProducts;
         this.restockFrequency = restockFrequency;
         this.dateOutletOpened = dateOutletOpened;
         this.dateCreated = dateCreated;
@@ -261,19 +259,11 @@ public class Customer {
         this.numberOfCustomersPerDay = numberOfCustomersPerDay;
     }
 
-    public String getNumberOfProducts() {
-        return numberOfProducts;
-    }
-
-    public void setNumberOfProducts(String numberOfProducts) {
-        this.numberOfProducts = numberOfProducts;
-    }
-
-    public Integer getRestockFrequency() {
+    public String getRestockFrequency() {
         return restockFrequency;
     }
 
-    public void setRestockFrequency(Integer restockFrequency) {
+    public void setRestockFrequency(String restockFrequency) {
         this.restockFrequency = restockFrequency;
     }
 

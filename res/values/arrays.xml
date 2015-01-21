@@ -56,9 +56,9 @@
     </string-array>
     <string-array name="outletsize">
         <item>""</item>
-        <item>Big</item>
-        <item>Medium</item>
-        <item>Small</item>
+        <item>Large(over 50)</item>
+        <item>Medium(30)</item>
+        <item>Small(10)</item>
     </string-array>
     <string-array name="licencetype">
         <item>""</item>
@@ -172,5 +172,11 @@
         <item>@drawable/customer_default</item>
         <item>@drawable/call_selected</item>
         <item>@drawable/cart</item>
+    </array>
+    <array name="restock_frequency">
+        <item>Daily</item>
+        <item>Once a week</item>
+        <item>Once every two weeks</item>
+        <item>Once a Month</item>
     </array>
 </resources>

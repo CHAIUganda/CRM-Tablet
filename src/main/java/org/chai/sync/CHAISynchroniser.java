@@ -218,13 +218,6 @@ public class CHAISynchroniser {
         if(!taskList.isEmpty()){
             updatePropgress("Uploading Tasks..");
         }
-        for (Task task : taskList) {
-            boolean uploaded = taskClient.uploadTask(task);
-            if (uploaded) {
-                detailerCallDao.queryBuilder().where(DetailerCallDao.Properties.TaskId.eq(task.getId())).buildDelete().executeDeleteWithoutDetachingEntities();
-                taskDao.delete(task);
-            }
-        }
     }
 
     private void downloadProducts(){

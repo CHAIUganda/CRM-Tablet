@@ -76,8 +76,6 @@ public class CustomerDetailsActivity extends Activity {
         ((TextView) findViewById(R.id.customer_profile_address)).setText(Utils.getKeyCustomerContact(customer.getCustomerContacts()).getContact());
         ((TextView) findViewById(R.id.customer_profile_district)).setText(customer.getSubcounty().getDistrict().getName());
         ((TextView) findViewById(R.id.customer_profile_subcounty)).setText(customer.getSubcounty().getName());
-        ((TextView) findViewById(R.id.customer_profile_parish)).setText("");
-        ((TextView) findViewById(R.id.customer_profile_village)).setText("");
         ((TextView) findViewById(R.id.customer_profile_date_outlet_opened)).setText(customer.getDateOutletOpened()+"");
         ((TextView) findViewById(R.id.customer_profile_outlet_type)).setText(customer.getOutletType());
         ((TextView) findViewById(R.id.customer_profile_size)).setText(customer.getOutletSize());
@@ -90,7 +88,6 @@ public class CustomerDetailsActivity extends Activity {
         ((TextView) findViewById(R.id.profile_number_of_employees)).setText(customer.getNumberOfEmployees() + "");
         ((TextView) findViewById(R.id.customer_profile_number_of_branches)).setText(customer.getHasSisterBranch() + "");
         ((TextView) findViewById(R.id.customer_profile_num_customers_per_day)).setText(customer.getNumberOfCustomersPerDay() + "");
-        ((TextView) findViewById(R.id.customer_profile_num_products)).setText(customer.getNumberOfProducts() + "");
         ((TextView) findViewById(R.id.customer_profile_restock_frequency)).setText(customer.getRestockFrequency() + "");
 
     }
