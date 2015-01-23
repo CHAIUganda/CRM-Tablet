@@ -19,7 +19,7 @@ import org.chai.model.OrderData;
 /** 
  * DAO for table ORDER_DATA.
 */
-public class OrderDataDao extends AbstractDao<OrderData, Long> {
+public class OrderDataDao extends AbstractDao<OrderData, String> {
 
     public static final String TABLENAME = "ORDER_DATA";
 
@@ -28,13 +28,11 @@ public class OrderDataDao extends AbstractDao<OrderData, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Quantity = new Property(2, int.class, "quantity", false, "QUANTITY");
-        public final static Property Price = new Property(3, int.class, "price", false, "PRICE");
+        public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
+        public final static Property Quantity = new Property(1, int.class, "quantity", false, "QUANTITY");
+        public final static Property Price = new Property(2, int.class, "price", false, "PRICE");
+        public final static Property OrderId = new Property(3, String.class, "orderId", false, "ORDER_ID");
         public final static Property ProductId = new Property(4, String.class, "productId", false, "PRODUCT_ID");
-        public final static Property OrderId = new Property(5, long.class, "orderId", false, "ORDER_ID");
-        public final static Property ProductRefId = new Property(6, long.class, "productRefId", false, "PRODUCT_REF_ID");
     };
 
     private DaoSession daoSession;
@@ -55,13 +53,11 @@ public class OrderDataDao extends AbstractDao<OrderData, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'ORDER_DATA' (" + //
-                "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'QUANTITY' INTEGER NOT NULL ," + // 2: quantity
-                "'PRICE' INTEGER NOT NULL ," + // 3: price
-                "'PRODUCT_ID' TEXT," + // 4: productId
-                "'ORDER_ID' INTEGER NOT NULL ," + // 5: orderId
-                "'PRODUCT_REF_ID' INTEGER NOT NULL );"); // 6: productRefId
+                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'QUANTITY' INTEGER NOT NULL ," + // 1: quantity
+                "'PRICE' INTEGER NOT NULL ," + // 2: price
+                "'ORDER_ID' TEXT NOT NULL ," + // 3: orderId
+                "'PRODUCT_ID' TEXT NOT NULL );"); // 4: productId
     }
 
     /** Drops the underlying database table. */
@@ -74,21 +70,11 @@ public class OrderDataDao extends AbstractDao<OrderData, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, OrderData entity) {
         stmt.clearBindings();
- 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
-        stmt.bindString(2, entity.getUuid());
-        stmt.bindLong(3, entity.getQuantity());
-        stmt.bindLong(4, entity.getPrice());
- 
-        String productId = entity.getProductId();
-        if (productId != null) {
-            stmt.bindString(5, productId);
-        }
-        stmt.bindLong(6, entity.getOrderId());
-        stmt.bindLong(7, entity.getProductRefId());
+        stmt.bindString(1, entity.getUuid());
+        stmt.bindLong(2, entity.getQuantity());
+        stmt.bindLong(3, entity.getPrice());
+        stmt.bindString(4, entity.getOrderId());
+        stmt.bindString(5, entity.getProductId());
     }
 
     @Override
@@ -99,21 +85,19 @@ public class OrderDataDao extends AbstractDao<OrderData, Long> {
 
     /** @inheritdoc */
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public OrderData readEntity(Cursor cursor, int offset) {
         OrderData entity = new OrderData( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // uuid
-            cursor.getInt(offset + 2), // quantity
-            cursor.getInt(offset + 3), // price
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // productId
-            cursor.getLong(offset + 5), // orderId
-            cursor.getLong(offset + 6) // productRefId
+            cursor.getString(offset + 0), // uuid
+            cursor.getInt(offset + 1), // quantity
+            cursor.getInt(offset + 2), // price
+            cursor.getString(offset + 3), // orderId
+            cursor.getString(offset + 4) // productId
         );
         return entity;
     }
@@ -121,27 +105,24 @@ public class OrderDataDao extends AbstractDao<OrderData, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, OrderData entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUuid(cursor.getString(offset + 1));
-        entity.setQuantity(cursor.getInt(offset + 2));
-        entity.setPrice(cursor.getInt(offset + 3));
-        entity.setProductId(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setOrderId(cursor.getLong(offset + 5));
-        entity.setProductRefId(cursor.getLong(offset + 6));
+        entity.setUuid(cursor.getString(offset + 0));
+        entity.setQuantity(cursor.getInt(offset + 1));
+        entity.setPrice(cursor.getInt(offset + 2));
+        entity.setOrderId(cursor.getString(offset + 3));
+        entity.setProductId(cursor.getString(offset + 4));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(OrderData entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected String updateKeyAfterInsert(OrderData entity, long rowId) {
+        return entity.getUuid();
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(OrderData entity) {
+    public String getKey(OrderData entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getUuid();
         } else {
             return null;
         }
@@ -154,7 +135,7 @@ public class OrderDataDao extends AbstractDao<OrderData, Long> {
     }
     
     /** Internal query to resolve the "orderDatas" to-many relationship of Order. */
-    public List<OrderData> _queryOrder_OrderDatas(long orderId) {
+    public List<OrderData> _queryOrder_OrderDatas(String orderId) {
         synchronized (this) {
             if (order_OrderDatasQuery == null) {
                 QueryBuilder<OrderData> queryBuilder = queryBuilder();
@@ -168,16 +149,16 @@ public class OrderDataDao extends AbstractDao<OrderData, Long> {
     }
 
     /** Internal query to resolve the "orderDatas" to-many relationship of Product. */
-    public List<OrderData> _queryProduct_OrderDatas(long productRefId) {
+    public List<OrderData> _queryProduct_OrderDatas(String productId) {
         synchronized (this) {
             if (product_OrderDatasQuery == null) {
                 QueryBuilder<OrderData> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.ProductRefId.eq(null));
+                queryBuilder.where(Properties.ProductId.eq(null));
                 product_OrderDatasQuery = queryBuilder.build();
             }
         }
         Query<OrderData> query = product_OrderDatasQuery.forCurrentThread();
-        query.setParameter(0, productRefId);
+        query.setParameter(0, productId);
         return query.list();
     }
 
@@ -192,8 +173,8 @@ public class OrderDataDao extends AbstractDao<OrderData, Long> {
             builder.append(',');
             SqlUtils.appendColumns(builder, "T1", daoSession.getProductDao().getAllColumns());
             builder.append(" FROM ORDER_DATA T");
-            builder.append(" LEFT JOIN orders T0 ON T.'ORDER_ID'=T0.'_id'");
-            builder.append(" LEFT JOIN PRODUCT T1 ON T.'PRODUCT_REF_ID'=T1.'_id'");
+            builder.append(" LEFT JOIN orders T0 ON T.'ORDER_ID'=T0.'UUID'");
+            builder.append(" LEFT JOIN PRODUCT T1 ON T.'PRODUCT_ID'=T1.'UUID'");
             builder.append(' ');
             selectDeep = builder.toString();
         }

@@ -19,7 +19,7 @@ import org.chai.model.Parish;
 /** 
  * DAO for table PARISH.
 */
-public class ParishDao extends AbstractDao<Parish, Long> {
+public class ParishDao extends AbstractDao<Parish, String> {
 
     public static final String TABLENAME = "PARISH";
 
@@ -28,10 +28,9 @@ public class ParishDao extends AbstractDao<Parish, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
-        public final static Property SubCountyId = new Property(3, long.class, "subCountyId", false, "SUB_COUNTY_ID");
+        public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property SubCountyId = new Property(2, String.class, "subCountyId", false, "SUB_COUNTY_ID");
     };
 
     private DaoSession daoSession;
@@ -51,10 +50,9 @@ public class ParishDao extends AbstractDao<Parish, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'PARISH' (" + //
-                "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'NAME' TEXT NOT NULL ," + // 2: name
-                "'SUB_COUNTY_ID' INTEGER NOT NULL );"); // 3: subCountyId
+                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'NAME' TEXT NOT NULL ," + // 1: name
+                "'SUB_COUNTY_ID' TEXT NOT NULL );"); // 2: subCountyId
     }
 
     /** Drops the underlying database table. */
@@ -67,14 +65,9 @@ public class ParishDao extends AbstractDao<Parish, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, Parish entity) {
         stmt.clearBindings();
- 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
-        stmt.bindString(2, entity.getUuid());
-        stmt.bindString(3, entity.getName());
-        stmt.bindLong(4, entity.getSubCountyId());
+        stmt.bindString(1, entity.getUuid());
+        stmt.bindString(2, entity.getName());
+        stmt.bindString(3, entity.getSubCountyId());
     }
 
     @Override
@@ -85,18 +78,17 @@ public class ParishDao extends AbstractDao<Parish, Long> {
 
     /** @inheritdoc */
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public Parish readEntity(Cursor cursor, int offset) {
         Parish entity = new Parish( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // uuid
-            cursor.getString(offset + 2), // name
-            cursor.getLong(offset + 3) // subCountyId
+            cursor.getString(offset + 0), // uuid
+            cursor.getString(offset + 1), // name
+            cursor.getString(offset + 2) // subCountyId
         );
         return entity;
     }
@@ -104,24 +96,22 @@ public class ParishDao extends AbstractDao<Parish, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Parish entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUuid(cursor.getString(offset + 1));
-        entity.setName(cursor.getString(offset + 2));
-        entity.setSubCountyId(cursor.getLong(offset + 3));
+        entity.setUuid(cursor.getString(offset + 0));
+        entity.setName(cursor.getString(offset + 1));
+        entity.setSubCountyId(cursor.getString(offset + 2));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(Parish entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected String updateKeyAfterInsert(Parish entity, long rowId) {
+        return entity.getUuid();
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(Parish entity) {
+    public String getKey(Parish entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getUuid();
         } else {
             return null;
         }
@@ -134,7 +124,7 @@ public class ParishDao extends AbstractDao<Parish, Long> {
     }
     
     /** Internal query to resolve the "parishes" to-many relationship of Subcounty. */
-    public List<Parish> _querySubcounty_Parishes(long subCountyId) {
+    public List<Parish> _querySubcounty_Parishes(String subCountyId) {
         synchronized (this) {
             if (subcounty_ParishesQuery == null) {
                 QueryBuilder<Parish> queryBuilder = queryBuilder();
@@ -156,7 +146,7 @@ public class ParishDao extends AbstractDao<Parish, Long> {
             builder.append(',');
             SqlUtils.appendColumns(builder, "T0", daoSession.getSubcountyDao().getAllColumns());
             builder.append(" FROM PARISH T");
-            builder.append(" LEFT JOIN SUBCOUNTY T0 ON T.'SUB_COUNTY_ID'=T0.'_id'");
+            builder.append(" LEFT JOIN SUBCOUNTY T0 ON T.'SUB_COUNTY_ID'=T0.'UUID'");
             builder.append(' ');
             selectDeep = builder.toString();
         }

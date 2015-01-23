@@ -19,7 +19,7 @@ import org.chai.model.Order;
 /** 
  * DAO for table orders.
 */
-public class OrderDao extends AbstractDao<Order, Long> {
+public class OrderDao extends AbstractDao<Order, String> {
 
     public static final String TABLENAME = "orders";
 
@@ -28,12 +28,10 @@ public class OrderDao extends AbstractDao<Order, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property ClientRefId = new Property(1, String.class, "clientRefId", false, "CLIENT_REF_ID");
-        public final static Property DeliveryDate = new Property(2, java.util.Date.class, "deliveryDate", false, "DELIVERY_DATE");
+        public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
+        public final static Property DeliveryDate = new Property(1, java.util.Date.class, "deliveryDate", false, "DELIVERY_DATE");
+        public final static Property OrderDate = new Property(2, java.util.Date.class, "orderDate", false, "ORDER_DATE");
         public final static Property CustomerId = new Property(3, String.class, "customerId", false, "CUSTOMER_ID");
-        public final static Property OrderDate = new Property(4, java.util.Date.class, "orderDate", false, "ORDER_DATE");
-        public final static Property CustomerRefId = new Property(5, long.class, "customerRefId", false, "CUSTOMER_REF_ID");
     };
 
     private DaoSession daoSession;
@@ -53,12 +51,10 @@ public class OrderDao extends AbstractDao<Order, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'orders' (" + //
-                "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'CLIENT_REF_ID' TEXT NOT NULL UNIQUE ," + // 1: clientRefId
-                "'DELIVERY_DATE' INTEGER NOT NULL ," + // 2: deliveryDate
-                "'CUSTOMER_ID' TEXT," + // 3: customerId
-                "'ORDER_DATE' INTEGER NOT NULL ," + // 4: orderDate
-                "'CUSTOMER_REF_ID' INTEGER NOT NULL );"); // 5: customerRefId
+                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'DELIVERY_DATE' INTEGER NOT NULL ," + // 1: deliveryDate
+                "'ORDER_DATE' INTEGER NOT NULL ," + // 2: orderDate
+                "'CUSTOMER_ID' TEXT NOT NULL );"); // 3: customerId
     }
 
     /** Drops the underlying database table. */
@@ -71,20 +67,10 @@ public class OrderDao extends AbstractDao<Order, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, Order entity) {
         stmt.clearBindings();
- 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
-        stmt.bindString(2, entity.getClientRefId());
-        stmt.bindLong(3, entity.getDeliveryDate().getTime());
- 
-        String customerId = entity.getCustomerId();
-        if (customerId != null) {
-            stmt.bindString(4, customerId);
-        }
-        stmt.bindLong(5, entity.getOrderDate().getTime());
-        stmt.bindLong(6, entity.getCustomerRefId());
+        stmt.bindString(1, entity.getUuid());
+        stmt.bindLong(2, entity.getDeliveryDate().getTime());
+        stmt.bindLong(3, entity.getOrderDate().getTime());
+        stmt.bindString(4, entity.getCustomerId());
     }
 
     @Override
@@ -95,20 +81,18 @@ public class OrderDao extends AbstractDao<Order, Long> {
 
     /** @inheritdoc */
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public Order readEntity(Cursor cursor, int offset) {
         Order entity = new Order( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // clientRefId
-            new java.util.Date(cursor.getLong(offset + 2)), // deliveryDate
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // customerId
-            new java.util.Date(cursor.getLong(offset + 4)), // orderDate
-            cursor.getLong(offset + 5) // customerRefId
+            cursor.getString(offset + 0), // uuid
+            new java.util.Date(cursor.getLong(offset + 1)), // deliveryDate
+            new java.util.Date(cursor.getLong(offset + 2)), // orderDate
+            cursor.getString(offset + 3) // customerId
         );
         return entity;
     }
@@ -116,26 +100,23 @@ public class OrderDao extends AbstractDao<Order, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Order entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setClientRefId(cursor.getString(offset + 1));
-        entity.setDeliveryDate(new java.util.Date(cursor.getLong(offset + 2)));
-        entity.setCustomerId(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setOrderDate(new java.util.Date(cursor.getLong(offset + 4)));
-        entity.setCustomerRefId(cursor.getLong(offset + 5));
+        entity.setUuid(cursor.getString(offset + 0));
+        entity.setDeliveryDate(new java.util.Date(cursor.getLong(offset + 1)));
+        entity.setOrderDate(new java.util.Date(cursor.getLong(offset + 2)));
+        entity.setCustomerId(cursor.getString(offset + 3));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(Order entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected String updateKeyAfterInsert(Order entity, long rowId) {
+        return entity.getUuid();
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(Order entity) {
+    public String getKey(Order entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getUuid();
         } else {
             return null;
         }
@@ -148,17 +129,17 @@ public class OrderDao extends AbstractDao<Order, Long> {
     }
     
     /** Internal query to resolve the "orders" to-many relationship of Customer. */
-    public List<Order> _queryCustomer_Orders(long customerRefId) {
+    public List<Order> _queryCustomer_Orders(String customerId) {
         synchronized (this) {
             if (customer_OrdersQuery == null) {
                 QueryBuilder<Order> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.CustomerRefId.eq(null));
+                queryBuilder.where(Properties.CustomerId.eq(null));
                 queryBuilder.orderRaw("ORDER_DATE ASC");
                 customer_OrdersQuery = queryBuilder.build();
             }
         }
         Query<Order> query = customer_OrdersQuery.forCurrentThread();
-        query.setParameter(0, customerRefId);
+        query.setParameter(0, customerId);
         return query.list();
     }
 
@@ -171,7 +152,7 @@ public class OrderDao extends AbstractDao<Order, Long> {
             builder.append(',');
             SqlUtils.appendColumns(builder, "T0", daoSession.getCustomerDao().getAllColumns());
             builder.append(" FROM orders T");
-            builder.append(" LEFT JOIN CUSTOMER T0 ON T.'CUSTOMER_REF_ID'=T0.'_id'");
+            builder.append(" LEFT JOIN CUSTOMER T0 ON T.'CUSTOMER_ID'=T0.'UUID'");
             builder.append(' ');
             selectDeep = builder.toString();
         }

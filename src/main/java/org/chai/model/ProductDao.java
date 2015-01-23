@@ -14,7 +14,7 @@ import org.chai.model.Product;
 /** 
  * DAO for table PRODUCT.
 */
-public class ProductDao extends AbstractDao<Product, Long> {
+public class ProductDao extends AbstractDao<Product, String> {
 
     public static final String TABLENAME = "PRODUCT";
 
@@ -23,13 +23,12 @@ public class ProductDao extends AbstractDao<Product, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
-        public final static Property UnitOfMeasure = new Property(3, String.class, "unitOfMeasure", false, "UNIT_OF_MEASURE");
-        public final static Property Formulation = new Property(4, String.class, "formulation", false, "FORMULATION");
-        public final static Property UnitPrice = new Property(5, String.class, "unitPrice", false, "UNIT_PRICE");
-        public final static Property GroupName = new Property(6, String.class, "groupName", false, "GROUP_NAME");
+        public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property UnitOfMeasure = new Property(2, String.class, "unitOfMeasure", false, "UNIT_OF_MEASURE");
+        public final static Property Formulation = new Property(3, String.class, "formulation", false, "FORMULATION");
+        public final static Property UnitPrice = new Property(4, String.class, "unitPrice", false, "UNIT_PRICE");
+        public final static Property GroupName = new Property(5, String.class, "groupName", false, "GROUP_NAME");
     };
 
     private DaoSession daoSession;
@@ -48,13 +47,12 @@ public class ProductDao extends AbstractDao<Product, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'PRODUCT' (" + //
-                "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'NAME' TEXT NOT NULL ," + // 2: name
-                "'UNIT_OF_MEASURE' TEXT NOT NULL ," + // 3: unitOfMeasure
-                "'FORMULATION' TEXT NOT NULL ," + // 4: formulation
-                "'UNIT_PRICE' TEXT NOT NULL ," + // 5: unitPrice
-                "'GROUP_NAME' TEXT);"); // 6: groupName
+                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'NAME' TEXT NOT NULL ," + // 1: name
+                "'UNIT_OF_MEASURE' TEXT NOT NULL ," + // 2: unitOfMeasure
+                "'FORMULATION' TEXT NOT NULL ," + // 3: formulation
+                "'UNIT_PRICE' TEXT NOT NULL ," + // 4: unitPrice
+                "'GROUP_NAME' TEXT);"); // 5: groupName
     }
 
     /** Drops the underlying database table. */
@@ -67,20 +65,15 @@ public class ProductDao extends AbstractDao<Product, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, Product entity) {
         stmt.clearBindings();
- 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
-        stmt.bindString(2, entity.getUuid());
-        stmt.bindString(3, entity.getName());
-        stmt.bindString(4, entity.getUnitOfMeasure());
-        stmt.bindString(5, entity.getFormulation());
-        stmt.bindString(6, entity.getUnitPrice());
+        stmt.bindString(1, entity.getUuid());
+        stmt.bindString(2, entity.getName());
+        stmt.bindString(3, entity.getUnitOfMeasure());
+        stmt.bindString(4, entity.getFormulation());
+        stmt.bindString(5, entity.getUnitPrice());
  
         String groupName = entity.getGroupName();
         if (groupName != null) {
-            stmt.bindString(7, groupName);
+            stmt.bindString(6, groupName);
         }
     }
 
@@ -92,21 +85,20 @@ public class ProductDao extends AbstractDao<Product, Long> {
 
     /** @inheritdoc */
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public Product readEntity(Cursor cursor, int offset) {
         Product entity = new Product( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // uuid
-            cursor.getString(offset + 2), // name
-            cursor.getString(offset + 3), // unitOfMeasure
-            cursor.getString(offset + 4), // formulation
-            cursor.getString(offset + 5), // unitPrice
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // groupName
+            cursor.getString(offset + 0), // uuid
+            cursor.getString(offset + 1), // name
+            cursor.getString(offset + 2), // unitOfMeasure
+            cursor.getString(offset + 3), // formulation
+            cursor.getString(offset + 4), // unitPrice
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // groupName
         );
         return entity;
     }
@@ -114,27 +106,25 @@ public class ProductDao extends AbstractDao<Product, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Product entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUuid(cursor.getString(offset + 1));
-        entity.setName(cursor.getString(offset + 2));
-        entity.setUnitOfMeasure(cursor.getString(offset + 3));
-        entity.setFormulation(cursor.getString(offset + 4));
-        entity.setUnitPrice(cursor.getString(offset + 5));
-        entity.setGroupName(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setUuid(cursor.getString(offset + 0));
+        entity.setName(cursor.getString(offset + 1));
+        entity.setUnitOfMeasure(cursor.getString(offset + 2));
+        entity.setFormulation(cursor.getString(offset + 3));
+        entity.setUnitPrice(cursor.getString(offset + 4));
+        entity.setGroupName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(Product entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected String updateKeyAfterInsert(Product entity, long rowId) {
+        return entity.getUuid();
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(Product entity) {
+    public String getKey(Product entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getUuid();
         } else {
             return null;
         }

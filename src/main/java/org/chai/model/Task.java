@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 public class Task {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     private String description;
@@ -28,7 +27,8 @@ public class Task {
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
     private Boolean isDirty;
-    private long customerId;
+    /** Not-null value. */
+    private String customerId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -37,7 +37,7 @@ public class Task {
     private transient TaskDao myDao;
 
     private Customer customer;
-    private Long customer__resolvedKey;
+    private String customer__resolvedKey;
 
     private List<Sale> sales;
     private List<DetailerCall> detailers;
@@ -48,12 +48,11 @@ public class Task {
     public Task() {
     }
 
-    public Task(Long id) {
-        this.id = id;
+    public Task(String uuid) {
+        this.uuid = uuid;
     }
 
-    public Task(Long id, String uuid, String description, String status, String priority, String type, java.util.Date dueDate, java.util.Date completionDate, java.util.Date dateScheduled, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, long customerId) {
-        this.id = id;
+    public Task(String uuid, String description, String status, String priority, String type, java.util.Date dueDate, java.util.Date completionDate, java.util.Date dateScheduled, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String customerId) {
         this.uuid = uuid;
         this.description = description;
         this.status = status;
@@ -72,14 +71,6 @@ public class Task {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getTaskDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -172,18 +163,20 @@ public class Task {
         this.isDirty = isDirty;
     }
 
-    public long getCustomerId() {
+    /** Not-null value. */
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(long customerId) {
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Customer getCustomer() {
-        long __key = this.customerId;
-        if (customer__resolvedKey == null || !customer__resolvedKey.equals(__key)) {
+        String __key = this.customerId;
+        if (customer__resolvedKey == null || customer__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -203,7 +196,7 @@ public class Task {
         }
         synchronized (this) {
             this.customer = customer;
-            customerId = customer.getId();
+            customerId = customer.getUuid();
             customer__resolvedKey = customerId;
         }
     }
@@ -215,7 +208,7 @@ public class Task {
                 throw new DaoException("Entity is detached from DAO context");
             }
             SaleDao targetDao = daoSession.getSaleDao();
-            List<Sale> salesNew = targetDao._queryTask_Sales(id);
+            List<Sale> salesNew = targetDao._queryTask_Sales(uuid);
             synchronized (this) {
                 if(sales == null) {
                     sales = salesNew;
@@ -237,7 +230,7 @@ public class Task {
                 throw new DaoException("Entity is detached from DAO context");
             }
             DetailerCallDao targetDao = daoSession.getDetailerCallDao();
-            List<DetailerCall> detailersNew = targetDao._queryTask_Detailers(id);
+            List<DetailerCall> detailersNew = targetDao._queryTask_Detailers(uuid);
             synchronized (this) {
                 if(detailers == null) {
                     detailers = detailersNew;

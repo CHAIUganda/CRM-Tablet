@@ -19,7 +19,7 @@ import org.chai.model.Subcounty;
 /** 
  * DAO for table SUBCOUNTY.
 */
-public class SubcountyDao extends AbstractDao<Subcounty, Long> {
+public class SubcountyDao extends AbstractDao<Subcounty, String> {
 
     public static final String TABLENAME = "SUBCOUNTY";
 
@@ -28,10 +28,9 @@ public class SubcountyDao extends AbstractDao<Subcounty, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
-        public final static Property DistrictId = new Property(3, long.class, "districtId", false, "DISTRICT_ID");
+        public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property DistrictId = new Property(2, String.class, "districtId", false, "DISTRICT_ID");
     };
 
     private DaoSession daoSession;
@@ -51,10 +50,9 @@ public class SubcountyDao extends AbstractDao<Subcounty, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'SUBCOUNTY' (" + //
-                "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'NAME' TEXT NOT NULL ," + // 2: name
-                "'DISTRICT_ID' INTEGER NOT NULL );"); // 3: districtId
+                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'NAME' TEXT NOT NULL ," + // 1: name
+                "'DISTRICT_ID' TEXT NOT NULL );"); // 2: districtId
     }
 
     /** Drops the underlying database table. */
@@ -67,14 +65,9 @@ public class SubcountyDao extends AbstractDao<Subcounty, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, Subcounty entity) {
         stmt.clearBindings();
- 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
-        stmt.bindString(2, entity.getUuid());
-        stmt.bindString(3, entity.getName());
-        stmt.bindLong(4, entity.getDistrictId());
+        stmt.bindString(1, entity.getUuid());
+        stmt.bindString(2, entity.getName());
+        stmt.bindString(3, entity.getDistrictId());
     }
 
     @Override
@@ -85,18 +78,17 @@ public class SubcountyDao extends AbstractDao<Subcounty, Long> {
 
     /** @inheritdoc */
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public Subcounty readEntity(Cursor cursor, int offset) {
         Subcounty entity = new Subcounty( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // uuid
-            cursor.getString(offset + 2), // name
-            cursor.getLong(offset + 3) // districtId
+            cursor.getString(offset + 0), // uuid
+            cursor.getString(offset + 1), // name
+            cursor.getString(offset + 2) // districtId
         );
         return entity;
     }
@@ -104,24 +96,22 @@ public class SubcountyDao extends AbstractDao<Subcounty, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Subcounty entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUuid(cursor.getString(offset + 1));
-        entity.setName(cursor.getString(offset + 2));
-        entity.setDistrictId(cursor.getLong(offset + 3));
+        entity.setUuid(cursor.getString(offset + 0));
+        entity.setName(cursor.getString(offset + 1));
+        entity.setDistrictId(cursor.getString(offset + 2));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(Subcounty entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected String updateKeyAfterInsert(Subcounty entity, long rowId) {
+        return entity.getUuid();
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(Subcounty entity) {
+    public String getKey(Subcounty entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getUuid();
         } else {
             return null;
         }
@@ -134,7 +124,7 @@ public class SubcountyDao extends AbstractDao<Subcounty, Long> {
     }
     
     /** Internal query to resolve the "subcounties" to-many relationship of District. */
-    public List<Subcounty> _queryDistrict_Subcounties(long districtId) {
+    public List<Subcounty> _queryDistrict_Subcounties(String districtId) {
         synchronized (this) {
             if (district_SubcountiesQuery == null) {
                 QueryBuilder<Subcounty> queryBuilder = queryBuilder();
@@ -156,7 +146,7 @@ public class SubcountyDao extends AbstractDao<Subcounty, Long> {
             builder.append(',');
             SqlUtils.appendColumns(builder, "T0", daoSession.getDistrictDao().getAllColumns());
             builder.append(" FROM SUBCOUNTY T");
-            builder.append(" LEFT JOIN DISTRICT T0 ON T.'DISTRICT_ID'=T0.'_id'");
+            builder.append(" LEFT JOIN DISTRICT T0 ON T.'DISTRICT_ID'=T0.'UUID'");
             builder.append(' ');
             selectDeep = builder.toString();
         }

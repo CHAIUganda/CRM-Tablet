@@ -16,7 +16,6 @@ import org.omg.CORBA.PUBLIC_MEMBER;
  */
 public class User {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     /** Not-null value. */
@@ -44,12 +43,11 @@ public class User {
     public User() {
     }
 
-    public User(Long id) {
-        this.id = id;
+    public User(String uuid) {
+        this.uuid = uuid;
     }
 
-    public User(Long id, String uuid, String userName, String password, boolean enabled, boolean accountexpired, boolean accountlocked, Boolean passwordexpired, String role) {
-        this.id = id;
+    public User(String uuid, String userName, String password, boolean enabled, boolean accountexpired, boolean accountlocked, Boolean passwordexpired, String role) {
         this.uuid = uuid;
         this.userName = userName;
         this.password = password;
@@ -64,14 +62,6 @@ public class User {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getUserDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */

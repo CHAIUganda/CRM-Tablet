@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 public class Product {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     /** Not-null value. */
@@ -44,12 +43,11 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id) {
-        this.id = id;
+    public Product(String uuid) {
+        this.uuid = uuid;
     }
 
-    public Product(Long id, String uuid, String name, String unitOfMeasure, String formulation, String unitPrice, String groupName) {
-        this.id = id;
+    public Product(String uuid, String name, String unitOfMeasure, String formulation, String unitPrice, String groupName) {
         this.uuid = uuid;
         this.name = name;
         this.unitOfMeasure = unitOfMeasure;
@@ -62,14 +60,6 @@ public class Product {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getProductDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -137,7 +127,7 @@ public class Product {
                 throw new DaoException("Entity is detached from DAO context");
             }
             PromotionDao targetDao = daoSession.getPromotionDao();
-            List<Promotion> promotionsNew = targetDao._queryProduct_Promotions(id);
+            List<Promotion> promotionsNew = targetDao._queryProduct_Promotions(uuid);
             synchronized (this) {
                 if(promotions == null) {
                     promotions = promotionsNew;
@@ -159,7 +149,7 @@ public class Product {
                 throw new DaoException("Entity is detached from DAO context");
             }
             OrderDataDao targetDao = daoSession.getOrderDataDao();
-            List<OrderData> orderDatasNew = targetDao._queryProduct_OrderDatas(id);
+            List<OrderData> orderDatasNew = targetDao._queryProduct_OrderDatas(uuid);
             synchronized (this) {
                 if(orderDatas == null) {
                     orderDatas = orderDatasNew;
@@ -181,7 +171,7 @@ public class Product {
                 throw new DaoException("Entity is detached from DAO context");
             }
             SaleDataDao targetDao = daoSession.getSaleDataDao();
-            List<SaleData> salesDatasNew = targetDao._queryProduct_SalesDatas(id);
+            List<SaleData> salesDatasNew = targetDao._queryProduct_SalesDatas(uuid);
             synchronized (this) {
                 if(salesDatas == null) {
                     salesDatas = salesDatasNew;

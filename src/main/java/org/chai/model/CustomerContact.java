@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 public class CustomerContact {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     private String contact;
@@ -24,7 +23,17 @@ public class CustomerContact {
     private String role;
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
-    private long customerId;
+    /** Not-null value. */
+    private String customerId;
+
+    /** Used to resolve relations */
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    private transient CustomerContactDao myDao;
+
+    private Customer customer;
+    private String customer__resolvedKey;
 
 
     // KEEP FIELDS - put your custom fields here
@@ -39,18 +48,17 @@ public class CustomerContact {
     @JsonIgnore
     private Customer customer;
     @JsonIgnore
-    private Long customer__resolvedKey;
+    private String customer__resolvedKey;
     // KEEP FIELDS END
 
     public CustomerContact() {
     }
 
-    public CustomerContact(Long id) {
-        this.id = id;
+    public CustomerContact(String uuid) {
+        this.uuid = uuid;
     }
 
-    public CustomerContact(Long id, String uuid, String contact, String names, String gender, String role, java.util.Date dateCreated, java.util.Date lastUpdated, long customerId) {
-        this.id = id;
+    public CustomerContact(String uuid, String contact, String names, String gender, String role, java.util.Date dateCreated, java.util.Date lastUpdated, String customerId) {
         this.uuid = uuid;
         this.contact = contact;
         this.names = names;
@@ -65,14 +73,6 @@ public class CustomerContact {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getCustomerContactDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -133,18 +133,20 @@ public class CustomerContact {
         this.lastUpdated = lastUpdated;
     }
 
-    public long getCustomerId() {
+    /** Not-null value. */
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(long customerId) {
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Customer getCustomer() {
-        long __key = this.customerId;
-        if (customer__resolvedKey == null || !customer__resolvedKey.equals(__key)) {
+        String __key = this.customerId;
+        if (customer__resolvedKey == null || customer__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -164,7 +166,7 @@ public class CustomerContact {
         }
         synchronized (this) {
             this.customer = customer;
-            customerId = customer.getId();
+            customerId = customer.getUuid();
             customer__resolvedKey = customerId;
         }
     }

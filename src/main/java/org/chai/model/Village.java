@@ -12,12 +12,12 @@ import de.greenrobot.dao.DaoException;
  */
 public class Village {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     /** Not-null value. */
     private String name;
-    private long parishId;
+    /** Not-null value. */
+    private String parishId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -26,7 +26,7 @@ public class Village {
     private transient VillageDao myDao;
 
     private Parish parish;
-    private Long parish__resolvedKey;
+    private String parish__resolvedKey;
 
 
     // KEEP FIELDS - put your custom fields here
@@ -35,12 +35,11 @@ public class Village {
     public Village() {
     }
 
-    public Village(Long id) {
-        this.id = id;
+    public Village(String uuid) {
+        this.uuid = uuid;
     }
 
-    public Village(Long id, String uuid, String name, long parishId) {
-        this.id = id;
+    public Village(String uuid, String name, String parishId) {
         this.uuid = uuid;
         this.name = name;
         this.parishId = parishId;
@@ -50,14 +49,6 @@ public class Village {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getVillageDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -80,18 +71,20 @@ public class Village {
         this.name = name;
     }
 
-    public long getParishId() {
+    /** Not-null value. */
+    public String getParishId() {
         return parishId;
     }
 
-    public void setParishId(long parishId) {
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setParishId(String parishId) {
         this.parishId = parishId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Parish getParish() {
-        long __key = this.parishId;
-        if (parish__resolvedKey == null || !parish__resolvedKey.equals(__key)) {
+        String __key = this.parishId;
+        if (parish__resolvedKey == null || parish__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -111,7 +104,7 @@ public class Village {
         }
         synchronized (this) {
             this.parish = parish;
-            parishId = parish.getId();
+            parishId = parish.getUuid();
             parish__resolvedKey = parishId;
         }
     }

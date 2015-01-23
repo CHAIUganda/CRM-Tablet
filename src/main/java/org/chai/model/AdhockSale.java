@@ -16,9 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class AdhockSale {
 
-    private Long id;
     /** Not-null value. */
-    private String clientRefId;
+    private String uuid;
     /** Not-null value. */
     private java.util.Date dateOfSale;
     private Boolean doYouStockOrsZinc;
@@ -29,8 +28,17 @@ public class AdhockSale {
     private String recommendationNextStep;
     private String recommendationLevel;
     private String governmentApproval;
+    /** Not-null value. */
     private String customerId;
-    private long customerRefId;
+
+    /** Used to resolve relations */
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    private transient AdhockSaleDao myDao;
+
+    private Customer customer;
+    private String customer__resolvedKey;
 
     private List<SaleData> adhockSalesDatas;
 
@@ -47,19 +55,18 @@ public class AdhockSale {
     @JsonIgnore
     private Customer customer;
     @JsonIgnore
-    private Long customer__resolvedKey;
+    private String customer__resolvedKey;
     // KEEP FIELDS END
 
     public AdhockSale() {
     }
 
-    public AdhockSale(Long id) {
-        this.id = id;
+    public AdhockSale(String uuid) {
+        this.uuid = uuid;
     }
 
-    public AdhockSale(Long id, String clientRefId, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howManyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, String customerId, long customerRefId) {
-        this.id = id;
-        this.clientRefId = clientRefId;
+    public AdhockSale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howManyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, String customerId) {
+        this.uuid = uuid;
         this.dateOfSale = dateOfSale;
         this.doYouStockOrsZinc = doYouStockOrsZinc;
         this.howManyZincInStock = howManyZincInStock;
@@ -70,7 +77,6 @@ public class AdhockSale {
         this.recommendationLevel = recommendationLevel;
         this.governmentApproval = governmentApproval;
         this.customerId = customerId;
-        this.customerRefId = customerRefId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -79,22 +85,14 @@ public class AdhockSale {
         myDao = daoSession != null ? daoSession.getAdhockSaleDao() : null;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     /** Not-null value. */
-    public String getClientRefId() {
-        return clientRefId;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setClientRefId(String clientRefId) {
-        this.clientRefId = clientRefId;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     /** Not-null value. */
@@ -171,26 +169,20 @@ public class AdhockSale {
         this.governmentApproval = governmentApproval;
     }
 
+    /** Not-null value. */
     public String getCustomerId() {
         return customerId;
     }
 
+    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
-    public long getCustomerRefId() {
-        return customerRefId;
-    }
-
-    public void setCustomerRefId(long customerRefId) {
-        this.customerRefId = customerRefId;
-    }
-
     /** To-one relationship, resolved on first access. */
     public Customer getCustomer() {
-        long __key = this.customerRefId;
-        if (customer__resolvedKey == null || !customer__resolvedKey.equals(__key)) {
+        String __key = this.customerId;
+        if (customer__resolvedKey == null || customer__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -206,12 +198,12 @@ public class AdhockSale {
 
     public void setCustomer(Customer customer) {
         if (customer == null) {
-            throw new DaoException("To-one property 'customerRefId' has not-null constraint; cannot set to-one to null");
+            throw new DaoException("To-one property 'customerId' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
             this.customer = customer;
-            customerRefId = customer.getId();
-            customer__resolvedKey = customerRefId;
+            customerId = customer.getUuid();
+            customer__resolvedKey = customerId;
         }
     }
 
@@ -222,7 +214,7 @@ public class AdhockSale {
                 throw new DaoException("Entity is detached from DAO context");
             }
             SaleDataDao targetDao = daoSession.getSaleDataDao();
-            List<SaleData> adhockSalesDatasNew = targetDao._queryAdhockSale_AdhockSalesDatas(id);
+            List<SaleData> adhockSalesDatasNew = targetDao._queryAdhockSale_AdhockSalesDatas(uuid);
             synchronized (this) {
                 if(adhockSalesDatas == null) {
                     adhockSalesDatas = adhockSalesDatasNew;

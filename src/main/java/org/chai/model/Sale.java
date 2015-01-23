@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class Sale {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     /** Not-null value. */
@@ -28,7 +27,7 @@ public class Sale {
     private String pointOfsaleMaterial;
     private String recommendationNextStep;
     private String recommendationLevel;
-    private String governmentApproval;
+    /** Not-null value. */
     private String orderId;
 
     private List<SaleData> salesDatas;
@@ -37,9 +36,7 @@ public class Sale {
 
     /** Used to resolve relations */
     @JsonIgnore
-    private long taskId;
-    @JsonIgnore
-    private long orderRefid;
+    private String taskId;
     @JsonIgnore
     private transient DaoSession daoSession;
 
@@ -50,23 +47,22 @@ public class Sale {
     @JsonIgnore
     private Order order;
     @JsonIgnore
-    private Long order__resolvedKey;
+    private String order__resolvedKey;
 
     @JsonIgnore
     private Task task;
     @JsonIgnore
-    private Long task__resolvedKey;
+    private String task__resolvedKey;
     // KEEP FIELDS END
 
     public Sale() {
     }
 
-    public Sale(Long id) {
-        this.id = id;
+    public Sale(String uuid) {
+        this.uuid = uuid;
     }
 
-    public Sale(Long id, String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, String orderId, long orderRefid, long taskId) {
-        this.id = id;
+    public Sale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String orderId, String taskId) {
         this.uuid = uuid;
         this.dateOfSale = dateOfSale;
         this.doYouStockOrsZinc = doYouStockOrsZinc;
@@ -76,9 +72,7 @@ public class Sale {
         this.pointOfsaleMaterial = pointOfsaleMaterial;
         this.recommendationNextStep = recommendationNextStep;
         this.recommendationLevel = recommendationLevel;
-        this.governmentApproval = governmentApproval;
         this.orderId = orderId;
-        this.orderRefid = orderRefid;
         this.taskId = taskId;
     }
 
@@ -86,14 +80,6 @@ public class Sale {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getSaleDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -172,42 +158,30 @@ public class Sale {
         this.recommendationLevel = recommendationLevel;
     }
 
-    public String getGovernmentApproval() {
-        return governmentApproval;
-    }
-
-    public void setGovernmentApproval(String governmentApproval) {
-        this.governmentApproval = governmentApproval;
-    }
-
+    /** Not-null value. */
     public String getOrderId() {
         return orderId;
     }
 
+    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
-    public long getOrderRefid() {
-        return orderRefid;
-    }
-
-    public void setOrderRefid(long orderRefid) {
-        this.orderRefid = orderRefid;
-    }
-
-    public long getTaskId() {
+    /** Not-null value. */
+    public String getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(long taskId) {
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setTaskId(String taskId) {
         this.taskId = taskId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Order getOrder() {
-        long __key = this.orderRefid;
-        if (order__resolvedKey == null || !order__resolvedKey.equals(__key)) {
+        String __key = this.orderId;
+        if (order__resolvedKey == null || order__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -223,19 +197,19 @@ public class Sale {
 
     public void setOrder(Order order) {
         if (order == null) {
-            throw new DaoException("To-one property 'orderRefid' has not-null constraint; cannot set to-one to null");
+            throw new DaoException("To-one property 'orderId' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
             this.order = order;
-            orderRefid = order.getId();
-            order__resolvedKey = orderRefid;
+            orderId = order.getUuid();
+            order__resolvedKey = orderId;
         }
     }
 
     /** To-one relationship, resolved on first access. */
     public Task getTask() {
-        long __key = this.taskId;
-        if (task__resolvedKey == null || !task__resolvedKey.equals(__key)) {
+        String __key = this.taskId;
+        if (task__resolvedKey == null || task__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -255,7 +229,7 @@ public class Sale {
         }
         synchronized (this) {
             this.task = task;
-            taskId = task.getId();
+            taskId = task.getUuid();
             task__resolvedKey = taskId;
         }
     }
@@ -267,7 +241,7 @@ public class Sale {
                 throw new DaoException("Entity is detached from DAO context");
             }
             SaleDataDao targetDao = daoSession.getSaleDataDao();
-            List<SaleData> salesDatasNew = targetDao._querySale_SalesDatas(id);
+            List<SaleData> salesDatasNew = targetDao._querySale_SalesDatas(uuid);
             synchronized (this) {
                 if(salesDatas == null) {
                     salesDatas = salesDatasNew;

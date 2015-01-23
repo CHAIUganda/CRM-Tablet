@@ -13,12 +13,12 @@ import de.greenrobot.dao.DaoException;
  */
 public class District {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     /** Not-null value. */
     private String name;
-    private long regionId;
+    /** Not-null value. */
+    private String regionId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -27,7 +27,7 @@ public class District {
     private transient DistrictDao myDao;
 
     private Region region;
-    private Long region__resolvedKey;
+    private String region__resolvedKey;
 
     private List<Subcounty> subcounties;
 
@@ -37,12 +37,11 @@ public class District {
     public District() {
     }
 
-    public District(Long id) {
-        this.id = id;
+    public District(String uuid) {
+        this.uuid = uuid;
     }
 
-    public District(Long id, String uuid, String name, long regionId) {
-        this.id = id;
+    public District(String uuid, String name, String regionId) {
         this.uuid = uuid;
         this.name = name;
         this.regionId = regionId;
@@ -52,14 +51,6 @@ public class District {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getDistrictDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -82,18 +73,20 @@ public class District {
         this.name = name;
     }
 
-    public long getRegionId() {
+    /** Not-null value. */
+    public String getRegionId() {
         return regionId;
     }
 
-    public void setRegionId(long regionId) {
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setRegionId(String regionId) {
         this.regionId = regionId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Region getRegion() {
-        long __key = this.regionId;
-        if (region__resolvedKey == null || !region__resolvedKey.equals(__key)) {
+        String __key = this.regionId;
+        if (region__resolvedKey == null || region__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -113,7 +106,7 @@ public class District {
         }
         synchronized (this) {
             this.region = region;
-            regionId = region.getId();
+            regionId = region.getUuid();
             region__resolvedKey = regionId;
         }
     }
@@ -125,7 +118,7 @@ public class District {
                 throw new DaoException("Entity is detached from DAO context");
             }
             SubcountyDao targetDao = daoSession.getSubcountyDao();
-            List<Subcounty> subcountiesNew = targetDao._queryDistrict_Subcounties(id);
+            List<Subcounty> subcountiesNew = targetDao._queryDistrict_Subcounties(uuid);
             synchronized (this) {
                 if(subcounties == null) {
                     subcounties = subcountiesNew;

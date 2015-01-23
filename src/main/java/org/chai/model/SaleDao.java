@@ -19,7 +19,7 @@ import org.chai.model.Sale;
 /** 
  * DAO for table SALE.
 */
-public class SaleDao extends AbstractDao<Sale, Long> {
+public class SaleDao extends AbstractDao<Sale, String> {
 
     public static final String TABLENAME = "SALE";
 
@@ -28,20 +28,17 @@ public class SaleDao extends AbstractDao<Sale, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property DateOfSale = new Property(2, java.util.Date.class, "dateOfSale", false, "DATE_OF_SALE");
-        public final static Property DoYouStockOrsZinc = new Property(3, Boolean.class, "doYouStockOrsZinc", false, "DO_YOU_STOCK_ORS_ZINC");
-        public final static Property HowManyZincInStock = new Property(4, Integer.class, "howManyZincInStock", false, "HOW_MANY_ZINC_IN_STOCK");
-        public final static Property HowmanyOrsInStock = new Property(5, Integer.class, "howmanyOrsInStock", false, "HOWMANY_ORS_IN_STOCK");
-        public final static Property IfNoWhy = new Property(6, String.class, "ifNoWhy", false, "IF_NO_WHY");
-        public final static Property PointOfsaleMaterial = new Property(7, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
-        public final static Property RecommendationNextStep = new Property(8, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
-        public final static Property RecommendationLevel = new Property(9, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
-        public final static Property GovernmentApproval = new Property(10, String.class, "governmentApproval", false, "GOVERNMENT_APPROVAL");
-        public final static Property OrderId = new Property(11, String.class, "orderId", false, "ORDER_ID");
-        public final static Property OrderRefid = new Property(12, long.class, "orderRefid", false, "ORDER_REFID");
-        public final static Property TaskId = new Property(13, long.class, "taskId", false, "TASK_ID");
+        public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
+        public final static Property DateOfSale = new Property(1, java.util.Date.class, "dateOfSale", false, "DATE_OF_SALE");
+        public final static Property DoYouStockOrsZinc = new Property(2, Boolean.class, "doYouStockOrsZinc", false, "DO_YOU_STOCK_ORS_ZINC");
+        public final static Property HowManyZincInStock = new Property(3, Integer.class, "howManyZincInStock", false, "HOW_MANY_ZINC_IN_STOCK");
+        public final static Property HowmanyOrsInStock = new Property(4, Integer.class, "howmanyOrsInStock", false, "HOWMANY_ORS_IN_STOCK");
+        public final static Property IfNoWhy = new Property(5, String.class, "ifNoWhy", false, "IF_NO_WHY");
+        public final static Property PointOfsaleMaterial = new Property(6, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
+        public final static Property RecommendationNextStep = new Property(7, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
+        public final static Property RecommendationLevel = new Property(8, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
+        public final static Property OrderId = new Property(9, String.class, "orderId", false, "ORDER_ID");
+        public final static Property TaskId = new Property(10, String.class, "taskId", false, "TASK_ID");
     };
 
     private DaoSession daoSession;
@@ -62,20 +59,17 @@ public class SaleDao extends AbstractDao<Sale, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'SALE' (" + //
-                "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'DATE_OF_SALE' INTEGER NOT NULL ," + // 2: dateOfSale
-                "'DO_YOU_STOCK_ORS_ZINC' INTEGER," + // 3: doYouStockOrsZinc
-                "'HOW_MANY_ZINC_IN_STOCK' INTEGER," + // 4: howManyZincInStock
-                "'HOWMANY_ORS_IN_STOCK' INTEGER," + // 5: howmanyOrsInStock
-                "'IF_NO_WHY' TEXT," + // 6: ifNoWhy
-                "'POINT_OFSALE_MATERIAL' TEXT," + // 7: pointOfsaleMaterial
-                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 8: recommendationNextStep
-                "'RECOMMENDATION_LEVEL' TEXT," + // 9: recommendationLevel
-                "'GOVERNMENT_APPROVAL' TEXT," + // 10: governmentApproval
-                "'ORDER_ID' TEXT," + // 11: orderId
-                "'ORDER_REFID' INTEGER NOT NULL ," + // 12: orderRefid
-                "'TASK_ID' INTEGER NOT NULL );"); // 13: taskId
+                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'DATE_OF_SALE' INTEGER NOT NULL ," + // 1: dateOfSale
+                "'DO_YOU_STOCK_ORS_ZINC' INTEGER," + // 2: doYouStockOrsZinc
+                "'HOW_MANY_ZINC_IN_STOCK' INTEGER," + // 3: howManyZincInStock
+                "'HOWMANY_ORS_IN_STOCK' INTEGER," + // 4: howmanyOrsInStock
+                "'IF_NO_WHY' TEXT," + // 5: ifNoWhy
+                "'POINT_OFSALE_MATERIAL' TEXT," + // 6: pointOfsaleMaterial
+                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 7: recommendationNextStep
+                "'RECOMMENDATION_LEVEL' TEXT," + // 8: recommendationLevel
+                "'ORDER_ID' TEXT NOT NULL ," + // 9: orderId
+                "'TASK_ID' TEXT NOT NULL );"); // 10: taskId
     }
 
     /** Drops the underlying database table. */
@@ -88,60 +82,45 @@ public class SaleDao extends AbstractDao<Sale, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, Sale entity) {
         stmt.clearBindings();
- 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
-        stmt.bindString(2, entity.getUuid());
-        stmt.bindLong(3, entity.getDateOfSale().getTime());
+        stmt.bindString(1, entity.getUuid());
+        stmt.bindLong(2, entity.getDateOfSale().getTime());
  
         Boolean doYouStockOrsZinc = entity.getDoYouStockOrsZinc();
         if (doYouStockOrsZinc != null) {
-            stmt.bindLong(4, doYouStockOrsZinc ? 1l: 0l);
+            stmt.bindLong(3, doYouStockOrsZinc ? 1l: 0l);
         }
  
         Integer howManyZincInStock = entity.getHowManyZincInStock();
         if (howManyZincInStock != null) {
-            stmt.bindLong(5, howManyZincInStock);
+            stmt.bindLong(4, howManyZincInStock);
         }
  
         Integer howmanyOrsInStock = entity.getHowmanyOrsInStock();
         if (howmanyOrsInStock != null) {
-            stmt.bindLong(6, howmanyOrsInStock);
+            stmt.bindLong(5, howmanyOrsInStock);
         }
  
         String ifNoWhy = entity.getIfNoWhy();
         if (ifNoWhy != null) {
-            stmt.bindString(7, ifNoWhy);
+            stmt.bindString(6, ifNoWhy);
         }
  
         String pointOfsaleMaterial = entity.getPointOfsaleMaterial();
         if (pointOfsaleMaterial != null) {
-            stmt.bindString(8, pointOfsaleMaterial);
+            stmt.bindString(7, pointOfsaleMaterial);
         }
  
         String recommendationNextStep = entity.getRecommendationNextStep();
         if (recommendationNextStep != null) {
-            stmt.bindString(9, recommendationNextStep);
+            stmt.bindString(8, recommendationNextStep);
         }
  
         String recommendationLevel = entity.getRecommendationLevel();
         if (recommendationLevel != null) {
-            stmt.bindString(10, recommendationLevel);
+            stmt.bindString(9, recommendationLevel);
         }
- 
-        String governmentApproval = entity.getGovernmentApproval();
-        if (governmentApproval != null) {
-            stmt.bindString(11, governmentApproval);
-        }
- 
-        String orderId = entity.getOrderId();
-        if (orderId != null) {
-            stmt.bindString(12, orderId);
-        }
-        stmt.bindLong(13, entity.getOrderRefid());
-        stmt.bindLong(14, entity.getTaskId());
+        stmt.bindString(10, entity.getOrderId());
+        stmt.bindString(11, entity.getTaskId());
     }
 
     @Override
@@ -152,28 +131,25 @@ public class SaleDao extends AbstractDao<Sale, Long> {
 
     /** @inheritdoc */
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public Sale readEntity(Cursor cursor, int offset) {
         Sale entity = new Sale( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // uuid
-            new java.util.Date(cursor.getLong(offset + 2)), // dateOfSale
-            cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0, // doYouStockOrsZinc
-            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // howManyZincInStock
-            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // howmanyOrsInStock
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // ifNoWhy
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // pointOfsaleMaterial
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // recommendationNextStep
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // recommendationLevel
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // governmentApproval
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // orderId
-            cursor.getLong(offset + 12), // orderRefid
-            cursor.getLong(offset + 13) // taskId
+            cursor.getString(offset + 0), // uuid
+            new java.util.Date(cursor.getLong(offset + 1)), // dateOfSale
+            cursor.isNull(offset + 2) ? null : cursor.getShort(offset + 2) != 0, // doYouStockOrsZinc
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // howManyZincInStock
+            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // howmanyOrsInStock
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // ifNoWhy
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // pointOfsaleMaterial
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // recommendationNextStep
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // recommendationLevel
+            cursor.getString(offset + 9), // orderId
+            cursor.getString(offset + 10) // taskId
         );
         return entity;
     }
@@ -181,34 +157,30 @@ public class SaleDao extends AbstractDao<Sale, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Sale entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUuid(cursor.getString(offset + 1));
-        entity.setDateOfSale(new java.util.Date(cursor.getLong(offset + 2)));
-        entity.setDoYouStockOrsZinc(cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0);
-        entity.setHowManyZincInStock(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setHowmanyOrsInStock(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
-        entity.setIfNoWhy(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setPointOfsaleMaterial(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setRecommendationNextStep(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setRecommendationLevel(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setGovernmentApproval(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setOrderId(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setOrderRefid(cursor.getLong(offset + 12));
-        entity.setTaskId(cursor.getLong(offset + 13));
+        entity.setUuid(cursor.getString(offset + 0));
+        entity.setDateOfSale(new java.util.Date(cursor.getLong(offset + 1)));
+        entity.setDoYouStockOrsZinc(cursor.isNull(offset + 2) ? null : cursor.getShort(offset + 2) != 0);
+        entity.setHowManyZincInStock(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
+        entity.setHowmanyOrsInStock(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
+        entity.setIfNoWhy(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setPointOfsaleMaterial(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setRecommendationNextStep(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setRecommendationLevel(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setOrderId(cursor.getString(offset + 9));
+        entity.setTaskId(cursor.getString(offset + 10));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(Sale entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected String updateKeyAfterInsert(Sale entity, long rowId) {
+        return entity.getUuid();
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(Sale entity) {
+    public String getKey(Sale entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getUuid();
         } else {
             return null;
         }
@@ -221,22 +193,22 @@ public class SaleDao extends AbstractDao<Sale, Long> {
     }
     
     /** Internal query to resolve the "sales" to-many relationship of Order. */
-    public List<Sale> _queryOrder_Sales(long orderRefid) {
+    public List<Sale> _queryOrder_Sales(String orderId) {
         synchronized (this) {
             if (order_SalesQuery == null) {
                 QueryBuilder<Sale> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.OrderRefid.eq(null));
+                queryBuilder.where(Properties.OrderId.eq(null));
                 queryBuilder.orderRaw("DATE_OF_SALE ASC");
                 order_SalesQuery = queryBuilder.build();
             }
         }
         Query<Sale> query = order_SalesQuery.forCurrentThread();
-        query.setParameter(0, orderRefid);
+        query.setParameter(0, orderId);
         return query.list();
     }
 
     /** Internal query to resolve the "sales" to-many relationship of Task. */
-    public List<Sale> _queryTask_Sales(long taskId) {
+    public List<Sale> _queryTask_Sales(String taskId) {
         synchronized (this) {
             if (task_SalesQuery == null) {
                 QueryBuilder<Sale> queryBuilder = queryBuilder();
@@ -261,8 +233,8 @@ public class SaleDao extends AbstractDao<Sale, Long> {
             builder.append(',');
             SqlUtils.appendColumns(builder, "T1", daoSession.getTaskDao().getAllColumns());
             builder.append(" FROM SALE T");
-            builder.append(" LEFT JOIN orders T0 ON T.'ORDER_REFID'=T0.'_id'");
-            builder.append(" LEFT JOIN TASK T1 ON T.'TASK_ID'=T1.'_id'");
+            builder.append(" LEFT JOIN orders T0 ON T.'ORDER_ID'=T0.'UUID'");
+            builder.append(" LEFT JOIN TASK T1 ON T.'TASK_ID'=T1.'UUID'");
             builder.append(' ');
             selectDeep = builder.toString();
         }

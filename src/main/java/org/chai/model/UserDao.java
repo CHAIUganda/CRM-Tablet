@@ -14,7 +14,7 @@ import org.chai.model.User;
 /** 
  * DAO for table USER.
 */
-public class UserDao extends AbstractDao<User, Long> {
+public class UserDao extends AbstractDao<User, String> {
 
     public static final String TABLENAME = "USER";
 
@@ -23,15 +23,14 @@ public class UserDao extends AbstractDao<User, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property UserName = new Property(2, String.class, "userName", false, "USER_NAME");
-        public final static Property Password = new Property(3, String.class, "password", false, "PASSWORD");
-        public final static Property Enabled = new Property(4, boolean.class, "enabled", false, "ENABLED");
-        public final static Property Accountexpired = new Property(5, boolean.class, "accountexpired", false, "ACCOUNTEXPIRED");
-        public final static Property Accountlocked = new Property(6, boolean.class, "accountlocked", false, "ACCOUNTLOCKED");
-        public final static Property Passwordexpired = new Property(7, Boolean.class, "passwordexpired", false, "PASSWORDEXPIRED");
-        public final static Property Role = new Property(8, String.class, "role", false, "ROLE");
+        public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
+        public final static Property UserName = new Property(1, String.class, "userName", false, "USER_NAME");
+        public final static Property Password = new Property(2, String.class, "password", false, "PASSWORD");
+        public final static Property Enabled = new Property(3, boolean.class, "enabled", false, "ENABLED");
+        public final static Property Accountexpired = new Property(4, boolean.class, "accountexpired", false, "ACCOUNTEXPIRED");
+        public final static Property Accountlocked = new Property(5, boolean.class, "accountlocked", false, "ACCOUNTLOCKED");
+        public final static Property Passwordexpired = new Property(6, Boolean.class, "passwordexpired", false, "PASSWORDEXPIRED");
+        public final static Property Role = new Property(7, String.class, "role", false, "ROLE");
     };
 
     private DaoSession daoSession;
@@ -50,15 +49,14 @@ public class UserDao extends AbstractDao<User, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'USER' (" + //
-                "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'USER_NAME' TEXT NOT NULL ," + // 2: userName
-                "'PASSWORD' TEXT NOT NULL ," + // 3: password
-                "'ENABLED' INTEGER NOT NULL ," + // 4: enabled
-                "'ACCOUNTEXPIRED' INTEGER NOT NULL ," + // 5: accountexpired
-                "'ACCOUNTLOCKED' INTEGER NOT NULL ," + // 6: accountlocked
-                "'PASSWORDEXPIRED' INTEGER," + // 7: passwordexpired
-                "'ROLE' TEXT);"); // 8: role
+                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'USER_NAME' TEXT NOT NULL ," + // 1: userName
+                "'PASSWORD' TEXT NOT NULL ," + // 2: password
+                "'ENABLED' INTEGER NOT NULL ," + // 3: enabled
+                "'ACCOUNTEXPIRED' INTEGER NOT NULL ," + // 4: accountexpired
+                "'ACCOUNTLOCKED' INTEGER NOT NULL ," + // 5: accountlocked
+                "'PASSWORDEXPIRED' INTEGER," + // 6: passwordexpired
+                "'ROLE' TEXT);"); // 7: role
     }
 
     /** Drops the underlying database table. */
@@ -71,26 +69,21 @@ public class UserDao extends AbstractDao<User, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, User entity) {
         stmt.clearBindings();
- 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
-        stmt.bindString(2, entity.getUuid());
-        stmt.bindString(3, entity.getUserName());
-        stmt.bindString(4, entity.getPassword());
-        stmt.bindLong(5, entity.getEnabled() ? 1l: 0l);
-        stmt.bindLong(6, entity.getAccountexpired() ? 1l: 0l);
-        stmt.bindLong(7, entity.getAccountlocked() ? 1l: 0l);
+        stmt.bindString(1, entity.getUuid());
+        stmt.bindString(2, entity.getUserName());
+        stmt.bindString(3, entity.getPassword());
+        stmt.bindLong(4, entity.getEnabled() ? 1l: 0l);
+        stmt.bindLong(5, entity.getAccountexpired() ? 1l: 0l);
+        stmt.bindLong(6, entity.getAccountlocked() ? 1l: 0l);
  
         Boolean passwordexpired = entity.getPasswordexpired();
         if (passwordexpired != null) {
-            stmt.bindLong(8, passwordexpired ? 1l: 0l);
+            stmt.bindLong(7, passwordexpired ? 1l: 0l);
         }
  
         String role = entity.getRole();
         if (role != null) {
-            stmt.bindString(9, role);
+            stmt.bindString(8, role);
         }
     }
 
@@ -102,23 +95,22 @@ public class UserDao extends AbstractDao<User, Long> {
 
     /** @inheritdoc */
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public User readEntity(Cursor cursor, int offset) {
         User entity = new User( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // uuid
-            cursor.getString(offset + 2), // userName
-            cursor.getString(offset + 3), // password
-            cursor.getShort(offset + 4) != 0, // enabled
-            cursor.getShort(offset + 5) != 0, // accountexpired
-            cursor.getShort(offset + 6) != 0, // accountlocked
-            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0, // passwordexpired
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // role
+            cursor.getString(offset + 0), // uuid
+            cursor.getString(offset + 1), // userName
+            cursor.getString(offset + 2), // password
+            cursor.getShort(offset + 3) != 0, // enabled
+            cursor.getShort(offset + 4) != 0, // accountexpired
+            cursor.getShort(offset + 5) != 0, // accountlocked
+            cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0, // passwordexpired
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // role
         );
         return entity;
     }
@@ -126,29 +118,27 @@ public class UserDao extends AbstractDao<User, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, User entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUuid(cursor.getString(offset + 1));
-        entity.setUserName(cursor.getString(offset + 2));
-        entity.setPassword(cursor.getString(offset + 3));
-        entity.setEnabled(cursor.getShort(offset + 4) != 0);
-        entity.setAccountexpired(cursor.getShort(offset + 5) != 0);
-        entity.setAccountlocked(cursor.getShort(offset + 6) != 0);
-        entity.setPasswordexpired(cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0);
-        entity.setRole(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setUuid(cursor.getString(offset + 0));
+        entity.setUserName(cursor.getString(offset + 1));
+        entity.setPassword(cursor.getString(offset + 2));
+        entity.setEnabled(cursor.getShort(offset + 3) != 0);
+        entity.setAccountexpired(cursor.getShort(offset + 4) != 0);
+        entity.setAccountlocked(cursor.getShort(offset + 5) != 0);
+        entity.setPasswordexpired(cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0);
+        entity.setRole(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(User entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected String updateKeyAfterInsert(User entity, long rowId) {
+        return entity.getUuid();
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(User entity) {
+    public String getKey(User entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getUuid();
         } else {
             return null;
         }

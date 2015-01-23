@@ -12,12 +12,12 @@ import de.greenrobot.dao.DaoException;
  */
 public class PromotionalItem {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     /** Not-null value. */
     private String name;
-    private long promotionId;
+    /** Not-null value. */
+    private String promotionId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -26,7 +26,7 @@ public class PromotionalItem {
     private transient PromotionalItemDao myDao;
 
     private Promotion promotion;
-    private Long promotion__resolvedKey;
+    private String promotion__resolvedKey;
 
 
     // KEEP FIELDS - put your custom fields here
@@ -35,12 +35,11 @@ public class PromotionalItem {
     public PromotionalItem() {
     }
 
-    public PromotionalItem(Long id) {
-        this.id = id;
+    public PromotionalItem(String uuid) {
+        this.uuid = uuid;
     }
 
-    public PromotionalItem(Long id, String uuid, String name, long promotionId) {
-        this.id = id;
+    public PromotionalItem(String uuid, String name, String promotionId) {
         this.uuid = uuid;
         this.name = name;
         this.promotionId = promotionId;
@@ -50,14 +49,6 @@ public class PromotionalItem {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getPromotionalItemDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -80,18 +71,20 @@ public class PromotionalItem {
         this.name = name;
     }
 
-    public long getPromotionId() {
+    /** Not-null value. */
+    public String getPromotionId() {
         return promotionId;
     }
 
-    public void setPromotionId(long promotionId) {
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setPromotionId(String promotionId) {
         this.promotionId = promotionId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Promotion getPromotion() {
-        long __key = this.promotionId;
-        if (promotion__resolvedKey == null || !promotion__resolvedKey.equals(__key)) {
+        String __key = this.promotionId;
+        if (promotion__resolvedKey == null || promotion__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -111,7 +104,7 @@ public class PromotionalItem {
         }
         synchronized (this) {
             this.promotion = promotion;
-            promotionId = promotion.getId();
+            promotionId = promotion.getUuid();
             promotion__resolvedKey = promotionId;
         }
     }

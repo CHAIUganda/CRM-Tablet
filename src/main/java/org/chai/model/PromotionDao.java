@@ -19,7 +19,7 @@ import org.chai.model.Promotion;
 /** 
  * DAO for table PROMOTION.
 */
-public class PromotionDao extends AbstractDao<Promotion, Long> {
+public class PromotionDao extends AbstractDao<Promotion, String> {
 
     public static final String TABLENAME = "PROMOTION";
 
@@ -28,12 +28,11 @@ public class PromotionDao extends AbstractDao<Promotion, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Description = new Property(2, String.class, "description", false, "DESCRIPTION");
-        public final static Property StartDate = new Property(3, java.util.Date.class, "startDate", false, "START_DATE");
-        public final static Property StopDate = new Property(4, java.util.Date.class, "stopDate", false, "STOP_DATE");
-        public final static Property ProductId = new Property(5, long.class, "productId", false, "PRODUCT_ID");
+        public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
+        public final static Property Description = new Property(1, String.class, "description", false, "DESCRIPTION");
+        public final static Property StartDate = new Property(2, java.util.Date.class, "startDate", false, "START_DATE");
+        public final static Property StopDate = new Property(3, java.util.Date.class, "stopDate", false, "STOP_DATE");
+        public final static Property ProductId = new Property(4, String.class, "productId", false, "PRODUCT_ID");
     };
 
     private DaoSession daoSession;
@@ -53,12 +52,11 @@ public class PromotionDao extends AbstractDao<Promotion, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'PROMOTION' (" + //
-                "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'DESCRIPTION' TEXT NOT NULL ," + // 2: description
-                "'START_DATE' INTEGER NOT NULL ," + // 3: startDate
-                "'STOP_DATE' INTEGER NOT NULL ," + // 4: stopDate
-                "'PRODUCT_ID' INTEGER NOT NULL );"); // 5: productId
+                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'DESCRIPTION' TEXT NOT NULL ," + // 1: description
+                "'START_DATE' INTEGER NOT NULL ," + // 2: startDate
+                "'STOP_DATE' INTEGER NOT NULL ," + // 3: stopDate
+                "'PRODUCT_ID' TEXT NOT NULL );"); // 4: productId
     }
 
     /** Drops the underlying database table. */
@@ -71,16 +69,11 @@ public class PromotionDao extends AbstractDao<Promotion, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, Promotion entity) {
         stmt.clearBindings();
- 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
-        stmt.bindString(2, entity.getUuid());
-        stmt.bindString(3, entity.getDescription());
-        stmt.bindLong(4, entity.getStartDate().getTime());
-        stmt.bindLong(5, entity.getStopDate().getTime());
-        stmt.bindLong(6, entity.getProductId());
+        stmt.bindString(1, entity.getUuid());
+        stmt.bindString(2, entity.getDescription());
+        stmt.bindLong(3, entity.getStartDate().getTime());
+        stmt.bindLong(4, entity.getStopDate().getTime());
+        stmt.bindString(5, entity.getProductId());
     }
 
     @Override
@@ -91,20 +84,19 @@ public class PromotionDao extends AbstractDao<Promotion, Long> {
 
     /** @inheritdoc */
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public Promotion readEntity(Cursor cursor, int offset) {
         Promotion entity = new Promotion( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // uuid
-            cursor.getString(offset + 2), // description
-            new java.util.Date(cursor.getLong(offset + 3)), // startDate
-            new java.util.Date(cursor.getLong(offset + 4)), // stopDate
-            cursor.getLong(offset + 5) // productId
+            cursor.getString(offset + 0), // uuid
+            cursor.getString(offset + 1), // description
+            new java.util.Date(cursor.getLong(offset + 2)), // startDate
+            new java.util.Date(cursor.getLong(offset + 3)), // stopDate
+            cursor.getString(offset + 4) // productId
         );
         return entity;
     }
@@ -112,26 +104,24 @@ public class PromotionDao extends AbstractDao<Promotion, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Promotion entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUuid(cursor.getString(offset + 1));
-        entity.setDescription(cursor.getString(offset + 2));
-        entity.setStartDate(new java.util.Date(cursor.getLong(offset + 3)));
-        entity.setStopDate(new java.util.Date(cursor.getLong(offset + 4)));
-        entity.setProductId(cursor.getLong(offset + 5));
+        entity.setUuid(cursor.getString(offset + 0));
+        entity.setDescription(cursor.getString(offset + 1));
+        entity.setStartDate(new java.util.Date(cursor.getLong(offset + 2)));
+        entity.setStopDate(new java.util.Date(cursor.getLong(offset + 3)));
+        entity.setProductId(cursor.getString(offset + 4));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(Promotion entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected String updateKeyAfterInsert(Promotion entity, long rowId) {
+        return entity.getUuid();
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(Promotion entity) {
+    public String getKey(Promotion entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getUuid();
         } else {
             return null;
         }
@@ -144,7 +134,7 @@ public class PromotionDao extends AbstractDao<Promotion, Long> {
     }
     
     /** Internal query to resolve the "promotions" to-many relationship of Product. */
-    public List<Promotion> _queryProduct_Promotions(long productId) {
+    public List<Promotion> _queryProduct_Promotions(String productId) {
         synchronized (this) {
             if (product_PromotionsQuery == null) {
                 QueryBuilder<Promotion> queryBuilder = queryBuilder();
@@ -166,7 +156,7 @@ public class PromotionDao extends AbstractDao<Promotion, Long> {
             builder.append(',');
             SqlUtils.appendColumns(builder, "T0", daoSession.getProductDao().getAllColumns());
             builder.append(" FROM PROMOTION T");
-            builder.append(" LEFT JOIN PRODUCT T0 ON T.'PRODUCT_ID'=T0.'_id'");
+            builder.append(" LEFT JOIN PRODUCT T0 ON T.'PRODUCT_ID'=T0.'UUID'");
             builder.append(' ');
             selectDeep = builder.toString();
         }

@@ -13,7 +13,6 @@ import de.greenrobot.dao.DaoException;
  */
 public class Promotion {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     /** Not-null value. */
@@ -22,7 +21,8 @@ public class Promotion {
     private java.util.Date startDate;
     /** Not-null value. */
     private java.util.Date stopDate;
-    private long productId;
+    /** Not-null value. */
+    private String productId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -31,7 +31,7 @@ public class Promotion {
     private transient PromotionDao myDao;
 
     private Product product;
-    private Long product__resolvedKey;
+    private String product__resolvedKey;
 
     private List<PromotionalItem> items;
 
@@ -41,12 +41,11 @@ public class Promotion {
     public Promotion() {
     }
 
-    public Promotion(Long id) {
-        this.id = id;
+    public Promotion(String uuid) {
+        this.uuid = uuid;
     }
 
-    public Promotion(Long id, String uuid, String description, java.util.Date startDate, java.util.Date stopDate, long productId) {
-        this.id = id;
+    public Promotion(String uuid, String description, java.util.Date startDate, java.util.Date stopDate, String productId) {
         this.uuid = uuid;
         this.description = description;
         this.startDate = startDate;
@@ -58,14 +57,6 @@ public class Promotion {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getPromotionDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -108,18 +99,20 @@ public class Promotion {
         this.stopDate = stopDate;
     }
 
-    public long getProductId() {
+    /** Not-null value. */
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Product getProduct() {
-        long __key = this.productId;
-        if (product__resolvedKey == null || !product__resolvedKey.equals(__key)) {
+        String __key = this.productId;
+        if (product__resolvedKey == null || product__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -139,7 +132,7 @@ public class Promotion {
         }
         synchronized (this) {
             this.product = product;
-            productId = product.getId();
+            productId = product.getUuid();
             product__resolvedKey = productId;
         }
     }
@@ -151,7 +144,7 @@ public class Promotion {
                 throw new DaoException("Entity is detached from DAO context");
             }
             PromotionalItemDao targetDao = daoSession.getPromotionalItemDao();
-            List<PromotionalItem> itemsNew = targetDao._queryPromotion_Items(id);
+            List<PromotionalItem> itemsNew = targetDao._queryPromotion_Items(uuid);
             synchronized (this) {
                 if(items == null) {
                     items = itemsNew;

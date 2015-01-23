@@ -13,14 +13,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class OrderData {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     private int quantity;
     private int price;
+    /** Not-null value. */
+    private String orderId;
+    /** Not-null value. */
     private String productId;
-    private long orderId;
-    private long productRefId;
+
 
     // KEEP FIELDS - put your custom fields here
 
@@ -35,43 +36,33 @@ public class OrderData {
     @JsonIgnore
     private Order order;
     @JsonIgnore
-    private Long order__resolvedKey;
+    private String order__resolvedKey;
 
     @JsonIgnore
     private Product product;
     @JsonIgnore
-    private Long product__resolvedKey;
+    private String product__resolvedKey;
     // KEEP FIELDS END
 
     public OrderData() {
     }
 
-    public OrderData(Long id) {
-        this.id = id;
+    public OrderData(String uuid) {
+        this.uuid = uuid;
     }
 
-    public OrderData(Long id, String uuid, int quantity, int price, String productId, long orderId, long productRefId) {
-        this.id = id;
+    public OrderData(String uuid, int quantity, int price, String orderId, String productId) {
         this.uuid = uuid;
         this.quantity = quantity;
         this.price = price;
-        this.productId = productId;
         this.orderId = orderId;
-        this.productRefId = productRefId;
+        this.productId = productId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getOrderDataDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -100,34 +91,30 @@ public class OrderData {
         this.price = price;
     }
 
+    /** Not-null value. */
+    public String getOrderId() {
+        return orderId;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    /** Not-null value. */
     public String getProductId() {
         return productId;
     }
 
+    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setProductId(String productId) {
         this.productId = productId;
     }
 
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
-    }
-
-    public long getProductRefId() {
-        return productRefId;
-    }
-
-    public void setProductRefId(long productRefId) {
-        this.productRefId = productRefId;
-    }
-
     /** To-one relationship, resolved on first access. */
     public Order getOrder() {
-        long __key = this.orderId;
-        if (order__resolvedKey == null || !order__resolvedKey.equals(__key)) {
+        String __key = this.orderId;
+        if (order__resolvedKey == null || order__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -147,15 +134,15 @@ public class OrderData {
         }
         synchronized (this) {
             this.order = order;
-            orderId = order.getId();
+            orderId = order.getUuid();
             order__resolvedKey = orderId;
         }
     }
 
     /** To-one relationship, resolved on first access. */
     public Product getProduct() {
-        long __key = this.productRefId;
-        if (product__resolvedKey == null || !product__resolvedKey.equals(__key)) {
+        String __key = this.productId;
+        if (product__resolvedKey == null || product__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -171,12 +158,12 @@ public class OrderData {
 
     public void setProduct(Product product) {
         if (product == null) {
-            throw new DaoException("To-one property 'productRefId' has not-null constraint; cannot set to-one to null");
+            throw new DaoException("To-one property 'productId' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
             this.product = product;
-            productRefId = product.getId();
-            product__resolvedKey = productRefId;
+            productId = product.getUuid();
+            product__resolvedKey = productId;
         }
     }
 

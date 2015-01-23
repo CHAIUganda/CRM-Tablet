@@ -13,7 +13,6 @@ import de.greenrobot.dao.DaoException;
  */
 public class Region {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     /** Not-null value. */
@@ -33,12 +32,11 @@ public class Region {
     public Region() {
     }
 
-    public Region(Long id) {
-        this.id = id;
+    public Region(String uuid) {
+        this.uuid = uuid;
     }
 
-    public Region(Long id, String uuid, String name) {
-        this.id = id;
+    public Region(String uuid, String name) {
         this.uuid = uuid;
         this.name = name;
     }
@@ -47,14 +45,6 @@ public class Region {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getRegionDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -84,7 +74,7 @@ public class Region {
                 throw new DaoException("Entity is detached from DAO context");
             }
             DistrictDao targetDao = daoSession.getDistrictDao();
-            List<District> districtsNew = targetDao._queryRegion_Districts(id);
+            List<District> districtsNew = targetDao._queryRegion_Districts(uuid);
             synchronized (this) {
                 if(districts == null) {
                     districts = districtsNew;

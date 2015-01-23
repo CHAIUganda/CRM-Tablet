@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 public class DetailerCall {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     private java.util.Date dateOfSurvey;
@@ -44,7 +43,17 @@ public class DetailerCall {
     private Integer tenureLength;
     private Double latitude;
     private Double longitude;
-    private long taskId;
+    /** Not-null value. */
+    private String taskId;
+
+    /** Used to resolve relations */
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    private transient DetailerCallDao myDao;
+
+    private Task task;
+    private String task__resolvedKey;
 
 
     // KEEP FIELDS - put your custom fields here
@@ -59,18 +68,17 @@ public class DetailerCall {
     @JsonIgnore
     private Task task;
     @JsonIgnore
-    private Long task__resolvedKey;
+    private String task__resolvedKey;
     // KEEP FIELDS END
 
     public DetailerCall() {
     }
 
-    public DetailerCall(Long id) {
-        this.id = id;
+    public DetailerCall(String uuid) {
+        this.uuid = uuid;
     }
 
-    public DetailerCall(Long id, String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPriceZinc, Double buyingPriceOrs, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, long taskId) {
-        this.id = id;
+    public DetailerCall(String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPriceZinc, Double buyingPriceOrs, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, String taskId) {
         this.uuid = uuid;
         this.dateOfSurvey = dateOfSurvey;
         this.diarrheaPatientsInFacility = diarrheaPatientsInFacility;
@@ -105,14 +113,6 @@ public class DetailerCall {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getDetailerCallDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -333,18 +333,20 @@ public class DetailerCall {
         this.longitude = longitude;
     }
 
-    public long getTaskId() {
+    /** Not-null value. */
+    public String getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(long taskId) {
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setTaskId(String taskId) {
         this.taskId = taskId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Task getTask() {
-        long __key = this.taskId;
-        if (task__resolvedKey == null || !task__resolvedKey.equals(__key)) {
+        String __key = this.taskId;
+        if (task__resolvedKey == null || task__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -364,7 +366,7 @@ public class DetailerCall {
         }
         synchronized (this) {
             this.task = task;
-            taskId = task.getId();
+            taskId = task.getUuid();
             task__resolvedKey = taskId;
         }
     }

@@ -19,7 +19,7 @@ import org.chai.model.District;
 /** 
  * DAO for table DISTRICT.
 */
-public class DistrictDao extends AbstractDao<District, Long> {
+public class DistrictDao extends AbstractDao<District, String> {
 
     public static final String TABLENAME = "DISTRICT";
 
@@ -28,10 +28,9 @@ public class DistrictDao extends AbstractDao<District, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
-        public final static Property RegionId = new Property(3, long.class, "regionId", false, "REGION_ID");
+        public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property RegionId = new Property(2, String.class, "regionId", false, "REGION_ID");
     };
 
     private DaoSession daoSession;
@@ -51,10 +50,9 @@ public class DistrictDao extends AbstractDao<District, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'DISTRICT' (" + //
-                "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'NAME' TEXT NOT NULL ," + // 2: name
-                "'REGION_ID' INTEGER NOT NULL );"); // 3: regionId
+                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'NAME' TEXT NOT NULL ," + // 1: name
+                "'REGION_ID' TEXT NOT NULL );"); // 2: regionId
     }
 
     /** Drops the underlying database table. */
@@ -67,14 +65,9 @@ public class DistrictDao extends AbstractDao<District, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, District entity) {
         stmt.clearBindings();
- 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
-        stmt.bindString(2, entity.getUuid());
-        stmt.bindString(3, entity.getName());
-        stmt.bindLong(4, entity.getRegionId());
+        stmt.bindString(1, entity.getUuid());
+        stmt.bindString(2, entity.getName());
+        stmt.bindString(3, entity.getRegionId());
     }
 
     @Override
@@ -85,18 +78,17 @@ public class DistrictDao extends AbstractDao<District, Long> {
 
     /** @inheritdoc */
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public District readEntity(Cursor cursor, int offset) {
         District entity = new District( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // uuid
-            cursor.getString(offset + 2), // name
-            cursor.getLong(offset + 3) // regionId
+            cursor.getString(offset + 0), // uuid
+            cursor.getString(offset + 1), // name
+            cursor.getString(offset + 2) // regionId
         );
         return entity;
     }
@@ -104,24 +96,22 @@ public class DistrictDao extends AbstractDao<District, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, District entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUuid(cursor.getString(offset + 1));
-        entity.setName(cursor.getString(offset + 2));
-        entity.setRegionId(cursor.getLong(offset + 3));
+        entity.setUuid(cursor.getString(offset + 0));
+        entity.setName(cursor.getString(offset + 1));
+        entity.setRegionId(cursor.getString(offset + 2));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(District entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected String updateKeyAfterInsert(District entity, long rowId) {
+        return entity.getUuid();
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(District entity) {
+    public String getKey(District entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getUuid();
         } else {
             return null;
         }
@@ -134,7 +124,7 @@ public class DistrictDao extends AbstractDao<District, Long> {
     }
     
     /** Internal query to resolve the "districts" to-many relationship of Region. */
-    public List<District> _queryRegion_Districts(long regionId) {
+    public List<District> _queryRegion_Districts(String regionId) {
         synchronized (this) {
             if (region_DistrictsQuery == null) {
                 QueryBuilder<District> queryBuilder = queryBuilder();
@@ -156,7 +146,7 @@ public class DistrictDao extends AbstractDao<District, Long> {
             builder.append(',');
             SqlUtils.appendColumns(builder, "T0", daoSession.getRegionDao().getAllColumns());
             builder.append(" FROM DISTRICT T");
-            builder.append(" LEFT JOIN REGION T0 ON T.'REGION_ID'=T0.'_id'");
+            builder.append(" LEFT JOIN REGION T0 ON T.'REGION_ID'=T0.'UUID'");
             builder.append(' ');
             selectDeep = builder.toString();
         }

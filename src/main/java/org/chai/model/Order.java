@@ -14,16 +14,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class Order {
 
-    private Long id;
     /** Not-null value. */
-    private String clientRefId;
+    private String uuid;
     /** Not-null value. */
     private java.util.Date deliveryDate;
-    private String customerId;
     /** Not-null value. */
     private java.util.Date orderDate;
-    private long customerRefId;
+    /** Not-null value. */
+    private String customerId;
 
+    /** Used to resolve relations */
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    private transient OrderDao myDao;
+
+    private Customer customer;
+    private String customer__resolvedKey;
+
+    private List<Sale> sales;
     private List<OrderData> orderDatas;
 
     // KEEP FIELDS - put your custom fields here
@@ -38,7 +47,7 @@ public class Order {
     @JsonIgnore
     private Customer customer;
     @JsonIgnore
-    private Long customer__resolvedKey;
+    private String customer__resolvedKey;
 
     @JsonIgnore
     private List<Sale> sales;
@@ -47,17 +56,15 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id) {
-        this.id = id;
+    public Order(String uuid) {
+        this.uuid = uuid;
     }
 
-    public Order(Long id, String clientRefId, java.util.Date deliveryDate, String customerId, java.util.Date orderDate, long customerRefId) {
-        this.id = id;
-        this.clientRefId = clientRefId;
+    public Order(String uuid, java.util.Date deliveryDate, java.util.Date orderDate, String customerId) {
+        this.uuid = uuid;
         this.deliveryDate = deliveryDate;
-        this.customerId = customerId;
         this.orderDate = orderDate;
-        this.customerRefId = customerRefId;
+        this.customerId = customerId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -66,22 +73,14 @@ public class Order {
         myDao = daoSession != null ? daoSession.getOrderDao() : null;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     /** Not-null value. */
-    public String getClientRefId() {
-        return clientRefId;
+    public String getUuid() {
+        return uuid;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setClientRefId(String clientRefId) {
-        this.clientRefId = clientRefId;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     /** Not-null value. */
@@ -94,14 +93,6 @@ public class Order {
         this.deliveryDate = deliveryDate;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
     /** Not-null value. */
     public java.util.Date getOrderDate() {
         return orderDate;
@@ -112,18 +103,20 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public long getCustomerRefId() {
-        return customerRefId;
+    /** Not-null value. */
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerRefId(long customerRefId) {
-        this.customerRefId = customerRefId;
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Customer getCustomer() {
-        long __key = this.customerRefId;
-        if (customer__resolvedKey == null || !customer__resolvedKey.equals(__key)) {
+        String __key = this.customerId;
+        if (customer__resolvedKey == null || customer__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -139,12 +132,12 @@ public class Order {
 
     public void setCustomer(Customer customer) {
         if (customer == null) {
-            throw new DaoException("To-one property 'customerRefId' has not-null constraint; cannot set to-one to null");
+            throw new DaoException("To-one property 'customerId' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
             this.customer = customer;
-            customerRefId = customer.getId();
-            customer__resolvedKey = customerRefId;
+            customerId = customer.getUuid();
+            customer__resolvedKey = customerId;
         }
     }
 
@@ -155,7 +148,7 @@ public class Order {
                 throw new DaoException("Entity is detached from DAO context");
             }
             SaleDao targetDao = daoSession.getSaleDao();
-            List<Sale> salesNew = targetDao._queryOrder_Sales(id);
+            List<Sale> salesNew = targetDao._queryOrder_Sales(uuid);
             synchronized (this) {
                 if(sales == null) {
                     sales = salesNew;
@@ -177,7 +170,7 @@ public class Order {
                 throw new DaoException("Entity is detached from DAO context");
             }
             OrderDataDao targetDao = daoSession.getOrderDataDao();
-            List<OrderData> orderDatasNew = targetDao._queryOrder_OrderDatas(id);
+            List<OrderData> orderDatasNew = targetDao._queryOrder_OrderDatas(uuid);
             synchronized (this) {
                 if(orderDatas == null) {
                     orderDatas = orderDatasNew;

@@ -13,12 +13,12 @@ import de.greenrobot.dao.DaoException;
  */
 public class Parish {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     /** Not-null value. */
     private String name;
-    private long subCountyId;
+    /** Not-null value. */
+    private String subCountyId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -27,7 +27,7 @@ public class Parish {
     private transient ParishDao myDao;
 
     private Subcounty subcounty;
-    private Long subcounty__resolvedKey;
+    private String subcounty__resolvedKey;
 
     private List<Village> villages;
 
@@ -37,12 +37,11 @@ public class Parish {
     public Parish() {
     }
 
-    public Parish(Long id) {
-        this.id = id;
+    public Parish(String uuid) {
+        this.uuid = uuid;
     }
 
-    public Parish(Long id, String uuid, String name, long subCountyId) {
-        this.id = id;
+    public Parish(String uuid, String name, String subCountyId) {
         this.uuid = uuid;
         this.name = name;
         this.subCountyId = subCountyId;
@@ -52,14 +51,6 @@ public class Parish {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getParishDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -82,18 +73,20 @@ public class Parish {
         this.name = name;
     }
 
-    public long getSubCountyId() {
+    /** Not-null value. */
+    public String getSubCountyId() {
         return subCountyId;
     }
 
-    public void setSubCountyId(long subCountyId) {
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setSubCountyId(String subCountyId) {
         this.subCountyId = subCountyId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Subcounty getSubcounty() {
-        long __key = this.subCountyId;
-        if (subcounty__resolvedKey == null || !subcounty__resolvedKey.equals(__key)) {
+        String __key = this.subCountyId;
+        if (subcounty__resolvedKey == null || subcounty__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -113,7 +106,7 @@ public class Parish {
         }
         synchronized (this) {
             this.subcounty = subcounty;
-            subCountyId = subcounty.getId();
+            subCountyId = subcounty.getUuid();
             subcounty__resolvedKey = subCountyId;
         }
     }
@@ -125,7 +118,7 @@ public class Parish {
                 throw new DaoException("Entity is detached from DAO context");
             }
             VillageDao targetDao = daoSession.getVillageDao();
-            List<Village> villagesNew = targetDao._queryParish_Villages(id);
+            List<Village> villagesNew = targetDao._queryParish_Villages(uuid);
             synchronized (this) {
                 if(villages == null) {
                     villages = villagesNew;

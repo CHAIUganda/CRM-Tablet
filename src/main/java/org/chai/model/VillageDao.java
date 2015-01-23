@@ -19,7 +19,7 @@ import org.chai.model.Village;
 /** 
  * DAO for table VILLAGE.
 */
-public class VillageDao extends AbstractDao<Village, Long> {
+public class VillageDao extends AbstractDao<Village, String> {
 
     public static final String TABLENAME = "VILLAGE";
 
@@ -28,10 +28,9 @@ public class VillageDao extends AbstractDao<Village, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
-        public final static Property ParishId = new Property(3, long.class, "parishId", false, "PARISH_ID");
+        public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property ParishId = new Property(2, String.class, "parishId", false, "PARISH_ID");
     };
 
     private DaoSession daoSession;
@@ -51,10 +50,9 @@ public class VillageDao extends AbstractDao<Village, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'VILLAGE' (" + //
-                "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'NAME' TEXT NOT NULL ," + // 2: name
-                "'PARISH_ID' INTEGER NOT NULL );"); // 3: parishId
+                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'NAME' TEXT NOT NULL ," + // 1: name
+                "'PARISH_ID' TEXT NOT NULL );"); // 2: parishId
     }
 
     /** Drops the underlying database table. */
@@ -67,14 +65,9 @@ public class VillageDao extends AbstractDao<Village, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, Village entity) {
         stmt.clearBindings();
- 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
-        stmt.bindString(2, entity.getUuid());
-        stmt.bindString(3, entity.getName());
-        stmt.bindLong(4, entity.getParishId());
+        stmt.bindString(1, entity.getUuid());
+        stmt.bindString(2, entity.getName());
+        stmt.bindString(3, entity.getParishId());
     }
 
     @Override
@@ -85,18 +78,17 @@ public class VillageDao extends AbstractDao<Village, Long> {
 
     /** @inheritdoc */
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public Village readEntity(Cursor cursor, int offset) {
         Village entity = new Village( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // uuid
-            cursor.getString(offset + 2), // name
-            cursor.getLong(offset + 3) // parishId
+            cursor.getString(offset + 0), // uuid
+            cursor.getString(offset + 1), // name
+            cursor.getString(offset + 2) // parishId
         );
         return entity;
     }
@@ -104,24 +96,22 @@ public class VillageDao extends AbstractDao<Village, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Village entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUuid(cursor.getString(offset + 1));
-        entity.setName(cursor.getString(offset + 2));
-        entity.setParishId(cursor.getLong(offset + 3));
+        entity.setUuid(cursor.getString(offset + 0));
+        entity.setName(cursor.getString(offset + 1));
+        entity.setParishId(cursor.getString(offset + 2));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(Village entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected String updateKeyAfterInsert(Village entity, long rowId) {
+        return entity.getUuid();
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(Village entity) {
+    public String getKey(Village entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getUuid();
         } else {
             return null;
         }
@@ -134,7 +124,7 @@ public class VillageDao extends AbstractDao<Village, Long> {
     }
     
     /** Internal query to resolve the "villages" to-many relationship of Parish. */
-    public List<Village> _queryParish_Villages(long parishId) {
+    public List<Village> _queryParish_Villages(String parishId) {
         synchronized (this) {
             if (parish_VillagesQuery == null) {
                 QueryBuilder<Village> queryBuilder = queryBuilder();
@@ -156,7 +146,7 @@ public class VillageDao extends AbstractDao<Village, Long> {
             builder.append(',');
             SqlUtils.appendColumns(builder, "T0", daoSession.getParishDao().getAllColumns());
             builder.append(" FROM VILLAGE T");
-            builder.append(" LEFT JOIN PARISH T0 ON T.'PARISH_ID'=T0.'_id'");
+            builder.append(" LEFT JOIN PARISH T0 ON T.'PARISH_ID'=T0.'UUID'");
             builder.append(' ');
             selectDeep = builder.toString();
         }

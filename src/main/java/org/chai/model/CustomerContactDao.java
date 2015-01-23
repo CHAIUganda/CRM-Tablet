@@ -19,7 +19,7 @@ import org.chai.model.CustomerContact;
 /** 
  * DAO for table CUSTOMER_CONTACT.
 */
-public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
+public class CustomerContactDao extends AbstractDao<CustomerContact, String> {
 
     public static final String TABLENAME = "CUSTOMER_CONTACT";
 
@@ -28,15 +28,14 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Contact = new Property(2, String.class, "contact", false, "CONTACT");
-        public final static Property Names = new Property(3, String.class, "names", false, "NAMES");
-        public final static Property Gender = new Property(4, String.class, "gender", false, "GENDER");
-        public final static Property Role = new Property(5, String.class, "role", false, "ROLE");
-        public final static Property DateCreated = new Property(6, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
-        public final static Property LastUpdated = new Property(7, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
-        public final static Property CustomerId = new Property(8, long.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
+        public final static Property Contact = new Property(1, String.class, "contact", false, "CONTACT");
+        public final static Property Names = new Property(2, String.class, "names", false, "NAMES");
+        public final static Property Gender = new Property(3, String.class, "gender", false, "GENDER");
+        public final static Property Role = new Property(4, String.class, "role", false, "ROLE");
+        public final static Property DateCreated = new Property(5, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(6, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
+        public final static Property CustomerId = new Property(7, String.class, "customerId", false, "CUSTOMER_ID");
     };
 
     private DaoSession daoSession;
@@ -56,15 +55,14 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'CUSTOMER_CONTACT' (" + //
-                "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'CONTACT' TEXT," + // 2: contact
-                "'NAMES' TEXT," + // 3: names
-                "'GENDER' TEXT," + // 4: gender
-                "'ROLE' TEXT," + // 5: role
-                "'DATE_CREATED' INTEGER," + // 6: dateCreated
-                "'LAST_UPDATED' INTEGER," + // 7: lastUpdated
-                "'CUSTOMER_ID' INTEGER NOT NULL );"); // 8: customerId
+                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'CONTACT' TEXT," + // 1: contact
+                "'NAMES' TEXT," + // 2: names
+                "'GENDER' TEXT," + // 3: gender
+                "'ROLE' TEXT," + // 4: role
+                "'DATE_CREATED' INTEGER," + // 5: dateCreated
+                "'LAST_UPDATED' INTEGER," + // 6: lastUpdated
+                "'CUSTOMER_ID' TEXT NOT NULL );"); // 7: customerId
     }
 
     /** Drops the underlying database table. */
@@ -77,43 +75,38 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, CustomerContact entity) {
         stmt.clearBindings();
- 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
-        stmt.bindString(2, entity.getUuid());
+        stmt.bindString(1, entity.getUuid());
  
         String contact = entity.getContact();
         if (contact != null) {
-            stmt.bindString(3, contact);
+            stmt.bindString(2, contact);
         }
  
         String names = entity.getNames();
         if (names != null) {
-            stmt.bindString(4, names);
+            stmt.bindString(3, names);
         }
  
         String gender = entity.getGender();
         if (gender != null) {
-            stmt.bindString(5, gender);
+            stmt.bindString(4, gender);
         }
  
         String role = entity.getRole();
         if (role != null) {
-            stmt.bindString(6, role);
+            stmt.bindString(5, role);
         }
  
         java.util.Date dateCreated = entity.getDateCreated();
         if (dateCreated != null) {
-            stmt.bindLong(7, dateCreated.getTime());
+            stmt.bindLong(6, dateCreated.getTime());
         }
  
         java.util.Date lastUpdated = entity.getLastUpdated();
         if (lastUpdated != null) {
-            stmt.bindLong(8, lastUpdated.getTime());
+            stmt.bindLong(7, lastUpdated.getTime());
         }
-        stmt.bindLong(9, entity.getCustomerId());
+        stmt.bindString(8, entity.getCustomerId());
     }
 
     @Override
@@ -124,23 +117,22 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
 
     /** @inheritdoc */
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public CustomerContact readEntity(Cursor cursor, int offset) {
         CustomerContact entity = new CustomerContact( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // uuid
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // contact
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // names
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // gender
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // role
-            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // dateCreated
-            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)), // lastUpdated
-            cursor.getLong(offset + 8) // customerId
+            cursor.getString(offset + 0), // uuid
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // contact
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // names
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // gender
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // role
+            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)), // dateCreated
+            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // lastUpdated
+            cursor.getString(offset + 7) // customerId
         );
         return entity;
     }
@@ -148,29 +140,27 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, CustomerContact entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUuid(cursor.getString(offset + 1));
-        entity.setContact(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setNames(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setGender(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setRole(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setDateCreated(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
-        entity.setLastUpdated(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
-        entity.setCustomerId(cursor.getLong(offset + 8));
+        entity.setUuid(cursor.getString(offset + 0));
+        entity.setContact(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setNames(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setGender(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setRole(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setDateCreated(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setLastUpdated(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setCustomerId(cursor.getString(offset + 7));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(CustomerContact entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected String updateKeyAfterInsert(CustomerContact entity, long rowId) {
+        return entity.getUuid();
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(CustomerContact entity) {
+    public String getKey(CustomerContact entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getUuid();
         } else {
             return null;
         }
@@ -183,7 +173,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
     }
     
     /** Internal query to resolve the "customerContacts" to-many relationship of Customer. */
-    public List<CustomerContact> _queryCustomer_CustomerContacts(long customerId) {
+    public List<CustomerContact> _queryCustomer_CustomerContacts(String customerId) {
         synchronized (this) {
             if (customer_CustomerContactsQuery == null) {
                 QueryBuilder<CustomerContact> queryBuilder = queryBuilder();
@@ -205,7 +195,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, Long> {
             builder.append(',');
             SqlUtils.appendColumns(builder, "T0", daoSession.getCustomerDao().getAllColumns());
             builder.append(" FROM CUSTOMER_CONTACT T");
-            builder.append(" LEFT JOIN CUSTOMER T0 ON T.'CUSTOMER_ID'=T0.'_id'");
+            builder.append(" LEFT JOIN CUSTOMER T0 ON T.'CUSTOMER_ID'=T0.'UUID'");
             builder.append(' ');
             selectDeep = builder.toString();
         }

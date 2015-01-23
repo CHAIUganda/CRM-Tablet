@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class Customer {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     private Double latitude;
@@ -43,8 +42,21 @@ public class Customer {
     private Boolean isDirty;
     private String tradingCenter;
     private String subcountyUuid;
-    private long subcountyId;
+    /** Not-null value. */
+    private String subcountyId;
 
+    /** Used to resolve relations */
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    private transient CustomerDao myDao;
+
+    private Subcounty subcounty;
+    private String subcounty__resolvedKey;
+
+    private List<CustomerContact> customerContacts;
+    private List<Order> orders;
+    private List<Task> tasks;
     private List<AdhockSale> adhockSales;
 
     // KEEP FIELDS - put your custom fields here
@@ -72,12 +84,11 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(Long id) {
-        this.id = id;
+    public Customer(String uuid) {
+        this.uuid = uuid;
     }
 
-    public Customer(Long id, String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String restockFrequency, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, long subcountyId) {
-        this.id = id;
+    public Customer(String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String restockFrequency, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, String subcountyId) {
         this.uuid = uuid;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -109,14 +120,6 @@ public class Customer {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getCustomerDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -315,18 +318,20 @@ public class Customer {
         this.subcountyUuid = subcountyUuid;
     }
 
-    public long getSubcountyId() {
+    /** Not-null value. */
+    public String getSubcountyId() {
         return subcountyId;
     }
 
-    public void setSubcountyId(long subcountyId) {
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setSubcountyId(String subcountyId) {
         this.subcountyId = subcountyId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Subcounty getSubcounty() {
-        long __key = this.subcountyId;
-        if (subcounty__resolvedKey == null || !subcounty__resolvedKey.equals(__key)) {
+        String __key = this.subcountyId;
+        if (subcounty__resolvedKey == null || subcounty__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -346,7 +351,7 @@ public class Customer {
         }
         synchronized (this) {
             this.subcounty = subcounty;
-            subcountyId = subcounty.getId();
+            subcountyId = subcounty.getUuid();
             subcounty__resolvedKey = subcountyId;
         }
     }
@@ -358,7 +363,7 @@ public class Customer {
                 throw new DaoException("Entity is detached from DAO context");
             }
             CustomerContactDao targetDao = daoSession.getCustomerContactDao();
-            List<CustomerContact> customerContactsNew = targetDao._queryCustomer_CustomerContacts(id);
+            List<CustomerContact> customerContactsNew = targetDao._queryCustomer_CustomerContacts(uuid);
             synchronized (this) {
                 if(customerContacts == null) {
                     customerContacts = customerContactsNew;
@@ -380,7 +385,7 @@ public class Customer {
                 throw new DaoException("Entity is detached from DAO context");
             }
             OrderDao targetDao = daoSession.getOrderDao();
-            List<Order> ordersNew = targetDao._queryCustomer_Orders(id);
+            List<Order> ordersNew = targetDao._queryCustomer_Orders(uuid);
             synchronized (this) {
                 if(orders == null) {
                     orders = ordersNew;
@@ -402,7 +407,7 @@ public class Customer {
                 throw new DaoException("Entity is detached from DAO context");
             }
             TaskDao targetDao = daoSession.getTaskDao();
-            List<Task> tasksNew = targetDao._queryCustomer_Tasks(id);
+            List<Task> tasksNew = targetDao._queryCustomer_Tasks(uuid);
             synchronized (this) {
                 if(tasks == null) {
                     tasks = tasksNew;
@@ -424,7 +429,7 @@ public class Customer {
                 throw new DaoException("Entity is detached from DAO context");
             }
             AdhockSaleDao targetDao = daoSession.getAdhockSaleDao();
-            List<AdhockSale> adhockSalesNew = targetDao._queryCustomer_AdhockSales(id);
+            List<AdhockSale> adhockSalesNew = targetDao._queryCustomer_AdhockSales(uuid);
             synchronized (this) {
                 if(adhockSales == null) {
                     adhockSales = adhockSalesNew;

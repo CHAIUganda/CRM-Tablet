@@ -15,15 +15,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class SaleData {
 
-    private Long id;
     /** Not-null value. */
     private String uuid;
     private int quantity;
     private int price;
     private String productId;
-    private Long adhockSaleId;
-    private long productRefId;
-
+    private String adhockSaleId;
+    /** Not-null value. */
+    private String productRefId;
 
     // KEEP FIELDS - put your custom fields here
 
@@ -33,35 +32,34 @@ public class SaleData {
 
     /** Used for active entity operations. */
     @JsonIgnore
-    private long saleId;
+    private String saleId;
     @JsonIgnore
     private transient SaleDataDao myDao;
 
     @JsonIgnore
     private Sale sale;
     @JsonIgnore
-    private Long sale__resolvedKey;
+    private String sale__resolvedKey;
 
     @JsonIgnore
     private Product product;
     @JsonIgnore
-    private Long product__resolvedKey;
+    private String product__resolvedKey;
 
     @JsonIgnore
     private AdhockSale adhockSale;
     @JsonIgnore
-    private Long adhockSale__resolvedKey;
+    private String adhockSale__resolvedKey;
     // KEEP FIELDS END
 
     public SaleData() {
     }
 
-    public SaleData(Long id) {
-        this.id = id;
+    public SaleData(String uuid) {
+        this.uuid = uuid;
     }
 
-    public SaleData(Long id, String uuid, int quantity, int price, String productId, Long saleId, Long adhockSaleId, long productRefId) {
-        this.id = id;
+    public SaleData(String uuid, int quantity, int price, String productId, String saleId, String adhockSaleId, String productRefId) {
         this.uuid = uuid;
         this.quantity = quantity;
         this.price = price;
@@ -75,14 +73,6 @@ public class SaleData {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getSaleDataDao() : null;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -119,34 +109,36 @@ public class SaleData {
         this.productId = productId;
     }
 
-    public Long getSaleId() {
+    public String getSaleId() {
         return saleId;
     }
 
-    public void setSaleId(Long saleId) {
+    public void setSaleId(String saleId) {
         this.saleId = saleId;
     }
 
-    public Long getAdhockSaleId() {
+    public String getAdhockSaleId() {
         return adhockSaleId;
     }
 
-    public void setAdhockSaleId(Long adhockSaleId) {
+    public void setAdhockSaleId(String adhockSaleId) {
         this.adhockSaleId = adhockSaleId;
     }
 
-    public long getProductRefId() {
+    /** Not-null value. */
+    public String getProductRefId() {
         return productRefId;
     }
 
-    public void setProductRefId(long productRefId) {
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setProductRefId(String productRefId) {
         this.productRefId = productRefId;
     }
 
     /** To-one relationship, resolved on first access. */
     public Sale getSale() {
-        Long __key = this.saleId;
-        if (sale__resolvedKey == null || !sale__resolvedKey.equals(__key)) {
+        String __key = this.saleId;
+        if (sale__resolvedKey == null || sale__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -163,15 +155,15 @@ public class SaleData {
     public void setSale(Sale sale) {
         synchronized (this) {
             this.sale = sale;
-            saleId = sale == null ? null : sale.getId();
+            saleId = sale == null ? null : sale.getUuid();
             sale__resolvedKey = saleId;
         }
     }
 
     /** To-one relationship, resolved on first access. */
     public Product getProduct() {
-        long __key = this.productRefId;
-        if (product__resolvedKey == null || !product__resolvedKey.equals(__key)) {
+        String __key = this.productRefId;
+        if (product__resolvedKey == null || product__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -191,15 +183,15 @@ public class SaleData {
         }
         synchronized (this) {
             this.product = product;
-            productRefId = product.getId();
+            productRefId = product.getUuid();
             product__resolvedKey = productRefId;
         }
     }
 
     /** To-one relationship, resolved on first access. */
     public AdhockSale getAdhockSale() {
-        Long __key = this.adhockSaleId;
-        if (adhockSale__resolvedKey == null || !adhockSale__resolvedKey.equals(__key)) {
+        String __key = this.adhockSaleId;
+        if (adhockSale__resolvedKey == null || adhockSale__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
@@ -216,7 +208,7 @@ public class SaleData {
     public void setAdhockSale(AdhockSale adhockSale) {
         synchronized (this) {
             this.adhockSale = adhockSale;
-            adhockSaleId = adhockSale == null ? null : adhockSale.getId();
+            adhockSaleId = adhockSale == null ? null : adhockSale.getUuid();
             adhockSale__resolvedKey = adhockSaleId;
         }
     }

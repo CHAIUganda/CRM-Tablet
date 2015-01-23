@@ -19,7 +19,7 @@ import org.chai.model.Task;
 /** 
  * DAO for table TASK.
 */
-public class TaskDao extends AbstractDao<Task, Long> {
+public class TaskDao extends AbstractDao<Task, String> {
 
     public static final String TABLENAME = "TASK";
 
@@ -28,19 +28,18 @@ public class TaskDao extends AbstractDao<Task, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Uuid = new Property(1, String.class, "uuid", false, "UUID");
-        public final static Property Description = new Property(2, String.class, "description", false, "DESCRIPTION");
-        public final static Property Status = new Property(3, String.class, "status", false, "STATUS");
-        public final static Property Priority = new Property(4, String.class, "priority", false, "PRIORITY");
-        public final static Property Type = new Property(5, String.class, "type", false, "TYPE");
-        public final static Property DueDate = new Property(6, java.util.Date.class, "dueDate", false, "DUE_DATE");
-        public final static Property CompletionDate = new Property(7, java.util.Date.class, "completionDate", false, "COMPLETION_DATE");
-        public final static Property DateScheduled = new Property(8, java.util.Date.class, "dateScheduled", false, "DATE_SCHEDULED");
-        public final static Property DateCreated = new Property(9, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
-        public final static Property LastUpdated = new Property(10, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
-        public final static Property IsDirty = new Property(11, Boolean.class, "isDirty", false, "IS_DIRTY");
-        public final static Property CustomerId = new Property(12, long.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
+        public final static Property Description = new Property(1, String.class, "description", false, "DESCRIPTION");
+        public final static Property Status = new Property(2, String.class, "status", false, "STATUS");
+        public final static Property Priority = new Property(3, String.class, "priority", false, "PRIORITY");
+        public final static Property Type = new Property(4, String.class, "type", false, "TYPE");
+        public final static Property DueDate = new Property(5, java.util.Date.class, "dueDate", false, "DUE_DATE");
+        public final static Property CompletionDate = new Property(6, java.util.Date.class, "completionDate", false, "COMPLETION_DATE");
+        public final static Property DateScheduled = new Property(7, java.util.Date.class, "dateScheduled", false, "DATE_SCHEDULED");
+        public final static Property DateCreated = new Property(8, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(9, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
+        public final static Property IsDirty = new Property(10, Boolean.class, "isDirty", false, "IS_DIRTY");
+        public final static Property CustomerId = new Property(11, String.class, "customerId", false, "CUSTOMER_ID");
     };
 
     private DaoSession daoSession;
@@ -60,19 +59,18 @@ public class TaskDao extends AbstractDao<Task, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'TASK' (" + //
-                "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'UUID' TEXT NOT NULL UNIQUE ," + // 1: uuid
-                "'DESCRIPTION' TEXT," + // 2: description
-                "'STATUS' TEXT," + // 3: status
-                "'PRIORITY' TEXT," + // 4: priority
-                "'TYPE' TEXT," + // 5: type
-                "'DUE_DATE' INTEGER," + // 6: dueDate
-                "'COMPLETION_DATE' INTEGER," + // 7: completionDate
-                "'DATE_SCHEDULED' INTEGER," + // 8: dateScheduled
-                "'DATE_CREATED' INTEGER," + // 9: dateCreated
-                "'LAST_UPDATED' INTEGER," + // 10: lastUpdated
-                "'IS_DIRTY' INTEGER," + // 11: isDirty
-                "'CUSTOMER_ID' INTEGER NOT NULL );"); // 12: customerId
+                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'DESCRIPTION' TEXT," + // 1: description
+                "'STATUS' TEXT," + // 2: status
+                "'PRIORITY' TEXT," + // 3: priority
+                "'TYPE' TEXT," + // 4: type
+                "'DUE_DATE' INTEGER," + // 5: dueDate
+                "'COMPLETION_DATE' INTEGER," + // 6: completionDate
+                "'DATE_SCHEDULED' INTEGER," + // 7: dateScheduled
+                "'DATE_CREATED' INTEGER," + // 8: dateCreated
+                "'LAST_UPDATED' INTEGER," + // 9: lastUpdated
+                "'IS_DIRTY' INTEGER," + // 10: isDirty
+                "'CUSTOMER_ID' TEXT NOT NULL );"); // 11: customerId
     }
 
     /** Drops the underlying database table. */
@@ -85,63 +83,58 @@ public class TaskDao extends AbstractDao<Task, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, Task entity) {
         stmt.clearBindings();
- 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
-        stmt.bindString(2, entity.getUuid());
+        stmt.bindString(1, entity.getUuid());
  
         String description = entity.getDescription();
         if (description != null) {
-            stmt.bindString(3, description);
+            stmt.bindString(2, description);
         }
  
         String status = entity.getStatus();
         if (status != null) {
-            stmt.bindString(4, status);
+            stmt.bindString(3, status);
         }
  
         String priority = entity.getPriority();
         if (priority != null) {
-            stmt.bindString(5, priority);
+            stmt.bindString(4, priority);
         }
  
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(6, type);
+            stmt.bindString(5, type);
         }
  
         java.util.Date dueDate = entity.getDueDate();
         if (dueDate != null) {
-            stmt.bindLong(7, dueDate.getTime());
+            stmt.bindLong(6, dueDate.getTime());
         }
  
         java.util.Date completionDate = entity.getCompletionDate();
         if (completionDate != null) {
-            stmt.bindLong(8, completionDate.getTime());
+            stmt.bindLong(7, completionDate.getTime());
         }
  
         java.util.Date dateScheduled = entity.getDateScheduled();
         if (dateScheduled != null) {
-            stmt.bindLong(9, dateScheduled.getTime());
+            stmt.bindLong(8, dateScheduled.getTime());
         }
  
         java.util.Date dateCreated = entity.getDateCreated();
         if (dateCreated != null) {
-            stmt.bindLong(10, dateCreated.getTime());
+            stmt.bindLong(9, dateCreated.getTime());
         }
  
         java.util.Date lastUpdated = entity.getLastUpdated();
         if (lastUpdated != null) {
-            stmt.bindLong(11, lastUpdated.getTime());
+            stmt.bindLong(10, lastUpdated.getTime());
         }
  
         Boolean isDirty = entity.getIsDirty();
         if (isDirty != null) {
-            stmt.bindLong(12, isDirty ? 1l: 0l);
+            stmt.bindLong(11, isDirty ? 1l: 0l);
         }
-        stmt.bindLong(13, entity.getCustomerId());
+        stmt.bindString(12, entity.getCustomerId());
     }
 
     @Override
@@ -152,27 +145,26 @@ public class TaskDao extends AbstractDao<Task, Long> {
 
     /** @inheritdoc */
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public Task readEntity(Cursor cursor, int offset) {
         Task entity = new Task( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // uuid
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // description
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // status
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // priority
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // type
-            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // dueDate
-            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)), // completionDate
-            cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // dateScheduled
-            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // dateCreated
-            cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)), // lastUpdated
-            cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0, // isDirty
-            cursor.getLong(offset + 12) // customerId
+            cursor.getString(offset + 0), // uuid
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // description
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // status
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // priority
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // type
+            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)), // dueDate
+            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // completionDate
+            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)), // dateScheduled
+            cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // dateCreated
+            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // lastUpdated
+            cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0, // isDirty
+            cursor.getString(offset + 11) // customerId
         );
         return entity;
     }
@@ -180,33 +172,31 @@ public class TaskDao extends AbstractDao<Task, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Task entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUuid(cursor.getString(offset + 1));
-        entity.setDescription(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setStatus(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setPriority(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setType(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setDueDate(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
-        entity.setCompletionDate(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
-        entity.setDateScheduled(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
-        entity.setDateCreated(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
-        entity.setLastUpdated(cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)));
-        entity.setIsDirty(cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0);
-        entity.setCustomerId(cursor.getLong(offset + 12));
+        entity.setUuid(cursor.getString(offset + 0));
+        entity.setDescription(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setStatus(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setPriority(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setType(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setDueDate(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setCompletionDate(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setDateScheduled(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
+        entity.setDateCreated(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
+        entity.setLastUpdated(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setIsDirty(cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0);
+        entity.setCustomerId(cursor.getString(offset + 11));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(Task entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected String updateKeyAfterInsert(Task entity, long rowId) {
+        return entity.getUuid();
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(Task entity) {
+    public String getKey(Task entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getUuid();
         } else {
             return null;
         }
@@ -219,7 +209,7 @@ public class TaskDao extends AbstractDao<Task, Long> {
     }
     
     /** Internal query to resolve the "tasks" to-many relationship of Customer. */
-    public List<Task> _queryCustomer_Tasks(long customerId) {
+    public List<Task> _queryCustomer_Tasks(String customerId) {
         synchronized (this) {
             if (customer_TasksQuery == null) {
                 QueryBuilder<Task> queryBuilder = queryBuilder();
@@ -241,7 +231,7 @@ public class TaskDao extends AbstractDao<Task, Long> {
             builder.append(',');
             SqlUtils.appendColumns(builder, "T0", daoSession.getCustomerDao().getAllColumns());
             builder.append(" FROM TASK T");
-            builder.append(" LEFT JOIN CUSTOMER T0 ON T.'CUSTOMER_ID'=T0.'_id'");
+            builder.append(" LEFT JOIN CUSTOMER T0 ON T.'CUSTOMER_ID'=T0.'UUID'");
             builder.append(' ');
             selectDeep = builder.toString();
         }
