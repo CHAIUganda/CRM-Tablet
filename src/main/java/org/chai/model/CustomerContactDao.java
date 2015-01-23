@@ -55,7 +55,7 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, String> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'CUSTOMER_CONTACT' (" + //
-                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'CONTACT' TEXT," + // 1: contact
                 "'NAMES' TEXT," + // 2: names
                 "'GENDER' TEXT," + // 3: gender

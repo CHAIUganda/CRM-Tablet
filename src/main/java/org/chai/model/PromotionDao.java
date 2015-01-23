@@ -52,7 +52,7 @@ public class PromotionDao extends AbstractDao<Promotion, String> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'PROMOTION' (" + //
-                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'DESCRIPTION' TEXT NOT NULL ," + // 1: description
                 "'START_DATE' INTEGER NOT NULL ," + // 2: startDate
                 "'STOP_DATE' INTEGER NOT NULL ," + // 3: stopDate

@@ -8,6 +8,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -33,6 +34,8 @@ public class TaskClient extends RestClient {
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "task/update", HttpMethod.PUT, httpEntity, ServerResponse.class);
             Log.i("Rest Task post Response:", "==============================================================================" + responseEntity.getBody().getMessage());
             return true;
+        }catch (HttpServerErrorException se){
+            Log.i("Server Error:",se.getResponseBodyAsString());
         }catch (Exception ex){
             ex.printStackTrace();
         }

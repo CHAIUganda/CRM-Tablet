@@ -55,7 +55,7 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'SALE_DATA' (" + //
-                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'QUANTITY' INTEGER NOT NULL ," + // 1: quantity
                 "'PRICE' INTEGER NOT NULL ," + // 2: price
                 "'SALE_ID' TEXT," + // 3: saleId

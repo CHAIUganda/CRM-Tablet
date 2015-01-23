@@ -50,7 +50,7 @@ public class SubcountyDao extends AbstractDao<Subcounty, String> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'SUBCOUNTY' (" + //
-                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'NAME' TEXT NOT NULL ," + // 1: name
                 "'DISTRICT_ID' TEXT NOT NULL );"); // 2: districtId
     }

@@ -44,7 +44,6 @@ public class Customer {
     private String subcountyUuid;
     /** Not-null value. */
     private String subcountyId;
-
     private List<AdhockSale> adhockSales;
 
     // KEEP FIELDS - put your custom fields here

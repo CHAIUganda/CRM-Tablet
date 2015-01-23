@@ -50,7 +50,7 @@ public class DistrictDao extends AbstractDao<District, String> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'DISTRICT' (" + //
-                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'NAME' TEXT NOT NULL ," + // 1: name
                 "'REGION_ID' TEXT NOT NULL );"); // 2: regionId
     }

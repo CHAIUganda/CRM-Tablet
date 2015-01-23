@@ -127,7 +127,7 @@ public class CHAISynchroniser {
                 }
             });
         }
-        Log.i("Synchroniser:","=============================================done");
+        Log.i("Synchroniser:", "=============================================done");
     }
 
     public void downloadRegions() {
@@ -196,17 +196,10 @@ public class CHAISynchroniser {
 
         Task[] tasks = taskClient.downloadTasks();
         for(Task task:tasks){
-            taskDao.insert(task);
-        }
-    }
-
-    public void uploadCustomers(){
-        List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
-        if(!customersList.isEmpty()){
-            updatePropgress("Uploading Customers...");
-            boolean uploaded = customerClient.uploadCustomers(customersList.toArray(new Customer[customersList.size()]));
-            if (uploaded) {
-                customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).buildDelete();
+            try{
+                taskDao.insert(task);
+            }catch (Exception ex){
+                //catch cases when task is a duplicate
             }
         }
     }
@@ -222,6 +215,16 @@ public class CHAISynchroniser {
 
     }
 
+    public void uploadCustomers(){
+        List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
+        if(!customersList.isEmpty()){
+            updatePropgress("Uploading Customers...");
+            boolean uploaded = customerClient.uploadCustomers(customersList.toArray(new Customer[customersList.size()]));
+            if (uploaded) {
+                customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).buildDelete();
+            }
+        }
+    } 
     private void downloadProducts(){
         productDao.deleteAll();
         Product[] products = productClient.downloadProducts();

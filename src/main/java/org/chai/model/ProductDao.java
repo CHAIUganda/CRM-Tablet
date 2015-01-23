@@ -47,7 +47,7 @@ public class ProductDao extends AbstractDao<Product, String> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'PRODUCT' (" + //
-                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'NAME' TEXT NOT NULL ," + // 1: name
                 "'UNIT_OF_MEASURE' TEXT NOT NULL ," + // 2: unitOfMeasure
                 "'FORMULATION' TEXT NOT NULL ," + // 3: formulation

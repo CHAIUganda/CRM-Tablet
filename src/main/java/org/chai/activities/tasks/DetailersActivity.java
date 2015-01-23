@@ -50,7 +50,7 @@ public class DetailersActivity extends Fragment {
     private TextView subcountyTxt;
     private DistrictArrayAdapter adapter;
 
-    private DetailerCall detailerCall;
+    private DetailerCall detailerCallInstance;
     private Task callDataTask;
     private Button pointOfSalesOptionsButton;
     private CharSequence[] pointOfSalesOptions;
@@ -64,15 +64,15 @@ public class DetailersActivity extends Fragment {
         String callId = bundle.getString("callId");
         if (callId != null) {
             //we are from call data listview
-            detailerCall = detailerCallDao.load(callId);
-            callDataTask = detailerCall.getTask();
+            detailerCallInstance = detailerCallDao.load(callId);
+            callDataTask = detailerCallInstance.getTask();
         } else {
             //from tasklist view
             Log.i("callId=======================================================", callId + "");
-            detailerCall = new DetailerCall(null);
+            detailerCallInstance = new DetailerCall(null);
             String taskId = bundle.getString("taskId");
             callDataTask = taskDao.load(taskId);
-            detailerCall = getLastDetailerInfo(callDataTask.getCustomer());
+            detailerCallInstance = getLastDetailerInfo(callDataTask.getCustomer());
         }
         setDateWidget(view);
         setGpsWidget(view);
@@ -119,18 +119,17 @@ public class DetailersActivity extends Fragment {
     private DetailerCall getLastDetailerInfo(Customer customer) {
         try {
             Query query = detailerCallDao.queryBuilder().where(new WhereCondition.StringCondition(" T.'"+DetailerCallDao.Properties.
-                    TaskId.columnName + "' IN " + "(SELECT " + TaskDao.Properties.Uuid.columnName + " FROM " + TaskDao.TABLENAME + " C WHERE C.'" + TaskDao.Properties.CustomerId.columnName + "' = " + customer.getUuid()+")")).build();
+                    TaskId.columnName + "' IN " + "(SELECT " + TaskDao.Properties.Uuid.columnName + " FROM " + TaskDao.TABLENAME + " C WHERE C.'" + TaskDao.Properties.CustomerId.columnName + "' = '" + customer.getUuid()+"')")).build();
             List<DetailerCall> detailerCallList = query.list();
-           /* List<DetailerCall> detailerCallList = detailerCallDao.queryRaw(" inner join " + TaskDao.TABLENAME + " TA on T." + DetailerCallDao.Properties.TaskId.columnName
-                    + " = TA." + TaskDao.Properties.Id.columnName + " inner join " + CustomerDao.TABLENAME + " C on TA." + TaskDao.Properties.CustomerId.columnName
-                    + " = C." + CustomerDao.Properties.Id.columnName + " where C." + CustomerDao.Properties.Id.columnName + " = " + customer.getId());*/
             if (!detailerCallList.isEmpty()) {
                 return detailerCallList.get(0);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;
+        DetailerCall detailerCall = new DetailerCall(null);
+        detailerCallInstance.setIsNew(true);
+        return detailerCall;
     }
 
     private void initialiseGreenDao() {
@@ -283,101 +282,98 @@ public class DetailersActivity extends Fragment {
     }
 
     private void bindUiToDetailerCall() {
-        if (detailerCall == null) {
-            detailerCall = new DetailerCall(null);
-        }
-        detailerCall.setDateOfSurvey(new Date());
-        detailerCall.setDiarrheaPatientsInFacility(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).getText().toString()));
-        detailerCall.setOtherWaysHowYouHeard(((EditText) getActivity().findViewById(R.id.detailer_other_ways_youheard_about_zinc)).getText().toString());
+        detailerCallInstance.setDateOfSurvey(new Date());
+        detailerCallInstance.setDiarrheaPatientsInFacility(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).getText().toString()));
+        detailerCallInstance.setOtherWaysHowYouHeard(((EditText) getActivity().findViewById(R.id.detailer_other_ways_youheard_about_zinc)).getText().toString());
         if (((Spinner)getActivity(). findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString().equals("Yes")) {
-            detailerCall.setHowManyZincInStock(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailers_howmany_in_stock_zinc)).getText().toString()));
-            detailerCall.setHowmanyOrsInStock(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailers_howmany_in_stock_ors)).getText().toString()));
-            detailerCall.setZincBrandsold(((EditText)getActivity(). findViewById(R.id.detailers_brand_sold_zinc)).getText().toString());
-            detailerCall.setOrsBrandSold(((EditText)getActivity(). findViewById(R.id.detailers_brand_sold_ors)).getText().toString());
+            detailerCallInstance.setHowManyZincInStock(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailers_howmany_in_stock_zinc)).getText().toString()));
+            detailerCallInstance.setHowmanyOrsInStock(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailers_howmany_in_stock_ors)).getText().toString()));
+            detailerCallInstance.setZincBrandsold(((EditText)getActivity(). findViewById(R.id.detailers_brand_sold_zinc)).getText().toString());
+            detailerCallInstance.setOrsBrandSold(((EditText)getActivity(). findViewById(R.id.detailers_brand_sold_ors)).getText().toString());
         }
 
-        detailerCall.setIfNoWhy(((EditText)getActivity(). findViewById(R.id.detailer_if_no_why)).getText().toString());
-        detailerCall.setBuyingPriceZinc(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyzinc)).getText().toString()));
-        detailerCall.setBuyingPriceOrs(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyors)).getText().toString()));
-        detailerCall.setPointOfsaleMaterial(((Button)getActivity(). findViewById(R.id.detailer_point_of_sale)).getText().toString()
+        detailerCallInstance.setIfNoWhy(((EditText)getActivity(). findViewById(R.id.detailer_if_no_why)).getText().toString());
+        detailerCallInstance.setBuyingPriceZinc(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyzinc)).getText().toString()));
+        detailerCallInstance.setBuyingPriceOrs(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyors)).getText().toString()));
+        detailerCallInstance.setPointOfsaleMaterial(((Button)getActivity(). findViewById(R.id.detailer_point_of_sale)).getText().toString()
                 +","+((EditText)getActivity().findViewById(R.id.detailer_point_of_sale_others)).getText().toString());
-        detailerCall.setRecommendationNextStep(((Spinner)getActivity(). findViewById(R.id.detailer_next_step_recommendation)).getSelectedItem().toString());
+        detailerCallInstance.setRecommendationNextStep(((Spinner)getActivity(). findViewById(R.id.detailer_next_step_recommendation)).getSelectedItem().toString());
 
-        detailerCall.setHeardAboutDiarrheaTreatmentInChildren(((Spinner)getActivity(). findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors)).getSelectedItem().toString());
-        detailerCall.setHowDidYouHear(((Spinner)getActivity(). findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors)).getSelectedItem().toString());
-        detailerCall.setWhatYouKnowAbtDiarrhea(((Spinner)getActivity(). findViewById(R.id.detailer_how_diarrhea_affects_community)).getSelectedItem().toString());
-        detailerCall.setDiarrheaEffectsOnBody(((Spinner) getActivity().findViewById(R.id.detailer_effect_diarrhea_has_on_the_body)).getSelectedItem().toString());
-        detailerCall.setKnowledgeAbtOrsAndUsage(((Spinner)getActivity(). findViewById(R.id.detailer_how_ors_should_be_used)).getSelectedItem().toString());
-        detailerCall.setWhyNotUseAntibiotics(((Spinner)getActivity(). findViewById(R.id.detailer_why_should_not_use_antibiotics)).getSelectedItem().toString());
+        detailerCallInstance.setHeardAboutDiarrheaTreatmentInChildren(((Spinner)getActivity(). findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors)).getSelectedItem().toString());
+        detailerCallInstance.setHowDidYouHear(((Spinner)getActivity(). findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors)).getSelectedItem().toString());
+        detailerCallInstance.setWhatYouKnowAbtDiarrhea(((Spinner)getActivity(). findViewById(R.id.detailer_how_diarrhea_affects_community)).getSelectedItem().toString());
+        detailerCallInstance.setDiarrheaEffectsOnBody(((Spinner) getActivity().findViewById(R.id.detailer_effect_diarrhea_has_on_the_body)).getSelectedItem().toString());
+        detailerCallInstance.setKnowledgeAbtOrsAndUsage(((Spinner)getActivity(). findViewById(R.id.detailer_how_ors_should_be_used)).getSelectedItem().toString());
+        detailerCallInstance.setWhyNotUseAntibiotics(((Spinner)getActivity(). findViewById(R.id.detailer_why_should_not_use_antibiotics)).getSelectedItem().toString());
         String stocksZinc = ((Spinner) getActivity().findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString();
-        detailerCall.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
-        detailerCall.setRecommendationLevel(((Spinner)getActivity(). findViewById(R.id.detailer_recommendation_level)).getSelectedItem().toString());
-        detailerCall.setKnowledgeAbtZincAndUsage(((Spinner)getActivity(). findViewById(R.id.detailer_how_zinc_should_be_used)).getSelectedItem().toString());
-        detailerCall.setLatitude(capturedLatitude);
-        detailerCall.setLongitude(capturedLongitude);
+        detailerCallInstance.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
+        detailerCallInstance.setRecommendationLevel(((Spinner)getActivity(). findViewById(R.id.detailer_recommendation_level)).getSelectedItem().toString());
+        detailerCallInstance.setKnowledgeAbtZincAndUsage(((Spinner)getActivity(). findViewById(R.id.detailer_how_zinc_should_be_used)).getSelectedItem().toString());
+        detailerCallInstance.setLatitude(capturedLatitude);
+        detailerCallInstance.setLongitude(capturedLongitude);
     }
 
     private void bindDetailerCallToUi(View view) {
-        if (!isNewDetailerCall()) {
-            Customer customer = detailerCall.getTask().getCustomer();
-            ((EditText)view. findViewById(R.id.detailer_survey_date)).setText(Utils.dateToString(detailerCall.getDateOfSurvey()));
+        if (!detailerCallInstance.getIsNew()) {
+            Customer customer = detailerCallInstance.getTask().getCustomer();
+            ((EditText)view. findViewById(R.id.detailer_survey_date)).setText(Utils.dateToString(detailerCallInstance.getDateOfSurvey()));
             ((TextView) view.findViewById(R.id.detailer_name)).setText(customer.getOutletName());
             ((TextView)view. findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
             ((TextView)view. findViewById(R.id.detailer_subcounty)).setText(customer.getSubcounty().getName());
             ((TextView)view. findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
-            ((TextView)view. findViewById(R.id.detailers_gps_text)).setText(detailerCall.getLatitude()+","+detailerCall.getLongitude());
+            ((TextView)view. findViewById(R.id.detailers_gps_text)).setText(detailerCallInstance.getLatitude()+","+ detailerCallInstance.getLongitude());
             CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
             if(keyCustomerContact!= null){
                 ((TextView)view. findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getNames());
                 ((TextView)view. findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact.getContact());
             }
             ((EditText)view. findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
-            ((EditText)view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).setText(detailerCall.getDiarrheaPatientsInFacility() + "");
-            ((EditText)view.findViewById(R.id.detailer_other_ways_youheard_about_zinc)).setText(detailerCall.getOtherWaysHowYouHeard());
-            ((EditText)view. findViewById(R.id.detailers_howmany_in_stock_zinc)).setText(detailerCall.getHowManyZincInStock()+"");
-            ((EditText)view.findViewById(R.id.detailers_howmany_in_stock_ors)).setText(detailerCall.getHowmanyOrsInStock()+"");
-            ((EditText)view. findViewById(R.id.detailers_brand_sold_zinc)).setText(detailerCall.getZincBrandsold());
-            ((EditText)view.findViewById(R.id.detailers_brand_sold_ors)).setText(detailerCall.getOrsBrandSold());
-            ((EditText)view. findViewById(R.id.detailer_if_no_why)).setText(detailerCall.getIfNoWhy());
-            ((EditText)view.findViewById(R.id.detailer_whatpricedoyoubuyzinc)).setText(detailerCall.getBuyingPriceZinc() + "");
-            ((EditText)view.findViewById(R.id.detailer_whatpricedoyoubuyors)).setText(detailerCall.getBuyingPriceOrs() + "");
-            ((EditText)view.findViewById(R.id.detailers_gps_text)).setText(detailerCall.getLatitude() == null ? "0.0,0.0" : detailerCall.getLatitude() + ","+detailerCall.getLongitude());
+            ((EditText)view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).setText(detailerCallInstance.getDiarrheaPatientsInFacility() + "");
+            ((EditText)view.findViewById(R.id.detailer_other_ways_youheard_about_zinc)).setText(detailerCallInstance.getOtherWaysHowYouHeard());
+            ((EditText)view. findViewById(R.id.detailers_howmany_in_stock_zinc)).setText(detailerCallInstance.getHowManyZincInStock()+"");
+            ((EditText)view.findViewById(R.id.detailers_howmany_in_stock_ors)).setText(detailerCallInstance.getHowmanyOrsInStock()+"");
+            ((EditText)view. findViewById(R.id.detailers_brand_sold_zinc)).setText(detailerCallInstance.getZincBrandsold());
+            ((EditText)view.findViewById(R.id.detailers_brand_sold_ors)).setText(detailerCallInstance.getOrsBrandSold());
+            ((EditText)view. findViewById(R.id.detailer_if_no_why)).setText(detailerCallInstance.getIfNoWhy());
+            ((EditText)view.findViewById(R.id.detailer_whatpricedoyoubuyzinc)).setText(detailerCallInstance.getBuyingPriceZinc() + "");
+            ((EditText)view.findViewById(R.id.detailer_whatpricedoyoubuyors)).setText(detailerCallInstance.getBuyingPriceOrs() + "");
+            ((EditText)view.findViewById(R.id.detailers_gps_text)).setText(detailerCallInstance.getLatitude() == null ? "0.0,0.0" : detailerCallInstance.getLatitude() + ","+ detailerCallInstance.getLongitude());
 
             //spinners
 
             Spinner detailerHearAboutSpinner = (Spinner)view. findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors);
-            Utils.setSpinnerSelection(detailerHearAboutSpinner, detailerCall.getHeardAboutDiarrheaTreatmentInChildren());
+            Utils.setSpinnerSelection(detailerHearAboutSpinner, detailerCallInstance.getHeardAboutDiarrheaTreatmentInChildren());
 
             Spinner howdidyouHearSpinner = (Spinner) view.findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors);
-            Utils.setSpinnerSelection(howdidyouHearSpinner, detailerCall.getHowDidYouHear());
+            Utils.setSpinnerSelection(howdidyouHearSpinner, detailerCallInstance.getHowDidYouHear());
 
             Spinner effectsOfDiarrheaSpinner = (Spinner)view. findViewById(R.id.detailer_how_diarrhea_affects_community);
-            Utils.setSpinnerSelection(effectsOfDiarrheaSpinner, detailerCall.getWhatYouKnowAbtDiarrhea());
+            Utils.setSpinnerSelection(effectsOfDiarrheaSpinner, detailerCallInstance.getWhatYouKnowAbtDiarrhea());
 
             Spinner effectontheBodySpinner = (Spinner)view. findViewById(R.id.detailer_effect_diarrhea_has_on_the_body);
-            Utils.setSpinnerSelection(effectontheBodySpinner, detailerCall.getDiarrheaEffectsOnBody());
+            Utils.setSpinnerSelection(effectontheBodySpinner, detailerCallInstance.getDiarrheaEffectsOnBody());
 
             Spinner orsUsageSpinner = (Spinner)view. findViewById(R.id.detailer_how_ors_should_be_used);
-            Utils.setSpinnerSelection(orsUsageSpinner, detailerCall.getKnowledgeAbtOrsAndUsage());
+            Utils.setSpinnerSelection(orsUsageSpinner, detailerCallInstance.getKnowledgeAbtOrsAndUsage());
 
             Spinner dontUseAntiBioticsSpinner = (Spinner)view. findViewById(R.id.detailer_why_should_not_use_antibiotics);
-            Utils.setSpinnerSelection(dontUseAntiBioticsSpinner, detailerCall.getWhyNotUseAntibiotics());
+            Utils.setSpinnerSelection(dontUseAntiBioticsSpinner, detailerCallInstance.getWhyNotUseAntibiotics());
 
             Spinner doyouStockZincSpinner = (Spinner)view. findViewById(R.id.detailer_do_you_stock_zinc);
-            Boolean doYouStockOrsZinc = detailerCall.getDoYouStockOrsZinc();
+            Boolean doYouStockOrsZinc = detailerCallInstance.getDoYouStockOrsZinc();
             Utils.setSpinnerSelection(doyouStockZincSpinner, doYouStockOrsZinc?"Yes":"");
 
             Spinner nextStepRecommendation = ((Spinner)view. findViewById(R.id.detailer_next_step_recommendation));
-            Utils.setSpinnerSelection(nextStepRecommendation,detailerCall.getRecommendationNextStep());
+            Utils.setSpinnerSelection(nextStepRecommendation, detailerCallInstance.getRecommendationNextStep());
 
             Spinner recommendationSpinner = (Spinner)view. findViewById(R.id.detailer_recommendation_level);
-            Utils.setSpinnerSelection(recommendationSpinner, detailerCall.getRecommendationLevel());
+            Utils.setSpinnerSelection(recommendationSpinner, detailerCallInstance.getRecommendationLevel());
 
             Spinner whatdoyouknowAboutZinc = (Spinner)view.findViewById(R.id.detailer_how_zinc_should_be_used);
-            Utils.setSpinnerSelection(whatdoyouknowAboutZinc,detailerCall.getKnowledgeAbtZincAndUsage());
+            Utils.setSpinnerSelection(whatdoyouknowAboutZinc, detailerCallInstance.getKnowledgeAbtZincAndUsage());
 
             Button pointOfSaleMaterial =  ((Button)view. findViewById(R.id.detailer_point_of_sale));
-            pointOfSaleMaterial.setText(detailerCall.getPointOfsaleMaterial());
+            pointOfSaleMaterial.setText(detailerCallInstance.getPointOfsaleMaterial());
 
         }else{
             Calendar calendar = Calendar.getInstance();
@@ -401,12 +397,14 @@ public class DetailersActivity extends Fragment {
         boolean isSaved = false;
         try {
             bindUiToDetailerCall();
-            detailerCall.setTaskId(callDataTask.getUuid());
-            if(isNewDetailerCall()){
-                detailerCall.setUuid(UUID.randomUUID().toString());
-                detailerCallDao.insert(detailerCall);
+            detailerCallInstance.setTaskId(callDataTask.getUuid());
+            detailerCallInstance.setTask(callDataTask);
+            if(detailerCallInstance.getIsNew()){
+                detailerCallInstance.setUuid(UUID.randomUUID().toString());
+                detailerCallInstance.setIsNew(false);
+                detailerCallDao.insert(detailerCallInstance);
             }else{
-                detailerCallDao.update(detailerCall);
+                detailerCallDao.update(detailerCallInstance);
             }
             callDataTask.setStatus(TasksMainActivity.STATUS_COMPLETE);
             taskDao.update(callDataTask);
@@ -415,14 +413,6 @@ public class DetailersActivity extends Fragment {
             ex.printStackTrace();
         }
         return isSaved;
-    }
-
-    private boolean isNewDetailerCall() {
-        if (detailerCall == null || detailerCall.getUuid() == null) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -59,7 +59,7 @@ public class TaskDao extends AbstractDao<Task, String> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'TASK' (" + //
-                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'DESCRIPTION' TEXT," + // 1: description
                 "'STATUS' TEXT," + // 2: status
                 "'PRIORITY' TEXT," + // 3: priority

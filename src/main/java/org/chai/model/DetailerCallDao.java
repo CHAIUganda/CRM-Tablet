@@ -55,7 +55,8 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
         public final static Property TenureLength = new Property(24, Integer.class, "tenureLength", false, "TENURE_LENGTH");
         public final static Property Latitude = new Property(25, Double.class, "latitude", false, "LATITUDE");
         public final static Property Longitude = new Property(26, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property TaskId = new Property(27, String.class, "taskId", false, "TASK_ID");
+        public final static Property IsNew = new Property(27, Boolean.class, "isNew", false, "IS_NEW");
+        public final static Property TaskId = new Property(28, String.class, "taskId", false, "TASK_ID");
     };
 
     private DaoSession daoSession;
@@ -75,7 +76,7 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'DETAILER_CALL' (" + //
-                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'DATE_OF_SURVEY' INTEGER," + // 1: dateOfSurvey
                 "'DIARRHEA_PATIENTS_IN_FACILITY' INTEGER," + // 2: diarrheaPatientsInFacility
                 "'HEARD_ABOUT_DIARRHEA_TREATMENT_IN_CHILDREN' TEXT," + // 3: heardAboutDiarrheaTreatmentInChildren
@@ -102,7 +103,8 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
                 "'TENURE_LENGTH' INTEGER," + // 24: tenureLength
                 "'LATITUDE' REAL," + // 25: latitude
                 "'LONGITUDE' REAL," + // 26: longitude
-                "'TASK_ID' TEXT NOT NULL );"); // 27: taskId
+                "'IS_NEW' INTEGER," + // 27: isNew
+                "'TASK_ID' TEXT NOT NULL );"); // 28: taskId
     }
 
     /** Drops the underlying database table. */
@@ -246,7 +248,12 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
         if (longitude != null) {
             stmt.bindDouble(27, longitude);
         }
-        stmt.bindString(28, entity.getTaskId());
+ 
+        Boolean isNew = entity.getIsNew();
+        if (isNew != null) {
+            stmt.bindLong(28, isNew ? 1l: 0l);
+        }
+        stmt.bindString(29, entity.getTaskId());
     }
 
     @Override
@@ -292,7 +299,8 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
             cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24), // tenureLength
             cursor.isNull(offset + 25) ? null : cursor.getDouble(offset + 25), // latitude
             cursor.isNull(offset + 26) ? null : cursor.getDouble(offset + 26), // longitude
-            cursor.getString(offset + 27) // taskId
+            cursor.isNull(offset + 27) ? null : cursor.getShort(offset + 27) != 0, // isNew
+            cursor.getString(offset + 28) // taskId
         );
         return entity;
     }
@@ -327,7 +335,8 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
         entity.setTenureLength(cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24));
         entity.setLatitude(cursor.isNull(offset + 25) ? null : cursor.getDouble(offset + 25));
         entity.setLongitude(cursor.isNull(offset + 26) ? null : cursor.getDouble(offset + 26));
-        entity.setTaskId(cursor.getString(offset + 27));
+        entity.setIsNew(cursor.isNull(offset + 27) ? null : cursor.getShort(offset + 27) != 0);
+        entity.setTaskId(cursor.getString(offset + 28));
      }
     
     /** @inheritdoc */

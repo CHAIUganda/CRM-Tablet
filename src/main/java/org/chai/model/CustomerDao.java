@@ -72,7 +72,7 @@ public class CustomerDao extends AbstractDao<Customer, String> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'CUSTOMER' (" + //
-                "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
+                "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'LATITUDE' REAL," + // 1: latitude
                 "'LONGITUDE' REAL," + // 2: longitude
                 "'OUTLET_NAME' TEXT NOT NULL ," + // 3: outletName
