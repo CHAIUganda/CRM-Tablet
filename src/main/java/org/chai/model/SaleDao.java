@@ -37,8 +37,9 @@ public class SaleDao extends AbstractDao<Sale, String> {
         public final static Property PointOfsaleMaterial = new Property(6, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
         public final static Property RecommendationNextStep = new Property(7, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
         public final static Property RecommendationLevel = new Property(8, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
-        public final static Property OrderId = new Property(9, String.class, "orderId", false, "ORDER_ID");
-        public final static Property TaskId = new Property(10, String.class, "taskId", false, "TASK_ID");
+        public final static Property GovernmentApproval = new Property(9, String.class, "governmentApproval", false, "GOVERNMENT_APPROVAL");
+        public final static Property OrderId = new Property(10, String.class, "orderId", false, "ORDER_ID");
+        public final static Property TaskId = new Property(11, String.class, "taskId", false, "TASK_ID");
     };
 
     private DaoSession daoSession;
@@ -68,8 +69,9 @@ public class SaleDao extends AbstractDao<Sale, String> {
                 "'POINT_OFSALE_MATERIAL' TEXT," + // 6: pointOfsaleMaterial
                 "'RECOMMENDATION_NEXT_STEP' TEXT," + // 7: recommendationNextStep
                 "'RECOMMENDATION_LEVEL' TEXT," + // 8: recommendationLevel
-                "'ORDER_ID' TEXT NOT NULL ," + // 9: orderId
-                "'TASK_ID' TEXT NOT NULL );"); // 10: taskId
+                "'GOVERNMENT_APPROVAL' TEXT," + // 9: governmentApproval
+                "'ORDER_ID' TEXT NOT NULL ," + // 10: orderId
+                "'TASK_ID' TEXT NOT NULL );"); // 11: taskId
     }
 
     /** Drops the underlying database table. */
@@ -119,8 +121,13 @@ public class SaleDao extends AbstractDao<Sale, String> {
         if (recommendationLevel != null) {
             stmt.bindString(9, recommendationLevel);
         }
-        stmt.bindString(10, entity.getOrderId());
-        stmt.bindString(11, entity.getTaskId());
+ 
+        String governmentApproval = entity.getGovernmentApproval();
+        if (governmentApproval != null) {
+            stmt.bindString(10, governmentApproval);
+        }
+        stmt.bindString(11, entity.getOrderId());
+        stmt.bindString(12, entity.getTaskId());
     }
 
     @Override
@@ -148,8 +155,9 @@ public class SaleDao extends AbstractDao<Sale, String> {
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // pointOfsaleMaterial
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // recommendationNextStep
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // recommendationLevel
-            cursor.getString(offset + 9), // orderId
-            cursor.getString(offset + 10) // taskId
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // governmentApproval
+            cursor.getString(offset + 10), // orderId
+            cursor.getString(offset + 11) // taskId
         );
         return entity;
     }
@@ -166,8 +174,9 @@ public class SaleDao extends AbstractDao<Sale, String> {
         entity.setPointOfsaleMaterial(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setRecommendationNextStep(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setRecommendationLevel(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setOrderId(cursor.getString(offset + 9));
-        entity.setTaskId(cursor.getString(offset + 10));
+        entity.setGovernmentApproval(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setOrderId(cursor.getString(offset + 10));
+        entity.setTaskId(cursor.getString(offset + 11));
      }
     
     /** @inheritdoc */

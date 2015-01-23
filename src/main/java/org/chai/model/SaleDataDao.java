@@ -31,10 +31,9 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
         public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
         public final static Property Quantity = new Property(1, int.class, "quantity", false, "QUANTITY");
         public final static Property Price = new Property(2, int.class, "price", false, "PRICE");
-        public final static Property ProductId = new Property(3, String.class, "productId", false, "PRODUCT_ID");
-        public final static Property SaleId = new Property(4, String.class, "saleId", false, "SALE_ID");
-        public final static Property AdhockSaleId = new Property(5, String.class, "adhockSaleId", false, "ADHOCK_SALE_ID");
-        public final static Property ProductRefId = new Property(6, String.class, "productRefId", false, "PRODUCT_REF_ID");
+        public final static Property SaleId = new Property(3, String.class, "saleId", false, "SALE_ID");
+        public final static Property AdhockSaleId = new Property(4, String.class, "adhockSaleId", false, "ADHOCK_SALE_ID");
+        public final static Property ProductId = new Property(5, String.class, "productId", false, "PRODUCT_ID");
     };
 
     private DaoSession daoSession;
@@ -59,10 +58,9 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
                 "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
                 "'QUANTITY' INTEGER NOT NULL ," + // 1: quantity
                 "'PRICE' INTEGER NOT NULL ," + // 2: price
-                "'PRODUCT_ID' TEXT," + // 3: productId
-                "'SALE_ID' TEXT," + // 4: saleId
-                "'ADHOCK_SALE_ID' TEXT," + // 5: adhockSaleId
-                "'PRODUCT_REF_ID' TEXT NOT NULL );"); // 6: productRefId
+                "'SALE_ID' TEXT," + // 3: saleId
+                "'ADHOCK_SALE_ID' TEXT," + // 4: adhockSaleId
+                "'PRODUCT_ID' TEXT NOT NULL );"); // 5: productId
     }
 
     /** Drops the underlying database table. */
@@ -79,21 +77,16 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
         stmt.bindLong(2, entity.getQuantity());
         stmt.bindLong(3, entity.getPrice());
  
-        String productId = entity.getProductId();
-        if (productId != null) {
-            stmt.bindString(4, productId);
-        }
- 
         String saleId = entity.getSaleId();
         if (saleId != null) {
-            stmt.bindString(5, saleId);
+            stmt.bindString(4, saleId);
         }
  
         String adhockSaleId = entity.getAdhockSaleId();
         if (adhockSaleId != null) {
-            stmt.bindString(6, adhockSaleId);
+            stmt.bindString(5, adhockSaleId);
         }
-        stmt.bindString(7, entity.getProductRefId());
+        stmt.bindString(6, entity.getProductId());
     }
 
     @Override
@@ -115,10 +108,9 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
             cursor.getString(offset + 0), // uuid
             cursor.getInt(offset + 1), // quantity
             cursor.getInt(offset + 2), // price
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // productId
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // saleId
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // adhockSaleId
-            cursor.getString(offset + 6) // productRefId
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // saleId
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // adhockSaleId
+            cursor.getString(offset + 5) // productId
         );
         return entity;
     }
@@ -129,10 +121,9 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
         entity.setUuid(cursor.getString(offset + 0));
         entity.setQuantity(cursor.getInt(offset + 1));
         entity.setPrice(cursor.getInt(offset + 2));
-        entity.setProductId(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setSaleId(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setAdhockSaleId(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setProductRefId(cursor.getString(offset + 6));
+        entity.setSaleId(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setAdhockSaleId(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setProductId(cursor.getString(offset + 5));
      }
     
     /** @inheritdoc */
@@ -186,16 +177,16 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
     }
 
     /** Internal query to resolve the "salesDatas" to-many relationship of Product. */
-    public List<SaleData> _queryProduct_SalesDatas(String productRefId) {
+    public List<SaleData> _queryProduct_SalesDatas(String productId) {
         synchronized (this) {
             if (product_SalesDatasQuery == null) {
                 QueryBuilder<SaleData> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.ProductRefId.eq(null));
+                queryBuilder.where(Properties.ProductId.eq(null));
                 product_SalesDatasQuery = queryBuilder.build();
             }
         }
         Query<SaleData> query = product_SalesDatasQuery.forCurrentThread();
-        query.setParameter(0, productRefId);
+        query.setParameter(0, productId);
         return query.list();
     }
 
@@ -213,7 +204,7 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
             SqlUtils.appendColumns(builder, "T2", daoSession.getAdhockSaleDao().getAllColumns());
             builder.append(" FROM SALE_DATA T");
             builder.append(" LEFT JOIN SALE T0 ON T.'SALE_ID'=T0.'UUID'");
-            builder.append(" LEFT JOIN PRODUCT T1 ON T.'PRODUCT_REF_ID'=T1.'UUID'");
+            builder.append(" LEFT JOIN PRODUCT T1 ON T.'PRODUCT_ID'=T1.'UUID'");
             builder.append(" LEFT JOIN ADHOCK_SALE T2 ON T.'ADHOCK_SALE_ID'=T2.'UUID'");
             builder.append(' ');
             selectDeep = builder.toString();

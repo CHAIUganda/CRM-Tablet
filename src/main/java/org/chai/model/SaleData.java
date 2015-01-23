@@ -19,10 +19,10 @@ public class SaleData {
     private String uuid;
     private int quantity;
     private int price;
-    private String productId;
     private String adhockSaleId;
     /** Not-null value. */
-    private String productRefId;
+    private String productId;
+
 
     // KEEP FIELDS - put your custom fields here
 
@@ -59,14 +59,13 @@ public class SaleData {
         this.uuid = uuid;
     }
 
-    public SaleData(String uuid, int quantity, int price, String productId, String saleId, String adhockSaleId, String productRefId) {
+    public SaleData(String uuid, int quantity, int price, String saleId, String adhockSaleId, String productId) {
         this.uuid = uuid;
         this.quantity = quantity;
         this.price = price;
-        this.productId = productId;
         this.saleId = saleId;
         this.adhockSaleId = adhockSaleId;
-        this.productRefId = productRefId;
+        this.productId = productId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -101,14 +100,6 @@ public class SaleData {
         this.price = price;
     }
 
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
     public String getSaleId() {
         return saleId;
     }
@@ -126,13 +117,13 @@ public class SaleData {
     }
 
     /** Not-null value. */
-    public String getProductRefId() {
-        return productRefId;
+    public String getProductId() {
+        return productId;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setProductRefId(String productRefId) {
-        this.productRefId = productRefId;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     /** To-one relationship, resolved on first access. */
@@ -162,7 +153,7 @@ public class SaleData {
 
     /** To-one relationship, resolved on first access. */
     public Product getProduct() {
-        String __key = this.productRefId;
+        String __key = this.productId;
         if (product__resolvedKey == null || product__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
@@ -179,12 +170,12 @@ public class SaleData {
 
     public void setProduct(Product product) {
         if (product == null) {
-            throw new DaoException("To-one property 'productRefId' has not-null constraint; cannot set to-one to null");
+            throw new DaoException("To-one property 'productId' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
             this.product = product;
-            productRefId = product.getUuid();
-            product__resolvedKey = productRefId;
+            productId = product.getUuid();
+            product__resolvedKey = productId;
         }
     }
 

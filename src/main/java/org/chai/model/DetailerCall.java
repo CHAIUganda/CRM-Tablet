@@ -46,15 +46,6 @@ public class DetailerCall {
     /** Not-null value. */
     private String taskId;
 
-    /** Used to resolve relations */
-    private transient DaoSession daoSession;
-
-    /** Used for active entity operations. */
-    private transient DetailerCallDao myDao;
-
-    private Task task;
-    private String task__resolvedKey;
-
 
     // KEEP FIELDS - put your custom fields here
 

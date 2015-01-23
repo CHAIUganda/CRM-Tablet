@@ -27,6 +27,7 @@ public class Sale {
     private String pointOfsaleMaterial;
     private String recommendationNextStep;
     private String recommendationLevel;
+    private String governmentApproval;
     /** Not-null value. */
     private String orderId;
 
@@ -62,7 +63,7 @@ public class Sale {
         this.uuid = uuid;
     }
 
-    public Sale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String orderId, String taskId) {
+    public Sale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, String orderId, String taskId) {
         this.uuid = uuid;
         this.dateOfSale = dateOfSale;
         this.doYouStockOrsZinc = doYouStockOrsZinc;
@@ -72,6 +73,7 @@ public class Sale {
         this.pointOfsaleMaterial = pointOfsaleMaterial;
         this.recommendationNextStep = recommendationNextStep;
         this.recommendationLevel = recommendationLevel;
+        this.governmentApproval = governmentApproval;
         this.orderId = orderId;
         this.taskId = taskId;
     }
@@ -156,6 +158,14 @@ public class Sale {
 
     public void setRecommendationLevel(String recommendationLevel) {
         this.recommendationLevel = recommendationLevel;
+    }
+
+    public String getGovernmentApproval() {
+        return governmentApproval;
+    }
+
+    public void setGovernmentApproval(String governmentApproval) {
+        this.governmentApproval = governmentApproval;
     }
 
     /** Not-null value. */

@@ -45,18 +45,6 @@ public class Customer {
     /** Not-null value. */
     private String subcountyId;
 
-    /** Used to resolve relations */
-    private transient DaoSession daoSession;
-
-    /** Used for active entity operations. */
-    private transient CustomerDao myDao;
-
-    private Subcounty subcounty;
-    private String subcounty__resolvedKey;
-
-    private List<CustomerContact> customerContacts;
-    private List<Order> orders;
-    private List<Task> tasks;
     private List<AdhockSale> adhockSales;
 
     // KEEP FIELDS - put your custom fields here
@@ -72,7 +60,7 @@ public class Customer {
     @JsonIgnore
     private Subcounty subcounty;
     @JsonIgnore
-    private Long subcounty__resolvedKey;
+    private String subcounty__resolvedKey;
 
     private List<CustomerContact> customerContacts;
     @JsonIgnore

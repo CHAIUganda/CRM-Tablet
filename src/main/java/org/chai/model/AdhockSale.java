@@ -31,14 +31,6 @@ public class AdhockSale {
     /** Not-null value. */
     private String customerId;
 
-    /** Used to resolve relations */
-    private transient DaoSession daoSession;
-
-    /** Used for active entity operations. */
-    private transient AdhockSaleDao myDao;
-
-    private Customer customer;
-    private String customer__resolvedKey;
 
     private List<SaleData> adhockSalesDatas;
 

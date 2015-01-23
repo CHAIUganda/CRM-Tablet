@@ -26,14 +26,6 @@ public class CustomerContact {
     /** Not-null value. */
     private String customerId;
 
-    /** Used to resolve relations */
-    private transient DaoSession daoSession;
-
-    /** Used for active entity operations. */
-    private transient CustomerContactDao myDao;
-
-    private Customer customer;
-    private String customer__resolvedKey;
 
 
     // KEEP FIELDS - put your custom fields here

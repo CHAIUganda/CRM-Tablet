@@ -23,16 +23,6 @@ public class Order {
     /** Not-null value. */
     private String customerId;
 
-    /** Used to resolve relations */
-    private transient DaoSession daoSession;
-
-    /** Used for active entity operations. */
-    private transient OrderDao myDao;
-
-    private Customer customer;
-    private String customer__resolvedKey;
-
-    private List<Sale> sales;
     private List<OrderData> orderDatas;
 
     // KEEP FIELDS - put your custom fields here
