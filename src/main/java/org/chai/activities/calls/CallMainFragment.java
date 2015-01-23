@@ -84,7 +84,7 @@ public class CallMainFragment extends Fragment {
     private void goToDetailerForm(DetailerCall itemAtPosition) {
         DetailersActivity detailersActivity = new DetailersActivity();
         Bundle bundle = new Bundle();
-        bundle.putLong("callId", itemAtPosition.getId());
+        bundle.putString("callId", itemAtPosition.getUuid());
         detailersActivity.setArguments(bundle);
         ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);
     }
@@ -92,7 +92,7 @@ public class CallMainFragment extends Fragment {
     private void goToSalesForm(Sale sale){
         SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
         Bundle bundle = new Bundle();
-        bundle.putLong("callId", sale.getId());
+        bundle.putString("callId", sale.getUuid());
         commercialFormActivity.setArguments(bundle);
         ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity,true);
     }

@@ -66,13 +66,13 @@ public class TaskCalenderFragment extends Fragment {
                     SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
                     Bundle bundle = new Bundle();
                     Task itemAtPosition = (Task) adapterView.getItemAtPosition(position);
-                    bundle.putLong("taskId", itemAtPosition.getId());
+                    bundle.putString("taskId", itemAtPosition.getUuid());
                     commercialFormActivity.setArguments(bundle);
                     ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity, true);
                 }else{
                     DetailersActivity detailersActivity = new DetailersActivity();
                     Bundle bundle = new Bundle();
-                    bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
+                    bundle.putString("taskId", ((Task) adapterView.getItemAtPosition(position)).getUuid());
                     detailersActivity.setArguments(bundle);
                     ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);
                 }

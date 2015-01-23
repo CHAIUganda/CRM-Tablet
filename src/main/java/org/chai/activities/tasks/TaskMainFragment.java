@@ -35,7 +35,6 @@ public class TaskMainFragment extends BaseContainerFragment {
     private View getTabIndicator(Context context, String title) {
         View view = LayoutInflater.from(context).inflate(R.layout.tab_layout, null);
         ImageView iv = (ImageView) view.findViewById(R.id.imageView);
-//        iv.setImageResource(icon);
         TextView tv = (TextView) view.findViewById(R.id.textView);
         tv.setText(title);
         return view;

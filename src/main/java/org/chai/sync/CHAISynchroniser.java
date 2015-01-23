@@ -101,8 +101,6 @@ public class CHAISynchroniser {
             subcountyDao.deleteAll();
             customerContactDao.deleteAll();
             customerDao.deleteAll();
-            taskDao.deleteAll();
-            detailerCallDao.deleteAll();
             saleDao.deleteAll();
             downloadRegions();
             progressDialog.incrementProgressBy(10);
@@ -182,11 +180,11 @@ public class CHAISynchroniser {
         Customer[] customers = customerClient.downloadCustomers();
         for(Customer customer:customers){
             Long id = customerDao.insert(customer);
-            saveCustomerContacts(customer.getCustomerContacts(), id);
+            saveCustomerContacts(customer.getCustomerContacts(), customer.getUuid());
         }
     }
 
-    public void saveCustomerContacts(List<CustomerContact> customerContacts,Long customerId){
+    public void saveCustomerContacts(List<CustomerContact> customerContacts,String customerId){
         for(CustomerContact customerContact:customerContacts){
             customerContact.setCustomerId(customerId);
             customerContactDao.insert(customerContact);
@@ -218,6 +216,10 @@ public class CHAISynchroniser {
         if(!taskList.isEmpty()){
             updatePropgress("Uploading Tasks..");
         }
+        for (Task task : taskList) {
+            boolean uploaded = taskClient.uploadTask(task);
+        }
+
     }
 
     private void downloadProducts(){

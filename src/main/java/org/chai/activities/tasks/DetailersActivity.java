@@ -14,6 +14,8 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
+import de.greenrobot.dao.query.Query;
+import de.greenrobot.dao.query.WhereCondition;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
 import org.chai.adapter.DistrictArrayAdapter;
@@ -28,7 +30,6 @@ import java.util.*;
  */
 public class DetailersActivity extends Fragment {
 
-    static final int DATE_PICKER_ID = 1111;
     private EditText dateEditTxt;
     private DatePickerDialog datePickerDialog;
     private String initialDate;
@@ -71,6 +72,7 @@ public class DetailersActivity extends Fragment {
             detailerCall = new DetailerCall(null);
             Long taskId = bundle.getLong("taskId");
             callDataTask = taskDao.loadDeep(taskId);
+            detailerCall = getLastDetailerInfo(callDataTask.getCustomer());
         }
         setDateWidget(view);
         setGpsWidget(view);
@@ -112,6 +114,23 @@ public class DetailersActivity extends Fragment {
         bindDetailerCallToUi(view);
         managePointOfSaleOthers(view,false);
         return  view;
+    }
+
+    private DetailerCall getLastDetailerInfo(Customer customer) {
+        try {
+            Query query = detailerCallDao.queryBuilder().where(new WhereCondition.StringCondition(" T.'"+DetailerCallDao.Properties.
+                    TaskId.columnName + "' IN " + "(SELECT " + TaskDao.Properties.Uuid.columnName + " FROM " + TaskDao.TABLENAME + " C WHERE C.'" + TaskDao.Properties.CustomerId.columnName + "' = " + customer.getUuid()+")")).build();
+            List<DetailerCall> detailerCallList = query.list();
+           /* List<DetailerCall> detailerCallList = detailerCallDao.queryRaw(" inner join " + TaskDao.TABLENAME + " TA on T." + DetailerCallDao.Properties.TaskId.columnName
+                    + " = TA." + TaskDao.Properties.Id.columnName + " inner join " + CustomerDao.TABLENAME + " C on TA." + TaskDao.Properties.CustomerId.columnName
+                    + " = C." + CustomerDao.Properties.Id.columnName + " where C." + CustomerDao.Properties.Id.columnName + " = " + customer.getId());*/
+            if (!detailerCallList.isEmpty()) {
+                return detailerCallList.get(0);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     private void initialiseGreenDao() {
@@ -384,7 +403,7 @@ public class DetailersActivity extends Fragment {
         boolean isSaved = false;
         try {
             bindUiToDetailerCall();
-            detailerCall.setTaskId(callDataTask.getId());
+            detailerCall.setTaskId(callDataTask.getUuid());
             if(isNewDetailerCall()){
                 detailerCallDao.insert(detailerCall);
             }else{
@@ -400,7 +419,7 @@ public class DetailersActivity extends Fragment {
     }
 
     private boolean isNewDetailerCall() {
-        if (detailerCall.getId() == null || detailerCall.getId() == 0) {
+        if (detailerCall == null || detailerCall.getUuid() == null) {
             return true;
         } else {
             return false;
