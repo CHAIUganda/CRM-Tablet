@@ -286,8 +286,6 @@ public class DetailersActivity extends Fragment {
         if (detailerCall == null) {
             detailerCall = new DetailerCall(null);
         }
-        //
-        detailerCall.setUuid(UUID.randomUUID().toString());
         detailerCall.setDateOfSurvey(new Date());
         detailerCall.setDiarrheaPatientsInFacility(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).getText().toString()));
         detailerCall.setOtherWaysHowYouHeard(((EditText) getActivity().findViewById(R.id.detailer_other_ways_youheard_about_zinc)).getText().toString());
@@ -405,6 +403,7 @@ public class DetailersActivity extends Fragment {
             bindUiToDetailerCall();
             detailerCall.setTaskId(callDataTask.getUuid());
             if(isNewDetailerCall()){
+                detailerCall.setUuid(UUID.randomUUID().toString());
                 detailerCallDao.insert(detailerCall);
             }else{
                 detailerCallDao.update(detailerCall);
