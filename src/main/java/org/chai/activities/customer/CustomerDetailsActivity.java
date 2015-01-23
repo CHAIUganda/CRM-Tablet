@@ -28,15 +28,15 @@ public class CustomerDetailsActivity extends Activity {
     private DaoSession daoSession;
     private CustomerDao customerDao;
 
-    private long customerId;
+    private String customerId;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_details_activity);
         initialiseGreenDao();
         Bundle bundle = getIntent().getExtras();
-        customerId = bundle.getLong("id");
-        if (customerId != 0) {
+        customerId = bundle.getString("id");
+        if (customerId != null) {
             Customer customer = customerDao.load(customerId);
             if (customer != null) {
                 loadCustomerDetails(customer);
@@ -56,7 +56,7 @@ public class CustomerDetailsActivity extends Activity {
             case R.id.customer_details_edit:
                 Intent intent = new Intent(getApplicationContext(),CustomerForm.class);
                 Bundle bundle = new Bundle();
-                bundle.putLong("id",customerId);
+                bundle.putString("id",customerId);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return true;

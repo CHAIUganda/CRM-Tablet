@@ -61,17 +61,17 @@ public class DetailersActivity extends Fragment {
         View view = inflater.inflate(R.layout.detailers_form,container, false);
         initialiseGreenDao();
         Bundle bundle = getArguments();
-        Long callId = bundle.getLong("callId");
-        if (callId != 0 && callId != null) {
+        String callId = bundle.getString("callId");
+        if (callId != null) {
             //we are from call data listview
-            detailerCall = detailerCallDao.loadDeep(callId);
+            detailerCall = detailerCallDao.load(callId);
             callDataTask = detailerCall.getTask();
         } else {
             //from tasklist view
             Log.i("callId=======================================================", callId + "");
             detailerCall = new DetailerCall(null);
-            Long taskId = bundle.getLong("taskId");
-            callDataTask = taskDao.loadDeep(taskId);
+            String taskId = bundle.getString("taskId");
+            callDataTask = taskDao.load(taskId);
             detailerCall = getLastDetailerInfo(callDataTask.getCustomer());
         }
         setDateWidget(view);

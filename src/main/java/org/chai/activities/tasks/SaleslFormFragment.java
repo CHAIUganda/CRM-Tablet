@@ -267,16 +267,16 @@ public class SaleslFormFragment extends Fragment {
             saleCallData.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.sales_next_step_recommendation)).getSelectedItem().toString());
             saleCallData.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.sales_recommendation_level)).getSelectedItem().toString());
             saleCallData.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.sales_government_approval)).getSelectedItem().toString());
-            saleCallData.setTaskId(callDataTask.getId());
-            saleCallData.setOrderRefid(callDataTask.getId());
+            saleCallData.setTaskId(callDataTask.getUuid());
+            saleCallData.setOrderId(callDataTask.getUuid());
             saleCallData.setOrderId(callDataTask.getUuid());
             if(isUpdate){
                 saleDao.update(saleCallData);
-                submitSaleData(saleCallData.getId());
+                submitSaleData(saleCallData.getUuid());
             }else {
                 Long saleId = saleDao.insert(saleCallData);
                 //add the different sales.
-                submitSaleData(saleId);
+                submitSaleData(saleCallData.getUuid());
                 callDataTask.setStatus(TaskMainFragment.STATUS_COMPLETE);
                 taskDao.update(callDataTask);
             }
@@ -287,7 +287,7 @@ public class SaleslFormFragment extends Fragment {
         return isSaved;
     }
 
-    private void submitSaleData(Long saleId) {
+    private void submitSaleData(String saleId) {
         for (int i = 0; i < spinnerList.size(); ++i) {
             try{
                 SaleData saleData = instantiateSaleData(i);
@@ -296,10 +296,9 @@ public class SaleslFormFragment extends Fragment {
                 saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
                 saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
                 Product product = (Product) spinnerList.get(i).getSelectedItem();
-                saleData.setProductRefId(product.getId());
                 saleData.setProductId(product.getUuid());
 
-                if(saleData.getId()!=null){
+                if(saleData.getUuid()!=null){
                     saleDataDao.update(saleData);
                 }else{
                     saleDataDao.insert(saleData);
@@ -356,7 +355,7 @@ public class SaleslFormFragment extends Fragment {
     }
 
     private boolean isNewSalesCall() {
-        if (saleCallData == null || saleCallData.getId() == null) {
+        if (saleCallData == null || saleCallData.getUuid() == null) {
             return true;
         } else {
             return false;
@@ -365,7 +364,7 @@ public class SaleslFormFragment extends Fragment {
 
     private int getProductPosition(Product product) {
         for (int i = 0; i < products.size(); ++i) {
-            if (products.get(i).getId() == product.getId()) {
+            if (products.get(i).getUuid() == product.getUuid()) {
                 return i;
             }
         }

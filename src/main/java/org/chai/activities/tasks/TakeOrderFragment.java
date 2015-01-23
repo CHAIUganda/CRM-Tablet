@@ -140,7 +140,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             isUpdate = true;
-            Long orderId = bundle.getLong("orderId");
+            String orderId = bundle.getString("orderId");
             bindOrderToUi(orderId, view);
         }
         return view;
@@ -162,8 +162,8 @@ public class TakeOrderFragment extends BaseContainerFragment {
         }
     }
 
-    private void bindOrderToUi(Long orderId, View view) {
-        orderInstance = orderDao.loadDeep(orderId);
+    private void bindOrderToUi(String orderId, View view) {
+        orderInstance = orderDao.load(orderId);
         if (orderInstance != null) {
             ((AutoCompleteTextView) view.findViewById(R.id.order_auto_complete_textview)).setText(orderInstance.getCustomer().getOutletName());
             selectedCustomer = orderInstance.getCustomer();
@@ -247,35 +247,32 @@ public class TakeOrderFragment extends BaseContainerFragment {
 
     private void  submitOrder(){
         if (!isUpdate) {
-            orderInstance = new Order(null);
+            orderInstance = new Order(UUID.randomUUID().toString());
         }
-        orderInstance.setClientRefId(UUID.randomUUID().toString());
         orderInstance.setCustomerId(selectedCustomer.getUuid());
-        orderInstance.setCustomerRefId(selectedCustomer.getId());
         orderInstance.setDeliveryDate(Utils.stringToDate(((EditText) getActivity().findViewById(R.id.order_delivery_date)).getText().toString()));
         orderInstance.setOrderDate(new Date());
         if (isUpdate) {
             orderDao.update(orderInstance);
-            submitOrderData(orderInstance.getId());
+            submitOrderData(orderInstance.getUuid());
         } else {
             Long orderId = orderDao.insert(orderInstance);
-            orderInstance.setId(orderId);
-            submitOrderData(orderId);
+            orderInstance.setUuid(orderInstance.getUuid());
+            submitOrderData(orderInstance.getUuid());
         }
     }
 
-    private void submitOrderData(Long orderId){
+    private void submitOrderData(String orderId){
         for (int i = 0; i < spinnerList.size(); ++i) {
             OrderData orderData = instantiateOrder(i);
             orderData.setOrderId(orderId);
-            orderData.setUuid(UUID.randomUUID().toString());
             orderData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
             Product product = (Product) spinnerList.get(i).getSelectedItem();
             orderData.setProductId(product.getUuid());
-            orderData.setProductRefId(product.getId());
-            if(orderData.getId()!=null){
+            if(orderData.getUuid()!=null){
                 orderDataDao.update(orderData);
             }else{
+                orderData.setUuid(UUID.randomUUID().toString());
                 orderDataDao.insert(orderData);
             }
         }
@@ -284,7 +281,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
 
     private int getProductPosition(Product product) {
         for (int i = 0; i < products.size(); ++i) {
-            if (products.get(i).getId() == product.getId()) {
+            if (products.get(i).getUuid() == product.getUuid()) {
                 return i;
             }
         }

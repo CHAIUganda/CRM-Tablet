@@ -54,7 +54,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
             viewHolder.outlet.setText(customer.getOutletName());
             viewHolder.locationDescription.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(),20));
         }
-        if (customer.getCustomerContacts().size() > 0) {
+        if (customer!= null && customer.getCustomerContacts().size() > 0) {
             CustomerContact customerCtct = null;
             customerCtct = Utils.getKeyCustomerContact(customer.getCustomerContacts());
             if(customerCtct != null){

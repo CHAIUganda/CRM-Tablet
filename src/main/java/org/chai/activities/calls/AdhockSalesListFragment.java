@@ -50,7 +50,7 @@ public class AdhockSalesListFragment extends Fragment {
                 AdhockSale sale =  (AdhockSale)adapterView.getItemAtPosition(position);
                 MakeAdhockSaleFragment makeAdhockSaleFragment = new MakeAdhockSaleFragment();
                 Bundle bundle = new Bundle();
-                bundle.putLong("saleId",sale.getId());
+                bundle.putString("saleId",sale.getUuid());
                 makeAdhockSaleFragment.setArguments(bundle);
                 ((BaseContainerFragment)getParentFragment()).replaceFragment(makeAdhockSaleFragment,true);
             }

@@ -77,8 +77,10 @@ public class LoginActivity extends Activity {
                                     newUser.setRole(remoteUser.getRole());
                                     userDao.insert(newUser);
                                     role = remoteUser.getRole();
+                                    islogin = true;
+                                }else{
+                                    islogin = false;
                                 }
-                                islogin = true;
 
                             }
                         } else {

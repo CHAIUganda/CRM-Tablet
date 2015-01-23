@@ -277,43 +277,4 @@ public class SampleData {
         }
 
     */
-    public  void insertSampleSales(Long taskId,String taskUUid){
-        Sale sale = new Sale(null);
-        sale.setUuid(UUID.randomUUID().toString());
-        sale.setDateOfSale(new Date());
-        sale.setDoYouStockOrsZinc(true);
-        sale.setHowmanyOrsInStock(50);
-        sale.setHowManyZincInStock(50);
-        sale.setPointOfsaleMaterial("T-shirts");
-        sale.setRecommendationNextStep("Stock more zinc");
-        sale.setRecommendationLevel("medium");
-        sale.setGovernmentApproval("Yes");
-        sale.setTaskId(taskId);
-        sale.setOrderId(taskUUid);
-        sale.setOrderRefid(taskId);
-        Long saleId = saleDao.insert(sale);
-        //add the different sales.
-        submitSaleData(saleId);
-    }
-
-    private void submitSaleData(Long saleId) {
-        SaleData saleData = new SaleData(null);
-        saleData.setUuid(UUID.randomUUID().toString());
-        saleData.setSaleId(saleId);
-        saleData.setPrice(500000);
-        saleData.setQuantity(55);
-        saleData.setProductId("0a932ce9-fdd6-4f21-b9ba-41b7d3398a4c");
-        saleData.setProductRefId(24);
-        saleDataDao.insert(saleData);
-
-        SaleData saleData2 = new SaleData(null);
-        saleData2.setUuid(UUID.randomUUID().toString());
-        saleData2.setSaleId(saleId);
-        saleData2.setPrice(100000);
-        saleData2.setQuantity(15);
-        saleData2.setProductId("7a289fa3-8e79-4a66-a905-b74d1ca30826");
-        saleData2.setProductRefId(28);
-        saleDataDao.insert(saleData2);
-    }
-
 }

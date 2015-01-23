@@ -50,7 +50,7 @@ public class OrdersMainFragment extends Fragment {
                 Order order =  (Order)adapterView.getItemAtPosition(position);
                 TakeOrderFragment takeOrderFragment = new TakeOrderFragment();
                 Bundle bundle = new Bundle();
-                bundle.putLong("orderId",order.getId());
+                bundle.putString("orderId",order.getUuid());
                 takeOrderFragment.setArguments(bundle);
                 ((BaseContainerFragment)getParentFragment()).replaceFragment(takeOrderFragment,true);
             }

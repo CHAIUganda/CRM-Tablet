@@ -52,7 +52,7 @@ public class TaskByLocationFragment extends Fragment {
         districtSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                Long districtId = ((District) districtSpinner.getSelectedItem()).getId();
+                String districtId = ((District) districtSpinner.getSelectedItem()).getUuid();
                 List<Subcounty> subcountyList = subcountyDao.queryBuilder().where(SubcountyDao.Properties.DistrictId.eq(districtId)).list();
                 subcountySpinner.setAdapter(new SubcountyArrayAdapter(getActivity(), R.id.task_location_subcounty_spinner, subcountyList.toArray(new Subcounty[subcountyList.size()])));
             }
@@ -66,10 +66,10 @@ public class TaskByLocationFragment extends Fragment {
         subcountySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                Long subcountyId = ((Subcounty) subcountySpinner.getSelectedItem()).getId();
+                String subcountyId = ((Subcounty) subcountySpinner.getSelectedItem()).getUuid();
 
                 Query query = taskDao.queryBuilder().where(new WhereCondition.StringCondition("T.'"+TaskDao.Properties.Status.columnName+"' != '"+TaskMainFragment.STATUS_COMPLETE+"' and T.'"+TaskDao.Properties.
-                        CustomerId.columnName + "' IN " + "(SELECT " + CustomerDao.Properties.Id.columnName + " FROM " + CustomerDao.TABLENAME + " C WHERE C.'" + CustomerDao.Properties.SubcountyId.columnName + "' = " + subcountyId+")")).build();
+                        CustomerId.columnName + "' IN " + "(SELECT " + CustomerDao.Properties.Uuid.columnName + " FROM " + CustomerDao.TABLENAME + " C WHERE C.'" + CustomerDao.Properties.SubcountyId.columnName + "' = " + subcountyId+")")).build();
                 List<Task> taskList = query.list();
                 listView.setAdapter(new TaskListAdapter(getActivity(),taskList));
             }
@@ -85,13 +85,13 @@ public class TaskByLocationFragment extends Fragment {
                 if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
                     SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
+                    bundle.putString("taskId", ((Task) adapterView.getItemAtPosition(position)).getUuid());
                     commercialFormActivity.setArguments(bundle);
                     ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity,true);
                 }else{
                     DetailersActivity detailersActivity = new DetailersActivity();
                     Bundle bundle = new Bundle();
-                    bundle.putLong("taskId", ((Task) adapterView.getItemAtPosition(position)).getId());
+                    bundle.putString("taskId", ((Task) adapterView.getItemAtPosition(position)).getUuid());
                     detailersActivity.setArguments(bundle);
                     ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);
                 }

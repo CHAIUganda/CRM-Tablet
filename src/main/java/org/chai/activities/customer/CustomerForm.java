@@ -52,7 +52,7 @@ public class CustomerForm extends Activity {
         setContentView(R.layout.customer_form);
         initialiseGreenDao();
         Bundle bundle = getIntent().getExtras();
-        Long customerId = bundle.getLong("id");
+        String customerId = bundle.getString("id");
         setCustomerInstance(customerId);
         try {
             List<Subcounty> subcountiesList = subcountyDao.loadAll();
@@ -65,7 +65,7 @@ public class CustomerForm extends Activity {
             districtSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    Long districtId = ((District) districtSpinner.getSelectedItem()).getId();
+                    String districtId = ((District) districtSpinner.getSelectedItem()).getUuid();
                     List<Subcounty> subcounties = subcountyDao.queryBuilder().where(SubcountyDao.Properties.DistrictId.eq(districtId)).list();
                     subcountySpinner.setAdapter(new SubcountyArrayAdapter(getApplicationContext(),R.id.details_subcounty,subcounties.toArray(new Subcounty[subcounties.size()])));
                 }
@@ -211,7 +211,7 @@ public class CustomerForm extends Activity {
             customerInstance.setRestockFrequency(((Spinner) findViewById(R.id.details_restock_frequency)).getSelectedItem().toString().toLowerCase());
             customerInstance.setLongitude(capturedLongitude);
             customerInstance.setLatitude(capturedLatitude);
-            customerInstance.setSubcountyId(((Subcounty) subcountySpinner.getSelectedItem()).getId());
+            customerInstance.setSubcountyId(((Subcounty) subcountySpinner.getSelectedItem()).getUuid());
             customerInstance.setSubcountyUuid(((Subcounty) subcountySpinner.getSelectedItem()).getUuid());
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -262,7 +262,7 @@ public class CustomerForm extends Activity {
                 customerInstance.setIsDirty(true);
                 if (isNewCustomer()) {
                     Long customerId = customerDao.insert(customerInstance);
-                    saveCustomerContacts(customerId);
+                    saveCustomerContacts(customerInstance.getUuid());
                 } else {
                     customerDao.update(customerInstance);
                 }
@@ -302,23 +302,22 @@ public class CustomerForm extends Activity {
     }
 
     private boolean isNewCustomer() {
-        if (customerInstance.getId() == null || customerInstance.getId() == 0) {
+        if (customerInstance.getUuid() == null) {
             return true;
         } else {
             return false;
         }
     }
 
-    private void setCustomerInstance(Long id) {
+    private void setCustomerInstance(String id) {
         try {
-            if (id == null || id == 0) {
-                customerInstance = new Customer(null);
+            if (id == null) {
+                customerInstance = new Customer(UUID.randomUUID().toString());
             } else {
                 customerInstance = customerDao.load(id);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            customerInstance = new Customer(null);
         }
     }
 
@@ -336,7 +335,7 @@ public class CustomerForm extends Activity {
         spinner.setSelection(position);
     }
 
-    private void saveCustomerContacts(Long customerId) {
+    private void saveCustomerContacts(String customerId) {
         for (CustomerContact customerContact : customerContacts) {
             customerContact.setCustomerId(customerId);
             customerContactDao.insert(customerContact);

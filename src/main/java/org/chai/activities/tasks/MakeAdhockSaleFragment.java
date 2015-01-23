@@ -283,7 +283,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
 
     private int getProductPosition(Product product) {
         for (int i = 0; i < products.size(); ++i) {
-            if (products.get(i).getId() == product.getId()) {
+            if (products.get(i).getUuid() == product.getUuid()) {
                 return i;
             }
         }
@@ -292,9 +292,8 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
 
     private void submitSale(){
         if(!isUpdate){
-         saleInstance = new AdhockSale(null);
+         saleInstance = new AdhockSale(UUID.randomUUID().toString());
         }
-        saleInstance.setClientRefId(UUID.randomUUID().toString());
         saleInstance.setDateOfSale(new Date());
         String stocksZinc = ((Spinner) getActivity().findViewById(R.id.adhock_sale_do_you_stock_zinc)).getSelectedItem().toString();
         saleInstance.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
@@ -310,19 +309,18 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         saleInstance.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.adhock_sale_recommendation_level)).getSelectedItem().toString());
         saleInstance.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.adhock_sale_government_approval)).getSelectedItem().toString());
         saleInstance.setCustomerId(salesCustomer.getUuid());
-        saleInstance.setCustomerRefId(salesCustomer.getId());
 
         if(isUpdate){
             saleDao.update(saleInstance);
-            submitSaleData(saleInstance.getId());
+            submitSaleData(saleInstance.getUuid());
         }else{
             Long saleId = saleDao.insert(saleInstance);
             //add the different sales.
-            submitSaleData(saleId);
+            submitSaleData(saleInstance.getUuid());
         }
     }
 
-    private void submitSaleData(Long saleId) {
+    private void submitSaleData(String saleId) {
         for (int i = 0; i < spinnerList.size(); ++i) {
             try {
                 SaleData saleData = instantiateSaleData(i);
@@ -331,9 +329,8 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
                 saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
                 saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
                 Product product = (Product) spinnerList.get(i).getSelectedItem();
-                saleData.setProductRefId(product.getId());
                 saleData.setProductId(product.getUuid());
-                if(saleData.getId()!=null){
+                if(saleData.getUuid()!=null){
                     saleDataDao.update(saleData);
                 }else{
                     saleDataDao.insert(saleData);

@@ -77,7 +77,7 @@ public class CustomersMainFragment extends ListFragment {
 
         Intent intent = new Intent(getActivity().getApplicationContext(), CustomerDetailsActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putLong("id", selectedCustomer.getId());
+        bundle.putString("id", selectedCustomer.getUuid());
         intent.putExtras(bundle);
         startActivity(intent);
     }

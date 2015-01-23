@@ -39,7 +39,7 @@ public class TaskViewOnMapFragment extends Fragment {
     private DaoSession daoSession;
     private TaskDao taskDao;
     private GoogleMap googleMap;
-    private HashMap<String,Long> markers = new HashMap<String, Long>();
+    private HashMap<String,String> markers = new HashMap<String, String>();
     private Spinner calenderSpinner;
     private AsyncTaskRunner runner;
 
@@ -68,7 +68,7 @@ public class TaskViewOnMapFragment extends Fragment {
           googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
               @Override
               public boolean onMarkerClick(Marker marker) {
-                  Long taskId = markers.get(marker.getId());
+                  String taskId = markers.get(marker.getId());
                   Task task = taskDao.load(taskId);
                   if(task!= null){
                       marker.showInfoWindow();
@@ -81,7 +81,7 @@ public class TaskViewOnMapFragment extends Fragment {
           googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
               @Override
               public void onInfoWindowClick(Marker marker) {
-                  Long taskId = markers.get(marker.getId());
+                  String taskId = markers.get(marker.getId());
                   runner = new AsyncTaskRunner();
                   runner.execute(taskId);
                   marker.hideInfoWindow();
@@ -129,7 +129,7 @@ public class TaskViewOnMapFragment extends Fragment {
                 if(longitude != 0&&latitude!= 0){
                     MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(latitude, longitude)).title(task.getDescription());
                     Marker marker = map.addMarker(markerOptions);
-                    markers.put(marker.getId(),task.getId());
+                    markers.put(marker.getId(),task.getUuid());
                 }
             }
         }
@@ -152,29 +152,29 @@ public class TaskViewOnMapFragment extends Fragment {
         return outstandingTasks;
     }
 
-    private void showForm(Long taskId){
+    private void showForm(String taskId){
         if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
             SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
             Bundle bundle = new Bundle();
-            bundle.putLong("taskId", taskId);
+            bundle.putString("taskId", taskId);
             commercialFormActivity.setArguments(bundle);
             ((BaseContainerFragment) getParentFragment()).replaceFragment(commercialFormActivity, true);
         } else {
             DetailersActivity detailersActivity = new DetailersActivity();
             Bundle bundle = new Bundle();
-            bundle.putLong("taskId", taskId);
+            bundle.putString("taskId", taskId);
             detailersActivity.setArguments(bundle);
             ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);
         }
         runner = null;
     }
-    private class AsyncTaskRunner extends AsyncTask<Long, String, String>{
+    private class AsyncTaskRunner extends AsyncTask<String, String, String>{
 
-        private Long taskId;
+        private String taskId;
 
         @Override
-        protected String doInBackground(Long... longs) {
-            taskId = longs[0];
+        protected String doInBackground(String... strings) {
+            taskId = strings[0];
             return null;
         }
 
