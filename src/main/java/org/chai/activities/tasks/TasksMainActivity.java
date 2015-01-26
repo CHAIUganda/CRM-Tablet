@@ -58,7 +58,7 @@ public class TasksMainActivity extends Activity {
                 Task selectedChild = taskList.get(selectedHeader).get(childPosition);
                 Intent intent = new Intent(getApplicationContext(), DetailersActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putLong("taskId", selectedChild.getId());
+                bundle.putString("taskId", selectedChild.getUuid());
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return false;

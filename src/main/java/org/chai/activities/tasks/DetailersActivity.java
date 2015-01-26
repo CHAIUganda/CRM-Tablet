@@ -128,7 +128,7 @@ public class DetailersActivity extends Fragment {
             ex.printStackTrace();
         }
         DetailerCall detailerCall = new DetailerCall(null);
-        detailerCallInstance.setIsNew(true);
+        detailerCall.setIsNew(true);
         return detailerCall;
     }
 
