@@ -146,10 +146,11 @@ public class TaskViewOnMapFragment extends Fragment {
                 Log.i("Latitude============",latitude+"");
                 Log.i("Longitude===========",longitude+"");
                 if(longitude != 0&&latitude!= 0){
-                    OverlayItem myLocationOverlayItem = new OverlayItem(task.getType(), task.getDescription(), new GeoPoint(latitude, longitude));
+                    OverlayItem taskMarker = new OverlayItem(task.getUuid(), task.getDescription(), new GeoPoint(latitude, longitude));
                     Drawable myCurrentLocationMarker = this.getResources().getDrawable(R.drawable.drugstore);
-                    myLocationOverlayItem.setMarker(myCurrentLocationMarker);
-                    items.add(myLocationOverlayItem);
+                    taskMarker.setMarker(myCurrentLocationMarker);
+                    items.add(taskMarker);
+                    markers.put(taskMarker.getTitle(),task.getUuid());
                 }
             }
         }
@@ -165,6 +166,9 @@ public class TaskViewOnMapFragment extends Fragment {
                     }
 
                     public boolean onItemLongPress(final int index, final OverlayItem item) {
+                        String taskId = markers.get(item.getTitle());
+                        runner = new AsyncTaskRunner();
+                        runner.execute(taskId);
                         return true;
                     }
                 }, resourceProxy);
