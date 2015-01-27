@@ -170,7 +170,6 @@ public class CallMainFragment extends Fragment {
                             detailerCalls.remove(position);
                             detailerCallAdapter.notifyDataSetChanged();
                         }
-                        salesAdapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
 
