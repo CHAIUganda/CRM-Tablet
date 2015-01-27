@@ -22,13 +22,16 @@ import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.model.*;
 import org.chai.rest.RestClient;
+import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
 import org.osmdroid.DefaultResourceProxyImpl;
+import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
+import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.SimpleLocationOverlay;
 
 import java.util.*;
@@ -48,24 +51,17 @@ public class TaskViewOnMapFragment extends Fragment {
     private AsyncTaskRunner runner;
 
 
-
-    // The MapView variable:
-    private MapView mapView;
-
-    // Default map zoom level:
     private int MAP_DEFAULT_ZOOM = 8;
-
-    // Default map Latitude:
-    private double MAP_DEFAULT_LATITUDE =0.381397;
-
-    // Default map Longitude:
+    private double MAP_DEFAULT_LATITUDE =0.881397;
     private double MAP_DEFAULT_LONGITUDE = 32.5202839;
 
-    private DefaultResourceProxyImpl resourceProxy;
-    private Drawable markerIcon;
-    private ArrayList<OverlayItem> items;
+    private MapView mapView;
+    private IMapController mapController;
     private SimpleLocationOverlay mMyLocationOverlay;
-
+    private ItemizedIconOverlay<OverlayItem> currentLocationOverlay;
+    private DefaultResourceProxyImpl resourceProxy;
+    private ArrayList<OverlayItem> items;
+    private GPSTracker gpsTracker;
 
 
     @Override
@@ -85,70 +81,39 @@ public class TaskViewOnMapFragment extends Fragment {
 
         mapView = (MapView)view.findViewById(R.id.mapview);
 
-        // Setup the mapView controller:
+        mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setBuiltInZoomControls(true);
         mapView.setMultiTouchControls(true);
-        mapView.setClickable(false);
-        mapView.setUseDataConnection(true);
-        mapView.getController().setZoom(MAP_DEFAULT_ZOOM);
-        mapView.getController().setCenter(new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE));
-        mapView.setTileSource(TileSourceFactory.MAPNIK);
-        markerIcon = this.getResources().getDrawable(R.drawable.drugstore);
-        resourceProxy = new DefaultResourceProxyImpl(getActivity().getApplicationContext());
-        items = new ArrayList<OverlayItem>();
+
+        mapController = this.mapView.getController();
+        mapController.setZoom(MAP_DEFAULT_ZOOM);
 
         this.mMyLocationOverlay = new SimpleLocationOverlay(getActivity());
         this.mapView.getOverlays().add(mMyLocationOverlay);
 
-       /* List<Task> tasks = taskDao.loadAll();
-        if(!tasks.isEmpty()){
-            addTasksToMap2(tasks, mapView);
-        }*/
+        gpsTracker = new GPSTracker(getActivity());
+        if(gpsTracker.canGetLocation()){
+            MAP_DEFAULT_LATITUDE = gpsTracker.getLatitude();
+            MAP_DEFAULT_LONGITUDE = gpsTracker.getLongitude();
+        }
 
+        GeoPoint currentLocation = new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE);
+        mapController.setCenter(currentLocation);
 
+        resourceProxy = new DefaultResourceProxyImpl(getActivity());
 
-       /* initialiseGreenDao();
-        googleMap =   ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-      if(googleMap!=null){
-          googleMap.setMyLocationEnabled(true);
-          googleMap.getUiSettings().setZoomControlsEnabled(true);
-          googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(1.3733, 32.2903), 8.0f));
-          List<Task> tasks = taskDao.loadAll();
-          if(!tasks.isEmpty()){
-              addTasksToMap(tasks, googleMap);
-          }
-          googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-              @Override
-              public boolean onMarkerClick(Marker marker) {
-                  String taskId = markers.get(marker.getId());
-                  Task task = taskDao.load(taskId);
-                  if(task!= null){
-                      marker.showInfoWindow();
-                  }else{
-                      Toast.makeText(getActivity(),"Task is unknown",Toast.LENGTH_LONG).show();
-                  }
-                  return false;
-              }
-          });
-          googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-              @Override
-              public void onInfoWindowClick(Marker marker) {
-                  String taskId = markers.get(marker.getId());
-                  runner = new AsyncTaskRunner();
-                  runner.execute(taskId);
-                  marker.hideInfoWindow();
-              }
-          });
-      }
-       */
+        OverlayItem myLocationOverlayItem = new OverlayItem("Here", "Current Position", currentLocation);
+        Drawable myCurrentLocationMarker = this.getResources().getDrawable(R.drawable.drugstore);
+        myLocationOverlayItem.setMarker(myCurrentLocationMarker);
 
         calenderSpinner = (Spinner)view.findViewById(R.id.map_filter_spinner);
         calenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = (String)calenderSpinner.getSelectedItem();
+                Log.i("selected:",item);
                 List<Task> taskList = loadTasksFromDb(item);
-                addTasksToMap2(taskList, mapView);
+                addTasksToMap2(taskList);
             }
 
             @Override
@@ -171,7 +136,8 @@ public class TaskViewOnMapFragment extends Fragment {
         }
     }
 
-    private void addTasksToMap(List<Task> taskList, GoogleMap map){
+    private void addTasksToMap2(List<Task> taskList){
+        items = new ArrayList<OverlayItem>();
         for(Task task:taskList){
             Customer customer = task.getCustomer();
             if(customer!=null){
@@ -180,33 +146,32 @@ public class TaskViewOnMapFragment extends Fragment {
                 Log.i("Latitude============",latitude+"");
                 Log.i("Longitude===========",longitude+"");
                 if(longitude != 0&&latitude!= 0){
-                    MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(latitude, longitude)).title(task.getDescription());
-                    Marker marker = map.addMarker(markerOptions);
-                    markers.put(marker.getId(),task.getUuid());
+                    OverlayItem myLocationOverlayItem = new OverlayItem(task.getType(), task.getDescription(), new GeoPoint(latitude, longitude));
+                    Drawable myCurrentLocationMarker = this.getResources().getDrawable(R.drawable.drugstore);
+                    myLocationOverlayItem.setMarker(myCurrentLocationMarker);
+                    items.add(myLocationOverlayItem);
                 }
             }
         }
+        currentLocationOverlay = new ItemizedIconOverlay<OverlayItem>(items,
+                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                    public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
+                        Toast.makeText(getActivity(),
+                            item.getTitle() + "\n"
+                                    + item.getSnippet() + "\n"
+                                    + item.getPoint().getLatitudeE6() + " : " + item.getPoint().getLongitudeE6(),
+                            Toast.LENGTH_LONG).show();
+                        return true;
+                    }
 
-    }
+                    public boolean onItemLongPress(final int index, final OverlayItem item) {
+                        return true;
+                    }
+                }, resourceProxy);
+        this.mapView.getOverlays().clear();
+        this.mapView.getOverlays().add(this.currentLocationOverlay);
+        this.mapView.invalidate();
 
-    private void addTasksToMap2(List<Task> taskList,MapView osmdrMap){
-        for(Task task:taskList){
-            Customer customer = task.getCustomer();
-            if(customer!=null){
-                double latitude = customer.getLatitude();
-                double longitude = customer.getLongitude();
-                Log.i("Latitude============",latitude+"");
-                Log.i("Longitude===========",longitude+"");
-                if(longitude != 0&&latitude!= 0){
-                    OverlayItem overlayItem = new OverlayItem("Here", "Current Position", new GeoPoint(latitude,longitude));
-                    overlayItem.setMarker(markerIcon);
-                    items.add(overlayItem);
-                }
-            }
-        }
-        ItemizedIconOverlay  markerOverlays = new ItemizedIconOverlay<OverlayItem>(items, onItemGestureListener,resourceProxy);
-        osmdrMap.getOverlays().add(markerOverlays);
-        osmdrMap.invalidate();
     }
 
     private List<Task> loadTasksFromDb(String dueDateString) {
@@ -257,22 +222,5 @@ public class TaskViewOnMapFragment extends Fragment {
            showForm(taskId);
         }
     }
-
-    ItemizedIconOverlay.OnItemGestureListener<OverlayItem> onItemGestureListener = new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
-        @Override
-        public boolean onItemSingleTapUp(int i, OverlayItem overlayItem) {
-            Toast.makeText(getActivity(),
-                    overlayItem.getSnippet() + "\n"
-                            + overlayItem.getTitle() + "\n"
-                            + overlayItem.getPoint().getLatitudeE6() + " : " + overlayItem.getPoint().getLongitudeE6(),
-                    Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        @Override
-        public boolean onItemLongPress(int i, OverlayItem overlayItem) {
-            return false;
-        }
-    };
 
 }
