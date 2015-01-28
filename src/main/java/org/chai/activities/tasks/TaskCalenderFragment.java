@@ -1,12 +1,12 @@
 package org.chai.activities.tasks;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -34,12 +34,14 @@ public class TaskCalenderFragment extends Fragment {
     TaskListAdapter taskListAdapter;
     private ListView listView;
     private Spinner spinner;
+    private List<Task> taskList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.task_calender_fragment, container, false);
         initialiseGreenDao();
-        taskListAdapter = new TaskListAdapter(getActivity(), loadTasksFromDb((getResources().getStringArray(R.array.task_filters))[0]));
+        taskList = loadTasksFromDb((getResources().getStringArray(R.array.task_filters))[0]);
+        taskListAdapter = new TaskListAdapter(getActivity(), taskList);
         listView = (ListView) view.findViewById(R.id.calender_tasks_list_view);
         spinner = (Spinner) view.findViewById(R.id.task_filter_spinner);
         listView.setAdapter(taskListAdapter);
@@ -109,5 +111,53 @@ public class TaskCalenderFragment extends Fragment {
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
         }
         return outstandingTasks;
-    } 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.delete_context_menu, menu);
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.delete_menu_item:
+                try {
+                    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
+                    int position = (int) info.id;
+                    askBeforeDelete(position).show();
+                } catch (Exception ex) {
+
+                }
+                return true;
+        }
+        return super.onContextItemSelected(menuItem);
+    }
+
+    private AlertDialog askBeforeDelete(final int position) {
+        AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                .setTitle("Delete")
+                .setMessage("Are you sure you want to Delete the selected Item")
+                .setIcon(R.drawable.delete_icon)
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {dialog.dismiss();
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+        return dialog;
+
+    }
+
 }
