@@ -48,6 +48,7 @@ public class DetailerCall {
     /** Not-null value. */
     private String taskId;
 
+
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */

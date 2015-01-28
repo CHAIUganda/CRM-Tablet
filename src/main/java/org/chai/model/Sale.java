@@ -31,6 +31,7 @@ public class Sale {
     private Boolean isHistory;
     /** Not-null value. */
     private String orderId;
+
     private List<SaleData> salesDatas;
 
     // KEEP FIELDS - put your custom fields here

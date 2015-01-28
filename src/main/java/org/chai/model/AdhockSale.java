@@ -30,7 +30,6 @@ public class AdhockSale {
     private String governmentApproval;
     /** Not-null value. */
     private String customerId;
-
     private List<SaleData> adhockSalesDatas;
 
     // KEEP FIELDS - put your custom fields here

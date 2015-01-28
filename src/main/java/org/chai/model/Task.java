@@ -27,6 +27,7 @@ public class Task {
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
     private Boolean isDirty;
+    private Boolean isAdhock;
     /** Not-null value. */
     private String customerId;
 
@@ -52,7 +53,7 @@ public class Task {
         this.uuid = uuid;
     }
 
-    public Task(String uuid, String description, String status, String priority, String type, java.util.Date dueDate, java.util.Date completionDate, java.util.Date dateScheduled, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String customerId) {
+    public Task(String uuid, String description, String status, String priority, String type, java.util.Date dueDate, java.util.Date completionDate, java.util.Date dateScheduled, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, Boolean isAdhock, String customerId) {
         this.uuid = uuid;
         this.description = description;
         this.status = status;
@@ -64,6 +65,7 @@ public class Task {
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
         this.isDirty = isDirty;
+        this.isAdhock = isAdhock;
         this.customerId = customerId;
     }
 
@@ -161,6 +163,14 @@ public class Task {
 
     public void setIsDirty(Boolean isDirty) {
         this.isDirty = isDirty;
+    }
+
+    public Boolean getIsAdhock() {
+        return isAdhock;
+    }
+
+    public void setIsAdhock(Boolean isAdhock) {
+        this.isAdhock = isAdhock;
     }
 
     /** Not-null value. */

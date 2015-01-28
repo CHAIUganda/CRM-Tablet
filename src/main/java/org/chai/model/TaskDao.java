@@ -39,7 +39,8 @@ public class TaskDao extends AbstractDao<Task, String> {
         public final static Property DateCreated = new Property(8, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
         public final static Property LastUpdated = new Property(9, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
         public final static Property IsDirty = new Property(10, Boolean.class, "isDirty", false, "IS_DIRTY");
-        public final static Property CustomerId = new Property(11, String.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property IsAdhock = new Property(11, Boolean.class, "isAdhock", false, "IS_ADHOCK");
+        public final static Property CustomerId = new Property(12, String.class, "customerId", false, "CUSTOMER_ID");
     };
 
     private DaoSession daoSession;
@@ -70,7 +71,8 @@ public class TaskDao extends AbstractDao<Task, String> {
                 "'DATE_CREATED' INTEGER," + // 8: dateCreated
                 "'LAST_UPDATED' INTEGER," + // 9: lastUpdated
                 "'IS_DIRTY' INTEGER," + // 10: isDirty
-                "'CUSTOMER_ID' TEXT NOT NULL );"); // 11: customerId
+                "'IS_ADHOCK' INTEGER," + // 11: isAdhock
+                "'CUSTOMER_ID' TEXT NOT NULL );"); // 12: customerId
     }
 
     /** Drops the underlying database table. */
@@ -134,7 +136,12 @@ public class TaskDao extends AbstractDao<Task, String> {
         if (isDirty != null) {
             stmt.bindLong(11, isDirty ? 1l: 0l);
         }
-        stmt.bindString(12, entity.getCustomerId());
+ 
+        Boolean isAdhock = entity.getIsAdhock();
+        if (isAdhock != null) {
+            stmt.bindLong(12, isAdhock ? 1l: 0l);
+        }
+        stmt.bindString(13, entity.getCustomerId());
     }
 
     @Override
@@ -164,7 +171,8 @@ public class TaskDao extends AbstractDao<Task, String> {
             cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // dateCreated
             cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // lastUpdated
             cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0, // isDirty
-            cursor.getString(offset + 11) // customerId
+            cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0, // isAdhock
+            cursor.getString(offset + 12) // customerId
         );
         return entity;
     }
@@ -183,7 +191,8 @@ public class TaskDao extends AbstractDao<Task, String> {
         entity.setDateCreated(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
         entity.setLastUpdated(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
         entity.setIsDirty(cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0);
-        entity.setCustomerId(cursor.getString(offset + 11));
+        entity.setIsAdhock(cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0);
+        entity.setCustomerId(cursor.getString(offset + 12));
      }
     
     /** @inheritdoc */
