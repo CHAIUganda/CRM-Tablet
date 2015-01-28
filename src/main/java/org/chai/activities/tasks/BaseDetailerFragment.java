@@ -290,7 +290,7 @@ public abstract class BaseDetailerFragment extends BaseContainerFragment {
 
     }
 
-    private void setSelectedOptions() {
+    protected void setSelectedOptions() {
         pointOfSalesOptionsButton.setText("");
         for( int i = 0; i < pointOfSalesOptions.length; i++ ){
             Log.i( "ME", pointOfSalesOptions[ i ] + " selected: " + selections[i] );
@@ -312,7 +312,7 @@ public abstract class BaseDetailerFragment extends BaseContainerFragment {
             pointOfSalesOthersLayout.setVisibility(View.GONE);
         }
     }
-    
+
     protected boolean allMandatoryFieldsFilled(View view) {
         if (((EditText)view. findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).getText().toString().equals("")) {
             return false;
