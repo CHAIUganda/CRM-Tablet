@@ -87,6 +87,7 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
             task.setCustomer(customer);
             task.setDescription("Go check on "+customer.getOutletName());
             task.setType("detailer");
+            task.setIsAdhock(true);
 
             taskDao.insert(task);
             detailerCallInstance.setTask(task);

@@ -7,10 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.*;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.*;
 import de.greenrobot.dao.query.QueryBuilder;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
@@ -49,8 +46,10 @@ public class TaskCalenderFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                String item = (String) spinner.getSelectedItem(); 
-                taskListAdapter = new TaskListAdapter(getActivity(), loadTasksFromDb(item));
+                String item = (String) spinner.getSelectedItem();
+                taskList.clear();
+                taskList = loadTasksFromDb(item);
+                taskListAdapter = new TaskListAdapter(getActivity(), taskList);
                 listView.setAdapter(taskListAdapter);
                 taskListAdapter.notifyDataSetChanged();
             }
@@ -81,6 +80,8 @@ public class TaskCalenderFragment extends Fragment {
 
             }
         });
+
+        registerForContextMenu(view.findViewById(R.id.calender_tasks_list_view));
         return view;
     }
 
@@ -103,12 +104,12 @@ public class TaskCalenderFragment extends Fragment {
         QueryBuilder<Task> taskQueryBuilder = taskDao.queryBuilder();
         List<Task> outstandingTasks=null;
         if(itemPosition==1){
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(Utils.addToDate(new Date(),0)),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(Utils.addToDate(new Date(),0)),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).list();
         }else{
             Date dueDateOffset = Utils.addToDate(new Date(),itemPosition);
             Date dueDatemax = Utils.addToDate(new Date(),itemPosition+1);
             Log.i("Due Date:",dueDateOffset.toString()+":max-"+dueDatemax.toString());
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).list();
         }
         return outstandingTasks;
     }
@@ -117,14 +118,14 @@ public class TaskCalenderFragment extends Fragment {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.delete_context_menu, menu);
+        inflater.inflate(R.menu.cancel_context_menu, menu);
 
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.delete_menu_item:
+            case R.id.cancel_task_menu_item:
                 try {
                     AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
                     int position = (int) info.id;
@@ -137,18 +138,30 @@ public class TaskCalenderFragment extends Fragment {
         return super.onContextItemSelected(menuItem);
     }
 
-    private AlertDialog askBeforeDelete(final int position) {
-        AlertDialog dialog = new AlertDialog.Builder(getActivity())
-                .setTitle("Delete")
-                .setMessage("Are you sure you want to Delete the selected Item")
-                .setIcon(R.drawable.delete_icon)
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+    private AlertDialog.Builder askBeforeDelete(final int position) {
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        final View promptView = inflater.inflate(R.layout.task_cancel_prompt,null);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        dialog.setView(promptView);
 
-                    public void onClick(DialogInterface dialog, int whichButton) {dialog.dismiss();
+        dialog.setTitle("Cancel Task")
+                .setMessage("Are you sure you want to cancel this task?")
+                .setIcon(R.drawable.delete_icon)
+                .setPositiveButton("Cancel Task", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String reason = ((EditText) promptView.findViewById(R.id.promptDialogUserInput)).getText().toString();
+                        Task task = taskList.get(position);
+                        task.setStatus(TaskMainFragment.STATUS_CANCELLED);
+                        task.setDescription(task.getDescription() + "(" + reason + ")");
+                        taskDao.update(task);
+                        taskList.remove(position);
+                        taskListAdapter.notifyDataSetChanged();
+                        dialog.dismiss();
                     }
 
                 })
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
                         dialog.dismiss();
