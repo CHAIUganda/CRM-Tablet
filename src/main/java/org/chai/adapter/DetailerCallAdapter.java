@@ -1,6 +1,7 @@
 package org.chai.adapter;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

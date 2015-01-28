@@ -44,9 +44,9 @@ public class DetailerCall {
     private Double latitude;
     private Double longitude;
     private Boolean isNew;
+    private Boolean isHistory;
     /** Not-null value. */
     private String taskId;
-
 
     // KEEP FIELDS - put your custom fields here
 
@@ -70,7 +70,7 @@ public class DetailerCall {
         this.uuid = uuid;
     }
 
-    public DetailerCall(String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPriceZinc, Double buyingPriceOrs, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, Boolean isNew, String taskId) {
+    public DetailerCall(String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPriceZinc, Double buyingPriceOrs, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, Boolean isNew, Boolean isHistory, String taskId) {
         this.uuid = uuid;
         this.dateOfSurvey = dateOfSurvey;
         this.diarrheaPatientsInFacility = diarrheaPatientsInFacility;
@@ -99,6 +99,7 @@ public class DetailerCall {
         this.latitude = latitude;
         this.longitude = longitude;
         this.isNew = isNew;
+        this.isHistory = isHistory;
         this.taskId = taskId;
     }
 
@@ -332,6 +333,14 @@ public class DetailerCall {
 
     public void setIsNew(Boolean isNew) {
         this.isNew = isNew;
+    }
+
+    public Boolean getIsHistory() {
+        return isHistory;
+    }
+
+    public void setIsHistory(Boolean isHistory) {
+        this.isHistory = isHistory;
     }
 
     /** Not-null value. */

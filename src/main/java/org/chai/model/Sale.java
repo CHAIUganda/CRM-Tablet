@@ -28,9 +28,9 @@ public class Sale {
     private String recommendationNextStep;
     private String recommendationLevel;
     private String governmentApproval;
+    private Boolean isHistory;
     /** Not-null value. */
     private String orderId;
-
     private List<SaleData> salesDatas;
 
     // KEEP FIELDS - put your custom fields here
@@ -63,7 +63,7 @@ public class Sale {
         this.uuid = uuid;
     }
 
-    public Sale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, String orderId, String taskId) {
+    public Sale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, Boolean isHistory, String orderId, String taskId) {
         this.uuid = uuid;
         this.dateOfSale = dateOfSale;
         this.doYouStockOrsZinc = doYouStockOrsZinc;
@@ -74,6 +74,7 @@ public class Sale {
         this.recommendationNextStep = recommendationNextStep;
         this.recommendationLevel = recommendationLevel;
         this.governmentApproval = governmentApproval;
+        this.isHistory = isHistory;
         this.orderId = orderId;
         this.taskId = taskId;
     }
@@ -166,6 +167,14 @@ public class Sale {
 
     public void setGovernmentApproval(String governmentApproval) {
         this.governmentApproval = governmentApproval;
+    }
+
+    public Boolean getIsHistory() {
+        return isHistory;
+    }
+
+    public void setIsHistory(Boolean isHistory) {
+        this.isHistory = isHistory;
     }
 
     /** Not-null value. */

@@ -84,6 +84,7 @@ public class TaskViewOnMapFragment extends Fragment {
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setBuiltInZoomControls(true);
         mapView.setMultiTouchControls(true);
+        mapView.setUseDataConnection(false);
 
         mapController = this.mapView.getController();
         mapController.setZoom(MAP_DEFAULT_ZOOM);

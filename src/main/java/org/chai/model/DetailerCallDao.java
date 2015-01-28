@@ -56,7 +56,8 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
         public final static Property Latitude = new Property(25, Double.class, "latitude", false, "LATITUDE");
         public final static Property Longitude = new Property(26, Double.class, "longitude", false, "LONGITUDE");
         public final static Property IsNew = new Property(27, Boolean.class, "isNew", false, "IS_NEW");
-        public final static Property TaskId = new Property(28, String.class, "taskId", false, "TASK_ID");
+        public final static Property IsHistory = new Property(28, Boolean.class, "isHistory", false, "IS_HISTORY");
+        public final static Property TaskId = new Property(29, String.class, "taskId", false, "TASK_ID");
     };
 
     private DaoSession daoSession;
@@ -104,7 +105,8 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
                 "'LATITUDE' REAL," + // 25: latitude
                 "'LONGITUDE' REAL," + // 26: longitude
                 "'IS_NEW' INTEGER," + // 27: isNew
-                "'TASK_ID' TEXT NOT NULL );"); // 28: taskId
+                "'IS_HISTORY' INTEGER," + // 28: isHistory
+                "'TASK_ID' TEXT NOT NULL );"); // 29: taskId
     }
 
     /** Drops the underlying database table. */
@@ -253,7 +255,12 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
         if (isNew != null) {
             stmt.bindLong(28, isNew ? 1l: 0l);
         }
-        stmt.bindString(29, entity.getTaskId());
+ 
+        Boolean isHistory = entity.getIsHistory();
+        if (isHistory != null) {
+            stmt.bindLong(29, isHistory ? 1l: 0l);
+        }
+        stmt.bindString(30, entity.getTaskId());
     }
 
     @Override
@@ -300,7 +307,8 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
             cursor.isNull(offset + 25) ? null : cursor.getDouble(offset + 25), // latitude
             cursor.isNull(offset + 26) ? null : cursor.getDouble(offset + 26), // longitude
             cursor.isNull(offset + 27) ? null : cursor.getShort(offset + 27) != 0, // isNew
-            cursor.getString(offset + 28) // taskId
+            cursor.isNull(offset + 28) ? null : cursor.getShort(offset + 28) != 0, // isHistory
+            cursor.getString(offset + 29) // taskId
         );
         return entity;
     }
@@ -336,7 +344,8 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
         entity.setLatitude(cursor.isNull(offset + 25) ? null : cursor.getDouble(offset + 25));
         entity.setLongitude(cursor.isNull(offset + 26) ? null : cursor.getDouble(offset + 26));
         entity.setIsNew(cursor.isNull(offset + 27) ? null : cursor.getShort(offset + 27) != 0);
-        entity.setTaskId(cursor.getString(offset + 28));
+        entity.setIsHistory(cursor.isNull(offset + 28) ? null : cursor.getShort(offset + 28) != 0);
+        entity.setTaskId(cursor.getString(offset + 29));
      }
     
     /** @inheritdoc */

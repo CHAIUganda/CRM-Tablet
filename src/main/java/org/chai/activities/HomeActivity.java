@@ -21,6 +21,7 @@ import org.chai.R;
 import org.chai.activities.calls.HistoryMainFragment;
 import org.chai.activities.customer.CustomersMainFragment;
 
+import org.chai.activities.tasks.AdhockDetailerFrgment;
 import org.chai.activities.tasks.MakeAdhockSaleFragment;
 import org.chai.activities.tasks.TakeOrderFragment;
 import org.chai.activities.tasks.TaskMainFragment;
@@ -72,6 +73,7 @@ public class HomeActivity extends FragmentActivity{
         if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
             navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],navMenuIcons.getResourceId(3,-1)));
         }
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5],navMenuIcons.getResourceId(2,-1)));
 
         navMenuIcons.recycle();
         adapter = new NavDrawerListAdapter(getApplicationContext(),navDrawerItems);
@@ -172,7 +174,14 @@ public class HomeActivity extends FragmentActivity{
                 fragment = new TakeOrderFragment();
                 break;
             case 4:
-                fragment = new MakeAdhockSaleFragment();
+                if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
+                    fragment = new MakeAdhockSaleFragment();
+                }else{
+                    fragment = new AdhockDetailerFrgment();
+                }
+                break;
+            case 5:
+                fragment = new AdhockDetailerFrgment();
                 break;
             default:
                 break;

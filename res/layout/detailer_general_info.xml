@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <EditText
+                android:id="@+id/detailer_survey_date"
+                android:text=""
+                android:minWidth="90dip"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:width="150dip"
+                android:height="40dip"
+                android:textColor="@color/list_main_text_color"
+                android:background="@drawable/bordertextfield"
+                android:textCursorDrawable="@null"/>
+
+        <Button
+                android:id="@+id/detailer_survey_date_btn"
+                android:text="Survey Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0091CC"
+                android:layout_marginLeft="5dp"
+                android:textColor="#fff"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <EditText
+                android:id="@+id/detailers_gps_text"
+                android:text=""
+                android:minWidth="90dip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:width="150dip"
+                android:height="40dip"
+                android:textColor="@color/list_main_text_color"
+                android:background="@drawable/bordertextfield"
+                android:editable="false"
+                android:textCursorDrawable="@null"/>
+
+        <Button
+                android:id="@+id/detailers_gps_btn"
+                android:text="Record GPS Coordinates"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="#0091CC"
+                android:layout_marginLeft="5dp"
+                android:textColor="#fff"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_how_many_diarrhea_patients_in_facility_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.How many diarrhea patients do you see in your outlet/Facility?"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <EditText
+                android:id="@+id/detailer_how_many_diarrhea_patients_in_facility"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="@dimen/list_sub_text_size"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="italic"
+                android:background="@drawable/bordertextfield"
+                android:singleLine="true"
+                android:inputType="number"
+                android:textCursorDrawable="@null"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="For the next 5 questions, get the attendants responses, compare them to the description give and rate the attendants answer as 'Good, Medium or Low'"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_hearabout_treatment_with_zinc_ors_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2.Have you heard about the treatment of Diarrhoea in children with ORS and Zinc combination"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <Spinner
+                android:id="@+id/detailer_hearabout_treatment_with_zinc_ors"
+                android:layout_height="wrap_content"
+                android:prompt="@string/selectItem"
+                android:layout_width="fill_parent"
+                android:entries="@array/yesnolist"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/detailer_how_did_you_hearabout_zinc_ors_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_how_did_you_hearabout_zinc_ors_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3.how did you hear/learn about ORS and Zinc treatment combination?"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <Spinner
+                android:id="@+id/detailer_how_did_you_hearabout_zinc_ors"
+                android:layout_height="wrap_content"
+                android:prompt="@string/selectItem"
+                android:layout_width="fill_parent"
+                android:entries="@array/sources_of_information"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/detailer_howdidyouhearaboutzinc_other_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_other_ways_youheard_about_zinc_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please specify Other ways you heard about zinc"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <EditText
+                android:id="@+id/detailer_other_ways_youheard_about_zinc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="@dimen/list_sub_text_size"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="italic"
+                android:background="@drawable/bordertextfield"
+                android:singleLine="true"
+                android:textCursorDrawable="@null"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_how_diarrhea_affects_community_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.Tell me what you know about diarrhea and how it affects your community?"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <Spinner
+                android:id="@+id/detailer_how_diarrhea_affects_community"
+                android:layout_height="wrap_content"
+                android:prompt="@string/selectItem"
+                android:layout_width="fill_parent"
+                android:entries="@array/ratings"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_effect_diarrhea_has_on_the_body_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.Do you know the affect that diarrhea has on the body"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <Spinner
+                android:id="@+id/detailer_effect_diarrhea_has_on_the_body"
+                android:layout_height="wrap_content"
+                android:prompt="@string/selectItem"
+                android:layout_width="fill_parent"
+                android:entries="@array/ratings"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_how_ors_should_be_used_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6.What do you know about ORS and how it should be used?"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <Spinner
+                android:id="@+id/detailer_how_ors_should_be_used"
+                android:layout_height="wrap_content"
+                android:prompt="@string/selectItem"
+                android:layout_width="fill_parent"
+                android:entries="@array/ratings"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_how_zinc_should_be_used_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7.What do you know about ZINC and how it should be used?"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <Spinner
+                android:id="@+id/detailer_how_zinc_should_be_used"
+                android:layout_height="wrap_content"
+                android:prompt="@string/selectItem"
+                android:layout_width="fill_parent"
+                android:entries="@array/ratings"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_why_should_not_use_antibiotics_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8.Why should you not use antibiotics to treat diarrhea"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <Spinner
+                android:id="@+id/detailer_why_should_not_use_antibiotics"
+                android:layout_height="wrap_content"
+                android:prompt="@string/selectItem"
+                android:layout_width="fill_parent"
+                android:entries="@array/ratings"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_do_you_stock_zinc_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9.Do you stock ORS and zinc"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <Spinner
+                android:id="@+id/detailer_do_you_stock_zinc"
+                android:layout_height="wrap_content"
+                android:prompt="@string/selectItem"
+                android:layout_width="fill_parent"
+                android:entries="@array/yesnolist"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/detailer_zinc_stock_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:id="@+id/detailers_howmany_in_stock_zinc_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10.If Yes, Check how many are in stock(Zinc):"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <EditText
+                    android:id="@+id/detailers_howmany_in_stock_zinc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="@dimen/list_sub_text_size"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:background="@drawable/bordertextfield"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:textCursorDrawable="@null"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:id="@+id/detailers_howmany_in_stock_ors_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11.If Yes, Check how many are in stock(ORS):"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <EditText
+                    android:id="@+id/detailers_howmany_in_stock_ors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="@dimen/list_sub_text_size"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:background="@drawable/bordertextfield"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:textCursorDrawable="@null"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:id="@+id/detailers_brand_sold_zinc_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12.Note the brands sold(Zinc):"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <EditText
+                    android:id="@+id/detailers_brand_sold_zinc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="@dimen/list_sub_text_size"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:background="@drawable/bordertextfield"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:id="@+id/detailers_brand_sold_ors_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="13.Note the brands sold(ORS):"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <EditText
+                    android:id="@+id/detailers_brand_sold_ors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="@dimen/list_sub_text_size"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:background="@drawable/bordertextfield"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null"/>
+
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/detailer_whatpricedoyoubuy_layout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14.What price do you buy Zinc"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <EditText
+                    android:id="@+id/detailer_whatpricedoyoubuyzinc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="@dimen/list_sub_text_size"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:background="@drawable/bordertextfield"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:textCursorDrawable="@null"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15.What price do you buy ORS"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"/>
+
+            <EditText
+                    android:id="@+id/detailer_whatpricedoyoubuyors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="@dimen/list_sub_text_size"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:background="@drawable/bordertextfield"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:textCursorDrawable="@null"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/detailer_ifnowhy_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16.If No, why?"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <EditText
+                android:id="@+id/detailer_if_no_why"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="@dimen/list_sub_text_size"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="italic"
+                android:background="@drawable/bordertextfield"
+                android:singleLine="true"
+                android:textCursorDrawable="@null"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_point_of_sale_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="17.Point of sale materials"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <Button
+                android:id="@+id/detailer_point_of_sale"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/detailer_point_of_sale_others_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Others Specify"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+        <EditText
+                android:id="@+id/detailer_point_of_sale_others"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="@dimen/list_sub_text_size"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="italic"
+                android:background="@drawable/bordertextfield"
+                android:singleLine="true"
+                android:textCursorDrawable="@null"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_recommendation_next_step_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="18.What did you recommend as next steps for the retailer"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <Spinner
+                android:id="@+id/detailer_next_step_recommendation"
+                android:layout_height="wrap_content"
+                android:prompt="@string/selectItem"
+                android:layout_width="fill_parent"
+                android:entries="@array/recommendation"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+                android:id="@+id/detailer_recommendation_level_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="19.What recommendation level would you give the customer"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <Spinner
+                android:id="@+id/detailer_recommendation_level"
+                android:layout_height="wrap_content"
+                android:prompt="@string/selectItem"
+                android:layout_width="fill_parent"
+                android:entries="@array/ratings"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

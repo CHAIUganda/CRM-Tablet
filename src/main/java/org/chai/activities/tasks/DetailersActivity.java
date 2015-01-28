@@ -66,14 +66,17 @@ public class DetailersActivity extends Fragment {
             //we are from call data listview
             detailerCallInstance = detailerCallDao.load(callId);
             callDataTask = detailerCallInstance.getTask();
+            if (detailerCallInstance.getIsHistory() != null && detailerCallInstance.getIsHistory()) {
+                setReadOnly(view);
+            }
         } else {
             //from tasklist view
-            Log.i("callId=======================================================", callId + "");
             detailerCallInstance = new DetailerCall(null);
             String taskId = bundle.getString("taskId");
             callDataTask = taskDao.load(taskId);
             detailerCallInstance = getLastDetailerInfo(callDataTask.getCustomer());
             detailerCallInstance.setIsNew(true);
+            detailerCallInstance.setIsHistory(false);
         }
         setDateWidget(view);
         setGpsWidget(view);
@@ -114,6 +117,7 @@ public class DetailersActivity extends Fragment {
         });
         bindDetailerCallToUi(view);
         managePointOfSaleOthers(view,false);
+        setRequiredFields(view);
         return  view;
     }
 
@@ -294,7 +298,7 @@ public class DetailersActivity extends Fragment {
             detailerCallInstance.setBuyingPriceOrs(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyors)).getText().toString()));
         }
 
-        detailerCallInstance.setIfNoWhy(((EditText)getActivity(). findViewById(R.id.detailer_if_no_why)).getText().toString());
+        detailerCallInstance.setIfNoWhy(((EditText) getActivity().findViewById(R.id.detailer_if_no_why)).getText().toString());
         detailerCallInstance.setPointOfsaleMaterial(((Button)getActivity(). findViewById(R.id.detailer_point_of_sale)).getText().toString()
                 +","+((EditText)getActivity().findViewById(R.id.detailer_point_of_sale_others)).getText().toString());
         detailerCallInstance.setRecommendationNextStep(((Spinner)getActivity(). findViewById(R.id.detailer_next_step_recommendation)).getSelectedItem().toString());
@@ -390,7 +394,6 @@ public class DetailersActivity extends Fragment {
                 ((TextView)view.findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getContact():"");
             }
         }
-        setRequiredFields(view);
     }
 
     private boolean saveDetailerCall() {
@@ -406,7 +409,7 @@ public class DetailersActivity extends Fragment {
             }else{
                 detailerCallDao.update(detailerCallInstance);
             }
-            callDataTask.setStatus(TasksMainActivity.STATUS_COMPLETE);
+            callDataTask.setStatus(TaskMainFragment.STATUS_COMPLETE);
             taskDao.update(callDataTask);
             isSaved = true;
         } catch (Exception ex) {
@@ -505,6 +508,42 @@ public class DetailersActivity extends Fragment {
         } else {
             pointOfSalesOthersLayout.setVisibility(View.GONE);
         }
+    }
+
+    private void setReadOnly(View view) {
+        view.findViewById(R.id.detailer_survey_date).setEnabled(false);
+        view.findViewById(R.id.detailer_name).setEnabled(false);
+        view.findViewById(R.id.detailer_desc_location).setEnabled(false);
+        view.findViewById(R.id.detailer_subcounty).setEnabled(false);
+        view.findViewById(R.id.detailer_outlet_size).setEnabled(false);
+        view.findViewById(R.id.detailers_gps_text).setEnabled(false);
+        view.findViewById(R.id.detailer_key_retailer_name).setEnabled(false);
+        view.findViewById(R.id.detailer_key_retailer_contact).setEnabled(false);
+        view.findViewById(R.id.detailers_gps_text).setEnabled(false);
+        view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility).setEnabled(false);
+        view.findViewById(R.id.detailer_other_ways_youheard_about_zinc).setEnabled(false);
+        view.findViewById(R.id.detailers_howmany_in_stock_zinc).setEnabled(false);
+        view.findViewById(R.id.detailers_howmany_in_stock_ors).setEnabled(false);
+        view.findViewById(R.id.detailers_brand_sold_zinc).setEnabled(false);
+        view.findViewById(R.id.detailers_brand_sold_ors).setEnabled(false);
+        view.findViewById(R.id.detailer_if_no_why).setEnabled(false);
+        view.findViewById(R.id.detailer_whatpricedoyoubuyzinc).setEnabled(false);
+        view.findViewById(R.id.detailer_whatpricedoyoubuyors).setEnabled(false);
+        view.findViewById(R.id.detailers_gps_text).setEnabled(false);
+
+        //spinners
+        view.findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors).setEnabled(false);
+        view.findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors).setEnabled(false);
+        view.findViewById(R.id.detailer_how_diarrhea_affects_community).setEnabled(false);
+        view.findViewById(R.id.detailer_effect_diarrhea_has_on_the_body).setEnabled(false);
+        view.findViewById(R.id.detailer_how_ors_should_be_used).setEnabled(false);
+        view.findViewById(R.id.detailer_why_should_not_use_antibiotics).setEnabled(false);
+        view.findViewById(R.id.detailer_do_you_stock_zinc).setEnabled(false);
+        view.findViewById(R.id.detailer_next_step_recommendation).setEnabled(false);
+        view.findViewById(R.id.detailer_recommendation_level).setEnabled(false);
+        view.findViewById(R.id.detailer_how_zinc_should_be_used).setEnabled(false);
+        view.findViewById(R.id.detailer_point_of_sale).setEnabled(false);
+        view.findViewById(R.id.detailer_submit_btn).setEnabled(false);
     }
 
 }

@@ -211,6 +211,12 @@ public class CHAISynchroniser {
         }
         for (Task task : taskList) {
             boolean uploaded = taskClient.uploadTask(task);
+            if(uploaded){
+                //set all detailer calls to isHistroy
+                DetailerCall detailerCall = task.getDetailers().get(0);
+                detailerCall.setIsHistory(true);
+                detailerCallDao.update(detailerCall);
+            }
         }
 
     }

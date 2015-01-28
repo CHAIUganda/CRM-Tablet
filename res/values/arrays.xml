@@ -166,6 +166,7 @@
         <item >History</item>
         <item >Take an Order</item>
         <item >Unscheduled Sale</item>
+        <item >Unscheduled Detailing</item>
     </string-array>
     <array name="nav_drawer_icons">
         <item>@drawable/task_default</item>
