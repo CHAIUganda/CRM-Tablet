@@ -72,8 +72,8 @@ public class HomeActivity extends FragmentActivity{
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[3],navMenuIcons.getResourceId(3,-1)));
         if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
             navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],navMenuIcons.getResourceId(3,-1)));
+            navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(2, -1)));
         }
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5],navMenuIcons.getResourceId(2,-1)));
 
         navMenuIcons.recycle();
         adapter = new NavDrawerListAdapter(getApplicationContext(),navDrawerItems);
@@ -174,11 +174,7 @@ public class HomeActivity extends FragmentActivity{
                 fragment = new TakeOrderFragment();
                 break;
             case 4:
-                if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
-                    fragment = new MakeAdhockSaleFragment();
-                }else{
-                    fragment = new AdhockDetailerFrgment();
-                }
+                fragment = new MakeAdhockSaleFragment();
                 break;
             case 5:
                 fragment = new AdhockDetailerFrgment();
