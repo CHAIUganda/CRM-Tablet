@@ -2,6 +2,7 @@ package org.chai.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,11 @@ public class SalesAdapter extends BaseAdapter {
             taskDescription.setText(sale.getTask().getDescription());
             customerNameTxtView.setText(sale.getTask().getCustomer().getOutletName());
             customerLocationTxtView.setText(sale.getTask().getCustomer().getDescriptionOfOutletLocation());
+            if(sale.getIsHistory()){
+                taskDescription.setTextColor(Color.parseColor("#C0C0C0"));
+                customerNameTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+                customerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+            }
         }
         return convertView;
     }

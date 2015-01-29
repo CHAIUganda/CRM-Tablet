@@ -3,6 +3,7 @@ package org.chai.adapter;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,11 @@ public class DetailerCallAdapter extends BaseAdapter {
             taskDescription.setText(detailerCall.getTask().getDescription());
             customerNameTxtView.setText(detailerCall.getTask().getCustomer().getOutletName());
             customerLocationTxtView.setText(detailerCall.getTask().getCustomer().getDescriptionOfOutletLocation());
+            if(detailerCall.getIsHistory()){
+                taskDescription.setTextColor(Color.parseColor("#C0C0C0"));
+                customerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+                customerNameTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+            }
         }
         return convertView;
     }

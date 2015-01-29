@@ -184,6 +184,9 @@ public class TaskViewOnMapFragment extends Fragment {
         if(itemPosition==1){
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
         }else{
+            if(itemPosition>0){
+                itemPosition=itemPosition-1;
+            }
             Date dueDateOffset = Utils.addToDate(new Date(),itemPosition);
             Date dueDatemax = Utils.addToDate(new Date(),itemPosition+1);
             Log.i("Due Date:",dueDateOffset.toString()+":max-"+dueDatemax.toString());

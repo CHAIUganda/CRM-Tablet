@@ -127,7 +127,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             isUpdate = true;
-            Long saleId = bundle.getLong("saleId");
+            String saleId = bundle.getString("saleId");
             bindSalesInfoToUI(saleId, view);
         }
         managePointOfSaleOthers(view,false);
@@ -158,8 +158,8 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         }
     }
 
-    private void bindSalesInfoToUI(Long saleId,View view) {
-        saleInstance = saleDao.loadDeep(saleId);
+    private void bindSalesInfoToUI(String saleId,View view) {
+        saleInstance = saleDao.load(saleId);
         if (saleInstance!=null) {
             ((AutoCompleteTextView) view.findViewById(R.id.adhock_sale_customer)).setText(saleInstance.getCustomer().getOutletName());
             salesCustomer = saleInstance.getCustomer();
@@ -420,7 +420,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
                 if (gpsTracker.canGetLocation()) {
                     capturedLatitude = gpsTracker.getLatitude();
                     capturedLongitude = gpsTracker.getLongitude();
-                    EditText detailsGps = (EditText)view1.findViewById(R.id.sales_gps);
+                    EditText detailsGps = (EditText)view1.findViewById(R.id.adhoc_sales_gps);
                     detailsGps.setText(capturedLatitude + "," + capturedLongitude);
                 } else {
                     gpsTracker.showSettingsAlert();

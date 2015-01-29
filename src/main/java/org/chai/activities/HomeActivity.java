@@ -192,7 +192,11 @@ public class HomeActivity extends FragmentActivity{
             fragmentManager.beginTransaction().replace(R.id.frame_container,fragment).commit();
             mDrawerList.setItemChecked(position,true);
             mDrawerList.setSelection(position);
-            setTitle(navMenuTitles[position]);
+            if (position == 4 && RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
+                setTitle(navMenuTitles[position+1]);
+            }else{
+                setTitle(navMenuTitles[position]);
+            }
             mDrawerLayout.closeDrawer(mDrawerList);
         }else{
             Log.e("HomeActivity", "Error in creating fragment");
