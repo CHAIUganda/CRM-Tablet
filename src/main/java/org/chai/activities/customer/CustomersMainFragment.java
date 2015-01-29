@@ -1,21 +1,18 @@
 package org.chai.activities.customer;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.text.TextUtils;
 import android.view.*;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.Toast;
+import android.widget.*;
 import org.chai.R;
 import org.chai.adapter.CustomerAdapter;
-import org.chai.model.Customer;
-import org.chai.model.CustomerDao;
-import org.chai.model.DaoMaster;
-import org.chai.model.DaoSession;
+import org.chai.model.*;
+import org.chai.rest.RestClient;
 
 import java.util.*;
 
@@ -47,6 +44,7 @@ public class CustomersMainFragment extends ListFragment {
             });
             customerAdapter = new CustomerAdapter(getActivity(), customerList);
             setListAdapter(customerAdapter);
+            registerForContextMenu(getListView());
         } catch (Exception exception) {
             Toast.makeText(getActivity().getApplicationContext(), "error in CustomerList:" + exception.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
@@ -109,6 +107,32 @@ public class CustomersMainFragment extends ListFragment {
         }
     }
 
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.inactivate_context_menu, menu);
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.customer_mark_inactive:
+                try {
+                    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
+                    int position = (int) info.id;
+                    askBeforeInactivate(position).show();
+                } catch (Exception ex) {
+
+                }
+                return true;
+        }
+        return super.onContextItemSelected(menuItem);
+    }
+
+
     private final SearchView.OnQueryTextListener queryListener = new SearchView.OnQueryTextListener() {
         @Override
         public boolean onQueryTextSubmit(String query) {
@@ -127,5 +151,36 @@ public class CustomersMainFragment extends ListFragment {
             return false;
         }
     };
+
+    private AlertDialog askBeforeInactivate(final int position) {
+        AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                .setTitle("Inactivate")
+                .setMessage("Are you sure you want to mark this customer as inactive?")
+                .setIcon(R.drawable.delete_icon)
+
+                .setPositiveButton("Inactivate", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Customer customer = customerList.get(position);
+                        customer.setIsDirty(true);
+                        customer.setIsActive(false);
+                        customerDao.update(customer);
+                        customerList.remove(position);
+                        customerAdapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+        return dialog;
+
+    }
 
 }

@@ -42,8 +42,10 @@ public class Customer {
     private Boolean isDirty;
     private String tradingCenter;
     private String subcountyUuid;
+    private Boolean isActive;
     /** Not-null value. */
     private String subcountyId;
+
     private List<AdhockSale> adhockSales;
 
     // KEEP FIELDS - put your custom fields here
@@ -75,7 +77,7 @@ public class Customer {
         this.uuid = uuid;
     }
 
-    public Customer(String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String restockFrequency, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, String subcountyId) {
+    public Customer(String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String restockFrequency, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, Boolean isActive, String subcountyId) {
         this.uuid = uuid;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -100,6 +102,7 @@ public class Customer {
         this.isDirty = isDirty;
         this.tradingCenter = tradingCenter;
         this.subcountyUuid = subcountyUuid;
+        this.isActive = isActive;
         this.subcountyId = subcountyId;
     }
 
@@ -303,6 +306,14 @@ public class Customer {
 
     public void setSubcountyUuid(String subcountyUuid) {
         this.subcountyUuid = subcountyUuid;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     /** Not-null value. */

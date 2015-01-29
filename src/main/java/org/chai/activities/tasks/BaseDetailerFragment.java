@@ -328,7 +328,7 @@ public abstract class BaseDetailerFragment extends BaseContainerFragment {
             return false;
         }else if (((Spinner)view. findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString().equals("")) {
             return false;
-        }   else if (((Spinner)view. findViewById(R.id.detailer_next_step_recommendation)).getSelectedItem().toString().equals("")) {
+        }   else if (((Button)view. findViewById(R.id.detailer_next_step_recommendation)).getText().toString().equals("")) {
             return false;
         } else if (((Spinner)view. findViewById(R.id.detailer_recommendation_level)).getSelectedItem().toString().equals("")) {
             return false;

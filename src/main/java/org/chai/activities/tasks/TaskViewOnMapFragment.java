@@ -84,7 +84,7 @@ public class TaskViewOnMapFragment extends Fragment {
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setBuiltInZoomControls(true);
         mapView.setMultiTouchControls(true);
-        mapView.setUseDataConnection(false);
+        mapView.setUseDataConnection(true);
 
         mapController = this.mapView.getController();
         mapController.setZoom(MAP_DEFAULT_ZOOM);
@@ -158,11 +158,7 @@ public class TaskViewOnMapFragment extends Fragment {
         currentLocationOverlay = new ItemizedIconOverlay<OverlayItem>(items,
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        Toast.makeText(getActivity(),
-                            item.getTitle() + "\n"
-                                    + item.getSnippet() + "\n"
-                                    + item.getPoint().getLatitudeE6() + " : " + item.getPoint().getLongitudeE6(),
-                            Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),item.getSnippet(),Toast.LENGTH_LONG).show();
                         return true;
                     }
 

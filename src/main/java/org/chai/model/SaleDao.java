@@ -39,8 +39,10 @@ public class SaleDao extends AbstractDao<Sale, String> {
         public final static Property RecommendationLevel = new Property(8, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
         public final static Property GovernmentApproval = new Property(9, String.class, "governmentApproval", false, "GOVERNMENT_APPROVAL");
         public final static Property IsHistory = new Property(10, Boolean.class, "isHistory", false, "IS_HISTORY");
-        public final static Property OrderId = new Property(11, String.class, "orderId", false, "ORDER_ID");
-        public final static Property TaskId = new Property(12, String.class, "taskId", false, "TASK_ID");
+        public final static Property Latitude = new Property(11, Double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(12, Double.class, "longitude", false, "LONGITUDE");
+        public final static Property OrderId = new Property(13, String.class, "orderId", false, "ORDER_ID");
+        public final static Property TaskId = new Property(14, String.class, "taskId", false, "TASK_ID");
     };
 
     private DaoSession daoSession;
@@ -72,8 +74,10 @@ public class SaleDao extends AbstractDao<Sale, String> {
                 "'RECOMMENDATION_LEVEL' TEXT," + // 8: recommendationLevel
                 "'GOVERNMENT_APPROVAL' TEXT," + // 9: governmentApproval
                 "'IS_HISTORY' INTEGER," + // 10: isHistory
-                "'ORDER_ID' TEXT NOT NULL ," + // 11: orderId
-                "'TASK_ID' TEXT NOT NULL );"); // 12: taskId
+                "'LATITUDE' REAL," + // 11: latitude
+                "'LONGITUDE' REAL," + // 12: longitude
+                "'ORDER_ID' TEXT NOT NULL ," + // 13: orderId
+                "'TASK_ID' TEXT NOT NULL );"); // 14: taskId
     }
 
     /** Drops the underlying database table. */
@@ -133,8 +137,18 @@ public class SaleDao extends AbstractDao<Sale, String> {
         if (isHistory != null) {
             stmt.bindLong(11, isHistory ? 1l: 0l);
         }
-        stmt.bindString(12, entity.getOrderId());
-        stmt.bindString(13, entity.getTaskId());
+ 
+        Double latitude = entity.getLatitude();
+        if (latitude != null) {
+            stmt.bindDouble(12, latitude);
+        }
+ 
+        Double longitude = entity.getLongitude();
+        if (longitude != null) {
+            stmt.bindDouble(13, longitude);
+        }
+        stmt.bindString(14, entity.getOrderId());
+        stmt.bindString(15, entity.getTaskId());
     }
 
     @Override
@@ -164,8 +178,10 @@ public class SaleDao extends AbstractDao<Sale, String> {
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // recommendationLevel
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // governmentApproval
             cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0, // isHistory
-            cursor.getString(offset + 11), // orderId
-            cursor.getString(offset + 12) // taskId
+            cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11), // latitude
+            cursor.isNull(offset + 12) ? null : cursor.getDouble(offset + 12), // longitude
+            cursor.getString(offset + 13), // orderId
+            cursor.getString(offset + 14) // taskId
         );
         return entity;
     }
@@ -184,8 +200,10 @@ public class SaleDao extends AbstractDao<Sale, String> {
         entity.setRecommendationLevel(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setGovernmentApproval(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setIsHistory(cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0);
-        entity.setOrderId(cursor.getString(offset + 11));
-        entity.setTaskId(cursor.getString(offset + 12));
+        entity.setLatitude(cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11));
+        entity.setLongitude(cursor.isNull(offset + 12) ? null : cursor.getDouble(offset + 12));
+        entity.setOrderId(cursor.getString(offset + 13));
+        entity.setTaskId(cursor.getString(offset + 14));
      }
     
     /** @inheritdoc */

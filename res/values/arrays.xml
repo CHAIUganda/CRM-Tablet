@@ -129,8 +129,7 @@
         <item>Medical Assistant</item>
         <item>Other</item>
     </string-array>
-    <string-array name="recommendation">
-        <item>""</item>
+    <string-array name="recommendation_nextstep">
         <item>No Next Step Needed</item>
         <item>Stock ORS</item>
         <item>Stock Zinc</item>
@@ -175,6 +174,7 @@
         <item>@drawable/cart</item>
     </array>
     <array name="restock_frequency">
+        <item>""</item>
         <item>Daily</item>
         <item>Once a week</item>
         <item>Once every two weeks</item>

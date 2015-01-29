@@ -38,7 +38,9 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
         public final static Property RecommendationNextStep = new Property(7, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
         public final static Property RecommendationLevel = new Property(8, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
         public final static Property GovernmentApproval = new Property(9, String.class, "governmentApproval", false, "GOVERNMENT_APPROVAL");
-        public final static Property CustomerId = new Property(10, String.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property Latitude = new Property(10, Double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(11, Double.class, "longitude", false, "LONGITUDE");
+        public final static Property CustomerId = new Property(12, String.class, "customerId", false, "CUSTOMER_ID");
     };
 
     private DaoSession daoSession;
@@ -68,7 +70,9 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
                 "'RECOMMENDATION_NEXT_STEP' TEXT," + // 7: recommendationNextStep
                 "'RECOMMENDATION_LEVEL' TEXT," + // 8: recommendationLevel
                 "'GOVERNMENT_APPROVAL' TEXT," + // 9: governmentApproval
-                "'CUSTOMER_ID' TEXT NOT NULL );"); // 10: customerId
+                "'LATITUDE' REAL," + // 10: latitude
+                "'LONGITUDE' REAL," + // 11: longitude
+                "'CUSTOMER_ID' TEXT NOT NULL );"); // 12: customerId
     }
 
     /** Drops the underlying database table. */
@@ -123,7 +127,17 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
         if (governmentApproval != null) {
             stmt.bindString(10, governmentApproval);
         }
-        stmt.bindString(11, entity.getCustomerId());
+ 
+        Double latitude = entity.getLatitude();
+        if (latitude != null) {
+            stmt.bindDouble(11, latitude);
+        }
+ 
+        Double longitude = entity.getLongitude();
+        if (longitude != null) {
+            stmt.bindDouble(12, longitude);
+        }
+        stmt.bindString(13, entity.getCustomerId());
     }
 
     @Override
@@ -152,7 +166,9 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // recommendationNextStep
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // recommendationLevel
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // governmentApproval
-            cursor.getString(offset + 10) // customerId
+            cursor.isNull(offset + 10) ? null : cursor.getDouble(offset + 10), // latitude
+            cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11), // longitude
+            cursor.getString(offset + 12) // customerId
         );
         return entity;
     }
@@ -170,7 +186,9 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
         entity.setRecommendationNextStep(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setRecommendationLevel(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setGovernmentApproval(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setCustomerId(cursor.getString(offset + 10));
+        entity.setLatitude(cursor.isNull(offset + 10) ? null : cursor.getDouble(offset + 10));
+        entity.setLongitude(cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11));
+        entity.setCustomerId(cursor.getString(offset + 12));
      }
     
     /** @inheritdoc */

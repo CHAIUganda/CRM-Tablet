@@ -28,8 +28,11 @@ public class AdhockSale {
     private String recommendationNextStep;
     private String recommendationLevel;
     private String governmentApproval;
+    private Double latitude;
+    private Double longitude;
     /** Not-null value. */
     private String customerId;
+
     private List<SaleData> adhockSalesDatas;
 
     // KEEP FIELDS - put your custom fields here
@@ -55,7 +58,7 @@ public class AdhockSale {
         this.uuid = uuid;
     }
 
-    public AdhockSale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howManyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, String customerId) {
+    public AdhockSale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howManyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, Double latitude, Double longitude, String customerId) {
         this.uuid = uuid;
         this.dateOfSale = dateOfSale;
         this.doYouStockOrsZinc = doYouStockOrsZinc;
@@ -66,6 +69,8 @@ public class AdhockSale {
         this.recommendationNextStep = recommendationNextStep;
         this.recommendationLevel = recommendationLevel;
         this.governmentApproval = governmentApproval;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.customerId = customerId;
     }
 
@@ -157,6 +162,22 @@ public class AdhockSale {
 
     public void setGovernmentApproval(String governmentApproval) {
         this.governmentApproval = governmentApproval;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     /** Not-null value. */

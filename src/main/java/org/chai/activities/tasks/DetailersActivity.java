@@ -13,6 +13,7 @@ import de.greenrobot.dao.query.WhereCondition;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
 import org.chai.model.*;
+import org.chai.util.CustomMultSelectDropDown;
 import org.chai.util.Utils;
 
 import java.util.Calendar;
@@ -62,6 +63,8 @@ public class DetailersActivity extends BaseDetailerFragment {
         manageHowDidyouHearOtherOption(view);
         manageHaveYouHeardAboutDiarheaTreatment(view);
         managePointOfSaleWidget(view);
+        CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown)view.findViewById(R.id.detailer_next_step_recommendation);
+        recommendationNextStep.setStringOptions(getResources().getStringArray(R.array.recommendation_nextstep));
 
         pointOfSalesOptionsButton = (Button)view.findViewById(R.id.detailer_point_of_sale);
         pointOfSalesOptions = getResources().getStringArray(R.array.point_of_sale_material);
@@ -151,7 +154,7 @@ public class DetailersActivity extends BaseDetailerFragment {
         detailerCallInstance.setIfNoWhy(((EditText) getActivity().findViewById(R.id.detailer_if_no_why)).getText().toString());
         detailerCallInstance.setPointOfsaleMaterial(((Button)getActivity(). findViewById(R.id.detailer_point_of_sale)).getText().toString()
                 +","+((EditText)getActivity().findViewById(R.id.detailer_point_of_sale_others)).getText().toString());
-        detailerCallInstance.setRecommendationNextStep(((Spinner)getActivity(). findViewById(R.id.detailer_next_step_recommendation)).getSelectedItem().toString());
+        detailerCallInstance.setRecommendationNextStep(((CustomMultSelectDropDown) getActivity().findViewById(R.id.detailer_next_step_recommendation)).getText().toString());
 
         detailerCallInstance.setHeardAboutDiarrheaTreatmentInChildren(((Spinner)getActivity(). findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors)).getSelectedItem().toString());
         detailerCallInstance.setHowDidYouHear(((Spinner)getActivity(). findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors)).getSelectedItem().toString());
@@ -222,8 +225,8 @@ public class DetailersActivity extends BaseDetailerFragment {
             Boolean doYouStockOrsZinc = detailerCallInstance.getDoYouStockOrsZinc();
             Utils.setSpinnerSelection(doyouStockZincSpinner, doYouStockOrsZinc?"Yes":"No");
 
-            Spinner nextStepRecommendation = ((Spinner)view. findViewById(R.id.detailer_next_step_recommendation));
-            Utils.setSpinnerSelection(nextStepRecommendation, detailerCallInstance.getRecommendationNextStep());
+            CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown) view.findViewById(R.id.detailer_next_step_recommendation);
+            recommendationNextStep.setText(detailerCallInstance.getRecommendationNextStep());
 
             Spinner recommendationSpinner = (Spinner)view. findViewById(R.id.detailer_recommendation_level);
             Utils.setSpinnerSelection(recommendationSpinner, detailerCallInstance.getRecommendationLevel());
@@ -247,6 +250,7 @@ public class DetailersActivity extends BaseDetailerFragment {
                 CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
                 ((TextView)view. findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getNames():"");
                 ((TextView)view.findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getContact():"");
+                ((EditText)view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).setText(customer.getNumberOfCustomersPerDay() + "");
             }
         }
     }

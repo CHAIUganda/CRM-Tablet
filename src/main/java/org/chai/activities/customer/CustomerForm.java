@@ -83,7 +83,7 @@ public class CustomerForm extends Activity {
             saveCustomerBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(customerInstance.getCustomerContacts().isEmpty() && customerContacts.isEmpty()){
+                    if(customerInstance.getUuid()==null && customerContacts.isEmpty()){
                         Toast.makeText(getApplicationContext(), "Please enter atleast one contact!", Toast.LENGTH_LONG).show();
                     }else{
                         boolean isSaved = saveCustomer();
@@ -163,9 +163,9 @@ public class CustomerForm extends Activity {
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
-            customerDao = daoSession.getCustomerDao();
             subcountyDao = daoSession.getSubcountyDao();
             districtDao = daoSession.getDistrictDao();
+            customerDao = daoSession.getCustomerDao();
             customerContactDao = daoSession.getCustomerContactDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
@@ -312,7 +312,7 @@ public class CustomerForm extends Activity {
     private void setCustomerInstance(String id) {
         try {
             if (id == null) {
-                customerInstance = new Customer(UUID.randomUUID().toString());
+                customerInstance = new Customer(null);
             } else {
                 customerInstance = customerDao.load(id);
             }

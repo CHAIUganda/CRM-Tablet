@@ -17,6 +17,7 @@ import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
+import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
 
 import java.util.ArrayList;
@@ -47,6 +48,10 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
     private Button pointOfSalesOptionsButton;
     private CharSequence[] pointOfSalesOptions;
     private boolean[] selections;
+
+    private GPSTracker gpsTracker;
+    private double capturedLatitude;
+    private double capturedLongitude;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
@@ -112,6 +117,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             });
             manageDoyouStockZincResponses(view);
             setRequiredFields(view);
+            setGpsWidget(view);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -309,6 +315,8 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         saleInstance.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.adhock_sale_recommendation_level)).getSelectedItem().toString());
         saleInstance.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.adhock_sale_government_approval)).getSelectedItem().toString());
         saleInstance.setCustomerId(salesCustomer.getUuid());
+        saleInstance.setLatitude(capturedLatitude);
+        saleInstance.setLongitude(capturedLongitude);
 
         if(isUpdate){
             saleDao.update(saleInstance);
@@ -402,5 +410,25 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             pointOfSalesOthersLayout.setVisibility(View.GONE);
         }
     }
+
+    private void setGpsWidget(final View view1) {
+        Button showGps = (Button)view1.findViewById(R.id.adhok_sales_capture_gps);
+        showGps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gpsTracker = new GPSTracker(getActivity());
+                if (gpsTracker.canGetLocation()) {
+                    capturedLatitude = gpsTracker.getLatitude();
+                    capturedLongitude = gpsTracker.getLongitude();
+                    EditText detailsGps = (EditText)view1.findViewById(R.id.sales_gps);
+                    detailsGps.setText(capturedLatitude + "," + capturedLongitude);
+                } else {
+                    gpsTracker.showSettingsAlert();
+                }
+            }
+        });
+    }
+
+
 
 }

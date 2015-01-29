@@ -11,6 +11,7 @@ import org.chai.activities.HomeActivity;
 import org.chai.model.Customer;
 import org.chai.model.DetailerCall;
 import org.chai.model.Task;
+import org.chai.util.CustomMultSelectDropDown;
 
 import java.util.Date;
 import java.util.List;
@@ -48,6 +49,8 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
         manageHowDidyouHearOtherOption(view);
         manageHaveYouHeardAboutDiarheaTreatment(view);
         managePointOfSaleWidget(view);
+        CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown)view.findViewById(R.id.detailer_next_step_recommendation);
+        recommendationNextStep.setStringOptions(getResources().getStringArray(R.array.recommendation_nextstep));
 
         Button saveDetailetCallBtn = (Button) view.findViewById(R.id.adhoc_detailer_submit_btn);
         saveDetailetCallBtn.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +120,7 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
         detailerCallInstance.setIfNoWhy(((EditText) getActivity().findViewById(R.id.detailer_if_no_why)).getText().toString());
         detailerCallInstance.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.detailer_point_of_sale)).getText().toString()
                 + "," + ((EditText) getActivity().findViewById(R.id.detailer_point_of_sale_others)).getText().toString());
-        detailerCallInstance.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.detailer_next_step_recommendation)).getSelectedItem().toString());
+        detailerCallInstance.setRecommendationNextStep(((Button) getActivity().findViewById(R.id.detailer_next_step_recommendation)).getText().toString());
 
         detailerCallInstance.setHeardAboutDiarrheaTreatmentInChildren(((Spinner) getActivity().findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors)).getSelectedItem().toString());
         detailerCallInstance.setHowDidYouHear(((Spinner) getActivity().findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors)).getSelectedItem().toString());

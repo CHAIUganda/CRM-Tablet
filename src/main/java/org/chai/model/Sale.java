@@ -29,9 +29,10 @@ public class Sale {
     private String recommendationLevel;
     private String governmentApproval;
     private Boolean isHistory;
+    private Double latitude;
+    private Double longitude;
     /** Not-null value. */
     private String orderId;
-
     private List<SaleData> salesDatas;
 
     // KEEP FIELDS - put your custom fields here
@@ -64,7 +65,7 @@ public class Sale {
         this.uuid = uuid;
     }
 
-    public Sale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, Boolean isHistory, String orderId, String taskId) {
+    public Sale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, Boolean isHistory, Double latitude, Double longitude, String orderId, String taskId) {
         this.uuid = uuid;
         this.dateOfSale = dateOfSale;
         this.doYouStockOrsZinc = doYouStockOrsZinc;
@@ -76,6 +77,8 @@ public class Sale {
         this.recommendationLevel = recommendationLevel;
         this.governmentApproval = governmentApproval;
         this.isHistory = isHistory;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.orderId = orderId;
         this.taskId = taskId;
     }
@@ -176,6 +179,22 @@ public class Sale {
 
     public void setIsHistory(Boolean isHistory) {
         this.isHistory = isHistory;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     /** Not-null value. */

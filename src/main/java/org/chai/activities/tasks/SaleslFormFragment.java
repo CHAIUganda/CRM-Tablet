@@ -19,6 +19,8 @@ import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
+import org.chai.util.CustomMultSelectDropDown;
+import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
 
 import java.util.ArrayList;
@@ -53,6 +55,10 @@ public class SaleslFormFragment extends Fragment {
     private CharSequence[] pointOfSalesOptions;
     private boolean[] selections;
 
+    private GPSTracker gpsTracker;
+    private double capturedLatitude;
+    private double capturedLongitude;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.sales_form,container, false);
@@ -63,17 +69,17 @@ public class SaleslFormFragment extends Fragment {
             quantityFields = new ArrayList<EditText>();
             priceFields = new ArrayList<EditText>();
             Bundle bundle = getArguments();
-            Long callId = bundle.getLong("callId");
-            if (callId != 0 && callId != null) {
+            String callId = bundle.getString("callId");
+            if (callId != null) {
                 //from call list
-                saleCallData = saleDao.loadDeep(callId);
+                saleCallData = saleDao.load(callId);
                 callDataTask = saleCallData.getTask();
                 salesCustomer = callDataTask.getCustomer();
                 isUpdate = true;
             } else {
                 //from task list view
-                Long taskId = bundle.getLong("taskId");
-                callDataTask = taskDao.loadDeep(taskId);
+                String taskId = bundle.getString("taskId");
+                callDataTask = taskDao.load(taskId);
                 salesCustomer = callDataTask.getCustomer();
             }
             ((TextView) view.findViewById(R.id.sales_customer)).setText(salesCustomer.getOutletName());
@@ -89,6 +95,9 @@ public class SaleslFormFragment extends Fragment {
             pointOfSalesOptionsButton = (Button)view.findViewById(R.id.sales_point_of_sale);
             pointOfSalesOptions = getResources().getStringArray(R.array.point_of_sale_material);
             selections = new boolean[pointOfSalesOptions.length];
+
+            CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown)view.findViewById(R.id.sales_next_step_recommendation);
+            recommendationNextStep.setStringOptions(getResources().getStringArray(R.array.recommendation_nextstep));
 
             pointOfSalesOptionsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -120,6 +129,7 @@ public class SaleslFormFragment extends Fragment {
             manageDoyouStockZincResponses(view);
             managePointOfSaleOthers(view,false);
             bindSalesInfoToUI(view);
+            setGpsWidget(view);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -149,6 +159,7 @@ public class SaleslFormFragment extends Fragment {
             ((EditText) view.findViewById(R.id.sales_howmany_in_stock_ors)).setText(saleCallData.getHowmanyOrsInStock() + "");
             ((EditText) view.findViewById(R.id.sales_howmany_in_stock_zinc)).setText(saleCallData.getHowManyZincInStock() + "");
             ((EditText) view.findViewById(R.id.sales_if_no_why)).setText(saleCallData.getIfNoWhy());
+            ((EditText) view.findViewById(R.id.sales_gps)).setText(saleCallData.getLatitude()+","+saleCallData.getLongitude());
 
             Spinner doyouStockZincSpinner = (Spinner) view.findViewById(R.id.sales_do_you_stock_zinc);
             Utils.setSpinnerSelection(doyouStockZincSpinner, (saleCallData.getDoYouStockOrsZinc() == true) ? "Yes" : "No");
@@ -159,8 +170,8 @@ public class SaleslFormFragment extends Fragment {
             Button pointOfSaleMaterial = (Button) view.findViewById(R.id.sales_point_of_sale);
             pointOfSaleMaterial.setText(saleCallData.getPointOfsaleMaterial());
 
-            Spinner recommendationNextStep = (Spinner) view.findViewById(R.id.sales_next_step_recommendation);
-            Utils.setSpinnerSelection(recommendationNextStep, saleCallData.getRecommendationNextStep());
+            CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown) view.findViewById(R.id.sales_next_step_recommendation);
+            recommendationNextStep.setText(saleCallData.getRecommendationNextStep());
 
             Spinner recommendationNextLevel = (Spinner) view.findViewById(R.id.sales_recommendation_level);
             Utils.setSpinnerSelection(recommendationNextLevel, saleCallData.getRecommendationLevel());
@@ -264,19 +275,21 @@ public class SaleslFormFragment extends Fragment {
             saleCallData.setIfNoWhy(((EditText) getActivity().findViewById(R.id.sales_if_no_why)).getText().toString()
                     +","+((EditText)getActivity().findViewById(R.id.sales_point_of_sale_others)).getText().toString());
             saleCallData.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.sales_point_of_sale)).getText().toString());
-            saleCallData.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.sales_next_step_recommendation)).getSelectedItem().toString());
+            saleCallData.setRecommendationNextStep(((Button) getActivity().findViewById(R.id.sales_next_step_recommendation)).getText().toString());
             saleCallData.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.sales_recommendation_level)).getSelectedItem().toString());
             saleCallData.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.sales_government_approval)).getSelectedItem().toString());
             saleCallData.setTaskId(callDataTask.getUuid());
             saleCallData.setOrderId(callDataTask.getUuid());
             saleCallData.setOrderId(callDataTask.getUuid());
+            saleCallData.setLatitude(capturedLatitude);
+            saleCallData.setLongitude(capturedLongitude);
             if(isUpdate){
                 saleDao.update(saleCallData);
-                submitSaleData(saleCallData.getUuid());
+                submitSaleData(saleCallData);
             }else {
                 Long saleId = saleDao.insert(saleCallData);
                 //add the different sales.
-                submitSaleData(saleCallData.getUuid());
+                submitSaleData(saleCallData);
                 callDataTask.setStatus(TaskMainFragment.STATUS_COMPLETE);
                 taskDao.update(callDataTask);
             }
@@ -287,12 +300,12 @@ public class SaleslFormFragment extends Fragment {
         return isSaved;
     }
 
-    private void submitSaleData(String saleId) {
+    private void submitSaleData(Sale sale) {
         for (int i = 0; i < spinnerList.size(); ++i) {
             try{
                 SaleData saleData = instantiateSaleData(i);
-                saleData.setUuid(UUID.randomUUID().toString());
-                saleData.setSaleId(saleId);
+                saleData.setSaleId(sale.getUuid());
+                saleData.setSale(sale);
                 saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
                 saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
                 Product product = (Product) spinnerList.get(i).getSelectedItem();
@@ -301,6 +314,7 @@ public class SaleslFormFragment extends Fragment {
                 if(saleData.getUuid()!=null){
                     saleDataDao.update(saleData);
                 }else{
+                    saleData.setUuid(UUID.randomUUID().toString());
                     saleDataDao.insert(saleData);
                 }
             }catch (Exception ex){
@@ -433,5 +447,24 @@ public class SaleslFormFragment extends Fragment {
             }
         }
     }
+
+    protected void setGpsWidget(final View view1) {
+        Button showGps = (Button)view1.findViewById(R.id.sales_capture_gps);
+        showGps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gpsTracker = new GPSTracker(getActivity());
+                if (gpsTracker.canGetLocation()) {
+                    capturedLatitude = gpsTracker.getLatitude();
+                    capturedLongitude = gpsTracker.getLongitude();
+                    EditText detailsGps = (EditText)view1.findViewById(R.id.sales_gps);
+                    detailsGps.setText(capturedLatitude + "," + capturedLongitude);
+                } else {
+                    gpsTracker.showSettingsAlert();
+                }
+            }
+        });
+    }
+
 
 }

@@ -75,7 +75,7 @@
                 android:id="@+id/detailer_how_many_diarrhea_patients_in_facility_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1.How many diarrhea patients do you see in your outlet/Facility?"
+                android:text="1.How many diarrhea patients do you see in your outlet/Facility per week?"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
@@ -597,12 +597,11 @@
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
-        <Spinner
+        <org.chai.util.CustomMultSelectDropDown
                 android:id="@+id/detailer_next_step_recommendation"
                 android:layout_height="wrap_content"
                 android:prompt="@string/selectItem"
                 android:layout_width="fill_parent"
-                android:entries="@array/recommendation"
                 android:background="@drawable/btn_dropdown"/>
 
     </LinearLayout>
