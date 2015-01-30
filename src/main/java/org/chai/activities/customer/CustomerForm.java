@@ -191,7 +191,6 @@ public class CustomerForm extends Activity {
 
     private void bindUIToCustomer() {
         try {
-            customerInstance.setUuid(UUID.randomUUID().toString());
             customerInstance.setOutletName(((EditText) findViewById(R.id.detailsname)).getText().toString());
             customerInstance.setDateOutletOpened(Utils.stringToDate(((EditText) findViewById(R.id.details_date_outlet_opened)).getText().toString()));
             customerInstance.setOutletType(((Spinner) findViewById(R.id.details_outlet_type)).getSelectedItem().toString());
@@ -261,6 +260,7 @@ public class CustomerForm extends Activity {
                 bindUIToCustomer();
                 customerInstance.setIsDirty(true);
                 if (isNewCustomer()) {
+                    customerInstance.setUuid(UUID.randomUUID().toString());
                     Long customerId = customerDao.insert(customerInstance);
                     saveCustomerContacts(customerInstance.getUuid());
                 } else {
