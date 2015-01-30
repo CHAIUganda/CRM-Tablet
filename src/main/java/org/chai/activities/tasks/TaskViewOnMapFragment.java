@@ -33,6 +33,8 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.SimpleLocationOverlay;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.*;
 
@@ -52,12 +54,12 @@ public class TaskViewOnMapFragment extends Fragment {
 
 
     private int MAP_DEFAULT_ZOOM = 8;
-    private double MAP_DEFAULT_LATITUDE =0.881397;
-    private double MAP_DEFAULT_LONGITUDE = 32.5202839;
+    private double MAP_DEFAULT_LATITUDE =0.3136;
+    private double MAP_DEFAULT_LONGITUDE = 32.5811;
 
     private MapView mapView;
     private IMapController mapController;
-    private SimpleLocationOverlay mMyLocationOverlay;
+    private MyLocationNewOverlay mMyLocationOverlay;
     private ItemizedIconOverlay<OverlayItem> currentLocationOverlay;
     private DefaultResourceProxyImpl resourceProxy;
     private ArrayList<OverlayItem> items;
@@ -86,27 +88,27 @@ public class TaskViewOnMapFragment extends Fragment {
         mapView.setMultiTouchControls(true);
         mapView.setUseDataConnection(true);
 
-        mapController = this.mapView.getController();
-        mapController.setZoom(MAP_DEFAULT_ZOOM);
+        resourceProxy = new DefaultResourceProxyImpl(getActivity());
 
-        this.mMyLocationOverlay = new SimpleLocationOverlay(getActivity());
+        this.mMyLocationOverlay = new MyLocationNewOverlay(getActivity(),mapView);
+        this.mMyLocationOverlay.enableMyLocation();
+        this.mMyLocationOverlay.setDrawAccuracyEnabled(true);
+
+        mapController = this.mapView.getController();
+
         this.mapView.getOverlays().add(mMyLocationOverlay);
 
         gpsTracker = new GPSTracker(getActivity());
         if(gpsTracker.canGetLocation()){
             MAP_DEFAULT_LATITUDE = gpsTracker.getLatitude();
             MAP_DEFAULT_LONGITUDE = gpsTracker.getLongitude();
+        }else{
+            gpsTracker.showSettingsAlert();
         }
 
         GeoPoint currentLocation = new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE);
-        mapController.setCenter(currentLocation);
-
-        resourceProxy = new DefaultResourceProxyImpl(getActivity());
-
-        OverlayItem myLocationOverlayItem = new OverlayItem("Here", "Current Position", currentLocation);
-        Drawable myCurrentLocationMarker = this.getResources().getDrawable(R.drawable.drugstore);
-        myLocationOverlayItem.setMarker(myCurrentLocationMarker);
-
+        mapController.setZoom(MAP_DEFAULT_ZOOM);
+        mapController.animateTo(currentLocation);
         calenderSpinner = (Spinner)view.findViewById(R.id.map_filter_spinner);
         calenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -171,6 +173,10 @@ public class TaskViewOnMapFragment extends Fragment {
                 }, resourceProxy);
         this.mapView.getOverlays().clear();
         this.mapView.getOverlays().add(this.currentLocationOverlay);
+        //FIX ME should get center point for all these points
+        if(!items.isEmpty()){
+            this.mapController.animateTo(items.get(0).getPoint());
+        }
         this.mapView.invalidate();
 
     }

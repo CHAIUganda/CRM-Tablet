@@ -17,6 +17,7 @@ import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
+import org.chai.util.CustomMultSelectDropDown;
 import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
 
@@ -86,6 +87,9 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             pointOfSalesOptionsButton = (Button)view.findViewById(R.id.adhock_sale_point_of_sale);
             pointOfSalesOptions = getResources().getStringArray(R.array.point_of_sale_material);
             selections = new boolean[pointOfSalesOptions.length];
+
+            CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown)view.findViewById(R.id.adhock_sale_next_step_recommendation);
+            recommendationNextStep.setStringOptions(getResources().getStringArray(R.array.recommendation_nextstep));
 
             pointOfSalesOptionsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -176,8 +180,9 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             Button pointOfSaleMaterial = (Button) view.findViewById(R.id.adhock_sale_point_of_sale);
            pointOfSaleMaterial.setText(saleInstance.getPointOfsaleMaterial());
 
-            Spinner recommendationNextStep = (Spinner) view.findViewById(R.id.adhock_sale_next_step_recommendation);
-            Utils.setSpinnerSelection(recommendationNextStep, saleInstance.getRecommendationNextStep());
+
+            CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown) view.findViewById(R.id.adhock_sale_next_step_recommendation);
+            recommendationNextStep.setText(saleInstance.getRecommendationNextStep());
 
             Spinner recommendationNextLevel = (Spinner) view.findViewById(R.id.adhock_sale_recommendation_level);
             Utils.setSpinnerSelection(recommendationNextLevel, saleInstance.getRecommendationLevel());
@@ -311,7 +316,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         }
         saleInstance.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.adhock_sale_point_of_sale)).getText().toString()
                 +","+((EditText)getActivity().findViewById(R.id.adhoc_point_of_sale_others)).getText().toString());
-        saleInstance.setRecommendationNextStep(((Spinner) getActivity().findViewById(R.id.adhock_sale_next_step_recommendation)).getSelectedItem().toString());
+        saleInstance.setRecommendationNextStep(((CustomMultSelectDropDown) getActivity().findViewById(R.id.adhock_sale_next_step_recommendation)).getText().toString());
         saleInstance.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.adhock_sale_recommendation_level)).getSelectedItem().toString());
         saleInstance.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.adhock_sale_government_approval)).getSelectedItem().toString());
         saleInstance.setCustomerId(salesCustomer.getUuid());
