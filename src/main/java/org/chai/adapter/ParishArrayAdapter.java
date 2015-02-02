@@ -46,6 +46,7 @@ public class ParishArrayAdapter extends ArrayAdapter<Parish> {
         TextView label = new TextView(context);
         label.setTextColor(Color.WHITE);
         label.setText(parishes[position].getName());
+        label.setPadding(5,20,5,20);
 
         return label;
     }

@@ -46,6 +46,7 @@ public class SubcountyArrayAdapter extends ArrayAdapter<Subcounty> {
         TextView label = new TextView(context);
         label.setTextColor(Color.BLACK);
         label.setText(subcounties[position].getName());
+        label.setPadding(5,20,5,20);
 
         return label;
     }
