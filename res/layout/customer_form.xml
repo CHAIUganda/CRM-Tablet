@@ -119,7 +119,7 @@
                         android:id="@+id/details_licence_type_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4.Type of licence(Is the licence certificate visible in the outlet):"
+                        android:text="4.Type of licence->Is the licence certificate visible in the outlet?"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 
@@ -244,7 +244,7 @@
                         android:id="@+id/details_desc_location_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="9. Of Outlet Location(please state landmark of key location point so you can find easily next time):"
+                        android:text="9.Please give directions to the outlet from a key landmark"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 

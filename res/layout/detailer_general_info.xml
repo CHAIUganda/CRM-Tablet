@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/capture_call_data_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
@@ -143,7 +149,7 @@
                 android:id="@+id/detailer_how_did_you_hearabout_zinc_ors_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3.how did you hear/learn about ORS and Zinc treatment combination?"
+                android:text="3.How did you hear/learn about ORS and Zinc treatment combination?"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
@@ -199,6 +205,11 @@
                 android:text="4.Tell me what you know about diarrhea and how it affects your community?"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8dp"
+                android:text="@string/det_tell_me_whatyouknowaboutdiarrhea"/>
 
         <Spinner
                 android:id="@+id/detailer_how_diarrhea_affects_community"
@@ -224,6 +235,12 @@
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8dp"
+                android:text="@string/det_doyouknowtheeffectdiarrheahasonthebody"/>
+
         <Spinner
                 android:id="@+id/detailer_effect_diarrhea_has_on_the_body"
                 android:layout_height="wrap_content"
@@ -247,6 +264,12 @@
                 android:text="6.What do you know about ORS and how it should be used?"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8dp"
+                android:text="@string/det_whatdoyouknowaboutors"/>
 
         <Spinner
                 android:id="@+id/detailer_how_ors_should_be_used"
@@ -272,6 +295,12 @@
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8dp"
+                android:text="@string/det_whatdoyouknowaboutzink"/>
+
         <Spinner
                 android:id="@+id/detailer_how_zinc_should_be_used"
                 android:layout_height="wrap_content"
@@ -295,6 +324,11 @@
                 android:text="8.Why should you not use antibiotics to treat diarrhea"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8dp"
+                android:text="@string/det_whyshould_younot_use_antibiotics"/>
 
         <Spinner
                 android:id="@+id/detailer_why_should_not_use_antibiotics"
@@ -346,7 +380,7 @@
                     android:id="@+id/detailers_howmany_in_stock_zinc_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10.If Yes, Check how many are in stock(Zinc):"
+                    android:text="10.If Yes, Check how many are in stock(Zinc:1x10):"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -361,7 +395,8 @@
                     android:background="@drawable/bordertextfield"
                     android:singleLine="true"
                     android:inputType="number"
-                    android:textCursorDrawable="@null"/>
+                    android:textCursorDrawable="@null"
+                    android:maxLength="5000"/>
 
         </LinearLayout>
 
@@ -375,7 +410,7 @@
                     android:id="@+id/detailers_howmany_in_stock_ors_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="11.If Yes, Check how many are in stock(ORS):"
+                    android:text="11.If Yes, Check how many are in stock(ORS:1 sachet):"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -390,7 +425,8 @@
                     android:background="@drawable/bordertextfield"
                     android:singleLine="true"
                     android:inputType="number"
-                    android:textCursorDrawable="@null"/>
+                    android:textCursorDrawable="@null"
+                    android:maxLength="2000"/>
 
         </LinearLayout>
 
@@ -462,7 +498,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="14.What price do you buy Zinc"
+                    android:text="14.What price do you buy Zinc(1x10)"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -482,7 +518,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="15.What price do you buy ORS"
+                    android:text="15.What price do you buy ORS(1 sachet)"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"/>
@@ -632,3 +668,5 @@
 
 
 </LinearLayout>
+
+</ScrollView>

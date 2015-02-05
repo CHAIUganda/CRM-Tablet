@@ -29,4 +29,13 @@
     <string name="sync">Syncronise</string>
     <string name="action_search">Search</string>
     <string name="search_hint">Search for Customer</string>
+    <string name="det_tell_me_whatyouknowaboutdiarrhea">
+        Diarrhea is the passage of watery or loose stools (at least 3x over 24hrs)\nDiarrhea is
+        usually spread through contaminated food or water\nDiarrhea is a
+        leading cause of death in children in Uganda </string>
+    <string name="det_doyouknowtheeffectdiarrheahasonthebody">Diarrhea can lead to increased loss of water and minerals in the body\nChildren can become dehydrated and die if they lose too much water\nChildren can become weaker and malnourished due to diarrhea</string>
+    <string name="det_whatdoyouknowaboutors">ORS treats dehydration\nAfter each stool give 1L of clean water, mixed with 1 sachet of ORS\nDosage can change based on age of the child</string>
+    <string name="det_whatdoyouknowaboutzink">Zinc helps the child recover quickly and improve appetite and growth\nGive to the child for the full 10 days\nDosage can change based on the age of the child
+</string>
+    <string name="det_whyshould_younot_use_antibiotics">Antibiotics should be used for bacterial infections only\nMost diarrhea cases are caused by viruses\nAntibiotics can make people sicker in the long term</string>
 </resources>

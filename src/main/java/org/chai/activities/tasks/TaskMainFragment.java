@@ -26,7 +26,7 @@ public class TaskMainFragment extends BaseContainerFragment {
         tabHost = new FragmentTabHost(getActivity());
         tabHost.setup(getActivity(),getChildFragmentManager(),R.layout.task_main_fragment);
 
-        tabHost.addTab(tabHost.newTabSpec("Calender").setIndicator(getTabIndicator(tabHost.getContext(),"Calender")),CalenderFragmentContainer.class,null);
+        tabHost.addTab(tabHost.newTabSpec("Calender").setIndicator(getTabIndicator(tabHost.getContext(),"Calendar")),CalenderFragmentContainer.class,null);
         tabHost.addTab(tabHost.newTabSpec("location").setIndicator(getTabIndicator(tabHost.getContext(),"View by Location")),LocationFragmentContainer.class,null);
         tabHost.addTab(tabHost.newTabSpec("viewonmap").setIndicator(getTabIndicator(tabHost.getContext(),"View on Map")),TaskMapFragmentContainer.class,null);
 

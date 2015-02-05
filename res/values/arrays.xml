@@ -51,14 +51,14 @@
         <item>Drug Shop</item>
         <item>Private Clinic</item>
         <item>Public Health Center</item>
-        <item>Publich Hospital</item>
+        <item>Public Hospital</item>
         <item>Private Hospital</item>
     </string-array>
     <string-array name="outletsize">
         <item>""</item>
-        <item>Large(over 50)</item>
-        <item>Medium(30)</item>
-        <item>Small(10)</item>
+        <item>Large (50 or more products)</item>
+        <item>Medium (around 30 products)</item>
+        <item>Small (10 or fewer products</item>
     </string-array>
     <string-array name="licencetype">
         <item>""</item>
@@ -105,9 +105,9 @@
     </string-array>
     <string-array name="ratings">
         <item>""</item>
-        <item>Good</item>
-        <item>Medium</item>
-        <item>Low</item>
+        <item>High(3 points addressed)</item>
+        <item>Medium(2 points addressed)</item>
+        <item>Low(0 or 1 point addressed)</item>
     </string-array>
     <string-array name="contact_type">
         <item>""</item>
@@ -135,6 +135,7 @@
         <item>Stock Zinc</item>
         <item>Start recommending ORS and Zinc together</item>
         <item>Start selling ORS and Zinc at MRP</item>
+        <item>Purchase Zinc or/and ORS from cheaper supply source</item>
     </string-array>
     <string-array name="turnover">
         <item>""</item>
@@ -144,9 +145,11 @@
         <item>Greater than 300,000 UGX</item>
     </string-array>
     <string-array name="point_of_sale_material">
+        <item>ORS/zinc dangler</item>
+        <item>Tent card</item>
         <item>Poster</item>
-        <item>Flyer</item>
-        <item>T-shirt</item>
+        <item>Bunting</item>
+        <item>MRP dangler</item>
         <item>Pen</item>
         <item>Others</item>
     </string-array>

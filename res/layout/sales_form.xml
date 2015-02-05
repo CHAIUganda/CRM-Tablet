@@ -239,7 +239,7 @@
                       android:padding="5dip">
 
                 <TextView
-                        android:text="4.Note the brands sold:"
+                        android:text="4.If sale was made, how many were sold?"
                         android:textColor="@color/list_main_text_color"
                         android:textSize="@dimen/list_main_text_size"/>
 
