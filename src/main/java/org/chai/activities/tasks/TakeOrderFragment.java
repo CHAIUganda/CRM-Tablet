@@ -50,7 +50,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.order_form,container,false);
+        final View view = inflater.inflate(R.layout.order_form,container,false);
         initialiseGreenDao();
 
         tableLayout = (TableLayout)view.findViewById(R.id.orders_table);
@@ -71,9 +71,13 @@ public class TakeOrderFragment extends BaseContainerFragment {
 
         textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view1, int position, long l) {
                 Customer selected = (Customer)adapterView.getAdapter().getItem(position);
                 selectedCustomer = selected;
+                if(selectedCustomer!=null){
+                    ((TextView)view. findViewById(R.id.order_district)).setText(selectedCustomer.getSubcounty().getDistrict().getName());
+                    ((TextView)view. findViewById(R.id.order_subcounty)).setText(selectedCustomer.getSubcounty().getName());
+                }
             }
         });
 
@@ -115,6 +119,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
                         datePickerDialog.updateDate(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
                     }
                 }
+//                datePickerDialog.getDatePicker().setMinDate(Utils.flattenDate(new Date()).getTime());
                 datePickerDialog.show();
 
             }
@@ -167,7 +172,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
         if (orderInstance != null) {
             ((AutoCompleteTextView) view.findViewById(R.id.order_auto_complete_textview)).setText(orderInstance.getCustomer().getOutletName());
             selectedCustomer = orderInstance.getCustomer();
-            dateEditTxt.setText(Utils.dateToString(orderInstance.getOrderDate()));
+            dateEditTxt.setText(Utils.dateToString(orderInstance.getDeliveryDate()));
             bindOrderDataToUi(view, orderInstance);
         }
     }
