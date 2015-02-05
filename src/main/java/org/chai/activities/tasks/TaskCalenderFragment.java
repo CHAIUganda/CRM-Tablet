@@ -8,13 +8,16 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
+import de.greenrobot.dao.query.Query;
 import de.greenrobot.dao.query.QueryBuilder;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.adapter.TaskListAdapter;
 import org.chai.model.*;
 import org.chai.rest.RestClient;
+import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
+import org.osmdroid.util.GeoPoint;
 
 import java.util.Date;
 import java.util.List;
@@ -105,13 +108,20 @@ public class TaskCalenderFragment extends Fragment {
         List<Task> outstandingTasks=null;
         if(itemPosition==1){
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(Utils.addToDate(new Date(),0)),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).list();
-        } else if (itemPosition > 0 && itemPosition < 6) {
+        } else if (itemPosition >= 0 && itemPosition < 6) {
             itemPosition = itemPosition - 1;
             Date dueDateOffset = Utils.addToDate(new Date(),itemPosition);
             Date dueDatemax = Utils.addToDate(new Date(),itemPosition+1);
             Log.i("Due Date:",dueDateOffset.toString()+":max-"+dueDatemax.toString());
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).list();
-        }else{
+        }else if(itemPosition == 6){
+            //nearby tasks
+            GeoPoint geoPoint = getCurrentLocation();
+            Query query = taskDao.queryRawCreate(",Customer C ORDER BY abs(C.latitude-("+geoPoint.getAltitude()
+                    +")) + abs(C.longitude - ("+geoPoint.getLongitude()+")) LIMIT 20");
+            List list = query.list();
+            outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(geoPoint, list, 20);
+        }else if(itemPosition == 7){
             outstandingTasks = taskDao.loadAll();
         }
         return outstandingTasks;
@@ -174,6 +184,19 @@ public class TaskCalenderFragment extends Fragment {
                 .create();
         return dialog;
 
+    }
+
+    private GeoPoint getCurrentLocation(){
+        double latitude = 0,longitude = 0;
+        GPSTracker gpsTracker = new GPSTracker(getActivity());
+        if(gpsTracker.canGetLocation()){
+            latitude = gpsTracker.getLatitude();
+            longitude = gpsTracker.getLongitude();
+        }else{
+            gpsTracker.showSettingsAlert();
+        }
+        GeoPoint currentLocation = new GeoPoint(latitude,longitude);
+        return currentLocation;
     }
 
 }

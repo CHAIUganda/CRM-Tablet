@@ -2,6 +2,7 @@ package org.chai.util;
 
 
 import android.graphics.Color;
+import android.location.Location;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -10,12 +11,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import org.chai.model.CustomerContact;
+import org.chai.model.Task;
+import org.chai.util.geodistance.DistanceCalculator;
+import org.chai.util.geodistance.DistanceComparator;
+import org.chai.util.geodistance.ResultsHelper;
+import org.osmdroid.util.GeoPoint;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by victor on 10/16/14.
@@ -106,5 +109,30 @@ public class Utils {
         cal.add(Calendar.DAY_OF_YEAR, toAdd);
         return cal.getTime();
     }
+    public static List<Task> orderAndFilterUsingRealDistanceTo(GeoPoint referencePoint, List<Task> tasks,int resultLimit) {
+
+        final double referenceLatitude = referencePoint.getLatitudeE6() / 1e6;
+        final double referenceLongitude = referencePoint.getLongitudeE6() / 1e6;
+
+        DistanceCalculator<Task> distanceCalculator = new DistanceCalculator<Task>() {
+            public Double calculateDistanceTo(Task point) {
+
+                double pointLatitude = point.getCustomer().getLatitude() / 1e6;
+                double pointLongitude = point.getCustomer().getLongitude() / 1e6;
+
+                float[] results = new float[1];
+                Location.distanceBetween(referenceLatitude, referenceLongitude, pointLatitude, pointLongitude, results);
+                return (double) results[0];
+
+            }
+        };
+
+        Comparator<? super Task> distanceComparator = DistanceComparator.create(distanceCalculator, true);
+
+        List<Task> filtered = ResultsHelper.filterFirstMin(resultLimit, tasks, distanceComparator);
+
+        return filtered;
+    }
+
 
 }

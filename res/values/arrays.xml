@@ -157,6 +157,7 @@
         <item>Due in two days</item>
         <item>Due in three days</item>
         <item>Due in four days</item>
+        <item>Nearby Tasks</item>
         <item>All Tasks</item>
     </string-array>
     <!-- Nav Drawer Menu Items -->

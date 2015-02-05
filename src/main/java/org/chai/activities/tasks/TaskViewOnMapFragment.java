@@ -17,6 +17,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import de.greenrobot.dao.query.Query;
 import de.greenrobot.dao.query.QueryBuilder;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
@@ -56,6 +57,10 @@ public class TaskViewOnMapFragment extends Fragment {
     private int MAP_DEFAULT_ZOOM = 8;
     private double MAP_DEFAULT_LATITUDE =0.3136;
     private double MAP_DEFAULT_LONGITUDE = 32.5811;
+    private int MAX_TASKS_TO_SHOW_ON_MAP = 20;
+
+    /*private double MAP_DEFAULT_LATITUDE = 0.7190105;
+    private double MAP_DEFAULT_LONGITUDE = 31.4345434;*/
 
     private MapView mapView;
     private IMapController mapController;
@@ -189,13 +194,20 @@ public class TaskViewOnMapFragment extends Fragment {
         List<Task> outstandingTasks=null;
         if(itemPosition==1){
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
-        } else if (itemPosition > 0 && itemPosition < 6) {
+        } else if (itemPosition >= 0 && itemPosition < 6) {
             itemPosition=itemPosition-1;
             Date dueDateOffset = Utils.addToDate(new Date(),itemPosition);
             Date dueDatemax = Utils.addToDate(new Date(),itemPosition+1);
             Log.i("Due Date:",dueDateOffset.toString()+":max-"+dueDatemax.toString());
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
-        }else{
+        } else if (itemPosition == 6) {
+            //nearby tasks
+            Query query = taskDao.queryRawCreate(",Customer C ORDER BY abs(C.latitude-(" + MAP_DEFAULT_LATITUDE
+                    + ")) + abs(C.longitude - (" + MAP_DEFAULT_LONGITUDE + ")) LIMIT " + MAX_TASKS_TO_SHOW_ON_MAP);
+            List list = query.list();
+            outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE), list, MAX_TASKS_TO_SHOW_ON_MAP);
+
+        } else if (itemPosition == 7) {
             outstandingTasks = taskDao.loadAll();
         }
         return outstandingTasks;
