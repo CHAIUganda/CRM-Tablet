@@ -185,4 +185,10 @@
         <item>Once every two weeks</item>
         <item>Once a Month</item>
     </array>
+    <array name="licencetype2">
+        <item>NDA</item>
+        <item>PSU</item>
+        <item>UMDPC</item>
+        <item>Other</item>
+    </array>
 </resources>

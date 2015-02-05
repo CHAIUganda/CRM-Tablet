@@ -124,7 +124,7 @@
                         android:textStyle="bold"/>
 
                 <Spinner
-                        android:id="@+id/details_licence_type"
+                        android:id="@+id/details_licence_visible"
                         android:layout_height="wrap_content"
                         android:prompt="@string/selectItem"
                         android:layout_width="fill_parent"
@@ -132,6 +132,35 @@
                         android:background="@drawable/btn_dropdown"/>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/type_of_licence_layout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4-a.If yes, what type of license?"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Do NOT ask this question.  Look around outlet for license."
+                        android:textSize="10dp"/>
+
+            <Spinner
+                    android:id="@+id/details_licence_type"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/selectItem"
+                    android:layout_width="fill_parent"
+                    android:entries="@array/licencetype2"
+                    android:background="@drawable/btn_dropdown"/>
+
+        </LinearLayout>
 
 
             <LinearLayout
@@ -346,32 +375,6 @@
 
             </LinearLayout>
 
-
-
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:id="@+id/details_has_sister_branches_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="15.Is this Outlet linked to any other branches?"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="bold"/>
-
-                <Spinner
-                        android:id="@+id/details_has_sister_branches"
-                        android:layout_height="wrap_content"
-                        android:prompt="@string/selectItem"
-                        android:layout_width="fill_parent"
-                        android:entries="@array/yesnolist"
-                        android:background="@drawable/btn_dropdown"/>
-
-            </LinearLayout>
-
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -504,29 +507,6 @@
                         android:layout_width="fill_parent"
                         android:background="@drawable/btn_dropdown"
                         android:entries="@array/restock_frequency"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                <TextView
-                        android:id="@+id/details_building_structure_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="22.Building Structure:"
-                        android:textColor="@color/list_main_text_color"
-                        android:textStyle="bold"/>
-                <Spinner
-                        android:id="@+id/details_building_structure"
-                        android:layout_height="wrap_content"
-                        android:prompt="@string/selectItem"
-                        android:layout_width="fill_parent"
-                        android:background="@drawable/btn_dropdown"
-                        android:entries="@array/buildingstructure"/>
 
             </LinearLayout>
 

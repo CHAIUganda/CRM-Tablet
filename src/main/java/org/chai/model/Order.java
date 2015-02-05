@@ -22,7 +22,6 @@ public class Order {
     private java.util.Date orderDate;
     /** Not-null value. */
     private String customerId;
-
     private List<OrderData> orderDatas;
 
     // KEEP FIELDS - put your custom fields here

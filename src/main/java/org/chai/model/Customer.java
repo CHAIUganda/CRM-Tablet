@@ -29,11 +29,10 @@ public class Customer {
     private String majoritySourceOfSupply;
     private String keyWholeSalerName;
     private String keyWholeSalerContact;
-    private String buildingStructure;
+    private Boolean licenceVisible;
     private String typeOfLicence;
     private String descriptionOfOutletLocation;
     private Integer numberOfEmployees;
-    private Boolean hasSisterBranch;
     private Integer numberOfCustomersPerDay;
     private String restockFrequency;
     private java.util.Date dateOutletOpened;
@@ -77,7 +76,7 @@ public class Customer {
         this.uuid = uuid;
     }
 
-    public Customer(String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, String buildingStructure, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Boolean hasSisterBranch, Integer numberOfCustomersPerDay, String restockFrequency, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, Boolean isActive, String subcountyId) {
+    public Customer(String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, Boolean licenceVisible, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfCustomersPerDay, String restockFrequency, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, Boolean isActive, String subcountyId) {
         this.uuid = uuid;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -89,11 +88,10 @@ public class Customer {
         this.majoritySourceOfSupply = majoritySourceOfSupply;
         this.keyWholeSalerName = keyWholeSalerName;
         this.keyWholeSalerContact = keyWholeSalerContact;
-        this.buildingStructure = buildingStructure;
+        this.licenceVisible = licenceVisible;
         this.typeOfLicence = typeOfLicence;
         this.descriptionOfOutletLocation = descriptionOfOutletLocation;
         this.numberOfEmployees = numberOfEmployees;
-        this.hasSisterBranch = hasSisterBranch;
         this.numberOfCustomersPerDay = numberOfCustomersPerDay;
         this.restockFrequency = restockFrequency;
         this.dateOutletOpened = dateOutletOpened;
@@ -204,12 +202,12 @@ public class Customer {
         this.keyWholeSalerContact = keyWholeSalerContact;
     }
 
-    public String getBuildingStructure() {
-        return buildingStructure;
+    public Boolean getLicenceVisible() {
+        return licenceVisible;
     }
 
-    public void setBuildingStructure(String buildingStructure) {
-        this.buildingStructure = buildingStructure;
+    public void setLicenceVisible(Boolean licenceVisible) {
+        this.licenceVisible = licenceVisible;
     }
 
     public String getTypeOfLicence() {
@@ -234,14 +232,6 @@ public class Customer {
 
     public void setNumberOfEmployees(Integer numberOfEmployees) {
         this.numberOfEmployees = numberOfEmployees;
-    }
-
-    public Boolean getHasSisterBranch() {
-        return hasSisterBranch;
-    }
-
-    public void setHasSisterBranch(Boolean hasSisterBranch) {
-        this.hasSisterBranch = hasSisterBranch;
     }
 
     public Integer getNumberOfCustomersPerDay() {

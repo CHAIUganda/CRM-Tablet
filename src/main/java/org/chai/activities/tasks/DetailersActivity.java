@@ -60,6 +60,7 @@ public class DetailersActivity extends BaseDetailerFragment {
         subcountyTxt = (TextView)view.findViewById(R.id.detailer_subcounty);
 
         manageDoyouStockZincResponses(view);
+        manageDoyouStockOrsResponses(view);
         manageHowDidyouHearOtherOption(view);
         manageHaveYouHeardAboutDiarheaTreatment(view);
         managePointOfSaleWidget(view);
@@ -144,14 +145,23 @@ public class DetailersActivity extends BaseDetailerFragment {
         detailerCallInstance.setOtherWaysHowYouHeard(((EditText) getActivity().findViewById(R.id.detailer_other_ways_youheard_about_zinc)).getText().toString());
         if (((Spinner)getActivity(). findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString().equals("Yes")) {
             detailerCallInstance.setHowManyZincInStock(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailers_howmany_in_stock_zinc)).getText().toString()));
-            detailerCallInstance.setHowmanyOrsInStock(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailers_howmany_in_stock_ors)).getText().toString()));
             detailerCallInstance.setZincBrandsold(((EditText)getActivity(). findViewById(R.id.detailers_brand_sold_zinc)).getText().toString());
-            detailerCallInstance.setOrsBrandSold(((EditText)getActivity(). findViewById(R.id.detailers_brand_sold_ors)).getText().toString());
             detailerCallInstance.setBuyingPriceZinc(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyzinc)).getText().toString()));
-            detailerCallInstance.setBuyingPriceOrs(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyors)).getText().toString()));
+            detailerCallInstance.setZincSellingPrice(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_sellingPrice_zinc)).getText().toString()));
         }
 
-        detailerCallInstance.setIfNoWhy(((EditText) getActivity().findViewById(R.id.detailer_if_no_why)).getText().toString());
+
+        if (((Spinner)getActivity(). findViewById(R.id.detailer_do_you_stock_ors)).getSelectedItem().toString().equals("Yes")) {
+            detailerCallInstance.setHowmanyOrsInStock(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailers_howmany_in_stock_ors)).getText().toString()));
+            detailerCallInstance.setOrsBrandSold(((EditText)getActivity(). findViewById(R.id.detailers_brand_sold_ors)).getText().toString());
+            detailerCallInstance.setBuyingPriceOrs(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyors)).getText().toString()));
+            detailerCallInstance.setOrsSellingPrice(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_sellingPrice_ors)).getText().toString()));
+        }
+
+
+        detailerCallInstance.setIfNoZincWhy(((EditText) getActivity().findViewById(R.id.detailer_if_no_zinc_why)).getText().toString());
+        detailerCallInstance.setIfNoOrsWhy(((EditText) getActivity().findViewById(R.id.detailer_if_no_ors_why)).getText().toString());
+
         detailerCallInstance.setPointOfsaleMaterial(((Button)getActivity(). findViewById(R.id.detailer_point_of_sale)).getText().toString()
                 +","+((EditText)getActivity().findViewById(R.id.detailer_point_of_sale_others)).getText().toString());
         detailerCallInstance.setRecommendationNextStep(((CustomMultSelectDropDown) getActivity().findViewById(R.id.detailer_next_step_recommendation)).getText().toString());
@@ -162,9 +172,12 @@ public class DetailersActivity extends BaseDetailerFragment {
         detailerCallInstance.setDiarrheaEffectsOnBody(((Spinner) getActivity().findViewById(R.id.detailer_effect_diarrhea_has_on_the_body)).getSelectedItem().toString());
         detailerCallInstance.setKnowledgeAbtOrsAndUsage(((Spinner)getActivity(). findViewById(R.id.detailer_how_ors_should_be_used)).getSelectedItem().toString());
         detailerCallInstance.setWhyNotUseAntibiotics(((Spinner)getActivity(). findViewById(R.id.detailer_why_should_not_use_antibiotics)).getSelectedItem().toString());
+
         String stocksZinc = ((Spinner) getActivity().findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString();
-        detailerCallInstance.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
-        detailerCallInstance.setRecommendationLevel(((Spinner)getActivity(). findViewById(R.id.detailer_recommendation_level)).getSelectedItem().toString());
+        detailerCallInstance.setDoYouStockZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
+        String stocksOrs = ((Spinner) getActivity().findViewById(R.id.detailer_do_you_stock_ors)).getSelectedItem().toString();
+        detailerCallInstance.setDoYouStockOrs(stocksOrs.equalsIgnoreCase("Yes") ? true : false);
+
         detailerCallInstance.setKnowledgeAbtZincAndUsage(((Spinner)getActivity(). findViewById(R.id.detailer_how_zinc_should_be_used)).getSelectedItem().toString());
         detailerCallInstance.setLatitude(capturedLatitude);
         detailerCallInstance.setLongitude(capturedLongitude);
@@ -181,6 +194,7 @@ public class DetailersActivity extends BaseDetailerFragment {
             ((EditText)view. findViewById(R.id.detailer_survey_date)).setText(Utils.dateToString(detailerCallInstance.getDateOfSurvey()));
             ((TextView) view.findViewById(R.id.detailer_name)).setText(customer.getOutletName());
             ((TextView)view. findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
+            ((TextView)view. findViewById(R.id.detailer_district)).setText(customer.getSubcounty().getDistrict().getName());
             ((TextView)view. findViewById(R.id.detailer_subcounty)).setText(customer.getSubcounty().getName());
             ((TextView)view. findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
             ((TextView)view. findViewById(R.id.detailers_gps_text)).setText(detailerCallInstance.getLatitude()+","+ detailerCallInstance.getLongitude());
@@ -196,9 +210,13 @@ public class DetailersActivity extends BaseDetailerFragment {
             ((EditText)view.findViewById(R.id.detailers_howmany_in_stock_ors)).setText(detailerCallInstance.getHowmanyOrsInStock()+"");
             ((EditText)view. findViewById(R.id.detailers_brand_sold_zinc)).setText(detailerCallInstance.getZincBrandsold());
             ((EditText)view.findViewById(R.id.detailers_brand_sold_ors)).setText(detailerCallInstance.getOrsBrandSold());
-            ((EditText)view. findViewById(R.id.detailer_if_no_why)).setText(detailerCallInstance.getIfNoWhy());
+            ((EditText)view. findViewById(R.id.detailer_if_no_zinc_why)).setText(detailerCallInstance.getIfNoZincWhy());
+            ((EditText)view. findViewById(R.id.detailer_if_no_ors_why)).setText(detailerCallInstance.getIfNoOrsWhy());
             ((EditText)view.findViewById(R.id.detailer_whatpricedoyoubuyzinc)).setText(detailerCallInstance.getBuyingPriceZinc() + "");
             ((EditText)view.findViewById(R.id.detailer_whatpricedoyoubuyors)).setText(detailerCallInstance.getBuyingPriceOrs() + "");
+
+            ((EditText)view.findViewById(R.id.detailer_sellingPrice_zinc)).setText(detailerCallInstance.getZincSellingPrice() + "");
+            ((EditText)view.findViewById(R.id.detailer_sellingPrice_ors)).setText(detailerCallInstance.getOrsSellingPrice() + "");
             ((EditText)view.findViewById(R.id.detailers_gps_text)).setText(detailerCallInstance.getLatitude() == null ? "0.0,0.0" : detailerCallInstance.getLatitude() + ","+ detailerCallInstance.getLongitude());
 
             //spinners
@@ -222,14 +240,15 @@ public class DetailersActivity extends BaseDetailerFragment {
             Utils.setSpinnerSelection(dontUseAntiBioticsSpinner, detailerCallInstance.getWhyNotUseAntibiotics());
 
             Spinner doyouStockZincSpinner = (Spinner)view. findViewById(R.id.detailer_do_you_stock_zinc);
-            Boolean doYouStockOrsZinc = detailerCallInstance.getDoYouStockOrsZinc();
+            Boolean doYouStockOrsZinc = detailerCallInstance.getDoYouStockZinc();
             Utils.setSpinnerSelection(doyouStockZincSpinner, doYouStockOrsZinc?"Yes":"No");
+
+            Spinner doyouStockOrsSpinner = (Spinner)view. findViewById(R.id.detailer_do_you_stock_ors);
+            Boolean doYouStockOrs = detailerCallInstance.getDoYouStockOrs();
+            Utils.setSpinnerSelection(doyouStockOrsSpinner, doYouStockOrs?"Yes":"No");
 
             CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown) view.findViewById(R.id.detailer_next_step_recommendation);
             recommendationNextStep.setText(detailerCallInstance.getRecommendationNextStep());
-
-            Spinner recommendationSpinner = (Spinner)view. findViewById(R.id.detailer_recommendation_level);
-            Utils.setSpinnerSelection(recommendationSpinner, detailerCallInstance.getRecommendationLevel());
 
             Spinner whatdoyouknowAboutZinc = (Spinner)view.findViewById(R.id.detailer_how_zinc_should_be_used);
             Utils.setSpinnerSelection(whatdoyouknowAboutZinc, detailerCallInstance.getKnowledgeAbtZincAndUsage());
@@ -242,6 +261,7 @@ public class DetailersActivity extends BaseDetailerFragment {
             ((EditText)view. findViewById(R.id.detailer_survey_date)).setText(calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.YEAR));
             Customer customer = callDataTask.getCustomer();
             if(customer!=null){
+                ((TextView)view. findViewById(R.id.detailer_district)).setText(customer.getSubcounty().getDistrict().getName());
                 ((TextView) view.findViewById(R.id.detailer_subcounty)).setText(customer.getSubcounty().getName());
                 ((TextView)view. findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
                 ((TextView)view. findViewById(R.id.detailer_name)).setText(customer.getOutletName());
@@ -289,7 +309,8 @@ public class DetailersActivity extends BaseDetailerFragment {
         view.findViewById(R.id.detailers_howmany_in_stock_ors).setEnabled(false);
         view.findViewById(R.id.detailers_brand_sold_zinc).setEnabled(false);
         view.findViewById(R.id.detailers_brand_sold_ors).setEnabled(false);
-        view.findViewById(R.id.detailer_if_no_why).setEnabled(false);
+        view.findViewById(R.id.detailer_if_no_zinc_why).setEnabled(false);
+        view.findViewById(R.id.detailer_if_no_ors_why).setEnabled(false);
         view.findViewById(R.id.detailer_whatpricedoyoubuyzinc).setEnabled(false);
         view.findViewById(R.id.detailer_whatpricedoyoubuyors).setEnabled(false);
         view.findViewById(R.id.detailers_gps_text).setEnabled(false);
@@ -303,7 +324,6 @@ public class DetailersActivity extends BaseDetailerFragment {
         view.findViewById(R.id.detailer_why_should_not_use_antibiotics).setEnabled(false);
         view.findViewById(R.id.detailer_do_you_stock_zinc).setEnabled(false);
         view.findViewById(R.id.detailer_next_step_recommendation).setEnabled(false);
-        view.findViewById(R.id.detailer_recommendation_level).setEnabled(false);
         view.findViewById(R.id.detailer_how_zinc_should_be_used).setEnabled(false);
         view.findViewById(R.id.detailer_point_of_sale).setEnabled(false);
         view.findViewById(R.id.detailer_submit_btn).setEnabled(false);

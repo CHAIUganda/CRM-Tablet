@@ -27,14 +27,16 @@ public class DetailerCall {
     private String knowledgeAbtOrsAndUsage;
     private String knowledgeAbtZincAndUsage;
     private String whyNotUseAntibiotics;
-    private Boolean doYouStockOrsZinc;
+    private Boolean doYouStockZinc;
+    private Boolean doYouStockOrs;
     private Integer howManyZincInStock;
     private Integer howmanyOrsInStock;
     private String zincBrandsold;
     private String orsBrandSold;
-    private String ifNoWhy;
-    private Double zincPrice;
-    private Double orsPrice;
+    private String ifNoZincWhy;
+    private String ifNoOrsWhy;
+    private Double zincSellingPrice;
+    private Double orsSellingPrice;
     private Double buyingPriceZinc;
     private Double buyingPriceOrs;
     private String pointOfsaleMaterial;
@@ -69,7 +71,7 @@ public class DetailerCall {
         this.uuid = uuid;
     }
 
-    public DetailerCall(String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoWhy, Double zincPrice, Double orsPrice, Double buyingPriceZinc, Double buyingPriceOrs, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, Boolean isNew, Boolean isHistory, String taskId) {
+    public DetailerCall(String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockZinc, Boolean doYouStockOrs, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoZincWhy, String ifNoOrsWhy, Double zincSellingPrice, Double orsSellingPrice, Double buyingPriceZinc, Double buyingPriceOrs, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, Boolean isNew, Boolean isHistory, String taskId) {
         this.uuid = uuid;
         this.dateOfSurvey = dateOfSurvey;
         this.diarrheaPatientsInFacility = diarrheaPatientsInFacility;
@@ -81,14 +83,16 @@ public class DetailerCall {
         this.knowledgeAbtOrsAndUsage = knowledgeAbtOrsAndUsage;
         this.knowledgeAbtZincAndUsage = knowledgeAbtZincAndUsage;
         this.whyNotUseAntibiotics = whyNotUseAntibiotics;
-        this.doYouStockOrsZinc = doYouStockOrsZinc;
+        this.doYouStockZinc = doYouStockZinc;
+        this.doYouStockOrs = doYouStockOrs;
         this.howManyZincInStock = howManyZincInStock;
         this.howmanyOrsInStock = howmanyOrsInStock;
         this.zincBrandsold = zincBrandsold;
         this.orsBrandSold = orsBrandSold;
-        this.ifNoWhy = ifNoWhy;
-        this.zincPrice = zincPrice;
-        this.orsPrice = orsPrice;
+        this.ifNoZincWhy = ifNoZincWhy;
+        this.ifNoOrsWhy = ifNoOrsWhy;
+        this.zincSellingPrice = zincSellingPrice;
+        this.orsSellingPrice = orsSellingPrice;
         this.buyingPriceZinc = buyingPriceZinc;
         this.buyingPriceOrs = buyingPriceOrs;
         this.pointOfsaleMaterial = pointOfsaleMaterial;
@@ -198,12 +202,20 @@ public class DetailerCall {
         this.whyNotUseAntibiotics = whyNotUseAntibiotics;
     }
 
-    public Boolean getDoYouStockOrsZinc() {
-        return doYouStockOrsZinc;
+    public Boolean getDoYouStockZinc() {
+        return doYouStockZinc;
     }
 
-    public void setDoYouStockOrsZinc(Boolean doYouStockOrsZinc) {
-        this.doYouStockOrsZinc = doYouStockOrsZinc;
+    public void setDoYouStockZinc(Boolean doYouStockZinc) {
+        this.doYouStockZinc = doYouStockZinc;
+    }
+
+    public Boolean getDoYouStockOrs() {
+        return doYouStockOrs;
+    }
+
+    public void setDoYouStockOrs(Boolean doYouStockOrs) {
+        this.doYouStockOrs = doYouStockOrs;
     }
 
     public Integer getHowManyZincInStock() {
@@ -238,28 +250,36 @@ public class DetailerCall {
         this.orsBrandSold = orsBrandSold;
     }
 
-    public String getIfNoWhy() {
-        return ifNoWhy;
+    public String getIfNoZincWhy() {
+        return ifNoZincWhy;
     }
 
-    public void setIfNoWhy(String ifNoWhy) {
-        this.ifNoWhy = ifNoWhy;
+    public void setIfNoZincWhy(String ifNoZincWhy) {
+        this.ifNoZincWhy = ifNoZincWhy;
     }
 
-    public Double getZincPrice() {
-        return zincPrice;
+    public String getIfNoOrsWhy() {
+        return ifNoOrsWhy;
     }
 
-    public void setZincPrice(Double zincPrice) {
-        this.zincPrice = zincPrice;
+    public void setIfNoOrsWhy(String ifNoOrsWhy) {
+        this.ifNoOrsWhy = ifNoOrsWhy;
     }
 
-    public Double getOrsPrice() {
-        return orsPrice;
+    public Double getZincSellingPrice() {
+        return zincSellingPrice;
     }
 
-    public void setOrsPrice(Double orsPrice) {
-        this.orsPrice = orsPrice;
+    public void setZincSellingPrice(Double zincSellingPrice) {
+        this.zincSellingPrice = zincSellingPrice;
+    }
+
+    public Double getOrsSellingPrice() {
+        return orsSellingPrice;
+    }
+
+    public void setOrsSellingPrice(Double orsSellingPrice) {
+        this.orsSellingPrice = orsSellingPrice;
     }
 
     public Double getBuyingPriceZinc() {

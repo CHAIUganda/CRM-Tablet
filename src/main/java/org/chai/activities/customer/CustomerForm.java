@@ -155,6 +155,7 @@ public class CustomerForm extends Activity {
         });
         bindCustomerToUI();
         setMandatoryFields();
+        manageLicenceVisible();
     }
 
     private void initialiseGreenDao() {
@@ -201,11 +202,12 @@ public class CustomerForm extends Activity {
             customerInstance.setKeyWholeSalerName(((EditText) findViewById(R.id.details_key_wholesaler_name)).getText().toString());
             customerInstance.setKeyWholeSalerContact(((EditText) findViewById(R.id.details_key_wholesaler_contact)).getText().toString());
 
-            customerInstance.setBuildingStructure(((Spinner) findViewById(R.id.details_building_structure)).getSelectedItem().toString());
+            String licenceVisible = ((Spinner)findViewById(R.id.details_licence_visible)).getSelectedItem().toString();
+            customerInstance.setLicenceVisible(licenceVisible.equalsIgnoreCase("Yes") ? true : false);
+            customerInstance.setTypeOfLicence(((Spinner) findViewById(R.id.details_licence_type)).getSelectedItem().toString().toLowerCase());
 
             customerInstance.setDescriptionOfOutletLocation(((EditText) findViewById(R.id.details_desc_location)).getText().toString());
             customerInstance.setNumberOfEmployees(Integer.parseInt(((EditText) findViewById(R.id.details_number_of_employees)).getText().toString()));
-            customerInstance.setHasSisterBranch(Boolean.valueOf(((Spinner) findViewById(R.id.details_has_sister_branches)).getSelectedItem().toString().toLowerCase()));
             customerInstance.setNumberOfCustomersPerDay(Integer.parseInt(((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString()));
             customerInstance.setRestockFrequency(((Spinner) findViewById(R.id.details_restock_frequency)).getSelectedItem().toString().toLowerCase());
             customerInstance.setLongitude(capturedLongitude);
@@ -235,8 +237,12 @@ public class CustomerForm extends Activity {
 
             Spinner restockFreq = (Spinner)findViewById(R.id.details_restock_frequency);
             setSpinnerSelection(restockFreq,customerInstance.getRestockFrequency() == null ? "" : customerInstance.getRestockFrequency() + "");
-            Spinner hasSisterBranches = ((Spinner) findViewById(R.id.details_has_sister_branches));
-            setSpinnerSelection(hasSisterBranches, customerInstance.getHasSisterBranch() == null ? "no" : "yes");
+
+            Spinner licenceVisibleSpinner = ((Spinner) findViewById(R.id.details_licence_visible));
+            Boolean licenceVisible = customerInstance.getLicenceVisible();
+            if(licenceVisible!=null){
+                setSpinnerSelection(licenceVisibleSpinner, licenceVisible ? "Yes" : "No");
+            }
 
             Spinner outletTypeSpinner = (Spinner) findViewById(R.id.details_outlet_type);
             setSpinnerSelection(outletTypeSpinner, customerInstance.getOutletType());
@@ -246,9 +252,6 @@ public class CustomerForm extends Activity {
 
             Spinner splitSpinner = (Spinner) findViewById(R.id.details_split);
             setSpinnerSelection(splitSpinner, customerInstance.getSplit());
-
-            Spinner buildingStructureSpinner = (Spinner) findViewById(R.id.details_building_structure);
-            setSpinnerSelection(buildingStructureSpinner, customerInstance.getBuildingStructure());
 
         }
     }
@@ -287,15 +290,11 @@ public class CustomerForm extends Activity {
             return false;
         } else if (((EditText) findViewById(R.id.details_number_of_employees)).getText().toString().equals("")) {
             return false;
-        }else if (((Spinner) findViewById(R.id.details_has_sister_branches)).getSelectedItem().toString().equals("")) {
-            return false;
         } else if (((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString().equals("")) {
             return false;
         } else if (((EditText) findViewById(R.id.details_sources_of_supply)).getText().toString().equals("")) {
             return false;
         } else if (((Spinner) findViewById(R.id.details_restock_frequency)).getSelectedItem().toString().equals("")) {
-            return false;
-        } else if (((Spinner) findViewById(R.id.details_building_structure)).getSelectedItem().toString().equals("")) {
             return false;
         }
         return true;
@@ -351,11 +350,30 @@ public class CustomerForm extends Activity {
         Utils.setRequired((TextView) findViewById(R.id.details_desc_location_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_date_outlet_opened_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_number_of_employees_lbl));
-        Utils.setRequired((TextView) findViewById(R.id.details_has_sister_branches_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_num_customers_per_day_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_sources_of_supply_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_restock_frequency_lbl));
-        Utils.setRequired((TextView) findViewById(R.id.details_building_structure_lbl));
+    }
+
+    protected void manageLicenceVisible() {
+        final Spinner spinner = (Spinner)findViewById(R.id.details_licence_visible);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                String selected = (String) spinner.getAdapter().getItem(position);
+                LinearLayout licenceTypeLayout = (LinearLayout)findViewById(R.id.type_of_licence_layout);
+                if ("No".equalsIgnoreCase(selected)) {
+                    licenceTypeLayout.setVisibility(View.GONE);
+                } else {
+                    licenceTypeLayout.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
 }

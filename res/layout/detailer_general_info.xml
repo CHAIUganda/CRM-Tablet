@@ -350,7 +350,7 @@
                 android:id="@+id/detailer_do_you_stock_zinc_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="9.Do you stock ORS and zinc"
+                android:text="9.Do you stock Zinc"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
@@ -364,13 +364,8 @@
 
     </LinearLayout>
 
-    <LinearLayout
-            android:id="@+id/detailer_zinc_stock_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
         <LinearLayout
+                android:id="@+id/detailer_zinc_stock_layout"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -398,50 +393,11 @@
                     android:textCursorDrawable="@null"
                     android:maxLength="5000"/>
 
-        </LinearLayout>
-
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-            <TextView
-                    android:id="@+id/detailers_howmany_in_stock_ors_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="11.If Yes, Check how many are in stock(ORS:1 sachet):"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="bold"/>
-
-            <EditText
-                    android:id="@+id/detailers_howmany_in_stock_ors"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:inputType="number"
-                    android:textCursorDrawable="@null"
-                    android:maxLength="2000"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
             <TextView
                     android:id="@+id/detailers_brand_sold_zinc_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12.Note the brands sold(Zinc):"
+                    android:text="11.Note the brands sold(Zinc):"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -457,48 +413,10 @@
                     android:singleLine="true"
                     android:textCursorDrawable="@null"/>
 
-        </LinearLayout>
-
-
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-            <TextView
-                    android:id="@+id/detailers_brand_sold_ors_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="13.Note the brands sold(ORS):"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="bold"/>
-
-            <EditText
-                    android:id="@+id/detailers_brand_sold_ors"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:textCursorDrawable="@null"/>
-
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/detailer_whatpricedoyoubuy_layout"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="14.What price do you buy Zinc(1x10)"
+                    android:text="12.What price do you buy Zinc(1x10)"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
@@ -518,7 +436,134 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="15.What price do you buy ORS(1 sachet)"
+                    android:text="13.At what price do you sell zinc (1x10)?"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"/>
+
+            <EditText
+                    android:id="@+id/detailer_sellingPrice_zinc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="@dimen/list_sub_text_size"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:background="@drawable/bordertextfield"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:textCursorDrawable="@null"/>
+
+
+        </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/detailer_if_zincnowhy_layout"
+            android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14.If No, why?"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <EditText
+                    android:id="@+id/detailer_if_no_zinc_why"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="@dimen/list_sub_text_size"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:background="@drawable/bordertextfield"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null"/>
+
+        </LinearLayout>
+
+
+    <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:id="@+id/detailer_do_you_stock_zinc_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15.Do you stock ORS"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+        <Spinner
+                android:id="@+id/detailer_do_you_stock_ors"
+                android:layout_height="wrap_content"
+                android:prompt="@string/selectItem"
+                android:layout_width="fill_parent"
+                android:entries="@array/yesnolist"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:id="@+id/detailer_ors_stock_layout"
+            android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:id="@+id/detailers_howmany_in_stock_ors_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16.If Yes, Check how many are in stock(ORS:1 sachet):"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <EditText
+                    android:id="@+id/detailers_howmany_in_stock_ors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="@dimen/list_sub_text_size"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:background="@drawable/bordertextfield"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:textCursorDrawable="@null"
+                    android:maxLength="2000"/>
+
+        <TextView
+                android:id="@+id/detailers_brand_sold_ors_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="17.Note the brands sold(ORS):"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <EditText
+                android:id="@+id/detailers_brand_sold_ors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="@dimen/list_sub_text_size"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="italic"
+                android:background="@drawable/bordertextfield"
+                android:singleLine="true"
+                android:textCursorDrawable="@null"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18.What price do you buy ORS(1 sachet)"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"/>
@@ -536,13 +581,31 @@
                     android:inputType="number"
                     android:textCursorDrawable="@null"/>
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="19.At what price do you sell ORS (1 sachet)?"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+        <EditText
+                android:id="@+id/detailer_sellingPrice_ors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="@dimen/list_sub_text_size"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="italic"
+                android:background="@drawable/bordertextfield"
+                android:singleLine="true"
+                android:inputType="number"
+                android:textCursorDrawable="@null"/>
+
         </LinearLayout>
 
-
-    </LinearLayout>
-
     <LinearLayout
-            android:id="@+id/detailer_ifnowhy_layout"
+            android:id="@+id/detailer_if_orsnowhy_layout"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -551,12 +614,12 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="16.If No, why?"
+                android:text="20.If No, why?"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
         <EditText
-                android:id="@+id/detailer_if_no_why"
+                android:id="@+id/detailer_if_no_ors_why"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
@@ -580,7 +643,7 @@
                 android:id="@+id/detailer_point_of_sale_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="17.Point of sale materials"
+                android:text="21.Point of sale materials"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
@@ -602,7 +665,7 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Others Specify"
+                android:text="22.Others Specify"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
         <EditText
@@ -629,7 +692,7 @@
                 android:id="@+id/detailer_recommendation_next_step_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="18.What did you recommend as next steps for the retailer"
+                android:text="23.What did you recommend as next steps for the retailer"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
@@ -638,30 +701,6 @@
                 android:layout_height="wrap_content"
                 android:prompt="@string/selectItem"
                 android:layout_width="fill_parent"
-                android:background="@drawable/btn_dropdown"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-        <TextView
-                android:id="@+id/detailer_recommendation_level_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="19.What recommendation level would you give the customer"
-                android:textColor="@color/list_main_text_color"
-                android:textStyle="bold"/>
-
-        <Spinner
-                android:id="@+id/detailer_recommendation_level"
-                android:layout_height="wrap_content"
-                android:prompt="@string/selectItem"
-                android:layout_width="fill_parent"
-                android:entries="@array/ratings"
                 android:background="@drawable/btn_dropdown"/>
 
     </LinearLayout>

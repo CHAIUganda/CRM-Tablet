@@ -39,13 +39,18 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
 
         textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view1, int position, long l) {
                 Customer selected = (Customer) adapterView.getAdapter().getItem(position);
                 customer = selected;
+                if(customer!=null){
+                    ((TextView)view. findViewById(R.id.adhoc_detailer_district)).setText(customer.getSubcounty().getDistrict().getName());
+                    ((TextView)view. findViewById(R.id.adhoc_detailer_subcounty)).setText(customer.getSubcounty().getName());
+                }
             }
         });
 
         manageDoyouStockZincResponses(view);
+        manageDoyouStockOrsResponses(view);
         manageHowDidyouHearOtherOption(view);
         manageHaveYouHeardAboutDiarheaTreatment(view);
         managePointOfSaleWidget(view);
@@ -108,16 +113,25 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
         detailerCallInstance.setDateOfSurvey(new Date());
         detailerCallInstance.setDiarrheaPatientsInFacility(Integer.parseInt(((EditText) getActivity().findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).getText().toString()));
         detailerCallInstance.setOtherWaysHowYouHeard(((EditText) getActivity().findViewById(R.id.detailer_other_ways_youheard_about_zinc)).getText().toString());
-        if (((Spinner) getActivity().findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString().equals("Yes")) {
-            detailerCallInstance.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.detailers_howmany_in_stock_zinc)).getText().toString()));
-            detailerCallInstance.setHowmanyOrsInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.detailers_howmany_in_stock_ors)).getText().toString()));
-            detailerCallInstance.setZincBrandsold(((EditText) getActivity().findViewById(R.id.detailers_brand_sold_zinc)).getText().toString());
-            detailerCallInstance.setOrsBrandSold(((EditText) getActivity().findViewById(R.id.detailers_brand_sold_ors)).getText().toString());
+
+        if (((Spinner)getActivity(). findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString().equals("Yes")) {
+            detailerCallInstance.setHowManyZincInStock(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailers_howmany_in_stock_zinc)).getText().toString()));
+            detailerCallInstance.setZincBrandsold(((EditText)getActivity(). findViewById(R.id.detailers_brand_sold_zinc)).getText().toString());
             detailerCallInstance.setBuyingPriceZinc(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyzinc)).getText().toString()));
-            detailerCallInstance.setBuyingPriceOrs(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyors)).getText().toString()));
+            detailerCallInstance.setZincSellingPrice(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_sellingPrice_zinc)).getText().toString()));
         }
 
-        detailerCallInstance.setIfNoWhy(((EditText) getActivity().findViewById(R.id.detailer_if_no_why)).getText().toString());
+
+        if (((Spinner)getActivity(). findViewById(R.id.detailer_do_you_stock_ors)).getSelectedItem().toString().equals("Yes")) {
+            detailerCallInstance.setHowmanyOrsInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.detailers_howmany_in_stock_ors)).getText().toString()));
+            detailerCallInstance.setOrsBrandSold(((EditText) getActivity().findViewById(R.id.detailers_brand_sold_ors)).getText().toString());
+            detailerCallInstance.setBuyingPriceOrs(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyors)).getText().toString()));
+            detailerCallInstance.setOrsSellingPrice(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_sellingPrice_ors)).getText().toString()));
+        }
+
+        detailerCallInstance.setIfNoZincWhy(((EditText) getActivity().findViewById(R.id.detailer_if_no_zinc_why)).getText().toString());
+        detailerCallInstance.setIfNoOrsWhy(((EditText) getActivity().findViewById(R.id.detailer_if_no_ors_why)).getText().toString());
+
         detailerCallInstance.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.detailer_point_of_sale)).getText().toString()
                 + "," + ((EditText) getActivity().findViewById(R.id.detailer_point_of_sale_others)).getText().toString());
         detailerCallInstance.setRecommendationNextStep(((Button) getActivity().findViewById(R.id.detailer_next_step_recommendation)).getText().toString());
@@ -128,9 +142,12 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
         detailerCallInstance.setDiarrheaEffectsOnBody(((Spinner) getActivity().findViewById(R.id.detailer_effect_diarrhea_has_on_the_body)).getSelectedItem().toString());
         detailerCallInstance.setKnowledgeAbtOrsAndUsage(((Spinner) getActivity().findViewById(R.id.detailer_how_ors_should_be_used)).getSelectedItem().toString());
         detailerCallInstance.setWhyNotUseAntibiotics(((Spinner) getActivity().findViewById(R.id.detailer_why_should_not_use_antibiotics)).getSelectedItem().toString());
+
         String stocksZinc = ((Spinner) getActivity().findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString();
-        detailerCallInstance.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
-        detailerCallInstance.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.detailer_recommendation_level)).getSelectedItem().toString());
+        detailerCallInstance.setDoYouStockZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
+        String stocksOrs = ((Spinner) getActivity().findViewById(R.id.detailer_do_you_stock_ors)).getSelectedItem().toString();
+        detailerCallInstance.setDoYouStockOrs(stocksOrs.equalsIgnoreCase("Yes") ? true : false);
+
         detailerCallInstance.setKnowledgeAbtZincAndUsage(((Spinner) getActivity().findViewById(R.id.detailer_how_zinc_should_be_used)).getSelectedItem().toString());
         detailerCallInstance.setLatitude(capturedLatitude);
         detailerCallInstance.setLongitude(capturedLongitude);

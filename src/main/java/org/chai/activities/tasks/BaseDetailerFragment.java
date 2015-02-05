@@ -162,16 +162,37 @@ public abstract class BaseDetailerFragment extends BaseContainerFragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 String selected = (String) spinner.getAdapter().getItem(position);
                 LinearLayout stockfieldsLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_zinc_stock_layout);
-                LinearLayout ifnowhyLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_ifnowhy_layout);
-                LinearLayout atWhatPriceDoYouBuyLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_whatpricedoyoubuy_layout);
+                LinearLayout ifnowhyLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_if_zincnowhy_layout);
                 if ("No".equalsIgnoreCase(selected)) {
                     stockfieldsLayout.setVisibility(View.GONE);
                     ifnowhyLayout.setVisibility(View.VISIBLE);
-                    atWhatPriceDoYouBuyLayout.setVisibility(View.GONE);
                 } else {
                     stockfieldsLayout.setVisibility(View.VISIBLE);
                     ifnowhyLayout.setVisibility(View.GONE);
-                    atWhatPriceDoYouBuyLayout.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    protected void manageDoyouStockOrsResponses(View view) {
+        final Spinner spinner = (Spinner)view.findViewById(R.id.detailer_do_you_stock_ors);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                String selected = (String) spinner.getAdapter().getItem(position);
+                LinearLayout stockfieldsLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_ors_stock_layout);
+                LinearLayout ifnowhyLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_if_orsnowhy_layout);
+                if ("No".equalsIgnoreCase(selected)) {
+                    stockfieldsLayout.setVisibility(View.GONE);
+                    ifnowhyLayout.setVisibility(View.VISIBLE);
+                } else {
+                    stockfieldsLayout.setVisibility(View.VISIBLE);
+                    ifnowhyLayout.setVisibility(View.GONE);
                 }
             }
 
@@ -233,7 +254,6 @@ public abstract class BaseDetailerFragment extends BaseContainerFragment {
         setRequired((TextView)view.findViewById(R.id.detailer_do_you_stock_zinc_view));
         setRequired((TextView)view.findViewById(R.id.detailer_point_of_sale_view));
         setRequired((TextView)view.findViewById(R.id.detailer_recommendation_next_step_view));
-        setRequired((TextView)view.findViewById(R.id.detailer_recommendation_level_view));
     }
 
     private void setRequired(TextView textView){
@@ -329,8 +349,6 @@ public abstract class BaseDetailerFragment extends BaseContainerFragment {
         }else if (((Spinner)view. findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString().equals("")) {
             return false;
         }   else if (((Button)view. findViewById(R.id.detailer_next_step_recommendation)).getText().toString().equals("")) {
-            return false;
-        } else if (((Spinner)view. findViewById(R.id.detailer_recommendation_level)).getSelectedItem().toString().equals("")) {
             return false;
         }
         return true;
