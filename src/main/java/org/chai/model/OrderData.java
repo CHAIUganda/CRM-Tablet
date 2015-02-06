@@ -22,6 +22,7 @@ public class OrderData {
     /** Not-null value. */
     private String productId;
 
+
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */

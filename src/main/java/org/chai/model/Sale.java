@@ -33,7 +33,9 @@ public class Sale {
     private Double longitude;
     /** Not-null value. */
     private String orderId;
+
     private List<SaleData> salesDatas;
+    private List<StokeData> stockDatas;
 
     // KEEP FIELDS - put your custom fields here
 
@@ -293,6 +295,28 @@ public class Sale {
     /** Resets a to-many relationship, making the next get call to query for a fresh result. */
     public synchronized void resetSalesDatas() {
         salesDatas = null;
+    }
+
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<StokeData> getStockDatas() {
+        if (stockDatas == null) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            StokeDataDao targetDao = daoSession.getStokeDataDao();
+            List<StokeData> stockDatasNew = targetDao._querySale_StockDatas(uuid);
+            synchronized (this) {
+                if(stockDatas == null) {
+                    stockDatas = stockDatasNew;
+                }
+            }
+        }
+        return stockDatas;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetStockDatas() {
+        stockDatas = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

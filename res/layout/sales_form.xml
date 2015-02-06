@@ -310,6 +310,7 @@
             </TableRow>
 
         </TableLayout>
+
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -325,6 +326,93 @@
                     android:paddingRight="5dp"
                     android:paddingLeft="5dp"/>
         </LinearLayout>
+
+
+        <TableLayout
+                android:id="@+id/sales_stock_table"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*"
+                android:padding="10dp"
+                android:layout_marginRight="10dp">
+            <TableRow android:id="@+id/tableRow22"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:padding="5dip">
+
+                <TextView
+                        android:text="5.How much stock is available for the following products"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="@dimen/list_main_text_size"/>
+
+            </TableRow>
+
+            <TableRow
+                    android:id="@+id/tableRow2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip">
+
+                <TextView
+                        android:text="Product:"
+                        android:textColor="@color/list_main_text_color"/>
+
+                <TextView
+                        android:text="Quantity:"
+                        android:textColor="@color/list_main_text_color"/>
+
+
+            </TableRow>
+
+            <TableRow
+                    android:id="@+id/tableRow3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip">
+
+                <Spinner
+                        android:id="@+id/sales_stock_product"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/selectItem"
+                        android:layout_width="match_parent"
+                        android:entries="@array/productlist"
+                        android:background="@drawable/btn_dropdown"/>
+
+                <EditText android:id="@+id/sales_stock_quantity"
+                          style="@style/myEditText"
+                          android:layout_marginRight="10dp"
+                          android:inputType="number"
+                          android:textColor="@color/list_main_text_color"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:padding="10dp"
+                          android:textSize="@dimen/list_sub_text_size"
+                          android:background="@drawable/bordertextfield"
+                          android:text=""
+                          android:singleLine="true"
+                          android:textCursorDrawable="@null"/>
+
+
+            </TableRow>
+
+        </TableLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <Button
+                    android:id="@+id/sales_stock_add_more"
+                    android:text="Add Row"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#428bca"
+                    android:layout_marginLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"/>
+        </LinearLayout>
+
 
         <LinearLayout
                 android:orientation="vertical"

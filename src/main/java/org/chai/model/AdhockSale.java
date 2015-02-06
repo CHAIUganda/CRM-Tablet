@@ -32,8 +32,8 @@ public class AdhockSale {
     private Double longitude;
     /** Not-null value. */
     private String customerId;
-
     private List<SaleData> adhockSalesDatas;
+    private List<StokeData> adhockStockDatas;
 
     // KEEP FIELDS - put your custom fields here
 
@@ -238,6 +238,28 @@ public class AdhockSale {
     /** Resets a to-many relationship, making the next get call to query for a fresh result. */
     public synchronized void resetAdhockSalesDatas() {
         adhockSalesDatas = null;
+    }
+
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<StokeData> getAdhockStockDatas() {
+        if (adhockStockDatas == null) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            StokeDataDao targetDao = daoSession.getStokeDataDao();
+            List<StokeData> adhockStockDatasNew = targetDao._queryAdhockSale_AdhockStockDatas(uuid);
+            synchronized (this) {
+                if(adhockStockDatas == null) {
+                    adhockStockDatas = adhockStockDatasNew;
+                }
+            }
+        }
+        return adhockStockDatas;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetAdhockStockDatas() {
+        adhockStockDatas = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

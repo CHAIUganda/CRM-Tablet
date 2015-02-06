@@ -53,6 +53,7 @@ public class SalesAdapter extends BaseAdapter {
 
         Sale sale = sales.get(position);
         if(sale!=null){
+            try{
             taskDescription.setText(sale.getTask().getDescription());
             customerNameTxtView.setText(sale.getTask().getCustomer().getOutletName());
             customerLocationTxtView.setText(sale.getTask().getCustomer().getDescriptionOfOutletLocation());
@@ -60,6 +61,9 @@ public class SalesAdapter extends BaseAdapter {
                 taskDescription.setTextColor(Color.parseColor("#C0C0C0"));
                 customerNameTxtView.setTextColor(Color.parseColor("#C0C0C0"));
                 customerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+            }
+            }catch (Exception ex){
+                //
             }
         }
         return convertView;

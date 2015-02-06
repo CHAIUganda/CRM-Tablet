@@ -49,6 +49,7 @@ public class DetailerCall {
     private Boolean isHistory;
     /** Not-null value. */
     private String taskId;
+
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */

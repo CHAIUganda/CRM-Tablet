@@ -2,7 +2,6 @@ package org.chai.activities.tasks;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.widget.*;
 import android.widget.TableRow.LayoutParams;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
-import org.chai.activities.HomeActivity;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.CustomMultSelectDropDown;
@@ -39,13 +37,17 @@ public class SaleslFormFragment extends Fragment {
     private TaskDao taskDao;
     private SaleDao saleDao;
     private SaleDataDao saleDataDao;
+    private StokeDataDao stokeDataDao;
     private ProductDao productDao;
 
 
-    private TableLayout tableLayout;
+    private TableLayout salesTableLayout;
+    private TableLayout stockTableLayout;
     private List<Spinner> spinnerList;
     private List<EditText> quantityFields;
     private List<EditText> priceFields;
+    private List<Spinner> stockSpinnerList;
+    private List<EditText> stockQuantityFlds;
     private Task callDataTask;
     private Sale saleCallData;
     private Customer salesCustomer;
@@ -64,10 +66,14 @@ public class SaleslFormFragment extends Fragment {
         View view = inflater.inflate(R.layout.sales_form,container, false);
         try {
             initialiseGreenDao();
-            tableLayout = (TableLayout)view.findViewById(R.id.sales_table);
+            salesTableLayout = (TableLayout) view.findViewById(R.id.sales_table);
+            stockTableLayout = (TableLayout) view.findViewById(R.id.sales_stock_table);
             spinnerList = new ArrayList<Spinner>();
             quantityFields = new ArrayList<EditText>();
             priceFields = new ArrayList<EditText>();
+            stockSpinnerList = new ArrayList<Spinner>();
+            stockQuantityFlds = new ArrayList<EditText>();
+
             Bundle bundle = getArguments();
             String callId = bundle.getString("callId");
             if (callId != null) {
@@ -86,11 +92,19 @@ public class SaleslFormFragment extends Fragment {
             ((TextView)view.findViewById(R.id.sales_customer_location)).setText(salesCustomer.getDescriptionOfOutletLocation());
 
             Spinner productSpinner = (Spinner) view.findViewById(R.id.sales_product);
+            Spinner stockProductSpinner =  (Spinner) view.findViewById(R.id.sales_stock_product);
             products = productDao.loadAll();
-            productSpinner.setAdapter(new ProductArrayAdapter(getActivity(),R.id.sales_product,products.toArray(new Product[products.size()])));
+
+            ProductArrayAdapter adapter = new ProductArrayAdapter(getActivity(), R.id.sales_product, products.toArray(new Product[products.size()]));
+            productSpinner.setAdapter(adapter);
+            stockProductSpinner.setAdapter(adapter);
+
             spinnerList.add(productSpinner);
             quantityFields.add((EditText)view.findViewById(R.id.sales_quantity));
             priceFields.add((EditText)view.findViewById(R.id.sales_price));
+
+            stockSpinnerList.add(stockProductSpinner);
+            stockQuantityFlds.add((EditText)view.findViewById(R.id.sales_quantity));
 
             pointOfSalesOptionsButton = (Button)view.findViewById(R.id.sales_point_of_sale);
             pointOfSalesOptions = getResources().getStringArray(R.array.point_of_sale_material);
@@ -109,7 +123,15 @@ public class SaleslFormFragment extends Fragment {
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    addRowToTable(null, view);
+                    addRowToTable(null,null, view,false);
+                }
+            });
+
+            Button addStockButton = (Button) view.findViewById(R.id.sales_stock_add_more);
+            addStockButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    addRowToTable(null,null, view,true);
                 }
             });
 
@@ -119,7 +141,7 @@ public class SaleslFormFragment extends Fragment {
                 public void onClick(View view) {
                     if (allMandatoryFieldsFilled(view) && submitSale()) {
                         Toast.makeText(getActivity(), "Your Data has been successfully saved.", Toast.LENGTH_LONG).show();
-                        ((BaseContainerFragment)getParentFragment()).popFragment();
+                        ((BaseContainerFragment) getParentFragment()).popFragment();
                     } else {
                         Toast.makeText(getActivity(), "Unable to save data,Please ensure that all mandatory fields are entered", Toast.LENGTH_LONG).show();
                     }
@@ -127,7 +149,7 @@ public class SaleslFormFragment extends Fragment {
             });
             setRequiredFields(view);
             manageDoyouStockZincResponses(view);
-            managePointOfSaleOthers(view,false);
+            managePointOfSaleOthers(view, false);
             bindSalesInfoToUI(view);
             setGpsWidget(view);
 
@@ -148,6 +170,7 @@ public class SaleslFormFragment extends Fragment {
             saleDao = daoSession.getSaleDao();
             saleDataDao = daoSession.getSaleDataDao();
             productDao = daoSession.getProductDao();
+            stokeDataDao = daoSession.getStokeDataDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -176,6 +199,7 @@ public class SaleslFormFragment extends Fragment {
             Spinner recommendationNextLevel = (Spinner) view.findViewById(R.id.sales_recommendation_level);
             Utils.setSpinnerSelection(recommendationNextLevel, saleCallData.getRecommendationLevel());
             bindSalesDataToUi(view);
+            bindStokeDataToUi(view);
         }
     }
 
@@ -187,12 +211,24 @@ public class SaleslFormFragment extends Fragment {
                 ((EditText)view.findViewById(R.id.sales_price)).setText(salesDatas.get(i).getPrice()+"");
                 ((Spinner)view.findViewById(R.id.sales_product)).setSelection(getProductPosition(salesDatas.get(i).getProduct()));
             }else {
-                addRowToTable(salesDatas.get(i), view);
+                addRowToTable(salesDatas.get(i),null, view,false);
             }
         }
     }
 
-    private void addRowToTable(SaleData saleData, View view) {
+    private void bindStokeDataToUi(View view) {
+        List<StokeData> stockDatas = saleCallData.getStockDatas();
+        for (int i = 0; i < stockDatas.size(); ++i) {
+            if (i == 0) {
+                ((EditText)view.findViewById(R.id.sales_stock_quantity)).setText(stockDatas.get(i).getQuantity()+"");
+                ((Spinner)view.findViewById(R.id.sales_stock_product)).setSelection(getProductPosition(stockDatas.get(i).getProduct()));
+            }else {
+                addRowToTable(null,stockDatas.get(i), view,true);
+            }
+        }
+    }
+
+    private void addRowToTable(SaleData saleData,StokeData stockData, View view,final boolean isStockTaking) {
         TableRow tableRow = new TableRow(getActivity());
         tableRow.setLayoutParams(new LayoutParams( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
@@ -216,36 +252,50 @@ public class SaleslFormFragment extends Fragment {
         priceView.setTextColor(Color.BLACK);
         priceView.setLayoutParams(params);
         priceView.setInputType(InputType.TYPE_CLASS_NUMBER);
-        tableRow.addView(priceView);
 
         if (saleData != null) {
             quantityView.setText(saleData.getQuantity() + "");
             priceView.setText(saleData.getPrice() + "");
             spinner.setSelection(getProductPosition(saleData.getProduct()));
+        }else if(stockData!=null){
+            quantityView.setText(stockData.getQuantity() + "");
+            spinner.setSelection(getProductPosition(stockData.getProduct()));
         }
         Button deleteBtn = (Button) getActivity().getLayoutInflater().inflate(R.layout.delete_icon, null);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 View row = (View) view.getParent();
-                ViewGroup container = ((ViewGroup)row.getParent());
+                ViewGroup container = ((ViewGroup) row.getParent());
                 container.removeView(row);
-               /* spinnerList.remove(spinner);
-                quantityFields.remove(quantityView);
-                priceFields.remove(priceView);*/
-                removeRow();
+                if (isStockTaking) {
+                    stockSpinnerList.remove(spinner);
+                    stockQuantityFlds.remove(quantityView);
+                } else {
+                    spinnerList.remove(spinner);
+                    quantityFields.remove(quantityView);
+                    priceFields.remove(priceView);
+                }
+//                removeRow();
                 container.invalidate();
             }
         });
-        tableRow.addView(deleteBtn);
+        if (isStockTaking) {
+            stockSpinnerList.add(spinner);
+            stockQuantityFlds.add(quantityView);
+            tableRow.addView(deleteBtn);
 
-        spinnerList.add(spinner);
-        quantityFields.add(quantityView);
-        priceFields.add(priceView);
+            stockTableLayout.addView(tableRow, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        } else {
+            tableRow.addView(priceView);
+            spinnerList.add(spinner);
+            quantityFields.add(quantityView);
+            priceFields.add(priceView);
+            tableRow.addView(deleteBtn);
 
-        tableLayout.addView(tableRow, new TableLayout.LayoutParams( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+            salesTableLayout.addView(tableRow, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        }
     }
-
     private void removeRow() {
         if (!spinnerList.isEmpty()) {
             spinnerList.remove(spinnerList.size() - 1);
@@ -286,10 +336,12 @@ public class SaleslFormFragment extends Fragment {
             if(isUpdate){
                 saleDao.update(saleCallData);
                 submitSaleData(saleCallData);
+                submitStockData(saleCallData);
             }else {
                 Long saleId = saleDao.insert(saleCallData);
                 //add the different sales.
                 submitSaleData(saleCallData);
+                submitStockData(saleCallData);
                 callDataTask.setStatus(TaskMainFragment.STATUS_COMPLETE);
                 taskDao.update(callDataTask);
             }
@@ -298,6 +350,28 @@ public class SaleslFormFragment extends Fragment {
             ex.printStackTrace();
         }
         return isSaved;
+    }
+
+    private void submitStockData(Sale saleCallData) {
+        for (int i = 0; i < stockSpinnerList.size(); ++i) {
+            try{
+                StokeData stokeData = instantiateStockData(i);
+                stokeData.setSaleId(stokeData.getUuid());
+                stokeData.setSale(saleCallData);
+                stokeData.setQuantity(Integer.parseInt(stockQuantityFlds.get(i).getText().toString()));
+                Product product = (Product) stockSpinnerList.get(i).getSelectedItem();
+                stokeData.setProductId(product.getUuid());
+
+                if(stokeData.getUuid()!=null){
+                    stokeDataDao.update(stokeData);
+                }else{
+                    stokeData.setUuid(UUID.randomUUID().toString());
+                    stokeDataDao.insert(stokeData);
+                }
+            }catch (Exception ex){
+                //ignore
+            }
+        }
     }
 
     private void submitSaleData(Sale sale) {
@@ -332,6 +406,17 @@ public class SaleslFormFragment extends Fragment {
             saleData = new SaleData(null);
         }
         return saleData;
+    }
+
+    private StokeData instantiateStockData(int index){
+        List<StokeData> stockDatas = saleCallData.getStockDatas();
+        StokeData stokeData;
+        if(index < stockDatas.size()){
+            stokeData = stockDatas.get(index);
+        }else{
+            stokeData = new StokeData(null);
+        }
+        return stokeData;
     }
 
 

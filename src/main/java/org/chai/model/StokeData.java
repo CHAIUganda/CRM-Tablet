@@ -11,18 +11,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @JsonIgnoreProperties(ignoreUnknown = true)
 // KEEP INCLUDES END
 /**
- * Entity mapped to table SALE_DATA.
+ * Entity mapped to table STOKE_DATA.
  */
-public class SaleData {
+public class StokeData {
 
     /** Not-null value. */
     private String uuid;
     private int quantity;
-    private int price;
-    private String adhockSaleId;
+    private String saleId;
+    private String adhockStockId;
     /** Not-null value. */
     private String productId;
-
 
     // KEEP FIELDS - put your custom fields here
 
@@ -32,9 +31,7 @@ public class SaleData {
 
     /** Used for active entity operations. */
     @JsonIgnore
-    private String saleId;
-    @JsonIgnore
-    private transient SaleDataDao myDao;
+    private transient StokeDataDao myDao;
 
     @JsonIgnore
     private Sale sale;
@@ -50,28 +47,28 @@ public class SaleData {
     private AdhockSale adhockSale;
     @JsonIgnore
     private String adhockSale__resolvedKey;
+
     // KEEP FIELDS END
 
-    public SaleData() {
+    public StokeData() {
     }
 
-    public SaleData(String uuid) {
+    public StokeData(String uuid) {
         this.uuid = uuid;
     }
 
-    public SaleData(String uuid, int quantity, int price, String saleId, String adhockSaleId, String productId) {
+    public StokeData(String uuid, int quantity, String saleId, String adhockStockId, String productId) {
         this.uuid = uuid;
         this.quantity = quantity;
-        this.price = price;
         this.saleId = saleId;
-        this.adhockSaleId = adhockSaleId;
+        this.adhockStockId = adhockStockId;
         this.productId = productId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getSaleDataDao() : null;
+        myDao = daoSession != null ? daoSession.getStokeDataDao() : null;
     }
 
     /** Not-null value. */
@@ -92,14 +89,6 @@ public class SaleData {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public String getSaleId() {
         return saleId;
     }
@@ -108,12 +97,12 @@ public class SaleData {
         this.saleId = saleId;
     }
 
-    public String getAdhockSaleId() {
-        return adhockSaleId;
+    public String getAdhockStockId() {
+        return adhockStockId;
     }
 
-    public void setAdhockSaleId(String adhockSaleId) {
-        this.adhockSaleId = adhockSaleId;
+    public void setAdhockStockId(String adhockStockId) {
+        this.adhockStockId = adhockStockId;
     }
 
     /** Not-null value. */
@@ -181,7 +170,7 @@ public class SaleData {
 
     /** To-one relationship, resolved on first access. */
     public AdhockSale getAdhockSale() {
-        String __key = this.adhockSaleId;
+        String __key = this.adhockStockId;
         if (adhockSale__resolvedKey == null || adhockSale__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
@@ -199,8 +188,8 @@ public class SaleData {
     public void setAdhockSale(AdhockSale adhockSale) {
         synchronized (this) {
             this.adhockSale = adhockSale;
-            adhockSaleId = adhockSale == null ? null : adhockSale.getUuid();
-            adhockSale__resolvedKey = adhockSaleId;
+            adhockStockId = adhockSale == null ? null : adhockSale.getUuid();
+            adhockSale__resolvedKey = adhockStockId;
         }
     }
 
