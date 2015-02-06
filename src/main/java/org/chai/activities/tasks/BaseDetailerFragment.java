@@ -20,6 +20,7 @@ import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 /**
@@ -121,6 +122,7 @@ public abstract class BaseDetailerFragment extends BaseContainerFragment {
                         datePickerDialog.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                     }
                 }
+                Utils.setMinimumDateInDatePicker(new Date(),datePickerDialog);
                 datePickerDialog.show();
 
             }

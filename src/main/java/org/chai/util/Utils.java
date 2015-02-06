@@ -1,13 +1,16 @@
 package org.chai.util;
 
 
+import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.location.Location;
+import android.os.Build;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
 import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import org.chai.model.CustomerContact;
@@ -142,6 +145,26 @@ public class Utils {
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
         return cal.getTime();
+    }
+
+    public static void fixUpDatePickerCalendarView(Date date,DatePickerDialog datePicker) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            final CalendarView calendarView = datePicker.getDatePicker().getCalendarView();
+            if (calendarView != null) {
+                Calendar calender = GregorianCalendar.getInstance();
+                calender.setTime(date);
+                calender.add(Calendar.MONTH, 24);
+                calendarView.setDate(calender.getTimeInMillis(), false, true);
+                calender.add(Calendar.MONTH, -24);
+                calendarView.setDate(calender.getTimeInMillis(), false, true);
+            }
+        }
+    }
+
+    public static void setMinimumDateInDatePicker(Date date,DatePickerDialog datePickerDialog){
+        Date currentDate = Utils.flattenDate(date);
+        datePickerDialog.getDatePicker().setMinDate(currentDate.getTime());
+        fixUpDatePickerCalendarView(currentDate,datePickerDialog);
     }
 
 
