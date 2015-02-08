@@ -66,7 +66,7 @@ public class CustomMultSelectDropDown extends Button implements View.OnClickList
             Log.i("ME================================", stringOptions[clicked] + " selected: " + selected);
             if (stringOptions[clicked].toString().equals("Other")) {
                 //show other dialog with a textfield
-                Log.i("other:","showing others dialog");
+                Log.i("other:", "showing others dialog");
                 showOtherTextFieldDialog();
             }
         }
