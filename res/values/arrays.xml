@@ -67,7 +67,7 @@
         <item>Ugandan Medical and Dental Practitioners</item>
         <item>Ministry of Health</item>
         <item>Unlicensed</item>
-        <item>Others</item>
+        <item>Other</item>
     </string-array>
     <string-array name="split">
         <item>""</item>
@@ -136,6 +136,7 @@
         <item>Start recommending ORS and Zinc together</item>
         <item>Start selling ORS and Zinc at MRP</item>
         <item>Purchase Zinc or/and ORS from cheaper supply source</item>
+        <item>Other</item>
     </string-array>
     <string-array name="turnover">
         <item>""</item>
@@ -151,7 +152,7 @@
         <item>Bunting</item>
         <item>MRP dangler</item>
         <item>Pen</item>
-        <item>Others</item>
+        <item>Other</item>
     </string-array>
     <string-array name="task_filters">
         <item>Today\'s Tasks</item>
