@@ -202,8 +202,10 @@ public class TaskViewOnMapFragment extends Fragment {
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
         } else if (itemPosition == 6) {
             //nearby tasks
-            Query query = taskDao.queryRawCreate(",Customer C ORDER BY abs(C.latitude-(" + MAP_DEFAULT_LATITUDE
-                    + ")) + abs(C.longitude - (" + MAP_DEFAULT_LONGITUDE + ")) LIMIT " + MAX_TASKS_TO_SHOW_ON_MAP);
+            Query query = taskDao.queryRawCreate(",Customer C WHERE T.'"+TaskDao.Properties.Status.columnName+"' != '"
+                    +TaskMainFragment.STATUS_COMPLETE+"' and T.'"+TaskDao.Properties.Status.columnName+"' != '"+TaskMainFragment.STATUS_CANCELLED
+                    +"' ORDER BY abs(C.latitude-(" + MAP_DEFAULT_LATITUDE
+                    + ")) + abs(C.longitude - (" + MAP_DEFAULT_LONGITUDE + "))  LIMIT " + MAX_TASKS_TO_SHOW_ON_MAP);
             List list = query.list();
             outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE), list, MAX_TASKS_TO_SHOW_ON_MAP);
 

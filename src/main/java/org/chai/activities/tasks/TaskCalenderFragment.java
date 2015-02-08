@@ -117,7 +117,9 @@ public class TaskCalenderFragment extends Fragment {
         }else if(itemPosition == 6){
             //nearby tasks
             GeoPoint geoPoint = getCurrentLocation();
-            Query query = taskDao.queryRawCreate(",Customer C ORDER BY abs(C.latitude-("+geoPoint.getAltitude()
+            Query query = taskDao.queryRawCreate(",Customer C WHERE T.'"+TaskDao.Properties.Status.columnName+"' != '"
+                    +TaskMainFragment.STATUS_COMPLETE+"' and T.'"+TaskDao.Properties.Status.columnName+"' != '"+TaskMainFragment.STATUS_CANCELLED
+                    +"' ORDER BY abs(C.latitude-("+geoPoint.getAltitude()
                     +")) + abs(C.longitude - ("+geoPoint.getLongitude()+")) LIMIT 20");
             List list = query.list();
             outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(geoPoint, list, 20);
