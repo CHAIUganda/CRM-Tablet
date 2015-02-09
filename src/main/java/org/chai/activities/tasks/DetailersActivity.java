@@ -98,8 +98,8 @@ import android.content.Intent;
          bindDetailerCallToUi(view);
          managePointOfSaleOthers(view, false);
          setRequiredFields(view);
-         addZincStockToTable(view,detailerCallInstance.getDetailerStocks());
-         addOrsStockToTable(view, detailerCallInstance.getDetailerStocks());
+         addZincStockToTable(view,detailerCallInstance);
+         addOrsStockToTable(view, detailerCallInstance);
          return  view;
      }
 

@@ -55,6 +55,7 @@ import android.app.AlertDialog;
      protected boolean[] selections;
      protected List<StockTableRow> zincStocks = new ArrayList<StockTableRow>();
      protected List<StockTableRow> orsStocks = new ArrayList<StockTableRow>();
+    protected List<DetailerStock> detailerStocksList = new ArrayList<DetailerStock>();
 
      protected abstract boolean saveForm();
 
@@ -373,14 +374,6 @@ import android.app.AlertDialog;
          }
      }
 
-     private void showZincStockInTable() {
-         List<DetailerStock> detailerStocks = detailerStockDao.queryBuilder().where(DetailerStockDao.Properties.Category.eq("zinc"),
-                 DetailerStockDao.Properties.DetailerId.eq(detailerCallInstance.getUuid())).list();
-         if (!detailerStocks.isEmpty()) {
-         }
-
-     }
-
      private void addStockToDetailer(DetailerCall detailerCallInstance,
                                      String brand, double stockLevel, double buyingPrice, double sellingPrice, String category) {
          DetailerStock detailerStock = new DetailerStock(null);
@@ -391,19 +384,16 @@ import android.app.AlertDialog;
          detailerStock.setSellingPrice(sellingPrice);
          detailerStock.setDetailerCall(detailerCallInstance);
          detailerStock.setDetailerId(detailerCallInstance.getUuid());
+         detailerStocksList.add(detailerStock);
      }
 
-     protected void submitDetailerStock(DetailerCall detailerCall) {
-         getZincStockFromUI();
-         getOrsStockFromUI();
-         for (DetailerStock stock : detailerCall.getDetailerStocks()) {
-             stock.setUuid(UUID.randomUUID().toString());
-             detailerStockDao.insert(stock);
-         }
-     }
-
-     protected void addZincStockToTable(View view, List<DetailerStock> detailerStocks) {
+     protected void addZincStockToTable(View view,DetailerCall detailerCall) {
+         List<DetailerStock> detailerStocks = new ArrayList<DetailerStock>();
          TableLayout tableLayout = (TableLayout) view.findViewById(R.id.detailer_zinc_stock_table2);
+         if(detailerCall.getUuid() != null){
+              detailerStocks = detailerStockDao.queryBuilder().where(DetailerStockDao.Properties.Category.eq("zinc"),
+                     DetailerStockDao.Properties.DetailerId.eq(detailerCallInstance.getUuid())).list();
+         }
          TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
          if (detailerStocks.isEmpty()) {
              StockTableRow dtzinc = new StockTableRow(view.getContext(), "DT Zinc", "", "", "");
@@ -434,7 +424,12 @@ import android.app.AlertDialog;
          }
      }
 
-     protected void addOrsStockToTable(View view, List<DetailerStock> detailerStocks) {
+     protected void addOrsStockToTable(View view,DetailerCall detailerCall) {
+         List<DetailerStock> detailerStocks = new ArrayList<DetailerStock>();
+         if(detailerCall.getUuid() != null){
+             detailerStocks = detailerStockDao.queryBuilder().where(DetailerStockDao.Properties.Category.eq("ors"),
+                     DetailerStockDao.Properties.DetailerId.eq(detailerCallInstance.getUuid())).list();
+         }
          TableLayout tableLayout = (TableLayout) view.findViewById(R.id.detailer_ors_stock_table2);
          TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
          if (detailerStocks.isEmpty()) {
@@ -453,9 +448,21 @@ import android.app.AlertDialog;
              for (DetailerStock stock : detailerStocks) {
                  StockTableRow dtzinc = new StockTableRow(view.getContext(), stock.getBrand(), stock.getStockLevel() + "", stock.getBuyingPrice() + "", stock.getSellingPrice() + "");
                  tableLayout.addView(dtzinc, params);
-                 zincStocks.add(dtzinc);
+                 orsStocks.add(dtzinc);
              }
          }
      }
 
- }
+    protected void submitDetailerStock(DetailerCall detailerCall) {
+        getZincStockFromUI();
+        getOrsStockFromUI();
+        //delete before inserting,temp fix for one to one in green dao
+        detailerStockDao.queryBuilder().where(DetailerStockDao.Properties.DetailerId.eq(detailerCallInstance.getUuid())).buildDelete().executeDeleteWithoutDetachingEntities();
+        for (DetailerStock stock : detailerStocksList) {
+            stock.setUuid(UUID.randomUUID().toString());
+            detailerStockDao.insert(stock);
+        }
+    }
+
+
+}
