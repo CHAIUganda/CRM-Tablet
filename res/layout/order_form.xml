@@ -105,6 +105,7 @@
                 android:stretchColumns="*"
                 android:padding="10dp"
                 android:layout_marginRight="10dp">
+
             <TableRow android:id="@+id/tableRow22"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
@@ -129,6 +130,10 @@
 
                 <TextView
                         android:text="Quantity:"
+                        android:textColor="@color/list_main_text_color"/>
+
+                <TextView
+                        android:text="Drop sample:"
                         android:textColor="@color/list_main_text_color"/>
 
             </TableRow>
@@ -160,6 +165,14 @@
                           android:text=""
                           android:singleLine="true"
                           android:textCursorDrawable="@null"/>
+
+                <CheckBox
+                        android:id="@+id/order_dropSample"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:layout_marginRight="10dp"
+                        android:checked="true"/>
 
 
             </TableRow>

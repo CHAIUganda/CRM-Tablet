@@ -31,8 +31,9 @@ public class OrderDataDao extends AbstractDao<OrderData, String> {
         public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
         public final static Property Quantity = new Property(1, int.class, "quantity", false, "QUANTITY");
         public final static Property Price = new Property(2, int.class, "price", false, "PRICE");
-        public final static Property OrderId = new Property(3, String.class, "orderId", false, "ORDER_ID");
-        public final static Property ProductId = new Property(4, String.class, "productId", false, "PRODUCT_ID");
+        public final static Property DropSample = new Property(3, Boolean.class, "dropSample", false, "DROP_SAMPLE");
+        public final static Property OrderId = new Property(4, String.class, "orderId", false, "ORDER_ID");
+        public final static Property ProductId = new Property(5, String.class, "productId", false, "PRODUCT_ID");
     };
 
     private DaoSession daoSession;
@@ -56,8 +57,9 @@ public class OrderDataDao extends AbstractDao<OrderData, String> {
                 "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'QUANTITY' INTEGER NOT NULL ," + // 1: quantity
                 "'PRICE' INTEGER NOT NULL ," + // 2: price
-                "'ORDER_ID' TEXT NOT NULL ," + // 3: orderId
-                "'PRODUCT_ID' TEXT NOT NULL );"); // 4: productId
+                "'DROP_SAMPLE' INTEGER," + // 3: dropSample
+                "'ORDER_ID' TEXT NOT NULL ," + // 4: orderId
+                "'PRODUCT_ID' TEXT NOT NULL );"); // 5: productId
     }
 
     /** Drops the underlying database table. */
@@ -73,8 +75,13 @@ public class OrderDataDao extends AbstractDao<OrderData, String> {
         stmt.bindString(1, entity.getUuid());
         stmt.bindLong(2, entity.getQuantity());
         stmt.bindLong(3, entity.getPrice());
-        stmt.bindString(4, entity.getOrderId());
-        stmt.bindString(5, entity.getProductId());
+ 
+        Boolean dropSample = entity.getDropSample();
+        if (dropSample != null) {
+            stmt.bindLong(4, dropSample ? 1l: 0l);
+        }
+        stmt.bindString(5, entity.getOrderId());
+        stmt.bindString(6, entity.getProductId());
     }
 
     @Override
@@ -96,8 +103,9 @@ public class OrderDataDao extends AbstractDao<OrderData, String> {
             cursor.getString(offset + 0), // uuid
             cursor.getInt(offset + 1), // quantity
             cursor.getInt(offset + 2), // price
-            cursor.getString(offset + 3), // orderId
-            cursor.getString(offset + 4) // productId
+            cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0, // dropSample
+            cursor.getString(offset + 4), // orderId
+            cursor.getString(offset + 5) // productId
         );
         return entity;
     }
@@ -108,8 +116,9 @@ public class OrderDataDao extends AbstractDao<OrderData, String> {
         entity.setUuid(cursor.getString(offset + 0));
         entity.setQuantity(cursor.getInt(offset + 1));
         entity.setPrice(cursor.getInt(offset + 2));
-        entity.setOrderId(cursor.getString(offset + 3));
-        entity.setProductId(cursor.getString(offset + 4));
+        entity.setDropSample(cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0);
+        entity.setOrderId(cursor.getString(offset + 4));
+        entity.setProductId(cursor.getString(offset + 5));
      }
     
     /** @inheritdoc */

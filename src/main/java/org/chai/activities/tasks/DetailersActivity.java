@@ -167,11 +167,12 @@ public class DetailersActivity extends BaseDetailerFragment {
         detailerCallInstance.setRecommendationNextStep(((CustomMultSelectDropDown) getActivity().findViewById(R.id.detailer_next_step_recommendation)).getText().toString());
 
         detailerCallInstance.setHeardAboutDiarrheaTreatmentInChildren(((Spinner)getActivity(). findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors)).getSelectedItem().toString());
-        detailerCallInstance.setHowDidYouHear(((Spinner)getActivity(). findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors)).getSelectedItem().toString());
-        detailerCallInstance.setWhatYouKnowAbtDiarrhea(((Spinner)getActivity(). findViewById(R.id.detailer_how_diarrhea_affects_community)).getSelectedItem().toString());
+        detailerCallInstance.setHowDidYouHear(((Spinner) getActivity().findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors)).getSelectedItem().toString());
+        detailerCallInstance.setWhatYouKnowAbtDiarrhea(((Spinner) getActivity().findViewById(R.id.detailer_how_diarrhea_affects_community)).getSelectedItem().toString());
         detailerCallInstance.setDiarrheaEffectsOnBody(((Spinner) getActivity().findViewById(R.id.detailer_effect_diarrhea_has_on_the_body)).getSelectedItem().toString());
-        detailerCallInstance.setKnowledgeAbtOrsAndUsage(((Spinner)getActivity(). findViewById(R.id.detailer_how_ors_should_be_used)).getSelectedItem().toString());
-        detailerCallInstance.setWhyNotUseAntibiotics(((Spinner)getActivity(). findViewById(R.id.detailer_why_should_not_use_antibiotics)).getSelectedItem().toString());
+        detailerCallInstance.setKnowledgeAbtOrsAndUsage(((Spinner) getActivity().findViewById(R.id.detailer_how_ors_should_be_used)).getSelectedItem().toString());
+        detailerCallInstance.setWhyNotUseAntibiotics(((Spinner) getActivity().findViewById(R.id.detailer_why_should_not_use_antibiotics)).getSelectedItem().toString());
+        detailerCallInstance.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.detailer_recommendation_level)).getSelectedItem().toString());
 
         String stocksZinc = ((Spinner) getActivity().findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString();
         detailerCallInstance.setDoYouStockZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
@@ -245,7 +246,7 @@ public class DetailersActivity extends BaseDetailerFragment {
 
             Spinner doyouStockOrsSpinner = (Spinner)view. findViewById(R.id.detailer_do_you_stock_ors);
             Boolean doYouStockOrs = detailerCallInstance.getDoYouStockOrs();
-            Utils.setSpinnerSelection(doyouStockOrsSpinner, doYouStockOrs?"Yes":"No");
+            Utils.setSpinnerSelection(doyouStockOrsSpinner, doYouStockOrs ? "Yes" : "No");
 
             CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown) view.findViewById(R.id.detailer_next_step_recommendation);
             recommendationNextStep.setText(detailerCallInstance.getRecommendationNextStep());
@@ -255,6 +256,9 @@ public class DetailersActivity extends BaseDetailerFragment {
 
             Button pointOfSaleMaterial =  ((Button)view. findViewById(R.id.detailer_point_of_sale));
             pointOfSaleMaterial.setText(detailerCallInstance.getPointOfsaleMaterial());
+
+            Spinner recomendationLevel = (Spinner)view.findViewById(R.id.detailer_recommendation_level);
+            Utils.setSpinnerSelection(recomendationLevel, detailerCallInstance.getRecommendationLevel());
 
         }else{
             Calendar calendar = Calendar.getInstance();

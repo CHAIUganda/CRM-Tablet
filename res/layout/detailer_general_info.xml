@@ -14,32 +14,32 @@
 
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp">
 
-        <EditText
-                android:id="@+id/detailer_survey_date"
-                android:text=""
-                android:minWidth="90dip"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:width="150dip"
-                android:height="40dip"
-                android:textColor="@color/list_main_text_color"
-                android:background="@drawable/bordertextfield"
-                android:textCursorDrawable="@null"/>
+             <EditText
+                     android:id="@+id/detailer_survey_date"
+                     android:text=""
+                     android:minWidth="90dip"
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_weight="1"
+                     android:width="150dip"
+                     android:height="40dip"
+                     android:textColor="@color/list_main_text_color"
+                     android:background="@drawable/bordertextfield"
+                     android:textCursorDrawable="@null"/>
 
-        <Button
-                android:id="@+id/detailer_survey_date_btn"
-                android:text="Survey Date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#0091CC"
-                android:layout_marginLeft="5dp"
-                android:textColor="#fff"/>
-    </LinearLayout>
+             <Button
+                     android:id="@+id/detailer_survey_date_btn"
+                     android:text="Survey Date"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:background="#0091CC"
+                     android:layout_marginLeft="5dp"
+                     android:textColor="#fff"/>
+         </LinearLayout>
 
     <LinearLayout
             android:orientation="horizontal"
@@ -174,7 +174,7 @@
                 android:id="@+id/detailer_other_ways_youheard_about_zinc_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Please specify Other ways you heard about zinc"
+                android:text="4.Please specify Other ways you heard about zinc"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
@@ -202,7 +202,7 @@
                 android:id="@+id/detailer_how_diarrhea_affects_community_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4.Tell me what you know about diarrhea and how it affects your community?"
+                android:text="5.Tell me what you know about diarrhea and how it affects your community?"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
         <TextView
@@ -231,7 +231,7 @@
                 android:id="@+id/detailer_effect_diarrhea_has_on_the_body_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5.Do you know the affect that diarrhea has on the body"
+                android:text="6.Do you know the affect that diarrhea has on the body"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
@@ -261,7 +261,7 @@
                 android:id="@+id/detailer_how_ors_should_be_used_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="6.What do you know about ORS and how it should be used?"
+                android:text="7.What do you know about ORS and how it should be used?"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
@@ -291,7 +291,7 @@
                 android:id="@+id/detailer_how_zinc_should_be_used_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7.What do you know about ZINC and how it should be used?"
+                android:text="8.What do you know about ZINC and how it should be used?"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
@@ -321,7 +321,7 @@
                 android:id="@+id/detailer_why_should_not_use_antibiotics_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="8.Why should you not use antibiotics to treat diarrhea"
+                android:text="9.Why should you not use antibiotics to treat diarrhea"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
         <TextView
@@ -643,7 +643,7 @@
                 android:id="@+id/detailer_point_of_sale_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="21.Point of sale materials"
+                android:text="21.Point of sale materials dropped"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 
@@ -680,7 +680,28 @@
                 android:singleLine="true"
                 android:textCursorDrawable="@null"/>
     </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="23.Based on your interaction, do you believe this retailer will recommend ORS and/or zinc as a 1st-line treatment for diarrhea?"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"/>
+
+        <Spinner
+                android:id="@+id/detailer_recommendation_level"
+                android:layout_height="wrap_content"
+                android:prompt="@string/selectItem"
+                android:layout_width="fill_parent"
+                android:entries="@array/yesnolist"
+                android:background="@drawable/btn_dropdown"/>
+
+    </LinearLayout>
 
     <LinearLayout
             android:orientation="vertical"
@@ -692,7 +713,7 @@
                 android:id="@+id/detailer_recommendation_next_step_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="23.What did you recommend as next steps for the retailer"
+                android:text="24.What did you recommend as next steps for the retailer"
                 android:textColor="@color/list_main_text_color"
                 android:textStyle="bold"/>
 

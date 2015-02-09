@@ -17,6 +17,7 @@ public class OrderData {
     private String uuid;
     private int quantity;
     private int price;
+    private Boolean dropSample;
     /** Not-null value. */
     private String orderId;
     /** Not-null value. */
@@ -50,10 +51,11 @@ public class OrderData {
         this.uuid = uuid;
     }
 
-    public OrderData(String uuid, int quantity, int price, String orderId, String productId) {
+    public OrderData(String uuid, int quantity, int price, Boolean dropSample, String orderId, String productId) {
         this.uuid = uuid;
         this.quantity = quantity;
         this.price = price;
+        this.dropSample = dropSample;
         this.orderId = orderId;
         this.productId = productId;
     }
@@ -88,6 +90,14 @@ public class OrderData {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public Boolean getDropSample() {
+        return dropSample;
+    }
+
+    public void setDropSample(Boolean dropSample) {
+        this.dropSample = dropSample;
     }
 
     /** Not-null value. */

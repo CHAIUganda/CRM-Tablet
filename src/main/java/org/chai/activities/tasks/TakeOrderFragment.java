@@ -37,6 +37,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
     private TableLayout tableLayout;
     private List<Spinner> spinnerList;
     private List<EditText> quantityFields;
+    private List<CheckBox> dropSampleChkBoxes;
 
     private EditText dateEditTxt;
     private DatePickerDialog datePickerDialog;
@@ -56,6 +57,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
         tableLayout = (TableLayout)view.findViewById(R.id.orders_table);
         spinnerList = new ArrayList<Spinner>();
         quantityFields = new ArrayList<EditText>();
+        dropSampleChkBoxes = new ArrayList<CheckBox>();
 
         Spinner productsSpinner = (Spinner) view.findViewById(R.id.order_product);
         products = productDao.loadAll();
@@ -63,6 +65,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
 
         spinnerList.add(productsSpinner);
         quantityFields.add((EditText)view. findViewById(R.id.order_quantity));
+        dropSampleChkBoxes.add((CheckBox)view.findViewById(R.id.order_dropSample));
 
         List<Customer> customersList = customerDao.loadAll();
         AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.order_auto_complete_textview);
@@ -183,6 +186,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
             if (i == 0) {
                 ((EditText) view.findViewById(R.id.order_quantity)).setText(orderDatas.get(i).getQuantity() + "");
                 ((Spinner) view.findViewById(R.id.order_product)).setSelection(getProductPosition(orderDatas.get(i).getProduct()));
+                ((CheckBox)view.findViewById(R.id.order_dropSample)).setChecked(orderDatas.get(i).getDropSample());
             } else {
                 addRowToTable(orderDatas.get(i), view);
             }
@@ -193,24 +197,31 @@ public class TakeOrderFragment extends BaseContainerFragment {
         TableRow tableRow = new TableRow(getActivity());
         tableRow.setLayoutParams(new TableRow.LayoutParams( TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-        Spinner spinner  = new Spinner(getActivity());
-        TableRow.LayoutParams spinnerParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
-        spinner.setLayoutParams(spinnerParams);
+        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        final Spinner spinner  = new Spinner(getActivity());
+        spinner.setLayoutParams(layoutParams);
         spinner.setAdapter(new ProductArrayAdapter(getActivity(),android.R.layout.simple_spinner_dropdown_item,products.toArray(new Product[products.size()])));
         spinner.setBackgroundResource(R.drawable.btn_dropdown);
 
         tableRow.addView(spinner);
 
-        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
-        params.setMargins(10,0,10,0);
-        EditText quantityView =(EditText)getActivity().getLayoutInflater().inflate(R.layout.edit_text_style,null);
+        layoutParams.setMargins(10,0,10,0);
+        final EditText quantityView =(EditText)getActivity().getLayoutInflater().inflate(R.layout.edit_text_style,null);
         quantityView.setTextColor(Color.BLACK);
-        quantityView.setLayoutParams(params);
+        quantityView.setLayoutParams(layoutParams);
         quantityView.setInputType(InputType.TYPE_CLASS_NUMBER);
         tableRow.addView(quantityView);
+
+        final CheckBox dropSampleChkBx =(CheckBox)getActivity().getLayoutInflater().inflate(R.layout.check_box_template,null);
+        dropSampleChkBx.setTextColor(Color.BLACK);
+//        dropSampleChkBx.setText("Drop Sample");
+        dropSampleChkBx.setLayoutParams(layoutParams);
+        tableRow.addView(dropSampleChkBx);
+
         if (orderData != null) {
             quantityView.setText(orderData.getQuantity() + "");
             spinner.setSelection(getProductPosition(orderData.getProduct()));
+            dropSampleChkBx.setChecked(orderData.getDropSample());
         }
 
         Button deleteBtn = (Button) getActivity().getLayoutInflater().inflate(R.layout.delete_icon, null);
@@ -220,8 +231,11 @@ public class TakeOrderFragment extends BaseContainerFragment {
                 View row = (View) view.getParent();
                 ViewGroup container = ((ViewGroup)row.getParent());
                 container.removeView(row);
+                spinnerList.remove(spinner);
+                quantityFields.remove(quantityView);
+                dropSampleChkBoxes.remove(dropSampleChkBx);
                 container.invalidate();
-                removeRow();
+//                removeRow();
             }
         });
         tableRow.addView(deleteBtn);
@@ -233,10 +247,13 @@ public class TakeOrderFragment extends BaseContainerFragment {
 
     private void removeRow() {
         if (!spinnerList.isEmpty()) {
-            spinnerList.remove(spinnerList.size() - 1);
-        }
+                     spinnerList.remove(spinnerList.size() - 1);
+                 }
         if (!quantityFields.isEmpty()) {
             quantityFields.remove(quantityFields.size() - 1);
+        }
+        if (!dropSampleChkBoxes.isEmpty()) {
+            dropSampleChkBoxes.remove(dropSampleChkBoxes.size() - 1);
         }
     }
 
@@ -272,6 +289,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
             OrderData orderData = instantiateOrder(i);
             orderData.setOrderId(orderId);
             orderData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
+            orderData.setDropSample(dropSampleChkBoxes.get(i).isChecked());
             Product product = (Product) spinnerList.get(i).getSelectedItem();
             orderData.setProductId(product.getUuid());
             if(orderData.getUuid()!=null){
