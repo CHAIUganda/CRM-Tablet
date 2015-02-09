@@ -6,3 +6,4 @@ target/
 *.iml
 gen-external-apklibs/
 classes/
+my-release-key.keystore
