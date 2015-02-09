@@ -144,18 +144,18 @@ public class DetailersActivity extends BaseDetailerFragment {
         detailerCallInstance.setDiarrheaPatientsInFacility(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).getText().toString()));
         detailerCallInstance.setOtherWaysHowYouHeard(((EditText) getActivity().findViewById(R.id.detailer_other_ways_youheard_about_zinc)).getText().toString());
         if (((Spinner)getActivity(). findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString().equals("Yes")) {
-            detailerCallInstance.setHowManyZincInStock(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailers_howmany_in_stock_zinc)).getText().toString()));
+           /* detailerCallInstance.setHowManyZincInStock(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailers_howmany_in_stock_zinc)).getText().toString()));
             detailerCallInstance.setZincBrandsold(((EditText)getActivity(). findViewById(R.id.detailers_brand_sold_zinc)).getText().toString());
             detailerCallInstance.setBuyingPriceZinc(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyzinc)).getText().toString()));
-            detailerCallInstance.setZincSellingPrice(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_sellingPrice_zinc)).getText().toString()));
+            detailerCallInstance.setZincSellingPrice(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_sellingPrice_zinc)).getText().toString()));*/
         }
 
 
         if (((Spinner)getActivity(). findViewById(R.id.detailer_do_you_stock_ors)).getSelectedItem().toString().equals("Yes")) {
-            detailerCallInstance.setHowmanyOrsInStock(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailers_howmany_in_stock_ors)).getText().toString()));
+          /*  detailerCallInstance.setHowmanyOrsInStock(Integer.parseInt(((EditText)getActivity(). findViewById(R.id.detailers_howmany_in_stock_ors)).getText().toString()));
             detailerCallInstance.setOrsBrandSold(((EditText)getActivity(). findViewById(R.id.detailers_brand_sold_ors)).getText().toString());
             detailerCallInstance.setBuyingPriceOrs(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_whatpricedoyoubuyors)).getText().toString()));
-            detailerCallInstance.setOrsSellingPrice(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_sellingPrice_ors)).getText().toString()));
+            detailerCallInstance.setOrsSellingPrice(Double.parseDouble(((EditText) getActivity().findViewById(R.id.detailer_sellingPrice_ors)).getText().toString()));*/
         }
 
 
@@ -207,17 +207,17 @@ public class DetailersActivity extends BaseDetailerFragment {
             ((EditText)view. findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
             ((EditText)view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).setText(detailerCallInstance.getDiarrheaPatientsInFacility() + "");
             ((EditText)view.findViewById(R.id.detailer_other_ways_youheard_about_zinc)).setText(detailerCallInstance.getOtherWaysHowYouHeard());
-            ((EditText)view. findViewById(R.id.detailers_howmany_in_stock_zinc)).setText(detailerCallInstance.getHowManyZincInStock()+"");
+           /* ((EditText)view. findViewById(R.id.detailers_howmany_in_stock_zinc)).setText(detailerCallInstance.getHowManyZincInStock()+"");
             ((EditText)view.findViewById(R.id.detailers_howmany_in_stock_ors)).setText(detailerCallInstance.getHowmanyOrsInStock()+"");
             ((EditText)view. findViewById(R.id.detailers_brand_sold_zinc)).setText(detailerCallInstance.getZincBrandsold());
-            ((EditText)view.findViewById(R.id.detailers_brand_sold_ors)).setText(detailerCallInstance.getOrsBrandSold());
+            ((EditText)view.findViewById(R.id.detailers_brand_sold_ors)).setText(detailerCallInstance.getOrsBrandSold());*/
             ((EditText)view. findViewById(R.id.detailer_if_no_zinc_why)).setText(detailerCallInstance.getIfNoZincWhy());
             ((EditText)view. findViewById(R.id.detailer_if_no_ors_why)).setText(detailerCallInstance.getIfNoOrsWhy());
-            ((EditText)view.findViewById(R.id.detailer_whatpricedoyoubuyzinc)).setText(detailerCallInstance.getBuyingPriceZinc() + "");
+            /*((EditText)view.findViewById(R.id.detailer_whatpricedoyoubuyzinc)).setText(detailerCallInstance.getBuyingPriceZinc() + "");
             ((EditText)view.findViewById(R.id.detailer_whatpricedoyoubuyors)).setText(detailerCallInstance.getBuyingPriceOrs() + "");
-
             ((EditText)view.findViewById(R.id.detailer_sellingPrice_zinc)).setText(detailerCallInstance.getZincSellingPrice() + "");
             ((EditText)view.findViewById(R.id.detailer_sellingPrice_ors)).setText(detailerCallInstance.getOrsSellingPrice() + "");
+*/
             ((EditText)view.findViewById(R.id.detailers_gps_text)).setText(detailerCallInstance.getLatitude() == null ? "0.0,0.0" : detailerCallInstance.getLatitude() + ","+ detailerCallInstance.getLongitude());
 
             //spinners
@@ -281,56 +281,56 @@ public class DetailersActivity extends BaseDetailerFragment {
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getActivity().getMenuInflater();
-        menuInflater.inflate(R.menu.new_customer_form_menu, menu);
-        return true;
-    }
+                  MenuInflater menuInflater = getActivity().getMenuInflater();
+                  menuInflater.inflate(R.menu.new_customer_form_menu, menu);
+                  return true;
+              }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.customer_form_home:
-                Intent i = new Intent(getActivity(), HomeActivity.class);
-                startActivity(i);
-                return true;
-            default:
-                return super.onOptionsItemSelected(menuItem);
-        }
-    }
+                  switch (menuItem.getItemId()) {
+                      case R.id.customer_form_home:
+                          Intent i = new Intent(getActivity(), HomeActivity.class);
+                          startActivity(i);
+                          return true;
+                      default:
+                          return super.onOptionsItemSelected(menuItem);
+                  }
+              }
 
     private void setReadOnly(View view) {
-        view.findViewById(R.id.detailer_survey_date).setEnabled(false);
-        view.findViewById(R.id.detailer_name).setEnabled(false);
-        view.findViewById(R.id.detailer_desc_location).setEnabled(false);
-        view.findViewById(R.id.detailer_subcounty).setEnabled(false);
-        view.findViewById(R.id.detailer_outlet_size).setEnabled(false);
-        view.findViewById(R.id.detailers_gps_text).setEnabled(false);
-        view.findViewById(R.id.detailer_key_retailer_name).setEnabled(false);
-        view.findViewById(R.id.detailer_key_retailer_contact).setEnabled(false);
-        view.findViewById(R.id.detailers_gps_text).setEnabled(false);
-        view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility).setEnabled(false);
-        view.findViewById(R.id.detailer_other_ways_youheard_about_zinc).setEnabled(false);
-        view.findViewById(R.id.detailers_howmany_in_stock_zinc).setEnabled(false);
-        view.findViewById(R.id.detailers_howmany_in_stock_ors).setEnabled(false);
-        view.findViewById(R.id.detailers_brand_sold_zinc).setEnabled(false);
-        view.findViewById(R.id.detailers_brand_sold_ors).setEnabled(false);
-        view.findViewById(R.id.detailer_if_no_zinc_why).setEnabled(false);
-        view.findViewById(R.id.detailer_if_no_ors_why).setEnabled(false);
-        view.findViewById(R.id.detailer_whatpricedoyoubuyzinc).setEnabled(false);
-        view.findViewById(R.id.detailer_whatpricedoyoubuyors).setEnabled(false);
-        view.findViewById(R.id.detailers_gps_text).setEnabled(false);
+                  view.findViewById(R.id.detailer_survey_date).setEnabled(false);
+                  view.findViewById(R.id.detailer_name).setEnabled(false);
+                  view.findViewById(R.id.detailer_desc_location).setEnabled(false);
+                  view.findViewById(R.id.detailer_subcounty).setEnabled(false);
+                  view.findViewById(R.id.detailer_outlet_size).setEnabled(false);
+                  view.findViewById(R.id.detailers_gps_text).setEnabled(false);
+                  view.findViewById(R.id.detailer_key_retailer_name).setEnabled(false);
+                  view.findViewById(R.id.detailer_key_retailer_contact).setEnabled(false);
+                  view.findViewById(R.id.detailers_gps_text).setEnabled(false);
+                  view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility).setEnabled(false);
+                  view.findViewById(R.id.detailer_other_ways_youheard_about_zinc).setEnabled(false);
+                 /* view.findViewById(R.id.detailers_howmany_in_stock_zinc).setEnabled(false);
+                                                 view.findViewById(R.id.detailers_howmany_in_stock_ors).setEnabled(false);
+                                                 view.findViewById(R.id.detailers_brand_sold_zinc).setEnabled(false);
+                                                 view.findViewById(R.id.detailers_brand_sold_ors).setEnabled(false);*/
+                  view.findViewById(R.id.detailer_if_no_zinc_why).setEnabled(false);
+                  view.findViewById(R.id.detailer_if_no_ors_why).setEnabled(false);
+                /*  view.findViewById(R.id.detailer_whatpricedoyoubuyzinc).setEnabled(false);
+                                               view.findViewById(R.id.detailer_whatpricedoyoubuyors).setEnabled(false);*/
+                  view.findViewById(R.id.detailers_gps_text).setEnabled(false);
 
-        //spinners
-        view.findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors).setEnabled(false);
-        view.findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors).setEnabled(false);
-        view.findViewById(R.id.detailer_how_diarrhea_affects_community).setEnabled(false);
-        view.findViewById(R.id.detailer_effect_diarrhea_has_on_the_body).setEnabled(false);
-        view.findViewById(R.id.detailer_how_ors_should_be_used).setEnabled(false);
-        view.findViewById(R.id.detailer_why_should_not_use_antibiotics).setEnabled(false);
-        view.findViewById(R.id.detailer_do_you_stock_zinc).setEnabled(false);
-        view.findViewById(R.id.detailer_next_step_recommendation).setEnabled(false);
-        view.findViewById(R.id.detailer_how_zinc_should_be_used).setEnabled(false);
-        view.findViewById(R.id.detailer_point_of_sale).setEnabled(false);
-        view.findViewById(R.id.detailer_submit_btn).setEnabled(false);
-    }
+                  //spinners
+                  view.findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors).setEnabled(false);
+                  view.findViewById(R.id.detailer_how_did_you_hearabout_zinc_ors).setEnabled(false);
+                  view.findViewById(R.id.detailer_how_diarrhea_affects_community).setEnabled(false);
+                  view.findViewById(R.id.detailer_effect_diarrhea_has_on_the_body).setEnabled(false);
+                  view.findViewById(R.id.detailer_how_ors_should_be_used).setEnabled(false);
+                  view.findViewById(R.id.detailer_why_should_not_use_antibiotics).setEnabled(false);
+                  view.findViewById(R.id.detailer_do_you_stock_zinc).setEnabled(false);
+                  view.findViewById(R.id.detailer_next_step_recommendation).setEnabled(false);
+                  view.findViewById(R.id.detailer_how_zinc_should_be_used).setEnabled(false);
+                  view.findViewById(R.id.detailer_point_of_sale).setEnabled(false);
+                  view.findViewById(R.id.detailer_submit_btn).setEnabled(false);
+              }
 
 }

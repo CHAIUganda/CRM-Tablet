@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+ <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/detailer_zinc_stock_table"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:stretchColumns="*"
+              android:padding="1dp"
+              android:background="#000000"
+              android:layout_margin="1dp">
+
+     <TableRow
+             android:id="@+id/detailer_stock_tableRow1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:padding="5dip"
+             android:background="#fff"
+             android:layout_margin="1dp">
+
+         <TextView
+                 android:text="10.If yes, please note the brands sold,\n stock levels, buying prices, and selling prices for each"
+                 android:textColor="@color/list_main_text_color"
+                 android:textSize="@dimen/list_main_text_size"
+                 android:layout_span="4"/>
+
+     </TableRow>
+
+     <TableRow
+             android:id="@+id/detailer_row2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:padding="5dip"
+             android:background="#fff"
+             android:layout_margin="1dp">
+
+         <TextView
+                 android:text="Brands"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_marginRight="10dp"/>
+
+         <TextView
+                 android:text="Stock level (1x10)"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_marginRight="10dp"/>
+
+         <TextView
+                 android:text="Buying Price (1x10)"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_marginRight="10dp"/>
+
+         <TextView
+                 android:text="Selling Price (1x10)"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_marginRight="10dp"/>
+
+     </TableRow>
+
+     <TableRow
+             android:id="@+id/tableRow3"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:padding="5dip"
+             android:background="#fff"
+             android:layout_margin="1dp">
+
+         <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginRight="10dp"
+                 android:text="DT Zinc"
+                 android:textColor="@color/list_main_text_color"
+                 android:textStyle="bold"/>
+
+         <EditText
+                 android:id="@+id/dtzinclevel_level"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+         <EditText
+                 android:id="@+id/dtzinc_buying_price"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+         <EditText
+                 android:id="@+id/dtzinc_selling_price"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+     </TableRow>
+
+     <TableRow
+             android:id="@+id/tableRow3"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:padding="5dip"
+             android:background="#fff"
+             android:layout_margin="1dp">
+
+         <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginRight="10dp"
+                 android:text="Zincocet"
+                 android:textColor="@color/list_main_text_color"
+                 android:textStyle="bold"/>
+
+         <EditText
+                 android:id="@+id/zincoset_stock_level"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+         <EditText
+                 android:id="@+id/zincoset__buying_price"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+         <EditText
+                 android:id="@+id/zincoset__selling_price"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+     </TableRow>
+
+     <TableRow
+             android:id="@+id/tableRow3"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:padding="5dip"
+             android:background="#fff"
+             android:layout_margin="1dp">
+
+         <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginRight="10dp"
+                 android:text="Zinkid"
+                 android:textColor="@color/list_main_text_color"
+                 android:textStyle="bold"/>
+
+         <EditText
+                 android:id="@+id/zinkid_stock_level"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+         <EditText
+                 android:id="@+id/zinkid_buying_price"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+         <EditText
+                 android:id="@+id/zinkid_selling_price"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+     </TableRow>
+
+     <TableRow
+             android:id="@+id/tableRow3"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:padding="5dip"
+             android:background="#fff"
+             android:layout_margin="1dp">
+
+         <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginRight="10dp"
+                 android:text="Zinc Sulphate"
+                 android:textColor="@color/list_main_text_color"
+                 android:textStyle="bold"/>
+
+         <EditText
+                 android:id="@+id/sulphate_stock_level"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+         <EditText
+                 android:id="@+id/sulphate_buying_price"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+         <EditText
+                 android:id="@+id/sulphate_selling_price"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+     </TableRow>
+
+     <TableRow
+             android:id="@+id/tableRow3"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:padding="5dip"
+             android:background="#fff"
+             android:layout_margin="1dp">
+
+         <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginRight="10dp"
+                 android:text="Zincos"
+                 android:textColor="@color/list_main_text_color"
+                 android:textStyle="bold"/>
+
+         <EditText
+                 android:id="@+id/zincos_stock_level"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+         <EditText
+                 android:id="@+id/zincos_buying_price"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+         <EditText
+                 android:id="@+id/zincos_selling_price"
+                 style="@style/myEditText"
+                 android:layout_marginRight="10dp"
+                 android:inputType="number"
+                 android:textColor="@color/list_main_text_color"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="10dp"
+                 android:textSize="@dimen/list_sub_text_size"
+                 android:background="@drawable/bordertextfield"
+                 android:text=""
+                 android:singleLine="true"
+                 android:textCursorDrawable="@null"/>
+
+     </TableRow>
+
+ </TableLayout>

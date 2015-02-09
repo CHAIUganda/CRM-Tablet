@@ -1,5 +1,6 @@
 package org.chai.model;
 
+import java.util.List;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -29,16 +30,8 @@ public class DetailerCall {
     private String whyNotUseAntibiotics;
     private Boolean doYouStockZinc;
     private Boolean doYouStockOrs;
-    private Integer howManyZincInStock;
-    private Integer howmanyOrsInStock;
-    private String zincBrandsold;
-    private String orsBrandSold;
     private String ifNoZincWhy;
     private String ifNoOrsWhy;
-    private Double zincSellingPrice;
-    private Double orsSellingPrice;
-    private Double buyingPriceZinc;
-    private Double buyingPriceOrs;
     private String pointOfsaleMaterial;
     private String recommendationNextStep;
     private String recommendationLevel;
@@ -49,6 +42,9 @@ public class DetailerCall {
     private Boolean isHistory;
     /** Not-null value. */
     private String taskId;
+
+    private List<DetailerStock> detailerStocks;
+
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */
@@ -71,7 +67,7 @@ public class DetailerCall {
         this.uuid = uuid;
     }
 
-    public DetailerCall(String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockZinc, Boolean doYouStockOrs, Integer howManyZincInStock, Integer howmanyOrsInStock, String zincBrandsold, String orsBrandSold, String ifNoZincWhy, String ifNoOrsWhy, Double zincSellingPrice, Double orsSellingPrice, Double buyingPriceZinc, Double buyingPriceOrs, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, Boolean isNew, Boolean isHistory, String taskId) {
+    public DetailerCall(String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockZinc, Boolean doYouStockOrs, String ifNoZincWhy, String ifNoOrsWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, Boolean isNew, Boolean isHistory, String taskId) {
         this.uuid = uuid;
         this.dateOfSurvey = dateOfSurvey;
         this.diarrheaPatientsInFacility = diarrheaPatientsInFacility;
@@ -85,16 +81,8 @@ public class DetailerCall {
         this.whyNotUseAntibiotics = whyNotUseAntibiotics;
         this.doYouStockZinc = doYouStockZinc;
         this.doYouStockOrs = doYouStockOrs;
-        this.howManyZincInStock = howManyZincInStock;
-        this.howmanyOrsInStock = howmanyOrsInStock;
-        this.zincBrandsold = zincBrandsold;
-        this.orsBrandSold = orsBrandSold;
         this.ifNoZincWhy = ifNoZincWhy;
         this.ifNoOrsWhy = ifNoOrsWhy;
-        this.zincSellingPrice = zincSellingPrice;
-        this.orsSellingPrice = orsSellingPrice;
-        this.buyingPriceZinc = buyingPriceZinc;
-        this.buyingPriceOrs = buyingPriceOrs;
         this.pointOfsaleMaterial = pointOfsaleMaterial;
         this.recommendationNextStep = recommendationNextStep;
         this.recommendationLevel = recommendationLevel;
@@ -218,38 +206,6 @@ public class DetailerCall {
         this.doYouStockOrs = doYouStockOrs;
     }
 
-    public Integer getHowManyZincInStock() {
-        return howManyZincInStock;
-    }
-
-    public void setHowManyZincInStock(Integer howManyZincInStock) {
-        this.howManyZincInStock = howManyZincInStock;
-    }
-
-    public Integer getHowmanyOrsInStock() {
-        return howmanyOrsInStock;
-    }
-
-    public void setHowmanyOrsInStock(Integer howmanyOrsInStock) {
-        this.howmanyOrsInStock = howmanyOrsInStock;
-    }
-
-    public String getZincBrandsold() {
-        return zincBrandsold;
-    }
-
-    public void setZincBrandsold(String zincBrandsold) {
-        this.zincBrandsold = zincBrandsold;
-    }
-
-    public String getOrsBrandSold() {
-        return orsBrandSold;
-    }
-
-    public void setOrsBrandSold(String orsBrandSold) {
-        this.orsBrandSold = orsBrandSold;
-    }
-
     public String getIfNoZincWhy() {
         return ifNoZincWhy;
     }
@@ -264,38 +220,6 @@ public class DetailerCall {
 
     public void setIfNoOrsWhy(String ifNoOrsWhy) {
         this.ifNoOrsWhy = ifNoOrsWhy;
-    }
-
-    public Double getZincSellingPrice() {
-        return zincSellingPrice;
-    }
-
-    public void setZincSellingPrice(Double zincSellingPrice) {
-        this.zincSellingPrice = zincSellingPrice;
-    }
-
-    public Double getOrsSellingPrice() {
-        return orsSellingPrice;
-    }
-
-    public void setOrsSellingPrice(Double orsSellingPrice) {
-        this.orsSellingPrice = orsSellingPrice;
-    }
-
-    public Double getBuyingPriceZinc() {
-        return buyingPriceZinc;
-    }
-
-    public void setBuyingPriceZinc(Double buyingPriceZinc) {
-        this.buyingPriceZinc = buyingPriceZinc;
-    }
-
-    public Double getBuyingPriceOrs() {
-        return buyingPriceOrs;
-    }
-
-    public void setBuyingPriceOrs(Double buyingPriceOrs) {
-        this.buyingPriceOrs = buyingPriceOrs;
     }
 
     public String getPointOfsaleMaterial() {
@@ -398,6 +322,28 @@ public class DetailerCall {
             taskId = task.getUuid();
             task__resolvedKey = taskId;
         }
+    }
+
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<DetailerStock> getDetailerStocks() {
+        if (detailerStocks == null) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            DetailerStockDao targetDao = daoSession.getDetailerStockDao();
+            List<DetailerStock> detailerStocksNew = targetDao._queryDetailerCall_DetailerStocks(uuid);
+            synchronized (this) {
+                if(detailerStocks == null) {
+                    detailerStocks = detailerStocksNew;
+                }
+            }
+        }
+        return detailerStocks;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetDetailerStocks() {
+        detailerStocks = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

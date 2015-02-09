@@ -163,13 +163,13 @@ public abstract class BaseDetailerFragment extends BaseContainerFragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 String selected = (String) spinner.getAdapter().getItem(position);
-                LinearLayout stockfieldsLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_zinc_stock_layout);
+                LinearLayout stocTable = (LinearLayout)getActivity().findViewById(R.id.detailer_zinc_stock_table);
                 LinearLayout ifnowhyLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_if_zincnowhy_layout);
                 if ("No".equalsIgnoreCase(selected)) {
-                    stockfieldsLayout.setVisibility(View.GONE);
+                    stocTable.setVisibility(View.GONE);
                     ifnowhyLayout.setVisibility(View.VISIBLE);
                 } else {
-                    stockfieldsLayout.setVisibility(View.VISIBLE);
+                    stocTable.setVisibility(View.VISIBLE);
                     ifnowhyLayout.setVisibility(View.GONE);
                 }
             }
@@ -187,13 +187,13 @@ public abstract class BaseDetailerFragment extends BaseContainerFragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 String selected = (String) spinner.getAdapter().getItem(position);
-                LinearLayout stockfieldsLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_ors_stock_layout);
+                LinearLayout stockTable = (LinearLayout)getActivity().findViewById(R.id.detailer_ors_stock_table);
                 LinearLayout ifnowhyLayout = (LinearLayout)getActivity().findViewById(R.id.detailer_if_orsnowhy_layout);
                 if ("No".equalsIgnoreCase(selected)) {
-                    stockfieldsLayout.setVisibility(View.GONE);
+                    stockTable.setVisibility(View.GONE);
                     ifnowhyLayout.setVisibility(View.VISIBLE);
                 } else {
-                    stockfieldsLayout.setVisibility(View.VISIBLE);
+                    stockTable.setVisibility(View.VISIBLE);
                     ifnowhyLayout.setVisibility(View.GONE);
                 }
             }

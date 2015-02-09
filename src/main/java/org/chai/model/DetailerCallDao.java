@@ -41,25 +41,17 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
         public final static Property WhyNotUseAntibiotics = new Property(10, String.class, "whyNotUseAntibiotics", false, "WHY_NOT_USE_ANTIBIOTICS");
         public final static Property DoYouStockZinc = new Property(11, Boolean.class, "doYouStockZinc", false, "DO_YOU_STOCK_ZINC");
         public final static Property DoYouStockOrs = new Property(12, Boolean.class, "doYouStockOrs", false, "DO_YOU_STOCK_ORS");
-        public final static Property HowManyZincInStock = new Property(13, Integer.class, "howManyZincInStock", false, "HOW_MANY_ZINC_IN_STOCK");
-        public final static Property HowmanyOrsInStock = new Property(14, Integer.class, "howmanyOrsInStock", false, "HOWMANY_ORS_IN_STOCK");
-        public final static Property ZincBrandsold = new Property(15, String.class, "zincBrandsold", false, "ZINC_BRANDSOLD");
-        public final static Property OrsBrandSold = new Property(16, String.class, "orsBrandSold", false, "ORS_BRAND_SOLD");
-        public final static Property IfNoZincWhy = new Property(17, String.class, "ifNoZincWhy", false, "IF_NO_ZINC_WHY");
-        public final static Property IfNoOrsWhy = new Property(18, String.class, "ifNoOrsWhy", false, "IF_NO_ORS_WHY");
-        public final static Property ZincSellingPrice = new Property(19, Double.class, "zincSellingPrice", false, "ZINC_SELLING_PRICE");
-        public final static Property OrsSellingPrice = new Property(20, Double.class, "orsSellingPrice", false, "ORS_SELLING_PRICE");
-        public final static Property BuyingPriceZinc = new Property(21, Double.class, "buyingPriceZinc", false, "BUYING_PRICE_ZINC");
-        public final static Property BuyingPriceOrs = new Property(22, Double.class, "buyingPriceOrs", false, "BUYING_PRICE_ORS");
-        public final static Property PointOfsaleMaterial = new Property(23, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
-        public final static Property RecommendationNextStep = new Property(24, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
-        public final static Property RecommendationLevel = new Property(25, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
-        public final static Property TenureLength = new Property(26, Integer.class, "tenureLength", false, "TENURE_LENGTH");
-        public final static Property Latitude = new Property(27, Double.class, "latitude", false, "LATITUDE");
-        public final static Property Longitude = new Property(28, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property IsNew = new Property(29, Boolean.class, "isNew", false, "IS_NEW");
-        public final static Property IsHistory = new Property(30, Boolean.class, "isHistory", false, "IS_HISTORY");
-        public final static Property TaskId = new Property(31, String.class, "taskId", false, "TASK_ID");
+        public final static Property IfNoZincWhy = new Property(13, String.class, "ifNoZincWhy", false, "IF_NO_ZINC_WHY");
+        public final static Property IfNoOrsWhy = new Property(14, String.class, "ifNoOrsWhy", false, "IF_NO_ORS_WHY");
+        public final static Property PointOfsaleMaterial = new Property(15, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
+        public final static Property RecommendationNextStep = new Property(16, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
+        public final static Property RecommendationLevel = new Property(17, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
+        public final static Property TenureLength = new Property(18, Integer.class, "tenureLength", false, "TENURE_LENGTH");
+        public final static Property Latitude = new Property(19, Double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(20, Double.class, "longitude", false, "LONGITUDE");
+        public final static Property IsNew = new Property(21, Boolean.class, "isNew", false, "IS_NEW");
+        public final static Property IsHistory = new Property(22, Boolean.class, "isHistory", false, "IS_HISTORY");
+        public final static Property TaskId = new Property(23, String.class, "taskId", false, "TASK_ID");
     };
 
     private DaoSession daoSession;
@@ -92,25 +84,17 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
                 "'WHY_NOT_USE_ANTIBIOTICS' TEXT," + // 10: whyNotUseAntibiotics
                 "'DO_YOU_STOCK_ZINC' INTEGER," + // 11: doYouStockZinc
                 "'DO_YOU_STOCK_ORS' INTEGER," + // 12: doYouStockOrs
-                "'HOW_MANY_ZINC_IN_STOCK' INTEGER," + // 13: howManyZincInStock
-                "'HOWMANY_ORS_IN_STOCK' INTEGER," + // 14: howmanyOrsInStock
-                "'ZINC_BRANDSOLD' TEXT," + // 15: zincBrandsold
-                "'ORS_BRAND_SOLD' TEXT," + // 16: orsBrandSold
-                "'IF_NO_ZINC_WHY' TEXT," + // 17: ifNoZincWhy
-                "'IF_NO_ORS_WHY' TEXT," + // 18: ifNoOrsWhy
-                "'ZINC_SELLING_PRICE' REAL," + // 19: zincSellingPrice
-                "'ORS_SELLING_PRICE' REAL," + // 20: orsSellingPrice
-                "'BUYING_PRICE_ZINC' REAL," + // 21: buyingPriceZinc
-                "'BUYING_PRICE_ORS' REAL," + // 22: buyingPriceOrs
-                "'POINT_OFSALE_MATERIAL' TEXT," + // 23: pointOfsaleMaterial
-                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 24: recommendationNextStep
-                "'RECOMMENDATION_LEVEL' TEXT," + // 25: recommendationLevel
-                "'TENURE_LENGTH' INTEGER," + // 26: tenureLength
-                "'LATITUDE' REAL," + // 27: latitude
-                "'LONGITUDE' REAL," + // 28: longitude
-                "'IS_NEW' INTEGER," + // 29: isNew
-                "'IS_HISTORY' INTEGER," + // 30: isHistory
-                "'TASK_ID' TEXT NOT NULL );"); // 31: taskId
+                "'IF_NO_ZINC_WHY' TEXT," + // 13: ifNoZincWhy
+                "'IF_NO_ORS_WHY' TEXT," + // 14: ifNoOrsWhy
+                "'POINT_OFSALE_MATERIAL' TEXT," + // 15: pointOfsaleMaterial
+                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 16: recommendationNextStep
+                "'RECOMMENDATION_LEVEL' TEXT," + // 17: recommendationLevel
+                "'TENURE_LENGTH' INTEGER," + // 18: tenureLength
+                "'LATITUDE' REAL," + // 19: latitude
+                "'LONGITUDE' REAL," + // 20: longitude
+                "'IS_NEW' INTEGER," + // 21: isNew
+                "'IS_HISTORY' INTEGER," + // 22: isHistory
+                "'TASK_ID' TEXT NOT NULL );"); // 23: taskId
     }
 
     /** Drops the underlying database table. */
@@ -185,96 +169,56 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
             stmt.bindLong(13, doYouStockOrs ? 1l: 0l);
         }
  
-        Integer howManyZincInStock = entity.getHowManyZincInStock();
-        if (howManyZincInStock != null) {
-            stmt.bindLong(14, howManyZincInStock);
-        }
- 
-        Integer howmanyOrsInStock = entity.getHowmanyOrsInStock();
-        if (howmanyOrsInStock != null) {
-            stmt.bindLong(15, howmanyOrsInStock);
-        }
- 
-        String zincBrandsold = entity.getZincBrandsold();
-        if (zincBrandsold != null) {
-            stmt.bindString(16, zincBrandsold);
-        }
- 
-        String orsBrandSold = entity.getOrsBrandSold();
-        if (orsBrandSold != null) {
-            stmt.bindString(17, orsBrandSold);
-        }
- 
         String ifNoZincWhy = entity.getIfNoZincWhy();
         if (ifNoZincWhy != null) {
-            stmt.bindString(18, ifNoZincWhy);
+            stmt.bindString(14, ifNoZincWhy);
         }
  
         String ifNoOrsWhy = entity.getIfNoOrsWhy();
         if (ifNoOrsWhy != null) {
-            stmt.bindString(19, ifNoOrsWhy);
-        }
- 
-        Double zincSellingPrice = entity.getZincSellingPrice();
-        if (zincSellingPrice != null) {
-            stmt.bindDouble(20, zincSellingPrice);
-        }
- 
-        Double orsSellingPrice = entity.getOrsSellingPrice();
-        if (orsSellingPrice != null) {
-            stmt.bindDouble(21, orsSellingPrice);
-        }
- 
-        Double buyingPriceZinc = entity.getBuyingPriceZinc();
-        if (buyingPriceZinc != null) {
-            stmt.bindDouble(22, buyingPriceZinc);
-        }
- 
-        Double buyingPriceOrs = entity.getBuyingPriceOrs();
-        if (buyingPriceOrs != null) {
-            stmt.bindDouble(23, buyingPriceOrs);
+            stmt.bindString(15, ifNoOrsWhy);
         }
  
         String pointOfsaleMaterial = entity.getPointOfsaleMaterial();
         if (pointOfsaleMaterial != null) {
-            stmt.bindString(24, pointOfsaleMaterial);
+            stmt.bindString(16, pointOfsaleMaterial);
         }
  
         String recommendationNextStep = entity.getRecommendationNextStep();
         if (recommendationNextStep != null) {
-            stmt.bindString(25, recommendationNextStep);
+            stmt.bindString(17, recommendationNextStep);
         }
  
         String recommendationLevel = entity.getRecommendationLevel();
         if (recommendationLevel != null) {
-            stmt.bindString(26, recommendationLevel);
+            stmt.bindString(18, recommendationLevel);
         }
  
         Integer tenureLength = entity.getTenureLength();
         if (tenureLength != null) {
-            stmt.bindLong(27, tenureLength);
+            stmt.bindLong(19, tenureLength);
         }
  
         Double latitude = entity.getLatitude();
         if (latitude != null) {
-            stmt.bindDouble(28, latitude);
+            stmt.bindDouble(20, latitude);
         }
  
         Double longitude = entity.getLongitude();
         if (longitude != null) {
-            stmt.bindDouble(29, longitude);
+            stmt.bindDouble(21, longitude);
         }
  
         Boolean isNew = entity.getIsNew();
         if (isNew != null) {
-            stmt.bindLong(30, isNew ? 1l: 0l);
+            stmt.bindLong(22, isNew ? 1l: 0l);
         }
  
         Boolean isHistory = entity.getIsHistory();
         if (isHistory != null) {
-            stmt.bindLong(31, isHistory ? 1l: 0l);
+            stmt.bindLong(23, isHistory ? 1l: 0l);
         }
-        stmt.bindString(32, entity.getTaskId());
+        stmt.bindString(24, entity.getTaskId());
     }
 
     @Override
@@ -306,25 +250,17 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // whyNotUseAntibiotics
             cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0, // doYouStockZinc
             cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0, // doYouStockOrs
-            cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13), // howManyZincInStock
-            cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14), // howmanyOrsInStock
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // zincBrandsold
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // orsBrandSold
-            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // ifNoZincWhy
-            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // ifNoOrsWhy
-            cursor.isNull(offset + 19) ? null : cursor.getDouble(offset + 19), // zincSellingPrice
-            cursor.isNull(offset + 20) ? null : cursor.getDouble(offset + 20), // orsSellingPrice
-            cursor.isNull(offset + 21) ? null : cursor.getDouble(offset + 21), // buyingPriceZinc
-            cursor.isNull(offset + 22) ? null : cursor.getDouble(offset + 22), // buyingPriceOrs
-            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // pointOfsaleMaterial
-            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // recommendationNextStep
-            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // recommendationLevel
-            cursor.isNull(offset + 26) ? null : cursor.getInt(offset + 26), // tenureLength
-            cursor.isNull(offset + 27) ? null : cursor.getDouble(offset + 27), // latitude
-            cursor.isNull(offset + 28) ? null : cursor.getDouble(offset + 28), // longitude
-            cursor.isNull(offset + 29) ? null : cursor.getShort(offset + 29) != 0, // isNew
-            cursor.isNull(offset + 30) ? null : cursor.getShort(offset + 30) != 0, // isHistory
-            cursor.getString(offset + 31) // taskId
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // ifNoZincWhy
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // ifNoOrsWhy
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // pointOfsaleMaterial
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // recommendationNextStep
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // recommendationLevel
+            cursor.isNull(offset + 18) ? null : cursor.getInt(offset + 18), // tenureLength
+            cursor.isNull(offset + 19) ? null : cursor.getDouble(offset + 19), // latitude
+            cursor.isNull(offset + 20) ? null : cursor.getDouble(offset + 20), // longitude
+            cursor.isNull(offset + 21) ? null : cursor.getShort(offset + 21) != 0, // isNew
+            cursor.isNull(offset + 22) ? null : cursor.getShort(offset + 22) != 0, // isHistory
+            cursor.getString(offset + 23) // taskId
         );
         return entity;
     }
@@ -345,25 +281,17 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
         entity.setWhyNotUseAntibiotics(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
         entity.setDoYouStockZinc(cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0);
         entity.setDoYouStockOrs(cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0);
-        entity.setHowManyZincInStock(cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13));
-        entity.setHowmanyOrsInStock(cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14));
-        entity.setZincBrandsold(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setOrsBrandSold(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setIfNoZincWhy(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
-        entity.setIfNoOrsWhy(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
-        entity.setZincSellingPrice(cursor.isNull(offset + 19) ? null : cursor.getDouble(offset + 19));
-        entity.setOrsSellingPrice(cursor.isNull(offset + 20) ? null : cursor.getDouble(offset + 20));
-        entity.setBuyingPriceZinc(cursor.isNull(offset + 21) ? null : cursor.getDouble(offset + 21));
-        entity.setBuyingPriceOrs(cursor.isNull(offset + 22) ? null : cursor.getDouble(offset + 22));
-        entity.setPointOfsaleMaterial(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
-        entity.setRecommendationNextStep(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
-        entity.setRecommendationLevel(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
-        entity.setTenureLength(cursor.isNull(offset + 26) ? null : cursor.getInt(offset + 26));
-        entity.setLatitude(cursor.isNull(offset + 27) ? null : cursor.getDouble(offset + 27));
-        entity.setLongitude(cursor.isNull(offset + 28) ? null : cursor.getDouble(offset + 28));
-        entity.setIsNew(cursor.isNull(offset + 29) ? null : cursor.getShort(offset + 29) != 0);
-        entity.setIsHistory(cursor.isNull(offset + 30) ? null : cursor.getShort(offset + 30) != 0);
-        entity.setTaskId(cursor.getString(offset + 31));
+        entity.setIfNoZincWhy(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setIfNoOrsWhy(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setPointOfsaleMaterial(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setRecommendationNextStep(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setRecommendationLevel(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setTenureLength(cursor.isNull(offset + 18) ? null : cursor.getInt(offset + 18));
+        entity.setLatitude(cursor.isNull(offset + 19) ? null : cursor.getDouble(offset + 19));
+        entity.setLongitude(cursor.isNull(offset + 20) ? null : cursor.getDouble(offset + 20));
+        entity.setIsNew(cursor.isNull(offset + 21) ? null : cursor.getShort(offset + 21) != 0);
+        entity.setIsHistory(cursor.isNull(offset + 22) ? null : cursor.getShort(offset + 22) != 0);
+        entity.setTaskId(cursor.getString(offset + 23));
      }
     
     /** @inheritdoc */
