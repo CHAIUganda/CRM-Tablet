@@ -32,8 +32,8 @@ public class DetailerStockDao extends AbstractDao<DetailerStock, String> {
         public final static Property Brand = new Property(1, String.class, "brand", false, "BRAND");
         public final static Property Category = new Property(2, String.class, "category", false, "CATEGORY");
         public final static Property StockLevel = new Property(3, double.class, "stockLevel", false, "STOCK_LEVEL");
-        public final static Property BuyingPrice = new Property(4, Integer.class, "buyingPrice", false, "BUYING_PRICE");
-        public final static Property SellingPrice = new Property(5, Integer.class, "sellingPrice", false, "SELLING_PRICE");
+        public final static Property BuyingPrice = new Property(4, Double.class, "buyingPrice", false, "BUYING_PRICE");
+        public final static Property SellingPrice = new Property(5, Double.class, "sellingPrice", false, "SELLING_PRICE");
         public final static Property DetailerId = new Property(6, String.class, "detailerId", false, "DETAILER_ID");
     };
 
@@ -58,8 +58,8 @@ public class DetailerStockDao extends AbstractDao<DetailerStock, String> {
                 "'BRAND' TEXT NOT NULL ," + // 1: brand
                 "'CATEGORY' TEXT NOT NULL ," + // 2: category
                 "'STOCK_LEVEL' REAL NOT NULL ," + // 3: stockLevel
-                "'BUYING_PRICE' INTEGER," + // 4: buyingPrice
-                "'SELLING_PRICE' INTEGER," + // 5: sellingPrice
+                "'BUYING_PRICE' REAL," + // 4: buyingPrice
+                "'SELLING_PRICE' REAL," + // 5: sellingPrice
                 "'DETAILER_ID' TEXT NOT NULL );"); // 6: detailerId
     }
 
@@ -78,14 +78,14 @@ public class DetailerStockDao extends AbstractDao<DetailerStock, String> {
         stmt.bindString(3, entity.getCategory());
         stmt.bindDouble(4, entity.getStockLevel());
  
-        Integer buyingPrice = entity.getBuyingPrice();
+        Double buyingPrice = entity.getBuyingPrice();
         if (buyingPrice != null) {
-            stmt.bindLong(5, buyingPrice);
+            stmt.bindDouble(5, buyingPrice);
         }
  
-        Integer sellingPrice = entity.getSellingPrice();
+        Double sellingPrice = entity.getSellingPrice();
         if (sellingPrice != null) {
-            stmt.bindLong(6, sellingPrice);
+            stmt.bindDouble(6, sellingPrice);
         }
         stmt.bindString(7, entity.getDetailerId());
     }
@@ -110,8 +110,8 @@ public class DetailerStockDao extends AbstractDao<DetailerStock, String> {
             cursor.getString(offset + 1), // brand
             cursor.getString(offset + 2), // category
             cursor.getDouble(offset + 3), // stockLevel
-            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // buyingPrice
-            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // sellingPrice
+            cursor.isNull(offset + 4) ? null : cursor.getDouble(offset + 4), // buyingPrice
+            cursor.isNull(offset + 5) ? null : cursor.getDouble(offset + 5), // sellingPrice
             cursor.getString(offset + 6) // detailerId
         );
         return entity;
@@ -124,8 +124,8 @@ public class DetailerStockDao extends AbstractDao<DetailerStock, String> {
         entity.setBrand(cursor.getString(offset + 1));
         entity.setCategory(cursor.getString(offset + 2));
         entity.setStockLevel(cursor.getDouble(offset + 3));
-        entity.setBuyingPrice(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setSellingPrice(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setBuyingPrice(cursor.isNull(offset + 4) ? null : cursor.getDouble(offset + 4));
+        entity.setSellingPrice(cursor.isNull(offset + 5) ? null : cursor.getDouble(offset + 5));
         entity.setDetailerId(cursor.getString(offset + 6));
      }
     

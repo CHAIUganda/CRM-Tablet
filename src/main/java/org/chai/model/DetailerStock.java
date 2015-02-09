@@ -22,8 +22,8 @@ public class DetailerStock {
     /** Not-null value. */
     private String category;
     private double stockLevel;
-    private Integer buyingPrice;
-    private Integer sellingPrice;
+    private Double buyingPrice;
+    private Double sellingPrice;
     /** Not-null value. */
     private String detailerId;
 
@@ -41,7 +41,6 @@ public class DetailerStock {
     private DetailerCall detailerCall;
     @JsonIgnore
     private String detailerCall__resolvedKey;
-
     // KEEP FIELDS END
 
     public DetailerStock() {
@@ -51,7 +50,7 @@ public class DetailerStock {
         this.uuid = uuid;
     }
 
-    public DetailerStock(String uuid, String brand, String category, double stockLevel, Integer buyingPrice, Integer sellingPrice, String detailerId) {
+    public DetailerStock(String uuid, String brand, String category, double stockLevel, Double buyingPrice, Double sellingPrice, String detailerId) {
         this.uuid = uuid;
         this.brand = brand;
         this.category = category;
@@ -105,19 +104,19 @@ public class DetailerStock {
         this.stockLevel = stockLevel;
     }
 
-    public Integer getBuyingPrice() {
+    public Double getBuyingPrice() {
         return buyingPrice;
     }
 
-    public void setBuyingPrice(Integer buyingPrice) {
+    public void setBuyingPrice(Double buyingPrice) {
         this.buyingPrice = buyingPrice;
     }
 
-    public Integer getSellingPrice() {
+    public Double getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(Integer sellingPrice) {
+    public void setSellingPrice(Double sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
 

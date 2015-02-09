@@ -63,6 +63,7 @@
              android:layout_margin="1dp">
 
          <TextView
+                 android:id="@+id/oralyte_lbl"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_marginRight="10dp"
@@ -126,6 +127,7 @@
              android:layout_margin="1dp">
 
          <TextView
+                 android:id="@+id/restors_lbl"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_marginRight="10dp"
@@ -189,6 +191,7 @@
              android:layout_margin="1dp">
 
          <TextView
+                 android:id="@+id/revive_lbl"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_marginRight="10dp"

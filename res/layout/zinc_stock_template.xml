@@ -65,6 +65,7 @@
              android:layout_margin="1dp">
 
          <TextView
+                 android:id="@+id/dtzinc_lbl"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_marginRight="10dp"
@@ -73,7 +74,7 @@
                  android:textStyle="bold"/>
 
          <EditText
-                 android:id="@+id/dtzinclevel_level"
+                 android:id="@+id/dtzinc_stock_level"
                  style="@style/myEditText"
                  android:layout_marginRight="10dp"
                  android:inputType="number"
@@ -128,6 +129,7 @@
              android:layout_margin="1dp">
 
          <TextView
+                 android:id="@+id/zincocet_lbl"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_marginRight="10dp"
@@ -191,6 +193,7 @@
              android:layout_margin="1dp">
 
          <TextView
+                 android:id="@+id/zinkid_lbl"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_marginRight="10dp"
@@ -254,6 +257,7 @@
              android:layout_margin="1dp">
 
          <TextView
+                 android:id="@+id/sulphate_lbl"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_marginRight="10dp"
@@ -317,6 +321,7 @@
              android:layout_margin="1dp">
 
          <TextView
+                 android:id="@+id/zincos_lbl"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_marginRight="10dp"
