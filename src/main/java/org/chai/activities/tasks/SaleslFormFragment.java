@@ -53,9 +53,6 @@ public class SaleslFormFragment extends Fragment {
     private Customer salesCustomer;
     private List<Product> products;
     private boolean isUpdate = false;
-    private Button pointOfSalesOptionsButton;
-    private CharSequence[] pointOfSalesOptions;
-    private boolean[] selections;
 
     private GPSTracker gpsTracker;
     private double capturedLatitude;
@@ -106,19 +103,13 @@ public class SaleslFormFragment extends Fragment {
             stockSpinnerList.add(stockProductSpinner);
             stockQuantityFlds.add((EditText)view.findViewById(R.id.sales_quantity));
 
-            pointOfSalesOptionsButton = (Button)view.findViewById(R.id.sales_point_of_sale);
-            pointOfSalesOptions = getResources().getStringArray(R.array.point_of_sale_material);
-            selections = new boolean[pointOfSalesOptions.length];
+            CustomMultSelectDropDown pointOfSaleMaterials = (CustomMultSelectDropDown)view.findViewById(R.id.sales_point_of_sale);
+            pointOfSaleMaterials.setStringOptions(getResources().getStringArray(R.array.point_of_sale_material));
+
 
             CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown)view.findViewById(R.id.sales_next_step_recommendation);
             recommendationNextStep.setStringOptions(getResources().getStringArray(R.array.recommendation_nextstep));
 
-            pointOfSalesOptionsButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showPointOfSaleDialog();
-                }
-            });
             Button addButton = (Button)view.findViewById(R.id.sales_add_more);
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -149,7 +140,6 @@ public class SaleslFormFragment extends Fragment {
             });
             setRequiredFields(view);
             manageDoyouStockZincResponses(view);
-            managePointOfSaleOthers(view, false);
             bindSalesInfoToUI(view);
             setGpsWidget(view);
 
@@ -196,8 +186,6 @@ public class SaleslFormFragment extends Fragment {
             CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown) view.findViewById(R.id.sales_next_step_recommendation);
             recommendationNextStep.setText(saleCallData.getRecommendationNextStep());
 
-            Spinner recommendationNextLevel = (Spinner) view.findViewById(R.id.sales_recommendation_level);
-            Utils.setSpinnerSelection(recommendationNextLevel, saleCallData.getRecommendationLevel());
             bindSalesDataToUi(view);
             bindStokeDataToUi(view);
         }
@@ -323,10 +311,9 @@ public class SaleslFormFragment extends Fragment {
                 saleCallData.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString()));
             }
             saleCallData.setIfNoWhy(((EditText) getActivity().findViewById(R.id.sales_if_no_why)).getText().toString()
-                    +","+((EditText)getActivity().findViewById(R.id.sales_point_of_sale_others)).getText().toString());
+                    +","+((EditText)getActivity().findViewById(R.id.sales_if_no_why)).getText().toString());
             saleCallData.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.sales_point_of_sale)).getText().toString());
             saleCallData.setRecommendationNextStep(((Button) getActivity().findViewById(R.id.sales_next_step_recommendation)).getText().toString());
-            saleCallData.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.sales_recommendation_level)).getSelectedItem().toString());
             saleCallData.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.sales_government_approval)).getSelectedItem().toString());
             saleCallData.setTaskId(callDataTask.getUuid());
             saleCallData.setOrderId(callDataTask.getUuid());
@@ -444,15 +431,6 @@ public class SaleslFormFragment extends Fragment {
         });
     }
 
-    private void managePointOfSaleOthers(View view,boolean isShow) {
-        LinearLayout pointOfSalesOthersLayout = (LinearLayout)view.findViewById(R.id.sales_point_of_sale_others_layout);
-        if (isShow) {
-            pointOfSalesOthersLayout.setVisibility(View.VISIBLE);
-        } else {
-            pointOfSalesOthersLayout.setVisibility(View.GONE);
-        }
-    }
-
     private boolean isNewSalesCall() {
         if (saleCallData == null || saleCallData.getUuid() == null) {
             return true;
@@ -487,50 +465,6 @@ public class SaleslFormFragment extends Fragment {
             }
         }
         return true;
-    }
-
-    protected void showPointOfSaleDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-        dialog.setTitle("Point of Sale Material")
-                .setMultiChoiceItems(pointOfSalesOptions,selections,new DialogSelectionClickHandler())
-                .setPositiveButton("OK",new DialogButtonClickHandler());
-        dialog.show();
-    }
-
-
-    public class DialogButtonClickHandler implements DialogInterface.OnClickListener
-    {
-        public void onClick( DialogInterface dialog, int clicked )
-        {
-            switch( clicked )
-            {
-                case DialogInterface.BUTTON_POSITIVE:
-                    setSelectedOptions();
-                    break;
-            }
-        }
-    }
-
-    public class DialogSelectionClickHandler implements DialogInterface.OnMultiChoiceClickListener
-    {
-        public void onClick( DialogInterface dialog, int clicked, boolean selected )
-        {
-            Log.i( "ME================================", pointOfSalesOptions[clicked] + " selected: " + selected );
-        }
-
-    }
-
-    private void setSelectedOptions() {
-        managePointOfSaleOthers(getView(),false);
-        pointOfSalesOptionsButton.setText("");
-        for( int i = 0; i < pointOfSalesOptions.length; i++ ){
-            Log.i( "ME", pointOfSalesOptions[ i ] + " selected: " + selections[i] );
-            if (selections[i] && !pointOfSalesOptions[i].toString().equalsIgnoreCase("others")) {
-                pointOfSalesOptionsButton.setText((pointOfSalesOptionsButton.getText().toString().equals("")?"":pointOfSalesOptionsButton.getText() + ",") + pointOfSalesOptions[i]);
-            }else  if (selections[i] && pointOfSalesOptions[i].toString().equalsIgnoreCase("others")){
-                managePointOfSaleOthers(getView(),true);
-            }
-        }
     }
 
     protected void setGpsWidget(final View view1) {

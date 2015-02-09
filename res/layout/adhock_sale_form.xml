@@ -328,11 +328,11 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="9.Point of sale materials"
+                    android:text="9.Point of sales materials dropped"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
-            <Button
+            <org.chai.util.CustomMultSelectDropDown
                     android:id="@+id/adhock_sale_point_of_sale"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
@@ -384,29 +384,6 @@
                     android:layout_height="wrap_content"
                     android:prompt="@string/selectItem"
                     android:layout_width="fill_parent"
-                    android:background="@drawable/btn_dropdown"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="11.What recommendation level would you give the customer"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="bold"/>
-
-            <Spinner
-                    android:id="@+id/adhock_sale_recommendation_level"
-                    android:layout_height="wrap_content"
-                    android:prompt="@string/selectItem"
-                    android:layout_width="fill_parent"
-                    android:entries="@array/ratings"
                     android:background="@drawable/btn_dropdown"/>
 
         </LinearLayout>

@@ -46,9 +46,6 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
     private Customer salesCustomer;
     private List<Product> products;
     private boolean isUpdate = false;
-    private Button pointOfSalesOptionsButton;
-    private CharSequence[] pointOfSalesOptions;
-    private boolean[] selections;
 
     private GPSTracker gpsTracker;
     private double capturedLatitude;
@@ -84,19 +81,11 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
                 }
             });
 
-            pointOfSalesOptionsButton = (Button)view.findViewById(R.id.adhock_sale_point_of_sale);
-            pointOfSalesOptions = getResources().getStringArray(R.array.point_of_sale_material);
-            selections = new boolean[pointOfSalesOptions.length];
+            CustomMultSelectDropDown pointOfSaleMaterials = (CustomMultSelectDropDown)view.findViewById(R.id.adhock_sale_point_of_sale);
+            pointOfSaleMaterials.setStringOptions(getResources().getStringArray(R.array.point_of_sale_material));
 
             CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown)view.findViewById(R.id.adhock_sale_next_step_recommendation);
             recommendationNextStep.setStringOptions(getResources().getStringArray(R.array.recommendation_nextstep));
-
-            pointOfSalesOptionsButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                  showPointOfSaleDialog();
-                }
-            });
 
             Button addButton = (Button)view.findViewById(R.id.adhock_sale_add_more);
             addButton.setOnClickListener(new View.OnClickListener() {
@@ -134,16 +123,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             String saleId = bundle.getString("saleId");
             bindSalesInfoToUI(saleId, view);
         }
-        managePointOfSaleOthers(view,false);
         return view ;
-    }
-
-    protected void showPointOfSaleDialog() {
-       AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-        dialog.setTitle("Point of Sale Material")
-                .setMultiChoiceItems(pointOfSalesOptions,selections,new DialogSelectionClickHandler())
-                .setPositiveButton("OK",new DialogButtonClickHandler());
-        dialog.show();
     }
 
     private void initialiseGreenDao() {
@@ -184,8 +164,6 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             CustomMultSelectDropDown recommendationNextStep = (CustomMultSelectDropDown) view.findViewById(R.id.adhock_sale_next_step_recommendation);
             recommendationNextStep.setText(saleInstance.getRecommendationNextStep());
 
-            Spinner recommendationNextLevel = (Spinner) view.findViewById(R.id.adhock_sale_recommendation_level);
-            Utils.setSpinnerSelection(recommendationNextLevel, saleInstance.getRecommendationLevel());
             bindSalesDataToUi(view);
         }
     }
@@ -317,7 +295,6 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         saleInstance.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.adhock_sale_point_of_sale)).getText().toString()
                 +","+((EditText)getActivity().findViewById(R.id.adhoc_point_of_sale_others)).getText().toString());
         saleInstance.setRecommendationNextStep(((CustomMultSelectDropDown) getActivity().findViewById(R.id.adhock_sale_next_step_recommendation)).getText().toString());
-        saleInstance.setRecommendationLevel(((Spinner) getActivity().findViewById(R.id.adhock_sale_recommendation_level)).getSelectedItem().toString());
         saleInstance.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.adhock_sale_government_approval)).getSelectedItem().toString());
         saleInstance.setCustomerId(salesCustomer.getUuid());
         saleInstance.setLatitude(capturedLatitude);
@@ -370,50 +347,6 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_howmany_in_stock_zinc_view));
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_howmany_in_stock_ors_view));
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_customer_lbl));
-    }
-
-    public class DialogButtonClickHandler implements DialogInterface.OnClickListener
-    {
-        public void onClick( DialogInterface dialog, int clicked )
-        {
-            switch( clicked )
-            {
-                case DialogInterface.BUTTON_POSITIVE:
-                    setSelectedOptions();
-                    break;
-            }
-        }
-    }
-
-    public class DialogSelectionClickHandler implements DialogInterface.OnMultiChoiceClickListener
-    {
-        public void onClick( DialogInterface dialog, int clicked, boolean selected )
-        {
-            Log.i( "ME================================", pointOfSalesOptions[clicked] + " selected: " + selected );
-        }
-
-    }
-
-    private void setSelectedOptions() {
-        managePointOfSaleOthers(getView(),false);
-        pointOfSalesOptionsButton.setText("");
-        for( int i = 0; i < pointOfSalesOptions.length; i++ ){
-            Log.i( "ME", pointOfSalesOptions[ i ] + " selected: " + selections[i] );
-            if (selections[i] && !pointOfSalesOptions[i].toString().equalsIgnoreCase("others")) {
-                pointOfSalesOptionsButton.setText((pointOfSalesOptionsButton.getText().toString().equals("")?"":pointOfSalesOptionsButton.getText() + ",") + pointOfSalesOptions[i]);
-            }else  if (selections[i] && pointOfSalesOptions[i].toString().equalsIgnoreCase("others")){
-                managePointOfSaleOthers(getView(),true);
-            }
-        }
-    }
-
-    private void managePointOfSaleOthers(View view,boolean isShow) {
-        LinearLayout pointOfSalesOthersLayout = (LinearLayout)view.findViewById(R.id.adhoc_point_of_sale_others_layout);
-        if (isShow) {
-            pointOfSalesOthersLayout.setVisibility(View.VISIBLE);
-        } else {
-            pointOfSalesOthersLayout.setVisibility(View.GONE);
-        }
     }
 
     private void setGpsWidget(final View view1) {

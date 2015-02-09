@@ -446,42 +446,16 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6.Point of sale materials"
+                    android:text="6.Point of sales materials dropped"
                     android:textColor="@color/list_main_text_color"
                     android:textStyle="bold"/>
 
-            <Button
+            <org.chai.util.CustomMultSelectDropDown
                     android:id="@+id/sales_point_of_sale"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:background="@drawable/btn_dropdown"/>
 
-        </LinearLayout>
-
-        <LinearLayout
-                android:id="@+id/sales_point_of_sale_others_layout"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Others Specify"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="bold"/>
-            <EditText
-                    android:id="@+id/sales_point_of_sale_others"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="@dimen/list_sub_text_size"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="italic"
-                    android:background="@drawable/bordertextfield"
-                    android:singleLine="true"
-                    android:textCursorDrawable="@null"/>
         </LinearLayout>
 
         <LinearLayout
@@ -505,30 +479,6 @@
                     android:background="@drawable/btn_dropdown"/>
 
         </LinearLayout>
-
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="8.What recommendation level would you give the customer"
-                    android:textColor="@color/list_main_text_color"
-                    android:textStyle="bold"/>
-
-            <Spinner
-                    android:id="@+id/sales_recommendation_level"
-                    android:layout_height="wrap_content"
-                    android:prompt="@string/selectItem"
-                    android:layout_width="fill_parent"
-                    android:entries="@array/ratings"
-                    android:background="@drawable/btn_dropdown"/>
-
-        </LinearLayout>
-
 
         <Button
                 android:id="@+id/sales_save_sale"
