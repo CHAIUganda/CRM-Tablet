@@ -181,6 +181,8 @@ public class TaskViewOnMapFragment extends Fragment {
         //FIX ME should get center point for all these points
         if(!items.isEmpty()){
             this.mapController.animateTo(items.get(0).getPoint());
+        }else{
+            this.mapController.animateTo(new GeoPoint(MAP_DEFAULT_LATITUDE,MAP_DEFAULT_LONGITUDE));
         }
         this.mapView.invalidate();
 
