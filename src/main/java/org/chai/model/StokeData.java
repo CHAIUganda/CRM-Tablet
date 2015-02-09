@@ -47,7 +47,6 @@ public class StokeData {
     private AdhockSale adhockSale;
     @JsonIgnore
     private String adhockSale__resolvedKey;
-
     // KEEP FIELDS END
 
     public StokeData() {

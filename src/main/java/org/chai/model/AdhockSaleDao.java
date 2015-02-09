@@ -31,16 +31,13 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
         public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
         public final static Property DateOfSale = new Property(1, java.util.Date.class, "dateOfSale", false, "DATE_OF_SALE");
         public final static Property DoYouStockOrsZinc = new Property(2, Boolean.class, "doYouStockOrsZinc", false, "DO_YOU_STOCK_ORS_ZINC");
-        public final static Property HowManyZincInStock = new Property(3, Integer.class, "howManyZincInStock", false, "HOW_MANY_ZINC_IN_STOCK");
-        public final static Property HowManyOrsInStock = new Property(4, Integer.class, "howManyOrsInStock", false, "HOW_MANY_ORS_IN_STOCK");
-        public final static Property IfNoWhy = new Property(5, String.class, "ifNoWhy", false, "IF_NO_WHY");
-        public final static Property PointOfsaleMaterial = new Property(6, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
-        public final static Property RecommendationNextStep = new Property(7, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
-        public final static Property RecommendationLevel = new Property(8, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
-        public final static Property GovernmentApproval = new Property(9, String.class, "governmentApproval", false, "GOVERNMENT_APPROVAL");
-        public final static Property Latitude = new Property(10, Double.class, "latitude", false, "LATITUDE");
-        public final static Property Longitude = new Property(11, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property CustomerId = new Property(12, String.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property IfNoWhy = new Property(3, String.class, "ifNoWhy", false, "IF_NO_WHY");
+        public final static Property PointOfsaleMaterial = new Property(4, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
+        public final static Property RecommendationNextStep = new Property(5, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
+        public final static Property GovernmentApproval = new Property(6, String.class, "governmentApproval", false, "GOVERNMENT_APPROVAL");
+        public final static Property Latitude = new Property(7, Double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(8, Double.class, "longitude", false, "LONGITUDE");
+        public final static Property CustomerId = new Property(9, String.class, "customerId", false, "CUSTOMER_ID");
     };
 
     private DaoSession daoSession;
@@ -63,16 +60,13 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
                 "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'DATE_OF_SALE' INTEGER NOT NULL ," + // 1: dateOfSale
                 "'DO_YOU_STOCK_ORS_ZINC' INTEGER," + // 2: doYouStockOrsZinc
-                "'HOW_MANY_ZINC_IN_STOCK' INTEGER," + // 3: howManyZincInStock
-                "'HOW_MANY_ORS_IN_STOCK' INTEGER," + // 4: howManyOrsInStock
-                "'IF_NO_WHY' TEXT," + // 5: ifNoWhy
-                "'POINT_OFSALE_MATERIAL' TEXT," + // 6: pointOfsaleMaterial
-                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 7: recommendationNextStep
-                "'RECOMMENDATION_LEVEL' TEXT," + // 8: recommendationLevel
-                "'GOVERNMENT_APPROVAL' TEXT," + // 9: governmentApproval
-                "'LATITUDE' REAL," + // 10: latitude
-                "'LONGITUDE' REAL," + // 11: longitude
-                "'CUSTOMER_ID' TEXT NOT NULL );"); // 12: customerId
+                "'IF_NO_WHY' TEXT," + // 3: ifNoWhy
+                "'POINT_OFSALE_MATERIAL' TEXT," + // 4: pointOfsaleMaterial
+                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 5: recommendationNextStep
+                "'GOVERNMENT_APPROVAL' TEXT," + // 6: governmentApproval
+                "'LATITUDE' REAL," + // 7: latitude
+                "'LONGITUDE' REAL," + // 8: longitude
+                "'CUSTOMER_ID' TEXT NOT NULL );"); // 9: customerId
     }
 
     /** Drops the underlying database table. */
@@ -93,51 +87,36 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
             stmt.bindLong(3, doYouStockOrsZinc ? 1l: 0l);
         }
  
-        Integer howManyZincInStock = entity.getHowManyZincInStock();
-        if (howManyZincInStock != null) {
-            stmt.bindLong(4, howManyZincInStock);
-        }
- 
-        Integer howManyOrsInStock = entity.getHowManyOrsInStock();
-        if (howManyOrsInStock != null) {
-            stmt.bindLong(5, howManyOrsInStock);
-        }
- 
         String ifNoWhy = entity.getIfNoWhy();
         if (ifNoWhy != null) {
-            stmt.bindString(6, ifNoWhy);
+            stmt.bindString(4, ifNoWhy);
         }
  
         String pointOfsaleMaterial = entity.getPointOfsaleMaterial();
         if (pointOfsaleMaterial != null) {
-            stmt.bindString(7, pointOfsaleMaterial);
+            stmt.bindString(5, pointOfsaleMaterial);
         }
  
         String recommendationNextStep = entity.getRecommendationNextStep();
         if (recommendationNextStep != null) {
-            stmt.bindString(8, recommendationNextStep);
-        }
- 
-        String recommendationLevel = entity.getRecommendationLevel();
-        if (recommendationLevel != null) {
-            stmt.bindString(9, recommendationLevel);
+            stmt.bindString(6, recommendationNextStep);
         }
  
         String governmentApproval = entity.getGovernmentApproval();
         if (governmentApproval != null) {
-            stmt.bindString(10, governmentApproval);
+            stmt.bindString(7, governmentApproval);
         }
  
         Double latitude = entity.getLatitude();
         if (latitude != null) {
-            stmt.bindDouble(11, latitude);
+            stmt.bindDouble(8, latitude);
         }
  
         Double longitude = entity.getLongitude();
         if (longitude != null) {
-            stmt.bindDouble(12, longitude);
+            stmt.bindDouble(9, longitude);
         }
-        stmt.bindString(13, entity.getCustomerId());
+        stmt.bindString(10, entity.getCustomerId());
     }
 
     @Override
@@ -159,16 +138,13 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
             cursor.getString(offset + 0), // uuid
             new java.util.Date(cursor.getLong(offset + 1)), // dateOfSale
             cursor.isNull(offset + 2) ? null : cursor.getShort(offset + 2) != 0, // doYouStockOrsZinc
-            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // howManyZincInStock
-            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // howManyOrsInStock
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // ifNoWhy
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // pointOfsaleMaterial
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // recommendationNextStep
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // recommendationLevel
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // governmentApproval
-            cursor.isNull(offset + 10) ? null : cursor.getDouble(offset + 10), // latitude
-            cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11), // longitude
-            cursor.getString(offset + 12) // customerId
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // ifNoWhy
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // pointOfsaleMaterial
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // recommendationNextStep
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // governmentApproval
+            cursor.isNull(offset + 7) ? null : cursor.getDouble(offset + 7), // latitude
+            cursor.isNull(offset + 8) ? null : cursor.getDouble(offset + 8), // longitude
+            cursor.getString(offset + 9) // customerId
         );
         return entity;
     }
@@ -179,16 +155,13 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
         entity.setUuid(cursor.getString(offset + 0));
         entity.setDateOfSale(new java.util.Date(cursor.getLong(offset + 1)));
         entity.setDoYouStockOrsZinc(cursor.isNull(offset + 2) ? null : cursor.getShort(offset + 2) != 0);
-        entity.setHowManyZincInStock(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
-        entity.setHowManyOrsInStock(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setIfNoWhy(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setPointOfsaleMaterial(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setRecommendationNextStep(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setRecommendationLevel(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setGovernmentApproval(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setLatitude(cursor.isNull(offset + 10) ? null : cursor.getDouble(offset + 10));
-        entity.setLongitude(cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11));
-        entity.setCustomerId(cursor.getString(offset + 12));
+        entity.setIfNoWhy(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setPointOfsaleMaterial(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setRecommendationNextStep(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setGovernmentApproval(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setLatitude(cursor.isNull(offset + 7) ? null : cursor.getDouble(offset + 7));
+        entity.setLongitude(cursor.isNull(offset + 8) ? null : cursor.getDouble(offset + 8));
+        entity.setCustomerId(cursor.getString(offset + 9));
      }
     
     /** @inheritdoc */

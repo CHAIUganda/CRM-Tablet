@@ -21,17 +21,15 @@ public class AdhockSale {
     /** Not-null value. */
     private java.util.Date dateOfSale;
     private Boolean doYouStockOrsZinc;
-    private Integer howManyZincInStock;
-    private Integer howManyOrsInStock;
     private String ifNoWhy;
     private String pointOfsaleMaterial;
     private String recommendationNextStep;
-    private String recommendationLevel;
     private String governmentApproval;
     private Double latitude;
     private Double longitude;
     /** Not-null value. */
     private String customerId;
+
     private List<SaleData> adhockSalesDatas;
     private List<StokeData> adhockStockDatas;
 
@@ -58,16 +56,13 @@ public class AdhockSale {
         this.uuid = uuid;
     }
 
-    public AdhockSale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, Integer howManyZincInStock, Integer howManyOrsInStock, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, String governmentApproval, Double latitude, Double longitude, String customerId) {
+    public AdhockSale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String governmentApproval, Double latitude, Double longitude, String customerId) {
         this.uuid = uuid;
         this.dateOfSale = dateOfSale;
         this.doYouStockOrsZinc = doYouStockOrsZinc;
-        this.howManyZincInStock = howManyZincInStock;
-        this.howManyOrsInStock = howManyOrsInStock;
         this.ifNoWhy = ifNoWhy;
         this.pointOfsaleMaterial = pointOfsaleMaterial;
         this.recommendationNextStep = recommendationNextStep;
-        this.recommendationLevel = recommendationLevel;
         this.governmentApproval = governmentApproval;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -108,22 +103,6 @@ public class AdhockSale {
         this.doYouStockOrsZinc = doYouStockOrsZinc;
     }
 
-    public Integer getHowManyZincInStock() {
-        return howManyZincInStock;
-    }
-
-    public void setHowManyZincInStock(Integer howManyZincInStock) {
-        this.howManyZincInStock = howManyZincInStock;
-    }
-
-    public Integer getHowManyOrsInStock() {
-        return howManyOrsInStock;
-    }
-
-    public void setHowManyOrsInStock(Integer howManyOrsInStock) {
-        this.howManyOrsInStock = howManyOrsInStock;
-    }
-
     public String getIfNoWhy() {
         return ifNoWhy;
     }
@@ -146,14 +125,6 @@ public class AdhockSale {
 
     public void setRecommendationNextStep(String recommendationNextStep) {
         this.recommendationNextStep = recommendationNextStep;
-    }
-
-    public String getRecommendationLevel() {
-        return recommendationLevel;
-    }
-
-    public void setRecommendationLevel(String recommendationLevel) {
-        this.recommendationLevel = recommendationLevel;
     }
 
     public String getGovernmentApproval() {

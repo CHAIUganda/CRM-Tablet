@@ -31,18 +31,15 @@ public class SaleDao extends AbstractDao<Sale, String> {
         public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
         public final static Property DateOfSale = new Property(1, java.util.Date.class, "dateOfSale", false, "DATE_OF_SALE");
         public final static Property DoYouStockOrsZinc = new Property(2, Boolean.class, "doYouStockOrsZinc", false, "DO_YOU_STOCK_ORS_ZINC");
-        public final static Property HowManyZincInStock = new Property(3, Integer.class, "howManyZincInStock", false, "HOW_MANY_ZINC_IN_STOCK");
-        public final static Property HowmanyOrsInStock = new Property(4, Integer.class, "howmanyOrsInStock", false, "HOWMANY_ORS_IN_STOCK");
-        public final static Property IfNoWhy = new Property(5, String.class, "ifNoWhy", false, "IF_NO_WHY");
-        public final static Property PointOfsaleMaterial = new Property(6, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
-        public final static Property RecommendationNextStep = new Property(7, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
-        public final static Property RecommendationLevel = new Property(8, String.class, "recommendationLevel", false, "RECOMMENDATION_LEVEL");
-        public final static Property GovernmentApproval = new Property(9, String.class, "governmentApproval", false, "GOVERNMENT_APPROVAL");
-        public final static Property IsHistory = new Property(10, Boolean.class, "isHistory", false, "IS_HISTORY");
-        public final static Property Latitude = new Property(11, Double.class, "latitude", false, "LATITUDE");
-        public final static Property Longitude = new Property(12, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property OrderId = new Property(13, String.class, "orderId", false, "ORDER_ID");
-        public final static Property TaskId = new Property(14, String.class, "taskId", false, "TASK_ID");
+        public final static Property IfNoWhy = new Property(3, String.class, "ifNoWhy", false, "IF_NO_WHY");
+        public final static Property PointOfsaleMaterial = new Property(4, String.class, "pointOfsaleMaterial", false, "POINT_OFSALE_MATERIAL");
+        public final static Property RecommendationNextStep = new Property(5, String.class, "recommendationNextStep", false, "RECOMMENDATION_NEXT_STEP");
+        public final static Property GovernmentApproval = new Property(6, String.class, "governmentApproval", false, "GOVERNMENT_APPROVAL");
+        public final static Property IsHistory = new Property(7, Boolean.class, "isHistory", false, "IS_HISTORY");
+        public final static Property Latitude = new Property(8, Double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(9, Double.class, "longitude", false, "LONGITUDE");
+        public final static Property OrderId = new Property(10, String.class, "orderId", false, "ORDER_ID");
+        public final static Property TaskId = new Property(11, String.class, "taskId", false, "TASK_ID");
     };
 
     private DaoSession daoSession;
@@ -66,18 +63,15 @@ public class SaleDao extends AbstractDao<Sale, String> {
                 "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'DATE_OF_SALE' INTEGER NOT NULL ," + // 1: dateOfSale
                 "'DO_YOU_STOCK_ORS_ZINC' INTEGER," + // 2: doYouStockOrsZinc
-                "'HOW_MANY_ZINC_IN_STOCK' INTEGER," + // 3: howManyZincInStock
-                "'HOWMANY_ORS_IN_STOCK' INTEGER," + // 4: howmanyOrsInStock
-                "'IF_NO_WHY' TEXT," + // 5: ifNoWhy
-                "'POINT_OFSALE_MATERIAL' TEXT," + // 6: pointOfsaleMaterial
-                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 7: recommendationNextStep
-                "'RECOMMENDATION_LEVEL' TEXT," + // 8: recommendationLevel
-                "'GOVERNMENT_APPROVAL' TEXT," + // 9: governmentApproval
-                "'IS_HISTORY' INTEGER," + // 10: isHistory
-                "'LATITUDE' REAL," + // 11: latitude
-                "'LONGITUDE' REAL," + // 12: longitude
-                "'ORDER_ID' TEXT NOT NULL ," + // 13: orderId
-                "'TASK_ID' TEXT NOT NULL );"); // 14: taskId
+                "'IF_NO_WHY' TEXT," + // 3: ifNoWhy
+                "'POINT_OFSALE_MATERIAL' TEXT," + // 4: pointOfsaleMaterial
+                "'RECOMMENDATION_NEXT_STEP' TEXT," + // 5: recommendationNextStep
+                "'GOVERNMENT_APPROVAL' TEXT," + // 6: governmentApproval
+                "'IS_HISTORY' INTEGER," + // 7: isHistory
+                "'LATITUDE' REAL," + // 8: latitude
+                "'LONGITUDE' REAL," + // 9: longitude
+                "'ORDER_ID' TEXT NOT NULL ," + // 10: orderId
+                "'TASK_ID' TEXT NOT NULL );"); // 11: taskId
     }
 
     /** Drops the underlying database table. */
@@ -98,57 +92,42 @@ public class SaleDao extends AbstractDao<Sale, String> {
             stmt.bindLong(3, doYouStockOrsZinc ? 1l: 0l);
         }
  
-        Integer howManyZincInStock = entity.getHowManyZincInStock();
-        if (howManyZincInStock != null) {
-            stmt.bindLong(4, howManyZincInStock);
-        }
- 
-        Integer howmanyOrsInStock = entity.getHowmanyOrsInStock();
-        if (howmanyOrsInStock != null) {
-            stmt.bindLong(5, howmanyOrsInStock);
-        }
- 
         String ifNoWhy = entity.getIfNoWhy();
         if (ifNoWhy != null) {
-            stmt.bindString(6, ifNoWhy);
+            stmt.bindString(4, ifNoWhy);
         }
  
         String pointOfsaleMaterial = entity.getPointOfsaleMaterial();
         if (pointOfsaleMaterial != null) {
-            stmt.bindString(7, pointOfsaleMaterial);
+            stmt.bindString(5, pointOfsaleMaterial);
         }
  
         String recommendationNextStep = entity.getRecommendationNextStep();
         if (recommendationNextStep != null) {
-            stmt.bindString(8, recommendationNextStep);
-        }
- 
-        String recommendationLevel = entity.getRecommendationLevel();
-        if (recommendationLevel != null) {
-            stmt.bindString(9, recommendationLevel);
+            stmt.bindString(6, recommendationNextStep);
         }
  
         String governmentApproval = entity.getGovernmentApproval();
         if (governmentApproval != null) {
-            stmt.bindString(10, governmentApproval);
+            stmt.bindString(7, governmentApproval);
         }
  
         Boolean isHistory = entity.getIsHistory();
         if (isHistory != null) {
-            stmt.bindLong(11, isHistory ? 1l: 0l);
+            stmt.bindLong(8, isHistory ? 1l: 0l);
         }
  
         Double latitude = entity.getLatitude();
         if (latitude != null) {
-            stmt.bindDouble(12, latitude);
+            stmt.bindDouble(9, latitude);
         }
  
         Double longitude = entity.getLongitude();
         if (longitude != null) {
-            stmt.bindDouble(13, longitude);
+            stmt.bindDouble(10, longitude);
         }
-        stmt.bindString(14, entity.getOrderId());
-        stmt.bindString(15, entity.getTaskId());
+        stmt.bindString(11, entity.getOrderId());
+        stmt.bindString(12, entity.getTaskId());
     }
 
     @Override
@@ -170,18 +149,15 @@ public class SaleDao extends AbstractDao<Sale, String> {
             cursor.getString(offset + 0), // uuid
             new java.util.Date(cursor.getLong(offset + 1)), // dateOfSale
             cursor.isNull(offset + 2) ? null : cursor.getShort(offset + 2) != 0, // doYouStockOrsZinc
-            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // howManyZincInStock
-            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // howmanyOrsInStock
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // ifNoWhy
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // pointOfsaleMaterial
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // recommendationNextStep
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // recommendationLevel
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // governmentApproval
-            cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0, // isHistory
-            cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11), // latitude
-            cursor.isNull(offset + 12) ? null : cursor.getDouble(offset + 12), // longitude
-            cursor.getString(offset + 13), // orderId
-            cursor.getString(offset + 14) // taskId
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // ifNoWhy
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // pointOfsaleMaterial
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // recommendationNextStep
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // governmentApproval
+            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0, // isHistory
+            cursor.isNull(offset + 8) ? null : cursor.getDouble(offset + 8), // latitude
+            cursor.isNull(offset + 9) ? null : cursor.getDouble(offset + 9), // longitude
+            cursor.getString(offset + 10), // orderId
+            cursor.getString(offset + 11) // taskId
         );
         return entity;
     }
@@ -192,18 +168,15 @@ public class SaleDao extends AbstractDao<Sale, String> {
         entity.setUuid(cursor.getString(offset + 0));
         entity.setDateOfSale(new java.util.Date(cursor.getLong(offset + 1)));
         entity.setDoYouStockOrsZinc(cursor.isNull(offset + 2) ? null : cursor.getShort(offset + 2) != 0);
-        entity.setHowManyZincInStock(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
-        entity.setHowmanyOrsInStock(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setIfNoWhy(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setPointOfsaleMaterial(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setRecommendationNextStep(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setRecommendationLevel(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setGovernmentApproval(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setIsHistory(cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0);
-        entity.setLatitude(cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11));
-        entity.setLongitude(cursor.isNull(offset + 12) ? null : cursor.getDouble(offset + 12));
-        entity.setOrderId(cursor.getString(offset + 13));
-        entity.setTaskId(cursor.getString(offset + 14));
+        entity.setIfNoWhy(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setPointOfsaleMaterial(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setRecommendationNextStep(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setGovernmentApproval(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setIsHistory(cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0);
+        entity.setLatitude(cursor.isNull(offset + 8) ? null : cursor.getDouble(offset + 8));
+        entity.setLongitude(cursor.isNull(offset + 9) ? null : cursor.getDouble(offset + 9));
+        entity.setOrderId(cursor.getString(offset + 10));
+        entity.setTaskId(cursor.getString(offset + 11));
      }
     
     /** @inheritdoc */

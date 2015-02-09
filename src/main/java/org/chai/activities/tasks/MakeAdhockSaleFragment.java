@@ -1,7 +1,5 @@
 package org.chai.activities.tasks;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -12,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import android.widget.TableRow.LayoutParams;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
@@ -29,19 +28,27 @@ import java.util.UUID;
 /**
  * Created by victor on 1/7/15.
  */
+/*
+TO DO: this class needs to be refactored with sales to
+inherit from a super class since they share attrs
+ */
 public class MakeAdhockSaleFragment extends BaseContainerFragment {
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private AdhockSaleDao saleDao;
     private SaleDataDao saleDataDao;
+    private StokeDataDao stokeDataDao;
     private ProductDao productDao;
     private CustomerDao  customerDao;
 
-    private TableLayout tableLayout;
+    private TableLayout salesTableLayout;
+    private TableLayout stockTableLayout;
     private List<Spinner> spinnerList;
     private List<EditText> quantityFields;
     private List<EditText> priceFields;
+    private List<Spinner> stockSpinnerList;
+    private List<EditText> stockQuantityFlds;
     private AdhockSale saleInstance;
     private Customer salesCustomer;
     private List<Product> products;
@@ -56,17 +63,30 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         View view = inflater.inflate(R.layout.adhock_sale_form,container, false);
         try {
             initialiseGreenDao();
-            tableLayout = (TableLayout)view.findViewById(R.id.adhock_sale_table);
+            salesTableLayout = (TableLayout)view.findViewById(R.id.adhock_sale_table);
+            stockTableLayout = (TableLayout) view.findViewById(R.id.adhoc_sales_stock_table);
             spinnerList = new ArrayList<Spinner>();
             quantityFields = new ArrayList<EditText>();
             priceFields = new ArrayList<EditText>();
+            stockSpinnerList = new ArrayList<Spinner>();
+            stockQuantityFlds = new ArrayList<EditText>();
 
             Spinner productSpinner = (Spinner) view.findViewById(R.id.adhock_sale_product);
+            Spinner stockProductSpinner =  (Spinner) view.findViewById(R.id.adhoc_sales_stock_product);
             products = productDao.loadAll();
-            productSpinner.setAdapter(new ProductArrayAdapter(getActivity(),R.id.adhock_sale_product,products.toArray(new Product[products.size()])));
+
+
+            ProductArrayAdapter adapter1 = new ProductArrayAdapter(getActivity(), R.id.adhock_sale_product, products.toArray(new Product[products.size()]));
+            productSpinner.setAdapter(adapter1);
+            stockProductSpinner.setAdapter(adapter1);
+
             spinnerList.add(productSpinner);
             quantityFields.add((EditText)view.findViewById(R.id.adhock_sale_quantity));
             priceFields.add((EditText)view.findViewById(R.id.adhock_sale_price));
+
+            stockSpinnerList.add(stockProductSpinner);
+            stockQuantityFlds.add((EditText)view.findViewById(R.id.adhoc_sales_stock_quantity));
+
 
             List<Customer> customersList = customerDao.loadAll();
             AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.adhock_sale_customer);
@@ -74,12 +94,12 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             textView.setAdapter(adapter);
 
             textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                    Customer selected = (Customer)adapterView.getAdapter().getItem(position);
-                    salesCustomer = selected;
-                }
-            });
+                             @Override
+                             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                                 Customer selected = (Customer)adapterView.getAdapter().getItem(position);
+                                 salesCustomer = selected;
+                             }
+                         });
 
             CustomMultSelectDropDown pointOfSaleMaterials = (CustomMultSelectDropDown)view.findViewById(R.id.adhock_sale_point_of_sale);
             pointOfSaleMaterials.setStringOptions(getResources().getStringArray(R.array.point_of_sale_material));
@@ -91,7 +111,15 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    addRowToTable(null, view);
+                    addRowToTable(null, null, view, false);
+                }
+            });
+
+            Button addStockButton = (Button) view.findViewById(R.id.adhoc_sales_stock_add_more);
+            addStockButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    addRowToTable(null,null, view,true);
                 }
             });
 
@@ -136,6 +164,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             saleDataDao = daoSession.getSaleDataDao();
             productDao = daoSession.getProductDao();
             customerDao = daoSession.getCustomerDao();
+            stokeDataDao = daoSession.getStokeDataDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -147,8 +176,6 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         if (saleInstance!=null) {
             ((AutoCompleteTextView) view.findViewById(R.id.adhock_sale_customer)).setText(saleInstance.getCustomer().getOutletName());
             salesCustomer = saleInstance.getCustomer();
-            ((EditText) view.findViewById(R.id.adhock_sale_howmany_in_stock_ors)).setText(saleInstance.getHowManyOrsInStock() + "");
-            ((EditText) view.findViewById(R.id.adhock_sale_howmany_in_stock_zinc)).setText(saleInstance.getHowManyZincInStock() + "");
             ((EditText) view.findViewById(R.id.adhock_sale_if_no_why)).setText(saleInstance.getIfNoWhy());
 
             Spinner doyouStockZincSpinner = (Spinner) view.findViewById(R.id.adhock_sale_do_you_stock_zinc);
@@ -165,6 +192,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             recommendationNextStep.setText(saleInstance.getRecommendationNextStep());
 
             bindSalesDataToUi(view);
+            bindStokeDataToUi(view);
         }
     }
 
@@ -176,17 +204,29 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
                 ((EditText)view.findViewById(R.id.adhock_sale_price)).setText(salesDatas.get(i).getPrice()+"");
                 ((Spinner)view.findViewById(R.id.adhock_sale_product)).setSelection(getProductPosition(salesDatas.get(i).getProduct()));
             }else {
-                addRowToTable(salesDatas.get(i), view);
+                addRowToTable(salesDatas.get(i),null, view,false);
+            }
+        }
+    }
+
+    private void bindStokeDataToUi(View view) {
+        List<StokeData> stockDatas = saleInstance.getAdhockStockDatas();
+        for (int i = 0; i < stockDatas.size(); ++i) {
+            if (i == 0) {
+                ((EditText)view.findViewById(R.id.adhoc_sales_stock_quantity)).setText(stockDatas.get(i).getQuantity()+"");
+                ((Spinner)view.findViewById(R.id.adhoc_sales_stock_product)).setSelection(getProductPosition(stockDatas.get(i).getProduct()));
+            }else {
+                addRowToTable(null,stockDatas.get(i), view,true);
             }
         }
     }
 
 
-    private void addRowToTable(SaleData saleData, View view) {
+    private void addRowToTable(SaleData saleData,StokeData stockData, View view,final boolean isStockTaking) {
         TableRow tableRow = new TableRow(getActivity());
         tableRow.setLayoutParams(new TableRow.LayoutParams( TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-        Spinner spinner = new Spinner(getActivity());
+        final Spinner spinner = new Spinner(getActivity());
         TableRow.LayoutParams spinnerParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         spinner.setLayoutParams(spinnerParams);
         spinner.setAdapter(new ProductArrayAdapter(getActivity(),android.R.layout.simple_spinner_dropdown_item,products.toArray(new Product[products.size()])));
@@ -196,22 +236,24 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(10,0,10,0);
-        EditText quantityView = (EditText) getActivity().getLayoutInflater().inflate(R.layout.edit_text_style, null);
+        final EditText quantityView = (EditText) getActivity().getLayoutInflater().inflate(R.layout.edit_text_style, null);
         quantityView.setTextColor(Color.BLACK);
         quantityView.setLayoutParams(params);
         quantityView.setInputType(InputType.TYPE_CLASS_NUMBER);
         tableRow.addView(quantityView);
 
-        EditText priceView = (EditText) getActivity().getLayoutInflater().inflate(R.layout.edit_text_style, null);
+        final EditText priceView = (EditText) getActivity().getLayoutInflater().inflate(R.layout.edit_text_style, null);
         priceView.setTextColor(Color.BLACK);
         priceView.setLayoutParams(params);
         priceView.setInputType(InputType.TYPE_CLASS_NUMBER);
-        tableRow.addView(priceView);
 
         if (saleData != null) {
             quantityView.setText(saleData.getQuantity() + "");
             priceView.setText(saleData.getPrice() + "");
             spinner.setSelection(getProductPosition(saleData.getProduct()));
+        }else if(stockData!=null){
+            quantityView.setText(stockData.getQuantity() + "");
+            spinner.setSelection(getProductPosition(stockData.getProduct()));
         }
         Button deleteBtn = (Button) getActivity().getLayoutInflater().inflate(R.layout.delete_icon, null);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -220,18 +262,33 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
                 View row = (View) view.getParent();
                 ViewGroup container = ((ViewGroup)row.getParent());
                 container.removeView(row);
+                if (isStockTaking) {
+                    stockSpinnerList.remove(spinner);
+                    stockQuantityFlds.remove(quantityView);
+                } else {
+                    spinnerList.remove(spinner);
+                    quantityFields.remove(quantityView);
+                    priceFields.remove(priceView);
+                }
+//                removeRow();
                 container.invalidate();
-                removeRow();
             }
         });
-        tableRow.addView(deleteBtn);
+        if (isStockTaking) {
+            stockSpinnerList.add(spinner);
+            stockQuantityFlds.add(quantityView);
+            tableRow.addView(deleteBtn);
 
-        spinnerList.add(spinner);
-        quantityFields.add(quantityView);
-        priceFields.add(priceView);
+            stockTableLayout.addView(tableRow, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        } else {
+            tableRow.addView(priceView);
+            spinnerList.add(spinner);
+            quantityFields.add(quantityView);
+            priceFields.add(priceView);
+            tableRow.addView(deleteBtn);
 
-        tableLayout.addView(tableRow, new TableLayout.LayoutParams( TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-    }
+            salesTableLayout.addView(tableRow, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        } }
 
     private void removeRow() {
         if (!spinnerList.isEmpty()) {
@@ -251,13 +308,10 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 String selected = (String) spinner.getAdapter().getItem(position);
-                LinearLayout stockfieldsLayout = (LinearLayout) getActivity().findViewById(R.id.adhock_sale_zinc_stock_layout);
                 LinearLayout ifnowhyLayout = (LinearLayout) getActivity().findViewById(R.id.adhock_sale_ifnowhy_layout);
                 if ("No".equalsIgnoreCase(selected)) {
-                    stockfieldsLayout.setVisibility(View.GONE);
                     ifnowhyLayout.setVisibility(View.VISIBLE);
                 } else {
-                    stockfieldsLayout.setVisibility(View.VISIBLE);
                     ifnowhyLayout.setVisibility(View.GONE);
                 }
             }
@@ -271,13 +325,13 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
 
 
     private int getProductPosition(Product product) {
-        for (int i = 0; i < products.size(); ++i) {
-            if (products.get(i).getUuid() == product.getUuid()) {
-                return i;
-            }
-        }
-        return 0;
-    }
+                  for (int i = 0; i < products.size(); ++i) {
+                      if (products.get(i).getUuid() == product.getUuid()) {
+                          return i;
+                      }
+                  }
+                  return 0;
+              }
 
     private void submitSale(){
         if(!isUpdate){
@@ -286,14 +340,10 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         saleInstance.setDateOfSale(new Date());
         String stocksZinc = ((Spinner) getActivity().findViewById(R.id.adhock_sale_do_you_stock_zinc)).getSelectedItem().toString();
         saleInstance.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
-        if (stocksZinc.equals("Yes")) {
-            saleInstance.setHowManyOrsInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.adhock_sale_howmany_in_stock_ors)).getText().toString()));
-            saleInstance.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.adhock_sale_howmany_in_stock_zinc)).getText().toString()));
-        }else{
+        if (stocksZinc.equals("No")) {
             saleInstance.setIfNoWhy(((EditText) getActivity().findViewById(R.id.adhock_sale_if_no_why)).getText().toString());
         }
-        saleInstance.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.adhock_sale_point_of_sale)).getText().toString()
-                +","+((EditText)getActivity().findViewById(R.id.adhoc_point_of_sale_others)).getText().toString());
+        saleInstance.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.adhock_sale_point_of_sale)).getText().toString());
         saleInstance.setRecommendationNextStep(((CustomMultSelectDropDown) getActivity().findViewById(R.id.adhock_sale_next_step_recommendation)).getText().toString());
         saleInstance.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.adhock_sale_government_approval)).getSelectedItem().toString());
         saleInstance.setCustomerId(salesCustomer.getUuid());
@@ -303,10 +353,12 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         if(isUpdate){
             saleDao.update(saleInstance);
             submitSaleData(saleInstance.getUuid());
+            submitStockData(saleInstance);
         }else{
             Long saleId = saleDao.insert(saleInstance);
             //add the different sales.
             submitSaleData(saleInstance.getUuid());
+            submitStockData(saleInstance);
         }
     }
 
@@ -314,7 +366,6 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         for (int i = 0; i < spinnerList.size(); ++i) {
             try {
                 SaleData saleData = instantiateSaleData(i);
-                saleData.setUuid(UUID.randomUUID().toString());
                 saleData.setAdhockSaleId(saleId);
                 saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
                 saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
@@ -323,12 +374,46 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
                 if(saleData.getUuid()!=null){
                     saleDataDao.update(saleData);
                 }else{
+                    saleData.setUuid(UUID.randomUUID().toString());
                     saleDataDao.insert(saleData);
                 }
             }catch (Exception ex){
                 //ignore
             }
         }
+    }
+
+    private void submitStockData(AdhockSale saleCallData) {
+        for (int i = 0; i < stockSpinnerList.size(); ++i) {
+            try{
+                StokeData stokeData = instantiateStockData(i);
+                stokeData.setSaleId(stokeData.getUuid());
+                stokeData.setAdhockSale(saleCallData);
+                stokeData.setQuantity(Integer.parseInt(stockQuantityFlds.get(i).getText().toString()));
+                Product product = (Product) stockSpinnerList.get(i).getSelectedItem();
+                stokeData.setProductId(product.getUuid());
+
+                if(stokeData.getUuid()!=null){
+                    stokeDataDao.update(stokeData);
+                }else{
+                    stokeData.setUuid(UUID.randomUUID().toString());
+                    stokeDataDao.insert(stokeData);
+                }
+            }catch (Exception ex){
+                //ignore
+            }
+        }
+    }
+
+    private StokeData instantiateStockData(int index){
+        List<StokeData> stockDatas = saleInstance.getAdhockStockDatas();
+        StokeData stokeData;
+        if(index < stockDatas.size()){
+            stokeData = stockDatas.get(index);
+        }else{
+            stokeData = new StokeData(null);
+        }
+        return stokeData;
     }
     private SaleData instantiateSaleData(int index){
         List<SaleData> saleDatas = saleInstance.getAdhockSalesDatas();
@@ -344,8 +429,6 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
     private void setRequiredFields(View view) {
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_do_you_stock_zinc_view));
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_government_approval_lbl));
-        Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_howmany_in_stock_zinc_view));
-        Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_howmany_in_stock_ors_view));
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_customer_lbl));
     }
 

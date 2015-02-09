@@ -23,7 +23,6 @@ public class SaleData {
     /** Not-null value. */
     private String productId;
 
-
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */

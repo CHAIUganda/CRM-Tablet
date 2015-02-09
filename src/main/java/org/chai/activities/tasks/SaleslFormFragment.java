@@ -1,7 +1,5 @@
 package org.chai.activities.tasks;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -169,8 +167,6 @@ public class SaleslFormFragment extends Fragment {
 
     private void bindSalesInfoToUI(View view) {
         if (!isNewSalesCall()) {
-            ((EditText) view.findViewById(R.id.sales_howmany_in_stock_ors)).setText(saleCallData.getHowmanyOrsInStock() + "");
-            ((EditText) view.findViewById(R.id.sales_howmany_in_stock_zinc)).setText(saleCallData.getHowManyZincInStock() + "");
             ((EditText) view.findViewById(R.id.sales_if_no_why)).setText(saleCallData.getIfNoWhy());
             ((EditText) view.findViewById(R.id.sales_gps)).setText(saleCallData.getLatitude()+","+saleCallData.getLongitude());
 
@@ -306,10 +302,6 @@ public class SaleslFormFragment extends Fragment {
             saleCallData.setDateOfSale(new Date());
             String stocksZinc = ((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString();
             saleCallData.setDoYouStockOrsZinc(stocksZinc.equalsIgnoreCase("Yes") ? true : false);
-            if (((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString().equals("Yes")) {
-                saleCallData.setHowmanyOrsInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_ors)).getText().toString()));
-                saleCallData.setHowManyZincInStock(Integer.parseInt(((EditText) getActivity().findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString()));
-            }
             saleCallData.setIfNoWhy(((EditText) getActivity().findViewById(R.id.sales_if_no_why)).getText().toString()
                     +","+((EditText)getActivity().findViewById(R.id.sales_if_no_why)).getText().toString());
             saleCallData.setPointOfsaleMaterial(((Button) getActivity().findViewById(R.id.sales_point_of_sale)).getText().toString());
@@ -413,13 +405,10 @@ public class SaleslFormFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 String selected = (String) spinner.getAdapter().getItem(position);
-                LinearLayout stockfieldsLayout = (LinearLayout) getActivity().findViewById(R.id.sales_zinc_stock_layout);
                 LinearLayout ifnowhyLayout = (LinearLayout) getActivity().findViewById(R.id.sales_ifnowhy_layout);
                 if ("No".equalsIgnoreCase(selected)) {
-                    stockfieldsLayout.setVisibility(View.GONE);
                     ifnowhyLayout.setVisibility(View.VISIBLE);
                 } else {
-                    stockfieldsLayout.setVisibility(View.VISIBLE);
                     ifnowhyLayout.setVisibility(View.GONE);
                 }
             }
@@ -451,18 +440,11 @@ public class SaleslFormFragment extends Fragment {
     private void setRequiredFields(View view) {
         Utils.setRequired((TextView) view.findViewById(R.id.sales_do_you_stock_zinc_view));
         Utils.setRequired((TextView) view.findViewById(R.id.sales_government_approval_lbl));
-        Utils.setRequired((TextView) view.findViewById(R.id.sales_howmany_in_stock_ors_view));
-        Utils.setRequired((TextView) view.findViewById(R.id.sales_howmany_in_stock_zinc_view));
     }
 
     private boolean allMandatoryFieldsFilled(View view) {
         if (((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString().equals("")) {
-            if(((EditText)getActivity().findViewById(R.id.sales_howmany_in_stock_zinc)).getText().toString().equalsIgnoreCase("")){
-                return false;
-            }
-            if(((EditText)getActivity().findViewById(R.id.sales_howmany_in_stock_ors)).getText().toString().equalsIgnoreCase("")){
-                return false;
-            }
+           return false;
         }
         return true;
     }
