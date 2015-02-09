@@ -57,7 +57,7 @@
     <string-array name="outletsize">
         <item>""</item>
         <item>Large (50 or more products)</item>
-        <item>Medium (around 30 products)</item>
+        <item>Medium (11-49 products)</item>
         <item>Small (10 or fewer products</item>
     </string-array>
     <string-array name="licencetype">

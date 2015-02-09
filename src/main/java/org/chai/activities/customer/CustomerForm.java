@@ -296,6 +296,8 @@ public class CustomerForm extends Activity {
             return false;
         } else if (((Spinner) findViewById(R.id.details_restock_frequency)).getSelectedItem().toString().equals("")) {
             return false;
+        }else if (((Spinner) findViewById(R.id.details_split)).getSelectedItem().toString().equals("")) {
+            return false;
         }
         return true;
     }
@@ -353,6 +355,7 @@ public class CustomerForm extends Activity {
         Utils.setRequired((TextView) findViewById(R.id.details_num_customers_per_day_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_sources_of_supply_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_restock_frequency_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.outlet_rural_village));
     }
 
     protected void manageLicenceVisible() {
