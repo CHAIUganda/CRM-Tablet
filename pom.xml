@@ -11,7 +11,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <android.sdk.path>C:\Program Files (x86)\Android\android-sdk</android.sdk.path>
-        <sign.keystore>my-release-key.keystore</sign.keystore>
+        <sign.keystore>F:\work\omni\chai\my-release-key.keystore</sign.keystore>
         <sign.alias>chai_droid</sign.alias>
         <sign.keypass>meandyou</sign.keypass>
         <sign.storepass>meandyou</sign.storepass>

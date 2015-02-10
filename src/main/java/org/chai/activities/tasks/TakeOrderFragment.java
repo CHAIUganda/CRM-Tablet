@@ -241,6 +241,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
         tableRow.addView(deleteBtn);
         spinnerList.add(spinner);
         quantityFields.add(quantityView);
+        dropSampleChkBoxes.add(dropSampleChkBx);
 
         tableLayout.addView(tableRow, new TableLayout.LayoutParams( TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
     }
