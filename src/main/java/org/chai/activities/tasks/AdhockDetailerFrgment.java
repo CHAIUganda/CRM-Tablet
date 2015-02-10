@@ -74,6 +74,8 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
         });
         managePointOfSaleOthers(view, false);
         setRequiredFields(view);
+        addZincStockToTable(view,detailerCallInstance);
+        addOrsStockToTable(view, detailerCallInstance);
 
         return view;
     }
@@ -101,6 +103,7 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
             detailerCallInstance.setTask(task);
             detailerCallInstance.setTaskId(task.getUuid());
             detailerCallDao.insert(detailerCallInstance);
+            submitDetailerStock(detailerCallInstance);
             return true;
         }catch (Exception ex){
             ex.printStackTrace();
