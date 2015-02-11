@@ -454,10 +454,17 @@ import android.app.AlertDialog;
      }
 
     protected void submitDetailerStock(DetailerCall detailerCall) {
-        getZincStockFromUI();
-        getOrsStockFromUI();
-        //delete before inserting,temp fix for one to one in green dao
-        detailerStockDao.queryBuilder().where(DetailerStockDao.Properties.DetailerId.eq(detailerCallInstance.getUuid())).buildDelete().executeDeleteWithoutDetachingEntities();
+        if (((Spinner)getActivity(). findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString().equals("Yes")) {
+            getZincStockFromUI();
+        }
+
+        if (((Spinner)getActivity(). findViewById(R.id.detailer_do_you_stock_ors)).getSelectedItem().toString().equals("Yes")) {
+            getOrsStockFromUI();
+        }
+        if(!detailerStocksList.isEmpty()){
+            //delete before inserting,temp fix for one to one in green dao
+            detailerStockDao.queryBuilder().where(DetailerStockDao.Properties.DetailerId.eq(detailerCallInstance.getUuid())).buildDelete().executeDeleteWithoutDetachingEntities();
+        }
         for (DetailerStock stock : detailerStocksList) {
             stock.setUuid(UUID.randomUUID().toString());
             detailerStockDao.insert(stock);

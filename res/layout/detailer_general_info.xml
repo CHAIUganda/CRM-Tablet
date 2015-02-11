@@ -208,7 +208,7 @@
               <TextView
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:textSize="10dp"
+                      android:textSize="13dp"
                       android:text="@string/det_tell_me_whatyouknowaboutdiarrhea"/>
 
               <Spinner
@@ -238,7 +238,7 @@
               <TextView
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:textSize="10dp"
+                      android:textSize="13dp"
                       android:text="@string/det_doyouknowtheeffectdiarrheahasonthebody"/>
 
               <Spinner
@@ -268,7 +268,7 @@
               <TextView
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:textSize="10dp"
+                      android:textSize="13dp"
                       android:text="@string/det_whatdoyouknowaboutors"/>
 
               <Spinner
@@ -298,7 +298,7 @@
               <TextView
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:textSize="10dp"
+                      android:textSize="13dp"
                       android:text="@string/det_whatdoyouknowaboutzink"/>
 
               <Spinner
@@ -328,7 +328,7 @@
               <TextView
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:textSize="10dp"
+                      android:textSize="13dp"
                       android:text="@string/det_whyshould_younot_use_antibiotics"/>
 
               <Spinner
@@ -402,23 +402,31 @@
 
                   <TextView
                           android:text="Brands"
+                          android:layout_width="0px"
                           android:textColor="@color/list_main_text_color"
-                          android:layout_marginRight="10dp"/>
+                          android:layout_marginRight="10dp"
+                          android:layout_weight="0.4"/>
 
                   <TextView
                           android:text="Stock level (1x10)"
+                          android:layout_width="0px"
                           android:textColor="@color/list_main_text_color"
-                          android:layout_marginRight="10dp"/>
+                          android:layout_marginRight="10dp"
+                          android:layout_weight="0.2"/>/>
 
                   <TextView
                           android:text="Buying Price (1x10)"
+                          android:layout_width="0px"
                           android:textColor="@color/list_main_text_color"
-                          android:layout_marginRight="10dp"/>
+                          android:layout_marginRight="10dp"
+                          android:layout_weight="0.2"/>/>
 
                   <TextView
                           android:text="Selling Price (1x10)"
+                          android:layout_width="0px"
                           android:textColor="@color/list_main_text_color"
-                          android:layout_marginRight="10dp"/>
+                          android:layout_marginRight="10dp"
+                          android:layout_weight="0.2"/>/>
 
               </TableRow>
 
@@ -513,23 +521,31 @@
 
                   <TextView
                           android:text="Brands"
+                          android:layout_width="0px"
                           android:textColor="@color/list_main_text_color"
-                          android:layout_marginRight="10dp"/>
+                          android:layout_marginRight="10dp"
+                          android:layout_weight="0.4"/>
 
                   <TextView
                           android:text="Stock level (1 sachet)"
+                          android:layout_width="0px"
                           android:textColor="@color/list_main_text_color"
-                          android:layout_marginRight="10dp"/>
+                          android:layout_marginRight="10dp"
+                          android:layout_weight="0.2"/>
 
                   <TextView
                           android:text="Buying Price(1 Sachet)"
+                          android:layout_width="0px"
                           android:textColor="@color/list_main_text_color"
-                          android:layout_marginRight="10dp"/>
+                          android:layout_marginRight="10dp"
+                          android:layout_weight="0.2"/>
 
                   <TextView
                           android:text="Selling Price(1 Sachet)"
+                          android:layout_width="0px"
                           android:textColor="@color/list_main_text_color"
-                          android:layout_marginRight="10dp"/>
+                          android:layout_marginRight="10dp"
+                          android:layout_weight="0.2"/>
 
               </TableRow>
 
