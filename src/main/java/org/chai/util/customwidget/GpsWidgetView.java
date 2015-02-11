@@ -59,9 +59,9 @@ public class GpsWidgetView extends LinearLayout implements LocationListener{
             @Override
             public void onClick(View view) {
                 showLocationDialog();
-                getLocation();
             }
         });
+        getLocation();
     }
 
     public String getLatLongText() {
@@ -209,7 +209,7 @@ public class GpsWidgetView extends LinearLayout implements LocationListener{
     }
 
     private void returnLocation() {
-        if (mlocation != null)  {
+        if (mlocation != null&&mLocationDialog!=null&&mLocationDialog.isShowing())  {
             mLocationDialog.dismiss();
         }
     }
