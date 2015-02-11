@@ -199,7 +199,7 @@ public class GpsWidgetView extends LinearLayout implements LocationListener{
         mLocationDialog.setCancelable(false);
         mLocationDialog.setIndeterminate(true);
         mLocationDialog.setIcon(android.R.drawable.ic_dialog_info);
-        mLocationDialog.setTitle("Getting GPS mlocation.");
+        mLocationDialog.setTitle("Getting GPS Location.");
         mLocationDialog.setMessage("Please wait..");
         mLocationDialog.setButton(DialogInterface.BUTTON_POSITIVE,"Capture",
                 geopointButtonListener);

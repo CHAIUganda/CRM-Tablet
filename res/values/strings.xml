@@ -14,7 +14,7 @@
     <string name="nearbycustomer">Find Nearby Customers</string>
     <string name="editprofile">Edit Profile</string>
     <string name="markasinactive">Mark As Inactive</string>
-    <string name="addnewcustomerlabel">Save and Submit New Customer information</string>
+    <string name="addnewcustomerlabel">Save and New Customer information</string>
     <string name="cancellabel">Cancel</string>
     <string name="updatelabel">Update</string>
     <string name="selectItem">Select Item</string>
@@ -24,7 +24,7 @@
     <string name="gpscoordinates">GPS Coordinates</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="savecalldata">Submit Sale</string>
+    <string name="savecalldata">Save Sale</string>
     <string name="delete_string">Delete</string>
     <string name="sync">Syncronise</string>
     <string name="action_search">Search</string>

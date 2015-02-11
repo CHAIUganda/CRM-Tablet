@@ -240,6 +240,7 @@ import java.util.*;
          setRequired((TextView) view.findViewById(R.id.detailer_do_you_stock_zinc_view));
          setRequired((TextView) view.findViewById(R.id.detailer_point_of_sale_view));
          setRequired((TextView) view.findViewById(R.id.detailer_recommendation_next_step_view));
+         setRequired((TextView) view.findViewById(R.id.detailer_recomendation_level_lbl));
      }
 
      private void setRequired(TextView textView) {
@@ -330,6 +331,8 @@ import java.util.*;
          } else if (((Spinner) view.findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString().equals("")) {
              return false;
          } else if (((Button) view.findViewById(R.id.detailer_next_step_recommendation)).getText().toString().equals("")) {
+             return false;
+         } else if (((Spinner) view.findViewById(R.id.detailer_recommendation_level)).getSelectedItem().toString().equals("")) {
              return false;
          }
          return true;

@@ -42,21 +42,21 @@ import org.chai.R;
         stockLevelTxt.setInputType(InputType.TYPE_CLASS_NUMBER);
         stockLevelTxt.setBackgroundResource(R.drawable.bordertextfield);
         stockLevelTxt.setLayoutParams(stockLevelParams);
-        stockLevelTxt.setText(stockLevel);
+        stockLevelTxt.setText(stockLevel.equals("0.0")?"":stockLevel);
 
         buyingPriceTxt = new EditText(context);
         buyingPriceParams.weight = 0.2f;
         buyingPriceTxt.setInputType(InputType.TYPE_CLASS_NUMBER);
         buyingPriceTxt.setBackgroundResource(R.drawable.bordertextfield);
         buyingPriceTxt.setLayoutParams(buyingPriceParams);
-        buyingPriceTxt.setText(buyingPrice);
+        buyingPriceTxt.setText(buyingPrice.equals("0.0")?"":buyingPrice);
 
         sellingPriceTxt = new EditText(context);
         sellingPriceParams.weight = 0.2f;
         sellingPriceTxt.setInputType(InputType.TYPE_CLASS_NUMBER);
         sellingPriceTxt.setBackgroundResource(R.drawable.bordertextfield);
         sellingPriceTxt.setLayoutParams(sellingPriceParams);
-        sellingPriceTxt.setText(sellingPrice);
+        sellingPriceTxt.setText(sellingPrice.equals("0.0")?"":sellingPrice);
 
         this.addView(brandLabel);
         this.addView(stockLevelTxt);
@@ -65,7 +65,8 @@ import org.chai.R;
     }
 
     public String getBrandName() {
-        return brandLabel.getText().toString();
+        String result = brandLabel.getText().toString();
+        return result.trim().equals("")?"0":result;
     }
 
     public void setBrandName(String brandName) {
@@ -73,27 +74,33 @@ import org.chai.R;
     }
 
     public String getStockLevel() {
-        return stockLevelTxt.getText().toString();
+        String result = stockLevelTxt.getText().toString();
+        return result.trim().equals("")?"0":result;
     }
 
     public void setStockLevel(String stockLevel) {
-        this.stockLevelTxt.setText(stockLevel);
+        String value = stockLevel.trim().equals("0.0")?"":stockLevel;
+        this.stockLevelTxt.setText(value);
     }
 
     public String getBuyingPrice() {
-        return buyingPriceTxt.getText().toString();
+        String result = buyingPriceTxt.getText().toString();
+        return result.trim().equals("")?"0":result;
     }
 
     public void setBuyingPrice(String buyingPrice) {
-        this.buyingPriceTxt.setText(buyingPrice);
+        String value = buyingPrice.trim().equals("0.0")?"":buyingPrice;
+        this.buyingPriceTxt.setText(value);
     }
 
     public String getSellingPrice() {
-        return sellingPriceTxt.getText().toString();
+        String result = sellingPriceTxt.getText().toString();
+        return result.trim().equals("")?"0":result;
     }
 
     public void setSellingPrice(String sellingPrice) {
-        this.sellingPriceTxt.setText(sellingPrice);
+        String value = sellingPrice.trim().equals("0.0")?"":sellingPrice;
+        this.sellingPriceTxt.setText(value);
     }
 
 
