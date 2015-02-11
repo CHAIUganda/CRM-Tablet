@@ -29,6 +29,7 @@ public class AdhockSale {
     private Double longitude;
     /** Not-null value. */
     private String customerId;
+
     private List<SaleData> adhockSalesDatas;
     private List<StokeData> adhockStockDatas;
 

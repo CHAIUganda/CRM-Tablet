@@ -86,14 +86,6 @@ public class GPSTracker extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         this.location = location;
-        if(this.location!=null){
-            ++mLocationCount;
-            if(mLocationCount>1){
-                if(location.getAccuracy() <= DEFAULT_LOCATION_ACCURACY){
-                    isBetterAccurracy = true;
-                }
-            }
-        }
     }
 
     @Override
@@ -132,14 +124,6 @@ public class GPSTracker extends Service implements LocationListener {
         return longitude;
     }
 
-    public boolean isBetterAccurracy() {
-        return isBetterAccurracy;
-    }
-
-    public void setBetterAccurracy(boolean isBetterAccurracy) {
-        this.isBetterAccurracy = isBetterAccurracy;
-    }
-
     public boolean canGetLocation() {
         return this.canGetLocation;
     }
@@ -166,37 +150,5 @@ public class GPSTracker extends Service implements LocationListener {
         if(locationManager != null){
             locationManager.removeUpdates(GPSTracker.this);
         }
-    }
-    /**
-     * Sets up the look and actions for the progress dialog while the GPS is searching.
-     */
-    private void setupLocationDialog() {
-        // dialog displayed while fetching gps location
-        mLocationDialog = new ProgressDialog(context);
-        DialogInterface.OnClickListener geopointButtonListener =
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case DialogInterface.BUTTON_POSITIVE:
-                                setBetterAccurracy(true);
-                                break;
-                            case DialogInterface. BUTTON_NEGATIVE:
-                                location = null;
-                                break;
-                        }
-                    }
-                };
-
-        // back button doesn't cancel
-        mLocationDialog.setCancelable(false);
-        mLocationDialog.setIndeterminate(true);
-        mLocationDialog.setIcon(android.R.drawable.ic_dialog_info);
-        mLocationDialog.setTitle("Getting GPS location.");
-        mLocationDialog.setMessage("Please wait..");
-        mLocationDialog.setButton(DialogInterface.BUTTON_POSITIVE,"Capture",
-                geopointButtonListener);
-        mLocationDialog.setButton(DialogInterface. BUTTON_NEGATIVE,"Cancel",
-                geopointButtonListener);
     }
 }

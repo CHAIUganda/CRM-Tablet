@@ -18,8 +18,9 @@ import android.app.AlertDialog;
  import org.chai.util.GPSTracker;
  import org.chai.util.StockTableRow;
  import org.chai.util.Utils;
+import org.chai.util.customwidget.GpsWidgetView;
 
- import java.util.*;
+import java.util.*;
 
 /**
   * Created by victor on 1/28/15.
@@ -33,8 +34,6 @@ import android.app.AlertDialog;
      protected String initialYear;
 
      protected GPSTracker gpsTracker;
-     protected double capturedLatitude;
-     protected double capturedLongitude;
 
      protected SQLiteDatabase db;
      protected DaoMaster daoMaster;
@@ -86,7 +85,7 @@ import android.app.AlertDialog;
          ((TextView) view.findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
          ((TextView) view.findViewById(R.id.detailer_subcounty)).setText(customer.getSubcounty().getName());
          ((TextView) view.findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
-         ((TextView) view.findViewById(R.id.detailers_gps_text)).setText(detailerCallInstance.getLatitude() + "," + detailerCallInstance.getLongitude());
+         ((GpsWidgetView) view.findViewById(R.id.detailers_gps_view)).setLatLongText(detailerCallInstance.getLatitude() + "," + detailerCallInstance.getLongitude());
          CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
          if (keyCustomerContact != null) {
              ((TextView) view.findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getNames());
@@ -128,24 +127,6 @@ import android.app.AlertDialog;
                  Utils.setMinimumDateInDatePicker(new Date(), datePickerDialog);
                  datePickerDialog.show();
 
-             }
-         });
-     }
-
-     protected void setGpsWidget(final View view1) {
-         Button showGps = (Button) view1.findViewById(R.id.detailers_gps_btn);
-         showGps.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 gpsTracker = new GPSTracker(getActivity());
-                 if (gpsTracker.canGetLocation()) {
-                     capturedLatitude = gpsTracker.getLatitude();
-                     capturedLongitude = gpsTracker.getLongitude();
-                     EditText detailsGps = (EditText) view1.findViewById(R.id.detailers_gps_text);
-                     detailsGps.setText(capturedLatitude + "," + capturedLongitude);
-                 } else {
-                     gpsTracker.showSettingsAlert();
-                 }
              }
          });
      }

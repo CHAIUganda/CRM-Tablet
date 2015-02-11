@@ -49,9 +49,9 @@ public class ProductDao extends AbstractDao<Product, String> {
         db.execSQL("CREATE TABLE " + constraint + "'PRODUCT' (" + //
                 "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'NAME' TEXT NOT NULL ," + // 1: name
-                "'UNIT_OF_MEASURE' TEXT NOT NULL ," + // 2: unitOfMeasure
-                "'FORMULATION' TEXT NOT NULL ," + // 3: formulation
-                "'UNIT_PRICE' TEXT NOT NULL ," + // 4: unitPrice
+                "'UNIT_OF_MEASURE' TEXT," + // 2: unitOfMeasure
+                "'FORMULATION' TEXT," + // 3: formulation
+                "'UNIT_PRICE' TEXT," + // 4: unitPrice
                 "'GROUP_NAME' TEXT);"); // 5: groupName
     }
 
@@ -67,9 +67,21 @@ public class ProductDao extends AbstractDao<Product, String> {
         stmt.clearBindings();
         stmt.bindString(1, entity.getUuid());
         stmt.bindString(2, entity.getName());
-        stmt.bindString(3, entity.getUnitOfMeasure());
-        stmt.bindString(4, entity.getFormulation());
-        stmt.bindString(5, entity.getUnitPrice());
+ 
+        String unitOfMeasure = entity.getUnitOfMeasure();
+        if (unitOfMeasure != null) {
+            stmt.bindString(3, unitOfMeasure);
+        }
+ 
+        String formulation = entity.getFormulation();
+        if (formulation != null) {
+            stmt.bindString(4, formulation);
+        }
+ 
+        String unitPrice = entity.getUnitPrice();
+        if (unitPrice != null) {
+            stmt.bindString(5, unitPrice);
+        }
  
         String groupName = entity.getGroupName();
         if (groupName != null) {
@@ -95,9 +107,9 @@ public class ProductDao extends AbstractDao<Product, String> {
         Product entity = new Product( //
             cursor.getString(offset + 0), // uuid
             cursor.getString(offset + 1), // name
-            cursor.getString(offset + 2), // unitOfMeasure
-            cursor.getString(offset + 3), // formulation
-            cursor.getString(offset + 4), // unitPrice
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // unitOfMeasure
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // formulation
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // unitPrice
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // groupName
         );
         return entity;
@@ -108,9 +120,9 @@ public class ProductDao extends AbstractDao<Product, String> {
     public void readEntity(Cursor cursor, Product entity, int offset) {
         entity.setUuid(cursor.getString(offset + 0));
         entity.setName(cursor.getString(offset + 1));
-        entity.setUnitOfMeasure(cursor.getString(offset + 2));
-        entity.setFormulation(cursor.getString(offset + 3));
-        entity.setUnitPrice(cursor.getString(offset + 4));
+        entity.setUnitOfMeasure(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setFormulation(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setUnitPrice(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setGroupName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     

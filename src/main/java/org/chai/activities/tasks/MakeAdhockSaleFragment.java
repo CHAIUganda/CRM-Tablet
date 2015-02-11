@@ -19,6 +19,7 @@ import org.chai.model.*;
 import org.chai.util.CustomMultSelectDropDown;
 import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
+import org.chai.util.customwidget.GpsWidgetView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,11 +54,6 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
     private Customer salesCustomer;
     private List<Product> products;
     private boolean isUpdate = false;
-
-    private GPSTracker gpsTracker;
-    private double capturedLatitude;
-    private double capturedLongitude;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.adhock_sale_form,container, false);
@@ -138,7 +134,6 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             });
             manageDoyouStockZincResponses(view);
             setRequiredFields(view);
-            setGpsWidget(view);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -177,6 +172,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             ((AutoCompleteTextView) view.findViewById(R.id.adhock_sale_customer)).setText(saleInstance.getCustomer().getOutletName());
             salesCustomer = saleInstance.getCustomer();
             ((EditText) view.findViewById(R.id.adhock_sale_if_no_why)).setText(saleInstance.getIfNoWhy());
+            ((GpsWidgetView)view.findViewById(R.id.adhoc_sales_gps)).setLatLongText(saleInstance.getLatitude()+","+saleInstance.getLongitude());
 
             Spinner doyouStockZincSpinner = (Spinner) view.findViewById(R.id.adhock_sale_do_you_stock_zinc);
             Utils.setSpinnerSelection(doyouStockZincSpinner, (saleInstance.getDoYouStockOrsZinc() == true) ? "Yes" : "No");
@@ -347,8 +343,8 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         saleInstance.setRecommendationNextStep(((CustomMultSelectDropDown) getActivity().findViewById(R.id.adhock_sale_next_step_recommendation)).getText().toString());
         saleInstance.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.adhock_sale_government_approval)).getSelectedItem().toString());
         saleInstance.setCustomerId(salesCustomer.getUuid());
-        saleInstance.setLatitude(capturedLatitude);
-        saleInstance.setLongitude(capturedLongitude);
+        saleInstance.setLatitude(((GpsWidgetView)getActivity().findViewById(R.id.adhoc_sales_gps)).getMlocation().getLatitude());
+        saleInstance.setLongitude(((GpsWidgetView)getActivity().findViewById(R.id.adhoc_sales_gps)).getMlocation().getLatitude());
 
         if(isUpdate){
             saleDao.update(saleInstance);
@@ -431,25 +427,5 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_government_approval_lbl));
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_customer_lbl));
     }
-
-    private void setGpsWidget(final View view1) {
-        Button showGps = (Button)view1.findViewById(R.id.adhok_sales_capture_gps);
-        showGps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gpsTracker = new GPSTracker(getActivity());
-                if (gpsTracker.canGetLocation()) {
-                    capturedLatitude = gpsTracker.getLatitude();
-                    capturedLongitude = gpsTracker.getLongitude();
-                    EditText detailsGps = (EditText)view1.findViewById(R.id.adhoc_sales_gps);
-                    detailsGps.setText(capturedLatitude + "," + capturedLongitude);
-                } else {
-                    gpsTracker.showSettingsAlert();
-                }
-            }
-        });
-    }
-
-
 
 }

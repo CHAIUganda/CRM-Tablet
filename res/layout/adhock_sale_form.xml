@@ -53,31 +53,11 @@
 
         </LinearLayout>
 
-        <LinearLayout android:orientation="horizontal"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:padding="10dp">
-
-            <EditText
-                    android:id="@+id/adhoc_sales_gps"
-                    android:text=""
-                    android:minWidth="90dip"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:width="150dip"
-                    android:height="40dip"
-                    android:textColor="@color/list_main_text_color"
-                    android:background="@drawable/bordertextfield"/>
-
-            <Button
-                    android:id="@+id/adhok_sales_capture_gps"
-                    android:text="Record GPS Coordinates"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:background="#428bca"
-                    android:layout_marginLeft="5dp"/>
-        </LinearLayout>
+        <org.chai.util.customwidget.GpsWidgetView
+                android:id="@+id/adhoc_sales_gps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"/>
 
         <LinearLayout
                 android:orientation="vertical"

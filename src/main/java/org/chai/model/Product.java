@@ -19,11 +19,8 @@ public class Product {
     private String uuid;
     /** Not-null value. */
     private String name;
-    /** Not-null value. */
     private String unitOfMeasure;
-    /** Not-null value. */
     private String formulation;
-    /** Not-null value. */
     private String unitPrice;
     private String groupName;
 
@@ -83,32 +80,26 @@ public class Product {
         this.name = name;
     }
 
-    /** Not-null value. */
     public String getUnitOfMeasure() {
         return unitOfMeasure;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setUnitOfMeasure(String unitOfMeasure) {
         this.unitOfMeasure = unitOfMeasure;
     }
 
-    /** Not-null value. */
     public String getFormulation() {
         return formulation;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setFormulation(String formulation) {
         this.formulation = formulation;
     }
 
-    /** Not-null value. */
     public String getUnitPrice() {
         return unitPrice;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setUnitPrice(String unitPrice) {
         this.unitPrice = unitPrice;
     }

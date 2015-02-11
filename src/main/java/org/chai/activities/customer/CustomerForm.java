@@ -20,6 +20,7 @@ import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
+import org.chai.util.customwidget.GpsWidgetView;
 
 import java.util.*;
 
@@ -40,9 +41,6 @@ public class CustomerForm extends Activity {
     private VillageDao villageDao;
     private CustomerContactDao customerContactDao;
 
-    private GPSTracker gpsTracker;
-    private double capturedLatitude;
-    private double capturedLongitude;
 
     private Customer customerInstance;
     private List<CustomerContact> customerContacts = new ArrayList<CustomerContact>();
@@ -99,21 +97,6 @@ public class CustomerForm extends Activity {
         } catch (Exception ex) {
             //
         }
-        Button showGps = (Button) findViewById(R.id.new_customer_capture_gps);
-        showGps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gpsTracker = new GPSTracker(CustomerForm.this);
-                if (gpsTracker.canGetLocation()) {
-                    capturedLatitude = gpsTracker.getLatitude();
-                    capturedLongitude = gpsTracker.getLongitude();
-                    EditText detailsGps = (EditText) findViewById(R.id.details_gps);
-                    detailsGps.setText(capturedLatitude + "," + capturedLongitude);
-                } else {
-                    gpsTracker.showSettingsAlert();
-                }
-            }
-        });
 
         Button newContactBtn = (Button) findViewById(R.id.menu_add_new_customer_contact);
         newContactBtn.setOnClickListener(new View.OnClickListener() {
@@ -210,8 +193,8 @@ public class CustomerForm extends Activity {
             customerInstance.setNumberOfEmployees(Integer.parseInt(((EditText) findViewById(R.id.details_number_of_employees)).getText().toString()));
             customerInstance.setNumberOfCustomersPerDay(Integer.parseInt(((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString()));
             customerInstance.setRestockFrequency(((Spinner) findViewById(R.id.details_restock_frequency)).getSelectedItem().toString().toLowerCase());
-            customerInstance.setLongitude(capturedLongitude);
-            customerInstance.setLatitude(capturedLatitude);
+            customerInstance.setLongitude( ((GpsWidgetView) findViewById(R.id.customer_gps_view)).getMlocation().getLongitude());
+            customerInstance.setLatitude( ((GpsWidgetView) findViewById(R.id.customer_gps_view)).getMlocation().getLatitude());
             customerInstance.setSubcountyId(((Subcounty) subcountySpinner.getSelectedItem()).getUuid());
             customerInstance.setSubcountyUuid(((Subcounty) subcountySpinner.getSelectedItem()).getUuid());
         } catch (Exception ex) {
@@ -233,7 +216,7 @@ public class CustomerForm extends Activity {
             ((EditText) findViewById(R.id.details_desc_location)).setText(customerInstance.getDescriptionOfOutletLocation() == null ? "" : customerInstance.getDescriptionOfOutletLocation());
             ((EditText) findViewById(R.id.details_number_of_employees)).setText(customerInstance.getNumberOfEmployees() == null ? "" : customerInstance.getNumberOfEmployees() + "");
             ((EditText) findViewById(R.id.details_num_customers_per_day)).setText(customerInstance.getNumberOfCustomersPerDay() == null ? "" : customerInstance.getNumberOfCustomersPerDay() + "");
-            ((EditText) findViewById(R.id.details_gps)).setText(customerInstance.getLatitude()+","+customerInstance.getLongitude());
+            ((GpsWidgetView) findViewById(R.id.customer_gps_view)).setLatLongText(customerInstance.getLatitude() + "," + customerInstance.getLongitude());
 
             Spinner restockFreq = (Spinner)findViewById(R.id.details_restock_frequency);
             setSpinnerSelection(restockFreq,customerInstance.getRestockFrequency() == null ? "" : customerInstance.getRestockFrequency() + "");

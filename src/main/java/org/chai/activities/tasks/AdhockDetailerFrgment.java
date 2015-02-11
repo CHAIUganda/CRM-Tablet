@@ -12,6 +12,7 @@ import org.chai.model.Customer;
 import org.chai.model.DetailerCall;
 import org.chai.model.Task;
 import org.chai.util.CustomMultSelectDropDown;
+import org.chai.util.customwidget.GpsWidgetView;
 
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,6 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
         initialiseGreenDao();
 
         setDateWidget(view);
-        setGpsWidget(view);
         initDetailerInstance();
         List<Customer> customersList = customerDao.loadAll();
         AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.adhock_detailer_customer);
@@ -153,7 +153,7 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
         detailerCallInstance.setDoYouStockOrs(stocksOrs.equalsIgnoreCase("Yes") ? true : false);
 
         detailerCallInstance.setKnowledgeAbtZincAndUsage(((Spinner) getActivity().findViewById(R.id.detailer_how_zinc_should_be_used)).getSelectedItem().toString());
-        detailerCallInstance.setLatitude(capturedLatitude);
-        detailerCallInstance.setLongitude(capturedLongitude);
+        detailerCallInstance.setLatitude(((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getMlocation().getLatitude());
+        detailerCallInstance.setLongitude(((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getMlocation().getLatitude());
     }
 }

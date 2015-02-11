@@ -38,4 +38,5 @@
     <string name="det_whatdoyouknowaboutzink">Zinc helps the child recover quickly and improve appetite and growth\nGive to the child for the full 10 days\nDosage can change based on the age of the child
 </string>
     <string name="det_whyshould_younot_use_antibiotics">Antibiotics should be used for bacterial infections only\nMost diarrhea cases are caused by viruses\nAntibiotics can make people sicker in the long term</string>
+    <string name="location_provider_accuracy">Using %1$s. Accuracy is %2$s meters.</string>
 </resources>

@@ -22,7 +22,6 @@ public class StokeData {
     private String adhockStockId;
     /** Not-null value. */
     private String productId;
-
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */

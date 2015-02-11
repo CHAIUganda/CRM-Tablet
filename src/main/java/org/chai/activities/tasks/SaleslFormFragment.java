@@ -18,6 +18,7 @@ import org.chai.model.*;
 import org.chai.util.CustomMultSelectDropDown;
 import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
+import org.chai.util.customwidget.GpsWidgetView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,10 +52,6 @@ public class SaleslFormFragment extends Fragment {
     private Customer salesCustomer;
     private List<Product> products;
     private boolean isUpdate = false;
-
-    private GPSTracker gpsTracker;
-    private double capturedLatitude;
-    private double capturedLongitude;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
@@ -139,7 +136,6 @@ public class SaleslFormFragment extends Fragment {
             setRequiredFields(view);
             manageDoyouStockZincResponses(view);
             bindSalesInfoToUI(view);
-            setGpsWidget(view);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -168,7 +164,7 @@ public class SaleslFormFragment extends Fragment {
     private void bindSalesInfoToUI(View view) {
         if (!isNewSalesCall()) {
             ((EditText) view.findViewById(R.id.sales_if_no_why)).setText(saleCallData.getIfNoWhy());
-            ((EditText) view.findViewById(R.id.sales_gps)).setText(saleCallData.getLatitude()+","+saleCallData.getLongitude());
+            ((GpsWidgetView) view.findViewById(R.id.sales_gps)).setLatLongText(saleCallData.getLatitude()+","+saleCallData.getLongitude());
 
             Spinner doyouStockZincSpinner = (Spinner) view.findViewById(R.id.sales_do_you_stock_zinc);
             Utils.setSpinnerSelection(doyouStockZincSpinner, (saleCallData.getDoYouStockOrsZinc() == true) ? "Yes" : "No");
@@ -310,8 +306,8 @@ public class SaleslFormFragment extends Fragment {
             saleCallData.setTaskId(callDataTask.getUuid());
             saleCallData.setOrderId(callDataTask.getUuid());
             saleCallData.setOrderId(callDataTask.getUuid());
-            saleCallData.setLatitude(capturedLatitude);
-            saleCallData.setLongitude(capturedLongitude);
+            saleCallData.setLatitude(((GpsWidgetView)getActivity().findViewById(R.id.sales_gps)).getMlocation().getLatitude());
+            saleCallData.setLongitude(((GpsWidgetView)getActivity().findViewById(R.id.sales_gps)).getMlocation().getLongitude());
             if(isUpdate){
                 saleDao.update(saleCallData);
                 submitSaleData(saleCallData);
@@ -448,24 +444,5 @@ public class SaleslFormFragment extends Fragment {
         }
         return true;
     }
-
-    protected void setGpsWidget(final View view1) {
-        Button showGps = (Button)view1.findViewById(R.id.sales_capture_gps);
-        showGps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gpsTracker = new GPSTracker(getActivity());
-                if (gpsTracker.canGetLocation()) {
-                    capturedLatitude = gpsTracker.getLatitude();
-                    capturedLongitude = gpsTracker.getLongitude();
-                    EditText detailsGps = (EditText)view1.findViewById(R.id.sales_gps);
-                    detailsGps.setText(capturedLatitude + "," + capturedLongitude);
-                } else {
-                    gpsTracker.showSettingsAlert();
-                }
-            }
-        });
-    }
-
 
 }

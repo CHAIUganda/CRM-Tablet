@@ -15,8 +15,9 @@ import android.content.Intent;
  import org.chai.model.*;
  import org.chai.util.CustomMultSelectDropDown;
  import org.chai.util.Utils;
+import org.chai.util.customwidget.GpsWidgetView;
 
- import java.util.Calendar;
+import java.util.Calendar;
  import java.util.Date;
  import java.util.List;
  import java.util.UUID;
@@ -54,7 +55,6 @@ import android.content.Intent;
              detailerCallInstance.setIsHistory(false);
          }
          setDateWidget(view);
-         setGpsWidget(view);
          List<Village> villageData = villageDao.loadAll();
          Village[] villages = villageData.toArray(new Village[villageData.size()]);
          subcountyTxt = (TextView)view.findViewById(R.id.detailer_subcounty);
@@ -167,8 +167,8 @@ import android.content.Intent;
          detailerCallInstance.setDoYouStockOrs(stocksOrs.equalsIgnoreCase("Yes") ? true : false);
 
          detailerCallInstance.setKnowledgeAbtZincAndUsage(((Spinner) getActivity().findViewById(R.id.detailer_how_zinc_should_be_used)).getSelectedItem().toString());
-         detailerCallInstance.setLatitude(capturedLatitude);
-         detailerCallInstance.setLongitude(capturedLongitude);
+         detailerCallInstance.setLatitude(((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getMlocation().getLatitude());
+         detailerCallInstance.setLongitude(((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getMlocation().getLongitude());
      }
 
      @Override
@@ -185,18 +185,18 @@ import android.content.Intent;
              ((TextView)view. findViewById(R.id.detailer_district)).setText(customer.getSubcounty().getDistrict().getName());
              ((TextView)view. findViewById(R.id.detailer_subcounty)).setText(customer.getSubcounty().getName());
              ((TextView)view. findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
-             ((TextView)view. findViewById(R.id.detailers_gps_text)).setText(detailerCallInstance.getLatitude()+","+ detailerCallInstance.getLongitude());
+             ((GpsWidgetView)view. findViewById(R.id.detailers_gps_view)).setLatLongText(detailerCallInstance.getLatitude()+","+ detailerCallInstance.getLongitude());
              CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
              if(keyCustomerContact!= null){
                  ((TextView)view. findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact.getNames());
                  ((TextView)view. findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact.getContact());
              }
-             ((EditText)view. findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
+             ((GpsWidgetView)view. findViewById(R.id.detailers_gps_view)).setLatLongText(customer.getLatitude() + "," + customer.getLongitude());
              ((EditText)view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).setText(detailerCallInstance.getDiarrheaPatientsInFacility() + "");
              ((EditText)view.findViewById(R.id.detailer_other_ways_youheard_about_zinc)).setText(detailerCallInstance.getOtherWaysHowYouHeard());
              ((EditText)view. findViewById(R.id.detailer_if_no_zinc_why)).setText(detailerCallInstance.getIfNoZincWhy());
              ((EditText)view. findViewById(R.id.detailer_if_no_ors_why)).setText(detailerCallInstance.getIfNoOrsWhy());
-             ((EditText)view.findViewById(R.id.detailers_gps_text)).setText(detailerCallInstance.getLatitude() == null ? "0.0,0.0" : detailerCallInstance.getLatitude() + ","+ detailerCallInstance.getLongitude());
+             ((GpsWidgetView)view.findViewById(R.id.detailers_gps_view)).setLatLongText(detailerCallInstance.getLatitude() == null ? "0.0,0.0" : detailerCallInstance.getLatitude() + ","+ detailerCallInstance.getLongitude());
 
              //spinners
 
@@ -248,7 +248,7 @@ import android.content.Intent;
                  ((TextView)view. findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
                  ((TextView)view. findViewById(R.id.detailer_name)).setText(customer.getOutletName());
                  ((TextView)view. findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
-                 ((EditText)view. findViewById(R.id.detailers_gps_text)).setText(customer.getLatitude() + "," + customer.getLongitude());
+                 ((GpsWidgetView)view. findViewById(R.id.detailers_gps_view)).setLatLongText(customer.getLatitude() + "," + customer.getLongitude());
                  CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
                  ((TextView)view. findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getNames():"");
                  ((TextView)view.findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getContact():"");
@@ -281,10 +281,10 @@ import android.content.Intent;
                    view.findViewById(R.id.detailer_desc_location).setEnabled(false);
                    view.findViewById(R.id.detailer_subcounty).setEnabled(false);
                    view.findViewById(R.id.detailer_outlet_size).setEnabled(false);
-                   view.findViewById(R.id.detailers_gps_text).setEnabled(false);
+                   view.findViewById(R.id.detailers_gps_view).setEnabled(false);
                    view.findViewById(R.id.detailer_key_retailer_name).setEnabled(false);
                    view.findViewById(R.id.detailer_key_retailer_contact).setEnabled(false);
-                   view.findViewById(R.id.detailers_gps_text).setEnabled(false);
+                   view.findViewById(R.id.detailers_gps_view).setEnabled(false);
                    view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility).setEnabled(false);
                    view.findViewById(R.id.detailer_other_ways_youheard_about_zinc).setEnabled(false);
                   /* view.findViewById(R.id.detailers_howmany_in_stock_zinc).setEnabled(false);
@@ -295,7 +295,7 @@ import android.content.Intent;
                    view.findViewById(R.id.detailer_if_no_ors_why).setEnabled(false);
                  /*  view.findViewById(R.id.detailer_whatpricedoyoubuyzinc).setEnabled(false);
                                                 view.findViewById(R.id.detailer_whatpricedoyoubuyors).setEnabled(false);*/
-                   view.findViewById(R.id.detailers_gps_text).setEnabled(false);
+                   view.findViewById(R.id.detailers_gps_view).setEnabled(false);
 
                    //spinners
                    view.findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors).setEnabled(false);
