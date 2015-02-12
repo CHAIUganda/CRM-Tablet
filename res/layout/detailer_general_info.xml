@@ -328,7 +328,7 @@
                       android:id="@+id/detailer_do_you_stock_zinc_view"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="9.Do you stock Zinc"
+                      android:text="10.Do you stock Zinc"
                       android:textColor="@color/list_main_text_color"
                       android:textStyle="bold"/>
 
@@ -362,7 +362,7 @@
                       android:layout_margin="1dp">
 
                   <TextView
-                          android:text="10.If yes, please note the brands sold,\n stock levels, buying prices, and selling prices for each"
+                          android:text="11.If yes, please note the brands sold,\n stock levels, buying prices, and selling prices for each"
                           android:textColor="@color/list_main_text_color"
                           android:textSize="@dimen/list_main_text_size"
                           android:layout_span="4"/>
@@ -419,7 +419,7 @@
               <TextView
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="14.If No, why?"
+                      android:text="12.If No, why?"
                       android:textColor="@color/list_main_text_color"
                       android:textStyle="bold"/>
 
@@ -445,10 +445,10 @@
                   android:padding="10dp">
 
               <TextView
-                      android:id="@+id/detailer_do_you_stock_zinc_view"
+                      android:id="@+id/detailer_do_you_stock_ors_view"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="15.Do you stock ORS"
+                      android:text="13.Do you stock ORS"
                       android:textColor="@color/list_main_text_color"
                       android:textStyle="bold"/>
 
@@ -481,7 +481,7 @@
                       android:layout_margin="1dp">
 
                   <TextView
-                          android:text="10.If yes, please note the brands sold,\n stock levels, buying prices, and selling prices for each"
+                          android:text="14.If yes, please note the brands sold,\n stock levels, buying prices, and selling prices for each"
                           android:textColor="@color/list_main_text_color"
                           android:textSize="@dimen/list_main_text_size"
                           android:layout_span="4"/>
@@ -538,7 +538,7 @@
               <TextView
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="20.If No, why?"
+                      android:text="15.If No, why?"
                       android:textColor="@color/list_main_text_color"
                       android:textStyle="bold"/>
 
@@ -567,7 +567,7 @@
                       android:id="@+id/detailer_point_of_sale_view"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="21.Point of sale materials dropped"
+                      android:text="16.Point of sale materials dropped"
                       android:textColor="@color/list_main_text_color"
                       android:textStyle="bold"/>
 
@@ -589,7 +589,7 @@
               <TextView
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:text="22.Others Specify"
+                      android:text="17.Others Specify"
                       android:textColor="@color/list_main_text_color"
                       android:textStyle="bold"/>
 
@@ -616,7 +616,7 @@
                       android:id="@+id/detailer_recomendation_level_lbl"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="23.Based on your interaction, do you believe this retailer will recommend ORS and/or zinc as a 1st-line treatment for diarrhea?"
+                      android:text="18.Based on your interaction, do you believe this retailer will recommend ORS and/or zinc as a 1st-line treatment for diarrhea?"
                       android:textColor="@color/list_main_text_color"
                       android:textStyle="bold"/>
 
@@ -640,7 +640,7 @@
                       android:id="@+id/detailer_recommendation_next_step_view"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="24.What did you recommend as next steps for the retailer"
+                      android:text="19.What did you recommend as next steps for the retailer"
                       android:textColor="@color/list_main_text_color"
                       android:textStyle="bold"/>
 

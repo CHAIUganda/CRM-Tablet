@@ -234,10 +234,11 @@ import java.util.*;
      protected void setRequiredFields(View view) {
          setRequired((TextView) view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility_view));
          setRequired((TextView) view.findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors_view));
-         setRequired((TextView) view.findViewById(R.id.detailer_how_ors_should_be_used_view));
-         setRequired((TextView) view.findViewById(R.id.detailer_how_zinc_should_be_used_view));
-         setRequired((TextView) view.findViewById(R.id.detailer_why_should_not_use_antibiotics_view));
+//         setRequired((TextView) view.findViewById(R.id.detailer_how_ors_should_be_used_view));
+//         setRequired((TextView) view.findViewById(R.id.detailer_how_zinc_should_be_used_view));
+//         setRequired((TextView) view.findViewById(R.id.detailer_why_should_not_use_antibiotics_view));
          setRequired((TextView) view.findViewById(R.id.detailer_do_you_stock_zinc_view));
+         setRequired((TextView) view.findViewById(R.id.detailer_do_you_stock_ors_view));
          setRequired((TextView) view.findViewById(R.id.detailer_point_of_sale_view));
          setRequired((TextView) view.findViewById(R.id.detailer_recommendation_next_step_view));
          setRequired((TextView) view.findViewById(R.id.detailer_recomendation_level_lbl));
@@ -320,13 +321,7 @@ import java.util.*;
              return false;
          } else if (((Spinner) view.findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors)).getSelectedItem().toString().equals("")) {
              return false;
-         } else if (((Spinner) view.findViewById(R.id.detailer_effect_diarrhea_has_on_the_body)).getSelectedItem().toString().equals("")) {
-             return false;
-         } else if (((Spinner) view.findViewById(R.id.detailer_how_ors_should_be_used)).getSelectedItem().toString().equals("")) {
-             return false;
-         } else if (((Spinner) view.findViewById(R.id.detailer_how_zinc_should_be_used)).getSelectedItem().toString().equals("")) {
-             return false;
-         } else if (((Spinner) view.findViewById(R.id.detailer_why_should_not_use_antibiotics)).getSelectedItem().toString().equals("")) {
+         } else if (((Spinner) view.findViewById(R.id.detailer_do_you_stock_ors)).getSelectedItem().toString().equals("")) {
              return false;
          } else if (((Spinner) view.findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString().equals("")) {
              return false;
