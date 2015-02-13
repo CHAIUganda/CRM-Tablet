@@ -11,11 +11,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-
           <LinearLayout
                   android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:padding="10dp">
+
+              <TextView
+                      android:id="@+id/detailer_survey_date_lbl"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text=""
+                      android:textColor="@color/list_main_text_color"
+                      android:textStyle="bold"/>
 
                <EditText
                        android:id="@+id/detailer_survey_date"
@@ -39,12 +46,30 @@
                        android:layout_marginLeft="5dp"
                        android:textColor="#fff"/>
            </LinearLayout>
-
-          <org.chai.util.customwidget.GpsWidgetView
-                  android:id="@+id/detailers_gps_view"
+          <LinearLayout
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:padding="10dp"/>
+                  android:layout_height="fill_parent">
+
+              <TextView
+                      android:id="@+id/detailer_gps_lbl"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text=""
+                      android:textColor="@color/list_main_text_color"
+                      android:textStyle="bold"
+                      android:layout_marginTop="20dp"
+                      android:layout_marginLeft="5dp"/>
+
+              <org.chai.util.customwidget.GpsWidgetView
+                      android:id="@+id/detailers_gps_view"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:width="150dip"
+                      android:height="40dip"
+                      android:padding="7dp"/>
+
+                  </LinearLayout>
 
 
           <LinearLayout

@@ -114,5 +114,18 @@ public class Place extends RestClient {
         return null;
     }
 
+    public SummaryReport[] getSummaryReports(){
+        try{
+            RestTemplate restTemplate = getRestTemplate();
+            ResponseEntity<SummaryReport[]> responseEntity = restTemplate.exchange(REST_URL+"dashboard",HttpMethod.GET,getRequestEntity(),SummaryReport[].class);
+            SummaryReport[] summaryReports = responseEntity.getBody();
+            Log.i("REST CLIENT:","found "+summaryReports.length+" Reports");
+            return summaryReports;
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return  null;
+    }
+
 
 }

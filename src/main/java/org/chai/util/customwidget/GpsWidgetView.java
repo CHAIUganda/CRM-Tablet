@@ -32,7 +32,7 @@ public class GpsWidgetView extends LinearLayout implements LocationListener{
     private String latLongText;
     private Context context;
 
-    public static final double DEFAULT_LOCATION_ACCURACY = 5.0;
+    public static final double DEFAULT_LOCATION_ACCURACY = 15.0;
     private boolean isGPSEnabled = false;
     private boolean isNetworkEnabled = false;
     private boolean canGetLocation = false;
@@ -55,13 +55,13 @@ public class GpsWidgetView extends LinearLayout implements LocationListener{
 
         latLongTxtView = (EditText)getChildAt(0);
         captureGpsBtn = (Button)getChildAt(1);
-        captureGpsBtn.setOnClickListener(new OnClickListener(){
+        captureGpsBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 showLocationDialog();
+                getLocation();
             }
         });
-        getLocation();
     }
 
     public String getLatLongText() {
@@ -89,9 +89,9 @@ public class GpsWidgetView extends LinearLayout implements LocationListener{
                         if(locationManager != null){
                             mlocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                         }
-                        if(mlocation != null){
+                      /*  if(mlocation != null){
                             latLongTxtView.setText(mlocation.getLatitude()+","+ mlocation.getLongitude());
-                        }
+                        }*/
                     }
                 }
                 if(isNetworkEnabled){
@@ -99,9 +99,9 @@ public class GpsWidgetView extends LinearLayout implements LocationListener{
                     Log.d("Network:", LocationManager.NETWORK_PROVIDER);
                     if(locationManager != null){
                         mlocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                        if(mlocation != null){
+                       /* if(mlocation != null){
                             latLongTxtView.setText(mlocation.getLatitude()+","+ mlocation.getLongitude());
-                        }
+                        }*/
                     }
                 }
 
@@ -208,8 +208,9 @@ public class GpsWidgetView extends LinearLayout implements LocationListener{
         mLocationDialog.show();
     }
 
-    private void returnLocation() {
+    private void returnLocation(){
         if (mlocation != null&&mLocationDialog!=null&&mLocationDialog.isShowing())  {
+            latLongTxtView.setText(mlocation.getLatitude()+","+ mlocation.getLongitude());
             mLocationDialog.dismiss();
         }
     }

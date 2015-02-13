@@ -44,6 +44,7 @@ public class Customer {
     private Boolean isActive;
     /** Not-null value. */
     private String subcountyId;
+
     private List<AdhockSale> adhockSales;
 
     // KEEP FIELDS - put your custom fields here

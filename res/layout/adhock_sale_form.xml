@@ -229,7 +229,7 @@
                         android:text="Quantity:"
                         android:textColor="@color/list_main_text_color"/>
                 <TextView
-                        android:text="Price:"
+                        android:text="Price per unit:"
                         android:textColor="@color/list_main_text_color"/>
 
             </TableRow>

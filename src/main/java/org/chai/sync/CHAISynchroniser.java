@@ -42,6 +42,7 @@ public class CHAISynchroniser {
     private SaleDataDao saleDataDao;
     private OrderDao orderDao;
     private AdhockSaleDao adhockSaleDao;
+    private SummaryReportDao summaryReportDao;
 
     public CHAISynchroniser(Activity activity) {
         this.parent = activity;
@@ -83,6 +84,7 @@ public class CHAISynchroniser {
             saleDataDao = daoSession.getSaleDataDao();
             orderDao = daoSession.getOrderDao();
             adhockSaleDao = daoSession.getAdhockSaleDao();
+            summaryReportDao = daoSession.getSummaryReportDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
         }
@@ -109,6 +111,7 @@ public class CHAISynchroniser {
             downloadTasks();
             progressDialog.incrementProgressBy(20);
             downloadProducts();
+            downloadSummaryReports();
 
             progressDialog.incrementProgressBy(20);
         }catch (HttpClientErrorException e){
@@ -268,6 +271,14 @@ public class CHAISynchroniser {
             if(uploaded){
                 orderDao.deleteAll();
             }
+        }
+    }
+
+    private void downloadSummaryReports() {
+        summaryReportDao.deleteAll();
+        SummaryReport[] summaryReports = place.getSummaryReports();
+        for (SummaryReport summaryReport : summaryReports) {
+            summaryReportDao.insert(summaryReport);
         }
     }
 

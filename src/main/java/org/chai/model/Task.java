@@ -1,6 +1,7 @@
 package org.chai.model;
 
 import java.util.List;
+
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -8,6 +9,7 @@ import de.greenrobot.dao.DaoException;
 
 // KEEP INCLUDES - put your custom includes here
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @JsonIgnoreProperties(ignoreUnknown = true)
 // KEEP INCLUDES END
 /**
@@ -31,19 +33,22 @@ public class Task {
     /** Not-null value. */
     private String customerId;
 
-    /** Used to resolve relations */
-    private transient DaoSession daoSession;
-
-    /** Used for active entity operations. */
-    private transient TaskDao myDao;
-
     private Customer customer;
     private String customer__resolvedKey;
 
-    private List<Sale> sales;
-    private List<DetailerCall> detailers;
 
     // KEEP FIELDS - put your custom fields here
+
+    /** Used to resolve relations */
+    @JsonIgnore
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    @JsonIgnore
+    private transient TaskDao myDao;
+    @JsonIgnore
+    private List<Sale> sales;
+    private List<DetailerCall> detailers;
     // KEEP FIELDS END
 
     public Task() {

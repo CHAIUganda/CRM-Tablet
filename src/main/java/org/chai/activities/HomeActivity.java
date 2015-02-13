@@ -27,6 +27,7 @@ import org.chai.activities.tasks.TakeOrderFragment;
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.adapter.NavDrawerListAdapter;
 import org.chai.model.User;
+import org.chai.reports.ReportViewFragment;
 import org.chai.rest.RestClient;
 import org.chai.sync.CHAISynchroniser;
 import org.chai.util.NavDrawerItem;
@@ -75,6 +76,7 @@ public class HomeActivity extends FragmentActivity{
         }else{
             navDrawerItems.add(new NavDrawerItem(navMenuTitles[5],navMenuIcons.getResourceId(2,-1)));
         }
+//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[6],navMenuIcons.getResourceId(4,-1)));
 
         navMenuIcons.recycle();
         adapter = new NavDrawerListAdapter(getApplicationContext(),navDrawerItems);
@@ -182,7 +184,7 @@ public class HomeActivity extends FragmentActivity{
                 }
                 break;
             case 5:
-                fragment = new AdhockDetailerFrgment();
+                fragment = new ReportViewFragment();
                 break;
             default:
                 break;
@@ -192,7 +194,7 @@ public class HomeActivity extends FragmentActivity{
             fragmentManager.beginTransaction().replace(R.id.frame_container,fragment).commit();
             mDrawerList.setItemChecked(position,true);
             mDrawerList.setSelection(position);
-            if (position == 4 && RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
+            if ((position == 4 && RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER))||position>4) {
                 setTitle(navMenuTitles[position+1]);
             }else{
                 setTitle(navMenuTitles[position]);

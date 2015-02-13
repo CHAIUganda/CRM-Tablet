@@ -42,6 +42,7 @@ public class DetailerCall {
     private Boolean isHistory;
     /** Not-null value. */
     private String taskId;
+
     private List<DetailerStock> detailerStocks;
 
     // KEEP FIELDS - put your custom fields here

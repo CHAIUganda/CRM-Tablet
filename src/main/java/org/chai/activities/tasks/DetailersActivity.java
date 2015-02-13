@@ -248,7 +248,6 @@ import java.util.Calendar;
                  ((TextView)view. findViewById(R.id.detailer_outlet_size)).setText(customer.getOutletSize());
                  ((TextView)view. findViewById(R.id.detailer_name)).setText(customer.getOutletName());
                  ((TextView)view. findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
-                 ((GpsWidgetView)view. findViewById(R.id.detailers_gps_view)).setLatLongText(customer.getLatitude() + "," + customer.getLongitude());
                  CustomerContact keyCustomerContact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
                  ((TextView)view. findViewById(R.id.detailer_key_retailer_name)).setText(keyCustomerContact!= null?keyCustomerContact.getNames():"");
                  ((TextView)view.findViewById(R.id.detailer_key_retailer_contact)).setText(keyCustomerContact!= null?keyCustomerContact.getContact():"");
