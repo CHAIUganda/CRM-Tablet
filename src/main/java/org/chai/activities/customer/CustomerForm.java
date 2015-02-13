@@ -193,8 +193,10 @@ public class CustomerForm extends Activity {
             customerInstance.setNumberOfEmployees(Integer.parseInt(((EditText) findViewById(R.id.details_number_of_employees)).getText().toString()));
             customerInstance.setNumberOfCustomersPerDay(Integer.parseInt(((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString()));
             customerInstance.setRestockFrequency(((Spinner) findViewById(R.id.details_restock_frequency)).getSelectedItem().toString().toLowerCase());
-            customerInstance.setLongitude( ((GpsWidgetView) findViewById(R.id.customer_gps_view)).getMlocation().getLongitude());
-            customerInstance.setLatitude( ((GpsWidgetView) findViewById(R.id.customer_gps_view)).getMlocation().getLatitude());
+            if (!((GpsWidgetView) findViewById(R.id.customer_gps_view)).getLatLongText().equals("")) {
+                customerInstance.setLongitude(((GpsWidgetView) findViewById(R.id.customer_gps_view)).getMlocation().getLongitude());
+                customerInstance.setLatitude(((GpsWidgetView) findViewById(R.id.customer_gps_view)).getMlocation().getLatitude());
+            }
             customerInstance.setSubcountyId(((Subcounty) subcountySpinner.getSelectedItem()).getUuid());
             customerInstance.setSubcountyUuid(((Subcounty) subcountySpinner.getSelectedItem()).getUuid());
         } catch (Exception ex) {

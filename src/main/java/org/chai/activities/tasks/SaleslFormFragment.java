@@ -306,8 +306,10 @@ public class SaleslFormFragment extends Fragment {
             saleCallData.setTaskId(callDataTask.getUuid());
             saleCallData.setOrderId(callDataTask.getUuid());
             saleCallData.setOrderId(callDataTask.getUuid());
-            saleCallData.setLatitude(((GpsWidgetView)getActivity().findViewById(R.id.sales_gps)).getMlocation().getLatitude());
-            saleCallData.setLongitude(((GpsWidgetView)getActivity().findViewById(R.id.sales_gps)).getMlocation().getLongitude());
+            if (!((GpsWidgetView) getActivity().findViewById(R.id.sales_gps)).getLatLongText().equals("")) {
+                saleCallData.setLatitude(((GpsWidgetView) getActivity().findViewById(R.id.sales_gps)).getMlocation().getLatitude());
+                saleCallData.setLongitude(((GpsWidgetView) getActivity().findViewById(R.id.sales_gps)).getMlocation().getLongitude());
+            }
             if(isUpdate){
                 saleDao.update(saleCallData);
                 submitSaleData(saleCallData);

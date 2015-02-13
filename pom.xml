@@ -84,6 +84,10 @@
                     </sdk>
                     <!--<deleteConflictingFiles>true</deleteConflictingFiles>-->
                     <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                    <sign>
+                        <debug>false</debug>
+                    </sign>
+                    <release>true</release>
                 </configuration>
                 <extensions>true</extensions>
             </plugin>
@@ -100,6 +104,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jarsigner-plugin</artifactId>
+                <version>1.4</version>
                 <executions>
                     <execution>
                         <id>signing</id>

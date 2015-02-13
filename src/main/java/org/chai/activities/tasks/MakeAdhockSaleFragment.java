@@ -172,6 +172,7 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
             ((AutoCompleteTextView) view.findViewById(R.id.adhock_sale_customer)).setText(saleInstance.getCustomer().getOutletName());
             salesCustomer = saleInstance.getCustomer();
             ((EditText) view.findViewById(R.id.adhock_sale_if_no_why)).setText(saleInstance.getIfNoWhy());
+
             ((GpsWidgetView)view.findViewById(R.id.adhoc_sales_gps)).setLatLongText(saleInstance.getLatitude()+","+saleInstance.getLongitude());
 
             Spinner doyouStockZincSpinner = (Spinner) view.findViewById(R.id.adhock_sale_do_you_stock_zinc);
@@ -343,8 +344,11 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
         saleInstance.setRecommendationNextStep(((CustomMultSelectDropDown) getActivity().findViewById(R.id.adhock_sale_next_step_recommendation)).getText().toString());
         saleInstance.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.adhock_sale_government_approval)).getSelectedItem().toString());
         saleInstance.setCustomerId(salesCustomer.getUuid());
-        saleInstance.setLatitude(((GpsWidgetView)getActivity().findViewById(R.id.adhoc_sales_gps)).getMlocation().getLatitude());
-        saleInstance.setLongitude(((GpsWidgetView)getActivity().findViewById(R.id.adhoc_sales_gps)).getMlocation().getLatitude());
+
+        if (!((GpsWidgetView) getActivity().findViewById(R.id.adhoc_sales_gps)).getLatLongText().equals("")) {
+            saleInstance.setLatitude(((GpsWidgetView)getActivity().findViewById(R.id.adhoc_sales_gps)).getMlocation().getLatitude());
+            saleInstance.setLongitude(((GpsWidgetView) getActivity().findViewById(R.id.adhoc_sales_gps)).getMlocation().getLatitude());
+        }
 
         if(isUpdate){
             saleDao.update(saleInstance);

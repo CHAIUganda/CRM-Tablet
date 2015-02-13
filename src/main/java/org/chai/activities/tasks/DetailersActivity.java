@@ -167,8 +167,10 @@ import java.util.Calendar;
          detailerCallInstance.setDoYouStockOrs(stocksOrs.equalsIgnoreCase("Yes") ? true : false);
 
          detailerCallInstance.setKnowledgeAbtZincAndUsage(((Spinner) getActivity().findViewById(R.id.detailer_how_zinc_should_be_used)).getSelectedItem().toString());
-         detailerCallInstance.setLatitude(((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getMlocation().getLatitude());
-         detailerCallInstance.setLongitude(((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getMlocation().getLongitude());
+         if(!((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getLatLongText().toString().equals("")){
+             detailerCallInstance.setLatitude(((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getMlocation().getLatitude());
+             detailerCallInstance.setLongitude(((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getMlocation().getLongitude());
+         }
      }
 
      @Override
