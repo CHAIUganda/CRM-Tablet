@@ -30,6 +30,7 @@ public class Product {
     /** Used for active entity operations. */
     private transient ProductDao myDao;
 
+    private List<TaskOrder> taskOrderproducts;
     private List<Promotion> promotions;
     private List<OrderData> orderDatas;
     private List<SaleData> salesDatas;
@@ -110,6 +111,28 @@ public class Product {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<TaskOrder> getTaskOrderproducts() {
+        if (taskOrderproducts == null) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            TaskOrderDao targetDao = daoSession.getTaskOrderDao();
+            List<TaskOrder> taskOrderproductsNew = targetDao._queryProduct_TaskOrderproducts(uuid);
+            synchronized (this) {
+                if(taskOrderproducts == null) {
+                    taskOrderproducts = taskOrderproductsNew;
+                }
+            }
+        }
+        return taskOrderproducts;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetTaskOrderproducts() {
+        taskOrderproducts = null;
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

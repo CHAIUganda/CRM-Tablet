@@ -7,101 +7,90 @@ import de.greenrobot.dao.DaoException;
 
 // KEEP INCLUDES - put your custom includes here
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 @JsonIgnoreProperties(ignoreUnknown = true)
 // KEEP INCLUDES END
 /**
- * Entity mapped to table STOKE_DATA.
+ * Entity mapped to table TASK_ORDER.
  */
-public class StokeData {
+public class TaskOrder {
 
+    private Long id;
+    private String quantity;
+    private String unitPrice;
     /** Not-null value. */
-    private String uuid;
-    private int quantity;
-    private String saleId;
-    private String adhockStockId;
+    private String taskId;
     /** Not-null value. */
     private String productId;
 
-    // KEEP FIELDS - put your custom fields here
-
     /** Used to resolve relations */
-    @JsonIgnore
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    @JsonIgnore
-    private transient StokeDataDao myDao;
+    private transient TaskOrderDao myDao;
 
-    @JsonIgnore
-    private Sale sale;
-    @JsonIgnore
-    private String sale__resolvedKey;
+    private Task task;
+    private String task__resolvedKey;
 
-    @JsonIgnore
     private Product product;
-    @JsonIgnore
     private String product__resolvedKey;
 
-    @JsonIgnore
-    private AdhockSale adhockSale;
-    @JsonIgnore
-    private String adhockSale__resolvedKey;
+
+    // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
-    public StokeData() {
+    public TaskOrder() {
     }
 
-    public StokeData(String uuid) {
-        this.uuid = uuid;
+    public TaskOrder(Long id) {
+        this.id = id;
     }
 
-    public StokeData(String uuid, int quantity, String saleId, String adhockStockId, String productId) {
-        this.uuid = uuid;
+    public TaskOrder(Long id, String quantity, String unitPrice, String taskId, String productId) {
+        this.id = id;
         this.quantity = quantity;
-        this.saleId = saleId;
-        this.adhockStockId = adhockStockId;
+        this.unitPrice = unitPrice;
+        this.taskId = taskId;
         this.productId = productId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getStokeDataDao() : null;
+        myDao = daoSession != null ? daoSession.getTaskOrderDao() : null;
     }
 
-    /** Not-null value. */
-    public String getUuid() {
-        return uuid;
+    public Long getId() {
+        return id;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
-    public String getSaleId() {
-        return saleId;
+    public String getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setSaleId(String saleId) {
-        this.saleId = saleId;
+    public void setUnitPrice(String unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
-    public String getAdhockStockId() {
-        return adhockStockId;
+    /** Not-null value. */
+    public String getTaskId() {
+        return taskId;
     }
 
-    public void setAdhockStockId(String adhockStockId) {
-        this.adhockStockId = adhockStockId;
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
     }
 
     /** Not-null value. */
@@ -115,27 +104,30 @@ public class StokeData {
     }
 
     /** To-one relationship, resolved on first access. */
-    public Sale getSale() {
-        String __key = this.saleId;
-        if (sale__resolvedKey == null || sale__resolvedKey != __key) {
+    public Task getTask() {
+        String __key = this.taskId;
+        if (task__resolvedKey == null || task__resolvedKey != __key) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            SaleDao targetDao = daoSession.getSaleDao();
-            Sale saleNew = targetDao.load(__key);
+            TaskDao targetDao = daoSession.getTaskDao();
+            Task taskNew = targetDao.load(__key);
             synchronized (this) {
-                sale = saleNew;
-            	sale__resolvedKey = __key;
+                task = taskNew;
+            	task__resolvedKey = __key;
             }
         }
-        return sale;
+        return task;
     }
 
-    public void setSale(Sale sale) {
+    public void setTask(Task task) {
+        if (task == null) {
+            throw new DaoException("To-one property 'taskId' has not-null constraint; cannot set to-one to null");
+        }
         synchronized (this) {
-            this.sale = sale;
-            saleId = sale == null ? null : sale.getUuid();
-            sale__resolvedKey = saleId;
+            this.task = task;
+            taskId = task.getUuid();
+            task__resolvedKey = taskId;
         }
     }
 
@@ -164,31 +156,6 @@ public class StokeData {
             this.product = product;
             productId = product.getUuid();
             product__resolvedKey = productId;
-        }
-    }
-
-    /** To-one relationship, resolved on first access. */
-    public AdhockSale getAdhockSale() {
-        String __key = this.adhockStockId;
-        if (adhockSale__resolvedKey == null || adhockSale__resolvedKey != __key) {
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            AdhockSaleDao targetDao = daoSession.getAdhockSaleDao();
-            AdhockSale adhockSaleNew = targetDao.load(__key);
-            synchronized (this) {
-                adhockSale = adhockSaleNew;
-            	adhockSale__resolvedKey = __key;
-            }
-        }
-        return adhockSale;
-    }
-
-    public void setAdhockSale(AdhockSale adhockSale) {
-        synchronized (this) {
-            this.adhockSale = adhockSale;
-            adhockStockId = adhockSale == null ? null : adhockSale.getUuid();
-            adhockSale__resolvedKey = adhockStockId;
         }
     }
 

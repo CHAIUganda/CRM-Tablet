@@ -109,7 +109,7 @@ public class SaleslFormFragment extends Fragment {
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    addRowToTable(null,null, view,false);
+                    addRowToTable(null,null,null, view,false);
                 }
             });
 
@@ -117,7 +117,7 @@ public class SaleslFormFragment extends Fragment {
             addStockButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    addRowToTable(null,null, view,true);
+                    addRowToTable(null,null,null, view,true);
                 }
             });
 
@@ -136,6 +136,9 @@ public class SaleslFormFragment extends Fragment {
             setRequiredFields(view);
             manageDoyouStockZincResponses(view);
             bindSalesInfoToUI(view);
+            if(!isUpdate){
+                prefillOrderData(view);
+            }
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -191,7 +194,7 @@ public class SaleslFormFragment extends Fragment {
                 ((EditText)view.findViewById(R.id.sales_price)).setText(salesDatas.get(i).getPrice()+"");
                 ((Spinner)view.findViewById(R.id.sales_product)).setSelection(getProductPosition(salesDatas.get(i).getProduct()));
             }else {
-                addRowToTable(salesDatas.get(i),null, view,false);
+                addRowToTable(salesDatas.get(i),null,null, view,false);
             }
         }
     }
@@ -203,12 +206,24 @@ public class SaleslFormFragment extends Fragment {
                 ((EditText)view.findViewById(R.id.sales_stock_quantity)).setText(stockDatas.get(i).getQuantity()+"");
                 ((Spinner)view.findViewById(R.id.sales_stock_product)).setSelection(getProductPosition(stockDatas.get(i).getProduct()));
             }else {
-                addRowToTable(null,stockDatas.get(i), view,true);
+                addRowToTable(null,stockDatas.get(i),null, view,true);
             }
         }
     }
 
-    private void addRowToTable(SaleData saleData,StokeData stockData, View view,final boolean isStockTaking) {
+    private void prefillOrderData(View view){
+        List<TaskOrder> taskOrders = callDataTask.getLineItems();
+        for (int i=0;i<taskOrders.size();++i){
+            if (i == 0) {
+                ((EditText)view.findViewById(R.id.sales_quantity)).setText(taskOrders.get(i).getQuantity()+"");
+                ((Spinner)view.findViewById(R.id.sales_product)).setSelection(getProductPosition(taskOrders.get(i).getProduct()));
+            }else {
+                addRowToTable(null,null,taskOrders.get(i), view,false);
+            }
+        }
+    }
+
+    private void addRowToTable(SaleData saleData,StokeData stockData,TaskOrder taskOrder, View view,final boolean isStockTaking) {
         TableRow tableRow = new TableRow(getActivity());
         tableRow.setLayoutParams(new LayoutParams( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
@@ -240,6 +255,9 @@ public class SaleslFormFragment extends Fragment {
         }else if(stockData!=null){
             quantityView.setText(stockData.getQuantity() + "");
             spinner.setSelection(getProductPosition(stockData.getProduct()));
+        }else if(taskOrder != null){
+            quantityView.setText(taskOrder.getQuantity());
+            spinner.setSelection(getProductPosition(taskOrder.getProduct()));
         }
         Button deleteBtn = (Button) getActivity().getLayoutInflater().inflate(R.layout.delete_icon, null);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -358,7 +376,7 @@ public class SaleslFormFragment extends Fragment {
                 saleData.setSaleId(sale.getUuid());
                 saleData.setSale(sale);
                 saleData.setPrice(Integer.parseInt(priceFields.get(i).getText().toString()));
-                saleData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
+                saleData.setQuantity(new Double(quantityFields.get(i).getText().toString()).intValue());
                 Product product = (Product) spinnerList.get(i).getSelectedItem();
                 saleData.setProductId(product.getUuid());
 

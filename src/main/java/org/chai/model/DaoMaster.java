@@ -18,6 +18,7 @@ import org.chai.model.CustomerContactDao;
 import org.chai.model.ProductDao;
 import org.chai.model.OrderDao;
 import org.chai.model.TaskDao;
+import org.chai.model.TaskOrderDao;
 import org.chai.model.PromotionDao;
 import org.chai.model.PromotionalItemDao;
 import org.chai.model.SaleDao;
@@ -49,6 +50,7 @@ public class DaoMaster extends AbstractDaoMaster {
         ProductDao.createTable(db, ifNotExists);
         OrderDao.createTable(db, ifNotExists);
         TaskDao.createTable(db, ifNotExists);
+        TaskOrderDao.createTable(db, ifNotExists);
         PromotionDao.createTable(db, ifNotExists);
         PromotionalItemDao.createTable(db, ifNotExists);
         SaleDao.createTable(db, ifNotExists);
@@ -74,6 +76,7 @@ public class DaoMaster extends AbstractDaoMaster {
         ProductDao.dropTable(db, ifExists);
         OrderDao.dropTable(db, ifExists);
         TaskDao.dropTable(db, ifExists);
+        TaskOrderDao.dropTable(db, ifExists);
         PromotionDao.dropTable(db, ifExists);
         PromotionalItemDao.dropTable(db, ifExists);
         SaleDao.dropTable(db, ifExists);
@@ -126,6 +129,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ProductDao.class);
         registerDaoClass(OrderDao.class);
         registerDaoClass(TaskDao.class);
+        registerDaoClass(TaskOrderDao.class);
         registerDaoClass(PromotionDao.class);
         registerDaoClass(PromotionalItemDao.class);
         registerDaoClass(SaleDao.class);

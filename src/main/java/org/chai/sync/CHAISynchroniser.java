@@ -43,6 +43,7 @@ public class CHAISynchroniser {
     private OrderDao orderDao;
     private AdhockSaleDao adhockSaleDao;
     private SummaryReportDao summaryReportDao;
+    private TaskOrderDao taskOrderDao;
 
     public CHAISynchroniser(Activity activity) {
         this.parent = activity;
@@ -85,6 +86,7 @@ public class CHAISynchroniser {
             orderDao = daoSession.getOrderDao();
             adhockSaleDao = daoSession.getAdhockSaleDao();
             summaryReportDao = daoSession.getSummaryReportDao();
+            taskOrderDao = daoSession.getTaskOrderDao();
         } catch (Exception ex) {
             Log.d("Error=====================================", ex.getLocalizedMessage());
         }
@@ -201,8 +203,18 @@ public class CHAISynchroniser {
         for(Task task:tasks){
             try{
                 taskDao.insert(task);
+                insertTaskOrders(task);
             }catch (Exception ex){
                 //catch cases when task is a duplicate
+            }
+        }
+    }
+    private void insertTaskOrders(Task task){
+        if(task.getLineItems()!=null){
+            for(TaskOrder order:task.getLineItems()){
+                order.setTaskId(task.getUuid());
+                order.setTask(task);
+                taskOrderDao.insert(order);
             }
         }
     }

@@ -1,7 +1,6 @@
 package org.chai.model;
 
 import java.util.List;
-
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -36,7 +35,6 @@ public class Task {
     private Customer customer;
     private String customer__resolvedKey;
 
-
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */
@@ -49,6 +47,7 @@ public class Task {
     @JsonIgnore
     private List<Sale> sales;
     private List<DetailerCall> detailers;
+    private List<TaskOrder> lineItems;
     // KEEP FIELDS END
 
     public Task() {
@@ -214,6 +213,28 @@ public class Task {
             customerId = customer.getUuid();
             customer__resolvedKey = customerId;
         }
+    }
+
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<TaskOrder> getLineItems() {
+        if (lineItems == null) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            TaskOrderDao targetDao = daoSession.getTaskOrderDao();
+            List<TaskOrder> lineItemsNew = targetDao._queryTask_LineItems(uuid);
+            synchronized (this) {
+                if(lineItems == null) {
+                    lineItems = lineItemsNew;
+                }
+            }
+        }
+        return lineItems;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetLineItems() {
+        lineItems = null;
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

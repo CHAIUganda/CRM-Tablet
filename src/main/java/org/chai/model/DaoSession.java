@@ -19,6 +19,7 @@ import org.chai.model.CustomerContact;
 import org.chai.model.Product;
 import org.chai.model.Order;
 import org.chai.model.Task;
+import org.chai.model.TaskOrder;
 import org.chai.model.Promotion;
 import org.chai.model.PromotionalItem;
 import org.chai.model.Sale;
@@ -41,6 +42,7 @@ import org.chai.model.CustomerContactDao;
 import org.chai.model.ProductDao;
 import org.chai.model.OrderDao;
 import org.chai.model.TaskDao;
+import org.chai.model.TaskOrderDao;
 import org.chai.model.PromotionDao;
 import org.chai.model.PromotionalItemDao;
 import org.chai.model.SaleDao;
@@ -72,6 +74,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig productDaoConfig;
     private final DaoConfig orderDaoConfig;
     private final DaoConfig taskDaoConfig;
+    private final DaoConfig taskOrderDaoConfig;
     private final DaoConfig promotionDaoConfig;
     private final DaoConfig promotionalItemDaoConfig;
     private final DaoConfig saleDaoConfig;
@@ -94,6 +97,7 @@ public class DaoSession extends AbstractDaoSession {
     private final ProductDao productDao;
     private final OrderDao orderDao;
     private final TaskDao taskDao;
+    private final TaskOrderDao taskOrderDao;
     private final PromotionDao promotionDao;
     private final PromotionalItemDao promotionalItemDao;
     private final SaleDao saleDao;
@@ -140,6 +144,9 @@ public class DaoSession extends AbstractDaoSession {
         taskDaoConfig = daoConfigMap.get(TaskDao.class).clone();
         taskDaoConfig.initIdentityScope(type);
 
+        taskOrderDaoConfig = daoConfigMap.get(TaskOrderDao.class).clone();
+        taskOrderDaoConfig.initIdentityScope(type);
+
         promotionDaoConfig = daoConfigMap.get(PromotionDao.class).clone();
         promotionDaoConfig.initIdentityScope(type);
 
@@ -183,6 +190,7 @@ public class DaoSession extends AbstractDaoSession {
         productDao = new ProductDao(productDaoConfig, this);
         orderDao = new OrderDao(orderDaoConfig, this);
         taskDao = new TaskDao(taskDaoConfig, this);
+        taskOrderDao = new TaskOrderDao(taskOrderDaoConfig, this);
         promotionDao = new PromotionDao(promotionDaoConfig, this);
         promotionalItemDao = new PromotionalItemDao(promotionalItemDaoConfig, this);
         saleDao = new SaleDao(saleDaoConfig, this);
@@ -205,6 +213,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(Product.class, productDao);
         registerDao(Order.class, orderDao);
         registerDao(Task.class, taskDao);
+        registerDao(TaskOrder.class, taskOrderDao);
         registerDao(Promotion.class, promotionDao);
         registerDao(PromotionalItem.class, promotionalItemDao);
         registerDao(Sale.class, saleDao);
@@ -229,6 +238,7 @@ public class DaoSession extends AbstractDaoSession {
         productDaoConfig.getIdentityScope().clear();
         orderDaoConfig.getIdentityScope().clear();
         taskDaoConfig.getIdentityScope().clear();
+        taskOrderDaoConfig.getIdentityScope().clear();
         promotionDaoConfig.getIdentityScope().clear();
         promotionalItemDaoConfig.getIdentityScope().clear();
         saleDaoConfig.getIdentityScope().clear();
@@ -280,6 +290,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public TaskDao getTaskDao() {
         return taskDao;
+    }
+
+    public TaskOrderDao getTaskOrderDao() {
+        return taskOrderDao;
     }
 
     public PromotionDao getPromotionDao() {
