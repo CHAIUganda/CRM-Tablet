@@ -120,9 +120,9 @@ public class TaskCalenderFragment extends Fragment {
             Query query = taskDao.queryRawCreate(",Customer C WHERE T.'"+TaskDao.Properties.Status.columnName+"' != '"
                     +TaskMainFragment.STATUS_COMPLETE+"' and T.'"+TaskDao.Properties.Status.columnName+"' != '"+TaskMainFragment.STATUS_CANCELLED
                     +"' ORDER BY abs(C.latitude-("+geoPoint.getAltitude()
-                    +")) + abs(C.longitude - ("+geoPoint.getLongitude()+")) LIMIT 20");
+                    +")) + abs(C.longitude - ("+geoPoint.getLongitude()+")) LIMIT 100");
             List list = query.list();
-            outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(geoPoint, list, 20);
+            outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(geoPoint, list,TaskViewOnMapFragment.MAX_RADIUS_IN_KM);
         }else if(itemPosition == 7){
             outstandingTasks = taskDao.loadAll();
         }

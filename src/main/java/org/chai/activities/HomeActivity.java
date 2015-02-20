@@ -22,7 +22,7 @@ import org.chai.activities.calls.HistoryMainFragment;
 import org.chai.activities.customer.CustomersMainFragment;
 
 import org.chai.activities.tasks.AdhockDetailerFrgment;
-import org.chai.activities.tasks.MakeAdhockSaleFragment;
+import org.chai.activities.tasks.AdhockSaleFragment;
 import org.chai.activities.tasks.TakeOrderFragment;
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.adapter.NavDrawerListAdapter;
@@ -178,7 +178,7 @@ public class HomeActivity extends FragmentActivity{
                 break;
             case 4:
                 if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
-                    fragment = new MakeAdhockSaleFragment();
+                    fragment = new AdhockSaleFragment();
                 }else{
                     fragment = new AdhockDetailerFrgment();
                 }

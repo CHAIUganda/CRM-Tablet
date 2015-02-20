@@ -167,7 +167,9 @@ public class SaleslFormFragment extends Fragment {
     private void bindSalesInfoToUI(View view) {
         if (!isNewSalesCall()) {
             ((EditText) view.findViewById(R.id.sales_if_no_why)).setText(saleCallData.getIfNoWhy());
-            ((GpsWidgetView) view.findViewById(R.id.sales_gps)).setLatLongText(saleCallData.getLatitude()+","+saleCallData.getLongitude());
+            ((GpsWidgetView) view.findViewById(R.id.sales_gps)).setLatLongText(saleCallData.getLatitude() + "," + saleCallData.getLongitude());
+            ((TextView)view. findViewById(R.id.sales_district)).setText(callDataTask.getCustomer().getSubcounty().getDistrict().getName());
+            ((TextView)view. findViewById(R.id.sales_subcounty)).setText(callDataTask.getCustomer().getSubcounty().getName());
 
             Spinner doyouStockZincSpinner = (Spinner) view.findViewById(R.id.sales_do_you_stock_zinc);
             Utils.setSpinnerSelection(doyouStockZincSpinner, (saleCallData.getDoYouStockOrsZinc() == true) ? "Yes" : "No");
@@ -183,6 +185,9 @@ public class SaleslFormFragment extends Fragment {
 
             bindSalesDataToUi(view);
             bindStokeDataToUi(view);
+        }else{
+            ((TextView)view. findViewById(R.id.sales_district)).setText(callDataTask.getCustomer().getSubcounty().getDistrict().getName());
+            ((TextView)view. findViewById(R.id.sales_subcounty)).setText(callDataTask.getCustomer().getSubcounty().getName());
         }
     }
 

@@ -27,6 +27,7 @@
                     android:textStyle="bold"/>
         </LinearLayout>
 
+
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -50,6 +51,51 @@
                     style="@style/myEditText"
                     android:textColor="@color/list_main_text_color"
                     android:layout_marginRight="10dp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="District:"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:id="@+id/adhoc_sales_district"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/list_main_text_color"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Subcounty:"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:id="@+id/adhoc_sales_subcounty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/list_main_text_color"/>
 
         </LinearLayout>
 

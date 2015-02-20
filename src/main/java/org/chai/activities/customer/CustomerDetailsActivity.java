@@ -73,7 +73,7 @@ public class CustomerDetailsActivity extends Activity {
 
     private void loadCustomerDetails(Customer customer) {
         ((TextView) findViewById(R.id.customer_profile_name)).setText(customer.getOutletName());
-        ((TextView) findViewById(R.id.customer_profile_address)).setText(Utils.getKeyCustomerContact(customer.getCustomerContacts()).getContact());
+        ((TextView) findViewById(R.id.customer_profile_address)).setText(Utils.getKeyCustomerContact(customer.getCustomerContacts()).getContact()+"");
         ((TextView) findViewById(R.id.customer_profile_district)).setText(customer.getSubcounty().getDistrict().getName());
         ((TextView) findViewById(R.id.customer_profile_subcounty)).setText(customer.getSubcounty().getName());
         ((TextView) findViewById(R.id.customer_profile_date_outlet_opened)).setText(customer.getDateOutletOpened()+"");

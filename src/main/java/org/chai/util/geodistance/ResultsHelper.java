@@ -71,14 +71,13 @@ public class ResultsHelper {
      * A partir de las lista pasada esta función se queda con los primeros n elementos que son
      * mínimos con respecto al comparador indicado
      *
-     * @param cantidadFiltrada  Cantidad de elementos a preservar en la lista devuelta
-     * @param elementosAFiltrar Los objetos que se deben filtrar
-     * @param orden             Relación de orden entre los elementos que permite encontrar el mínimo
+     * @param limit  Cantidad de elementos a preservar en la lista devuelta
+     * @param elementsToFilter Los objetos que se deben filtrar
+     * @param comparator             Relación de orden entre los elementos que permite encontrar el mínimo
      * @return La lista ordenada de menor a mayor de los primeros elementos
      */
-    public static <T> List<T> filterFirstMin(int cantidadFiltrada, Iterable<? extends T> elementosAFiltrar,
-                                             Comparator<? super T> orden) {
-        return filterFirstElements(cantidadFiltrada, elementosAFiltrar, orden, FilterType.MIN);
+    public static <T> List<T> filterFirstMin(int limit, Iterable<? extends T> elementsToFilter,Comparator<? super T> comparator) {
+        return filterFirstElements(limit, elementsToFilter, comparator, FilterType.MIN);
     }
 
     /**
@@ -101,17 +100,17 @@ public class ResultsHelper {
      * con el comparator
      *
      * @param <T>               Tipo de los elementos
-     * @param cantidadFiltrada  Cantidad máxima de elementos devueltos
-     * @param elementosAFiltrar Los elementos a ordenar y filtrar
-     * @param orden             La relación de orden entre los elementos
+     * @param limit  Cantidad máxima de elementos devueltos
+     * @param elementsToFilter Los elementos a ordenar y filtrar
+     * @param comparator             La relación de orden entre los elementos
      * @param filterType        El tipo de extremo buscado, los máximos o mínimos de la relación
      * @return La lista ordenada de los primeros máximos o mínimos acotada a la cantidad indicada
      */
-    private static <T> List<T> filterFirstElements(int cantidadFiltrada, Iterable<? extends T> elementosAFiltrar,
-                                                   Comparator<? super T> orden, FilterType filterType) {
+    private static <T> List<T> filterFirstElements(int limit, Iterable<? extends T> elementsToFilter,
+                                                   Comparator<? super T> comparator, FilterType filterType) {
         LinkedList<T> filtered = new LinkedList<T>();
 
-        for (T elemento : elementosAFiltrar) {
+        for (T elemento : elementsToFilter) {
             if (filtered.isEmpty()) {
                 // Es el primer elemento
                 filtered.add(elemento);
@@ -122,7 +121,7 @@ public class ResultsHelper {
             for (; elementIndex > 0; elementIndex--) {
                 int previousPosition = elementIndex - 1;
                 T possibleBetter = filtered.get(previousPosition);
-                if (filterType.isWorstOrEqualsThan(possibleBetter, elemento, orden)) {
+                if (filterType.isWorstOrEqualsThan(possibleBetter, elemento, comparator)) {
                     // Llegamos al lugar que le corresponde
                     break;
                 }
@@ -131,13 +130,13 @@ public class ResultsHelper {
             if (elementIndex < filtered.size()) {
                 // Es mejor que los valores actuales
                 filtered.add(elementIndex, elemento);
-                if (filtered.size() > cantidadFiltrada) {
+                if (filtered.size() > limit) {
                     // Si nos excedimos, sacamos al peor
                     filtered.removeLast();
                 }
             } else {
                 // Hay que agregarlo al final
-                if (filtered.size() < cantidadFiltrada) {
+                if (filtered.size() < limit) {
                     // Todavía queda lugar para agregarlo
                     filtered.add(elemento);
                 }

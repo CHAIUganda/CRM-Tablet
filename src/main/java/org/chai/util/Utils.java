@@ -9,10 +9,12 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.Task;
 import org.chai.util.geodistance.DistanceCalculator;
@@ -84,7 +86,7 @@ public class Utils {
     }
 
     public static String encrypeString(String text){
-        String encrypted = Base64.encodeToString(text.getBytes(),Base64.NO_WRAP);
+        String encrypted = Base64.encodeToString(text.getBytes(), Base64.NO_WRAP);
         return  encrypted;
     }
 
@@ -112,29 +114,39 @@ public class Utils {
         cal.add(Calendar.DAY_OF_YEAR, toAdd);
         return cal.getTime();
     }
-    public static List<Task> orderAndFilterUsingRealDistanceTo(GeoPoint referencePoint, List<Task> tasks,int resultLimit) {
 
-        final double referenceLatitude = referencePoint.getLatitudeE6() / 1e6;
-        final double referenceLongitude = referencePoint.getLongitudeE6() / 1e6;
+    public static List<Task> orderAndFilterUsingRealDistanceTo(GeoPoint referencePoint, List<Task> taskList, int radiusInKm) {
 
-        DistanceCalculator<Task> distanceCalculator = new DistanceCalculator<Task>() {
-            public Double calculateDistanceTo(Task point) {
-
-                double pointLatitude = point.getCustomer().getLatitude() / 1e6;
-                double pointLongitude = point.getCustomer().getLongitude() / 1e6;
-
-                float[] results = new float[1];
-                Location.distanceBetween(referenceLatitude, referenceLongitude, pointLatitude, pointLongitude, results);
-                return (double) results[0];
-
+        List<Task> filteredTasks = new ArrayList<Task>();
+        for (Task task : taskList) {
+            Customer customer = task.getCustomer();
+            double pointLatitude = customer.getLatitude()==null?0.0:customer.getLatitude();
+            double pointLongitude = customer.getLongitude()==null?0.0:customer.getLongitude();
+            Log.i("Task:",pointLatitude+","+pointLongitude);
+            double distanceInKm = getHeversineDistance(referencePoint, new GeoPoint(pointLatitude, pointLongitude));
+            Log.i("============================distance in Km:", distanceInKm + "");
+            if (distanceInKm <= radiusInKm) {
+                filteredTasks.add(task);
             }
-        };
+        }
+        return filteredTasks;
+    }
 
-        Comparator<? super Task> distanceComparator = DistanceComparator.create(distanceCalculator, true);
+    private static double getHeversineDistance(GeoPoint p1,GeoPoint p2){
+        final double DEG_RAD = 0.01745329251994;
+        final double R_EARTH = 6367.45;
+        double haversine, distance;
+        double dLat, dLon;
+        dLat = (p2.getLatitude() - p1.getLatitude()) * DEG_RAD;
+        dLon = (p2.getLongitude() - p1.getLongitude()) * DEG_RAD;
 
-        List<Task> filtered = ResultsHelper.filterFirstMin(resultLimit, tasks, distanceComparator);
+        haversine = Math.sin(dLat * 0.5) * Math.sin(dLat * 0.5) +
+                Math.sin(dLon * 0.5) * Math.sin(dLon * 0.5) *
+                        Math.cos(p1.getLatitude() * DEG_RAD) *
+                        Math.cos(p2.getLatitude() * DEG_RAD);
 
-        return filtered;
+        distance = Math.asin(Math.sqrt(haversine)) * R_EARTH * 2.0;
+        return distance;
     }
 
     public static Date flattenDate(Date date){

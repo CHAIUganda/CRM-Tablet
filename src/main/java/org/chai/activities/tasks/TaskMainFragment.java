@@ -19,6 +19,7 @@ import org.chai.activities.BaseContainerFragment;
  */
 public class TaskMainFragment extends BaseContainerFragment {
     public final static String STATUS_NEW = "new", STATUS_COMPLETE = "complete",STATUS_CANCELLED = "cancelled";
+    public final static String TASK_TYPE_ORDER = "Order";
    private FragmentTabHost tabHost;
 
     @Override

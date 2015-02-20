@@ -1,5 +1,6 @@
 package org.chai.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -22,20 +23,26 @@ public class TaskOrder {
     /** Not-null value. */
     private String productId;
 
+    // KEEP FIELDS - put your custom fields here
+
     /** Used to resolve relations */
+    @JsonIgnore
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
+    @JsonIgnore
     private transient TaskOrderDao myDao;
 
+    @JsonIgnore
     private Task task;
+    @JsonIgnore
     private String task__resolvedKey;
 
+    @JsonIgnore
     private Product product;
+    @JsonIgnore
     private String product__resolvedKey;
 
-
-    // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
 
     public TaskOrder() {

@@ -43,6 +43,7 @@ import java.util.*;
  * Created by victor on 12/11/14.
  */
 public class TaskViewOnMapFragment extends Fragment {
+    public static int MAX_RADIUS_IN_KM = 2;
     private static View view;
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
@@ -148,15 +149,20 @@ public class TaskViewOnMapFragment extends Fragment {
         items = new ArrayList<OverlayItem>();
         for(Task task:taskList){
             Customer customer = task.getCustomer();
-            if(customer!=null){
+            if(customer!=null&&customer.getLatitude()!=null){
                 double latitude = customer.getLatitude();
                 double longitude = customer.getLongitude();
                 Log.i("Latitude============",latitude+"");
                 Log.i("Longitude===========",longitude+"");
                 if(longitude != 0&&latitude!= 0){
                     OverlayItem taskMarker = new OverlayItem(task.getUuid(), task.getDescription(), new GeoPoint(latitude, longitude));
-                    Drawable myCurrentLocationMarker = this.getResources().getDrawable(R.drawable.drugstore);
-                    taskMarker.setMarker(myCurrentLocationMarker);
+                    if(task.getType().equalsIgnoreCase(TaskMainFragment.TASK_TYPE_ORDER)){
+                        Drawable myCurrentLocationMarker = this.getResources().getDrawable(R.drawable.drugstore_order);
+                        taskMarker.setMarker(myCurrentLocationMarker);
+                    }else{
+                        Drawable myCurrentLocationMarker = this.getResources().getDrawable(R.drawable.drugstore);
+                        taskMarker.setMarker(myCurrentLocationMarker);
+                    }
                     items.add(taskMarker);
                     markers.put(taskMarker.getTitle(),task.getUuid());
                 }
@@ -209,7 +215,7 @@ public class TaskViewOnMapFragment extends Fragment {
                     +"' ORDER BY abs(C.latitude-(" + MAP_DEFAULT_LATITUDE
                     + ")) + abs(C.longitude - (" + MAP_DEFAULT_LONGITUDE + "))  LIMIT " + MAX_TASKS_TO_SHOW_ON_MAP);
             List list = query.list();
-            outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE), list, MAX_TASKS_TO_SHOW_ON_MAP);
+            outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE), list,MAX_RADIUS_IN_KM);
 
         } else if (itemPosition == 7) {
             outstandingTasks = taskDao.loadAll();

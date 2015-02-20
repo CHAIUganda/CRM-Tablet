@@ -283,6 +283,8 @@ public class CustomerForm extends Activity {
             return false;
         }else if (((Spinner) findViewById(R.id.details_split)).getSelectedItem().toString().equals("")) {
             return false;
+        }else if (((GpsWidgetView) findViewById(R.id.customer_gps_view)).getLatLongText().toString().equals("")) {
+            return false;
         }
         return true;
     }
@@ -341,6 +343,7 @@ public class CustomerForm extends Activity {
         Utils.setRequired((TextView) findViewById(R.id.details_sources_of_supply_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_restock_frequency_lbl));
         Utils.setRequired((TextView) findViewById(R.id.outlet_rural_village));
+        Utils.setRequired((TextView) findViewById(R.id.customer_gps_lbl));
     }
 
     protected void manageLicenceVisible() {

@@ -33,7 +33,7 @@ import java.util.UUID;
 TO DO: this class needs to be refactored with sales to
 inherit from a super class since they share attrs
  */
-public class MakeAdhockSaleFragment extends BaseContainerFragment {
+public class AdhockSaleFragment extends BaseContainerFragment {
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
@@ -94,6 +94,14 @@ public class MakeAdhockSaleFragment extends BaseContainerFragment {
                              public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                                  Customer selected = (Customer)adapterView.getAdapter().getItem(position);
                                  salesCustomer = selected;
+                                 try{
+                                     if(salesCustomer!=null){
+                                         ((TextView)getActivity(). findViewById(R.id.adhoc_sales_district)).setText(salesCustomer.getSubcounty().getDistrict().getName());
+                                         ((TextView)getActivity(). findViewById(R.id.adhoc_sales_subcounty)).setText(salesCustomer.getSubcounty().getName());
+                                     }
+                                 }catch (Exception ex){
+                                     //ignore
+                                 }
                              }
                          });
 
