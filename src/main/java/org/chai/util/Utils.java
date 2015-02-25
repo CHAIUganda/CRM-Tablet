@@ -119,14 +119,18 @@ public class Utils {
 
         List<Task> filteredTasks = new ArrayList<Task>();
         for (Task task : taskList) {
-            Customer customer = task.getCustomer();
-            double pointLatitude = customer.getLatitude()==null?0.0:customer.getLatitude();
-            double pointLongitude = customer.getLongitude()==null?0.0:customer.getLongitude();
-            Log.i("Task:",pointLatitude+","+pointLongitude);
-            double distanceInKm = getHeversineDistance(referencePoint, new GeoPoint(pointLatitude, pointLongitude));
-            Log.i("============================distance in Km:", distanceInKm + "");
-            if (distanceInKm <= radiusInKm) {
-                filteredTasks.add(task);
+            try {
+                Customer customer = task.getCustomer();
+                double pointLatitude = customer.getLatitude() == null ? 0.0 : customer.getLatitude();
+                double pointLongitude = customer.getLongitude() == null ? 0.0 : customer.getLongitude();
+                Log.i("Task:", pointLatitude + "," + pointLongitude);
+                double distanceInKm = getHeversineDistance(referencePoint, new GeoPoint(pointLatitude, pointLongitude));
+                Log.i("============================distance in Km:", distanceInKm + "");
+                if (distanceInKm <= radiusInKm) {
+                    filteredTasks.add(task);
+                }
+            } catch (Exception ex) {
+                //ignore
             }
         }
         return filteredTasks;

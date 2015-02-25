@@ -12,6 +12,8 @@ import org.chai.model.CustomerContact;
 import org.chai.model.Task;
 import org.chai.util.Utils;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -70,6 +72,23 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         TextView contact;
         TextView subcounty;
         TextView locationDescription;
+    }
+
+    @Override
+     public void notifyDataSetChanged() {
+        Collections.sort(taskList, new Comparator<Task>() {
+            @Override
+            public int compare(Task task1, Task task2) {
+                Customer customer1 = task1.getCustomer();
+                Customer customer2 = task2.getCustomer();
+                if(customer1!=null&&customer2!=null){
+                    return customer1.getOutletName().compareToIgnoreCase(customer2.getOutletName());
+                }else{
+                    return 1;
+                }
+            }
+        });
+        super.notifyDataSetChanged();
     }
 
 

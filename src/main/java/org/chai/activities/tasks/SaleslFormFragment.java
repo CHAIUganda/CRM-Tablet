@@ -74,6 +74,9 @@ public class SaleslFormFragment extends Fragment {
                 callDataTask = saleCallData.getTask();
                 salesCustomer = callDataTask.getCustomer();
                 isUpdate = true;
+                if (saleCallData.getIsHistory() != null && saleCallData.getIsHistory()) {
+                    setReadOnly(view);
+                }
             } else {
                 //from task list view
                 String taskId = bundle.getString("taskId");
@@ -468,6 +471,25 @@ public class SaleslFormFragment extends Fragment {
            return false;
         }
         return true;
+    }
+
+
+
+    private void setReadOnly(View view) {
+        view.findViewById(R.id.sales_gps).setEnabled(false);
+        view.findViewById(R.id.sales_do_you_stock_zinc).setEnabled(false);
+        view.findViewById(R.id.sales_if_no_why).setEnabled(false);
+        view.findViewById(R.id.sales_stock_product).setEnabled(false);
+        view.findViewById(R.id.sales_stock_quantity).setEnabled(false);
+        view.findViewById(R.id.sales_stock_add_more).setEnabled(false);
+        view.findViewById(R.id.sales_product).setEnabled(false);
+        view.findViewById(R.id.sales_quantity).setEnabled(false);
+        view.findViewById(R.id.sales_price).setEnabled(false);
+        view.findViewById(R.id.sales_add_more).setEnabled(false);
+        view.findViewById(R.id.sales_government_approval).setEnabled(false);
+        view.findViewById(R.id.sales_point_of_sale).setEnabled(false);
+        view.findViewById(R.id.sales_next_step_recommendation).setEnabled(false);
+        view.findViewById(R.id.sales_save_sale).setEnabled(false);
     }
 
 }

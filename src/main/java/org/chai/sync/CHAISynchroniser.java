@@ -105,7 +105,7 @@ public class CHAISynchroniser {
             subcountyDao.deleteAll();
             customerContactDao.deleteAll();
             customerDao.deleteAll();
-            saleDao.deleteAll();
+//            saleDao.deleteAll();
             downloadRegions();
             progressDialog.incrementProgressBy(10);
             downloadCustomers();
@@ -220,17 +220,27 @@ public class CHAISynchroniser {
     }
 
     public void uploadTasks(){
-        List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.eq("complete")).list();
+        List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.notEq("new")).list();
         if(!taskList.isEmpty()){
             updatePropgress("Uploading Tasks..");
         }
         for (Task task : taskList) {
-            boolean uploaded = taskClient.uploadTask(task);
-            if(uploaded){
-                //set all detailer calls to isHistroy
-                DetailerCall detailerCall = task.getDetailers().get(0);
-                detailerCall.setIsHistory(true);
-                detailerCallDao.update(detailerCall);
+            try{
+                boolean uploaded = taskClient.uploadTask(task);
+                if(uploaded){
+                    //set all detailer calls to isHistroy
+                    if (RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
+                        DetailerCall detailerCall = task.getDetailers().get(0);
+                        detailerCall.setIsHistory(true);
+                        detailerCallDao.update(detailerCall);
+                    }else{
+                        Sale sale = task.getSales().get(0);
+                        sale.setIsHistory(true);
+                        saleDao.update(sale);
+                    }
+                }
+            }catch (Exception ex){
+                //
             }
         }
 
@@ -260,7 +270,10 @@ public class CHAISynchroniser {
             updatePropgress("Uploading Sales...");
             boolean uploaded = salesClient.uploadSales(saleList.toArray(new Sale[saleList.size()]));
             if(uploaded){
-                saleDao.deleteAll();
+                for(Sale sale:saleList){
+                    sale.setIsHistory(true);
+                    saleDao.update(sale);
+                }
             }
         }
     }

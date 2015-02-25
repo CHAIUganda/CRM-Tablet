@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import de.greenrobot.dao.query.Query;
 import de.greenrobot.dao.query.QueryBuilder;
+import org.chai.Globals;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.model.*;
@@ -43,7 +44,7 @@ import java.util.*;
  * Created by victor on 12/11/14.
  */
 public class TaskViewOnMapFragment extends Fragment {
-    public static int MAX_RADIUS_IN_KM = 2;
+    public static int MAX_RADIUS_IN_KM = 5;
     private static View view;
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
@@ -56,9 +57,9 @@ public class TaskViewOnMapFragment extends Fragment {
 
 
     private int MAP_DEFAULT_ZOOM = 8;
-    private double MAP_DEFAULT_LATITUDE =0.3136;
+    private double MAP_DEFAULT_LATITUDE =0.3417;
     private double MAP_DEFAULT_LONGITUDE = 32.5811;
-    private int MAX_TASKS_TO_SHOW_ON_MAP = 20;
+    private int MAX_TASKS_TO_SHOW_ON_MAP = 100;
 
     /*private double MAP_DEFAULT_LATITUDE = 0.7190105;
     private double MAP_DEFAULT_LONGITUDE = 31.4345434;*/
@@ -103,8 +104,7 @@ public class TaskViewOnMapFragment extends Fragment {
         mapController = this.mapView.getController();
 
         this.mapView.getOverlays().add(mMyLocationOverlay);
-
-        gpsTracker = new GPSTracker(getActivity());
+        gpsTracker  = Globals.getInstance().getGpsTracker();
         if(gpsTracker.canGetLocation()){
             MAP_DEFAULT_LATITUDE = gpsTracker.getLatitude();
             MAP_DEFAULT_LONGITUDE = gpsTracker.getLongitude();
@@ -201,27 +201,31 @@ public class TaskViewOnMapFragment extends Fragment {
         QueryBuilder<Task> taskQueryBuilder = taskDao.queryBuilder();
         List<Task> outstandingTasks=null;
         if(itemPosition==1){
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).orderAsc(TaskDao.Properties.Description).list();
         } else if (itemPosition >= 0 && itemPosition < 6) {
             itemPosition = itemPosition==0?itemPosition:itemPosition - 1;
             Date dueDateOffset = Utils.addToDate(new Date(),itemPosition);
             Date dueDatemax = Utils.addToDate(new Date(),itemPosition+1);
             Log.i("Due Date:",dueDateOffset.toString()+":max-"+dueDatemax.toString());
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).orderAsc(TaskDao.Properties.Description).list();
         } else if (itemPosition == 6) {
             //nearby tasks
-            Query query = taskDao.queryRawCreate(",Customer C WHERE T.'"+TaskDao.Properties.Status.columnName+"' != '"
+           /* Query query = taskDao.queryRawCreate(",Customer C WHERE T.'"+TaskDao.Properties.Status.columnName+"' != '"
                     +TaskMainFragment.STATUS_COMPLETE+"' and T.'"+TaskDao.Properties.Status.columnName+"' != '"+TaskMainFragment.STATUS_CANCELLED
                     +"' ORDER BY abs(C.latitude-(" + MAP_DEFAULT_LATITUDE
                     + ")) + abs(C.longitude - (" + MAP_DEFAULT_LONGITUDE + "))  LIMIT " + MAX_TASKS_TO_SHOW_ON_MAP);
-            List list = query.list();
-            outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE), list,MAX_RADIUS_IN_KM);
+            List list = query.list();*/
+
+            List list = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
+            outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(new GeoPoint(gpsTracker.getLatitude(), gpsTracker.getLongitude()), list,MAX_RADIUS_IN_KM);
 
         } else if (itemPosition == 7) {
-            outstandingTasks = taskDao.loadAll();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         }
         return outstandingTasks;
     }
+
+
 
     private void showForm(String taskId){
         if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {

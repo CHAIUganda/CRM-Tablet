@@ -107,24 +107,25 @@ public class TaskCalenderFragment extends Fragment {
         QueryBuilder<Task> taskQueryBuilder = taskDao.queryBuilder();
         List<Task> outstandingTasks=null;
         if(itemPosition==1){
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(Utils.addToDate(new Date(),0)),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(Utils.addToDate(new Date(),0)),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         } else if (itemPosition >= 0 && itemPosition < 6) {
             itemPosition = itemPosition==0?itemPosition:itemPosition - 1;
             Date dueDateOffset = Utils.addToDate(new Date(),itemPosition);
             Date dueDatemax = Utils.addToDate(new Date(),itemPosition+1);
             Log.i("Due Date:",dueDateOffset.toString()+":max-"+dueDatemax.toString());
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         }else if(itemPosition == 6){
             //nearby tasks
             GeoPoint geoPoint = getCurrentLocation();
-            Query query = taskDao.queryRawCreate(",Customer C WHERE T.'"+TaskDao.Properties.Status.columnName+"' != '"
+            /*Query query = taskDao.queryRawCreate(",Customer C WHERE T.'"+TaskDao.Properties.Status.columnName+"' != '"
                     +TaskMainFragment.STATUS_COMPLETE+"' and T.'"+TaskDao.Properties.Status.columnName+"' != '"+TaskMainFragment.STATUS_CANCELLED
                     +"' ORDER BY abs(C.latitude-("+geoPoint.getAltitude()
                     +")) + abs(C.longitude - ("+geoPoint.getLongitude()+")) LIMIT 100");
-            List list = query.list();
+            List list = query.list();*/
+            List list =taskQueryBuilder.where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
             outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(geoPoint, list,TaskViewOnMapFragment.MAX_RADIUS_IN_KM);
         }else if(itemPosition == 7){
-            outstandingTasks = taskDao.loadAll();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         }
         return outstandingTasks;
     }

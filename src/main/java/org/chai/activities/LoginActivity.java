@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.sun.swing.internal.plaf.synth.resources.synth_sv;
+import org.chai.Globals;
 import org.chai.R;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
@@ -123,6 +124,8 @@ public class LoginActivity extends Activity {
         RestClient.userName = user;
         RestClient.password = pass;
         RestClient.role = role;
+        //we initialise gps tracker her to start computing to get accuracy quickly
+        Globals.getInstance().initGpsTracker(this);
         startActivity(i);
     }
 
