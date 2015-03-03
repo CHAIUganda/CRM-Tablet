@@ -235,7 +235,7 @@ import java.util.*;
          setRequired((TextView) view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility_view));
          setRequired((TextView) view.findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors_view));
 //         setRequired((TextView) view.findViewById(R.id.detailer_how_ors_should_be_used_view));
-//         setRequired((TextView) view.findViewById(R.id.detailer_gps_lbl));
+         setRequired((TextView) view.findViewById(R.id.detailer_gps_lbl));
          setRequired((TextView) view.findViewById(R.id.detailer_survey_date_lbl));
          setRequired((TextView) view.findViewById(R.id.detailer_do_you_stock_zinc_view));
          setRequired((TextView) view.findViewById(R.id.detailer_do_you_stock_ors_view));
@@ -330,6 +330,8 @@ import java.util.*;
          } else if (((Spinner) view.findViewById(R.id.detailer_recommendation_level)).getSelectedItem().toString().equals("")) {
              return false;
          }else if (((EditText) view.findViewById(R.id.detailer_survey_date)).getText().toString().equals("")) {
+             return false;
+         }else if (((GpsWidgetView)view. findViewById(R.id.detailers_gps_view)).getLatLongText().toString().equals("")) {
              return false;
          }
          return true;

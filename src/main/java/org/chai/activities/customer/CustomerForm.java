@@ -86,7 +86,7 @@ public class CustomerForm extends Activity {
                     }else{
                         boolean isSaved = saveCustomer();
                         if (isSaved) {
-                            Toast.makeText(getApplicationContext(), "New Customer has been  successfully added!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Customer has been  successfully saved!", Toast.LENGTH_LONG).show();
                             finish();
                         } else {
                             Toast.makeText(getApplicationContext(), "A problem Occured while saving a new Customer,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();
@@ -194,8 +194,9 @@ public class CustomerForm extends Activity {
             customerInstance.setNumberOfCustomersPerDay(Integer.parseInt(((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString()));
             customerInstance.setRestockFrequency(((Spinner) findViewById(R.id.details_restock_frequency)).getSelectedItem().toString().toLowerCase());
             if (!((GpsWidgetView) findViewById(R.id.customer_gps_view)).getLatLongText().equals("")) {
-                customerInstance.setLongitude(((GpsWidgetView) findViewById(R.id.customer_gps_view)).getMlocation().getLongitude());
-                customerInstance.setLatitude(((GpsWidgetView) findViewById(R.id.customer_gps_view)).getMlocation().getLatitude());
+                String latLongText = ((GpsWidgetView) findViewById(R.id.customer_gps_view)).getLatLongText();
+                customerInstance.setLongitude(Double.parseDouble(latLongText.split(",")[0]));
+                customerInstance.setLatitude(Double.parseDouble(latLongText.split(",")[1]));
             }
             customerInstance.setSubcountyId(((Subcounty) subcountySpinner.getSelectedItem()).getUuid());
             customerInstance.setSubcountyUuid(((Subcounty) subcountySpinner.getSelectedItem()).getUuid());

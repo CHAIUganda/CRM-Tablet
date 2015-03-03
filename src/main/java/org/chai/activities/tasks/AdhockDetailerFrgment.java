@@ -2,6 +2,7 @@ package org.chai.activities.tasks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,7 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
                     Toast.makeText(getActivity(), "Please fill in all the mandaory fields", Toast.LENGTH_LONG).show();
                 }else if(saveForm()){
                     Toast.makeText(getActivity(), "Detailer Information has been  successfully added!", Toast.LENGTH_LONG).show();
+                    resetFragment(R.id.frame_container, new AdhockDetailerFrgment());
                     Intent i = new Intent(getActivity(), HomeActivity.class);
                     startActivity(i);
                 } else {
@@ -154,8 +156,9 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
 
         detailerCallInstance.setKnowledgeAbtZincAndUsage(((Spinner) getActivity().findViewById(R.id.detailer_how_zinc_should_be_used)).getSelectedItem().toString());
         if(!((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getLatLongText().toString().equals("")){
-            detailerCallInstance.setLatitude(((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getMlocation().getLatitude());
-            detailerCallInstance.setLongitude(((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getMlocation().getLongitude());
+            String latLongText = ((GpsWidgetView) getActivity().findViewById(R.id.detailers_gps_view)).getLatLongText();
+            detailerCallInstance.setLatitude(Double.parseDouble(latLongText.split(",")[0]));
+            detailerCallInstance.setLongitude(Double.parseDouble(latLongText.split(",")[1]));
         }
     }
 }

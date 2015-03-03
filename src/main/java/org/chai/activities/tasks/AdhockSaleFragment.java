@@ -133,6 +133,7 @@ public class AdhockSaleFragment extends BaseContainerFragment {
                 public void onClick(View view) {
                     try{
                         submitSale();
+                        resetFragment(R.id.frame_container, new AdhockSaleFragment());
                         Intent i = new Intent(getActivity(), HomeActivity.class);
                         startActivity(i);
                     }catch (Exception ex){
@@ -354,8 +355,10 @@ public class AdhockSaleFragment extends BaseContainerFragment {
         saleInstance.setCustomerId(salesCustomer.getUuid());
 
         if (!((GpsWidgetView) getActivity().findViewById(R.id.adhoc_sales_gps)).getLatLongText().equals("")) {
-            saleInstance.setLatitude(((GpsWidgetView)getActivity().findViewById(R.id.adhoc_sales_gps)).getMlocation().getLatitude());
-            saleInstance.setLongitude(((GpsWidgetView) getActivity().findViewById(R.id.adhoc_sales_gps)).getMlocation().getLatitude());
+            String latLongText = ((GpsWidgetView) getActivity().findViewById(R.id.adhoc_sales_gps)).getLatLongText();
+
+            saleInstance.setLatitude(Double.parseDouble(latLongText.split(",")[0]));
+            saleInstance.setLongitude(Double.parseDouble(latLongText.split(",")[1]));
         }
 
         if(isUpdate){

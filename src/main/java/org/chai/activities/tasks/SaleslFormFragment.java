@@ -99,7 +99,7 @@ public class SaleslFormFragment extends Fragment {
             priceFields.add((EditText)view.findViewById(R.id.sales_price));
 
             stockSpinnerList.add(stockProductSpinner);
-            stockQuantityFlds.add((EditText)view.findViewById(R.id.sales_quantity));
+            stockQuantityFlds.add((EditText)view.findViewById(R.id.sales_stock_quantity));
 
             CustomMultSelectDropDown pointOfSaleMaterials = (CustomMultSelectDropDown)view.findViewById(R.id.sales_point_of_sale);
             pointOfSaleMaterials.setStringOptions(getResources().getStringArray(R.array.point_of_sale_material));
@@ -333,8 +333,9 @@ public class SaleslFormFragment extends Fragment {
             saleCallData.setOrderId(callDataTask.getUuid());
             saleCallData.setOrderId(callDataTask.getUuid());
             if (!((GpsWidgetView) getActivity().findViewById(R.id.sales_gps)).getLatLongText().equals("")) {
-                saleCallData.setLatitude(((GpsWidgetView) getActivity().findViewById(R.id.sales_gps)).getMlocation().getLatitude());
-                saleCallData.setLongitude(((GpsWidgetView) getActivity().findViewById(R.id.sales_gps)).getMlocation().getLongitude());
+                String latLongText = ((GpsWidgetView) getActivity().findViewById(R.id.sales_gps)).getLatLongText();
+                saleCallData.setLatitude(Double.parseDouble(latLongText.split(",")[0]));
+                saleCallData.setLongitude(Double.parseDouble(latLongText.split(",")[1]));
             }
             if(isUpdate){
                 saleDao.update(saleCallData);

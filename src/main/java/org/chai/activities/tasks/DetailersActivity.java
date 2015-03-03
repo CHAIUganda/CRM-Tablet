@@ -168,8 +168,9 @@ import java.util.Calendar;
 
          detailerCallInstance.setKnowledgeAbtZincAndUsage(((Spinner) getActivity().findViewById(R.id.detailer_how_zinc_should_be_used)).getSelectedItem().toString());
          if(!((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getLatLongText().toString().equals("")){
-             detailerCallInstance.setLatitude(((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getMlocation().getLatitude());
-             detailerCallInstance.setLongitude(((GpsWidgetView)getActivity().findViewById(R.id.detailers_gps_view)).getMlocation().getLongitude());
+             String latLongText = ((GpsWidgetView) getActivity().findViewById(R.id.detailers_gps_view)).getLatLongText();
+             detailerCallInstance.setLatitude(Double.parseDouble(latLongText.split(",")[0]));
+             detailerCallInstance.setLongitude(Double.parseDouble(latLongText.split(",")[1]));
          }
      }
 
