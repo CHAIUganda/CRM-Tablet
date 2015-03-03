@@ -19,6 +19,8 @@ import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
 import org.osmdroid.util.GeoPoint;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -49,12 +51,18 @@ public class TaskCalenderFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                String item = (String) spinner.getSelectedItem();
-                taskList.clear();
-                taskList = loadTasksFromDb(item);
-                taskListAdapter = new TaskListAdapter(getActivity(), taskList);
-                listView.setAdapter(taskListAdapter);
-                taskListAdapter.notifyDataSetChanged();
+                try {
+                    String item = (String) spinner.getSelectedItem();
+                    taskList.clear();
+                    taskList = loadTasksFromDb(item);
+                    taskListAdapter = new TaskListAdapter(getActivity(), taskList);
+                    listView.setAdapter(taskListAdapter);
+                    taskListAdapter.notifyDataSetChanged();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(), "error loading tasks:" + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
+
             }
 
             @Override
@@ -117,11 +125,6 @@ public class TaskCalenderFragment extends Fragment {
         }else if(itemPosition == 6){
             //nearby tasks
             GeoPoint geoPoint = getCurrentLocation();
-            /*Query query = taskDao.queryRawCreate(",Customer C WHERE T.'"+TaskDao.Properties.Status.columnName+"' != '"
-                    +TaskMainFragment.STATUS_COMPLETE+"' and T.'"+TaskDao.Properties.Status.columnName+"' != '"+TaskMainFragment.STATUS_CANCELLED
-                    +"' ORDER BY abs(C.latitude-("+geoPoint.getAltitude()
-                    +")) + abs(C.longitude - ("+geoPoint.getLongitude()+")) LIMIT 100");
-            List list = query.list();*/
             List list =taskQueryBuilder.where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
             outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(geoPoint, list,TaskViewOnMapFragment.MAX_RADIUS_IN_KM);
         }else if(itemPosition == 7){

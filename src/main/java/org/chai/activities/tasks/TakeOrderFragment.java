@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -136,10 +139,12 @@ public class TakeOrderFragment extends BaseContainerFragment {
                     if(validateFieldValues()){
                         submitOrder();
                         Toast.makeText(getActivity(),"Thank you,your Order has been submitted.",Toast.LENGTH_LONG).show();
+                        resetFragment(R.id.frame_container, new TakeOrderFragment());
                         Intent i = new Intent(getActivity(), HomeActivity.class);
                         startActivity(i);
                     }
                 }catch (Exception ex){
+                    ex.printStackTrace();
                     Toast.makeText(getActivity(),"A problem Occured while saving a new Order,please ensure that data is entered correctly",Toast.LENGTH_LONG).show();
                 }
             }

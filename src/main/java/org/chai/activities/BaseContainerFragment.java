@@ -54,4 +54,11 @@ public class BaseContainerFragment extends Fragment {
         }
         return false;
     }
+    public void resetFragment(int id,BaseContainerFragment fragment){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.remove(fragment);
+        transaction.replace(id,fragment);
+        transaction.commit();
+
+    }
 }

@@ -10,6 +10,7 @@ import android.support.v4.app.*;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
@@ -60,6 +61,7 @@ public class HomeActivity extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_main_layout);
+        removeAnyFragmentsOnStack();
         mTitle = mDrawerTitle = getTitle();
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
         navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
@@ -143,8 +145,9 @@ public class HomeActivity extends FragmentActivity{
                 }).start();
                 return true;
             case R.id.action_logout:
-                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                startActivity(intent);
+                finish();
+                /*Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);*/
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -191,7 +194,8 @@ public class HomeActivity extends FragmentActivity{
         }
         if(fragment !=null){
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.frame_container,fragment).commit();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.frame_container, fragment).commit();
             mDrawerList.setItemChecked(position,true);
             mDrawerList.setSelection(position);
             if ((position == 4 && RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER))||position>4) {
@@ -227,6 +231,15 @@ public class HomeActivity extends FragmentActivity{
         Log.i("Back Button Pressed:","==============================================================");
         if(!BaseContainerFragment.handleBackPressed(getSupportFragmentManager())){
             super.onBackPressed();
+        }
+    }
+
+    private void removeAnyFragmentsOnStack(){
+        try{
+            FragmentManager fm = getSupportFragmentManager();
+            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
     }
 

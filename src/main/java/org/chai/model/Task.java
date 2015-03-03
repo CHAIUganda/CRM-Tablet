@@ -1,5 +1,6 @@
 package org.chai.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
@@ -45,8 +46,8 @@ public class Task {
     @JsonIgnore
     private transient TaskDao myDao;
     @JsonIgnore
-    private List<Sale> sales;
-    private List<DetailerCall> detailers;
+    private List<Sale> sales = new ArrayList<Sale>();
+    private List<DetailerCall> detailers = new ArrayList<DetailerCall>();
     private List<TaskOrder> lineItems;
     // KEEP FIELDS END
 

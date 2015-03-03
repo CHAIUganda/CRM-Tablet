@@ -23,6 +23,8 @@ public class TaskOrder {
     /** Not-null value. */
     private String productId;
 
+
+
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */
@@ -42,7 +44,6 @@ public class TaskOrder {
     private Product product;
     @JsonIgnore
     private String product__resolvedKey;
-
     // KEEP FIELDS END
 
     public TaskOrder() {

@@ -43,6 +43,7 @@ public class DetailerCall {
     /** Not-null value. */
     private String taskId;
 
+
     private List<DetailerStock> detailerStocks;
 
     // KEEP FIELDS - put your custom fields here

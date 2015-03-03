@@ -71,6 +71,7 @@ public class TaskByLocationFragment extends Fragment {
                 taskList = query.list();
                 taskListAdapter = new TaskListAdapter(getActivity(), taskList);
                 listView.setAdapter(taskListAdapter);
+                taskListAdapter.notifyDataSetChanged();
             }
 
             @Override
