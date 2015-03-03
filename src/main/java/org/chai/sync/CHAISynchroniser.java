@@ -10,6 +10,7 @@ import org.chai.rest.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -180,13 +181,30 @@ public class CHAISynchroniser {
         }
     }
 
-    public void downloadCustomers(){
+    public void downloadCustomersOld(){
         updatePropgress("Downloading Customers..");
         Customer[] customers = customerClient.downloadCustomers();
         for(Customer customer:customers){
             Long id = customerDao.insert(customer);
             saveCustomerContacts(customer.getCustomerContacts(), customer.getUuid());
         }
+    }
+    public void downloadCustomers(){
+        updatePropgress("Downloading Customers..");
+        Customer[] customers = customerClient.downloadCustomers();
+        customerDao.insertInTx(customers);
+
+        List<CustomerContact> contacts = new ArrayList<CustomerContact>();
+        for(Customer customer:customers){
+            List<CustomerContact> ccs = customer.getCustomerContacts();
+            if (ccs != null) {
+                for (CustomerContact cc : ccs) {
+                    cc.setCustomerId(customer.getUuid());
+                }
+                contacts.addAll(ccs);
+            }
+        }
+        customerContactDao.insertInTx(contacts);
     }
 
     public void saveCustomerContacts(List<CustomerContact> customerContacts,String customerId){
@@ -226,6 +244,9 @@ public class CHAISynchroniser {
         }
         for (Task task : taskList) {
             try{
+                if(taskIsHistory(task)){
+                    continue;
+                }
                 boolean uploaded = taskClient.uploadTask(task);
                 if(uploaded){
                     //set all detailer calls to isHistroy
@@ -244,6 +265,15 @@ public class CHAISynchroniser {
             }
         }
 
+    }
+
+    private boolean taskIsHistory(Task task) {
+        if(!task.getDetailers().isEmpty() &&task.getDetailers().get(0).getIsHistory()){
+            return true;
+        }else if(!task.getSales().isEmpty()&&task.getSales().get(0).getIsHistory()){
+            return true;
+        }
+        return false;
     }
 
     public void uploadCustomers(){
