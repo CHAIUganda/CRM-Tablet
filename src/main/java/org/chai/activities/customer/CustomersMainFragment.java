@@ -35,8 +35,7 @@ public class CustomersMainFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initialiseGreenDao();
-        try {
-//            loadDataFromDb();
+        try { 
             registerForContextMenu(getListView());
         } catch (Exception exception) {
             Toast.makeText(getActivity().getApplicationContext(), "error in CustomerList:" + exception.getLocalizedMessage(), Toast.LENGTH_LONG).show();
