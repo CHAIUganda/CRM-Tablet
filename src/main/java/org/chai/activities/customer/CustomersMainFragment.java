@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import org.chai.R;
@@ -35,19 +36,25 @@ public class CustomersMainFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         initialiseGreenDao();
         try {
-            customerList.addAll(customerDao.loadAll());
-            Collections.sort(customerList,new Comparator<Customer>() {
-                @Override
-                public int compare(Customer customer1, Customer customer2) {
-                    return customer1.getOutletName().compareToIgnoreCase(customer2.getOutletName());
-                }
-            });
-            customerAdapter = new CustomerAdapter(getActivity(), customerList);
-            setListAdapter(customerAdapter);
+//            loadDataFromDb();
             registerForContextMenu(getListView());
         } catch (Exception exception) {
             Toast.makeText(getActivity().getApplicationContext(), "error in CustomerList:" + exception.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void loadDataFromDb() {
+        customerList.clear();
+        customerList.addAll(customerDao.loadAll());
+        Collections.sort(customerList, new Comparator<Customer>() {
+            @Override
+            public int compare(Customer customer1, Customer customer2) {
+                return customer1.getOutletName().compareToIgnoreCase(customer2.getOutletName());
+            }
+        });
+        customerAdapter = new CustomerAdapter(getActivity(), customerList);
+        setListAdapter(customerAdapter);
+        customerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -180,6 +187,14 @@ public class CustomersMainFragment extends ListFragment {
                 })
                 .create();
         return dialog;
+
+    }
+
+    @Override
+     public void onResume() {
+        super.onResume();
+        loadDataFromDb();
+        Log.d("Customer Main Fragment", "List Frag Resumed");
 
     }
 
