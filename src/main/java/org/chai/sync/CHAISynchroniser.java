@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
+import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.model.*;
 import org.chai.rest.*;
 import org.springframework.web.client.HttpClientErrorException;
@@ -238,7 +239,7 @@ public class CHAISynchroniser {
     }
 
     public void uploadTasks(){
-        List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.notEq("new")).list();
+        List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_NEW)).list();
         if(!taskList.isEmpty()){
             updatePropgress("Uploading Tasks..");
         }
