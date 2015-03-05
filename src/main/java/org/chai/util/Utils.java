@@ -104,7 +104,7 @@ public class Utils {
         return 0;
     }
 
-    public static Date addToDate(Date currentDate,int toAdd){
+    public static Date addToDateOffset(Date currentDate, int toAdd){
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(currentDate);
         cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -114,6 +114,17 @@ public class Utils {
         cal.add(Calendar.DAY_OF_YEAR, toAdd);
         return cal.getTime();
     }
+    public static Date addToDateMax(Date currentDate, int toAdd){
+        Calendar cal = GregorianCalendar.getInstance();
+        cal.setTime(currentDate);
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        cal.set(Calendar.MILLISECOND, 999);
+        cal.add(Calendar.DAY_OF_YEAR, toAdd);
+        return cal.getTime();
+    }
+
 
     public static List<Task> orderAndFilterUsingRealDistanceTo(GeoPoint referencePoint, List<Task> taskList, int radiusInKm) {
 
