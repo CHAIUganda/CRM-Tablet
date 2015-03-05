@@ -54,7 +54,7 @@ import java.util.Calendar;
              detailerCallInstance.setIsNew(true);
              detailerCallInstance.setIsHistory(false);
          }
-         setDateWidget(view);
+//         setDateWidget(view);
          List<Village> villageData = villageDao.loadAll();
          Village[] villages = villageData.toArray(new Village[villageData.size()]);
          subcountyTxt = (TextView)view.findViewById(R.id.detailer_subcounty);
@@ -182,7 +182,6 @@ import java.util.Calendar;
      private void bindDetailerCallToUi(View view) {
          if (detailerCallInstance.getUuid() != null) {
              Customer customer = detailerCallInstance.getTask().getCustomer();
-             ((EditText)view. findViewById(R.id.detailer_survey_date)).setText(Utils.dateToString(detailerCallInstance.getDateOfSurvey()));
              ((TextView) view.findViewById(R.id.detailer_name)).setText(customer.getOutletName());
              ((TextView)view. findViewById(R.id.detailer_desc_location)).setText(customer.getDescriptionOfOutletLocation());
              ((TextView)view. findViewById(R.id.detailer_district)).setText(customer.getSubcounty().getDistrict().getName());
@@ -242,8 +241,6 @@ import java.util.Calendar;
              Utils.setSpinnerSelection(recomendationLevel, detailerCallInstance.getRecommendationLevel());
 
          }else{
-             Calendar calendar = Calendar.getInstance();
-             ((EditText)view. findViewById(R.id.detailer_survey_date)).setText(calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.YEAR));
              Customer customer = callDataTask.getCustomer();
              if(customer!=null){
                  ((TextView)view. findViewById(R.id.detailer_district)).setText(customer.getSubcounty().getDistrict().getName());
@@ -278,7 +275,6 @@ import java.util.Calendar;
                }
 
      private void setReadOnly(View view) {
-                   view.findViewById(R.id.detailer_survey_date).setEnabled(false);
                    view.findViewById(R.id.detailer_name).setEnabled(false);
                    view.findViewById(R.id.detailer_desc_location).setEnabled(false);
                    view.findViewById(R.id.detailer_subcounty).setEnabled(false);

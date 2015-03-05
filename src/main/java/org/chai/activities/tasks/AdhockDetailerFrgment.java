@@ -31,7 +31,6 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
         final View view = inflater.inflate(R.layout.adhoc_detailer_form, container, false);
         initialiseGreenDao();
 
-        setDateWidget(view);
         initDetailerInstance();
         List<Customer> customersList = customerDao.loadAll();
         AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.adhock_detailer_customer);

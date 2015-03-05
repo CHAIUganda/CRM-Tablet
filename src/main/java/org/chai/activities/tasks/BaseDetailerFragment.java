@@ -93,43 +93,6 @@ import java.util.*;
          }
      }
 
-     protected void setDateWidget(View view) {
-         Button dateBtn = (Button) view.findViewById(R.id.detailer_survey_date_btn);
-         dateEditTxt = (EditText) view.findViewById(R.id.detailer_survey_date);
-         dateEditTxt.setEnabled(false);
-
-         dateBtn.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 Calendar calendar = null;
-                 String existingDate = (String) dateEditTxt.getText().toString();
-                 if (existingDate != null && !existingDate.equals("")) {
-                     StringTokenizer stringTokenizer = new StringTokenizer(existingDate, "/");
-                     initialMonth = stringTokenizer.nextToken();
-                     initialDate = stringTokenizer.nextToken();
-                     initialYear = stringTokenizer.nextToken();
-                     if (datePickerDialog == null) {
-                         datePickerDialog = new DatePickerDialog(view.getContext(), new PickDate(), Integer.parseInt(initialYear),
-                                 Integer.parseInt(initialMonth),
-                                 Integer.parseInt(initialDate));
-
-                         datePickerDialog.updateDate(Integer.parseInt(initialYear),
-                                 Integer.parseInt(initialMonth),
-                                 Integer.parseInt(initialDate));
-                     }
-                 } else {
-                     calendar = Calendar.getInstance();
-                     if (datePickerDialog == null) {
-                         datePickerDialog = new DatePickerDialog(view.getContext(), new PickDate(), calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                         datePickerDialog.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                     }
-                 }
-                 Utils.setMinimumDateInDatePicker(new Date(), datePickerDialog);
-                 datePickerDialog.show();
-
-             }
-         });
-     }
 
      protected class PickDate implements DatePickerDialog.OnDateSetListener {
          @Override
@@ -236,7 +199,6 @@ import java.util.*;
          setRequired((TextView) view.findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors_view));
 //         setRequired((TextView) view.findViewById(R.id.detailer_how_ors_should_be_used_view));
          setRequired((TextView) view.findViewById(R.id.detailer_gps_lbl));
-         setRequired((TextView) view.findViewById(R.id.detailer_survey_date_lbl));
          setRequired((TextView) view.findViewById(R.id.detailer_do_you_stock_zinc_view));
          setRequired((TextView) view.findViewById(R.id.detailer_do_you_stock_ors_view));
          setRequired((TextView) view.findViewById(R.id.detailer_point_of_sale_view));
@@ -329,9 +291,7 @@ import java.util.*;
              return false;
          } else if (((Spinner) view.findViewById(R.id.detailer_recommendation_level)).getSelectedItem().toString().equals("")) {
              return false;
-         }else if (((EditText) view.findViewById(R.id.detailer_survey_date)).getText().toString().equals("")) {
-             return false;
-         }else if (((GpsWidgetView)view. findViewById(R.id.detailers_gps_view)).getLatLongText().toString().equals("")) {
+         } else if (((GpsWidgetView)view. findViewById(R.id.detailers_gps_view)).getLatLongText().toString().equals("")) {
              return false;
          }
          return true;

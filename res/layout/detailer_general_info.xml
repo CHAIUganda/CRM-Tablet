@@ -13,41 +13,6 @@
 
           <LinearLayout
                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:padding="10dp">
-
-              <TextView
-                      android:id="@+id/detailer_survey_date_lbl"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text=""
-                      android:textColor="@color/list_main_text_color"
-                      android:textStyle="bold"/>
-
-               <EditText
-                       android:id="@+id/detailer_survey_date"
-                       android:text=""
-                       android:minWidth="90dip"
-                       android:layout_height="wrap_content"
-                       android:layout_width="match_parent"
-                       android:layout_weight="1"
-                       android:width="150dip"
-                       android:height="40dip"
-                       android:textColor="@color/list_main_text_color"
-                       android:background="@drawable/bordertextfield"
-                       android:textCursorDrawable="@null"/>
-
-               <Button
-                       android:id="@+id/detailer_survey_date_btn"
-                       android:text="Survey Date"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:background="#0091CC"
-                       android:layout_marginLeft="5dp"
-                       android:textColor="#fff"/>
-           </LinearLayout>
-          <LinearLayout
-                  android:layout_width="match_parent"
                   android:layout_height="fill_parent">
 
               <TextView
