@@ -14,10 +14,6 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import de.greenrobot.dao.query.Query;
 import de.greenrobot.dao.query.QueryBuilder;
 import org.chai.Globals;
 import org.chai.R;
@@ -33,9 +29,6 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
-import org.osmdroid.views.overlay.ScaleBarOverlay;
-import org.osmdroid.views.overlay.SimpleLocationOverlay;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.*;
@@ -204,8 +197,8 @@ public class TaskViewOnMapFragment extends Fragment {
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).orderAsc(TaskDao.Properties.Description).list();
         } else if (itemPosition >= 0 && itemPosition < 6) {
             itemPosition = itemPosition==0?itemPosition:itemPosition - 1;
-            Date dueDateOffset = Utils.addToDate(new Date(),itemPosition);
-            Date dueDatemax = Utils.addToDate(new Date(),itemPosition+1);
+            Date dueDateOffset = Utils.addToDateOffset(new Date(), itemPosition);
+            Date dueDatemax = Utils.addToDateMax(new Date(), itemPosition + 1);
             Log.i("Due Date:",dueDateOffset.toString()+":max-"+dueDatemax.toString());
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).orderAsc(TaskDao.Properties.Description).list();
         } else if (itemPosition == 6) {

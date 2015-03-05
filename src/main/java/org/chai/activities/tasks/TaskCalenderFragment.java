@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
-import de.greenrobot.dao.query.Query;
 import de.greenrobot.dao.query.QueryBuilder;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
@@ -19,8 +18,6 @@ import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
 import org.osmdroid.util.GeoPoint;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -115,11 +112,11 @@ public class TaskCalenderFragment extends Fragment {
         QueryBuilder<Task> taskQueryBuilder = taskDao.queryBuilder();
         List<Task> outstandingTasks=null;
         if(itemPosition==1){
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(Utils.addToDate(new Date(),0)),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(Utils.addToDateOffset(new Date(), 0)),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         } else if (itemPosition >= 0 && itemPosition < 6) {
             itemPosition = itemPosition==0?itemPosition:itemPosition - 1;
-            Date dueDateOffset = Utils.addToDate(new Date(),itemPosition);
-            Date dueDatemax = Utils.addToDate(new Date(),itemPosition+1);
+            Date dueDateOffset = Utils.addToDateOffset(new Date(), itemPosition);
+            Date dueDatemax = Utils.addToDateMax(new Date(), itemPosition);
             Log.i("Due Date:",dueDateOffset.toString()+":max-"+dueDatemax.toString());
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         }else if(itemPosition == 6){
