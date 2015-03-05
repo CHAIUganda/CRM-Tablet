@@ -145,9 +145,7 @@ public class HomeActivity extends FragmentActivity{
                 }).start();
                 return true;
             case R.id.action_logout:
-                finish();
-                /*Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                startActivity(intent);*/
+                finish(); 
             default:
                 return super.onOptionsItemSelected(item);
         }
