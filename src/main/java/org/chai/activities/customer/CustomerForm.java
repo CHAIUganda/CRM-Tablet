@@ -190,7 +190,8 @@ public class CustomerForm extends Activity {
             customerInstance.setTypeOfLicence(((Spinner) findViewById(R.id.details_licence_type)).getSelectedItem().toString().toLowerCase());
 
             customerInstance.setDescriptionOfOutletLocation(((EditText) findViewById(R.id.details_desc_location)).getText().toString());
-            customerInstance.setNumberOfEmployees(Integer.parseInt(((EditText) findViewById(R.id.details_number_of_employees)).getText().toString()));
+            String emps = ((EditText) findViewById(R.id.details_number_of_employees)).getText().toString();
+            customerInstance.setNumberOfEmployees(Integer.parseInt(emps.equals("")?0+"":emps));
             customerInstance.setNumberOfCustomersPerDay(Integer.parseInt(((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString()));
             customerInstance.setRestockFrequency(((Spinner) findViewById(R.id.details_restock_frequency)).getSelectedItem().toString().toLowerCase());
             if (!((GpsWidgetView) findViewById(R.id.customer_gps_view)).getLatLongText().equals("")) {
@@ -272,17 +273,9 @@ public class CustomerForm extends Activity {
             return false;
         } else if (((EditText) findViewById(R.id.details_desc_location)).getText().toString().equals("")) {
             return false;
-        } else if (((EditText) findViewById(R.id.details_date_outlet_opened)).getText().toString().equals("")) {
+        }   else if (((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString().equals("")) {
             return false;
-        } else if (((EditText) findViewById(R.id.details_number_of_employees)).getText().toString().equals("")) {
-            return false;
-        } else if (((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString().equals("")) {
-            return false;
-        } else if (((EditText) findViewById(R.id.details_sources_of_supply)).getText().toString().equals("")) {
-            return false;
-        } else if (((Spinner) findViewById(R.id.details_restock_frequency)).getSelectedItem().toString().equals("")) {
-            return false;
-        }else if (((Spinner) findViewById(R.id.details_split)).getSelectedItem().toString().equals("")) {
+        }   else if (((Spinner) findViewById(R.id.details_split)).getSelectedItem().toString().equals("")) {
             return false;
         }else if (((GpsWidgetView) findViewById(R.id.customer_gps_view)).getLatLongText().toString().equals("")) {
             return false;
@@ -338,11 +331,11 @@ public class CustomerForm extends Activity {
         Utils.setRequired((TextView) findViewById(R.id.details_subcounty_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_district_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_desc_location_lbl));
-        Utils.setRequired((TextView) findViewById(R.id.details_date_outlet_opened_lbl));
-        Utils.setRequired((TextView) findViewById(R.id.details_number_of_employees_lbl));
+//        Utils.setRequired((TextView) findViewById(R.id.details_date_outlet_opened_lbl));
+//        Utils.setRequired((TextView) findViewById(R.id.details_number_of_employees_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_num_customers_per_day_lbl));
-        Utils.setRequired((TextView) findViewById(R.id.details_sources_of_supply_lbl));
-        Utils.setRequired((TextView) findViewById(R.id.details_restock_frequency_lbl));
+//        Utils.setRequired((TextView) findViewById(R.id.details_sources_of_supply_lbl));
+//        Utils.setRequired((TextView) findViewById(R.id.details_restock_frequency_lbl));
         Utils.setRequired((TextView) findViewById(R.id.outlet_rural_village));
         Utils.setRequired((TextView) findViewById(R.id.customer_gps_lbl));
     }
