@@ -125,7 +125,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
                         datePickerDialog.updateDate(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
                     }
                 }
-                Utils.setMinimumDateInDatePicker(new Date(),datePickerDialog);
+                Utils.setMinimumDateInDatePicker(Utils.addToDateOffset(new Date(),7),datePickerDialog);
                 datePickerDialog.show();
 
             }

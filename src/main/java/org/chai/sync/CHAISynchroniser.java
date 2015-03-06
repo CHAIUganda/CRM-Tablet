@@ -195,14 +195,16 @@ public class CHAISynchroniser {
         Customer[] customers = customerClient.downloadCustomers();
         customerDao.insertInTx(customers);
 
+
         List<CustomerContact> contacts = new ArrayList<CustomerContact>();
         for(Customer customer:customers){
-            List<CustomerContact> ccs = customer.getCustomerContacts();
-            if (ccs != null) {
-                for (CustomerContact cc : ccs) {
+            List<CustomerContact> customerContacts = customer.getCustomerContacts();
+            if (customerContacts != null) {
+                for (CustomerContact cc : customerContacts) {
                     cc.setCustomerId(customer.getUuid());
+                    cc.setCustomer(customer);
+                    contacts.add(cc);
                 }
-                contacts.addAll(ccs);
             }
         }
         customerContactDao.insertInTx(contacts);

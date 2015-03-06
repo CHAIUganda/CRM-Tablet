@@ -98,7 +98,7 @@
                     android:textSize="28dp"
                     android:singleLine="true"
                     android:textStyle="italic"
-                    android:text=""
+                    android:text="sal20"
                     android:textCursorDrawable="@null"/>
 
         </LinearLayout>
@@ -133,7 +133,7 @@
                     android:textSize="28dp"
                     android:singleLine="true"
                     android:textStyle="italic"
-                    android:text=""
+                    android:text="pagaja"
                     android:textCursorDrawable="@null"/>
 
         </LinearLayout>

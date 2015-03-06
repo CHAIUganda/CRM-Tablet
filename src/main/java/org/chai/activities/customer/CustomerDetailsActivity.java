@@ -72,21 +72,25 @@ public class CustomerDetailsActivity extends Activity {
     }
 
     private void loadCustomerDetails(Customer customer) {
-        ((TextView) findViewById(R.id.customer_profile_name)).setText(customer.getOutletName());
-        ((TextView) findViewById(R.id.customer_profile_address)).setText(Utils.getKeyCustomerContact(customer.getCustomerContacts()).getContact()+"");
-        ((TextView) findViewById(R.id.customer_profile_district)).setText(customer.getSubcounty().getDistrict().getName());
-        ((TextView) findViewById(R.id.customer_profile_subcounty)).setText(customer.getSubcounty().getName());
-        ((TextView) findViewById(R.id.customer_profile_date_outlet_opened)).setText(customer.getDateOutletOpened()+"");
-        ((TextView) findViewById(R.id.customer_profile_outlet_type)).setText(customer.getOutletType());
-        ((TextView) findViewById(R.id.customer_profile_size)).setText(customer.getOutletSize());
-        ((TextView) findViewById(R.id.customer_profile_split)).setText(customer.getSplit());
-        ((TextView) findViewById(R.id.customer_profile_sources_of_supply)).setText(customer.getMajoritySourceOfSupply());
-        ((TextView) findViewById(R.id.customer_profile_key_wholesaler_name)).setText(customer.getKeyWholeSalerName());
-        ((TextView) findViewById(R.id.customer_profile_key_wholesaler_contact)).setText(customer.getKeyWholeSalerContact());
-        ((TextView) findViewById(R.id.customer_profile_desc_location)).setText(customer.getDescriptionOfOutletLocation());
-        ((TextView) findViewById(R.id.profile_number_of_employees)).setText(customer.getNumberOfEmployees() + "");
-        ((TextView) findViewById(R.id.customer_profile_num_customers_per_day)).setText(customer.getNumberOfCustomersPerDay() + "");
-        ((TextView) findViewById(R.id.customer_profile_restock_frequency)).setText(customer.getRestockFrequency() + "");
+        try{
+            ((TextView) findViewById(R.id.customer_profile_name)).setText(customer.getOutletName());
+            ((TextView) findViewById(R.id.customer_profile_district)).setText(customer.getSubcounty().getDistrict().getName());
+            ((TextView) findViewById(R.id.customer_profile_subcounty)).setText(customer.getSubcounty().getName());
+            ((TextView) findViewById(R.id.customer_profile_date_outlet_opened)).setText(customer.getDateOutletOpened()+"");
+            ((TextView) findViewById(R.id.customer_profile_outlet_type)).setText(customer.getOutletType());
+            ((TextView) findViewById(R.id.customer_profile_size)).setText(customer.getOutletSize());
+            ((TextView) findViewById(R.id.customer_profile_split)).setText(customer.getSplit());
+            ((TextView) findViewById(R.id.customer_profile_sources_of_supply)).setText(customer.getMajoritySourceOfSupply());
+            ((TextView) findViewById(R.id.customer_profile_key_wholesaler_name)).setText(customer.getKeyWholeSalerName());
+            ((TextView) findViewById(R.id.customer_profile_key_wholesaler_contact)).setText(customer.getKeyWholeSalerContact());
+            ((TextView) findViewById(R.id.customer_profile_desc_location)).setText(customer.getDescriptionOfOutletLocation());
+            ((TextView) findViewById(R.id.profile_number_of_employees)).setText(customer.getNumberOfEmployees() + "");
+            ((TextView) findViewById(R.id.customer_profile_num_customers_per_day)).setText(customer.getNumberOfCustomersPerDay() + "");
+            ((TextView) findViewById(R.id.customer_profile_restock_frequency)).setText(customer.getRestockFrequency() + "");
+            ((TextView) findViewById(R.id.customer_profile_address)).setText(Utils.getKeyCustomerContact(customer.getCustomerContacts()).getContact()+"");
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
 
     }
 

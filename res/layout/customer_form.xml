@@ -509,10 +509,20 @@
 
             </LinearLayout>
 
-            <LinearLayout android:orientation="vertical"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:padding="10dp">
+            <LinearLayout
+                    android:id="@+id/customer_contacts_layout"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
                 <Button
                         android:id="@+id/menu_add_new_customer_contact"
                         android:layout_width="match_parent"
@@ -523,13 +533,6 @@
                         android:layout_marginLeft="50dp"
                         android:layout_marginRight="50dp"
                         android:background="#428bca"/>
-
-            </LinearLayout>
-            <LinearLayout
-                    android:id="@+id/customer_contacts_layout"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
             </LinearLayout>
 

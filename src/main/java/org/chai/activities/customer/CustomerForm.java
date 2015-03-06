@@ -20,6 +20,7 @@ import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
+import org.chai.util.customwidget.ContactWidgetView;
 import org.chai.util.customwidget.GpsWidgetView;
 
 import java.util.*;
@@ -44,6 +45,7 @@ public class CustomerForm extends Activity {
 
     private Customer customerInstance;
     private List<CustomerContact> customerContacts = new ArrayList<CustomerContact>();
+    private List<ContactWidgetView> contactsToUpdate = new ArrayList<ContactWidgetView>();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -240,6 +242,9 @@ public class CustomerForm extends Activity {
             Spinner splitSpinner = (Spinner) findViewById(R.id.details_split);
             setSpinnerSelection(splitSpinner, customerInstance.getSplit());
 
+            addContactsToLayout(customerInstance.getCustomerContacts());
+
+
         }
     }
 
@@ -251,11 +256,11 @@ public class CustomerForm extends Activity {
                 customerInstance.setIsDirty(true);
                 if (isNewCustomer()) {
                     customerInstance.setUuid(UUID.randomUUID().toString());
-                    Long customerId = customerDao.insert(customerInstance);
-                    saveCustomerContacts(customerInstance.getUuid());
+                    customerDao.insert(customerInstance);
                 } else {
                     customerDao.update(customerInstance);
                 }
+                saveCustomerContacts(customerInstance.getUuid());
                 isSaved = true;
             }
         } catch (Exception ex) {
@@ -322,6 +327,9 @@ public class CustomerForm extends Activity {
             customerContact.setCustomerId(customerId);
             customerContactDao.insert(customerContact);
         }
+        for(ContactWidgetView contactWidgetView:contactsToUpdate){
+            customerContactDao.update(contactWidgetView.getCustomerContact());
+        }
     }
 
     private void setMandatoryFields() {
@@ -359,6 +367,16 @@ public class CustomerForm extends Activity {
 
             }
         });
+    }
+
+    private void addContactsToLayout(List<CustomerContact> customerContactList) {
+        //add to parent form
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.customer_contacts_layout);
+        for (CustomerContact customerContact : customerContactList) {
+            ContactWidgetView contactWidgetView = new ContactWidgetView(CustomerForm.this, customerContact);
+            linearLayout.addView(contactWidgetView);
+            contactsToUpdate.add(contactWidgetView);
+        }
     }
 
 }

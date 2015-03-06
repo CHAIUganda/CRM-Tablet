@@ -76,7 +76,7 @@
                         android:padding="10dp"
                         android:textSize="@dimen/list_sub_text_size"
                         android:textStyle="italic"
-                        android:text="PO BOx 349 Kampala"/>
+                        android:text=""/>
 
             </LinearLayout>
 

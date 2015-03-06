@@ -1,5 +1,6 @@
 package org.chai.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
