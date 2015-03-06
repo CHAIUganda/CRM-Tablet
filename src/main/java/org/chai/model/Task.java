@@ -47,7 +47,7 @@ public class Task {
     private transient TaskDao myDao;
     @JsonIgnore
     private List<Sale> sales = new ArrayList<Sale>();
-    private List<DetailerCall> detailers = new ArrayList<DetailerCall>();
+    private List<DetailerCall> detailers;
     private List<TaskOrder> lineItems;
     // KEEP FIELDS END
 

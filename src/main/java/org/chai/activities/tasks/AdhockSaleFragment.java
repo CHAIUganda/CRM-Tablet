@@ -132,10 +132,14 @@ public class AdhockSaleFragment extends BaseContainerFragment {
                 @Override
                 public void onClick(View view) {
                     try{
-                        submitSale();
-                        resetFragment(R.id.frame_container, new AdhockSaleFragment());
-                        Intent i = new Intent(getActivity(), HomeActivity.class);
-                        startActivity(i);
+                        if(!allMandatoryFieldsFilled()){
+                            Toast.makeText(getActivity(),"Please ensure that data is entered correctly",Toast.LENGTH_LONG).show();
+                        }else{
+                            submitSale();
+                            resetFragment(R.id.frame_container, new AdhockSaleFragment());
+                            Intent i = new Intent(getActivity(), HomeActivity.class);
+                            startActivity(i);
+                        }
                     }catch (Exception ex){
                         Toast.makeText(getActivity(),"A problem Occured while saving a new Sale,please ensure that data is entered correctly",Toast.LENGTH_LONG).show();
                     }
@@ -441,6 +445,18 @@ public class AdhockSaleFragment extends BaseContainerFragment {
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_do_you_stock_zinc_view));
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_government_approval_lbl));
         Utils.setRequired((TextView) view.findViewById(R.id.adhock_sale_customer_lbl));
+        Utils.setRequired((TextView) view.findViewById(R.id.adhoc_gps_lbl));
     }
+
+
+    private boolean allMandatoryFieldsFilled() {
+        if (((Spinner) getActivity().findViewById(R.id.adhock_sale_do_you_stock_zinc)).getSelectedItem().toString().equals("")) {
+            return false;
+        }else if (((GpsWidgetView)getActivity().findViewById(R.id.adhoc_sales_gps)).getLatLongText().toString().equals("")) {
+            return false;
+        }
+        return true;
+    }
+
 
 }

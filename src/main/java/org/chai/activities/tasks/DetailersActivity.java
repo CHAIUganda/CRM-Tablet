@@ -119,7 +119,8 @@ import java.util.Calendar;
      }
 
      @Override
-     protected boolean saveForm() {   boolean isSaved = false;
+     protected boolean saveForm() {
+         boolean isSaved = false;
          try {
              bindUiToDetailerCall();
              detailerCallInstance.setTaskId(callDataTask.getUuid());

@@ -69,6 +69,11 @@
             <artifactId>slf4j-android</artifactId>
             <version>1.6.1-RC1</version>
         </dependency>
+        <dependency>
+            <groupId>com.splunk.mint</groupId>
+            <artifactId>mint</artifactId>
+            <version>4.0.9</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -166,6 +171,11 @@
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
             </snapshots>
+        </repository>
+        <repository>
+            <id>Splunk MINT repo</id>
+            <name>The Splunk MINT Repository</name>
+            <url>https://mint.splunk.com/maven/</url>
         </repository>
     </repositories>
     <profiles>

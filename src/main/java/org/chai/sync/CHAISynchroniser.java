@@ -271,10 +271,14 @@ public class CHAISynchroniser {
     }
 
     private boolean taskIsHistory(Task task) {
-        if(!task.getDetailers().isEmpty() &&task.getDetailers().get(0).getIsHistory()){
-            return true;
-        }else if(!task.getSales().isEmpty()&&task.getSales().get(0).getIsHistory()){
-            return true;
+        try{
+            if(!task.getDetailers().isEmpty() &&task.getDetailers().get(0).getIsHistory()){
+                return true;
+            }else if(!task.getSales().isEmpty()&&task.getSales().get(0).getIsHistory()){
+                return true;
+            }
+        }catch (Exception ex){
+
         }
         return false;
     }

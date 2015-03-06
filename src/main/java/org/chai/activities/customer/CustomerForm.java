@@ -346,6 +346,7 @@ public class CustomerForm extends Activity {
 //        Utils.setRequired((TextView) findViewById(R.id.details_restock_frequency_lbl));
         Utils.setRequired((TextView) findViewById(R.id.outlet_rural_village));
         Utils.setRequired((TextView) findViewById(R.id.customer_gps_lbl));
+        Utils.setRequired((TextView) findViewById(R.id.customer_add_contact_lbl));
     }
 
     protected void manageLicenceVisible() {
