@@ -55,13 +55,13 @@ public class SalesAdapter extends BaseAdapter {
         if(sale!=null){
             try{
             taskDescription.setText(sale.getTask().getDescription());
-            customerNameTxtView.setText(sale.getTask().getCustomer().getOutletName());
-            customerLocationTxtView.setText(sale.getTask().getCustomer().getDescriptionOfOutletLocation());
             if(sale.getIsHistory()){
                 taskDescription.setTextColor(Color.parseColor("#C0C0C0"));
                 customerNameTxtView.setTextColor(Color.parseColor("#C0C0C0"));
                 customerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
             }
+                customerNameTxtView.setText(sale.getTask().getCustomer().getOutletName());
+                customerLocationTxtView.setText(sale.getTask().getCustomer().getDescriptionOfOutletLocation());
             }catch (Exception ex){
                 //
             }

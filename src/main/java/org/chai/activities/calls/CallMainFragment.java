@@ -66,10 +66,18 @@ public class CallMainFragment extends Fragment {
                 try{
                     if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
                         Sale sale = (Sale)adapterView.getItemAtPosition(position);
-                        goToSalesForm(sale);
+                        if(sale.getTask().getCustomer() == null){
+                            Toast.makeText(getActivity(), "Error Loading commercial form:The customer was not found,please ensure this customer was not deleted from the server", Toast.LENGTH_LONG).show();
+                        }else{
+                            goToSalesForm(sale);
+                        }
                     }else{
                         DetailerCall itemAtPosition = (DetailerCall) adapterView.getItemAtPosition(position);
-                        goToDetailerForm(itemAtPosition);
+                        if(itemAtPosition.getTask().getCustomer() == null){
+                            Toast.makeText(getActivity(), "Error Loading Detailer form:The customer was not found,please ensure this customer was not deleted from the server", Toast.LENGTH_LONG).show();
+                        }else{
+                            goToDetailerForm(itemAtPosition);
+                        }
                     }
                 }catch (Exception ex){
                     ex.printStackTrace();

@@ -63,13 +63,13 @@ public class DetailerCallAdapter extends BaseAdapter {
         if(detailerCall!=null){
             try{
                 taskDescription.setText(detailerCall.getTask().getDescription());
-                customerNameTxtView.setText(detailerCall.getTask().getCustomer().getOutletName());
-                customerLocationTxtView.setText(detailerCall.getTask().getCustomer().getDescriptionOfOutletLocation());
                 if(detailerCall.getIsHistory()){
                     taskDescription.setTextColor(Color.parseColor("#C0C0C0"));
                     customerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
                     customerNameTxtView.setTextColor(Color.parseColor("#C0C0C0"));
                 }
+                customerNameTxtView.setText(detailerCall.getTask().getCustomer().getOutletName());
+                customerLocationTxtView.setText(detailerCall.getTask().getCustomer().getDescriptionOfOutletLocation());
             }catch (Exception ex){
                 //
             }

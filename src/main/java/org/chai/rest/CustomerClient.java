@@ -2,13 +2,10 @@ package org.chai.rest;
 
 import android.util.Log;
 import org.chai.model.Customer;
-import org.chai.model.Product;
 import org.chai.util.ServerResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,7 +17,7 @@ public class CustomerClient extends RestClient {
     public Customer[] downloadCustomers() {
         try {
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Customer[]> responseEntity = restTemplate.exchange(REST_URL + "customer/list?max="+Integer.MAX_VALUE, HttpMethod.GET, getRequestEntity(), Customer[].class);
+            ResponseEntity<Customer[]> responseEntity = restTemplate.exchange(REST_URL + "customer/list?max=" + Integer.MAX_VALUE, HttpMethod.GET, getRequestEntity(), Customer[].class);
             return responseEntity.getBody();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -28,19 +25,17 @@ public class CustomerClient extends RestClient {
         return null;
     }
 
-    public boolean uploadCustomers(Customer[] customers){
-        try{
-            for(Customer customer:customers){
-                RestTemplate restTemplate = getRestTemplate();
-                HttpEntity<Customer> httpEntity = new HttpEntity<Customer>(customer,getHeaders());
-                ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "customer/update", HttpMethod.PUT,httpEntity, ServerResponse.class);
-                Log.i("Rest Customer post Response:","=============================================================================="+responseEntity.getBody().getMessage());
-            }
-            return true;
-        }catch (HttpClientErrorException ex){
-            Log.i("Error:",ex.getResponseBodyAsString());
-            ex.printStackTrace();
+    public ServerResponse uploadCustomer(Customer customer) {
+        try {
+            RestTemplate restTemplate = getRestTemplate();
+            HttpEntity<Customer> httpEntity = new HttpEntity<Customer>(customer, getHeaders());
+            ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "customer/update", HttpMethod.PUT, httpEntity, ServerResponse.class);
+            Log.i("Rest Customer post Response:", "==============================================================================" + responseEntity.getBody().getMessage());
+
+            return new ServerResponse("200", "Successfully uploaded Customers");
+        } catch (HttpClientErrorException ex) {
+            ServerResponse serverResponse = ServerResponse.getServerErrorResponse(ex);
+            return serverResponse;
         }
-        return false;
     }
 }

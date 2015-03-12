@@ -61,7 +61,14 @@ public class CustomerDetailsActivity extends Activity {
                 startActivity(intent);
                 return true;
             case R.id.customer_details_inactive:
-                Toast.makeText(getApplicationContext(), "Error initialising Database:" + customerId, Toast.LENGTH_LONG).show();
+                try{
+                   Customer customer = customerDao.load(customerId);
+                    customer.setIsActive(false);
+                    customerDao.update(customer);
+                    Toast.makeText(getApplicationContext(), "Customer :" + customer.getOutletName()+" has been inactivated", Toast.LENGTH_LONG).show();
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
                 return true;
             case R.id.details_home:
                 Intent i = new Intent(getApplicationContext(), HomeActivity.class);

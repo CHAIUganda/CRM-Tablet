@@ -8,6 +8,8 @@ import android.widget.Toast;
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.model.*;
 import org.chai.rest.*;
+import org.chai.util.ServerResponse;
+import org.chai.util.SyncronizationException;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
@@ -56,7 +58,8 @@ public class CHAISynchroniser {
         salesClient = new SalesClient();
         initialiseGreenDao();
     }
-    public CHAISynchroniser(Activity parent,ProgressDialog progressDialog){
+
+    public CHAISynchroniser(Activity parent, ProgressDialog progressDialog) {
         this.parent = parent;
         this.progressDialog = progressDialog;
         place = new Place();
@@ -95,7 +98,7 @@ public class CHAISynchroniser {
     }
 
     public void startSyncronisationProcess() {
-        try{
+        try {
             uploadCustomers();
             uploadDirectSales();
             uploadSales();
@@ -118,12 +121,21 @@ public class CHAISynchroniser {
             downloadSummaryReports();
 
             progressDialog.incrementProgressBy(20);
-        }catch (HttpClientErrorException e){
-            Log.i("Error:============================================",e.getResponseBodyAsString());
+        }catch (final SyncronizationException syncExc){
+            parent.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(parent.getApplicationContext(),
+                            "The Syncronisation Process is Unable to continue,"+syncExc.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
+            });
+        }catch (HttpClientErrorException e) {
+            Log.i("Error:============================================", e.getResponseBodyAsString());
             e.printStackTrace();
-        }catch (HttpServerErrorException se){
-            Log.i("Error:============================================",se.getResponseBodyAsString());
-        }catch (Exception ex){
+        } catch (HttpServerErrorException se) {
+            Log.i("Error:============================================", se.getResponseBodyAsString());
+        } catch (Exception ex) {
             ex.printStackTrace();
             parent.runOnUiThread(new Runnable() {
                 @Override
@@ -161,7 +173,7 @@ public class CHAISynchroniser {
         updatePropgress("Downloading Subcounties...");
         Subcounty[] subcounties = place.downloadSubcounties();
         for (Subcounty subcounty : subcounties) {
-             subcountyDao.insert(subcounty);
+            subcountyDao.insert(subcounty);
         }
     }
 
@@ -182,22 +194,23 @@ public class CHAISynchroniser {
         }
     }
 
-    public void downloadCustomersOld(){
+    public void downloadCustomersOld() {
         updatePropgress("Downloading Customers..");
         Customer[] customers = customerClient.downloadCustomers();
-        for(Customer customer:customers){
+        for (Customer customer : customers) {
             Long id = customerDao.insert(customer);
             saveCustomerContacts(customer.getCustomerContacts(), customer.getUuid());
         }
     }
-    public void downloadCustomers(){
+
+    public void downloadCustomers() {
         updatePropgress("Downloading Customers..");
         Customer[] customers = customerClient.downloadCustomers();
-        customerDao.insertInTx(customers);
+        customerDao.insertOrReplaceInTx(customers);
 
 
         List<CustomerContact> contacts = new ArrayList<CustomerContact>();
-        for(Customer customer:customers){
+        for (Customer customer : customers) {
             List<CustomerContact> customerContacts = customer.getCustomerContacts();
             if (customerContacts != null) {
                 for (CustomerContact cc : customerContacts) {
@@ -207,32 +220,33 @@ public class CHAISynchroniser {
                 }
             }
         }
-        customerContactDao.insertInTx(contacts);
+        customerContactDao.insertOrReplaceInTx(contacts);
     }
 
-    public void saveCustomerContacts(List<CustomerContact> customerContacts,String customerId){
-        for(CustomerContact customerContact:customerContacts){
+    public void saveCustomerContacts(List<CustomerContact> customerContacts, String customerId) {
+        for (CustomerContact customerContact : customerContacts) {
             customerContact.setCustomerId(customerId);
             customerContactDao.insert(customerContact);
         }
     }
 
-    public void downloadTasks(){
+    public void downloadTasks() {
         updatePropgress("Downloading Tasks..");
 
         Task[] tasks = taskClient.downloadTasks();
-        for(Task task:tasks){
-            try{
+        for (Task task : tasks) {
+            try {
                 taskDao.insert(task);
                 insertTaskOrders(task);
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 //catch cases when task is a duplicate
             }
         }
     }
-    private void insertTaskOrders(Task task){
-        if(task.getLineItems()!=null){
-            for(TaskOrder order:task.getLineItems()){
+
+    private void insertTaskOrders(Task task) {
+        if (task.getLineItems() != null) {
+            for (TaskOrder order : task.getLineItems()) {
                 order.setTaskId(task.getUuid());
                 order.setTask(task);
                 taskOrderDao.insert(order);
@@ -240,97 +254,105 @@ public class CHAISynchroniser {
         }
     }
 
-    public void uploadTasks(){
+    public void uploadTasks() throws SyncronizationException {
         List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_NEW)).list();
-        if(!taskList.isEmpty()){
+        if (!taskList.isEmpty()) {
             updatePropgress("Uploading Tasks..");
         }
         for (Task task : taskList) {
-            try{
-                if(taskIsHistory(task)){
-                    continue;
+            if (taskIsHistory(task)) {
+                continue;
+            }
+            ServerResponse response = taskClient.uploadTask(task);
+            if (response.getStatus().equalsIgnoreCase("OK")) {
+                //set all detailer calls to isHistroy
+                if (RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
+                    DetailerCall detailerCall = task.getDetailers().get(0);
+                    detailerCall.setIsHistory(true);
+                    detailerCallDao.update(detailerCall);
+                } else {
+                    Sale sale = task.getSales().get(0);
+                    sale.setIsHistory(true);
+                    saleDao.update(sale);
                 }
-                boolean uploaded = taskClient.uploadTask(task);
-                if(uploaded){
-                    //set all detailer calls to isHistroy
-                    if (RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
-                        DetailerCall detailerCall = task.getDetailers().get(0);
-                        detailerCall.setIsHistory(true);
-                        detailerCallDao.update(detailerCall);
-                    }else{
-                        Sale sale = task.getSales().get(0);
-                        sale.setIsHistory(true);
-                        saleDao.update(sale);
-                    }
-                }
-            }catch (Exception ex){
-                //
+            }else{
+                throw new SyncronizationException(response.getMessage());
             }
         }
 
     }
 
     private boolean taskIsHistory(Task task) {
-        try{
-            if(!task.getDetailers().isEmpty() &&task.getDetailers().get(0).getIsHistory()){
+        try {
+            if (!task.getDetailers().isEmpty() && task.getDetailers().get(0).getIsHistory()) {
                 return true;
-            }else if(!task.getSales().isEmpty()&&task.getSales().get(0).getIsHistory()){
+            } else if (!task.getSales().isEmpty() && task.getSales().get(0).getIsHistory()) {
                 return true;
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
 
         }
         return false;
     }
 
-    public void uploadCustomers(){
+    public void uploadCustomers() {
         List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
-        if(!customersList.isEmpty()){
+        if (!customersList.isEmpty()) {
             updatePropgress("Uploading Customers...");
-            boolean uploaded = customerClient.uploadCustomers(customersList.toArray(new Customer[customersList.size()]));
-            if (uploaded) {
+        }
+        for (Customer customer : customersList) {
+            ServerResponse response = customerClient.uploadCustomer(customer);
+            if (response.getStatus().equalsIgnoreCase("OK")) {
                 customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).buildDelete();
             }
         }
-    } 
-    private void downloadProducts(){
+    }
+
+    private void downloadProducts() {
         productDao.deleteAll();
         Product[] products = productClient.downloadProducts();
-        for(Product product:products){
+        for (Product product : products) {
             productDao.insert(product);
         }
     }
 
-    private void uploadSales(){
+    private void uploadSales() {
         List<Sale> saleList = saleDao.loadAll();
-        if(!saleList.isEmpty()){
+        if (!saleList.isEmpty()) {
             updatePropgress("Uploading Sales...");
-            boolean uploaded = salesClient.uploadSales(saleList.toArray(new Sale[saleList.size()]));
-            if(uploaded){
-                for(Sale sale:saleList){
-                    sale.setIsHistory(true);
-                    saleDao.update(sale);
-                }
+        }
+        for (Sale sale : saleList) {
+            ServerResponse response = salesClient.uploadSale(sale);
+            if (response.getStatus().equalsIgnoreCase("OK")) {
+                sale.setIsHistory(true);
+                saleDao.update(sale);
             }
         }
     }
-    private void uploadDirectSales(){
+
+    private void uploadDirectSales() {
         List<AdhockSale> saleList = adhockSaleDao.loadAll();
-        if(!saleList.isEmpty()){
+        if (!saleList.isEmpty()) {
             updatePropgress("Uploading Sales...");
-            boolean uploaded = salesClient.uploadDirectSale(saleList.toArray(new AdhockSale[saleList.size()]));
-            if(uploaded){
+        }
+        for (AdhockSale adhockSale : saleList) {
+            updatePropgress("Uploading Sales...");
+            ServerResponse response = salesClient.uploadDirectSale(adhockSale);
+            if (response.equals("200")) {
                 adhockSaleDao.deleteAll();
             }
         }
     }
 
-    private void uploadOrders(){
+    private void uploadOrders() {
         List<Order> orderList = orderDao.loadAll();
-        if(!orderList.isEmpty()){
+        if (!orderList.isEmpty()) {
             updatePropgress("Uploading Orders...");
-            boolean uploaded = salesClient.uploadOrders(orderList.toArray(new Order[orderList.size()]));
-            if(uploaded){
+        }
+        for (Order order : orderList) {
+            updatePropgress("Uploading Orders...");
+            ServerResponse response = salesClient.uploadOrder(order);
+            if (response.getStatus().equalsIgnoreCase("OK")) {
                 orderDao.deleteAll();
             }
         }
@@ -344,7 +366,7 @@ public class CHAISynchroniser {
         }
     }
 
-    private void updatePropgress(final String message){
+    private void updatePropgress(final String message) {
         parent.runOnUiThread(new Runnable() {
             @Override
             public void run() {

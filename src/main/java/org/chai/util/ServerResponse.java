@@ -1,6 +1,8 @@
 package org.chai.util;
 
+import android.util.Log;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.web.client.HttpClientErrorException;
 
 /**
  * Created by victor on 11/11/14.
@@ -31,5 +33,12 @@ public class ServerResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public static ServerResponse getServerErrorResponse(HttpClientErrorException ex) {
+        ServerResponse serverResponse = new ServerResponse("500", ex.getResponseBodyAsString());
+        Log.i("Error:", serverResponse.getMessage());
+        ex.printStackTrace();
+        return serverResponse;
     }
 }

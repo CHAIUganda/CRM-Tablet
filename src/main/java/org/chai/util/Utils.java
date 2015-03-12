@@ -21,6 +21,7 @@ import org.chai.util.geodistance.DistanceCalculator;
 import org.chai.util.geodistance.DistanceComparator;
 import org.chai.util.geodistance.ResultsHelper;
 import org.osmdroid.util.GeoPoint;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
