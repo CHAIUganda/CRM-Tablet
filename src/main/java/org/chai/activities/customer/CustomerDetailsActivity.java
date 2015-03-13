@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
+import org.chai.activities.LoginActivity;
 import org.chai.model.Customer;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
@@ -73,6 +74,9 @@ public class CustomerDetailsActivity extends Activity {
             case R.id.details_home:
                 Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(i);
+                return true;
+            case R.id.details_logout:
+                HomeActivity.logout(this);
             default:
                 return super.onOptionsItemSelected(menuItem);
         }

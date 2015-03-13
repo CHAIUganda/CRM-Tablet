@@ -6,4 +6,9 @@
             android:icon="@drawable/home_icon"
             android:title="Home"
             android:showAsAction="ifRoom"/>
+    <item
+            android:id="@+id/customer_logout"
+            android:orderInCategory="100"
+            android:showAsAction="ifRoom"
+            android:title="Logout"/>
 </menu>

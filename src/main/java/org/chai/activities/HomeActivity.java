@@ -1,6 +1,7 @@
 package org.chai.activities;
 
 import android.app.*;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -145,7 +146,7 @@ public class HomeActivity extends FragmentActivity{
                 }).start();
                 return true;
             case R.id.action_logout:
-                finish();
+                logout(this);
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -239,6 +240,13 @@ public class HomeActivity extends FragmentActivity{
         }catch (Exception ex){
             ex.printStackTrace();
         }
+    }
+
+    public static void logout(Activity activity){
+        Intent login = new Intent(activity.getApplicationContext(), LoginActivity.class);
+        login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        activity.startActivity(login);
+        activity.finish();
     }
 
 }

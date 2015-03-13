@@ -170,6 +170,10 @@ public class CustomerForm extends Activity {
             case R.id.customer_form_home:
                 Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(i);
+                return true;
+            case R.id.customer_logout:
+                HomeActivity.logout(this);
+                return true;
             default:
                 return super.onOptionsItemSelected(menuItem);
         }
