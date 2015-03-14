@@ -43,6 +43,7 @@ public class CustomersMainFragment extends ListFragment {
     }
 
     private void loadDataFromDb() {
+        daoSession.clear();
         customerList.clear();
         customerList.addAll(customerDao.loadAll());
         Collections.sort(customerList, new Comparator<Customer>() {

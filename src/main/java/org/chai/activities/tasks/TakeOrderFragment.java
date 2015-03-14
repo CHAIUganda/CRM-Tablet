@@ -20,6 +20,8 @@ import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
+import org.chai.rest.RestClient;
+import org.chai.util.NavDrawerItem;
 import org.chai.util.Utils;
 
 import java.util.*;
@@ -125,7 +127,11 @@ public class TakeOrderFragment extends BaseContainerFragment {
                         datePickerDialog.updateDate(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
                     }
                 }
-                Utils.setMinimumDateInDatePicker(Utils.addToDateOffset(new Date(),7),datePickerDialog);
+                if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
+                    Utils.setMinimumDateInDatePicker(Utils.addToDateOffset(new Date(),0),datePickerDialog);
+                }else{
+                    Utils.setMinimumDateInDatePicker(Utils.addToDateOffset(new Date(),7),datePickerDialog);
+                }
                 datePickerDialog.show();
 
             }

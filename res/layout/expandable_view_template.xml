@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- Clickable title -->
+    <TextView   android:id="@+id/help_title_gest"
+                android:text="xx"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="bold"
+                android:clickable="true" />
+
+    <!--content to hide/show -->
+    <TextView   android:id="@+id/txt_help_gest"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textColor="@color/list_main_text_color"
+                android:textStyle="normal"
+                android:singleLine="false"
+                android:text="xx"/>
+</merge>

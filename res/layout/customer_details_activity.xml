@@ -269,7 +269,7 @@
                         android:padding="10dp"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="italic"
-                        android:text="byaruhanga Drug shop"/>
+                        android:text="bya"/>
 
             </LinearLayout>
 
@@ -346,7 +346,6 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -391,7 +390,7 @@
                         android:padding="10dp"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="italic"
-                        android:text="byaruhanga Drug shop"/>
+                        android:text="bya"/>
 
             </LinearLayout>
 
@@ -415,7 +414,7 @@
                         android:padding="10dp"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="italic"
-                        android:text="byaruhanga Drug shop"/>
+                        android:text="bya"/>
 
             </LinearLayout>
 
@@ -439,7 +438,7 @@
                         android:padding="10dp"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="italic"
-                        android:text="byaruhanga Drug shop"/>
+                        android:text="bya"/>
 
             </LinearLayout>
 
@@ -464,7 +463,25 @@
                         android:padding="10dp"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="italic"
-                        android:text="byaruhanga Drug shop"/>
+                        android:text="bya"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/details_contact_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"
+                        android:textSize="24dp"
+                        android:text="Contacts:"
+                        />
 
             </LinearLayout>
 

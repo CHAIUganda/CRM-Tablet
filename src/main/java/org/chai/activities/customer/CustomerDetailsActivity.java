@@ -8,16 +8,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
 import org.chai.activities.LoginActivity;
-import org.chai.model.Customer;
-import org.chai.model.CustomerDao;
-import org.chai.model.DaoMaster;
-import org.chai.model.DaoSession;
+import org.chai.model.*;
 import org.chai.util.Utils;
+import org.chai.util.customwidget.ContactWidgetView;
+import org.chai.util.customwidget.ExpandableView;
+
+import java.util.List;
 
 /**
  * Created by victor on 10/17/14.
@@ -41,6 +43,7 @@ public class CustomerDetailsActivity extends Activity {
             Customer customer = customerDao.load(customerId);
             if (customer != null) {
                 loadCustomerDetails(customer);
+                addContactsToLayout(customer.getCustomerContacts());
             }
         }
     }
@@ -67,6 +70,7 @@ public class CustomerDetailsActivity extends Activity {
                     customer.setIsActive(false);
                     customerDao.update(customer);
                     Toast.makeText(getApplicationContext(), "Customer :" + customer.getOutletName()+" has been inactivated", Toast.LENGTH_LONG).show();
+                    finish();
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
@@ -114,6 +118,14 @@ public class CustomerDetailsActivity extends Activity {
             customerDao = daoSession.getCustomerDao();
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+    private void addContactsToLayout(List<CustomerContact> customerContactList) {
+        //add to parent form
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.details_contact_layout);
+        for (CustomerContact customerContact : customerContactList) {
+            ExpandableView expandableView = new ExpandableView(CustomerDetailsActivity.this,customerContact);
+            linearLayout.addView(expandableView);
         }
     }
 }

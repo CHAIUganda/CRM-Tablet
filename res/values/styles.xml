@@ -35,4 +35,9 @@
         <item name="android:background">@drawable/bordertextfield</item>
         <item name="android:textSize">@dimen/list_sub_text_size</item>
     </style>
+    <style name="contact_style" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">#00FF00</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:textSize">20dp</item>
+    </style>
 </resources>
