@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
@@ -106,11 +108,13 @@ public class CustomerForm extends Activity {
             public void onClick(View view) {
                 LayoutInflater layoutInflater = (LayoutInflater) CustomerForm.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View entryView = layoutInflater.inflate(R.layout.add_contact_layout, null);
-                AlertDialog.Builder alert = new AlertDialog.Builder(CustomerForm.this);
+                final EditText contactNumber = ((EditText) entryView.findViewById(R.id.customer_contact_telephone));
+                final AlertDialog.Builder alert = new AlertDialog.Builder(CustomerForm.this);
                 alert.setIcon(R.drawable.icon).setTitle("New Contact").setView(entryView).setPositiveButton("Add", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int button) {
+
                         CustomerContact customerContact = new CustomerContact(null);
                         customerContact.setContact(((EditText) entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
                         customerContact.setNames(((EditText) entryView.findViewById(R.id.customer_contact_names)).getText().toString());
@@ -131,12 +135,32 @@ public class CustomerForm extends Activity {
 
                     }
                 });
-                alert.show();
+                final AlertDialog dialog = alert.create();
+                dialog.show();
+                ((AlertDialog)dialog).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                contactMandatoryFieldsEntered(contactNumber,dialog);
             }
         });
         bindCustomerToUI();
         setMandatoryFields();
         manageLicenceVisible();
+    }
+
+    private void contactMandatoryFieldsEntered(EditText contactNumber, final AlertDialog dialog) {
+        contactNumber.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence c, int i, int i2, int i3) {}
+            @Override public void onTextChanged(CharSequence c, int i, int i2, int i3) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Will be called AFTER text has been changed.
+                if (editable.toString().length() == 0){
+                    ((AlertDialog)dialog).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                } else {
+                    ((AlertDialog)dialog).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                }
+            }
+        });
     }
 
     private void initialiseGreenDao() {
@@ -337,6 +361,7 @@ public class CustomerForm extends Activity {
                 CustomerContact customerContact = contactWidgetView.getCustomerContact();
                 customerContact.setUuid(UUID.randomUUID().toString());
                 customerContact.setCustomerId(customerId);
+                customerContact.setCustomer(customerInstance);
                 customerContactDao.insert(customerContact);
             } else {
                 customerContactDao.update(contactWidgetView.getCustomerContact());
@@ -351,11 +376,7 @@ public class CustomerForm extends Activity {
         Utils.setRequired((TextView) findViewById(R.id.details_subcounty_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_district_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_desc_location_lbl));
-//        Utils.setRequired((TextView) findViewById(R.id.details_date_outlet_opened_lbl));
-//        Utils.setRequired((TextView) findViewById(R.id.details_number_of_employees_lbl));
         Utils.setRequired((TextView) findViewById(R.id.details_num_customers_per_day_lbl));
-//        Utils.setRequired((TextView) findViewById(R.id.details_sources_of_supply_lbl));
-//        Utils.setRequired((TextView) findViewById(R.id.details_restock_frequency_lbl));
         Utils.setRequired((TextView) findViewById(R.id.outlet_rural_village));
         Utils.setRequired((TextView) findViewById(R.id.customer_gps_lbl));
         Utils.setRequired((TextView) findViewById(R.id.customer_add_contact_lbl));

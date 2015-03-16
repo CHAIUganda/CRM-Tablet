@@ -281,17 +281,22 @@ import java.util.*;
      }
 
      protected boolean allMandatoryFieldsFilled(View view) {
-         if (((EditText) view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility)).getText().toString().equals("")) {
+         EditText howmanyDiarrheaPatients = ((EditText) view.findViewById(R.id.detailer_how_many_diarrhea_patients_in_facility));
+         Spinner howDidYouhearAboutZinc =  ((Spinner) view.findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors));
+         Spinner doYouStockOrs = ((Spinner) view.findViewById(R.id.detailer_do_you_stock_ors));
+         Spinner doyouStockZinc = ((Spinner) view.findViewById(R.id.detailer_do_you_stock_zinc));
+         Spinner recommendationLevel = ((Spinner) view.findViewById(R.id.detailer_recommendation_level));
+         if (!Utils.mandatoryFieldFilled(howmanyDiarrheaPatients)) {
              return false;
-         } else if (((Spinner) view.findViewById(R.id.detailer_hearabout_treatment_with_zinc_ors)).getSelectedItem().toString().equals("")) {
+         } else if (!Utils.mandatorySpinnerFieldSelected(howDidYouhearAboutZinc)) {
              return false;
-         } else if (((Spinner) view.findViewById(R.id.detailer_do_you_stock_ors)).getSelectedItem().toString().equals("")) {
+         } else if (!Utils.mandatorySpinnerFieldSelected(doYouStockOrs)) {
              return false;
-         } else if (((Spinner) view.findViewById(R.id.detailer_do_you_stock_zinc)).getSelectedItem().toString().equals("")) {
+         } else if (!Utils.mandatorySpinnerFieldSelected(doyouStockZinc)) {
              return false;
          } else if (((Button) view.findViewById(R.id.detailer_next_step_recommendation)).getText().toString().equals("")) {
              return false;
-         } else if (((Spinner) view.findViewById(R.id.detailer_recommendation_level)).getSelectedItem().toString().equals("")) {
+         } else if (!Utils.mandatorySpinnerFieldSelected(recommendationLevel)) {
              return false;
          } else if (((GpsWidgetView)view. findViewById(R.id.detailers_gps_view)).getLatLongText().toString().equals("")) {
              return false;

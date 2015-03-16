@@ -344,7 +344,7 @@ public class CHAISynchroniser {
         }
     }
 
-    private void uploadOrders() {
+    private void uploadOrders() throws SyncronizationException{
         List<Order> orderList = orderDao.loadAll();
         if (!orderList.isEmpty()) {
             updatePropgress("Uploading Orders...");
@@ -353,7 +353,9 @@ public class CHAISynchroniser {
             updatePropgress("Uploading Orders...");
             ServerResponse response = salesClient.uploadOrder(order);
             if (response.getStatus().equalsIgnoreCase("OK")) {
-                orderDao.deleteAll();
+                orderDao.delete(order);
+            }else{
+                throw new SyncronizationException(response.getMessage());
             }
         }
     }

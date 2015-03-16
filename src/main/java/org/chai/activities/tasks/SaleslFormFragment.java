@@ -469,9 +469,13 @@ public class SaleslFormFragment extends Fragment {
     }
 
     private boolean allMandatoryFieldsFilled(View view) {
-        if (((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc)).getSelectedItem().toString().equals("")) {
+        Spinner doYouStockZinc = ((Spinner) getActivity().findViewById(R.id.sales_do_you_stock_zinc));
+        Spinner governmentApproval = ((Spinner) getActivity().findViewById(R.id.sales_government_approval));
+        if (!Utils.mandatorySpinnerFieldSelected(doYouStockZinc)) {
            return false;
         }else if (((GpsWidgetView)getActivity().findViewById(R.id.sales_gps)).getLatLongText().toString().equals("")) {
+            return false;
+        }else if (!Utils.mandatorySpinnerFieldSelected(governmentApproval)) {
             return false;
         }
         return true;

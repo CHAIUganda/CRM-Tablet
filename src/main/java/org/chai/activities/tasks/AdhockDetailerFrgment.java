@@ -169,7 +169,8 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
 
     private void bindDetailerCallToUi(View view) {
         if (detailerCallInstance.getUuid() != null) {
-            Customer customer = detailerCallInstance.getTask().getCustomer();
+            //since this is adhoc we assume its new
+            detailerCallInstance.setUuid(UUID.randomUUID().toString());
             ((TextView)view. findViewById(R.id.adhoc_detailer_district)).setText(customer.getSubcounty().getDistrict().getName());
             ((TextView)view. findViewById(R.id.adhoc_detailer_subcounty)).setText(customer.getSubcounty().getName());
             ((GpsWidgetView)view. findViewById(R.id.detailers_gps_view)).setLatLongText(detailerCallInstance.getLatitude()+","

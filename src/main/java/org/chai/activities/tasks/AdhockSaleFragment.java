@@ -450,9 +450,13 @@ public class AdhockSaleFragment extends BaseContainerFragment {
 
 
     private boolean allMandatoryFieldsFilled() {
-        if (((Spinner) getActivity().findViewById(R.id.adhock_sale_do_you_stock_zinc)).getSelectedItem().toString().equals("")) {
+        Spinner doYouStockZinc = ((Spinner) getActivity().findViewById(R.id.adhock_sale_do_you_stock_zinc));
+        Spinner governmentApproval = ((Spinner) getActivity().findViewById(R.id.adhock_sale_government_approval));
+        if (!Utils.mandatorySpinnerFieldSelected(doYouStockZinc)) {
             return false;
         }else if (((GpsWidgetView)getActivity().findViewById(R.id.adhoc_sales_gps)).getLatLongText().toString().equals("")) {
+            return false;
+        }else if (!Utils.mandatorySpinnerFieldSelected(governmentApproval)) {
             return false;
         }
         return true;

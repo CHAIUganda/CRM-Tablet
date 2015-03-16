@@ -96,7 +96,7 @@ public class CustomerDetailsActivity extends Activity {
             ((TextView) findViewById(R.id.customer_profile_trading_center)).setText(customer.getTradingCenter());
             ((TextView) findViewById(R.id.customer_profile_desc_location)).setText(customer.getDescriptionOfOutletLocation());
             ((TextView) findViewById(R.id.customer_profile_how_long_opened)).setText(customer.getLengthOpen());
-            ((TextView) findViewById(R.id.profile_number_of_employees)).setText(customer.getNumberOfEmployees() + "");
+            ((TextView) findViewById(R.id.profile_number_of_employees)).setText(customer.getNumberOfEmployees() == 0 ? "" : customer.getNumberOfEmployees() + "");
             ((TextView) findViewById(R.id.customer_profile_num_customers_per_day)).setText(customer.getNumberOfCustomersPerDay() + "");
             ((TextView) findViewById(R.id.customer_profile_sources_of_supply)).setText(customer.getMajoritySourceOfSupply());
             ((TextView) findViewById(R.id.customer_profile_key_wholesaler_name)).setText(customer.getKeyWholeSalerName());
