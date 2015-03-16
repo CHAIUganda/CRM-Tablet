@@ -11,7 +11,9 @@ import android.app.AlertDialog;
  import android.util.Log;
  import android.view.View;
  import android.widget.*;
- import org.chai.R;
+import de.greenrobot.dao.query.Query;
+import de.greenrobot.dao.query.WhereCondition;
+import org.chai.R;
  import org.chai.activities.BaseContainerFragment;
  import org.chai.adapter.DistrictArrayAdapter;
  import org.chai.model.*;
@@ -412,6 +414,22 @@ import java.util.*;
             stock.setUuid(UUID.randomUUID().toString());
             detailerStockDao.insert(stock);
         }
+    }
+
+
+    public DetailerCall getLastDetailerInfo(Customer customer) {
+        try {
+            Query query = detailerCallDao.queryBuilder().where(new WhereCondition.StringCondition(" T.'"+DetailerCallDao.Properties.
+                    TaskId.columnName + "' IN " + "(SELECT " + TaskDao.Properties.Uuid.columnName + " FROM " + TaskDao.TABLENAME + " C WHERE C.'" + TaskDao.Properties.CustomerId.columnName + "' = '" + customer.getUuid()+"')")).build();
+            List<DetailerCall> detailerCallList = query.list();
+            if (!detailerCallList.isEmpty()) {
+                return detailerCallList.get(0);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        DetailerCall detailerCall = new DetailerCall(null);
+        return detailerCall;
     }
 
 

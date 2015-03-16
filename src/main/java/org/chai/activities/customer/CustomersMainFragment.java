@@ -174,6 +174,7 @@ public class CustomersMainFragment extends ListFragment {
                         customerDao.update(customer);
                         customerList.remove(position);
                         customerAdapter.notifyDataSetChanged();
+                        getListView().invalidateViews();
                         dialog.dismiss();
                     }
 

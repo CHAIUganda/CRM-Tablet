@@ -11,7 +11,8 @@ import android.content.Intent;
  import de.greenrobot.dao.query.Query;
  import de.greenrobot.dao.query.WhereCondition;
  import org.chai.R;
- import org.chai.activities.HomeActivity;
+import org.chai.activities.BaseContainerFragment;
+import org.chai.activities.HomeActivity;
  import org.chai.model.*;
  import org.chai.util.CustomMultSelectDropDown;
  import org.chai.util.Utils;
@@ -88,8 +89,7 @@ import java.util.Calendar;
                      Toast.makeText(getActivity(), "Please fill in all the mandaory fields", Toast.LENGTH_LONG).show();
                  } else if (saveForm()) {
                      Toast.makeText(getActivity(), "Detailer Information has been  successfully added!", Toast.LENGTH_LONG).show();
-                     Intent i = new Intent(getActivity(), HomeActivity.class);
-                     startActivity(i);
+                     ((BaseContainerFragment)getParentFragment()).popFragment();
                  } else {
                      Toast.makeText(getActivity(), "A problem Occured while saving a new Detialer Information,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();
                  }
@@ -101,21 +101,6 @@ import java.util.Calendar;
          addZincStockToTable(view,detailerCallInstance);
          addOrsStockToTable(view, detailerCallInstance);
          return  view;
-     }
-
-     private DetailerCall getLastDetailerInfo(Customer customer) {
-         try {
-             Query query = detailerCallDao.queryBuilder().where(new WhereCondition.StringCondition(" T.'"+DetailerCallDao.Properties.
-                     TaskId.columnName + "' IN " + "(SELECT " + TaskDao.Properties.Uuid.columnName + " FROM " + TaskDao.TABLENAME + " C WHERE C.'" + TaskDao.Properties.CustomerId.columnName + "' = '" + customer.getUuid()+"')")).build();
-             List<DetailerCall> detailerCallList = query.list();
-             if (!detailerCallList.isEmpty()) {
-                 return detailerCallList.get(0);
-             }
-         } catch (Exception ex) {
-             ex.printStackTrace();
-         }
-         DetailerCall detailerCall = new DetailerCall(null);
-         return detailerCall;
      }
 
      @Override

@@ -69,7 +69,7 @@ public class ContactDetailsView extends LinearLayout {
     }
 
     public void setContent(CustomerContact contact) {
-        this.contentText.setText((contact.getContact() == null ? "NA" : contact.getContact())+"\n"
+        this.contentText.setText("Number:"+(contact.getContact() == null ? "NA" : contact.getContact())+"\n"
                 +"Name:"+(contact.getNames()== null ? "NA" : contact.getNames())+"\n"
                 +"Gender:"+(contact.getGender()== null ? "NA" : contact.getGender())+"\n"
                 +"Role:"+(contact.getRole()== null ? "NA" : contact.getRole()));

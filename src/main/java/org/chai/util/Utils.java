@@ -10,10 +10,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.CalendarView;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.*;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.Task;
@@ -193,6 +190,24 @@ public class Utils {
         Date currentDate = Utils.flattenDate(date);
         datePickerDialog.getDatePicker().setMinDate(currentDate.getTime());
         fixUpDatePickerCalendarView(currentDate,datePickerDialog);
+    }
+
+    public static boolean mandatoryFieldFilled(EditText editText){
+        if (editText.getText().toString().equals("")) {
+            editText.setError("This Field is mandatory!");
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public static boolean mandatorySpinnerFieldSelected(Spinner spinner){
+        if (spinner.getSelectedItem().toString().equals("")) {
+            ((TextView)spinner.getChildAt(0)).setError("This Field is mandatory!");
+            return false;
+        }else{
+            return true;
+        }
     }
 
 

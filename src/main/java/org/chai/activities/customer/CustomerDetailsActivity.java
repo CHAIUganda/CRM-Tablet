@@ -7,17 +7,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
-import org.chai.activities.LoginActivity;
 import org.chai.model.*;
 import org.chai.util.Utils;
-import org.chai.util.customwidget.ContactWidgetView;
-import org.chai.util.customwidget.ExpandableView;
+import org.chai.util.customwidget.ContactDetailsView;
 
 import java.util.List;
 
@@ -46,6 +41,7 @@ public class CustomerDetailsActivity extends Activity {
                 addContactsToLayout(customer.getCustomerContacts());
             }
         }
+
     }
 
 
@@ -68,6 +64,7 @@ public class CustomerDetailsActivity extends Activity {
                 try{
                    Customer customer = customerDao.load(customerId);
                     customer.setIsActive(false);
+                    customer.setIsDirty(true);
                     customerDao.update(customer);
                     Toast.makeText(getApplicationContext(), "Customer :" + customer.getOutletName()+" has been inactivated", Toast.LENGTH_LONG).show();
                     finish();
@@ -89,18 +86,21 @@ public class CustomerDetailsActivity extends Activity {
     private void loadCustomerDetails(Customer customer) {
         try{
             ((TextView) findViewById(R.id.customer_profile_name)).setText(customer.getOutletName());
-            ((TextView) findViewById(R.id.customer_profile_district)).setText(customer.getSubcounty().getDistrict().getName());
-            ((TextView) findViewById(R.id.customer_profile_subcounty)).setText(customer.getSubcounty().getName());
-            ((TextView) findViewById(R.id.customer_profile_date_outlet_opened)).setText(customer.getDateOutletOpened()+"");
             ((TextView) findViewById(R.id.customer_profile_outlet_type)).setText(customer.getOutletType());
             ((TextView) findViewById(R.id.customer_profile_size)).setText(customer.getOutletSize());
+            ((TextView) findViewById(R.id.customer_profile_district)).setText(customer.getSubcounty().getDistrict().getName());
+            ((TextView) findViewById(R.id.customer_profile_subcounty)).setText(customer.getSubcounty().getName());
+            ((TextView) findViewById(R.id.customer_profile_licence_visible)).setText((customer.getLicenceVisible()!=null?customer.getLicenceVisible():"false")+"");
+            ((TextView) findViewById(R.id.customer_profile_size)).setText(customer.getTypeOfLicence());
             ((TextView) findViewById(R.id.customer_profile_split)).setText(customer.getSplit());
+            ((TextView) findViewById(R.id.customer_profile_trading_center)).setText(customer.getTradingCenter());
+            ((TextView) findViewById(R.id.customer_profile_desc_location)).setText(customer.getDescriptionOfOutletLocation());
+            ((TextView) findViewById(R.id.customer_profile_how_long_opened)).setText(customer.getLengthOpen());
+            ((TextView) findViewById(R.id.profile_number_of_employees)).setText(customer.getNumberOfEmployees() + "");
+            ((TextView) findViewById(R.id.customer_profile_num_customers_per_day)).setText(customer.getNumberOfCustomersPerDay() + "");
             ((TextView) findViewById(R.id.customer_profile_sources_of_supply)).setText(customer.getMajoritySourceOfSupply());
             ((TextView) findViewById(R.id.customer_profile_key_wholesaler_name)).setText(customer.getKeyWholeSalerName());
             ((TextView) findViewById(R.id.customer_profile_key_wholesaler_contact)).setText(customer.getKeyWholeSalerContact());
-            ((TextView) findViewById(R.id.customer_profile_desc_location)).setText(customer.getDescriptionOfOutletLocation());
-            ((TextView) findViewById(R.id.profile_number_of_employees)).setText(customer.getNumberOfEmployees() + "");
-            ((TextView) findViewById(R.id.customer_profile_num_customers_per_day)).setText(customer.getNumberOfCustomersPerDay() + "");
             ((TextView) findViewById(R.id.customer_profile_restock_frequency)).setText(customer.getRestockFrequency() + "");
             ((TextView) findViewById(R.id.customer_profile_address)).setText(Utils.getKeyCustomerContact(customer.getCustomerContacts()).getContact()+"");
         }catch (Exception ex){
@@ -124,8 +124,8 @@ public class CustomerDetailsActivity extends Activity {
         //add to parent form
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.details_contact_layout);
         for (CustomerContact customerContact : customerContactList) {
-            ExpandableView expandableView = new ExpandableView(CustomerDetailsActivity.this,customerContact);
-            linearLayout.addView(expandableView);
+            ContactDetailsView contactDetailsView = new ContactDetailsView(CustomerDetailsActivity.this,customerContact);
+            linearLayout.addView(contactDetailsView);
         }
     }
 }

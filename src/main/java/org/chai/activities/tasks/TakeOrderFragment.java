@@ -336,7 +336,9 @@ public class TakeOrderFragment extends BaseContainerFragment {
 
     private boolean validateFieldValues() {
         if(selectedCustomer == null){
-            Toast.makeText(getActivity(),"Please enter valid customer",Toast.LENGTH_LONG).show();
+            AutoCompleteTextView textView = (AutoCompleteTextView) getActivity().findViewById(R.id.order_auto_complete_textview);
+            textView.setError("Please enter valid customer");
+//            Toast.makeText(getActivity(),"Please enter valid customer",Toast.LENGTH_LONG).show();
             return false;
         }else if(((EditText) getActivity().findViewById(R.id.order_delivery_date)).getText().toString().equalsIgnoreCase("")){
             Toast.makeText(getActivity(),"Please enter a delivery date",Toast.LENGTH_LONG).show();

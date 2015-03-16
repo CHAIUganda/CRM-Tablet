@@ -44,7 +44,7 @@ public class CustomerForm extends Activity {
 
 
     private Customer customerInstance;
-    private List<CustomerContact> customerContacts = new ArrayList<CustomerContact>();
+//    private List<CustomerContact> customerContacts = new ArrayList<CustomerContact>();
     private List<ContactWidgetView> contactsToUpdate = new ArrayList<ContactWidgetView>();
 
     public void onCreate(Bundle savedInstanceState) {
@@ -60,14 +60,14 @@ public class CustomerForm extends Activity {
 
             subcountySpinner = (Spinner) findViewById(R.id.details_subcounty);
             districtSpinner = (Spinner) findViewById(R.id.details_district);
-            districtSpinner.setAdapter(new DistrictArrayAdapter(this,R.id.details_district,districtList.toArray(new District[districtList.size()])));
+            districtSpinner.setAdapter(new DistrictArrayAdapter(this, R.id.details_district, districtList.toArray(new District[districtList.size()])));
 
             districtSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     String districtId = ((District) districtSpinner.getSelectedItem()).getUuid();
                     List<Subcounty> subcounties = subcountyDao.queryBuilder().where(SubcountyDao.Properties.DistrictId.eq(districtId)).list();
-                    subcountySpinner.setAdapter(new SubcountyArrayAdapter(getApplicationContext(),R.id.details_subcounty,subcounties.toArray(new Subcounty[subcounties.size()])));
+                    subcountySpinner.setAdapter(new SubcountyArrayAdapter(getApplicationContext(), R.id.details_subcounty, subcounties.toArray(new Subcounty[subcounties.size()])));
                 }
 
                 @Override
@@ -83,9 +83,9 @@ public class CustomerForm extends Activity {
             saveCustomerBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(customerInstance.getUuid()==null && customerContacts.isEmpty()){
+                    if (customerInstance.getUuid() == null && contactsToUpdate.isEmpty()) {
                         Toast.makeText(getApplicationContext(), "Please enter atleast one contact!", Toast.LENGTH_LONG).show();
-                    }else{
+                    } else {
                         boolean isSaved = saveCustomer();
                         if (isSaved) {
                             Toast.makeText(getApplicationContext(), "Customer has been  successfully saved!", Toast.LENGTH_LONG).show();
@@ -112,20 +112,16 @@ public class CustomerForm extends Activity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int button) {
                         CustomerContact customerContact = new CustomerContact(null);
-                        customerContact.setUuid(UUID.randomUUID().toString());
                         customerContact.setContact(((EditText) entryView.findViewById(R.id.customer_contact_telephone)).getText().toString());
                         customerContact.setNames(((EditText) entryView.findViewById(R.id.customer_contact_names)).getText().toString());
                         customerContact.setGender(((Spinner) entryView.findViewById(R.id.customer_contact_gender)).getSelectedItem().toString());
                         customerContact.setRole(((Spinner) entryView.findViewById(R.id.customer_contact_type)).getSelectedItem().toString());
-                        customerContacts.add(customerContact);
+//                        customerContacts.add(customerContact);
                         //add to parent form
                         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.customer_contacts_layout);
-
-                        TextView contactView = new TextView(CustomerForm.this);
-                        contactView.setText(customerContact.getNames() + ":" + customerContact.getContact());
-                        contactView.setTextSize(18);
-                        contactView.setTextColor(Color.parseColor("#000000"));
-                        linearLayout.addView(contactView);
+                        ContactWidgetView contactWidgetView = new ContactWidgetView(CustomerForm.this, customerContact);
+                        contactsToUpdate.add(contactWidgetView);
+                        linearLayout.addView(contactWidgetView);
 
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -182,7 +178,7 @@ public class CustomerForm extends Activity {
     private void bindUIToCustomer() {
         try {
             customerInstance.setOutletName(((EditText) findViewById(R.id.detailsname)).getText().toString());
-            customerInstance.setDateOutletOpened(Utils.stringToDate(((EditText) findViewById(R.id.details_date_outlet_opened)).getText().toString()));
+            customerInstance.setLengthOpen(((EditText) findViewById(R.id.details_date_outlet_opened)).getText().toString());
             customerInstance.setOutletType(((Spinner) findViewById(R.id.details_outlet_type)).getSelectedItem().toString());
             customerInstance.setOutletSize(((Spinner) findViewById(R.id.details_size)).getSelectedItem().toString());
             customerInstance.setSplit(((Spinner) findViewById(R.id.details_split)).getSelectedItem().toString());
@@ -191,13 +187,13 @@ public class CustomerForm extends Activity {
             customerInstance.setKeyWholeSalerName(((EditText) findViewById(R.id.details_key_wholesaler_name)).getText().toString());
             customerInstance.setKeyWholeSalerContact(((EditText) findViewById(R.id.details_key_wholesaler_contact)).getText().toString());
 
-            String licenceVisible = ((Spinner)findViewById(R.id.details_licence_visible)).getSelectedItem().toString();
+            String licenceVisible = ((Spinner) findViewById(R.id.details_licence_visible)).getSelectedItem().toString();
             customerInstance.setLicenceVisible(licenceVisible.equalsIgnoreCase("Yes") ? true : false);
             customerInstance.setTypeOfLicence(((Spinner) findViewById(R.id.details_licence_type)).getSelectedItem().toString().toLowerCase());
 
             customerInstance.setDescriptionOfOutletLocation(((EditText) findViewById(R.id.details_desc_location)).getText().toString());
             String emps = ((EditText) findViewById(R.id.details_number_of_employees)).getText().toString();
-            customerInstance.setNumberOfEmployees(Integer.parseInt(emps.equals("")?0+"":emps));
+            customerInstance.setNumberOfEmployees(Integer.parseInt(emps.equals("") ? 0 + "" : emps));
             customerInstance.setNumberOfCustomersPerDay(Integer.parseInt(((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString()));
             customerInstance.setRestockFrequency(((Spinner) findViewById(R.id.details_restock_frequency)).getSelectedItem().toString().toLowerCase());
             if (!((GpsWidgetView) findViewById(R.id.customer_gps_view)).getLatLongText().equals("")) {
@@ -216,7 +212,7 @@ public class CustomerForm extends Activity {
     private void bindCustomerToUI() {
         if (!isNewCustomer()) {
             ((EditText) findViewById(R.id.detailsname)).setText(customerInstance.getOutletName() == null ? "" : customerInstance.getOutletName());
-            ((EditText) findViewById(R.id.details_date_outlet_opened)).setText(customerInstance.getDateOutletOpened() == null ? "" : Utils.dateToString(customerInstance.getDateOutletOpened()));
+            ((EditText) findViewById(R.id.details_date_outlet_opened)).setText(customerInstance.getLengthOpen() == null ? "" : customerInstance.getLengthOpen());
 
             ((EditText) findViewById(R.id.details_sources_of_supply)).setText(customerInstance.getMajoritySourceOfSupply() == null ? "" : customerInstance.getMajoritySourceOfSupply());
             ((EditText) findViewById(R.id.details_key_wholesaler_name)).setText(customerInstance.getKeyWholeSalerName() == null ? "" : customerInstance.getKeyWholeSalerName());
@@ -224,16 +220,16 @@ public class CustomerForm extends Activity {
 
 
             ((EditText) findViewById(R.id.details_desc_location)).setText(customerInstance.getDescriptionOfOutletLocation() == null ? "" : customerInstance.getDescriptionOfOutletLocation());
-            ((EditText) findViewById(R.id.details_number_of_employees)).setText(customerInstance.getNumberOfEmployees() == null ? "" : customerInstance.getNumberOfEmployees() + "");
+            ((EditText) findViewById(R.id.details_number_of_employees)).setText(customerInstance.getNumberOfEmployees() == 0 ? "" : customerInstance.getNumberOfEmployees() + "");
             ((EditText) findViewById(R.id.details_num_customers_per_day)).setText(customerInstance.getNumberOfCustomersPerDay() == null ? "" : customerInstance.getNumberOfCustomersPerDay() + "");
             ((GpsWidgetView) findViewById(R.id.customer_gps_view)).setLatLongText(customerInstance.getLatitude() + "," + customerInstance.getLongitude());
 
-            Spinner restockFreq = (Spinner)findViewById(R.id.details_restock_frequency);
-            setSpinnerSelection(restockFreq,customerInstance.getRestockFrequency() == null ? "" : customerInstance.getRestockFrequency() + "");
+            Spinner restockFreq = (Spinner) findViewById(R.id.details_restock_frequency);
+            setSpinnerSelection(restockFreq, customerInstance.getRestockFrequency() == null ? "" : customerInstance.getRestockFrequency() + "");
 
             Spinner licenceVisibleSpinner = ((Spinner) findViewById(R.id.details_licence_visible));
             Boolean licenceVisible = customerInstance.getLicenceVisible();
-            if(licenceVisible!=null){
+            if (licenceVisible != null) {
                 setSpinnerSelection(licenceVisibleSpinner, licenceVisible ? "Yes" : "No");
             }
 
@@ -260,6 +256,7 @@ public class CustomerForm extends Activity {
                 customerInstance.setIsDirty(true);
                 if (isNewCustomer()) {
                     customerInstance.setUuid(UUID.randomUUID().toString());
+                    customerInstance.setIsActive(true);
                     customerDao.insert(customerInstance);
                 } else {
                     customerDao.update(customerInstance);
@@ -274,19 +271,27 @@ public class CustomerForm extends Activity {
     }
 
     private boolean allMandatoryFieldsFilled() {
-        if (((EditText) findViewById(R.id.detailsname)).getText().toString().equals("")) {
+        EditText outletName = (EditText) findViewById(R.id.detailsname);
+        EditText descLocation = (EditText) findViewById(R.id.details_desc_location);
+        EditText diarreahPatients = (EditText) findViewById(R.id.details_num_customers_per_day);
+        Spinner splitSpinner = ((Spinner) findViewById(R.id.details_split));
+        Spinner outletType = ((Spinner) findViewById(R.id.details_outlet_type));
+        Spinner outletSize = ((Spinner) findViewById(R.id.details_size));
+        GpsWidgetView gpsWidgetView = ((GpsWidgetView) findViewById(R.id.customer_gps_view));
+        if (!Utils.mandatoryFieldFilled(outletName)) {
             return false;
-        } else if (((Spinner) findViewById(R.id.details_outlet_type)).getSelectedItem().toString().equals("")) {
+        } else if (!Utils.mandatorySpinnerFieldSelected(outletType)) {
             return false;
-        } else if (((Spinner) findViewById(R.id.details_size)).getSelectedItem().toString().equals("")) {
+        } else if (!Utils.mandatorySpinnerFieldSelected(outletSize)) {
             return false;
-        } else if (((EditText) findViewById(R.id.details_desc_location)).getText().toString().equals("")) {
+        } else if (!Utils.mandatoryFieldFilled(descLocation)) {
             return false;
-        }   else if (((EditText) findViewById(R.id.details_num_customers_per_day)).getText().toString().equals("")) {
+        } else if (!Utils.mandatoryFieldFilled(diarreahPatients)) {
             return false;
-        }   else if (((Spinner) findViewById(R.id.details_split)).getSelectedItem().toString().equals("")) {
+        } else if (!Utils.mandatorySpinnerFieldSelected(splitSpinner)) {
             return false;
-        }else if (((GpsWidgetView) findViewById(R.id.customer_gps_view)).getLatLongText().toString().equals("")) {
+        } else if (gpsWidgetView.getLatLongText().toString().equals("")) {
+//            gpsWidgetView.setError("This field is mandatory");
             return false;
         }
         return true;
@@ -327,12 +332,15 @@ public class CustomerForm extends Activity {
     }
 
     private void saveCustomerContacts(String customerId) {
-        for (CustomerContact customerContact : customerContacts) {
-            customerContact.setCustomerId(customerId);
-            customerContactDao.insert(customerContact);
-        }
-        for(ContactWidgetView contactWidgetView:contactsToUpdate){
-            customerContactDao.update(contactWidgetView.getCustomerContact());
+        for (ContactWidgetView contactWidgetView : contactsToUpdate) {
+            if (contactWidgetView.getCustomerContact().getUuid() == null) {
+                CustomerContact customerContact = contactWidgetView.getCustomerContact();
+                customerContact.setUuid(UUID.randomUUID().toString());
+                customerContact.setCustomerId(customerId);
+                customerContactDao.insert(customerContact);
+            } else {
+                customerContactDao.update(contactWidgetView.getCustomerContact());
+            }
         }
     }
 
@@ -354,12 +362,12 @@ public class CustomerForm extends Activity {
     }
 
     protected void manageLicenceVisible() {
-        final Spinner spinner = (Spinner)findViewById(R.id.details_licence_visible);
+        final Spinner spinner = (Spinner) findViewById(R.id.details_licence_visible);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 String selected = (String) spinner.getAdapter().getItem(position);
-                LinearLayout licenceTypeLayout = (LinearLayout)findViewById(R.id.type_of_licence_layout);
+                LinearLayout licenceTypeLayout = (LinearLayout) findViewById(R.id.type_of_licence_layout);
                 if ("No".equalsIgnoreCase(selected)) {
                     licenceTypeLayout.setVisibility(View.GONE);
                 } else {
