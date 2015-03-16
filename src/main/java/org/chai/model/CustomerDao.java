@@ -45,7 +45,7 @@ public class CustomerDao extends AbstractDao<Customer, String> {
         public final static Property NumberOfEmployees = new Property(14, Integer.class, "numberOfEmployees", false, "NUMBER_OF_EMPLOYEES");
         public final static Property NumberOfCustomersPerDay = new Property(15, Integer.class, "numberOfCustomersPerDay", false, "NUMBER_OF_CUSTOMERS_PER_DAY");
         public final static Property RestockFrequency = new Property(16, String.class, "restockFrequency", false, "RESTOCK_FREQUENCY");
-        public final static Property DateOutletOpened = new Property(17, java.util.Date.class, "dateOutletOpened", false, "DATE_OUTLET_OPENED");
+        public final static Property LengthOpen = new Property(17, String.class, "lengthOpen", false, "LENGTH_OPEN");
         public final static Property DateCreated = new Property(18, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
         public final static Property LastUpdated = new Property(19, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
         public final static Property IsDirty = new Property(20, Boolean.class, "isDirty", false, "IS_DIRTY");
@@ -89,7 +89,7 @@ public class CustomerDao extends AbstractDao<Customer, String> {
                 "'NUMBER_OF_EMPLOYEES' INTEGER," + // 14: numberOfEmployees
                 "'NUMBER_OF_CUSTOMERS_PER_DAY' INTEGER," + // 15: numberOfCustomersPerDay
                 "'RESTOCK_FREQUENCY' TEXT," + // 16: restockFrequency
-                "'DATE_OUTLET_OPENED' INTEGER," + // 17: dateOutletOpened
+                "'LENGTH_OPEN' TEXT," + // 17: lengthOpen
                 "'DATE_CREATED' INTEGER," + // 18: dateCreated
                 "'LAST_UPDATED' INTEGER," + // 19: lastUpdated
                 "'IS_DIRTY' INTEGER," + // 20: isDirty
@@ -187,9 +187,9 @@ public class CustomerDao extends AbstractDao<Customer, String> {
             stmt.bindString(17, restockFrequency);
         }
  
-        java.util.Date dateOutletOpened = entity.getDateOutletOpened();
-        if (dateOutletOpened != null) {
-            stmt.bindLong(18, dateOutletOpened.getTime());
+        String lengthOpen = entity.getLengthOpen();
+        if (lengthOpen != null) {
+            stmt.bindString(18, lengthOpen);
         }
  
         java.util.Date dateCreated = entity.getDateCreated();
@@ -257,7 +257,7 @@ public class CustomerDao extends AbstractDao<Customer, String> {
             cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14), // numberOfEmployees
             cursor.isNull(offset + 15) ? null : cursor.getInt(offset + 15), // numberOfCustomersPerDay
             cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // restockFrequency
-            cursor.isNull(offset + 17) ? null : new java.util.Date(cursor.getLong(offset + 17)), // dateOutletOpened
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // lengthOpen
             cursor.isNull(offset + 18) ? null : new java.util.Date(cursor.getLong(offset + 18)), // dateCreated
             cursor.isNull(offset + 19) ? null : new java.util.Date(cursor.getLong(offset + 19)), // lastUpdated
             cursor.isNull(offset + 20) ? null : cursor.getShort(offset + 20) != 0, // isDirty
@@ -289,7 +289,7 @@ public class CustomerDao extends AbstractDao<Customer, String> {
         entity.setNumberOfEmployees(cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14));
         entity.setNumberOfCustomersPerDay(cursor.isNull(offset + 15) ? null : cursor.getInt(offset + 15));
         entity.setRestockFrequency(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setDateOutletOpened(cursor.isNull(offset + 17) ? null : new java.util.Date(cursor.getLong(offset + 17)));
+        entity.setLengthOpen(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
         entity.setDateCreated(cursor.isNull(offset + 18) ? null : new java.util.Date(cursor.getLong(offset + 18)));
         entity.setLastUpdated(cursor.isNull(offset + 19) ? null : new java.util.Date(cursor.getLong(offset + 19)));
         entity.setIsDirty(cursor.isNull(offset + 20) ? null : cursor.getShort(offset + 20) != 0);

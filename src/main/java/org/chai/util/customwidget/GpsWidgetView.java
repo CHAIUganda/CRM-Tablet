@@ -68,6 +68,10 @@ public class GpsWidgetView extends LinearLayout implements LocationListener{
         return latLongTxtView.getText().toString();
     }
 
+    public void setError(String message){
+        latLongTxtView.setError(message);
+    }
+
     public void setLatLongText(String latLongText) {
         if(latLongText.equals("null,null")){
             latLongText = "";

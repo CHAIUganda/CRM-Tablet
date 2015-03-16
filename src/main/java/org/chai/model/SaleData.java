@@ -22,6 +22,7 @@ public class SaleData {
     private String adhockSaleId;
     /** Not-null value. */
     private String productId;
+
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */

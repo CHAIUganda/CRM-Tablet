@@ -1,6 +1,5 @@
 package org.chai.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
@@ -36,7 +35,7 @@ public class Customer {
     private Integer numberOfEmployees;
     private Integer numberOfCustomersPerDay;
     private String restockFrequency;
-    private java.util.Date dateOutletOpened;
+    private String lengthOpen;
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
     private Boolean isDirty;
@@ -45,6 +44,7 @@ public class Customer {
     private Boolean isActive;
     /** Not-null value. */
     private String subcountyId;
+
     private List<AdhockSale> adhockSales;
 
     // KEEP FIELDS - put your custom fields here
@@ -76,7 +76,7 @@ public class Customer {
         this.uuid = uuid;
     }
 
-    public Customer(String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, Boolean licenceVisible, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfCustomersPerDay, String restockFrequency, java.util.Date dateOutletOpened, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, Boolean isActive, String subcountyId) {
+    public Customer(String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, Boolean licenceVisible, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfCustomersPerDay, String restockFrequency, String lengthOpen, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, Boolean isActive, String subcountyId) {
         this.uuid = uuid;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -94,7 +94,7 @@ public class Customer {
         this.numberOfEmployees = numberOfEmployees;
         this.numberOfCustomersPerDay = numberOfCustomersPerDay;
         this.restockFrequency = restockFrequency;
-        this.dateOutletOpened = dateOutletOpened;
+        this.lengthOpen = lengthOpen;
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
         this.isDirty = isDirty;
@@ -250,12 +250,12 @@ public class Customer {
         this.restockFrequency = restockFrequency;
     }
 
-    public java.util.Date getDateOutletOpened() {
-        return dateOutletOpened;
+    public String getLengthOpen() {
+        return lengthOpen;
     }
 
-    public void setDateOutletOpened(java.util.Date dateOutletOpened) {
-        this.dateOutletOpened = dateOutletOpened;
+    public void setLengthOpen(String lengthOpen) {
+        this.lengthOpen = lengthOpen;
     }
 
     public java.util.Date getDateCreated() {

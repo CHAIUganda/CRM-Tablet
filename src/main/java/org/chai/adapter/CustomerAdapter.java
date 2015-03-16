@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
 
         viewHolder.customerName.setText(customer.getOutletName());
         viewHolder.customerAddress.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(), 50));
-        if(!customer.getIsActive()){
+        if(customer.getIsActive()!= null && !customer.getIsActive()){
             viewHolder.customerName.setTextColor(Color.parseColor("#C0C0C0"));
             viewHolder.customerAddress.setTextColor(Color.parseColor("#C0C0C0"));
             viewHolder.telephone.setTextColor(Color.parseColor("#C0C0C0"));
