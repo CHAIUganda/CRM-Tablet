@@ -91,7 +91,7 @@ public class CustomerDetailsActivity extends Activity {
             ((TextView) findViewById(R.id.customer_profile_district)).setText(customer.getSubcounty().getDistrict().getName());
             ((TextView) findViewById(R.id.customer_profile_subcounty)).setText(customer.getSubcounty().getName());
             ((TextView) findViewById(R.id.customer_profile_licence_visible)).setText((customer.getLicenceVisible()!=null?customer.getLicenceVisible():"false")+"");
-            ((TextView) findViewById(R.id.customer_profile_size)).setText(customer.getTypeOfLicence());
+            ((TextView) findViewById(R.id.customer_profile_licence_type)).setText(customer.getTypeOfLicence());
             ((TextView) findViewById(R.id.customer_profile_split)).setText(customer.getSplit());
             ((TextView) findViewById(R.id.customer_profile_trading_center)).setText(customer.getTradingCenter());
             ((TextView) findViewById(R.id.customer_profile_desc_location)).setText(customer.getDescriptionOfOutletLocation());
@@ -102,7 +102,6 @@ public class CustomerDetailsActivity extends Activity {
             ((TextView) findViewById(R.id.customer_profile_key_wholesaler_name)).setText(customer.getKeyWholeSalerName());
             ((TextView) findViewById(R.id.customer_profile_key_wholesaler_contact)).setText(customer.getKeyWholeSalerContact());
             ((TextView) findViewById(R.id.customer_profile_restock_frequency)).setText(customer.getRestockFrequency() + "");
-            ((TextView) findViewById(R.id.customer_profile_address)).setText(Utils.getKeyCustomerContact(customer.getCustomerContacts()).getContact()+"");
         }catch (Exception ex){
             ex.printStackTrace();
         }

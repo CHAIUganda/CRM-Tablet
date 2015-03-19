@@ -175,6 +175,7 @@ public class CustomersMainFragment extends ListFragment {
                         customerList.remove(position);
                         customerAdapter.notifyDataSetChanged();
                         getListView().invalidateViews();
+                        onResume();
                         dialog.dismiss();
                     }
 
