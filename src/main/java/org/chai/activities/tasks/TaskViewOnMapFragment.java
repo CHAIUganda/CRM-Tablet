@@ -107,7 +107,14 @@ public class TaskViewOnMapFragment extends Fragment {
 
         GeoPoint currentLocation = new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE);
         mapController.setZoom(MAP_DEFAULT_ZOOM);
-        mapController.animateTo(currentLocation);
+//        mapController.animateTo(currentLocation);
+        mMyLocationOverlay.runOnFirstFix(new Runnable() {
+            public void run() {
+                mapController.animateTo(mMyLocationOverlay
+                        .getMyLocation());
+            }
+        });
+
         calenderSpinner = (Spinner)view.findViewById(R.id.map_filter_spinner);
         calenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

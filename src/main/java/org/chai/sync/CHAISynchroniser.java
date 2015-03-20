@@ -303,7 +303,7 @@ public class CHAISynchroniser {
         for (Customer customer : customersList) {
             ServerResponse response = customerClient.uploadCustomer(customer);
             if (response.getStatus().equalsIgnoreCase("OK")) {
-                customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).buildDelete();
+                customerDao.delete(customer);
             }
         }
     }
