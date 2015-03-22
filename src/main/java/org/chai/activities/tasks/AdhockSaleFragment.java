@@ -17,7 +17,6 @@ import org.chai.activities.HomeActivity;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.CustomMultSelectDropDown;
-import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.GpsWidgetView;
 
@@ -37,7 +36,7 @@ public class AdhockSaleFragment extends BaseContainerFragment {
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
-    private AdhockSaleDao saleDao;
+    private AdhockSaleDao adhockSaleDao;
     private SaleDataDao saleDataDao;
     private StokeDataDao stokeDataDao;
     private ProductDao productDao;
@@ -157,7 +156,11 @@ public class AdhockSaleFragment extends BaseContainerFragment {
         if (bundle != null) {
             isUpdate = true;
             String saleId = bundle.getString("saleId");
-            bindSalesInfoToUI(saleId, view);
+            saleInstance = adhockSaleDao.load(saleId);
+            bindSalesInfoToUI(saleInstance, view);
+            if (saleInstance.getIsHistory() != null && saleInstance.getIsHistory()) {
+                setReadOnly(view);
+            }
         }
         return view ;
     }
@@ -168,7 +171,7 @@ public class AdhockSaleFragment extends BaseContainerFragment {
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
-            saleDao = daoSession.getAdhockSaleDao();
+            adhockSaleDao = daoSession.getAdhockSaleDao();
             saleDataDao = daoSession.getSaleDataDao();
             productDao = daoSession.getProductDao();
             customerDao = daoSession.getCustomerDao();
@@ -179,9 +182,8 @@ public class AdhockSaleFragment extends BaseContainerFragment {
         }
     }
 
-    private void bindSalesInfoToUI(String saleId,View view) {
-        saleInstance = saleDao.load(saleId);
-        if (saleInstance!=null) {
+    private void bindSalesInfoToUI(AdhockSale adhockSale, View view) {
+        if (adhockSale != null) {
             ((AutoCompleteTextView) view.findViewById(R.id.adhock_sale_customer)).setText(saleInstance.getCustomer().getOutletName());
             salesCustomer = saleInstance.getCustomer();
             ((EditText) view.findViewById(R.id.adhock_sale_if_no_why)).setText(saleInstance.getIfNoWhy());
@@ -280,7 +282,6 @@ public class AdhockSaleFragment extends BaseContainerFragment {
                     quantityFields.remove(quantityView);
                     priceFields.remove(priceView);
                 }
-//                removeRow();
                 container.invalidate();
             }
         });
@@ -299,18 +300,6 @@ public class AdhockSaleFragment extends BaseContainerFragment {
 
             salesTableLayout.addView(tableRow, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         } }
-
-    private void removeRow() {
-        if (!spinnerList.isEmpty()) {
-            spinnerList.remove(spinnerList.size() - 1);
-        }
-        if (!quantityFields.isEmpty()) {
-            quantityFields.remove(quantityFields.size() - 1);
-        }
-        if (!priceFields.isEmpty()) {
-            priceFields.remove(priceFields.size() - 1);
-        }
-    }
 
     private void manageDoyouStockZincResponses(View view) {
         final Spinner spinner = (Spinner) view.findViewById(R.id.adhock_sale_do_you_stock_zinc);
@@ -346,6 +335,7 @@ public class AdhockSaleFragment extends BaseContainerFragment {
     private void submitSale(){
         if(!isUpdate){
          saleInstance = new AdhockSale(UUID.randomUUID().toString());
+            saleInstance.setIsHistory(false);
         }
         saleInstance.setDateOfSale(new Date());
         String stocksZinc = ((Spinner) getActivity().findViewById(R.id.adhock_sale_do_you_stock_zinc)).getSelectedItem().toString();
@@ -366,11 +356,11 @@ public class AdhockSaleFragment extends BaseContainerFragment {
         }
 
         if(isUpdate){
-            saleDao.update(saleInstance);
+            adhockSaleDao.update(saleInstance);
             submitSaleData(saleInstance.getUuid());
             submitStockData(saleInstance);
         }else{
-            Long saleId = saleDao.insert(saleInstance);
+            Long saleId = adhockSaleDao.insert(saleInstance);
             //add the different sales.
             submitSaleData(saleInstance.getUuid());
             submitStockData(saleInstance);
@@ -448,7 +438,6 @@ public class AdhockSaleFragment extends BaseContainerFragment {
         Utils.setRequired((TextView) view.findViewById(R.id.adhoc_gps_lbl));
     }
 
-
     private boolean allMandatoryFieldsFilled() {
         Spinner doYouStockZinc = ((Spinner) getActivity().findViewById(R.id.adhock_sale_do_you_stock_zinc));
         Spinner governmentApproval = ((Spinner) getActivity().findViewById(R.id.adhock_sale_government_approval));
@@ -460,6 +449,20 @@ public class AdhockSaleFragment extends BaseContainerFragment {
             return false;
         }
         return true;
+    }
+
+    private void setReadOnly(View view) {
+        view.findViewById(R.id.adhock_sale_customer).setEnabled(false);
+        view.findViewById(R.id.adhock_sale_if_no_why).setEnabled(false);
+        view.findViewById(R.id.adhoc_sales_gps).setEnabled(false);
+        view.findViewById(R.id.adhock_sale_do_you_stock_zinc).setEnabled(false);
+        view.findViewById(R.id.adhock_sale_government_approval).setEnabled(false);
+        view.findViewById(R.id.adhock_sale_point_of_sale).setEnabled(false);
+        view.findViewById(R.id.adhock_sale_next_step_recommendation).setEnabled(false);
+        view.findViewById(R.id.adhock_sale_table).setEnabled(false);
+        view.findViewById(R.id.adhoc_sales_stock_table).setEnabled(false);
+        view.findViewById(R.id.adhock_sale_save_sale).setEnabled(false);
+
     }
 
 

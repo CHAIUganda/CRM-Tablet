@@ -291,7 +291,8 @@ public class CHAISynchroniser {
             updatePropgress("Uploading Sales...");
             ServerResponse response = salesClient.uploadDirectSale(adhockSale);
             if (response.getStatus().equalsIgnoreCase("OK")) {
-                adhockSaleDao.delete(adhockSale);
+                adhockSale.setIsHistory(true);
+                adhockSaleDao.update(adhockSale);
             }else{
                 throw new SyncronizationException(response.getMessage());
             }
