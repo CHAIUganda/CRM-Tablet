@@ -1,6 +1,5 @@
 package org.chai.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -8,6 +7,7 @@ import de.greenrobot.dao.DaoException;
 
 // KEEP INCLUDES - put your custom includes here
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @JsonIgnoreProperties(ignoreUnknown = true)
 // KEEP INCLUDES END
 /**
@@ -22,7 +22,6 @@ public class TaskOrder {
     private String taskId;
     /** Not-null value. */
     private String productId;
-
 
 
     // KEEP FIELDS - put your custom fields here

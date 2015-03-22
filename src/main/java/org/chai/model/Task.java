@@ -36,7 +36,6 @@ public class Task {
     private Customer customer;
     private String customer__resolvedKey;
 
-
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */

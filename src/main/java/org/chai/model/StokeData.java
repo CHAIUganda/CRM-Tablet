@@ -24,7 +24,6 @@ public class StokeData {
     private String productId;
 
 
-
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */

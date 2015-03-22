@@ -27,6 +27,7 @@ public class DetailerStock {
     /** Not-null value. */
     private String detailerId;
 
+
     // KEEP FIELDS - put your custom fields here
 
     /** Used to resolve relations */

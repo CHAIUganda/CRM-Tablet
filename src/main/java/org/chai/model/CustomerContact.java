@@ -24,7 +24,7 @@ public class CustomerContact {
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
     /** Not-null value. */
-    private String customerId;
+    private String customerId; 
 
 
     // KEEP FIELDS - put your custom fields here

@@ -37,7 +37,8 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
         public final static Property GovernmentApproval = new Property(6, String.class, "governmentApproval", false, "GOVERNMENT_APPROVAL");
         public final static Property Latitude = new Property(7, Double.class, "latitude", false, "LATITUDE");
         public final static Property Longitude = new Property(8, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property CustomerId = new Property(9, String.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property IsHistory = new Property(9, Boolean.class, "isHistory", false, "IS_HISTORY");
+        public final static Property CustomerId = new Property(10, String.class, "customerId", false, "CUSTOMER_ID");
     };
 
     private DaoSession daoSession;
@@ -66,7 +67,8 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
                 "'GOVERNMENT_APPROVAL' TEXT," + // 6: governmentApproval
                 "'LATITUDE' REAL," + // 7: latitude
                 "'LONGITUDE' REAL," + // 8: longitude
-                "'CUSTOMER_ID' TEXT NOT NULL );"); // 9: customerId
+                "'IS_HISTORY' INTEGER," + // 9: isHistory
+                "'CUSTOMER_ID' TEXT NOT NULL );"); // 10: customerId
     }
 
     /** Drops the underlying database table. */
@@ -116,7 +118,12 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
         if (longitude != null) {
             stmt.bindDouble(9, longitude);
         }
-        stmt.bindString(10, entity.getCustomerId());
+ 
+        Boolean isHistory = entity.getIsHistory();
+        if (isHistory != null) {
+            stmt.bindLong(10, isHistory ? 1l: 0l);
+        }
+        stmt.bindString(11, entity.getCustomerId());
     }
 
     @Override
@@ -144,7 +151,8 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // governmentApproval
             cursor.isNull(offset + 7) ? null : cursor.getDouble(offset + 7), // latitude
             cursor.isNull(offset + 8) ? null : cursor.getDouble(offset + 8), // longitude
-            cursor.getString(offset + 9) // customerId
+            cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9) != 0, // isHistory
+            cursor.getString(offset + 10) // customerId
         );
         return entity;
     }
@@ -161,7 +169,8 @@ public class AdhockSaleDao extends AbstractDao<AdhockSale, String> {
         entity.setGovernmentApproval(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setLatitude(cursor.isNull(offset + 7) ? null : cursor.getDouble(offset + 7));
         entity.setLongitude(cursor.isNull(offset + 8) ? null : cursor.getDouble(offset + 8));
-        entity.setCustomerId(cursor.getString(offset + 9));
+        entity.setIsHistory(cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9) != 0);
+        entity.setCustomerId(cursor.getString(offset + 10));
      }
     
     /** @inheritdoc */

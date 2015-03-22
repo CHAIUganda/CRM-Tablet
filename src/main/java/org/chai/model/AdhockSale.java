@@ -27,6 +27,7 @@ public class AdhockSale {
     private String governmentApproval;
     private Double latitude;
     private Double longitude;
+    private Boolean isHistory;
     /** Not-null value. */
     private String customerId;
 
@@ -56,7 +57,7 @@ public class AdhockSale {
         this.uuid = uuid;
     }
 
-    public AdhockSale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String governmentApproval, Double latitude, Double longitude, String customerId) {
+    public AdhockSale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String governmentApproval, Double latitude, Double longitude, Boolean isHistory, String customerId) {
         this.uuid = uuid;
         this.dateOfSale = dateOfSale;
         this.doYouStockOrsZinc = doYouStockOrsZinc;
@@ -66,6 +67,7 @@ public class AdhockSale {
         this.governmentApproval = governmentApproval;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.isHistory = isHistory;
         this.customerId = customerId;
     }
 
@@ -149,6 +151,14 @@ public class AdhockSale {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public Boolean getIsHistory() {
+        return isHistory;
+    }
+
+    public void setIsHistory(Boolean isHistory) {
+        this.isHistory = isHistory;
     }
 
     /** Not-null value. */
