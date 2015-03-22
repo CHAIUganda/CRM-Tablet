@@ -110,7 +110,6 @@ public class CHAISynchroniser {
             subcountyDao.deleteAll();
             customerContactDao.deleteAll();
             customerDao.deleteAll();
-//            saleDao.deleteAll();
             downloadRegions();
             progressDialog.incrementProgressBy(10);
             downloadCustomers();
@@ -122,29 +121,17 @@ public class CHAISynchroniser {
 
             progressDialog.incrementProgressBy(20);
         }catch (final SyncronizationException syncExc){
-            parent.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(parent.getApplicationContext(),
-                            "The Syncronisation Process is Unable to continue,"+syncExc.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                }
-            });
-        }catch (HttpClientErrorException e) {
+            displayError("The Syncronisation Process is Unable to continue,"+syncExc.getMessage());
+        } catch (final HttpClientErrorException e) {
             Log.i("Error:============================================", e.getResponseBodyAsString());
             e.printStackTrace();
+            displayError("The Syncronisation Process is Unable to continue," + e.getMessage());
         } catch (HttpServerErrorException se) {
             Log.i("Error:============================================", se.getResponseBodyAsString());
+            displayError(se.getResponseBodyAsString());
         } catch (Exception ex) {
             ex.printStackTrace();
-            parent.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(parent.getApplicationContext(),
-                            "The Syncronisation Process is Unable to continue,Please ensure that there is a network connection",
-                            Toast.LENGTH_LONG).show();
-                }
-            });
+            displayError("The Syncronisation Process is Unable to continue,Please ensure that there is a network connection");
         }
         Log.i("Synchroniser:", "=============================================done");
     }
@@ -177,38 +164,10 @@ public class CHAISynchroniser {
         }
     }
 
-    public void downloadParishes() {
-        updatePropgress("Downloading Parishes...");
-        Parish[] parishes = place.downloadParishes();
-        for (Parish parish : parishes) {
-            parishDao.insert(parish);
-        }
-        downloadVillage();
-    }
-
-    public void downloadVillage() {
-        updatePropgress("Downloading Villages...");
-        Village[] villages = place.downloadVillages();
-        for (Village village : villages) {
-            villageDao.insert(village);
-        }
-    }
-
-    public void downloadCustomersOld() {
-        updatePropgress("Downloading Customers..");
-        Customer[] customers = customerClient.downloadCustomers();
-        for (Customer customer : customers) {
-            Long id = customerDao.insert(customer);
-            saveCustomerContacts(customer.getCustomerContacts(), customer.getUuid());
-        }
-    }
-
     public void downloadCustomers() {
         updatePropgress("Downloading Customers..");
         Customer[] customers = customerClient.downloadCustomers();
         customerDao.insertOrReplaceInTx(customers);
-
-
         List<CustomerContact> contacts = new ArrayList<CustomerContact>();
         for (Customer customer : customers) {
             List<CustomerContact> customerContacts = customer.getCustomerContacts();
@@ -223,35 +182,24 @@ public class CHAISynchroniser {
         customerContactDao.insertOrReplaceInTx(contacts);
     }
 
-    public void saveCustomerContacts(List<CustomerContact> customerContacts, String customerId) {
-        for (CustomerContact customerContact : customerContacts) {
-            customerContact.setCustomerId(customerId);
-            customerContactDao.insert(customerContact);
-        }
-    }
-
     public void downloadTasks() {
         updatePropgress("Downloading Tasks..");
 
         Task[] tasks = taskClient.downloadTasks();
+        taskDao.insertOrReplaceInTx(tasks);
+        List<TaskOrder> taskOrders = new ArrayList<TaskOrder>();
         for (Task task : tasks) {
-            try {
-                taskDao.insert(task);
-                insertTaskOrders(task);
-            } catch (Exception ex) {
-                //catch cases when task is a duplicate
+            List<TaskOrder> lineItems = task.getLineItems();
+            if (lineItems != null) {
+                for (TaskOrder order : lineItems) {
+                    order.setTaskId(task.getUuid());
+                    order.setTask(task);
+                    taskOrders.add(order);
+                }
             }
-        }
-    }
 
-    private void insertTaskOrders(Task task) {
-        if (task.getLineItems() != null) {
-            for (TaskOrder order : task.getLineItems()) {
-                order.setTaskId(task.getUuid());
-                order.setTask(task);
-                taskOrderDao.insert(order);
-            }
         }
+        taskOrderDao.insertOrReplaceInTx(taskOrders);
     }
 
     public void uploadTasks() throws SyncronizationException {
@@ -265,7 +213,7 @@ public class CHAISynchroniser {
             }
             ServerResponse response = taskClient.uploadTask(task);
             if (response.getStatus().equalsIgnoreCase("OK")) {
-                //set all detailer calls to isHistroy
+                //set all detailer and sale calls to isHistroy
                 if (RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
                     DetailerCall detailerCall = task.getDetailers().get(0);
                     detailerCall.setIsHistory(true);
@@ -295,7 +243,7 @@ public class CHAISynchroniser {
         return false;
     }
 
-    public void uploadCustomers() {
+    public void uploadCustomers() throws SyncronizationException{
         List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
         if (!customersList.isEmpty()) {
             updatePropgress("Uploading Customers...");
@@ -304,6 +252,8 @@ public class CHAISynchroniser {
             ServerResponse response = customerClient.uploadCustomer(customer);
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 customerDao.delete(customer);
+            }else{
+                throw new SyncronizationException(response.getMessage());
             }
         }
     }
@@ -316,8 +266,8 @@ public class CHAISynchroniser {
         }
     }
 
-    private void uploadSales() {
-        List<Sale> saleList = saleDao.loadAll();
+    private void uploadSales()throws SyncronizationException{
+        List<Sale> saleList = saleDao.queryBuilder().where(SaleDao.Properties.IsHistory.notEq(true)).list();
         if (!saleList.isEmpty()) {
             updatePropgress("Uploading Sales...");
         }
@@ -326,11 +276,13 @@ public class CHAISynchroniser {
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 sale.setIsHistory(true);
                 saleDao.update(sale);
+            }else{
+                throw new SyncronizationException(response.getMessage());
             }
         }
     }
 
-    private void uploadDirectSales() {
+    private void uploadDirectSales()throws SyncronizationException{
         List<AdhockSale> saleList = adhockSaleDao.loadAll();
         if (!saleList.isEmpty()) {
             updatePropgress("Uploading Sales...");
@@ -338,8 +290,10 @@ public class CHAISynchroniser {
         for (AdhockSale adhockSale : saleList) {
             updatePropgress("Uploading Sales...");
             ServerResponse response = salesClient.uploadDirectSale(adhockSale);
-            if (response.equals("200")) {
-                adhockSaleDao.deleteAll();
+            if (response.getStatus().equalsIgnoreCase("OK")) {
+                adhockSaleDao.delete(adhockSale);
+            }else{
+                throw new SyncronizationException(response.getMessage());
             }
         }
     }
@@ -373,6 +327,15 @@ public class CHAISynchroniser {
             @Override
             public void run() {
                 progressDialog.setMessage(message);
+            }
+        });
+    }
+
+    private void displayError(final String message){
+        parent.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(parent.getApplicationContext(),message,Toast.LENGTH_LONG).show();
             }
         });
     }
