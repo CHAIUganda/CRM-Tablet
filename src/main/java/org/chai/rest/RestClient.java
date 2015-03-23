@@ -1,5 +1,9 @@
 package org.chai.rest;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import org.chai.util.MyApplication;
 import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -21,7 +25,9 @@ public class RestClient {
     public HttpHeaders getHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(new MediaType("application", "json")));
-        headers.set("device-imei","Samsung Galaxy S3");
+        headers.set("device-imei", "Samsung Galaxy S3");
+        headers.set("app-version-code",getVersionCode(MyApplication.getContext())+"");
+        headers.set("app-version-name",getVersionName(MyApplication.getContext())+"");
         HttpAuthentication authHeader = new HttpBasicAuthentication(userName, password);
         headers.setAuthorization(authHeader);
         return headers;
@@ -36,5 +42,23 @@ public class RestClient {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         return restTemplate;
+    }
+
+    public int getVersionCode(Context context) {
+        try {
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            return pInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            return 0;
+        }
+    }
+
+    public String getVersionName(Context context) {
+        try {
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            return pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            return "NA";
+        }
     }
 }
