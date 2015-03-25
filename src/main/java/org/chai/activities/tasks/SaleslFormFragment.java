@@ -370,6 +370,7 @@ public class SaleslFormFragment extends Fragment {
             saleCallData.setTaskId(callDataTask.getUuid());
             saleCallData.setOrderId(callDataTask.getUuid());
             saleCallData.setOrderId(callDataTask.getUuid());
+            saleCallData.setIsHistory(false);
             if (!((GpsWidgetView) getActivity().findViewById(R.id.sales_gps)).getLatLongText().equals("")) {
                 String latLongText = ((GpsWidgetView) getActivity().findViewById(R.id.sales_gps)).getLatLongText();
                 saleCallData.setLatitude(Double.parseDouble(latLongText.split(",")[0]));
