@@ -218,10 +218,6 @@ public class CHAISynchroniser {
                     DetailerCall detailerCall = task.getDetailers().get(0);
                     detailerCall.setIsHistory(true);
                     detailerCallDao.update(detailerCall);
-                } else {
-                    Sale sale = task.getSales().get(0);
-                    sale.setIsHistory(true);
-                    saleDao.update(sale);
                 }
             }else{
                 throw new SyncronizationException(response.getMessage());
