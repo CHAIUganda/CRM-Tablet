@@ -4,7 +4,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,8 +97,27 @@ public class SaleslFormFragment extends Fragment {
             stockProductSpinner.setAdapter(adapter);
 
             spinnerList.add(productSpinner);
-            quantityFields.add((EditText)view.findViewById(R.id.sales_quantity));
-            priceFields.add((EditText)view.findViewById(R.id.sales_price));
+            final EditText quantityFld = (EditText) view.findViewById(R.id.sales_quantity);
+            quantityFields.add(quantityFld);
+            EditText salesFld = (EditText) view.findViewById(R.id.sales_price);
+            salesFld.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (quantityFld.getText().toString().equals("0")||quantityFld.getText().toString().equals("")) {
+                        quantityFld.setError("Quantity cant be 0!");
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                }
+            });
+            priceFields.add(salesFld);
 
             stockSpinnerList.add(stockProductSpinner);
             stockQuantityFlds.add((EditText)view.findViewById(R.id.sales_stock_quantity));
@@ -255,6 +276,23 @@ public class SaleslFormFragment extends Fragment {
         priceView.setTextColor(Color.BLACK);
         priceView.setLayoutParams(params);
         priceView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        priceView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(quantityView.getText().toString().equals("0")||quantityView.getText().toString().equals("")){
+                    quantityView.setError("Quantity cant be 0!");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
 
         if (saleData != null) {
             quantityView.setText(saleData.getQuantity() + "");
