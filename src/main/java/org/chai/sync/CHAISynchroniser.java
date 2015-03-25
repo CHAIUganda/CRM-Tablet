@@ -288,6 +288,9 @@ public class CHAISynchroniser {
             updatePropgress("Uploading Sales...");
         }
         for (AdhockSale adhockSale : saleList) {
+            if(adhockSale.getIsHistory()){
+                continue;
+            }
             updatePropgress("Uploading Sales...");
             ServerResponse response = salesClient.uploadDirectSale(adhockSale);
             if (response.getStatus().equalsIgnoreCase("OK")) {
