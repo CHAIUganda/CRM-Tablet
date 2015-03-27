@@ -42,8 +42,10 @@ public class Customer {
     private String tradingCenter;
     private String subcountyUuid;
     private Boolean isActive;
+    private String segment;
     /** Not-null value. */
     private String subcountyId;
+
     private List<AdhockSale> adhockSales;
 
     // KEEP FIELDS - put your custom fields here
@@ -75,7 +77,7 @@ public class Customer {
         this.uuid = uuid;
     }
 
-    public Customer(String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, Boolean licenceVisible, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfCustomersPerDay, String restockFrequency, String lengthOpen, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, Boolean isActive, String subcountyId) {
+    public Customer(String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, Boolean licenceVisible, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfCustomersPerDay, String restockFrequency, String lengthOpen, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, Boolean isActive, String segment, String subcountyId) {
         this.uuid = uuid;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -100,6 +102,7 @@ public class Customer {
         this.tradingCenter = tradingCenter;
         this.subcountyUuid = subcountyUuid;
         this.isActive = isActive;
+        this.segment = segment;
         this.subcountyId = subcountyId;
     }
 
@@ -303,6 +306,14 @@ public class Customer {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public String getSegment() {
+        return segment;
+    }
+
+    public void setSegment(String segment) {
+        this.segment = segment;
     }
 
     /** Not-null value. */
