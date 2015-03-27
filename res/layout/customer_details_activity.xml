@@ -273,6 +273,31 @@
                         android:text=""/>
 
             </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Customer Segment:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_segment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
