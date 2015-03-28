@@ -47,7 +47,7 @@
                       android:id="@+id/detailer_how_many_diarrhea_patients_in_facility_view"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="1.How many diarrhea patients do you see in your outlet/Facility per week?"
+                      android:text="1.How many children under 5 do you see at your shop on a weekly basis?"
                       android:textColor="@color/list_main_text_color"
                       android:textStyle="bold"/>
 
