@@ -1,6 +1,7 @@
 package org.chai.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,10 +51,19 @@ public class AdhockSalesAdapter extends BaseAdapter {
 
         AdhockSale adhockSale = sales.get(position);
         if(adhockSale!=null){
-            saleCustomerName.setText(adhockSale.getCustomer().getOutletName());
-            saleCustomerLocationTxtView.setText(adhockSale.getCustomer().getDescriptionOfOutletLocation());
-            saleDateTxtView.setText(Utils.dateToString(adhockSale.getDateOfSale()));
-            imageView.setImageResource(R.drawable.cart);
+            try {
+                if(adhockSale.getIsHistory()){
+                    saleCustomerName.setTextColor(Color.parseColor("#C0C0C0"));
+                    saleCustomerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+                    saleDateTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+                }
+                saleCustomerName.setText(adhockSale.getCustomer().getOutletName());
+                saleCustomerLocationTxtView.setText(adhockSale.getCustomer().getDescriptionOfOutletLocation());
+                saleDateTxtView.setText(Utils.dateToString(adhockSale.getDateOfSale()));
+                imageView.setImageResource(R.drawable.cart);
+            }catch (Exception ex){
+                //
+            }
         }
         return convertView;
     }
