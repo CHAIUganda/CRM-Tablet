@@ -14,6 +14,7 @@ import android.widget.TableRow.LayoutParams;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
+import org.chai.adapter.CustomerAutocompleteAdapter;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.CustomMultSelectDropDown;
@@ -85,7 +86,7 @@ public class AdhockSaleFragment extends BaseContainerFragment {
 
             List<Customer> customersList = customerDao.loadAll();
             AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.adhock_sale_customer);
-            ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(getActivity(),android.R.layout.simple_dropdown_item_1line,customersList);
+            CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(getActivity(),android.R.layout.simple_dropdown_item_1line,new ArrayList<Customer>(customersList));
             textView.setAdapter(adapter);
 
             textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
