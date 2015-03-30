@@ -21,7 +21,7 @@ public class OrderData {
     /** Not-null value. */
     private String orderId;
     /** Not-null value. */
-    private String productId;
+    private String productId; 
 
 
     // KEEP FIELDS - put your custom fields here

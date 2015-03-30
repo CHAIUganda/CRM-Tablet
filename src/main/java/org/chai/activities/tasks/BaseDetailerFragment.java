@@ -62,7 +62,7 @@ import java.util.*;
 
      protected abstract void bindUiToDetailerCall();
 
-     protected abstract void initDetailerInstance();
+     protected abstract DetailerCall initDetailerInstance();
 
 
      protected void initialiseGreenDao() {
@@ -433,8 +433,7 @@ import java.util.*;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        DetailerCall detailerCall = new DetailerCall(null);
-        return detailerCall;
+        return null;
     }
 
 

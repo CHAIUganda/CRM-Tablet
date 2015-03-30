@@ -21,7 +21,7 @@ public class TaskOrder {
     /** Not-null value. */
     private String taskId;
     /** Not-null value. */
-    private String productId;
+    private String productId; 
 
 
     // KEEP FIELDS - put your custom fields here

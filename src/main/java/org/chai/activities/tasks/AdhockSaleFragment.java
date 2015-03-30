@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,7 @@ import org.chai.adapter.CustomerAutocompleteAdapter;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.CustomMultSelectDropDown;
+import org.chai.util.InputFilterMinMax;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.GpsWidgetView;
 
@@ -77,8 +81,27 @@ public class AdhockSaleFragment extends BaseContainerFragment {
             stockProductSpinner.setAdapter(adapter1);
 
             spinnerList.add(productSpinner);
-            quantityFields.add((EditText)view.findViewById(R.id.adhock_sale_quantity));
-            priceFields.add((EditText)view.findViewById(R.id.adhock_sale_price));
+            final EditText quantityFld = (EditText) view.findViewById(R.id.adhock_sale_quantity);
+            EditText priceFld = (EditText) view.findViewById(R.id.adhock_sale_price);
+            priceFld.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (quantityFld.getText().toString().equals("0") || quantityFld.getText().toString().equals("")) {
+                        quantityFld.setError("Quantity cant be 0!");
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                }
+            });
+            quantityFields.add(quantityFld);
+            priceFields.add(priceFld);
 
             stockSpinnerList.add(stockProductSpinner);
             stockQuantityFlds.add((EditText)view.findViewById(R.id.adhoc_sales_stock_quantity));
@@ -133,7 +156,7 @@ public class AdhockSaleFragment extends BaseContainerFragment {
                 public void onClick(View view) {
                     try{
                         if(!allMandatoryFieldsFilled()){
-                            Toast.makeText(getActivity(),"Please ensure that data is entered correctly",Toast.LENGTH_LONG).show();
+                            Utils.showError(getActivity(),"Error:","Please ensure that data is entered correctly");
                         }else{
                             submitSale();
                             resetFragment(R.id.frame_container, new AdhockSaleFragment());
@@ -141,7 +164,7 @@ public class AdhockSaleFragment extends BaseContainerFragment {
                             startActivity(i);
                         }
                     }catch (Exception ex){
-                        Toast.makeText(getActivity(),"A problem Occured while saving a new Sale,please ensure that data is entered correctly",Toast.LENGTH_LONG).show();
+                        Utils.showError(getActivity(),"Error","A problem Occured while saving a new Sale,please ensure that data is entered correctly");
                     }
                 }
             });
@@ -259,6 +282,25 @@ public class AdhockSaleFragment extends BaseContainerFragment {
         priceView.setTextColor(Color.BLACK);
         priceView.setLayoutParams(params);
         priceView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        priceView.setFilters(new InputFilter[]{new InputFilterMinMax("1", "100000000")});
+
+        priceView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(quantityView.getText().toString().equals("0")||quantityView.getText().toString().equals("")){
+                    quantityView.setError("Quantity cant be 0!");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
 
         if (saleData != null) {
             quantityView.setText(saleData.getQuantity() + "");

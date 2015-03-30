@@ -145,14 +145,14 @@ public class TakeOrderFragment extends BaseContainerFragment {
                 try{
                     if(validateFieldValues()){
                         submitOrder();
-                        Toast.makeText(getActivity(),"Thank you,your Order has been submitted.",Toast.LENGTH_LONG).show();
+                        Utils.showError(getActivity(),"Info:","Thank you,your Order has been submitted.");
                         resetFragment(R.id.frame_container, new TakeOrderFragment());
                         Intent i = new Intent(getActivity(), HomeActivity.class);
                         startActivity(i);
                     }
                 }catch (Exception ex){
                     ex.printStackTrace();
-                    Toast.makeText(getActivity(),"A problem Occured while saving a new Order,please ensure that data is entered correctly",Toast.LENGTH_LONG).show();
+                    Utils.showError(getActivity(),"Error:","A problem Occured while saving a new Order,please ensure that data is entered correctly");
                 }
             }
         });
@@ -339,13 +339,12 @@ public class TakeOrderFragment extends BaseContainerFragment {
         if(selectedCustomer == null){
             AutoCompleteTextView textView = (AutoCompleteTextView) getActivity().findViewById(R.id.order_auto_complete_textview);
             textView.setError("Please enter valid customer");
-//            Toast.makeText(getActivity(),"Please enter valid customer",Toast.LENGTH_LONG).show();
             return false;
         }else if(((EditText) getActivity().findViewById(R.id.order_delivery_date)).getText().toString().equalsIgnoreCase("")){
-            Toast.makeText(getActivity(),"Please enter a delivery date",Toast.LENGTH_LONG).show();
+            Utils.showError(getActivity(),"Error:","Please enter a delivery date");
             return false;
         }else if(quantityFields.get(0).getText().toString().equalsIgnoreCase("")){
-            Toast.makeText(getActivity(),"Please enter atleast a product and qunatity ordered",Toast.LENGTH_LONG).show();
+            Utils.showError(getActivity(),"Error:","Please enter atleast a product and qunatity ordered");
             return false;
         }
 

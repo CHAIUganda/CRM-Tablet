@@ -66,7 +66,7 @@ public class CustomerDetailsActivity extends Activity {
                     customer.setIsActive(false);
                     customer.setIsDirty(true);
                     customerDao.update(customer);
-                    Toast.makeText(getApplicationContext(), "Customer :" + customer.getOutletName()+" has been inactivated", Toast.LENGTH_LONG).show();
+                    Utils.showError(CustomerDetailsActivity.this,"Info:",  "Customer :" + customer.getOutletName()+" has been inactivated");
                     finish();
                 }catch (Exception ex){
                     ex.printStackTrace();

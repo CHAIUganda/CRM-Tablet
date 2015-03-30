@@ -1,7 +1,10 @@
 package org.chai.util;
 
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
@@ -209,6 +212,14 @@ public class Utils {
         }else{
             return true;
         }
+    }
+
+    public static void showError(Activity activity,String title,String error) {
+        new AlertDialog.Builder(activity)
+                .setTitle(title)
+                .setMessage(error)
+                .setPositiveButton("ok", null)
+                .show();
     }
 
 

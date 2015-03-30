@@ -86,14 +86,17 @@ public class CustomerForm extends Activity {
                 @Override
                 public void onClick(View view) {
                     if (customerInstance.getUuid() == null && contactsToUpdate.isEmpty()) {
-                        Toast.makeText(getApplicationContext(), "Please enter atleast one contact!", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(), "Please enter atleast one contact!", Toast.LENGTH_LONG).show();
+                        Utils.showError(CustomerForm.this,"Error:", "Please enter atleast one contact!");
                     } else {
                         boolean isSaved = saveCustomer();
                         if (isSaved) {
-                            Toast.makeText(getApplicationContext(), "Customer has been  successfully saved!", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), "Customer has been  successfully saved!", Toast.LENGTH_LONG).show();
+                            Utils.showError(CustomerForm.this,"Info:", "Customer has been  successfully saved!");
                             finish();
                         } else {
-                            Toast.makeText(getApplicationContext(), "A problem Occured while saving a new Customer,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), "A problem Occured while saving a new Customer,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();
+                            Utils.showError(CustomerForm.this,"Error:", "A problem Occured while saving a new Customer,please ensure that data is entered correctly");
                         }
                     }
                 }
@@ -411,6 +414,14 @@ public class CustomerForm extends Activity {
             linearLayout.addView(contactWidgetView);
             contactsToUpdate.add(contactWidgetView);
         }
+    }
+
+    private void showError(String title,String error) {
+        new AlertDialog.Builder(CustomerForm.this)
+                .setTitle(title)
+                .setMessage(error)
+                .setPositiveButton("ok", null)
+                .show();
     }
 
 }

@@ -1,6 +1,7 @@
 package org.chai.activities.tasks;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
+import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
@@ -107,14 +109,7 @@ public class TaskViewOnMapFragment extends Fragment {
 
         GeoPoint currentLocation = new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE);
         mapController.setZoom(MAP_DEFAULT_ZOOM);
-//        mapController.animateTo(currentLocation);
-        mMyLocationOverlay.runOnFirstFix(new Runnable() {
-            public void run() {
-                mapController.animateTo(mMyLocationOverlay
-                        .getMyLocation());
-            }
-        });
-
+        mapController.animateTo(currentLocation);
         calenderSpinner = (Spinner)view.findViewById(R.id.map_filter_spinner);
         calenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

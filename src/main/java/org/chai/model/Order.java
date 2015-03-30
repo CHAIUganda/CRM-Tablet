@@ -21,7 +21,7 @@ public class Order {
     /** Not-null value. */
     private java.util.Date orderDate;
     /** Not-null value. */
-    private String customerId;
+    private String customerId; 
     private List<OrderData> orderDatas;
 
     // KEEP FIELDS - put your custom fields here

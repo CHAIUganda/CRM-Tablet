@@ -33,8 +33,10 @@ public class Task {
     /** Not-null value. */
     private String customerId;
 
+
     private Customer customer;
     private String customer__resolvedKey;
+
 
     // KEEP FIELDS - put your custom fields here
 

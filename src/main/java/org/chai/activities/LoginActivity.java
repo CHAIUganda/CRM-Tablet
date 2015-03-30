@@ -99,7 +99,7 @@ public class LoginActivity extends Activity {
                                     new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(getApplicationContext(), "Couldnt Login,Please check your Username or Password", Toast.LENGTH_LONG).show();
+                                            Utils.showError(LoginActivity.this,"Error:","Couldnt Login,Please check your Username or Password");
                                         }
                                     }
                             );

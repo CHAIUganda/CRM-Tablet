@@ -40,6 +40,7 @@ public class DetailerCall {
     private Double longitude;
     private Boolean isNew;
     private Boolean isHistory;
+    private String objections;
     /** Not-null value. */
     private String taskId;
 
@@ -67,7 +68,7 @@ public class DetailerCall {
         this.uuid = uuid;
     }
 
-    public DetailerCall(String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockZinc, Boolean doYouStockOrs, String ifNoZincWhy, String ifNoOrsWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, Boolean isNew, Boolean isHistory, String taskId) {
+    public DetailerCall(String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockZinc, Boolean doYouStockOrs, String ifNoZincWhy, String ifNoOrsWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, Boolean isNew, Boolean isHistory, String objections, String taskId) {
         this.uuid = uuid;
         this.dateOfSurvey = dateOfSurvey;
         this.diarrheaPatientsInFacility = diarrheaPatientsInFacility;
@@ -91,6 +92,7 @@ public class DetailerCall {
         this.longitude = longitude;
         this.isNew = isNew;
         this.isHistory = isHistory;
+        this.objections = objections;
         this.taskId = taskId;
     }
 
@@ -284,6 +286,14 @@ public class DetailerCall {
 
     public void setIsHistory(Boolean isHistory) {
         this.isHistory = isHistory;
+    }
+
+    public String getObjections() {
+        return objections;
+    }
+
+    public void setObjections(String objections) {
+        this.objections = objections;
     }
 
     /** Not-null value. */

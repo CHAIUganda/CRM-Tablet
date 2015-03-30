@@ -1,5 +1,6 @@
 package org.chai.activities.tasks;
 
+import android.app.AlertDialog;
 import android.content.Intent;
  import android.graphics.Color;
  import android.os.Bundle;
@@ -52,6 +53,9 @@ import java.util.Calendar;
              String taskId = bundle.getString("taskId");
              callDataTask = taskDao.load(taskId);
              detailerCallInstance = getLastDetailerInfo(callDataTask.getCustomer());
+             if(detailerCallInstance == null){
+                 initDetailerInstance();
+             }
              detailerCallInstance.setIsNew(true);
              detailerCallInstance.setIsHistory(false);
          }
@@ -86,12 +90,12 @@ import java.util.Calendar;
              @Override
              public void onClick(View view1) {
                  if (!allMandatoryFieldsFilled(view)) {
-                     Toast.makeText(getActivity(), "Please fill in all the mandaory fields", Toast.LENGTH_LONG).show();
+                     Utils.showError(getActivity(),"Error:", "Please fill in all the mandaory fields");
                  } else if (saveForm()) {
-                     Toast.makeText(getActivity(), "Detailer Information has been  successfully added!", Toast.LENGTH_LONG).show();
+                     Utils.showError(getActivity(),"Info:", "Detailer Information has been  successfully added!");
                      ((BaseContainerFragment)getParentFragment()).popFragment();
                  } else {
-                     Toast.makeText(getActivity(), "A problem Occured while saving a new Detialer Information,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();
+                    Utils.showError(getActivity(), "Error:", "Please fill in all the mandaory fields");
                  }
              }
          });
@@ -103,7 +107,7 @@ import java.util.Calendar;
          return  view;
      }
 
-     @Override
+    @Override
      protected boolean saveForm() {
          boolean isSaved = false;
          try {
@@ -158,11 +162,15 @@ import java.util.Calendar;
              detailerCallInstance.setLatitude(Double.parseDouble(latLongText.split(",")[0]));
              detailerCallInstance.setLongitude(Double.parseDouble(latLongText.split(",")[1]));
          }
+         detailerCallInstance.setObjections(((EditText) getActivity().findViewById(R.id.detailer_customer_objections)).getText().toString());
      }
 
      @Override
-     protected void initDetailerInstance() {
-
+     protected DetailerCall initDetailerInstance() {
+         detailerCallInstance = new DetailerCall(null);
+         detailerCallInstance.setIsHistory(false);
+         detailerCallInstance.setIsNew(true);
+         return detailerCallInstance;
      }
 
      private void bindDetailerCallToUi(View view) {
@@ -225,6 +233,7 @@ import java.util.Calendar;
 
              Spinner recomendationLevel = (Spinner)view.findViewById(R.id.detailer_recommendation_level);
              Utils.setSpinnerSelection(recomendationLevel, detailerCallInstance.getRecommendationLevel());
+             ((EditText)view. findViewById(R.id.detailer_customer_objections)).setText(detailerCallInstance.getObjections());
 
          }else{
              Customer customer = callDataTask.getCustomer();

@@ -644,6 +644,33 @@
           </LinearLayout>
 
 
+          <LinearLayout
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:padding="10dp">
+
+              <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="Please note down any customer objections"
+                      android:textColor="@color/list_main_text_color"
+                      android:textStyle="bold"/>
+
+              <EditText
+                      android:id="@+id/detailer_customer_objections"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:padding="10dp"
+                      android:textSize="@dimen/list_sub_text_size"
+                      android:textColor="@color/list_main_text_color"
+                      android:textStyle="italic"
+                      android:background="@drawable/bordertextfield"
+                      android:singleLine="false"
+                      android:textCursorDrawable="@null"/>
+          </LinearLayout>
+
+
       </LinearLayout>
 
   </ScrollView>
