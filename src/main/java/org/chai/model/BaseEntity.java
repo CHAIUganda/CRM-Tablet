@@ -8,8 +8,9 @@ import java.util.Date;
 public interface BaseEntity {
     static int SYNC_SUCCESS = 0;
     static int SYNC_FAIL = 1;
+    static int SYNC_NOT_YET = 2;
     boolean isDirty = true;
-    Integer syncronisationStatus = SYNC_FAIL;
+    Integer syncronisationStatus = SYNC_NOT_YET;
     String syncronisationMessage = "";
     Date dateCreated = new Date();
     Date lastUpdated = new Date();
