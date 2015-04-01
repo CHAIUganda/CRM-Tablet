@@ -207,7 +207,6 @@ public class Utils {
     public static boolean mandatorySpinnerFieldSelected(Spinner spinner){
         if (spinner.getSelectedItem().toString().equals("")) {
             ((TextView)spinner.getChildAt(0)).setError("This Field is mandatory!");
-//            spinner.requestFocus();
             return false;
         }else{
             return true;

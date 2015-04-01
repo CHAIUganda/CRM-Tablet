@@ -7,10 +7,11 @@ import org.springframework.web.client.HttpClientErrorException;
 /**
  * Created by victor on 11/11/14.
  */
-//@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ServerResponse {
     public String status;
     public String message;
+    public String itemRef;
 
     public ServerResponse(String status, String message) {
         this.status = status;
@@ -33,6 +34,14 @@ public class ServerResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getItemRef() {
+        return itemRef;
+    }
+
+    public void setItemRef(String itemRef) {
+        this.itemRef = itemRef;
     }
 
     public static ServerResponse getServerErrorResponse(HttpClientErrorException ex) {

@@ -6,18 +6,26 @@ import android.app.ProgressDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.Deserializers;
+import com.sun.corba.se.spi.activation.Server;
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.model.*;
 import org.chai.rest.*;
 import org.chai.util.ServerResponse;
 import org.chai.util.SyncronizationException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by victor on 11/3/14.
@@ -51,7 +59,7 @@ public class CHAISynchroniser {
     private AdhockSaleDao adhockSaleDao;
     private SummaryReportDao summaryReportDao;
     private TaskOrderDao taskOrderDao;
-    private List<SyncronizationException> syncronisationErros;
+    private List<ServerResponse> syncronisationErros;
 
     public CHAISynchroniser(Activity activity) {
         this.parent = activity;
@@ -103,7 +111,7 @@ public class CHAISynchroniser {
 
     public void startSyncronisationProcess() {
         try {
-            syncronisationErros = new ArrayList<SyncronizationException>();
+            syncronisationErros = new ArrayList<ServerResponse>();
             uploadCustomers();
             uploadDirectSales();
             uploadSales();
@@ -235,7 +243,7 @@ public class CHAISynchroniser {
                 task.setLastUpdated(new Date());
                 task.setIsDirty(true);
                 taskDao.update(task);
-                syncronisationErros.add(new SyncronizationException(response.getMessage()));
+                syncronisationErros.add(response);
             }
         }
 
@@ -269,7 +277,7 @@ public class CHAISynchroniser {
                 customer.setLastUpdated(new Date());
                 customer.setIsDirty(true);
                 customerDao.update(customer);
-                syncronisationErros.add(new SyncronizationException(response.getMessage()));
+                syncronisationErros.add(response);
             }
         }
     }
@@ -300,7 +308,7 @@ public class CHAISynchroniser {
                 sale.setLastUpdated(new Date());
                 sale.setIsDirty(true);
                 saleDao.update(sale);
-                syncronisationErros.add(new SyncronizationException(response.getMessage()));
+                syncronisationErros.add(response);
             }
         }
     }
@@ -327,7 +335,7 @@ public class CHAISynchroniser {
                 adhockSale.setLastUpdated(new Date());
                 adhockSale.setIsDirty(true);
                 adhockSaleDao.update(adhockSale);
-                syncronisationErros.add(new SyncronizationException(response.getMessage()));
+                syncronisationErros.add(response);
             }
         }
     }
@@ -348,7 +356,7 @@ public class CHAISynchroniser {
                 order.setLastUpdated(new Date());
                 order.setIsDirty(true);
                 orderDao.update(order);
-                syncronisationErros.add(new SyncronizationException(response.getMessage()));
+                syncronisationErros.add(response);
             }
         }
     }
@@ -379,17 +387,32 @@ public class CHAISynchroniser {
         });
     }
 
-    private void displaySyncErros(List<SyncronizationException> errors){
-        StringBuilder formartedErrors = new StringBuilder();
-        formartedErrors.append("The following errors were encountered during syncronisation process\n");
-        for(SyncronizationException exception:errors){
-            formartedErrors.append(exception.getMessage()+"\n");
-        }
-        new AlertDialog.Builder(parent)
-                .setTitle("Errors:")
-                .setMessage(formartedErrors.toString())
-                .setPositiveButton("ok", null)
-                .show();
+    private void displaySyncErros(final List<ServerResponse> errors){
+        parent.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                StringBuilder formartedErrors = new StringBuilder();
+                formartedErrors.append("The following errors were encountered during syncronisation process\n");
+                for(ServerResponse response:errors){
+                    String message = response.getMessage();
+                    ObjectMapper mapper = new ObjectMapper();
+                    try {
+                        Map<String, Object> mapObject = mapper.readValue(message,new TypeReference<Map<String, Object>>() {
+                        });
+                        formartedErrors.append(response.getItemRef()+":"+mapObject.get("message") +"\n");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                new AlertDialog.Builder(parent)
+                        .setTitle("Errors:")
+                        .setMessage(formartedErrors.toString())
+                        .setPositiveButton("ok", null)
+                        .show();
+            }
+        });
+
     }
 
 }
