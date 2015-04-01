@@ -33,9 +33,12 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, String> {
         public final static Property Names = new Property(2, String.class, "names", false, "NAMES");
         public final static Property Gender = new Property(3, String.class, "gender", false, "GENDER");
         public final static Property Role = new Property(4, String.class, "role", false, "ROLE");
-        public final static Property DateCreated = new Property(5, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
-        public final static Property LastUpdated = new Property(6, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
-        public final static Property CustomerId = new Property(7, String.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property CustomerId = new Property(5, String.class, "customerId", false, "CUSTOMER_ID");
+        public final static Property IsDirty = new Property(6, Boolean.class, "isDirty", false, "IS_DIRTY");
+        public final static Property SyncronisationStatus = new Property(7, Integer.class, "syncronisationStatus", false, "SYNCRONISATION_STATUS");
+        public final static Property SyncronisationMessage = new Property(8, String.class, "syncronisationMessage", false, "SYNCRONISATION_MESSAGE");
+        public final static Property DateCreated = new Property(9, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(10, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
     };
 
     private DaoSession daoSession;
@@ -60,9 +63,12 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, String> {
                 "'NAMES' TEXT," + // 2: names
                 "'GENDER' TEXT," + // 3: gender
                 "'ROLE' TEXT," + // 4: role
-                "'DATE_CREATED' INTEGER," + // 5: dateCreated
-                "'LAST_UPDATED' INTEGER," + // 6: lastUpdated
-                "'CUSTOMER_ID' TEXT NOT NULL );"); // 7: customerId
+                "'CUSTOMER_ID' TEXT NOT NULL ," + // 5: customerId
+                "'IS_DIRTY' INTEGER," + // 6: isDirty
+                "'SYNCRONISATION_STATUS' INTEGER," + // 7: syncronisationStatus
+                "'SYNCRONISATION_MESSAGE' TEXT," + // 8: syncronisationMessage
+                "'DATE_CREATED' INTEGER," + // 9: dateCreated
+                "'LAST_UPDATED' INTEGER);"); // 10: lastUpdated
     }
 
     /** Drops the underlying database table. */
@@ -96,17 +102,32 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, String> {
         if (role != null) {
             stmt.bindString(5, role);
         }
+        stmt.bindString(6, entity.getCustomerId());
+ 
+        Boolean isDirty = entity.getIsDirty();
+        if (isDirty != null) {
+            stmt.bindLong(7, isDirty ? 1l: 0l);
+        }
+ 
+        Integer syncronisationStatus = entity.getSyncronisationStatus();
+        if (syncronisationStatus != null) {
+            stmt.bindLong(8, syncronisationStatus);
+        }
+ 
+        String syncronisationMessage = entity.getSyncronisationMessage();
+        if (syncronisationMessage != null) {
+            stmt.bindString(9, syncronisationMessage);
+        }
  
         java.util.Date dateCreated = entity.getDateCreated();
         if (dateCreated != null) {
-            stmt.bindLong(6, dateCreated.getTime());
+            stmt.bindLong(10, dateCreated.getTime());
         }
  
         java.util.Date lastUpdated = entity.getLastUpdated();
         if (lastUpdated != null) {
-            stmt.bindLong(7, lastUpdated.getTime());
+            stmt.bindLong(11, lastUpdated.getTime());
         }
-        stmt.bindString(8, entity.getCustomerId());
     }
 
     @Override
@@ -130,9 +151,12 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, String> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // names
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // gender
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // role
-            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)), // dateCreated
-            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // lastUpdated
-            cursor.getString(offset + 7) // customerId
+            cursor.getString(offset + 5), // customerId
+            cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0, // isDirty
+            cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // syncronisationStatus
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // syncronisationMessage
+            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // dateCreated
+            cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)) // lastUpdated
         );
         return entity;
     }
@@ -145,9 +169,12 @@ public class CustomerContactDao extends AbstractDao<CustomerContact, String> {
         entity.setNames(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setGender(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setRole(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setDateCreated(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
-        entity.setLastUpdated(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
-        entity.setCustomerId(cursor.getString(offset + 7));
+        entity.setCustomerId(cursor.getString(offset + 5));
+        entity.setIsDirty(cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0);
+        entity.setSyncronisationStatus(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
+        entity.setSyncronisationMessage(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setDateCreated(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setLastUpdated(cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)));
      }
     
     /** @inheritdoc */

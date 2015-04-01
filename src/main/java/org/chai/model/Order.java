@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * Entity mapped to table orders.
  */
-public class Order {
+public class Order implements BaseEntity {
 
     /** Not-null value. */
     private String uuid;
@@ -21,10 +21,20 @@ public class Order {
     /** Not-null value. */
     private java.util.Date orderDate;
     /** Not-null value. */
-    private String customerId; 
+    private String customerId;
     private List<OrderData> orderDatas;
 
     // KEEP FIELDS - put your custom fields here
+    @JsonIgnore
+    private Boolean isDirty;
+    @JsonIgnore
+    private Integer syncronisationStatus;
+    @JsonIgnore
+    private String syncronisationMessage;
+    @JsonIgnore
+    private java.util.Date dateCreated;
+    @JsonIgnore
+    private java.util.Date lastUpdated;
     /** Used to resolve relations */
     @JsonIgnore
     private transient DaoSession daoSession;
@@ -49,11 +59,16 @@ public class Order {
         this.uuid = uuid;
     }
 
-    public Order(String uuid, java.util.Date deliveryDate, java.util.Date orderDate, String customerId) {
+    public Order(String uuid, java.util.Date deliveryDate, java.util.Date orderDate, String customerId, Boolean isDirty, Integer syncronisationStatus, String syncronisationMessage, java.util.Date dateCreated, java.util.Date lastUpdated) {
         this.uuid = uuid;
         this.deliveryDate = deliveryDate;
         this.orderDate = orderDate;
         this.customerId = customerId;
+        this.isDirty = isDirty;
+        this.syncronisationStatus = syncronisationStatus;
+        this.syncronisationMessage = syncronisationMessage;
+        this.dateCreated = dateCreated;
+        this.lastUpdated = lastUpdated;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -100,6 +115,46 @@ public class Order {
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
+    }
+
+    public Boolean getIsDirty() {
+        return isDirty;
+    }
+
+    public void setIsDirty(Boolean isDirty) {
+        this.isDirty = isDirty;
+    }
+
+    public Integer getSyncronisationStatus() {
+        return syncronisationStatus;
+    }
+
+    public void setSyncronisationStatus(Integer syncronisationStatus) {
+        this.syncronisationStatus = syncronisationStatus;
+    }
+
+    public String getSyncronisationMessage() {
+        return syncronisationMessage;
+    }
+
+    public void setSyncronisationMessage(String syncronisationMessage) {
+        this.syncronisationMessage = syncronisationMessage;
+    }
+
+    public java.util.Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(java.util.Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public java.util.Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(java.util.Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     /** To-one relationship, resolved on first access. */

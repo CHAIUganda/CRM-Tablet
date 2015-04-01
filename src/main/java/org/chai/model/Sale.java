@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * Entity mapped to table SALE.
  */
-public class Sale {
+public class Sale implements BaseEntity {
 
     /** Not-null value. */
     private String uuid;
@@ -29,12 +29,24 @@ public class Sale {
     private Double latitude;
     private Double longitude;
     /** Not-null value. */
-    private String orderId; 
+    private String orderId;
+
 
     private List<SaleData> salesDatas;
     private List<StokeData> stockDatas;
 
     // KEEP FIELDS - put your custom fields here
+    /** Not-null value. */
+    @JsonIgnore
+    private Boolean isDirty;
+    @JsonIgnore
+    private Integer syncronisationStatus;
+    @JsonIgnore
+    private String syncronisationMessage;
+    @JsonIgnore
+    private java.util.Date dateCreated;
+    @JsonIgnore
+    private java.util.Date lastUpdated;
 
     /** Used to resolve relations */
     @JsonIgnore
@@ -64,7 +76,7 @@ public class Sale {
         this.uuid = uuid;
     }
 
-    public Sale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String governmentApproval, Boolean isHistory, Double latitude, Double longitude, String orderId, String taskId) {
+    public Sale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String governmentApproval, Boolean isHistory, Double latitude, Double longitude, String orderId, String taskId, Boolean isDirty, Integer syncronisationStatus, String syncronisationMessage, java.util.Date dateCreated, java.util.Date lastUpdated) {
         this.uuid = uuid;
         this.dateOfSale = dateOfSale;
         this.doYouStockOrsZinc = doYouStockOrsZinc;
@@ -77,6 +89,11 @@ public class Sale {
         this.longitude = longitude;
         this.orderId = orderId;
         this.taskId = taskId;
+        this.isDirty = isDirty;
+        this.syncronisationStatus = syncronisationStatus;
+        this.syncronisationMessage = syncronisationMessage;
+        this.dateCreated = dateCreated;
+        this.lastUpdated = lastUpdated;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -187,6 +204,46 @@ public class Sale {
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setTaskId(String taskId) {
         this.taskId = taskId;
+    }
+
+    public Boolean getIsDirty() {
+        return isDirty;
+    }
+
+    public void setIsDirty(Boolean isDirty) {
+        this.isDirty = isDirty;
+    }
+
+    public Integer getSyncronisationStatus() {
+        return syncronisationStatus;
+    }
+
+    public void setSyncronisationStatus(Integer syncronisationStatus) {
+        this.syncronisationStatus = syncronisationStatus;
+    }
+
+    public String getSyncronisationMessage() {
+        return syncronisationMessage;
+    }
+
+    public void setSyncronisationMessage(String syncronisationMessage) {
+        this.syncronisationMessage = syncronisationMessage;
+    }
+
+    public java.util.Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(java.util.Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public java.util.Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(java.util.Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     /** To-one relationship, resolved on first access. */

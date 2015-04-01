@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /**
  * Entity mapped to table DETAILER_CALL.
  */
-public class DetailerCall {
+public class DetailerCall implements BaseEntity {
 
     /** Not-null value. */
     private String uuid;
@@ -47,6 +47,16 @@ public class DetailerCall {
     private List<DetailerStock> detailerStocks;
 
     // KEEP FIELDS - put your custom fields here
+    @JsonIgnore
+    private Boolean isDirty;
+    @JsonIgnore
+    private Integer syncronisationStatus;
+    @JsonIgnore
+    private String syncronisationMessage;
+    @JsonIgnore
+    private java.util.Date dateCreated;
+    @JsonIgnore
+    private java.util.Date lastUpdated;
 
     /** Used to resolve relations */
     @JsonIgnore
@@ -68,7 +78,7 @@ public class DetailerCall {
         this.uuid = uuid;
     }
 
-    public DetailerCall(String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockZinc, Boolean doYouStockOrs, String ifNoZincWhy, String ifNoOrsWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, Boolean isNew, Boolean isHistory, String objections, String taskId) {
+    public DetailerCall(String uuid, java.util.Date dateOfSurvey, Integer diarrheaPatientsInFacility, String heardAboutDiarrheaTreatmentInChildren, String howDidYouHear, String otherWaysHowYouHeard, String whatYouKnowAbtDiarrhea, String diarrheaEffectsOnBody, String knowledgeAbtOrsAndUsage, String knowledgeAbtZincAndUsage, String whyNotUseAntibiotics, Boolean doYouStockZinc, Boolean doYouStockOrs, String ifNoZincWhy, String ifNoOrsWhy, String pointOfsaleMaterial, String recommendationNextStep, String recommendationLevel, Integer tenureLength, Double latitude, Double longitude, Boolean isNew, Boolean isHistory, String objections, String taskId, Boolean isDirty, Integer syncronisationStatus, String syncronisationMessage, java.util.Date dateCreated, java.util.Date lastUpdated) {
         this.uuid = uuid;
         this.dateOfSurvey = dateOfSurvey;
         this.diarrheaPatientsInFacility = diarrheaPatientsInFacility;
@@ -94,6 +104,11 @@ public class DetailerCall {
         this.isHistory = isHistory;
         this.objections = objections;
         this.taskId = taskId;
+        this.isDirty = isDirty;
+        this.syncronisationStatus = syncronisationStatus;
+        this.syncronisationMessage = syncronisationMessage;
+        this.dateCreated = dateCreated;
+        this.lastUpdated = lastUpdated;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -304,6 +319,46 @@ public class DetailerCall {
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setTaskId(String taskId) {
         this.taskId = taskId;
+    }
+
+    public Boolean getIsDirty() {
+        return isDirty;
+    }
+
+    public void setIsDirty(Boolean isDirty) {
+        this.isDirty = isDirty;
+    }
+
+    public Integer getSyncronisationStatus() {
+        return syncronisationStatus;
+    }
+
+    public void setSyncronisationStatus(Integer syncronisationStatus) {
+        this.syncronisationStatus = syncronisationStatus;
+    }
+
+    public String getSyncronisationMessage() {
+        return syncronisationMessage;
+    }
+
+    public void setSyncronisationMessage(String syncronisationMessage) {
+        this.syncronisationMessage = syncronisationMessage;
+    }
+
+    public java.util.Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(java.util.Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public java.util.Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(java.util.Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     /** To-one relationship, resolved on first access. */

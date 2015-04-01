@@ -53,6 +53,11 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
         public final static Property IsHistory = new Property(22, Boolean.class, "isHistory", false, "IS_HISTORY");
         public final static Property Objections = new Property(23, String.class, "objections", false, "OBJECTIONS");
         public final static Property TaskId = new Property(24, String.class, "taskId", false, "TASK_ID");
+        public final static Property IsDirty = new Property(25, Boolean.class, "isDirty", false, "IS_DIRTY");
+        public final static Property SyncronisationStatus = new Property(26, Integer.class, "syncronisationStatus", false, "SYNCRONISATION_STATUS");
+        public final static Property SyncronisationMessage = new Property(27, String.class, "syncronisationMessage", false, "SYNCRONISATION_MESSAGE");
+        public final static Property DateCreated = new Property(28, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(29, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
     };
 
     private DaoSession daoSession;
@@ -96,7 +101,12 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
                 "'IS_NEW' INTEGER," + // 21: isNew
                 "'IS_HISTORY' INTEGER," + // 22: isHistory
                 "'OBJECTIONS' TEXT," + // 23: objections
-                "'TASK_ID' TEXT NOT NULL );"); // 24: taskId
+                "'TASK_ID' TEXT NOT NULL ," + // 24: taskId
+                "'IS_DIRTY' INTEGER," + // 25: isDirty
+                "'SYNCRONISATION_STATUS' INTEGER," + // 26: syncronisationStatus
+                "'SYNCRONISATION_MESSAGE' TEXT," + // 27: syncronisationMessage
+                "'DATE_CREATED' INTEGER," + // 28: dateCreated
+                "'LAST_UPDATED' INTEGER);"); // 29: lastUpdated
     }
 
     /** Drops the underlying database table. */
@@ -226,6 +236,31 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
             stmt.bindString(24, objections);
         }
         stmt.bindString(25, entity.getTaskId());
+ 
+        Boolean isDirty = entity.getIsDirty();
+        if (isDirty != null) {
+            stmt.bindLong(26, isDirty ? 1l: 0l);
+        }
+ 
+        Integer syncronisationStatus = entity.getSyncronisationStatus();
+        if (syncronisationStatus != null) {
+            stmt.bindLong(27, syncronisationStatus);
+        }
+ 
+        String syncronisationMessage = entity.getSyncronisationMessage();
+        if (syncronisationMessage != null) {
+            stmt.bindString(28, syncronisationMessage);
+        }
+ 
+        java.util.Date dateCreated = entity.getDateCreated();
+        if (dateCreated != null) {
+            stmt.bindLong(29, dateCreated.getTime());
+        }
+ 
+        java.util.Date lastUpdated = entity.getLastUpdated();
+        if (lastUpdated != null) {
+            stmt.bindLong(30, lastUpdated.getTime());
+        }
     }
 
     @Override
@@ -268,7 +303,12 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
             cursor.isNull(offset + 21) ? null : cursor.getShort(offset + 21) != 0, // isNew
             cursor.isNull(offset + 22) ? null : cursor.getShort(offset + 22) != 0, // isHistory
             cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // objections
-            cursor.getString(offset + 24) // taskId
+            cursor.getString(offset + 24), // taskId
+            cursor.isNull(offset + 25) ? null : cursor.getShort(offset + 25) != 0, // isDirty
+            cursor.isNull(offset + 26) ? null : cursor.getInt(offset + 26), // syncronisationStatus
+            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // syncronisationMessage
+            cursor.isNull(offset + 28) ? null : new java.util.Date(cursor.getLong(offset + 28)), // dateCreated
+            cursor.isNull(offset + 29) ? null : new java.util.Date(cursor.getLong(offset + 29)) // lastUpdated
         );
         return entity;
     }
@@ -301,6 +341,11 @@ public class DetailerCallDao extends AbstractDao<DetailerCall, String> {
         entity.setIsHistory(cursor.isNull(offset + 22) ? null : cursor.getShort(offset + 22) != 0);
         entity.setObjections(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
         entity.setTaskId(cursor.getString(offset + 24));
+        entity.setIsDirty(cursor.isNull(offset + 25) ? null : cursor.getShort(offset + 25) != 0);
+        entity.setSyncronisationStatus(cursor.isNull(offset + 26) ? null : cursor.getInt(offset + 26));
+        entity.setSyncronisationMessage(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
+        entity.setDateCreated(cursor.isNull(offset + 28) ? null : new java.util.Date(cursor.getLong(offset + 28)));
+        entity.setLastUpdated(cursor.isNull(offset + 29) ? null : new java.util.Date(cursor.getLong(offset + 29)));
      }
     
     /** @inheritdoc */

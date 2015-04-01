@@ -46,14 +46,16 @@ public class CustomerDao extends AbstractDao<Customer, String> {
         public final static Property NumberOfCustomersPerDay = new Property(15, Integer.class, "numberOfCustomersPerDay", false, "NUMBER_OF_CUSTOMERS_PER_DAY");
         public final static Property RestockFrequency = new Property(16, String.class, "restockFrequency", false, "RESTOCK_FREQUENCY");
         public final static Property LengthOpen = new Property(17, String.class, "lengthOpen", false, "LENGTH_OPEN");
-        public final static Property DateCreated = new Property(18, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
-        public final static Property LastUpdated = new Property(19, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
-        public final static Property IsDirty = new Property(20, Boolean.class, "isDirty", false, "IS_DIRTY");
-        public final static Property TradingCenter = new Property(21, String.class, "tradingCenter", false, "TRADING_CENTER");
-        public final static Property SubcountyUuid = new Property(22, String.class, "subcountyUuid", false, "SUBCOUNTY_UUID");
-        public final static Property IsActive = new Property(23, Boolean.class, "isActive", false, "IS_ACTIVE");
-        public final static Property Segment = new Property(24, String.class, "segment", false, "SEGMENT");
-        public final static Property SubcountyId = new Property(25, String.class, "subcountyId", false, "SUBCOUNTY_ID");
+        public final static Property TradingCenter = new Property(18, String.class, "tradingCenter", false, "TRADING_CENTER");
+        public final static Property SubcountyUuid = new Property(19, String.class, "subcountyUuid", false, "SUBCOUNTY_UUID");
+        public final static Property IsActive = new Property(20, Boolean.class, "isActive", false, "IS_ACTIVE");
+        public final static Property Segment = new Property(21, String.class, "segment", false, "SEGMENT");
+        public final static Property SubcountyId = new Property(22, String.class, "subcountyId", false, "SUBCOUNTY_ID");
+        public final static Property IsDirty = new Property(23, Boolean.class, "isDirty", false, "IS_DIRTY");
+        public final static Property SyncronisationStatus = new Property(24, Integer.class, "syncronisationStatus", false, "SYNCRONISATION_STATUS");
+        public final static Property SyncronisationMessage = new Property(25, String.class, "syncronisationMessage", false, "SYNCRONISATION_MESSAGE");
+        public final static Property DateCreated = new Property(26, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(27, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
     };
 
     private DaoSession daoSession;
@@ -91,14 +93,16 @@ public class CustomerDao extends AbstractDao<Customer, String> {
                 "'NUMBER_OF_CUSTOMERS_PER_DAY' INTEGER," + // 15: numberOfCustomersPerDay
                 "'RESTOCK_FREQUENCY' TEXT," + // 16: restockFrequency
                 "'LENGTH_OPEN' TEXT," + // 17: lengthOpen
-                "'DATE_CREATED' INTEGER," + // 18: dateCreated
-                "'LAST_UPDATED' INTEGER," + // 19: lastUpdated
-                "'IS_DIRTY' INTEGER," + // 20: isDirty
-                "'TRADING_CENTER' TEXT," + // 21: tradingCenter
-                "'SUBCOUNTY_UUID' TEXT," + // 22: subcountyUuid
-                "'IS_ACTIVE' INTEGER," + // 23: isActive
-                "'SEGMENT' TEXT," + // 24: segment
-                "'SUBCOUNTY_ID' TEXT NOT NULL );"); // 25: subcountyId
+                "'TRADING_CENTER' TEXT," + // 18: tradingCenter
+                "'SUBCOUNTY_UUID' TEXT," + // 19: subcountyUuid
+                "'IS_ACTIVE' INTEGER," + // 20: isActive
+                "'SEGMENT' TEXT," + // 21: segment
+                "'SUBCOUNTY_ID' TEXT NOT NULL ," + // 22: subcountyId
+                "'IS_DIRTY' INTEGER," + // 23: isDirty
+                "'SYNCRONISATION_STATUS' INTEGER," + // 24: syncronisationStatus
+                "'SYNCRONISATION_MESSAGE' TEXT," + // 25: syncronisationMessage
+                "'DATE_CREATED' INTEGER," + // 26: dateCreated
+                "'LAST_UPDATED' INTEGER);"); // 27: lastUpdated
     }
 
     /** Drops the underlying database table. */
@@ -194,41 +198,51 @@ public class CustomerDao extends AbstractDao<Customer, String> {
             stmt.bindString(18, lengthOpen);
         }
  
-        java.util.Date dateCreated = entity.getDateCreated();
-        if (dateCreated != null) {
-            stmt.bindLong(19, dateCreated.getTime());
-        }
- 
-        java.util.Date lastUpdated = entity.getLastUpdated();
-        if (lastUpdated != null) {
-            stmt.bindLong(20, lastUpdated.getTime());
-        }
- 
-        Boolean isDirty = entity.getIsDirty();
-        if (isDirty != null) {
-            stmt.bindLong(21, isDirty ? 1l: 0l);
-        }
- 
         String tradingCenter = entity.getTradingCenter();
         if (tradingCenter != null) {
-            stmt.bindString(22, tradingCenter);
+            stmt.bindString(19, tradingCenter);
         }
  
         String subcountyUuid = entity.getSubcountyUuid();
         if (subcountyUuid != null) {
-            stmt.bindString(23, subcountyUuid);
+            stmt.bindString(20, subcountyUuid);
         }
  
         Boolean isActive = entity.getIsActive();
         if (isActive != null) {
-            stmt.bindLong(24, isActive ? 1l: 0l);
+            stmt.bindLong(21, isActive ? 1l: 0l);
         }
  
         String segment = entity.getSegment();
         if (segment != null) {
-            stmt.bindString(25, segment);
+            stmt.bindString(22, segment);
         }
-        stmt.bindString(26, entity.getSubcountyId());
+        stmt.bindString(23, entity.getSubcountyId());
+ 
+        Boolean isDirty = entity.getIsDirty();
+        if (isDirty != null) {
+            stmt.bindLong(24, isDirty ? 1l: 0l);
+        }
+ 
+        Integer syncronisationStatus = entity.getSyncronisationStatus();
+        if (syncronisationStatus != null) {
+            stmt.bindLong(25, syncronisationStatus);
+        }
+ 
+        String syncronisationMessage = entity.getSyncronisationMessage();
+        if (syncronisationMessage != null) {
+            stmt.bindString(26, syncronisationMessage);
+        }
+ 
+        java.util.Date dateCreated = entity.getDateCreated();
+        if (dateCreated != null) {
+            stmt.bindLong(27, dateCreated.getTime());
+        }
+ 
+        java.util.Date lastUpdated = entity.getLastUpdated();
+        if (lastUpdated != null) {
+            stmt.bindLong(28, lastUpdated.getTime());
+        }
     }
 
     @Override
@@ -265,14 +279,16 @@ public class CustomerDao extends AbstractDao<Customer, String> {
             cursor.isNull(offset + 15) ? null : cursor.getInt(offset + 15), // numberOfCustomersPerDay
             cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // restockFrequency
             cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // lengthOpen
-            cursor.isNull(offset + 18) ? null : new java.util.Date(cursor.getLong(offset + 18)), // dateCreated
-            cursor.isNull(offset + 19) ? null : new java.util.Date(cursor.getLong(offset + 19)), // lastUpdated
-            cursor.isNull(offset + 20) ? null : cursor.getShort(offset + 20) != 0, // isDirty
-            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // tradingCenter
-            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // subcountyUuid
-            cursor.isNull(offset + 23) ? null : cursor.getShort(offset + 23) != 0, // isActive
-            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // segment
-            cursor.getString(offset + 25) // subcountyId
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // tradingCenter
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // subcountyUuid
+            cursor.isNull(offset + 20) ? null : cursor.getShort(offset + 20) != 0, // isActive
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // segment
+            cursor.getString(offset + 22), // subcountyId
+            cursor.isNull(offset + 23) ? null : cursor.getShort(offset + 23) != 0, // isDirty
+            cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24), // syncronisationStatus
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // syncronisationMessage
+            cursor.isNull(offset + 26) ? null : new java.util.Date(cursor.getLong(offset + 26)), // dateCreated
+            cursor.isNull(offset + 27) ? null : new java.util.Date(cursor.getLong(offset + 27)) // lastUpdated
         );
         return entity;
     }
@@ -298,14 +314,16 @@ public class CustomerDao extends AbstractDao<Customer, String> {
         entity.setNumberOfCustomersPerDay(cursor.isNull(offset + 15) ? null : cursor.getInt(offset + 15));
         entity.setRestockFrequency(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
         entity.setLengthOpen(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
-        entity.setDateCreated(cursor.isNull(offset + 18) ? null : new java.util.Date(cursor.getLong(offset + 18)));
-        entity.setLastUpdated(cursor.isNull(offset + 19) ? null : new java.util.Date(cursor.getLong(offset + 19)));
-        entity.setIsDirty(cursor.isNull(offset + 20) ? null : cursor.getShort(offset + 20) != 0);
-        entity.setTradingCenter(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
-        entity.setSubcountyUuid(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
-        entity.setIsActive(cursor.isNull(offset + 23) ? null : cursor.getShort(offset + 23) != 0);
-        entity.setSegment(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
-        entity.setSubcountyId(cursor.getString(offset + 25));
+        entity.setTradingCenter(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setSubcountyUuid(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
+        entity.setIsActive(cursor.isNull(offset + 20) ? null : cursor.getShort(offset + 20) != 0);
+        entity.setSegment(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setSubcountyId(cursor.getString(offset + 22));
+        entity.setIsDirty(cursor.isNull(offset + 23) ? null : cursor.getShort(offset + 23) != 0);
+        entity.setSyncronisationStatus(cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24));
+        entity.setSyncronisationMessage(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
+        entity.setDateCreated(cursor.isNull(offset + 26) ? null : new java.util.Date(cursor.getLong(offset + 26)));
+        entity.setLastUpdated(cursor.isNull(offset + 27) ? null : new java.util.Date(cursor.getLong(offset + 27)));
      }
     
     /** @inheritdoc */

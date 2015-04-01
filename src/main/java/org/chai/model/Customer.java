@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * Entity mapped to table CUSTOMER.
  */
-public class Customer {
+public class Customer implements BaseEntity {
 
     /** Not-null value. */
     private String uuid;
@@ -36,9 +36,6 @@ public class Customer {
     private Integer numberOfCustomersPerDay;
     private String restockFrequency;
     private String lengthOpen;
-    private java.util.Date dateCreated;
-    private java.util.Date lastUpdated;
-    private Boolean isDirty;
     private String tradingCenter;
     private String subcountyUuid;
     private Boolean isActive;
@@ -48,6 +45,16 @@ public class Customer {
     private List<AdhockSale> adhockSales;
 
     // KEEP FIELDS - put your custom fields here
+    @JsonIgnore
+    private Boolean isDirty;
+    @JsonIgnore
+    private Integer syncronisationStatus;
+    @JsonIgnore
+    private String syncronisationMessage;
+    @JsonIgnore
+    private java.util.Date dateCreated;
+    @JsonIgnore
+    private java.util.Date lastUpdated;
 
     /** Used to resolve relations */
     @JsonIgnore
@@ -76,7 +83,7 @@ public class Customer {
         this.uuid = uuid;
     }
 
-    public Customer(String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, Boolean licenceVisible, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfCustomersPerDay, String restockFrequency, String lengthOpen, java.util.Date dateCreated, java.util.Date lastUpdated, Boolean isDirty, String tradingCenter, String subcountyUuid, Boolean isActive, String segment, String subcountyId) {
+    public Customer(String uuid, Double latitude, Double longitude, String outletName, String outletType, String outletSize, byte[] outletPicture, String split, String majoritySourceOfSupply, String keyWholeSalerName, String keyWholeSalerContact, Boolean licenceVisible, String typeOfLicence, String descriptionOfOutletLocation, Integer numberOfEmployees, Integer numberOfCustomersPerDay, String restockFrequency, String lengthOpen, String tradingCenter, String subcountyUuid, Boolean isActive, String segment, String subcountyId, Boolean isDirty, Integer syncronisationStatus, String syncronisationMessage, java.util.Date dateCreated, java.util.Date lastUpdated) {
         this.uuid = uuid;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -95,14 +102,16 @@ public class Customer {
         this.numberOfCustomersPerDay = numberOfCustomersPerDay;
         this.restockFrequency = restockFrequency;
         this.lengthOpen = lengthOpen;
-        this.dateCreated = dateCreated;
-        this.lastUpdated = lastUpdated;
-        this.isDirty = isDirty;
         this.tradingCenter = tradingCenter;
         this.subcountyUuid = subcountyUuid;
         this.isActive = isActive;
         this.segment = segment;
         this.subcountyId = subcountyId;
+        this.isDirty = isDirty;
+        this.syncronisationStatus = syncronisationStatus;
+        this.syncronisationMessage = syncronisationMessage;
+        this.dateCreated = dateCreated;
+        this.lastUpdated = lastUpdated;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -259,30 +268,6 @@ public class Customer {
         this.lengthOpen = lengthOpen;
     }
 
-    public java.util.Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(java.util.Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public java.util.Date getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(java.util.Date lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
-
-    public Boolean getIsDirty() {
-        return isDirty;
-    }
-
-    public void setIsDirty(Boolean isDirty) {
-        this.isDirty = isDirty;
-    }
-
     public String getTradingCenter() {
         return tradingCenter;
     }
@@ -323,6 +308,46 @@ public class Customer {
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setSubcountyId(String subcountyId) {
         this.subcountyId = subcountyId;
+    }
+
+    public Boolean getIsDirty() {
+        return isDirty;
+    }
+
+    public void setIsDirty(Boolean isDirty) {
+        this.isDirty = isDirty;
+    }
+
+    public Integer getSyncronisationStatus() {
+        return syncronisationStatus;
+    }
+
+    public void setSyncronisationStatus(Integer syncronisationStatus) {
+        this.syncronisationStatus = syncronisationStatus;
+    }
+
+    public String getSyncronisationMessage() {
+        return syncronisationMessage;
+    }
+
+    public void setSyncronisationMessage(String syncronisationMessage) {
+        this.syncronisationMessage = syncronisationMessage;
+    }
+
+    public java.util.Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(java.util.Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public java.util.Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(java.util.Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     /** To-one relationship, resolved on first access. */

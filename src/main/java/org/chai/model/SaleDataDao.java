@@ -34,6 +34,11 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
         public final static Property SaleId = new Property(3, String.class, "saleId", false, "SALE_ID");
         public final static Property AdhockSaleId = new Property(4, String.class, "adhockSaleId", false, "ADHOCK_SALE_ID");
         public final static Property ProductId = new Property(5, String.class, "productId", false, "PRODUCT_ID");
+        public final static Property IsDirty = new Property(6, Boolean.class, "isDirty", false, "IS_DIRTY");
+        public final static Property SyncronisationStatus = new Property(7, Integer.class, "syncronisationStatus", false, "SYNCRONISATION_STATUS");
+        public final static Property SyncronisationMessage = new Property(8, String.class, "syncronisationMessage", false, "SYNCRONISATION_MESSAGE");
+        public final static Property DateCreated = new Property(9, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(10, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
     };
 
     private DaoSession daoSession;
@@ -60,7 +65,12 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
                 "'PRICE' INTEGER NOT NULL ," + // 2: price
                 "'SALE_ID' TEXT," + // 3: saleId
                 "'ADHOCK_SALE_ID' TEXT," + // 4: adhockSaleId
-                "'PRODUCT_ID' TEXT NOT NULL );"); // 5: productId
+                "'PRODUCT_ID' TEXT NOT NULL ," + // 5: productId
+                "'IS_DIRTY' INTEGER," + // 6: isDirty
+                "'SYNCRONISATION_STATUS' INTEGER," + // 7: syncronisationStatus
+                "'SYNCRONISATION_MESSAGE' TEXT," + // 8: syncronisationMessage
+                "'DATE_CREATED' INTEGER," + // 9: dateCreated
+                "'LAST_UPDATED' INTEGER);"); // 10: lastUpdated
     }
 
     /** Drops the underlying database table. */
@@ -87,6 +97,31 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
             stmt.bindString(5, adhockSaleId);
         }
         stmt.bindString(6, entity.getProductId());
+ 
+        Boolean isDirty = entity.getIsDirty();
+        if (isDirty != null) {
+            stmt.bindLong(7, isDirty ? 1l: 0l);
+        }
+ 
+        Integer syncronisationStatus = entity.getSyncronisationStatus();
+        if (syncronisationStatus != null) {
+            stmt.bindLong(8, syncronisationStatus);
+        }
+ 
+        String syncronisationMessage = entity.getSyncronisationMessage();
+        if (syncronisationMessage != null) {
+            stmt.bindString(9, syncronisationMessage);
+        }
+ 
+        java.util.Date dateCreated = entity.getDateCreated();
+        if (dateCreated != null) {
+            stmt.bindLong(10, dateCreated.getTime());
+        }
+ 
+        java.util.Date lastUpdated = entity.getLastUpdated();
+        if (lastUpdated != null) {
+            stmt.bindLong(11, lastUpdated.getTime());
+        }
     }
 
     @Override
@@ -110,7 +145,12 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
             cursor.getInt(offset + 2), // price
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // saleId
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // adhockSaleId
-            cursor.getString(offset + 5) // productId
+            cursor.getString(offset + 5), // productId
+            cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0, // isDirty
+            cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // syncronisationStatus
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // syncronisationMessage
+            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // dateCreated
+            cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)) // lastUpdated
         );
         return entity;
     }
@@ -124,6 +164,11 @@ public class SaleDataDao extends AbstractDao<SaleData, String> {
         entity.setSaleId(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setAdhockSaleId(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setProductId(cursor.getString(offset + 5));
+        entity.setIsDirty(cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0);
+        entity.setSyncronisationStatus(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
+        entity.setSyncronisationMessage(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setDateCreated(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setLastUpdated(cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)));
      }
     
     /** @inheritdoc */
