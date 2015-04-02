@@ -38,30 +38,43 @@ public class OrderListAdapter extends BaseAdapter{
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        OrderHolder orderHolder = null;
         if(layoutInflater == null){
             layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if(convertView == null){
             convertView = layoutInflater.inflate(R.layout.call_list_row,null);
-        }
-        TextView orderCustomerName = (TextView)convertView.findViewById(R.id.call_task_description);
-        TextView orderCustomerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customername);
-        TextView orderDateTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
-        ImageView imageView = (ImageView)convertView.findViewById(R.id.callthumbnail);
-        TextView txterror = (TextView) convertView.findViewById(R.id.bg_error);
+            orderHolder = new OrderHolder();
+            orderHolder.orderCustomerName = (TextView) convertView.findViewById(R.id.call_task_description);
+            orderHolder.orderCustomerLocationTxtView = (TextView) convertView.findViewById(R.id.call_customername);
+            orderHolder.orderDateTxtView = (TextView) convertView.findViewById(R.id.call_customerlocation);
+            orderHolder.imageView = (ImageView) convertView.findViewById(R.id.callthumbnail);
+            orderHolder.txterror = (TextView) convertView.findViewById(R.id.bg_error);
+            convertView.setTag(orderHolder);
 
+        }else{
+            orderHolder = (OrderHolder) convertView.getTag();
+        }
         Order order = orders.get(position);
         if(order!=null){
-            orderCustomerName.setText(order.getCustomer().getOutletName());
-            orderCustomerLocationTxtView.setText(order.getCustomer().getDescriptionOfOutletLocation());
-            orderDateTxtView.setText(Utils.dateToString(order.getOrderDate()));
-            imageView.setImageResource(R.drawable.cart);
+            orderHolder.orderCustomerName.setText(order.getCustomer().getOutletName());
+            orderHolder.orderCustomerLocationTxtView.setText(order.getCustomer().getDescriptionOfOutletLocation());
+            orderHolder.orderDateTxtView.setText(Utils.dateToString(order.getOrderDate()));
+            orderHolder.imageView.setImageResource(R.drawable.cart);
             if(order.getSyncronisationStatus()!= null && order.getSyncronisationStatus()==BaseEntity.SYNC_FAIL){
-                txterror.setVisibility(View.VISIBLE);
-                txterror.setError(order.getSyncronisationMessage());
+                orderHolder.txterror.setVisibility(View.VISIBLE);
+                orderHolder.txterror.setError(order.getSyncronisationMessage());
             }
         }
         return convertView;
+    }
+
+    static class OrderHolder {
+        TextView orderCustomerName;
+        TextView orderCustomerLocationTxtView;
+        TextView orderDateTxtView;
+        ImageView imageView;
+        TextView txterror;
     }
 
 }

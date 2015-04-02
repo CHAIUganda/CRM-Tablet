@@ -39,39 +39,51 @@ public class AdhockSalesAdapter extends BaseAdapter {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
         if(layoutInflater == null){
             layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if(convertView == null){
             convertView = layoutInflater.inflate(R.layout.call_list_row,null);
+            holder = new ViewHolder();
+            holder.saleCustomerName = (TextView) convertView.findViewById(R.id.call_task_description);
+            holder.saleCustomerLocationTxtView = (TextView) convertView.findViewById(R.id.call_customername);
+            holder.saleDateTxtView = (TextView) convertView.findViewById(R.id.call_customerlocation);
+            holder.imageView = (ImageView) convertView.findViewById(R.id.callthumbnail);
+            holder.txterror = (TextView) convertView.findViewById(R.id.bg_error);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
-        TextView saleCustomerName = (TextView)convertView.findViewById(R.id.call_task_description);
-        TextView saleCustomerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customername);
-        TextView saleDateTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
-        ImageView imageView = (ImageView)convertView.findViewById(R.id.callthumbnail);
-        TextView txterror = (TextView) convertView.findViewById(R.id.bg_error);
 
         AdhockSale adhockSale = sales.get(position);
         if(adhockSale!=null){
             try {
                 if(adhockSale.getIsHistory()){
-                    saleCustomerName.setTextColor(Color.parseColor("#C0C0C0"));
-                    saleCustomerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
-                    saleDateTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+                    holder.saleCustomerName.setTextColor(Color.parseColor("#C0C0C0"));
+                    holder.saleCustomerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+                    holder.saleDateTxtView.setTextColor(Color.parseColor("#C0C0C0"));
                 }
-                saleCustomerName.setText(adhockSale.getCustomer().getOutletName());
-                saleCustomerLocationTxtView.setText(adhockSale.getCustomer().getDescriptionOfOutletLocation());
-                saleDateTxtView.setText(Utils.dateToString(adhockSale.getDateOfSale()));
-                imageView.setImageResource(R.drawable.cart);
+                holder.saleCustomerName.setText(adhockSale.getCustomer().getOutletName());
+                holder.saleCustomerLocationTxtView.setText(adhockSale.getCustomer().getDescriptionOfOutletLocation());
+                holder.saleDateTxtView.setText(Utils.dateToString(adhockSale.getDateOfSale()));
+                holder.imageView.setImageResource(R.drawable.cart);
                 if(adhockSale.getSyncronisationStatus()!= null && adhockSale.getSyncronisationStatus()== BaseEntity.SYNC_FAIL){
-                    txterror.setVisibility(View.VISIBLE);
-                    txterror.setError(adhockSale.getSyncronisationMessage());
+                    holder.txterror.setVisibility(View.VISIBLE);
+                    holder.txterror.setError(adhockSale.getSyncronisationMessage());
                 }
             }catch (Exception ex){
                 //
             }
         }
         return convertView;
+    }
+
+    static class ViewHolder {
+        TextView saleCustomerName;
+        TextView saleCustomerLocationTxtView;
+        TextView saleDateTxtView;
+        ImageView imageView;
+        TextView txterror;
     }
 
 }

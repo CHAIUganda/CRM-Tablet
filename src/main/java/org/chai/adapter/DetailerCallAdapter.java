@@ -50,36 +50,48 @@ public class DetailerCallAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
         if(inflater == null){
             inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if(convertView == null){
             convertView = inflater.inflate(R.layout.call_list_row,null);
+            holder = new ViewHolder();
+            holder.taskDescription = (TextView)convertView.findViewById(R.id.call_task_description);
+            holder.customerNameTxtView = (TextView)convertView.findViewById(R.id.call_customername);
+            holder.customerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
+            holder.txterror = (TextView) convertView.findViewById(R.id.bg_error);
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
         }
-        TextView taskDescription = (TextView)convertView.findViewById(R.id.call_task_description);
-        TextView customerNameTxtView = (TextView)convertView.findViewById(R.id.call_customername);
-        TextView customerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
-        TextView txterror = (TextView) convertView.findViewById(R.id.bg_error);
 
         DetailerCall detailerCall = detailerCalls.get(position);
         if(detailerCall!=null){
             try{
-                taskDescription.setText(detailerCall.getTask().getDescription());
+                holder.taskDescription.setText(detailerCall.getTask().getDescription());
                 if(detailerCall.getIsHistory()){
-                    taskDescription.setTextColor(Color.parseColor("#C0C0C0"));
-                    customerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
-                    customerNameTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+                    holder.taskDescription.setTextColor(Color.parseColor("#C0C0C0"));
+                    holder.customerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+                    holder.customerNameTxtView.setTextColor(Color.parseColor("#C0C0C0"));
                 }
-                customerNameTxtView.setText(detailerCall.getTask().getCustomer().getOutletName());
-                customerLocationTxtView.setText(detailerCall.getTask().getCustomer().getDescriptionOfOutletLocation());
+                holder.customerNameTxtView.setText(detailerCall.getTask().getCustomer().getOutletName());
+                holder.customerLocationTxtView.setText(detailerCall.getTask().getCustomer().getDescriptionOfOutletLocation());
                 if(detailerCall.getTask().getSyncronisationStatus()!= null && detailerCall.getTask().getSyncronisationStatus()== BaseEntity.SYNC_FAIL){
-                    txterror.setVisibility(View.VISIBLE);
-                    txterror.setError(detailerCall.getTask().getSyncronisationMessage());
+                    holder.txterror.setVisibility(View.VISIBLE);
+                    holder.txterror.setError(detailerCall.getTask().getSyncronisationMessage());
                 }
             }catch (Exception ex){
                 //
             }
         }
         return convertView;
+    }
+
+    static class ViewHolder{
+        TextView taskDescription  ;
+        TextView customerNameTxtView ;
+        TextView customerLocationTxtView ;
+        TextView txterror;
     }
 }
