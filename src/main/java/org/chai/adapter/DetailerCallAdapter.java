@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import org.chai.R;
+import org.chai.model.BaseEntity;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.DetailerCall;
@@ -58,6 +59,7 @@ public class DetailerCallAdapter extends BaseAdapter {
         TextView taskDescription = (TextView)convertView.findViewById(R.id.call_task_description);
         TextView customerNameTxtView = (TextView)convertView.findViewById(R.id.call_customername);
         TextView customerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
+        TextView txterror = (TextView) convertView.findViewById(R.id.bg_error);
 
         DetailerCall detailerCall = detailerCalls.get(position);
         if(detailerCall!=null){
@@ -70,6 +72,10 @@ public class DetailerCallAdapter extends BaseAdapter {
                 }
                 customerNameTxtView.setText(detailerCall.getTask().getCustomer().getOutletName());
                 customerLocationTxtView.setText(detailerCall.getTask().getCustomer().getDescriptionOfOutletLocation());
+                if(detailerCall.getTask().getSyncronisationStatus()!= null && detailerCall.getTask().getSyncronisationStatus()== BaseEntity.SYNC_FAIL){
+                    txterror.setVisibility(View.VISIBLE);
+                    txterror.setError(detailerCall.getSyncronisationMessage());
+                }
             }catch (Exception ex){
                 //
             }

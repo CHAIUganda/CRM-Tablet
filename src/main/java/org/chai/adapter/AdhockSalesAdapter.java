@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import org.chai.R;
 import org.chai.model.AdhockSale;
+import org.chai.model.BaseEntity;
 import org.chai.util.Utils;
 
 import java.util.List;
@@ -48,6 +49,7 @@ public class AdhockSalesAdapter extends BaseAdapter {
         TextView saleCustomerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customername);
         TextView saleDateTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
         ImageView imageView = (ImageView)convertView.findViewById(R.id.callthumbnail);
+        TextView txterror = (TextView) convertView.findViewById(R.id.bg_error);
 
         AdhockSale adhockSale = sales.get(position);
         if(adhockSale!=null){
@@ -61,6 +63,10 @@ public class AdhockSalesAdapter extends BaseAdapter {
                 saleCustomerLocationTxtView.setText(adhockSale.getCustomer().getDescriptionOfOutletLocation());
                 saleDateTxtView.setText(Utils.dateToString(adhockSale.getDateOfSale()));
                 imageView.setImageResource(R.drawable.cart);
+                if(adhockSale.getSyncronisationStatus()!= null && adhockSale.getSyncronisationStatus()== BaseEntity.SYNC_FAIL){
+                    txterror.setVisibility(View.VISIBLE);
+                    txterror.setError(adhockSale.getSyncronisationMessage());
+                }
             }catch (Exception ex){
                 //
             }

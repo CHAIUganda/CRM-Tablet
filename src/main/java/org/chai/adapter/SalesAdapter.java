@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import org.chai.R;
+import org.chai.model.BaseEntity;
 import org.chai.model.Sale;
 
 import java.util.List;
@@ -50,6 +51,7 @@ public class SalesAdapter extends BaseAdapter {
         TextView taskDescription = (TextView)convertView.findViewById(R.id.call_task_description);
         TextView customerNameTxtView = (TextView)convertView.findViewById(R.id.call_customername);
         TextView customerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
+        TextView txterror = (TextView) convertView.findViewById(R.id.bg_error);
 
         Sale sale = sales.get(position);
         if(sale!=null){
@@ -62,6 +64,10 @@ public class SalesAdapter extends BaseAdapter {
             }
                 customerNameTxtView.setText(sale.getTask().getCustomer().getOutletName());
                 customerLocationTxtView.setText(sale.getTask().getCustomer().getDescriptionOfOutletLocation());
+                if(sale.getSyncronisationStatus()!= null && sale.getSyncronisationStatus()== BaseEntity.SYNC_FAIL){
+                    txterror.setVisibility(View.VISIBLE);
+                    txterror.setError(sale.getSyncronisationMessage());
+                }
             }catch (Exception ex){
                 //
             }
