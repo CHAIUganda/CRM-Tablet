@@ -51,4 +51,13 @@
             android:text="0777505033"
             android:textStyle="italic"/>
 
+    <TextView android:id="@+id/bg_error"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+              android:layout_marginRight="8dp"
+              android:textColor="@color/bg_error_color"
+              android:visibility="invisible"/>
+
 </RelativeLayout>
