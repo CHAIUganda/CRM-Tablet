@@ -74,7 +74,7 @@ public class DetailerCallAdapter extends BaseAdapter {
                 customerLocationTxtView.setText(detailerCall.getTask().getCustomer().getDescriptionOfOutletLocation());
                 if(detailerCall.getTask().getSyncronisationStatus()!= null && detailerCall.getTask().getSyncronisationStatus()== BaseEntity.SYNC_FAIL){
                     txterror.setVisibility(View.VISIBLE);
-                    txterror.setError(detailerCall.getSyncronisationMessage());
+                    txterror.setError(detailerCall.getTask().getSyncronisationMessage());
                 }
             }catch (Exception ex){
                 //
