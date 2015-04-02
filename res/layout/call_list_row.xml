@@ -58,6 +58,9 @@
               android:layout_centerVertical="true"
               android:layout_marginRight="8dp"
               android:textColor="@color/bg_error_color"
-              android:visibility="invisible"/>
+              android:visibility="invisible"
+              android:focusable="true"
+              android:clickable="true"
+              android:focusableInTouchMode="true"/>
 
 </RelativeLayout>

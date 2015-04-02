@@ -50,6 +50,15 @@ public class OrderListAdapter extends BaseAdapter{
             orderHolder.orderDateTxtView = (TextView) convertView.findViewById(R.id.call_customerlocation);
             orderHolder.imageView = (ImageView) convertView.findViewById(R.id.callthumbnail);
             orderHolder.txterror = (TextView) convertView.findViewById(R.id.bg_error);
+            final OrderHolder finalOrderHolder = orderHolder;
+            /*orderHolder.txterror.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                        if(finalOrderHolder.txterror.getError().toString() != null){
+                         finalOrderHolder.txterror.setError(null);
+                        }
+                }
+            });*/
             convertView.setTag(orderHolder);
 
         }else{
