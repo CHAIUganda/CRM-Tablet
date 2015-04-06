@@ -13,17 +13,16 @@ import android.widget.Toast;
 import com.sun.swing.internal.plaf.synth.resources.synth_sv;
 import org.chai.Globals;
 import org.chai.R;
-import org.chai.model.DaoMaster;
-import org.chai.model.DaoSession;
-import org.chai.model.User;
-import org.chai.model.UserDao;
+import org.chai.model.*;
 import org.chai.rest.Place;
 import org.chai.rest.RestClient;
+import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 
 import java.util.List;
 import java.util.UUID;
 import com.splunk.mint.Mint;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 public class LoginActivity extends Activity {
 
@@ -32,6 +31,7 @@ public class LoginActivity extends Activity {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private UserDao userDao;
+    private VillageDao villageDao;
     private String role = User.ROLE_DETAILER;
 
     /**
@@ -47,10 +47,7 @@ public class LoginActivity extends Activity {
 		Log.i(TAG, "onCreate");
         setContentView(R.layout.login_activity);
         initialiseGreenDao();
-        //create initial data incase there is none
-      /*  SampleData sampleData = new SampleData(this);
-        sampleData.createBaseData();
-*/
+        List<Village> villages = villageDao.loadAll();
         Activity activity = this;
         Button loginBtn = (Button)findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener(){
@@ -134,11 +131,12 @@ public class LoginActivity extends Activity {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "chai-crm-db", null);
+            UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
             userDao = daoSession.getUserDao();
+            villageDao = daoSession.getVillageDao();
         } catch (Exception ex) {
             Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
