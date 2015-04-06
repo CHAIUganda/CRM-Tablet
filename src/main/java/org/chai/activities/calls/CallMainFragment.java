@@ -50,12 +50,12 @@ public class CallMainFragment extends Fragment {
         if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
             sales = new ArrayList<Sale>();
             sales.addAll(saleDao.loadAll());
-            salesAdapter = new SalesAdapter(getActivity(),getActivity(),sales);
+            salesAdapter = new SalesAdapter(getActivity(),sales);
             listView.setAdapter(salesAdapter);
         }else {
             detailerCalls = new ArrayList<DetailerCall>();
             detailerCalls.addAll(detailerCallDao.loadAll());
-            detailerCallAdapter = new DetailerCallAdapter(getActivity(),getActivity(),detailerCalls);
+            detailerCallAdapter = new DetailerCallAdapter(getActivity(),detailerCalls);
             listView.setAdapter(detailerCallAdapter);
         }
 

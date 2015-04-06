@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.os.Build;
 import android.text.Spannable;
@@ -13,7 +14,10 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.*;
+import org.chai.R;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.Task;
@@ -219,6 +223,23 @@ public class Utils {
                 .setMessage(error)
                 .setPositiveButton("ok", null)
                 .show();
+    }
+
+    public static void displayPopupWindow(Activity activity,View anchorView,String message) {
+        PopupWindow popup = new PopupWindow(activity);
+        View layout = activity.getLayoutInflater().inflate(R.layout.popup, null);
+        popup.setContentView(layout);
+        TextView popupText = (TextView)layout.findViewById(R.id.popupTxt);
+        popupText.setText(message);
+        // Set content width and height
+        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+        // Closes the popup window when touch outside of it - when looses focus
+        popup.setOutsideTouchable(true);
+        popup.setFocusable(true);
+        // Show anchored to button
+        popup.setBackgroundDrawable(new BitmapDrawable());
+        popup.showAsDropDown(anchorView);
     }
 
 

@@ -8,12 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import org.chai.R;
 import org.chai.model.BaseEntity;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.DetailerCall;
+import org.chai.util.ServerResponse;
 import org.chai.util.Utils;
 
 import java.util.List;
@@ -27,10 +30,9 @@ public class DetailerCallAdapter extends BaseAdapter {
     private List<DetailerCall> detailerCalls;
     private Context context;
 
-    public DetailerCallAdapter(Context context,Activity activity,List<DetailerCall> detailerCalls){
+    public DetailerCallAdapter(Activity activity,List<DetailerCall> detailerCalls){
         this.activity = activity;
         this.detailerCalls = detailerCalls;
-        this.context = context;
     }
 
     @Override
@@ -60,13 +62,13 @@ public class DetailerCallAdapter extends BaseAdapter {
             holder.taskDescription = (TextView)convertView.findViewById(R.id.call_task_description);
             holder.customerNameTxtView = (TextView)convertView.findViewById(R.id.call_customername);
             holder.customerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
-            holder.txterror = (TextView) convertView.findViewById(R.id.bg_error);
+            holder.txterror = (ImageView) convertView.findViewById(R.id.bg_error);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
 
-        DetailerCall detailerCall = detailerCalls.get(position);
+        final DetailerCall detailerCall = detailerCalls.get(position);
         if(detailerCall!=null){
             try{
                 holder.taskDescription.setText(detailerCall.getTask().getDescription());
@@ -79,8 +81,13 @@ public class DetailerCallAdapter extends BaseAdapter {
                 holder.customerLocationTxtView.setText(detailerCall.getTask().getCustomer().getDescriptionOfOutletLocation());
                 if(detailerCall.getTask().getSyncronisationStatus()!= null && detailerCall.getTask().getSyncronisationStatus()== BaseEntity.SYNC_FAIL){
                     holder.txterror.setVisibility(View.VISIBLE);
-                    holder.txterror.setError(detailerCall.getTask().getSyncronisationMessage());
                 }
+                holder.txterror.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Utils.displayPopupWindow(activity, view, ServerResponse.parseErrorMessage(detailerCall.getTask().getSyncronisationMessage()));
+                    }
+                });
             }catch (Exception ex){
                 //
             }
@@ -92,6 +99,6 @@ public class DetailerCallAdapter extends BaseAdapter {
         TextView taskDescription  ;
         TextView customerNameTxtView ;
         TextView customerLocationTxtView ;
-        TextView txterror;
+        ImageView txterror;
     }
 }

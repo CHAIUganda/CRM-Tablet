@@ -2,7 +2,12 @@ package org.chai.util;
 
 import android.util.Log;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.client.HttpClientErrorException;
+
+import java.io.IOException;
+import java.util.Map;
 
 /**
  * Created by victor on 11/11/14.
@@ -49,5 +54,17 @@ public class ServerResponse {
         Log.i("Error:", serverResponse.getMessage());
         ex.printStackTrace();
         return serverResponse;
+    }
+
+    public static String parseErrorMessage(String message){
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            Map<String, Object> mapObject = mapper.readValue(message,new TypeReference<Map<String, Object>>() {
+            });
+            return mapObject.get("message").toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
