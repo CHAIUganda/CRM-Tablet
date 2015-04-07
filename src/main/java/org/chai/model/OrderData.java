@@ -21,7 +21,7 @@ public class OrderData implements BaseEntity {
     /** Not-null value. */
     private String orderId;
     /** Not-null value. */
-    private String productId; 
+    private String productId;
 
 
     // KEEP FIELDS - put your custom fields here

@@ -29,7 +29,7 @@ public class Sale implements BaseEntity {
     private Double latitude;
     private Double longitude;
     /** Not-null value. */
-    private String orderId; 
+    private String orderId;
 
     private List<SaleData> salesDatas;
     private List<StokeData> stockDatas;

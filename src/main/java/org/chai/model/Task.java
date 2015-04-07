@@ -32,7 +32,6 @@ public class Task implements BaseEntity {
 
     private Customer customer;
     private String customer__resolvedKey;
-
     // KEEP FIELDS - put your custom fields here
     /** Not-null value. */
     @JsonIgnore

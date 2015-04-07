@@ -35,7 +35,6 @@ public class AdhockSale implements BaseEntity {
     private String syncronisationMessage;
     private java.util.Date dateCreated;
     private java.util.Date lastUpdated;
-
     private List<SaleData> adhockSalesDatas;
     private List<StokeData> adhockStockDatas;
 

@@ -19,7 +19,7 @@ public class StokeData implements BaseEntity {
     private String uuid;
     private int quantity;
     private String saleId;
-    private String adhockStockId; 
+    private String adhockStockId;
 
 
     // KEEP FIELDS - put your custom fields here
