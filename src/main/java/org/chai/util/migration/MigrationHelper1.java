@@ -44,9 +44,13 @@ public class MigrationHelper1 extends MigratorHelper {
     }
 
     private void executeAlterChangeSets(SQLiteDatabase db, String tableName, String columnName, String columnType) {
-        String sql = "ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnType;
-        db.execSQL(sql);
-        Log.i("Update chai_crm:", sql);
+        try{
+            String sql = "ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnType;
+            db.execSQL(sql);
+            Log.i("Update chai_crm:", sql);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     private void addMetaFieldsToAllTables(SQLiteDatabase db) {
