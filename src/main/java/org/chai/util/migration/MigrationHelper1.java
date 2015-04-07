@@ -25,7 +25,13 @@ public class MigrationHelper1 extends MigratorHelper {
         updateCustomer(db);
         updateDetailerCall(db);
         TaskOrderDao.createTable(db,true);
+        updateReportSummary(db);
 
+    }
+
+    private void updateReportSummary(SQLiteDatabase db) {
+        executeAlterChangeSets(db,SummaryReportDao.TABLENAME,SummaryReportDao.Properties.TeamAverageThisWeek.columnName,TYPE_TEXT);
+        executeAlterChangeSets(db,SummaryReportDao.TABLENAME,SummaryReportDao.Properties.TeamAverageThisMonth.columnName,TYPE_TEXT);
     }
 
     private void updateDetailerCall(SQLiteDatabase db) {
