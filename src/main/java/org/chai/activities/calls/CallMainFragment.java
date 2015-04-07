@@ -80,7 +80,7 @@ public class CallMainFragment extends Fragment {
     }
 
     private void loadDataFromDb() {
-        daoSession.clear(); 
+        daoSession.clear();
         if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
             sales = new ArrayList<Sale>();
             sales.addAll(saleDao.loadAll());
