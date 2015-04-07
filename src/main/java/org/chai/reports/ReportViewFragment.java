@@ -63,7 +63,8 @@ public class ReportViewFragment extends BaseContainerFragment{
     private void  addReportsToTable( List<SummaryReport> summaryReportList){
         TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
         for(SummaryReport summaryReport:summaryReportList){
-            tableLayout.addView(new SummaryReportTable(getActivity().getApplicationContext(),summaryReport.getItem().replace("_"," "),summaryReport.getWeek(),summaryReport.getMonth(),""),params);
+            tableLayout.addView(new SummaryReportTable(getActivity().getApplicationContext(),summaryReport.getItem().replace("_"," "),summaryReport.getWeek(),
+                    summaryReport.getMonth(),summaryReport.getTeamAverageThisWeek(),summaryReport.getTeamAverageThisMonth()),params);
         }
     }
 

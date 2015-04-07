@@ -12,6 +12,7 @@
                  android:padding="1dp"
                  android:background="#000000"
                  android:layout_margin="1dp">
+
         <TableRow
                 android:id="@+id/detailer_row2"
                 android:layout_width="wrap_content"
@@ -26,25 +27,16 @@
                     android:layout_width="0px"
                     android:textColor="@color/list_main_text_color"
                     android:layout_marginRight="10dp"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.2"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"/>
 
             <TextView
-                    android:text="This Week"
+                    android:text="Total"
                     android:layout_width="0px"
                     android:textColor="@color/list_main_text_color"
                     android:layout_marginRight="10dp"
-                    android:layout_weight="0.25"
-                    android:textStyle="bold"
-                    android:gravity="center_horizontal"/>
-
-            <TextView
-                    android:text="This Month"
-                    android:layout_width="0px"
-                    android:textColor="@color/list_main_text_color"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.4"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"/>
 
@@ -53,11 +45,60 @@
                     android:layout_width="0px"
                     android:textColor="@color/list_main_text_color"
                     android:layout_marginRight="10dp"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.4"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"/>
 
+        </TableRow>
+        <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:background="#fff"
+                android:layout_margin="1dp"
+                android:gravity="center_horizontal">
+            <TextView
+                    android:text=""
+                    android:layout_width="0px"
+                    android:textColor="@color/list_main_text_color"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.2"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+            <TextView
+                    android:text="This Week"
+                    android:layout_width="0px"
+                    android:textColor="@color/list_main_text_color"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.2"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+            <TextView
+                    android:text="This Month"
+                    android:layout_width="0px"
+                    android:textColor="@color/list_main_text_color"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.2"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+            <TextView
+                    android:text="This Week"
+                    android:layout_width="0px"
+                    android:textColor="@color/list_main_text_color"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.2"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
 
+            <TextView
+                    android:text="This Month"
+                    android:layout_width="0px"
+                    android:textColor="@color/list_main_text_color"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.2"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
         </TableRow>
 
     </TableLayout>
