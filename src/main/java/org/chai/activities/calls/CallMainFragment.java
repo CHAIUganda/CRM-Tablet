@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -47,17 +48,6 @@ public class CallMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.calls_main_activity,container,false);
         initialiseGreenDao();
         listView = (ListView)view.findViewById(R.id.callslistview);
-        if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
-            sales = new ArrayList<Sale>();
-            sales.addAll(saleDao.loadAll());
-            salesAdapter = new SalesAdapter(getActivity(),sales);
-            listView.setAdapter(salesAdapter);
-        }else {
-            detailerCalls = new ArrayList<DetailerCall>();
-            detailerCalls.addAll(detailerCallDao.loadAll());
-            detailerCallAdapter = new DetailerCallAdapter(getActivity(),detailerCalls);
-            listView.setAdapter(detailerCallAdapter);
-        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -87,6 +77,21 @@ public class CallMainFragment extends Fragment {
         });
         registerForContextMenu(view.findViewById(R.id.callslistview));
         return view;
+    }
+
+    private void loadDataFromDb() {
+        daoSession.clear(); 
+        if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+            sales = new ArrayList<Sale>();
+            sales.addAll(saleDao.loadAll());
+            salesAdapter = new SalesAdapter(getActivity(),sales);
+            listView.setAdapter(salesAdapter);
+        }else {
+            detailerCalls = new ArrayList<DetailerCall>();
+            detailerCalls.addAll(detailerCallDao.loadAll());
+            detailerCallAdapter = new DetailerCallAdapter(getActivity(),detailerCalls);
+            listView.setAdapter(detailerCallAdapter);
+        }
     }
 
     private void goToDetailerForm(DetailerCall itemAtPosition) {
@@ -178,6 +183,7 @@ public class CallMainFragment extends Fragment {
                             detailerCalls.remove(position);
                             detailerCallAdapter.notifyDataSetChanged();
                         }
+                        onResume();
                         dialog.dismiss();
                     }
 
@@ -193,5 +199,13 @@ public class CallMainFragment extends Fragment {
         return dialog;
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadDataFromDb();
+        Log.d("Customer Main Fragment", "List Frag Resumed");
+
+    }
+
 
 }
