@@ -14,6 +14,8 @@ import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.Task;
 import org.chai.model.TaskDao;
+import org.chai.util.MyApplication;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,7 +70,7 @@ public class TasksMainActivity extends Activity {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();

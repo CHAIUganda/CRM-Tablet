@@ -81,7 +81,7 @@ public class DaoMaster extends AbstractDaoMaster {
     }
     
     /** WARNING: Drops all table on Upgrade! Use only during development. */
-    public static class DevOpenHelper extends OpenHelper {
+  /*  public static class DevOpenHelper extends OpenHelper {
         public DevOpenHelper(Context context, String name, CursorFactory factory) {
             super(context, name, factory);
         }
@@ -92,7 +92,7 @@ public class DaoMaster extends AbstractDaoMaster {
             dropAllTables(db, true);
             onCreate(db);
         }
-    }
+    }*/
 
     public DaoMaster(SQLiteDatabase db) {
         super(db, SCHEMA_VERSION);

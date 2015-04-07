@@ -11,8 +11,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.model.*;
 import org.chai.rest.*;
+import org.chai.util.MyApplication;
 import org.chai.util.ServerResponse;
 import org.chai.util.SyncronizationException;
+import org.chai.util.migration.UpgradeOpenHelper;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
@@ -79,7 +81,7 @@ public class CHAISynchroniser {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(parent.getApplicationContext(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();

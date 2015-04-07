@@ -3,6 +3,7 @@ package org.chai.util;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import org.chai.model.*;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 /**
  * Created by victor on 10/16/14.
@@ -30,7 +31,7 @@ public class SampleData {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context, "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
