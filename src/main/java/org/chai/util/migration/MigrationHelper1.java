@@ -45,7 +45,7 @@ public class MigrationHelper1 extends MigratorHelper {
     private void updateCustomer(SQLiteDatabase db) {
         executeAlterChangeSets(db, CustomerDao.TABLENAME, CustomerDao.Properties.Segment.columnName, TYPE_TEXT);
         List<String> customerColumnsToRemove = new ArrayList<String>();
-        customerColumnsToRemove.add("'DATE_OUTLET_OPENED'");
+        customerColumnsToRemove.add("DATE_OUTLET_OPENED");
         dropColumns(db, getCustomerCreateCmd(), CustomerDao.TABLENAME,customerColumnsToRemove);
     }
 
