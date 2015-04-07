@@ -19,38 +19,47 @@ public class SummaryReportTable extends TableRow {
     TextView itemTextView;
     TextView weeklyTextView;
     TextView monthlyTextView;
+    TextView teamAverageTextView;
 
 
-    public SummaryReportTable(Context context,String item,String weekly,String monthly){
+    public SummaryReportTable(Context context,String item,String weekly,String monthly,String teamAverage){
         super(context);
         this.setLayoutParams(rowParams);
-        this.setWeightSum(0.9f);
+        this.setWeightSum(1f);
         this.setBackgroundColor(Color.WHITE);
 
         itemTextView = new TextView(context);
-        itemParams.weight = 0.3f;
+        itemParams.weight = 0.25f;
         itemTextView.setBackgroundResource(R.drawable.bordertextfield);
         itemTextView.setLayoutParams(itemParams);
         itemTextView.setText(item);
         itemTextView.setTextColor(Color.BLACK);
 
         weeklyTextView  =new TextView(context);
-        weeklyParams.weight = 0.3f;
+        weeklyParams.weight = 0.25f;
         weeklyTextView.setBackgroundResource(R.drawable.bordertextfield);
         weeklyTextView.setLayoutParams(itemParams);
         weeklyTextView.setText(weekly);
         weeklyTextView.setTextColor(Color.BLACK);
 
         monthlyTextView = new TextView(context);
-        monthlyParams.weight = 0.3f;
+        monthlyParams.weight = 0.25f;
         monthlyTextView.setBackgroundResource(R.drawable.bordertextfield);
         monthlyTextView.setLayoutParams(itemParams);
         monthlyTextView.setText(monthly);
         monthlyTextView.setTextColor(Color.BLACK);
 
+        teamAverageTextView = new TextView(context);
+        monthlyParams.weight = 0.25f;
+        teamAverageTextView.setBackgroundResource(R.drawable.bordertextfield);
+        teamAverageTextView.setLayoutParams(itemParams);
+        teamAverageTextView.setText(teamAverage);
+        teamAverageTextView.setTextColor(Color.BLACK);
+
         this.addView(itemTextView);
         this.addView(weeklyTextView);
         this.addView(monthlyTextView);
+        this.addView(teamAverageTextView);
     }
 
 

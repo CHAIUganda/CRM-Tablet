@@ -18,28 +18,44 @@
                 android:layout_height="wrap_content"
                 android:padding="5dip"
                 android:background="#fff"
-                android:layout_margin="1dp">
+                android:layout_margin="1dp"
+                android:gravity="center_horizontal">
 
             <TextView
                     android:text="Item"
                     android:layout_width="0px"
                     android:textColor="@color/list_main_text_color"
                     android:layout_marginRight="10dp"
-                    android:layout_weight="0.3"/>
+                    android:layout_weight="0.25"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
 
             <TextView
                     android:text="This Week"
                     android:layout_width="0px"
                     android:textColor="@color/list_main_text_color"
                     android:layout_marginRight="10dp"
-                    android:layout_weight="0.3"/>/>
+                    android:layout_weight="0.25"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
 
             <TextView
                     android:text="This Month"
                     android:layout_width="0px"
                     android:textColor="@color/list_main_text_color"
                     android:layout_marginRight="10dp"
-                    android:layout_weight="0.3"/>/>
+                    android:layout_weight="0.25"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+
+            <TextView
+                    android:text="Team Average"
+                    android:layout_width="0px"
+                    android:textColor="@color/list_main_text_color"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.25"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
 
 
         </TableRow>
