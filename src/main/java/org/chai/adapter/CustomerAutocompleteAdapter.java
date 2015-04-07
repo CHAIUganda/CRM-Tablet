@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
-import org.chai.R;
 import org.chai.model.Customer;
 
 import java.util.ArrayList;

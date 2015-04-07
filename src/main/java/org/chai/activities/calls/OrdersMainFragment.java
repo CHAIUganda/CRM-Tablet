@@ -12,8 +12,12 @@ import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.tasks.TakeOrderFragment;
 import org.chai.adapter.OrderListAdapter;
-import org.chai.model.*;
-import org.chai.rest.RestClient;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
+import org.chai.model.Order;
+import org.chai.model.OrderDao;
+import org.chai.util.MyApplication;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +67,7 @@ public class OrdersMainFragment extends Fragment {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();

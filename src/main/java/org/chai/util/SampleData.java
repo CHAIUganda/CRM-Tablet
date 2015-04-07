@@ -2,13 +2,7 @@ package org.chai.util;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 import org.chai.model.*;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by victor on 10/16/14.

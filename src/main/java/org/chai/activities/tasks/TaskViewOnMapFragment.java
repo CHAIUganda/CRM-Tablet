@@ -1,7 +1,6 @@
 package org.chai.activities.tasks;
 
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,18 +21,22 @@ import org.chai.activities.BaseContainerFragment;
 import org.chai.model.*;
 import org.chai.rest.RestClient;
 import org.chai.util.GPSTracker;
+import org.chai.util.MyApplication;
 import org.chai.util.Utils;
+import org.chai.util.migration.UpgradeOpenHelper;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
-import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by victor on 12/11/14.
@@ -130,7 +133,7 @@ public class TaskViewOnMapFragment extends Fragment {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();

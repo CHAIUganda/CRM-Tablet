@@ -1,17 +1,13 @@
 package org.chai.activities;
 
-import android.app.*;
-import android.content.Context;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.*;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
@@ -22,7 +18,6 @@ import android.widget.ListView;
 import org.chai.R;
 import org.chai.activities.calls.HistoryMainFragment;
 import org.chai.activities.customer.CustomersMainFragment;
-
 import org.chai.activities.tasks.AdhockDetailerFrgment;
 import org.chai.activities.tasks.AdhockSaleFragment;
 import org.chai.activities.tasks.TakeOrderFragment;

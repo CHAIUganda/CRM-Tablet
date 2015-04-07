@@ -8,23 +8,24 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.*;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
-import org.chai.activities.tasks.SaleslFormFragment;
 import org.chai.activities.tasks.DetailersActivity;
+import org.chai.activities.tasks.SaleslFormFragment;
 import org.chai.adapter.DetailerCallAdapter;
 import org.chai.adapter.SalesAdapter;
 import org.chai.model.*;
+import org.chai.rest.RestClient;
+import org.chai.util.MyApplication;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import android.view.ContextMenu.ContextMenuInfo;
-import org.chai.rest.RestClient;
 
 /**
  * Created by victor on 10/15/14.
@@ -112,7 +113,7 @@ public class CallMainFragment extends Fragment {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();

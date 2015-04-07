@@ -1,7 +1,6 @@
 package org.chai;
 
 import android.app.Activity;
-import android.content.Context;
 import org.chai.util.GPSTracker;
 
 /**

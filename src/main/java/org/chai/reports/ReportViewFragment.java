@@ -15,7 +15,9 @@ import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.SummaryReport;
 import org.chai.model.SummaryReportDao;
+import org.chai.util.MyApplication;
 import org.chai.util.customwidget.SummaryReportTable;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class ReportViewFragment extends BaseContainerFragment{
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+            UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();

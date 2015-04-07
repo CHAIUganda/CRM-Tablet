@@ -1,28 +1,32 @@
 package org.chai.activities.tasks;
 
 import android.app.AlertDialog;
- import android.app.DatePickerDialog;
- import android.content.DialogInterface;
- import android.database.sqlite.SQLiteDatabase;
- import android.graphics.Color;
- import android.text.Spannable;
- import android.text.SpannableStringBuilder;
- import android.text.style.ForegroundColorSpan;
- import android.util.Log;
- import android.view.View;
- import android.widget.*;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
+import android.view.View;
+import android.widget.*;
 import de.greenrobot.dao.query.Query;
 import de.greenrobot.dao.query.WhereCondition;
 import org.chai.R;
- import org.chai.activities.BaseContainerFragment;
- import org.chai.adapter.DistrictArrayAdapter;
- import org.chai.model.*;
- import org.chai.util.GPSTracker;
- import org.chai.util.StockTableRow;
- import org.chai.util.Utils;
+import org.chai.activities.BaseContainerFragment;
+import org.chai.adapter.DistrictArrayAdapter;
+import org.chai.model.*;
+import org.chai.util.GPSTracker;
+import org.chai.util.MyApplication;
+import org.chai.util.StockTableRow;
+import org.chai.util.Utils;
 import org.chai.util.customwidget.GpsWidgetView;
+import org.chai.util.migration.UpgradeOpenHelper;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
   * Created by victor on 1/28/15.
@@ -67,7 +71,7 @@ import java.util.*;
 
      protected void initialiseGreenDao() {
          try {
-             DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
              db = helper.getWritableDatabase();
              daoMaster = new DaoMaster(db);
              daoSession = daoMaster.newSession();

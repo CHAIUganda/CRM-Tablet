@@ -22,8 +22,10 @@ import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.CustomMultSelectDropDown;
 import org.chai.util.InputFilterMinMax;
+import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.GpsWidgetView;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -191,7 +193,7 @@ public class AdhockSaleFragment extends BaseContainerFragment {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();

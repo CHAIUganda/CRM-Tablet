@@ -2,12 +2,10 @@ package org.chai.activities.customer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,15 +15,15 @@ import android.widget.*;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
 import org.chai.adapter.DistrictArrayAdapter;
-import org.chai.adapter.ParishArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.model.*;
-import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.ContactWidgetView;
 import org.chai.util.customwidget.GpsWidgetView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by victor on 10/29/14.

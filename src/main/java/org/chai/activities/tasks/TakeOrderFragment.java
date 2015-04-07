@@ -1,14 +1,10 @@
 package org.chai.activities.tasks;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,8 +18,9 @@ import org.chai.adapter.CustomerAutocompleteAdapter;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
 import org.chai.rest.RestClient;
-import org.chai.util.NavDrawerItem;
+import org.chai.util.MyApplication;
 import org.chai.util.Utils;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.*;
 
@@ -168,7 +165,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();

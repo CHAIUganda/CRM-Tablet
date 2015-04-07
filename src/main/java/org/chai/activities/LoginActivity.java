@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.sun.swing.internal.plaf.synth.resources.synth_sv;
+import com.splunk.mint.Mint;
 import org.chai.Globals;
 import org.chai.R;
 import org.chai.model.*;
@@ -18,11 +18,10 @@ import org.chai.rest.Place;
 import org.chai.rest.RestClient;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.List;
 import java.util.UUID;
-import com.splunk.mint.Mint;
-import org.chai.util.migration.UpgradeOpenHelper;
 
 public class LoginActivity extends Activity {
 
@@ -96,7 +95,7 @@ public class LoginActivity extends Activity {
                                     new Runnable() {
                                         @Override
                                         public void run() {
-                                            Utils.showError(LoginActivity.this,"Error:","Couldnt Login,Please check your Username or Password");
+                                            Utils.showError(LoginActivity.this, "Error:", "Couldnt Login,Please check your Username or Password");
                                         }
                                     }
                             );

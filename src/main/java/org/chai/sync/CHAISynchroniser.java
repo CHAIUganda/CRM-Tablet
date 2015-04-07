@@ -6,18 +6,13 @@ import android.app.ProgressDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.Deserializers;
-import com.sun.corba.se.spi.activation.Server;
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.model.*;
 import org.chai.rest.*;
 import org.chai.util.ServerResponse;
 import org.chai.util.SyncronizationException;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
@@ -382,7 +377,7 @@ public class CHAISynchroniser {
         parent.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(parent.getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                Toast.makeText(parent.getApplicationContext(), message, Toast.LENGTH_LONG).show();
             }
         });
     }

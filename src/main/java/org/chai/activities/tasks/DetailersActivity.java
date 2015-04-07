@@ -1,28 +1,23 @@
 package org.chai.activities.tasks;
 
-import android.app.AlertDialog;
 import android.content.Intent;
- import android.graphics.Color;
- import android.os.Bundle;
- import android.text.Spannable;
- import android.text.SpannableStringBuilder;
- import android.text.style.ForegroundColorSpan;
- import android.view.*;
- import android.widget.*;
- import de.greenrobot.dao.query.Query;
- import de.greenrobot.dao.query.WhereCondition;
- import org.chai.R;
+import android.os.Bundle;
+import android.view.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
- import org.chai.model.*;
- import org.chai.util.CustomMultSelectDropDown;
- import org.chai.util.Utils;
+import org.chai.model.*;
+import org.chai.util.CustomMultSelectDropDown;
+import org.chai.util.Utils;
 import org.chai.util.customwidget.GpsWidgetView;
 
-import java.util.Calendar;
- import java.util.Date;
- import java.util.List;
- import java.util.UUID;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
   * Created by victor on 10/30/14.

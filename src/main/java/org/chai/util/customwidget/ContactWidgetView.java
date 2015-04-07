@@ -4,16 +4,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import org.chai.R;
 import org.chai.model.CustomerContact;
-
-import java.util.UUID;
 
 /**
  * Created by victor on 3/6/15.
