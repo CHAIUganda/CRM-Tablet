@@ -145,7 +145,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
                 try{
                     if(validateFieldValues()){
                         submitOrder();
-                        Utils.showError(getActivity(),"Info:","Thank you,your Order has been submitted.");
+                        Toast.makeText(getActivity(), "Thank you,your Order has been submitted." , Toast.LENGTH_LONG).show();
                         resetFragment(R.id.frame_container, new TakeOrderFragment());
                         Intent i = new Intent(getActivity(), HomeActivity.class);
                         startActivity(i);
@@ -301,7 +301,8 @@ public class TakeOrderFragment extends BaseContainerFragment {
         for (int i = 0; i < spinnerList.size(); ++i) {
             OrderData orderData = instantiateOrder(i);
             orderData.setOrderId(orderId);
-            orderData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
+            String qnty = quantityFields.get(i).getText().toString();
+            orderData.setQuantity((qnty==null||qnty.equals(""))?0:Integer.parseInt(qnty));
             orderData.setDropSample(dropSampleChkBoxes.get(i).isChecked());
             Product product = (Product) spinnerList.get(i).getSelectedItem();
             orderData.setProductId(product.getUuid());
