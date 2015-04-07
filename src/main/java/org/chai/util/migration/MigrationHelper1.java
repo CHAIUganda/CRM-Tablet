@@ -14,7 +14,7 @@ public class MigrationHelper1 extends MigratorHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db) {
         //analyse changes in the domains and update accordingly
-        db.execSQL("ALTER TABLE "+ VillageDao.TABLENAME+" ADD COLUMN "+VillageDao.Properties.Population.columnName+" TEXT");
-        Log.i("Update chai_crm:","Updated table "+ VillageDao.TABLENAME);
+        /*db.execSQL("ALTER TABLE "+ VillageDao.TABLENAME+" ADD COLUMN "+VillageDao.Properties.Population.columnName+" TEXT");
+        Log.i("Update chai_crm:","Updated table "+ VillageDao.TABLENAME);*/
     }
 }
