@@ -31,7 +31,6 @@ public class Sale implements BaseEntity {
     /** Not-null value. */
     private String orderId;
 
-
     private List<SaleData> salesDatas;
     private List<StokeData> stockDatas;
 

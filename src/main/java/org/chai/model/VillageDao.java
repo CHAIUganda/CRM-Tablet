@@ -30,7 +30,8 @@ public class VillageDao extends AbstractDao<Village, String> {
     public static class Properties {
         public final static Property Uuid = new Property(0, String.class, "uuid", true, "UUID");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property ParishId = new Property(2, String.class, "parishId", false, "PARISH_ID");
+        public final static Property Population = new Property(2, String.class, "population", false, "POPULATION");
+        public final static Property ParishId = new Property(3, String.class, "parishId", false, "PARISH_ID");
     };
 
     private DaoSession daoSession;
@@ -52,7 +53,8 @@ public class VillageDao extends AbstractDao<Village, String> {
         db.execSQL("CREATE TABLE " + constraint + "'VILLAGE' (" + //
                 "'UUID' TEXT PRIMARY KEY NOT NULL ," + // 0: uuid
                 "'NAME' TEXT NOT NULL ," + // 1: name
-                "'PARISH_ID' TEXT NOT NULL );"); // 2: parishId
+                "'POPULATION' TEXT," + // 2: population
+                "'PARISH_ID' TEXT NOT NULL );"); // 3: parishId
     }
 
     /** Drops the underlying database table. */
@@ -67,7 +69,12 @@ public class VillageDao extends AbstractDao<Village, String> {
         stmt.clearBindings();
         stmt.bindString(1, entity.getUuid());
         stmt.bindString(2, entity.getName());
-        stmt.bindString(3, entity.getParishId());
+ 
+        String population = entity.getPopulation();
+        if (population != null) {
+            stmt.bindString(3, population);
+        }
+        stmt.bindString(4, entity.getParishId());
     }
 
     @Override
@@ -88,7 +95,8 @@ public class VillageDao extends AbstractDao<Village, String> {
         Village entity = new Village( //
             cursor.getString(offset + 0), // uuid
             cursor.getString(offset + 1), // name
-            cursor.getString(offset + 2) // parishId
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // population
+            cursor.getString(offset + 3) // parishId
         );
         return entity;
     }
@@ -98,7 +106,8 @@ public class VillageDao extends AbstractDao<Village, String> {
     public void readEntity(Cursor cursor, Village entity, int offset) {
         entity.setUuid(cursor.getString(offset + 0));
         entity.setName(cursor.getString(offset + 1));
-        entity.setParishId(cursor.getString(offset + 2));
+        entity.setPopulation(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setParishId(cursor.getString(offset + 3));
      }
     
     /** @inheritdoc */

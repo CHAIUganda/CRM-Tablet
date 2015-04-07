@@ -22,7 +22,6 @@ public class SaleData implements BaseEntity {
     private String adhockSaleId;
 
 
-
     // KEEP FIELDS - put your custom fields here
     /** Not-null value. */
     private String productId;

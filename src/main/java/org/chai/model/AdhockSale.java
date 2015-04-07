@@ -30,17 +30,11 @@ public class AdhockSale implements BaseEntity {
     private Boolean isHistory;
     /** Not-null value. */
     private String customerId;
-    @JsonIgnore
     private Boolean isDirty;
-    @JsonIgnore
     private Integer syncronisationStatus;
-    @JsonIgnore
     private String syncronisationMessage;
-    @JsonIgnore
     private java.util.Date dateCreated;
-    @JsonIgnore
     private java.util.Date lastUpdated;
-
     private List<SaleData> adhockSalesDatas;
     private List<StokeData> adhockStockDatas;
 

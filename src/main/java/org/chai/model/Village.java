@@ -16,6 +16,7 @@ public class Village {
     private String uuid;
     /** Not-null value. */
     private String name;
+    private String population;
     /** Not-null value. */
     private String parishId;
 
@@ -39,9 +40,10 @@ public class Village {
         this.uuid = uuid;
     }
 
-    public Village(String uuid, String name, String parishId) {
+    public Village(String uuid, String name, String population, String parishId) {
         this.uuid = uuid;
         this.name = name;
+        this.population = population;
         this.parishId = parishId;
     }
 
@@ -69,6 +71,14 @@ public class Village {
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(String population) {
+        this.population = population;
     }
 
     /** Not-null value. */

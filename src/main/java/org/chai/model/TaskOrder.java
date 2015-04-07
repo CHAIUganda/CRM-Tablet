@@ -23,6 +23,7 @@ public class TaskOrder implements BaseEntity {
     /** Not-null value. */
     private String productId;
 
+
     // KEEP FIELDS - put your custom fields here
     @JsonIgnore
     private Boolean isDirty;

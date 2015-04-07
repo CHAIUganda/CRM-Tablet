@@ -22,7 +22,6 @@ public class StokeData implements BaseEntity {
     private String adhockStockId;
 
 
-
     // KEEP FIELDS - put your custom fields here
     /** Not-null value. */
     private String productId;

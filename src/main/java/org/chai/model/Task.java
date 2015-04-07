@@ -27,10 +27,11 @@ public class Task implements BaseEntity {
     private java.util.Date completionDate;
     private java.util.Date dateScheduled;
     private Boolean isAdhock;
+    /** Not-null value. */
+    private String customerId;
 
     private Customer customer;
     private String customer__resolvedKey;
-    private String customerId;
 
     // KEEP FIELDS - put your custom fields here
     /** Not-null value. */

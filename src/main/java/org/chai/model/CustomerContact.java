@@ -24,6 +24,7 @@ public class CustomerContact implements BaseEntity {
     /** Not-null value. */
     private String customerId;
 
+
     // KEEP FIELDS - put your custom fields here
     @JsonIgnore
     private Boolean isDirty;

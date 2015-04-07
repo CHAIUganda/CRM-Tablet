@@ -27,6 +27,7 @@ public class SummaryReportDao extends AbstractDao<SummaryReport, String> {
         public final static Property Item = new Property(1, String.class, "item", false, "ITEM");
         public final static Property Week = new Property(2, String.class, "week", false, "WEEK");
         public final static Property Month = new Property(3, String.class, "month", false, "MONTH");
+        public final static Property TeamAverage = new Property(4, String.class, "teamAverage", false, "TEAM_AVERAGE");
     };
 
     private DaoSession daoSession;
@@ -48,7 +49,8 @@ public class SummaryReportDao extends AbstractDao<SummaryReport, String> {
                 "'UUID' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uuid
                 "'ITEM' TEXT," + // 1: item
                 "'WEEK' TEXT," + // 2: week
-                "'MONTH' TEXT);"); // 3: month
+                "'MONTH' TEXT," + // 3: month
+                "'TEAM_AVERAGE' TEXT);"); // 4: teamAverage
     }
 
     /** Drops the underlying database table. */
@@ -77,6 +79,11 @@ public class SummaryReportDao extends AbstractDao<SummaryReport, String> {
         if (month != null) {
             stmt.bindString(4, month);
         }
+ 
+        String teamAverage = entity.getTeamAverage();
+        if (teamAverage != null) {
+            stmt.bindString(5, teamAverage);
+        }
     }
 
     @Override
@@ -98,7 +105,8 @@ public class SummaryReportDao extends AbstractDao<SummaryReport, String> {
             cursor.getString(offset + 0), // uuid
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // item
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // week
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // month
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // month
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // teamAverage
         );
         return entity;
     }
@@ -110,6 +118,7 @@ public class SummaryReportDao extends AbstractDao<SummaryReport, String> {
         entity.setItem(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setWeek(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setMonth(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setTeamAverage(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     /** @inheritdoc */
