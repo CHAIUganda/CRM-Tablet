@@ -20,7 +20,8 @@ public class SummaryReport {
     private String item;
     private String week;
     private String month;
-    private String teamAverage;
+    private String teamAverageThisWeek;
+    private String teamAverageThisMonth;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -39,12 +40,13 @@ public class SummaryReport {
         this.uuid = uuid;
     }
 
-    public SummaryReport(String uuid, String item, String week, String month, String teamAverage) {
+    public SummaryReport(String uuid, String item, String week, String month, String teamAverageThisWeek, String teamAverageThisMonth) {
         this.uuid = uuid;
         this.item = item;
         this.week = week;
         this.month = month;
-        this.teamAverage = teamAverage;
+        this.teamAverageThisWeek = teamAverageThisWeek;
+        this.teamAverageThisMonth = teamAverageThisMonth;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -87,12 +89,20 @@ public class SummaryReport {
         this.month = month;
     }
 
-    public String getTeamAverage() {
-        return teamAverage;
+    public String getTeamAverageThisWeek() {
+        return teamAverageThisWeek;
     }
 
-    public void setTeamAverage(String teamAverage) {
-        this.teamAverage = teamAverage;
+    public void setTeamAverageThisWeek(String teamAverageThisWeek) {
+        this.teamAverageThisWeek = teamAverageThisWeek;
+    }
+
+    public String getTeamAverageThisMonth() {
+        return teamAverageThisMonth;
+    }
+
+    public void setTeamAverageThisMonth(String teamAverageThisMonth) {
+        this.teamAverageThisMonth = teamAverageThisMonth;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

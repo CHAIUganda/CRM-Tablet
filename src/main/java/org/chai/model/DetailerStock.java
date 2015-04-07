@@ -25,7 +25,7 @@ public class DetailerStock implements BaseEntity {
     private Double buyingPrice;
     private Double sellingPrice;
     /** Not-null value. */
-    private String detailerId;
+    private String detailerId; 
 
 
     // KEEP FIELDS - put your custom fields here

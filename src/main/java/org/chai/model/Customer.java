@@ -41,7 +41,7 @@ public class Customer implements BaseEntity {
     private Boolean isActive;
     private String segment;
     /** Not-null value. */
-    private String subcountyId;
+    private String subcountyId; 
     private List<AdhockSale> adhockSales;
 
     // KEEP FIELDS - put your custom fields here

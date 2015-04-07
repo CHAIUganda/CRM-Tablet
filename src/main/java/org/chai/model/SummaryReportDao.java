@@ -27,7 +27,8 @@ public class SummaryReportDao extends AbstractDao<SummaryReport, String> {
         public final static Property Item = new Property(1, String.class, "item", false, "ITEM");
         public final static Property Week = new Property(2, String.class, "week", false, "WEEK");
         public final static Property Month = new Property(3, String.class, "month", false, "MONTH");
-        public final static Property TeamAverage = new Property(4, String.class, "teamAverage", false, "TEAM_AVERAGE");
+        public final static Property TeamAverageThisWeek = new Property(4, String.class, "teamAverageThisWeek", false, "TEAM_AVERAGE_THIS_WEEK");
+        public final static Property TeamAverageThisMonth = new Property(5, String.class, "teamAverageThisMonth", false, "TEAM_AVERAGE_THIS_MONTH");
     };
 
     private DaoSession daoSession;
@@ -50,7 +51,8 @@ public class SummaryReportDao extends AbstractDao<SummaryReport, String> {
                 "'ITEM' TEXT," + // 1: item
                 "'WEEK' TEXT," + // 2: week
                 "'MONTH' TEXT," + // 3: month
-                "'TEAM_AVERAGE' TEXT);"); // 4: teamAverage
+                "'TEAM_AVERAGE_THIS_WEEK' TEXT," + // 4: teamAverageThisWeek
+                "'TEAM_AVERAGE_THIS_MONTH' TEXT);"); // 5: teamAverageThisMonth
     }
 
     /** Drops the underlying database table. */
@@ -80,9 +82,14 @@ public class SummaryReportDao extends AbstractDao<SummaryReport, String> {
             stmt.bindString(4, month);
         }
  
-        String teamAverage = entity.getTeamAverage();
-        if (teamAverage != null) {
-            stmt.bindString(5, teamAverage);
+        String teamAverageThisWeek = entity.getTeamAverageThisWeek();
+        if (teamAverageThisWeek != null) {
+            stmt.bindString(5, teamAverageThisWeek);
+        }
+ 
+        String teamAverageThisMonth = entity.getTeamAverageThisMonth();
+        if (teamAverageThisMonth != null) {
+            stmt.bindString(6, teamAverageThisMonth);
         }
     }
 
@@ -106,7 +113,8 @@ public class SummaryReportDao extends AbstractDao<SummaryReport, String> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // item
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // week
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // month
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // teamAverage
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // teamAverageThisWeek
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // teamAverageThisMonth
         );
         return entity;
     }
@@ -118,7 +126,8 @@ public class SummaryReportDao extends AbstractDao<SummaryReport, String> {
         entity.setItem(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setWeek(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setMonth(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setTeamAverage(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setTeamAverageThisWeek(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setTeamAverageThisMonth(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     /** @inheritdoc */

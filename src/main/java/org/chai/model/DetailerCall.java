@@ -42,7 +42,7 @@ public class DetailerCall implements BaseEntity {
     private Boolean isHistory;
     private String objections;
     /** Not-null value. */
-    private String taskId;
+    private String taskId; 
 
     private List<DetailerStock> detailerStocks;
 
