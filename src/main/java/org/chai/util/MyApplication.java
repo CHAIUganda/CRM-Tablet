@@ -22,4 +22,8 @@ public class MyApplication extends Application {
     public static UpgradeOpenHelper getDbOpenHelper(){
        return new UpgradeOpenHelper(getContext(), "chai-crm-db", null);
     }
+    public static UpgradeOpenHelper getInMemoryDbOpenHelper(){
+        
+        return new UpgradeOpenHelper(getContext(),null, null);
+    }
 }
