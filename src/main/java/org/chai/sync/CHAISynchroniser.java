@@ -265,7 +265,7 @@ public class CHAISynchroniser {
             updatePropgress("Uploading Customers...");
         }
         for (Customer customer : customersList) {
-            ServerResponse response = customerClient.uploadCustomer(customer);
+            ServerResponse response = customerClient.uploadCustomer(customer,RestClient.getRestTemplate());
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 customerDao.delete(customer);
             }else{
