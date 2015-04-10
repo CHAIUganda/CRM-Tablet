@@ -91,8 +91,8 @@ public class CustomerForm extends Activity {
                     } else {
                         boolean isSaved = saveCustomer();
                         if (isSaved) {
-//                            Toast.makeText(getApplicationContext(), "Customer has been  successfully saved!", Toast.LENGTH_LONG).show();
-                            Utils.showError(CustomerForm.this,"Info:", "Customer has been  successfully saved!");
+                            Toast.makeText(getApplicationContext(), "Customer has been  successfully saved!", Toast.LENGTH_LONG).show();
+//                            Utils.showError(CustomerForm.this,"Info:", "Customer has been  successfully saved!");
                             finish();
                         } else {
 //                            Toast.makeText(getApplicationContext(), "A problem Occured while saving a new Customer,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();

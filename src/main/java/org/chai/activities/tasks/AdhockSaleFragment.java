@@ -392,6 +392,7 @@ public class AdhockSaleFragment extends BaseContainerFragment {
         saleInstance.setRecommendationNextStep(((CustomMultSelectDropDown) getActivity().findViewById(R.id.adhock_sale_next_step_recommendation)).getText().toString());
         saleInstance.setGovernmentApproval(((Spinner) getActivity().findViewById(R.id.adhock_sale_government_approval)).getSelectedItem().toString());
         saleInstance.setCustomerId(salesCustomer.getUuid());
+        saleInstance.setCustomer(salesCustomer);
 
         if (!((GpsWidgetView) getActivity().findViewById(R.id.adhoc_sales_gps)).getLatLongText().equals("")) {
             String latLongText = ((GpsWidgetView) getActivity().findViewById(R.id.adhoc_sales_gps)).getLatLongText();
