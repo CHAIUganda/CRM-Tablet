@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by victor on 08-Apr-15.
@@ -34,6 +34,9 @@ public class SyncronisationTest {
     private SaleDataDao saleDataDao;
     private OrderDao orderDao;
     private AdhockSaleDao adhockSaleDao;
+    Region region;
+    District district;
+    Subcounty subcounty;
     Customer customer;
     AdhockSale adhockSale;
     Sale sale;
@@ -43,15 +46,20 @@ public class SyncronisationTest {
 
     @Before
     public void setup(){
-        Region region = new Region(UUID.randomUUID().toString(),"Test Region");
-        District district = new District(UUID.randomUUID().toString(),"Test District",region.getUuid());
-        Subcounty subcounty = new Subcounty(UUID.randomUUID().toString(),"Test Subcounty",district.getUuid());
+        initialiseGreenDao();
+        region = new Region(UUID.randomUUID().toString(),"Test Region");
+        regionDao.insert(region);
+        district = new District(UUID.randomUUID().toString(),"Test District",region.getUuid());
+        districtDao.insert(district);
+        subcounty = new Subcounty(UUID.randomUUID().toString(),"Test Subcounty",district.getUuid());
+        subcountyDao.insert(subcounty);
+        customer = setUpCustomer(subcounty);
+        customerDao.insert(customer);
     }
     @Test
-    public void test_db_is_new(){
-        initialiseGreenDao();
+    public void test_db_has_data(){
         List<Customer> customers = customerDao.loadAll();
-        assertNotNull(db);
+        assertEquals(1,customers.size());
     }
 
 
