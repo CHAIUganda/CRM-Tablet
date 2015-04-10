@@ -42,7 +42,7 @@ public class LoginActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Mint.initAndStartSession(LoginActivity.this, "e6b332d2");
+        Mint.initAndStartSession(LoginActivity.this, "8255bd80");
 		Log.i(TAG, "onCreate");
         setContentView(R.layout.login_activity);
         initialiseGreenDao();
