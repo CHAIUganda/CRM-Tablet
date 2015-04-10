@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
+import org.chai.adapter.CustomerAutocompleteAdapter;
 import org.chai.model.Customer;
 import org.chai.model.DetailerCall;
 import org.chai.model.Task;
@@ -15,6 +16,7 @@ import org.chai.util.CustomMultSelectDropDown;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.GpsWidgetView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -34,7 +36,7 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
         initDetailerInstance();
         List<Customer> customersList = customerDao.loadAll();
         AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.adhock_detailer_customer);
-        ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(getActivity(), android.R.layout.simple_dropdown_item_1line, customersList);
+        CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(getActivity(),android.R.layout.simple_dropdown_item_1line,new ArrayList<Customer>(customersList));
         textView.setAdapter(adapter);
 
         textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

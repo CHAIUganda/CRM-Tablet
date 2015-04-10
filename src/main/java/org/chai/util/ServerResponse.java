@@ -14,9 +14,9 @@ import java.util.Map;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ServerResponse {
-    public String status;
-    public String message;
-    public String itemRef;
+    public String status="";
+    public String message="";
+    public String itemRef="";
 
     public ServerResponse(String status, String message) {
         this.status = status;
@@ -50,7 +50,7 @@ public class ServerResponse {
     }
 
     public static ServerResponse getServerErrorResponse(HttpClientErrorException ex) {
-        ServerResponse serverResponse = new ServerResponse("500", ex.getResponseBodyAsString());
+        ServerResponse serverResponse = new ServerResponse(ex.getStatusCode()+"", ex.getResponseBodyAsString());
         Log.i("Error:", serverResponse.getMessage());
         ex.printStackTrace();
         return serverResponse;

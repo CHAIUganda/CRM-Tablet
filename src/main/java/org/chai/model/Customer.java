@@ -41,9 +41,10 @@ public class Customer implements BaseEntity {
     private String segment;
     /** Not-null value. */
     private String subcountyId;
-    private List<AdhockSale> adhockSales;
 
     // KEEP FIELDS - put your custom fields here
+    @JsonIgnore
+    private List<AdhockSale> adhockSales;
     @JsonIgnore
     private Boolean isDirty;
     @JsonIgnore
