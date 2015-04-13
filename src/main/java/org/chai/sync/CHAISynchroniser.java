@@ -266,7 +266,10 @@ public class CHAISynchroniser {
         }
         for (Customer customer : customersList) {
             ServerResponse response = customerClient.uploadCustomer(customer,RestClient.getRestTemplate());
-            if (!response.getStatus().equalsIgnoreCase("OK")) {
+            if (response.getStatus().equalsIgnoreCase("OK")) {
+                customer.setIsDirty(false);
+                customerDao.update(customer);
+            }else{
                 customer.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
                 customer.setSyncronisationMessage(response.getMessage());
                 customer.setLastUpdated(new Date());
