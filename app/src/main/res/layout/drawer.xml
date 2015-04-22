@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The navigation drawer -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:id="@+id/left_drawer"
+     android:layout_width="240dp"
+     android:layout_height="match_parent"
+     android:background="@color/window_background"
+     android:layout_gravity="start"
+     android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+        <com.makeramen.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/img_profile_avatar"
+            android:src="@drawable/ic_blank_profile_image"
+            android:layout_marginBottom="20dp"
+            app:riv_corner_radius="50dip"
+            app:riv_border_width="4dip"
+            app:riv_border_color="#a2bdda"
+            app:riv_mutate_background="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detailer"
+            android:textColor="@color/app_text_color"
+            android:textStyle="bold"
+            android:id="@+id/txt_email" />
+    </LinearLayout>
+    
+     <ListView android:id="@+id/lst_drawer"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="1"
+	    android:choiceMode="singleChoice"
+	    android:divider="@android:color/transparent"
+	    android:dividerHeight="0dp"/>
+	
+     <LinearLayout
+         android:id="@+id/ln_about"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center_vertical"
+         android:padding="@dimen/content_padding"
+         android:background="@drawable/border_top_gray"
+         android:layout_gravity="bottom" >
+         <ImageView
+	         android:id="@+id/img_logout"
+	         android:layout_width="20dp"
+	         android:layout_height="20dp"
+	         android:layout_marginRight="20dp"
+	         android:scaleType="fitXY"
+	         android:src="@drawable/ic_logout" />
+         
+         <TextView
+              android:id="@+id/txt_logout"
+	          android:layout_width="match_parent"
+	          android:layout_height="wrap_content"
+	          android:textColor="#5c5b5b"
+	          android:textSize="18sp"
+	          android:text="Logout" />
+     </LinearLayout>
+</LinearLayout>

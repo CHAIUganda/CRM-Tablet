@@ -1,0 +1,35 @@
+<org.chai.activities.DashboardLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#f8f9fe" >
+    <!--  News Feed Button -->
+    <Button
+            android:id="@+id/btn_tasks"
+            style="@style/DashboardButton"
+            android:drawableTop="@drawable/btn_tasks"
+            android:text="Tasks" />
+
+    <!--  Friends Button -->
+    <Button
+            android:id="@+id/btn_customers"
+            style="@style/DashboardButton"
+            android:drawableTop="@drawable/btn_customer"
+            android:text="Customers" />
+
+    <!--  Messages Button -->
+    <Button
+            android:id="@+id/btn_calls"
+            style="@style/DashboardButton"
+            android:drawableTop="@drawable/btn_calls"
+            android:text="Call Data" />
+
+    <!--  Places Button -->
+    <Button
+            android:id="@+id/btn_sync"
+            style="@style/DashboardButton"
+            android:drawableTop="@drawable/btn_sync"
+            android:text="Syncronise" />
+
+</org.chai.activities.DashboardLayout><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/fragment_layout.xml -->

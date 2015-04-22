@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <org.chai.util.customwidget.FormSearchTextField
+            android:id="@+id/txt_antimalarial"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColorHint="#c0cddb"
+            android:layout_marginRight="10dp"
+            android:hint="Antimalarial"
+            style="@style/TextBoxStyle"/>
+
+        <ImageView
+            android:id="@+id/btn_remove_row"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerInside"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_remove_row"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lst_items"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="300dp">
+
+    </ListView>
+
+</LinearLayout><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/antimalarial_row.xml -->

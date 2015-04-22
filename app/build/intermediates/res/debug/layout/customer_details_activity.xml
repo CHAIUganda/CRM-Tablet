@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:chai="http://schemas.android.com/apk/res/org.chai"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f8f9fe">
+
+        <LinearLayout
+                      android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="50dp"
+                      android:layout_marginRight="50dp"
+                      android:layout_below="@+id/header">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Outlet Details"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="25dp"
+                        android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Outlet Name:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Outlet Type:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_outlet_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Outlet Size:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="District:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_district"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Subcounty:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_subcounty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Licence visible in outlet:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_licence_visible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Type of Licence:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_licence_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rural or Urban:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_split"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Trading Center:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_trading_center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description Of Outlet Location:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_desc_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="How long has this outlet been open(months):"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:id="@+id/customer_profile_how_long_opened"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="italic"
+                    android:text="12"/>
+
+        </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number Of Employees who work at the outlet:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/profile_number_of_employees"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="How many diarrhea patients under 5 years do you see per week?"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_num_customers_per_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Where does the outlet source the majority of it's supply?"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_sources_of_supply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Key wholesaler Name:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_key_wholesaler_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Key Wholesaler Contact:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_key_wholesaler_contact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="How many time on average does this outlet stock up(Per week):"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/customer_profile_restock_frequency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/details_contact_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"
+                        android:textSize="24dp"
+                        android:text="Contacts:"
+                        />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/customer_details_activity.xml -->

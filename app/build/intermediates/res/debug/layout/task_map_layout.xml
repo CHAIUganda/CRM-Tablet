@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+    <Spinner
+            android:id="@+id/map_filter_spinner"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:prompt="@string/selectItem"
+            android:entries="@array/task_filters"
+            android:background="@drawable/btn_dropdown"/>
+
+    <org.osmdroid.views.MapView
+            android:id="@+id/mapview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tilesource="Mapnik"
+            android:layout_below="@id/map_filter_spinner"/>
+
+</RelativeLayout><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/task_map_layout.xml -->
