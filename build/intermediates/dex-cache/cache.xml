@@ -16,13 +16,6 @@
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\slf4j-android-1.6.1-RC1-709086912b825392d2033c98b244985c915c5fe3.jar" />
     </item>
     <item
-        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.4.3\feff63199be7b8f495c2f3e2096dcb6bd5e5b0b3\jackson-databind-2.4.3.jar"
-        jumboMode="false"
-        revision="21.0.1"
-        sha1="feff63199be7b8f495c2f3e2096dcb6bd5e5b0b3">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\jackson-databind-2.4.3-45d30529fde5b1793f56eef894226172019cb75d.jar" />
-    </item>
-    <item
         jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -44,6 +37,76 @@
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\classes-be5fd432c91d1decd26852c7f71d98e9a9518136.jar" />
     </item>
     <item
+        jar="C:\Users\Zed\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-d07ae5a61dcaa51c97af7baa732a64c5cdd4262f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\exploded-aar\com.makeramen\roundedimageview\1.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b2f7dddedcdb3facde33de103dcc32b10c43b92e">
+        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\classes-da40540635cceb60a102ffbc411b4c3c4b5331c2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\de.greenrobot\greendao\1.3.7\dda08161d004c4df96938da6909f1c2b96cd33c8\greendao-1.3.7.jar"
+        jumboMode="false"
+        revision="21.0.1"
+        sha1="dda08161d004c4df96938da6909f1c2b96cd33c8">
+        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\greendao-1.3.7-ad1bf6f6753d02289e38097fbf8a985ca10e48e1.jar" />
+    </item>
+    <item
+        jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\exploded-aar\com.daimajia.androidanimations\library\1.1.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8cec50fc9cc847bad0d6ed7d93814f4b34744521">
+        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\classes-186a90e4b44a8a8996f06ec79e82c3d33a691204.jar" />
+    </item>
+    <item
+        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\de.greenrobot\greendao\1.3.7\dda08161d004c4df96938da6909f1c2b96cd33c8\greendao-1.3.7.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="dda08161d004c4df96938da6909f1c2b96cd33c8">
+        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\greendao-1.3.7-ad1bf6f6753d02289e38097fbf8a985ca10e48e1.jar" />
+    </item>
+    <item
+        jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\libs\android-query-full.0.26.8.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5ab405d9f4eaf5ddd615967cd35650657b758d40">
+        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\android-query-full.0.26.8-c7ed0ccb708bba875b137beedc7dd469adcaa6e2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\com.splunk.mint\mint\4.1\649384a7e2ec66691dd9ad91b540a6d2b4799fc8\mint-4.1.jar"
+        jumboMode="false"
+        revision="21.0.1"
+        sha1="649384a7e2ec66691dd9ad91b540a6d2b4799fc8">
+        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\mint-4.1-93441d1510ecd029b102445334787e91677d5f2d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.4.3\4cb3dbb0c2f75b51aa7543c53252989785a0c609\jackson-core-2.4.3.jar"
+        jumboMode="false"
+        revision="21.0.1"
+        sha1="4cb3dbb0c2f75b51aa7543c53252989785a0c609">
+        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\jackson-core-2.4.3-2fe98417063a207dc2556dc17634edc372e5d50c.jar" />
+    </item>
+    <item
+        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\com.splunk.mint\mint\4.1\649384a7e2ec66691dd9ad91b540a6d2b4799fc8\mint-4.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="649384a7e2ec66691dd9ad91b540a6d2b4799fc8">
+        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\mint-4.1-93441d1510ecd029b102445334787e91677d5f2d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.4.3\feff63199be7b8f495c2f3e2096dcb6bd5e5b0b3\jackson-databind-2.4.3.jar"
+        jumboMode="false"
+        revision="21.0.1"
+        sha1="feff63199be7b8f495c2f3e2096dcb6bd5e5b0b3">
+        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\jackson-databind-2.4.3-45d30529fde5b1793f56eef894226172019cb75d.jar" />
+    </item>
+    <item
         jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-rest-template\1.0.1.RELEASE\e132d929bd181941f79b0d63edafb8a86ae6fd33\spring-android-rest-template-1.0.1.RELEASE.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -56,13 +119,6 @@
         revision="21.1.2"
         sha1="ed2ab55be78d5d54ac9060d70d65a4573ae3d2ec">
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\classes-fa914c74e967e4d6480f4dbf3718b9b4064777aa.jar" />
-    </item>
-    <item
-        jar="C:\Users\Zed\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-d07ae5a61dcaa51c97af7baa732a64c5cdd4262f.jar" />
     </item>
     <item
         jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\org.slf4j\slf4j-android\1.6.1-RC1\fe76e182946faad493a50968f3344e848b467b42\slf4j-android-1.6.1-RC1.jar"
@@ -81,23 +137,16 @@
     <item
         jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\org.osmdroid\osmdroid-android\4.2\f3a0c73a9ed04a5d0959789c53da9f08462bfcc2\osmdroid-android-4.2.jar"
         jumboMode="false"
-        revision="21.1.2"
+        revision="21.0.1"
         sha1="f3a0c73a9ed04a5d0959789c53da9f08462bfcc2">
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\osmdroid-android-4.2-5ccc5b610f7d4376fcbbf95f35a2e6fc51a5caa3.jar" />
     </item>
     <item
         jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\org.osmdroid\osmdroid-android\4.2\f3a0c73a9ed04a5d0959789c53da9f08462bfcc2\osmdroid-android-4.2.jar"
         jumboMode="false"
-        revision="21.0.1"
+        revision="21.1.2"
         sha1="f3a0c73a9ed04a5d0959789c53da9f08462bfcc2">
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\osmdroid-android-4.2-5ccc5b610f7d4376fcbbf95f35a2e6fc51a5caa3.jar" />
-    </item>
-    <item
-        jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\exploded-aar\com.makeramen\roundedimageview\1.5.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b2f7dddedcdb3facde33de103dcc32b10c43b92e">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\classes-da40540635cceb60a102ffbc411b4c3c4b5331c2.jar" />
     </item>
     <item
         jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.0\classes.jar"
@@ -105,20 +154,6 @@
         revision="21.1.2"
         sha1="95fd37732ec852e99f07eeb516a3650172f1d136">
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\classes-936272368bcc7fe84391d9d88dc9025e8e538aab.jar" />
-    </item>
-    <item
-        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\de.greenrobot\greendao\1.3.7\dda08161d004c4df96938da6909f1c2b96cd33c8\greendao-1.3.7.jar"
-        jumboMode="false"
-        revision="21.0.1"
-        sha1="dda08161d004c4df96938da6909f1c2b96cd33c8">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\greendao-1.3.7-ad1bf6f6753d02289e38097fbf8a985ca10e48e1.jar" />
-    </item>
-    <item
-        jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\exploded-aar\com.daimajia.androidanimations\library\1.1.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="8cec50fc9cc847bad0d6ed7d93814f4b34744521">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\classes-186a90e4b44a8a8996f06ec79e82c3d33a691204.jar" />
     </item>
     <item
         jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-rest-template\1.0.1.RELEASE\e132d929bd181941f79b0d63edafb8a86ae6fd33\spring-android-rest-template-1.0.1.RELEASE.jar"
@@ -140,20 +175,6 @@
         revision="21.1.2"
         sha1="4cb3dbb0c2f75b51aa7543c53252989785a0c609">
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\jackson-core-2.4.3-2fe98417063a207dc2556dc17634edc372e5d50c.jar" />
-    </item>
-    <item
-        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\de.greenrobot\greendao\1.3.7\dda08161d004c4df96938da6909f1c2b96cd33c8\greendao-1.3.7.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="dda08161d004c4df96938da6909f1c2b96cd33c8">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\greendao-1.3.7-ad1bf6f6753d02289e38097fbf8a985ca10e48e1.jar" />
-    </item>
-    <item
-        jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\libs\android-query-full.0.26.8.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="5ab405d9f4eaf5ddd615967cd35650657b758d40">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\android-query-full.0.26.8-c7ed0ccb708bba875b137beedc7dd469adcaa6e2.jar" />
     </item>
     <item
         jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.4.0\d6a66c7a5f01cf500377bd669507a08cfeba882a\jackson-annotations-2.4.0.jar"
@@ -177,13 +198,6 @@
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\spring-android-core-1.0.1.RELEASE-b4211d7f81387e4d8bad8640b2855a3b1bee801f.jar" />
     </item>
     <item
-        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\com.splunk.mint\mint\4.1\649384a7e2ec66691dd9ad91b540a6d2b4799fc8\mint-4.1.jar"
-        jumboMode="false"
-        revision="21.0.1"
-        sha1="649384a7e2ec66691dd9ad91b540a6d2b4799fc8">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\mint-4.1-93441d1510ecd029b102445334787e91677d5f2d.jar" />
-    </item>
-    <item
         jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\exploded-aar\me.relex\circleindicator\1.1.2\classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -191,25 +205,11 @@
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\classes-3911bdeda280bcf05dd7ef9fad3e1d29f2738ff8.jar" />
     </item>
     <item
-        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.4.3\4cb3dbb0c2f75b51aa7543c53252989785a0c609\jackson-core-2.4.3.jar"
-        jumboMode="false"
-        revision="21.0.1"
-        sha1="4cb3dbb0c2f75b51aa7543c53252989785a0c609">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\jackson-core-2.4.3-2fe98417063a207dc2556dc17634edc372e5d50c.jar" />
-    </item>
-    <item
         jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-core\1.0.1.RELEASE\e68f0e8e4b636ee30c4de58953be38d9b72a5e3b\spring-android-core-1.0.1.RELEASE.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="e68f0e8e4b636ee30c4de58953be38d9b72a5e3b">
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\spring-android-core-1.0.1.RELEASE-b4211d7f81387e4d8bad8640b2855a3b1bee801f.jar" />
-    </item>
-    <item
-        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\com.splunk.mint\mint\4.1\649384a7e2ec66691dd9ad91b540a6d2b4799fc8\mint-4.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="649384a7e2ec66691dd9ad91b540a6d2b4799fc8">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\mint-4.1-93441d1510ecd029b102445334787e91677d5f2d.jar" />
     </item>
     <item
         jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"

@@ -1,32 +1,29 @@
 package org.chai.activities;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.*;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.androidquery.AQuery;
+import com.astuetz.PagerSlidingTabStrip;
+
 import org.chai.R;
-import org.chai.activities.calls.HistoryMainFragment;
-import org.chai.activities.customer.CustomersMainFragment;
-import org.chai.activities.tasks.AdhockDetailerFrgment;
-import org.chai.activities.tasks.AdhockSaleFragment;
-import org.chai.activities.tasks.TakeOrderFragment;
-import org.chai.activities.tasks.TaskMainFragment;
+import org.chai.activities.tasks.CalenderFragmentContainer;
+import org.chai.activities.tasks.LocationFragmentContainer;
+import org.chai.activities.tasks.TaskMapFragmentContainer;
 import org.chai.adapter.NavDrawerListAdapter;
-import org.chai.model.User;
-import org.chai.reports.ReportViewFragment;
-import org.chai.rest.RestClient;
-import org.chai.sync.CHAISynchroniser;
 import org.chai.util.NavDrawerItem;
 
 import java.util.ArrayList;
@@ -34,7 +31,7 @@ import java.util.ArrayList;
 /**
  * Created by victor on 10/15/14.
  */
-public class HomeActivity extends FragmentActivity{
+public class HomeActivity extends BaseActivity{
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -53,10 +50,32 @@ public class HomeActivity extends FragmentActivity{
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
 
+    Toolbar toolbar;
+    AQuery aq;
+
+    ViewPager mViewPager;
+
+    String[] titles = new String[]{"CALENDAR", "VIEW BY LOCATION", "MAP"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_main_layout);
+
+        aq = new AQuery(this);
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        mViewPager = (ViewPager)findViewById(R.id.viewpager);
+        mViewPager.setAdapter(new ViewPagerAdapter());
+
+        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabs.setViewPager(mViewPager);
+
+        super.setUpDrawer(toolbar);
+
+        /*
         removeAnyFragmentsOnStack();
         mTitle = mDrawerTitle = getTitle();
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
@@ -96,15 +115,52 @@ public class HomeActivity extends FragmentActivity{
                 invalidateOptionsMenu();
             }
         };
-//        mDrawerToggle.setDrawerIndicatorEnabled(true);
+//      mDrawerToggle.setDrawerIndicatorEnabled(true);
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         if(savedInstanceState == null){
             displayView(0);
+        }*/
+    }
+
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+        final int PAGE_COUNT = 3;
+
+        public ViewPagerAdapter() {
+            super(getSupportFragmentManager());
+        }
+
+        @Override
+        public int getCount() {
+            return PAGE_COUNT;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            Bundle b = new Bundle();
+            Fragment target = null;
+            switch(position){
+                case 0:
+                    target = new CalenderFragmentContainer();
+                    break;
+                case 1:
+                    target = new LocationFragmentContainer();
+                    break;
+                case 2:
+                    target = new TaskMapFragmentContainer();
+                    break;
+            }
+            target.setArguments(b);
+            return target;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles[position];
         }
     }
 
-    private class SlideMenuClickListener implements ListView.OnItemClickListener{
+    /*private class SlideMenuClickListener implements ListView.OnItemClickListener{
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
             displayView(position);
@@ -145,20 +201,61 @@ public class HomeActivity extends FragmentActivity{
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }*/
+
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.save_form_menu, menu);
+        return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        if(item.getItemId() == R.id.action_save){
+            Toast.makeText(this, "Form details saved", Toast.LENGTH_LONG).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        actionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(Gravity.START|Gravity.LEFT)){
+            drawerLayout.closeDrawers();
+            return;
+        }
+        super.onBackPressed();
+    }
+
 
     /***
      * Called when invalidateOptionsMenu() is triggered
      */
-    @Override
+    /*@Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // if nav drawer is opened, hide the action items
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
         menu.findItem(R.id.action_sync).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
-    }
+    }*/
 
-    private void displayView(int position){
+    /*private void displayView(int position){
        Fragment fragment = null;
         switch (position){
             case 0:
@@ -241,6 +338,6 @@ public class HomeActivity extends FragmentActivity{
         login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         activity.startActivity(login);
         activity.finish();
-    }
+    }*/
 
 }

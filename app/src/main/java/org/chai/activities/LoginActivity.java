@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +40,7 @@ public class LoginActivity extends BaseActivity {
     private UserDao userDao;
     private VillageDao villageDao;
     private String role = User.ROLE_DETAILER;
+    Toolbar toolbar;
 
     /**
      * Called when the activity is first created.
@@ -52,13 +54,18 @@ public class LoginActivity extends BaseActivity {
 
         if(AccountManager.getUsername(this) != null){
             Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
-            return;
+            finish();
         }
 
         Mint.initAndStartSession(LoginActivity.this, "8255bd80");
 
         setContentView(R.layout.login_activity);
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         initialiseGreenDao();
         List<Village> villages = villageDao.loadAll();
         Activity activity = this;
@@ -122,7 +129,7 @@ public class LoginActivity extends BaseActivity {
 
     private ProgressDialog showProgressDialog() {
         final ProgressDialog progressDialog  = new ProgressDialog(LoginActivity.this);
-        progressDialog.setMessage("Logging in,Please wait...");
+        progressDialog.setMessage("Logging in, Please wait...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setIndeterminate(false);
         progressDialog.setCanceledOnTouchOutside(false);

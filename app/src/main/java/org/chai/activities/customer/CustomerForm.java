@@ -17,6 +17,7 @@ import org.chai.activities.HomeActivity;
 import org.chai.adapter.DistrictArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.model.*;
+import org.chai.util.AccountManager;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.ContactWidgetView;
@@ -195,7 +196,7 @@ public class CustomerForm extends Activity {
                 startActivity(i);
                 return true;
             case R.id.customer_logout:
-                HomeActivity.logout(this);
+                AccountManager.logout(this);
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);

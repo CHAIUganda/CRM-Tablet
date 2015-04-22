@@ -143,7 +143,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
                     if(validateFieldValues()){
                         submitOrder();
                         Toast.makeText(getActivity(), "Thank you,your Order has been submitted." , Toast.LENGTH_LONG).show();
-                        resetFragment(R.id.frame_container, new TakeOrderFragment());
+                        //resetFragment(R.id.frame_container, new TakeOrderFragment()); //TO UNCOMMENT - FIX
                         Intent i = new Intent(getActivity(), HomeActivity.class);
                         startActivity(i);
                     }

@@ -161,7 +161,7 @@ public class AdhockSaleFragment extends BaseContainerFragment {
                             Utils.showError(getActivity(),"Error:","Please ensure that data is entered correctly");
                         }else{
                             submitSale();
-                            resetFragment(R.id.frame_container, new AdhockSaleFragment());
+                            //resetFragment(R.id.frame_container, new AdhockSaleFragment()); //TO UNCOMMENT
                             Intent i = new Intent(getActivity(), HomeActivity.class);
                             startActivity(i);
                         }

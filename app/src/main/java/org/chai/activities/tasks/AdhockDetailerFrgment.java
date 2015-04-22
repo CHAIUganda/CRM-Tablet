@@ -74,7 +74,7 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
                     Utils.showError(getActivity(),"Error:","Please fill in all the mandaory fields");
                 }else if(saveForm()){
                     Utils.showError(getActivity(),"Infor","Detailer Information has been  successfully added!");
-                    resetFragment(R.id.frame_container, new AdhockDetailerFrgment());
+                    //resetFragment(R.id.frame_container, new AdhockDetailerFrgment());
                     Intent i = new Intent(getActivity(), HomeActivity.class);
                     startActivity(i);
                 } else {

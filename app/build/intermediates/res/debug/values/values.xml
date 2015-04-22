@@ -452,6 +452,7 @@
     <dimen name="list_sub_sub_text_size">12dip</dimen>
     <dimen name="list_sub_text_size">14dip</dimen>
     <dimen name="login_label_size">18dp</dimen>
+    <dimen name="tab_horizontal_padding">40dp</dimen>
     <dimen name="text_label_size">12dp</dimen>
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment/>

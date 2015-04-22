@@ -19,7 +19,6 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.util.AccountManager;
-import org.chai.util.Utils;
 
 /**
  * Created by Zed on 2/4/2015.
@@ -128,7 +127,6 @@ public class BaseActivity extends ActionBarActivity{
         drawerMenuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Utils.log("Menu Item clicked: " + position);
                 Class target = null;
                 switch (position) {
                     case 0:
@@ -164,8 +162,7 @@ public class BaseActivity extends ActionBarActivity{
         aquery.id(R.id.txt_logout).clicked(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent i = new Intent(BaseActivity.this, LoginActivity.class);
-                startActivity(i);
+                AccountManager.logout(BaseActivity.this);
             }
         });
 

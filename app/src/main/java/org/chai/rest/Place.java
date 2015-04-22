@@ -104,15 +104,15 @@ public class Place extends RestClient {
     public User login(String user, String pass) {
         Utils.log("Login user -> " + user + " -> " + pass);
         try{
-            //userName = user;
-            //password = pass;
+            userName = user;
+            password = pass;
+
             RestTemplate restTemplate = getRestTemplate();
             HttpHeaders headers = getHeaders();
             HttpEntity<?> requestEntity = new HttpEntity<Object>(headers);
             ResponseEntity<User> responseEntity = restTemplate.exchange(REST_URL + "info", HttpMethod.GET, requestEntity, User.class);
             User user1 = responseEntity.getBody();
             if(user1 != null){
-                Utils.log("User is not NULL");
                 return user1;
             }
         }catch (Exception ex){

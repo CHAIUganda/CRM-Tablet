@@ -13,6 +13,7 @@ import android.widget.Toast;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
 import org.chai.model.*;
+import org.chai.util.AccountManager;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.ContactDetailsView;
@@ -81,7 +82,7 @@ public class CustomerDetailsActivity extends Activity {
                 startActivity(i);
                 return true;
             case R.id.details_logout:
-                HomeActivity.logout(this);
+                AccountManager.logout(this);
             default:
                 return super.onOptionsItemSelected(menuItem);
         }
