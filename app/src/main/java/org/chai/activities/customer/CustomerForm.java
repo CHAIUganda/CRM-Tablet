@@ -2,12 +2,10 @@ package org.chai.activities.customer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,15 +15,17 @@ import android.widget.*;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
 import org.chai.adapter.DistrictArrayAdapter;
-import org.chai.adapter.ParishArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.model.*;
-import org.chai.util.GPSTracker;
+import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.ContactWidgetView;
 import org.chai.util.customwidget.GpsWidgetView;
+import org.chai.util.migration.UpgradeOpenHelper;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by victor on 10/29/14.
@@ -86,14 +86,17 @@ public class CustomerForm extends Activity {
                 @Override
                 public void onClick(View view) {
                     if (customerInstance.getUuid() == null && contactsToUpdate.isEmpty()) {
-                        Toast.makeText(getApplicationContext(), "Please enter atleast one contact!", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(), "Please enter atleast one contact!", Toast.LENGTH_LONG).show();
+                        Utils.showError(CustomerForm.this,"Error:", "Please enter atleast one contact!");
                     } else {
                         boolean isSaved = saveCustomer();
                         if (isSaved) {
                             Toast.makeText(getApplicationContext(), "Customer has been  successfully saved!", Toast.LENGTH_LONG).show();
+//                            Utils.showError(CustomerForm.this,"Info:", "Customer has been  successfully saved!");
                             finish();
                         } else {
-                            Toast.makeText(getApplicationContext(), "A problem Occured while saving a new Customer,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), "A problem Occured while saving a new Customer,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();
+                            Utils.showError(CustomerForm.this,"Error:", "A problem Occured while saving a new Customer,please ensure that data is entered correctly");
                         }
                     }
                 }
@@ -165,7 +168,7 @@ public class CustomerForm extends Activity {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
@@ -411,6 +414,14 @@ public class CustomerForm extends Activity {
             linearLayout.addView(contactWidgetView);
             contactsToUpdate.add(contactWidgetView);
         }
+    }
+
+    private void showError(String title,String error) {
+        new AlertDialog.Builder(CustomerForm.this)
+                .setTitle(title)
+                .setMessage(error)
+                .setPositiveButton("ok", null)
+                .show();
     }
 
 }

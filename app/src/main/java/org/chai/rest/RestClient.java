@@ -18,11 +18,11 @@ public class RestClient {
     public static String userName ;
     public static String password  ;
     public static String role;
-//    public static String REST_URL = "http://23.239.27.196:8080/web-crm/rest/";
+    public static String REST_URL = "http://23.239.27.196:8080/web-crm/rest/";
 //    public static String REST_URL = "http://192.168.1.107:8080/chai-crm/rest/";
-    public static String REST_URL = "http://178.79.178.121:8080/test-web-crm/rest/";
+//    public static String REST_URL = "http://178.79.178.121:8080/test-web-crm/rest/";
 
-    public HttpHeaders getHeaders() {
+    public static HttpHeaders getHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(new MediaType("application", "json")));
         headers.set("device-imei", "Samsung Galaxy S3");
@@ -33,18 +33,18 @@ public class RestClient {
         return headers;
     }
 
-    public HttpEntity<?> getRequestEntity() {
+    public static  HttpEntity<?> getRequestEntity() {
         HttpEntity<?> requestEntity = new HttpEntity<Object>(getHeaders());
         return requestEntity;
     }
 
-    public RestTemplate getRestTemplate() {
+    public static RestTemplate getRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         return restTemplate;
     }
 
-    public int getVersionCode(Context context) {
+    public static int getVersionCode(Context context) {
         try {
             PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_META_DATA);
             return pInfo.versionCode;
@@ -53,7 +53,7 @@ public class RestClient {
         }
     }
 
-    public String getVersionName(Context context) {
+    public static String getVersionName(Context context) {
         try {
             PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_META_DATA);
             return pInfo.versionName;

@@ -24,9 +24,12 @@ public class SalesClient extends RestClient {
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "sale/saleOrder", HttpMethod.PUT, httpEntity, ServerResponse.class);
             Log.i("Rest Sales post Response:", "==============================================================================" + responseEntity.getBody().getMessage());
 
-            return responseEntity.getBody();
+            ServerResponse body = responseEntity.getBody();
+            body.setItemRef(sale.getTask().getCustomer().getOutletName());
+            return body;
         } catch (HttpClientErrorException ex) {
             ServerResponse serverResponse = ServerResponse.getServerErrorResponse(ex);
+            serverResponse.setItemRef(sale.getTask().getCustomer().getOutletName());
             return serverResponse;
         }
     }
@@ -51,9 +54,12 @@ public class SalesClient extends RestClient {
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "sale/directSale", HttpMethod.PUT, httpEntity, ServerResponse.class);
             Log.i("Rest Sales post Response:", "==============================================================================" + responseEntity.getBody().getMessage());
 
-            return responseEntity.getBody();
+            ServerResponse body = responseEntity.getBody();
+            body.setItemRef(sale.getCustomer().getOutletName()+"(Adhock Sale)");
+            return body;
         } catch (HttpClientErrorException ex) {
             ServerResponse serverResponse = ServerResponse.getServerErrorResponse(ex);
+            serverResponse.setItemRef(sale.getCustomer().getOutletName()+"(Adhock Sale)");
             return serverResponse;
         }
     }
@@ -65,9 +71,12 @@ public class SalesClient extends RestClient {
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "sale/placeOrder", HttpMethod.PUT, httpEntity, ServerResponse.class);
             Log.i("Rest Order post Response:", "==============================================================================" + responseEntity.getBody().getMessage());
 
-            return responseEntity.getBody();
+            ServerResponse body = responseEntity.getBody();
+            body.setItemRef(order.getCustomer()+"(Order)");
+            return body;
         } catch (HttpClientErrorException ex) {
             ServerResponse serverResponse = ServerResponse.getServerErrorResponse(ex);
+            serverResponse.setItemRef(order.getCustomer()+"(Order)");
             return serverResponse;
         }
     }

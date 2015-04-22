@@ -21,7 +21,9 @@ import org.chai.activities.BaseContainerFragment;
 import org.chai.model.*;
 import org.chai.rest.RestClient;
 import org.chai.util.GPSTracker;
+import org.chai.util.MyApplication;
 import org.chai.util.Utils;
+import org.chai.util.migration.UpgradeOpenHelper;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -31,7 +33,10 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by victor on 12/11/14.
@@ -107,14 +112,7 @@ public class TaskViewOnMapFragment extends Fragment {
 
         GeoPoint currentLocation = new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE);
         mapController.setZoom(MAP_DEFAULT_ZOOM);
-//        mapController.animateTo(currentLocation);
-        mMyLocationOverlay.runOnFirstFix(new Runnable() {
-            public void run() {
-                mapController.animateTo(mMyLocationOverlay
-                        .getMyLocation());
-            }
-        });
-
+        mapController.animateTo(currentLocation);
         calenderSpinner = (Spinner)view.findViewById(R.id.map_filter_spinner);
         calenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -135,7 +133,7 @@ public class TaskViewOnMapFragment extends Fragment {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();

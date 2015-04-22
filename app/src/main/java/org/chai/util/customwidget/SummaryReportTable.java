@@ -19,38 +19,61 @@ public class SummaryReportTable extends TableRow {
     TextView itemTextView;
     TextView weeklyTextView;
     TextView monthlyTextView;
+    TextView teamAverageThisWeekTextView;
+    TextView teamAverageThisMonthTextView;
 
 
-    public SummaryReportTable(Context context,String item,String weekly,String monthly){
+    public SummaryReportTable(Context context,String item,String weekly,String monthly,String teamAverageThisWeek,String teamAverageThisMonth){
         super(context);
         this.setLayoutParams(rowParams);
-        this.setWeightSum(0.9f);
+        this.setWeightSum(1f);
         this.setBackgroundColor(Color.WHITE);
 
         itemTextView = new TextView(context);
-        itemParams.weight = 0.3f;
+        itemParams.weight = 0.2f;
         itemTextView.setBackgroundResource(R.drawable.bordertextfield);
         itemTextView.setLayoutParams(itemParams);
         itemTextView.setText(item);
         itemTextView.setTextColor(Color.BLACK);
 
         weeklyTextView  =new TextView(context);
-        weeklyParams.weight = 0.3f;
+        weeklyParams.weight = 0.2f;
         weeklyTextView.setBackgroundResource(R.drawable.bordertextfield);
         weeklyTextView.setLayoutParams(itemParams);
+        weeklyTextView.setGravity(Gravity.CENTER);
         weeklyTextView.setText(weekly);
         weeklyTextView.setTextColor(Color.BLACK);
 
         monthlyTextView = new TextView(context);
-        monthlyParams.weight = 0.3f;
+        monthlyParams.weight = 0.2f;
         monthlyTextView.setBackgroundResource(R.drawable.bordertextfield);
         monthlyTextView.setLayoutParams(itemParams);
+        monthlyTextView.setGravity(Gravity.CENTER);
         monthlyTextView.setText(monthly);
         monthlyTextView.setTextColor(Color.BLACK);
+
+        teamAverageThisWeekTextView = new TextView(context);
+        monthlyParams.weight = 0.25f;
+        teamAverageThisWeekTextView.setBackgroundResource(R.drawable.bordertextfield);
+        teamAverageThisWeekTextView.setLayoutParams(itemParams);
+        teamAverageThisWeekTextView.setGravity(Gravity.CENTER);
+        teamAverageThisWeekTextView.setText(teamAverageThisWeek);
+        teamAverageThisWeekTextView.setTextColor(Color.BLACK);
+
+        teamAverageThisMonthTextView = new TextView(context);
+        monthlyParams.weight = 0.2f;
+        teamAverageThisMonthTextView.setBackgroundResource(R.drawable.bordertextfield);
+        teamAverageThisMonthTextView.setLayoutParams(itemParams);
+        teamAverageThisMonthTextView.setGravity(Gravity.CENTER);
+        teamAverageThisMonthTextView.setText(teamAverageThisMonth);
+        teamAverageThisMonthTextView.setTextColor(Color.BLACK);
+
 
         this.addView(itemTextView);
         this.addView(weeklyTextView);
         this.addView(monthlyTextView);
+        this.addView(teamAverageThisWeekTextView);
+        this.addView(teamAverageThisMonthTextView);
     }
 
 

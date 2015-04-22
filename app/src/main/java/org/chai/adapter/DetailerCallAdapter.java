@@ -1,18 +1,18 @@
 package org.chai.adapter;
 
 import android.app.Activity;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import org.chai.R;
-import org.chai.model.Customer;
-import org.chai.model.CustomerContact;
+import org.chai.model.BaseEntity;
 import org.chai.model.DetailerCall;
+import org.chai.util.ServerResponse;
 import org.chai.util.Utils;
 
 import java.util.List;
@@ -26,10 +26,9 @@ public class DetailerCallAdapter extends BaseAdapter {
     private List<DetailerCall> detailerCalls;
     private Context context;
 
-    public DetailerCallAdapter(Context context,Activity activity,List<DetailerCall> detailerCalls){
+    public DetailerCallAdapter(Activity activity,List<DetailerCall> detailerCalls){
         this.activity = activity;
         this.detailerCalls = detailerCalls;
-        this.context = context;
     }
 
     @Override
@@ -49,31 +48,53 @@ public class DetailerCallAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
         if(inflater == null){
             inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if(convertView == null){
             convertView = inflater.inflate(R.layout.call_list_row,null);
+            holder = new ViewHolder();
+            holder.taskDescription = (TextView)convertView.findViewById(R.id.call_task_description);
+            holder.customerNameTxtView = (TextView)convertView.findViewById(R.id.call_customername);
+            holder.customerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
+            holder.txterror = (ImageView) convertView.findViewById(R.id.bg_error);
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
         }
-        TextView taskDescription = (TextView)convertView.findViewById(R.id.call_task_description);
-        TextView customerNameTxtView = (TextView)convertView.findViewById(R.id.call_customername);
-        TextView customerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
 
-        DetailerCall detailerCall = detailerCalls.get(position);
+        final DetailerCall detailerCall = detailerCalls.get(position);
         if(detailerCall!=null){
             try{
-                taskDescription.setText(detailerCall.getTask().getDescription());
+                holder.taskDescription.setText(detailerCall.getTask().getDescription());
                 if(detailerCall.getIsHistory()){
-                    taskDescription.setTextColor(Color.parseColor("#C0C0C0"));
-                    customerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
-                    customerNameTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+                    holder.taskDescription.setTextColor(Color.parseColor("#C0C0C0"));
+                    holder.customerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+                    holder.customerNameTxtView.setTextColor(Color.parseColor("#C0C0C0"));
                 }
-                customerNameTxtView.setText(detailerCall.getTask().getCustomer().getOutletName());
-                customerLocationTxtView.setText(detailerCall.getTask().getCustomer().getDescriptionOfOutletLocation());
+                holder.customerNameTxtView.setText(detailerCall.getTask().getCustomer().getOutletName());
+                holder.customerLocationTxtView.setText(detailerCall.getTask().getCustomer().getDescriptionOfOutletLocation());
+                if(detailerCall.getTask().getSyncronisationStatus()!= null && detailerCall.getTask().getSyncronisationStatus()== BaseEntity.SYNC_FAIL){
+                    holder.txterror.setVisibility(View.VISIBLE);
+                }
+                holder.txterror.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Utils.displayPopupWindow(activity, view, ServerResponse.parseErrorMessage(detailerCall.getTask().getSyncronisationMessage()));
+                    }
+                });
             }catch (Exception ex){
                 //
             }
         }
         return convertView;
+    }
+
+    static class ViewHolder{
+        TextView taskDescription  ;
+        TextView customerNameTxtView ;
+        TextView customerLocationTxtView ;
+        ImageView txterror;
     }
 }

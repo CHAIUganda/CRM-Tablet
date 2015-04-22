@@ -384,7 +384,7 @@
                         android:id="@+id/details_num_customers_per_day_lbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="16.How many diarrhea patients under 5 years do you see per week?"
+                        android:text="16.How many children under 5 do you see at your shop on a weekly basis?"
                         android:textColor="@color/list_main_text_color"
                         android:textStyle="bold"/>
 

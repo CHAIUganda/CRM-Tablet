@@ -7,9 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import org.chai.R;
+import org.chai.model.BaseEntity;
 import org.chai.model.Sale;
+import org.chai.util.ServerResponse;
+import org.chai.util.Utils;
 
 import java.util.List;
 
@@ -17,13 +21,11 @@ import java.util.List;
  * Created by victor on 12/31/14.
  */
 public class SalesAdapter extends BaseAdapter {
-    private Context context;
     private Activity activity;
     private LayoutInflater inflater;
     private List<Sale> sales;
 
-    public SalesAdapter(Context context,Activity activity,List<Sale> sales){
-        this.context = context;
+    public SalesAdapter(Activity activity, List<Sale> sales) {
         this.sales = sales;
         this.activity = activity;
     }
@@ -41,32 +43,54 @@ public class SalesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
         if(inflater == null){
-            inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if(convertView == null){
             convertView = inflater.inflate(R.layout.call_list_row,null);
+            holder = new ViewHolder();
+            holder.taskDescription = (TextView)convertView.findViewById(R.id.call_task_description);
+            holder.customerNameTxtView = (TextView)convertView.findViewById(R.id.call_customername);
+            holder.customerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
+            holder.txterror = (ImageView) convertView.findViewById(R.id.bg_error);
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
         }
-        TextView taskDescription = (TextView)convertView.findViewById(R.id.call_task_description);
-        TextView customerNameTxtView = (TextView)convertView.findViewById(R.id.call_customername);
-        TextView customerLocationTxtView = (TextView)convertView.findViewById(R.id.call_customerlocation);
 
-        Sale sale = sales.get(position);
+        final Sale sale = sales.get(position);
         if(sale!=null){
             try{
-            taskDescription.setText(sale.getTask().getDescription());
+                holder.taskDescription.setText(sale.getTask().getDescription());
             if(sale.getIsHistory()){
-                taskDescription.setTextColor(Color.parseColor("#C0C0C0"));
-                customerNameTxtView.setTextColor(Color.parseColor("#C0C0C0"));
-                customerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+                holder.taskDescription.setTextColor(Color.parseColor("#C0C0C0"));
+                holder.customerNameTxtView.setTextColor(Color.parseColor("#C0C0C0"));
+                holder.customerLocationTxtView.setTextColor(Color.parseColor("#C0C0C0"));
             }
-                customerNameTxtView.setText(sale.getTask().getCustomer().getOutletName());
-                customerLocationTxtView.setText(sale.getTask().getCustomer().getDescriptionOfOutletLocation());
+                holder.customerNameTxtView.setText(sale.getTask().getCustomer().getOutletName());
+                holder.customerLocationTxtView.setText(sale.getTask().getCustomer().getDescriptionOfOutletLocation());
+                if(sale.getSyncronisationStatus()!= null && sale.getSyncronisationStatus()== BaseEntity.SYNC_FAIL){
+                    holder.txterror.setVisibility(View.VISIBLE);
+                }
+                holder.txterror.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Utils.displayPopupWindow(activity, view, ServerResponse.parseErrorMessage(sale.getSyncronisationMessage()));
+                    }
+                });
             }catch (Exception ex){
                 //
             }
         }
         return convertView;
+    }
+
+    static class ViewHolder {
+        TextView taskDescription;
+        TextView customerNameTxtView;
+        TextView customerLocationTxtView;
+        ImageView txterror;
     }
 
 }

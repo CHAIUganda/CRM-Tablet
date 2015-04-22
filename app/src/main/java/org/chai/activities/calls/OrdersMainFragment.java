@@ -3,18 +3,21 @@ package org.chai.activities.calls;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.*;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.tasks.TakeOrderFragment;
 import org.chai.adapter.OrderListAdapter;
-import org.chai.model.*;
-import org.chai.rest.RestClient;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
+import org.chai.model.Order;
+import org.chai.model.OrderDao;
+import org.chai.util.MyApplication;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +42,7 @@ public class OrdersMainFragment extends Fragment {
         orderList = new ArrayList<Order>();
         orderList.addAll(orderDao.loadAll());
         orderListView = (ListView)view.findViewById(R.id.orderslistview);
+//        orderListView.setItemsCanFocus(true);
         orderListAdapter = new OrderListAdapter(getActivity(), orderList);
         orderListView.setAdapter(orderListAdapter);
 
@@ -53,6 +57,7 @@ public class OrdersMainFragment extends Fragment {
                 bundle.putString("orderId",order.getUuid());
                 takeOrderFragment.setArguments(bundle);
                 ((BaseContainerFragment)getParentFragment()).replaceFragment(takeOrderFragment,true);
+//                displayPopupWindow(view,"Testing");
             }
         });
         registerForContextMenu(view.findViewById(R.id.orderslistview));
@@ -62,7 +67,7 @@ public class OrdersMainFragment extends Fragment {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
@@ -127,7 +132,22 @@ public class OrdersMainFragment extends Fragment {
 
     }
 
-
+    private void displayPopupWindow(View anchorView,String message) {
+        PopupWindow popup = new PopupWindow(getActivity());
+        View layout = getActivity().getLayoutInflater().inflate(R.layout.popup, null);
+        popup.setContentView(layout);
+        TextView popupText = (TextView)layout.findViewById(R.id.popupTxt);
+        popupText.setText(message);
+        // Set content width and height
+        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+        // Closes the popup window when touch outside of it - when looses focus
+        popup.setOutsideTouchable(true);
+        popup.setFocusable(true);
+        // Show anchored to button
+        popup.setBackgroundDrawable(new BitmapDrawable());
+        popup.showAsDropDown(anchorView);
+    }
 
 
 }

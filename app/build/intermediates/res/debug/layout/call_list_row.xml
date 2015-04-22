@@ -22,6 +22,7 @@
             android:layout_alignTop="@+id/callthumbnail"
             android:layout_toRightOf="@+id/callthumbnail"
             android:textColor="@color/list_main_text_color"
+            android:layout_weight="1"
             android:textSize="@dimen/list_main_text_size"
             android:text="kakama victor"
             android:textStyle="bold"/>
@@ -34,14 +35,16 @@
             android:layout_below="@id/call_task_description"
             android:layout_marginTop="1dip"
             android:layout_toRightOf="@+id/callthumbnail"
+            android:layout_toLeftOf="@+id/bg_error"
             android:textColor="@color/list_main_text_color"
             android:text="kakama victor"
+            android:layout_weight="1"
             android:textStyle="bold"/>
 
     <!-- customer location -->
     <TextView
             android:id="@+id/call_customerlocation"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/call_customername"
             android:layout_marginTop="5dp"
@@ -50,5 +53,26 @@
             android:textSize="@dimen/list_sub_sub_text_size"
             android:text="0777505033"
             android:textStyle="italic"/>
+
+    <!--<TextView android:id="@+id/bg_error"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+              android:layout_marginRight="8dp"
+              android:textColor="@color/bg_error_color"
+              android:visibility="invisible" />-->
+    <org.chai.util.customwidget.NoParentPressImageView
+            android:id="@+id/bg_error"
+            android:layout_width="?android:attr/listPreferredItemHeight"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/indicator_input_error"
+            android:background="#fff"
+            android:scaleType="center"
+            android:clickable="true"
+            android:visibility="invisible"/>
 
 </RelativeLayout><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/call_list_row.xml -->

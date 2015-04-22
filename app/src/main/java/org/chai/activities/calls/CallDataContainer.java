@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
-import org.chai.activities.tasks.TaskCalenderFragment;
 
 /**
  * Created by victor on 1/6/15.

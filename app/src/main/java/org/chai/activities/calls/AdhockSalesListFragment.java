@@ -13,7 +13,12 @@ import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.tasks.AdhockSaleFragment;
 import org.chai.adapter.AdhockSalesAdapter;
-import org.chai.model.*;
+import org.chai.model.AdhockSale;
+import org.chai.model.AdhockSaleDao;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
+import org.chai.util.MyApplication;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +66,7 @@ public class AdhockSalesListFragment extends Fragment {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();

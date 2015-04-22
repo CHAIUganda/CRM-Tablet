@@ -6,9 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import com.androidquery.AQuery;
-
 import org.chai.R;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
@@ -24,6 +21,7 @@ import java.util.List;
  */
 public class TaskListAdapter extends ArrayAdapter<Task> {
     private List<Task> taskList;
+
     public TaskListAdapter(Activity activity,List<Task> aTaskList){
         super(activity.getApplicationContext(), R.layout.task_calender_fragment, aTaskList);
         this.taskList = aTaskList;
@@ -32,10 +30,10 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        AQuery aq;
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.task_list_item, parent, false);
+
             viewHolder = new ViewHolder();
             TextView taskListOutlet = (TextView) convertView.findViewById(R.id.task_list_outlet);
             TextView taskListAddress = (TextView) convertView.findViewById(R.id.task_list_outlet_contact);

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,9 +19,11 @@ import org.chai.activities.BaseContainerFragment;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
 import org.chai.util.CustomMultSelectDropDown;
-import org.chai.util.GPSTracker;
+import org.chai.util.InputFilterMinMax;
+import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.GpsWidgetView;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -100,6 +103,7 @@ public class SaleslFormFragment extends Fragment {
             final EditText quantityFld = (EditText) view.findViewById(R.id.sales_quantity);
             quantityFields.add(quantityFld);
             EditText salesFld = (EditText) view.findViewById(R.id.sales_price);
+            salesFld.setFilters(new InputFilter[]{new InputFilterMinMax("1","100000000")});
             salesFld.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -150,10 +154,10 @@ public class SaleslFormFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     if (allMandatoryFieldsFilled(view) && submitSale()) {
-                        Toast.makeText(getActivity(), "Your Data has been successfully saved.", Toast.LENGTH_LONG).show();
+                        Utils.showError(getActivity(), "Info:", "Your Data has been successfully saved.");
                         ((BaseContainerFragment) getParentFragment()).popFragment();
                     } else {
-                        Toast.makeText(getActivity(), "Unable to save data,Please ensure that all mandatory fields are entered", Toast.LENGTH_LONG).show();
+                        Utils.showError(getActivity(),"Error:","Unable to save data,Please ensure that all mandatory fields are entered");
                     }
                 }
             });
@@ -173,7 +177,7 @@ public class SaleslFormFragment extends Fragment {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
@@ -276,6 +280,7 @@ public class SaleslFormFragment extends Fragment {
         priceView.setTextColor(Color.BLACK);
         priceView.setLayoutParams(params);
         priceView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        priceView.setFilters(new InputFilter[]{new InputFilterMinMax("1","100000000")});
         priceView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

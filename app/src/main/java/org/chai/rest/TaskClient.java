@@ -33,9 +33,12 @@ public class TaskClient extends RestClient {
             HttpEntity<Task> httpEntity = new HttpEntity<Task>(task, getHeaders());
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "task/update", HttpMethod.PUT, httpEntity, ServerResponse.class);
             Log.i("Rest Task post Response:", "==============================================================================" + responseEntity.getBody().getMessage());
-            return responseEntity.getBody();
+            ServerResponse body = responseEntity.getBody();
+            body.setItemRef(task.getDescription());
+            return body;
         } catch (HttpClientErrorException ex) {
             ServerResponse serverResponse = ServerResponse.getServerErrorResponse(ex);
+            serverResponse.setItemRef(task.getDescription());
             return serverResponse;
         }
     }

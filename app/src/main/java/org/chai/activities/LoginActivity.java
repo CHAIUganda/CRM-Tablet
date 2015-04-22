@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,15 +18,17 @@ import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.User;
 import org.chai.model.UserDao;
+import org.chai.model.Village;
+import org.chai.model.VillageDao;
 import org.chai.rest.Place;
 import org.chai.rest.RestClient;
 import org.chai.util.AccountManager;
+import org.chai.util.MyApplication;
 import org.chai.util.Utils;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.List;
 import java.util.UUID;
-
-//import com.sun.swing.internal.plaf.synth.resources.synth_sv;
 
 public class LoginActivity extends BaseActivity {
 
@@ -36,13 +37,13 @@ public class LoginActivity extends BaseActivity {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private UserDao userDao;
+    private VillageDao villageDao;
     private String role = User.ROLE_DETAILER;
 
-    Toolbar toolbar;
     /**
      * Called when the activity is first created.
-     * @param savedInstanceState If the activity is being re-initialized after 
-     * previously being shut down then this Bundle contains the data it most 
+     * @param savedInstanceState If the activity is being re-initialized after
+     * previously being shut down then this Bundle contains the data it most
      * recently supplied in onSaveInstanceState(Bundle). <b>Note: Otherwise it is null.</b>
      */
     @Override
@@ -55,14 +56,10 @@ public class LoginActivity extends BaseActivity {
             return;
         }
 
-        Mint.initAndStartSession(LoginActivity.this, "e6b332d2");
+        Mint.initAndStartSession(LoginActivity.this, "8255bd80");
         setContentView(R.layout.login_activity);
-
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         initialiseGreenDao();
-
+        List<Village> villages = villageDao.loadAll();
         Activity activity = this;
         Button loginBtn = (Button)findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener(){
@@ -111,7 +108,7 @@ public class LoginActivity extends BaseActivity {
                                     new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(getApplicationContext(), "Couldnt Login,Please check your Username or Password", Toast.LENGTH_LONG).show();
+                                            Utils.showError(LoginActivity.this, "Error:", "Couldnt Login,Please check your Username or Password");
                                         }
                                     }
                             );
@@ -147,11 +144,12 @@ public class LoginActivity extends BaseActivity {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "chai-crm-db", null);
+            UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
             userDao = daoSession.getUserDao();
+            villageDao = daoSession.getVillageDao();
         } catch (Exception ex) {
             Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -161,7 +159,5 @@ public class LoginActivity extends BaseActivity {
     public void onBackPressed() {
         finish();
     }
-
-
 }
 

@@ -1,16 +1,13 @@
 package org.chai.rest;
 
-import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 import org.chai.model.*;
-import org.springframework.http.*;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Collections;
-import java.util.UUID;
 
 /**
  * Created by victor on 11/3/14.

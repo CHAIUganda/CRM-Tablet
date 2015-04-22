@@ -1,14 +1,10 @@
 package org.chai.activities.tasks;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,11 +14,13 @@ import android.widget.*;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
+import org.chai.adapter.CustomerAutocompleteAdapter;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.*;
 import org.chai.rest.RestClient;
-import org.chai.util.NavDrawerItem;
+import org.chai.util.MyApplication;
 import org.chai.util.Utils;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.*;
 
@@ -74,7 +72,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
 
         List<Customer> customersList = customerDao.loadAll();
         AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.order_auto_complete_textview);
-        ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(getActivity(),android.R.layout.simple_dropdown_item_1line,customersList);
+        CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(getActivity(),android.R.layout.simple_dropdown_item_1line,new ArrayList<Customer>(customersList));
         textView.setAdapter(adapter);
 
         textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -144,14 +142,14 @@ public class TakeOrderFragment extends BaseContainerFragment {
                 try{
                     if(validateFieldValues()){
                         submitOrder();
-                        Toast.makeText(getActivity(),"Thank you,your Order has been submitted.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Thank you,your Order has been submitted." , Toast.LENGTH_LONG).show();
                         resetFragment(R.id.frame_container, new TakeOrderFragment());
                         Intent i = new Intent(getActivity(), HomeActivity.class);
                         startActivity(i);
                     }
                 }catch (Exception ex){
                     ex.printStackTrace();
-                    Toast.makeText(getActivity(),"A problem Occured while saving a new Order,please ensure that data is entered correctly",Toast.LENGTH_LONG).show();
+                    Utils.showError(getActivity(),"Error:","A problem Occured while saving a new Order,please ensure that data is entered correctly");
                 }
             }
         });
@@ -167,7 +165,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
@@ -300,7 +298,8 @@ public class TakeOrderFragment extends BaseContainerFragment {
         for (int i = 0; i < spinnerList.size(); ++i) {
             OrderData orderData = instantiateOrder(i);
             orderData.setOrderId(orderId);
-            orderData.setQuantity(Integer.parseInt(quantityFields.get(i).getText().toString()));
+            String qnty = quantityFields.get(i).getText().toString();
+            orderData.setQuantity((qnty==null||qnty.equals(""))?0:Integer.parseInt(qnty));
             orderData.setDropSample(dropSampleChkBoxes.get(i).isChecked());
             Product product = (Product) spinnerList.get(i).getSelectedItem();
             orderData.setProductId(product.getUuid());
@@ -338,13 +337,12 @@ public class TakeOrderFragment extends BaseContainerFragment {
         if(selectedCustomer == null){
             AutoCompleteTextView textView = (AutoCompleteTextView) getActivity().findViewById(R.id.order_auto_complete_textview);
             textView.setError("Please enter valid customer");
-//            Toast.makeText(getActivity(),"Please enter valid customer",Toast.LENGTH_LONG).show();
             return false;
         }else if(((EditText) getActivity().findViewById(R.id.order_delivery_date)).getText().toString().equalsIgnoreCase("")){
-            Toast.makeText(getActivity(),"Please enter a delivery date",Toast.LENGTH_LONG).show();
+            Utils.showError(getActivity(),"Error:","Please enter a delivery date");
             return false;
         }else if(quantityFields.get(0).getText().toString().equalsIgnoreCase("")){
-            Toast.makeText(getActivity(),"Please enter atleast a product and qunatity ordered",Toast.LENGTH_LONG).show();
+            Utils.showError(getActivity(),"Error:","Please enter atleast a product and qunatity ordered");
             return false;
         }
 

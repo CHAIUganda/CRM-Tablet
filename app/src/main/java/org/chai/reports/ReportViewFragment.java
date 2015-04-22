@@ -15,7 +15,9 @@ import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.SummaryReport;
 import org.chai.model.SummaryReportDao;
+import org.chai.util.MyApplication;
 import org.chai.util.customwidget.SummaryReportTable;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.List;
 
@@ -40,27 +42,31 @@ public class ReportViewFragment extends BaseContainerFragment{
         if(!summaryReportList.isEmpty()){
             addReportsToTable(summaryReportList);
         }
-
         return view;
     }
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+            UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
             summaryReportDao = daoSession.getSummaryReportDao();
         } catch (Exception ex) {
-            Log.d("Error============", ex.getLocalizedMessage());
+            Log.d("Error=====================================", ex.getLocalizedMessage());
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
+    /**
+     *
+     * @param summaryReportList
+     */
     private void  addReportsToTable( List<SummaryReport> summaryReportList){
         TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
         for(SummaryReport summaryReport:summaryReportList){
-            tableLayout.addView(new SummaryReportTable(getActivity().getApplicationContext(),summaryReport.getItem().replace("_"," "),summaryReport.getWeek(),summaryReport.getMonth()),params);
+            tableLayout.addView(new SummaryReportTable(getActivity().getApplicationContext(),summaryReport.getItem().replace("_"," "),summaryReport.getWeek(),
+                    summaryReport.getMonth(),summaryReport.getTeamAverageThisWeek(),summaryReport.getTeamAverageThisMonth()),params);
         }
     }
 

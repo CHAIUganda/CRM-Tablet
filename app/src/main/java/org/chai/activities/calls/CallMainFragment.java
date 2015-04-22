@@ -6,24 +6,26 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.*;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
-import org.chai.activities.tasks.SaleslFormFragment;
 import org.chai.activities.tasks.DetailersActivity;
+import org.chai.activities.tasks.SaleslFormFragment;
 import org.chai.adapter.DetailerCallAdapter;
 import org.chai.adapter.SalesAdapter;
 import org.chai.model.*;
+import org.chai.rest.RestClient;
+import org.chai.util.MyApplication;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import android.view.ContextMenu.ContextMenuInfo;
-import org.chai.rest.RestClient;
 
 /**
  * Created by victor on 10/15/14.
@@ -47,17 +49,6 @@ public class CallMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.calls_main_activity,container,false);
         initialiseGreenDao();
         listView = (ListView)view.findViewById(R.id.callslistview);
-        if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
-            sales = new ArrayList<Sale>();
-            sales.addAll(saleDao.loadAll());
-            salesAdapter = new SalesAdapter(getActivity(),getActivity(),sales);
-            listView.setAdapter(salesAdapter);
-        }else {
-            detailerCalls = new ArrayList<DetailerCall>();
-            detailerCalls.addAll(detailerCallDao.loadAll());
-            detailerCallAdapter = new DetailerCallAdapter(getActivity(),getActivity(),detailerCalls);
-            listView.setAdapter(detailerCallAdapter);
-        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -89,6 +80,21 @@ public class CallMainFragment extends Fragment {
         return view;
     }
 
+    private void loadDataFromDb() {
+        daoSession.clear();
+        if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+            sales = new ArrayList<Sale>();
+            sales.addAll(saleDao.loadAll());
+            salesAdapter = new SalesAdapter(getActivity(),sales);
+            listView.setAdapter(salesAdapter);
+        }else {
+            detailerCalls = new ArrayList<DetailerCall>();
+            detailerCalls.addAll(detailerCallDao.loadAll());
+            detailerCallAdapter = new DetailerCallAdapter(getActivity(),detailerCalls);
+            listView.setAdapter(detailerCallAdapter);
+        }
+    }
+
     private void goToDetailerForm(DetailerCall itemAtPosition) {
         DetailersActivity detailersActivity = new DetailersActivity();
         Bundle bundle = new Bundle();
@@ -107,7 +113,7 @@ public class CallMainFragment extends Fragment {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getActivity(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
@@ -178,6 +184,7 @@ public class CallMainFragment extends Fragment {
                             detailerCalls.remove(position);
                             detailerCallAdapter.notifyDataSetChanged();
                         }
+                        onResume();
                         dialog.dismiss();
                     }
 
@@ -193,5 +200,13 @@ public class CallMainFragment extends Fragment {
         return dialog;
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadDataFromDb();
+        Log.d("Customer Main Fragment", "List Frag Resumed");
+
+    }
+
 
 }

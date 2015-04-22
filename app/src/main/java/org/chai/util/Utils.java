@@ -1,8 +1,11 @@
 package org.chai.util;
 
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -11,25 +14,16 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CalendarView;
-import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
-
+import android.view.WindowManager;
+import android.widget.*;
+import org.chai.R;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.Task;
 import org.osmdroid.util.GeoPoint;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by victor on 10/16/14.
@@ -38,6 +32,7 @@ public class Utils {
     public static void log(String msg){
         Log.d("CHAI", msg);
     }
+
     public static String truncateString(String text,int size){
         try{
             if(text.length()<size){
@@ -215,11 +210,35 @@ public class Utils {
     public static boolean mandatorySpinnerFieldSelected(Spinner spinner){
         if (spinner.getSelectedItem().toString().equals("")) {
             ((TextView)spinner.getChildAt(0)).setError("This Field is mandatory!");
-//            spinner.requestFocus();
             return false;
         }else{
             return true;
         }
+    }
+
+    public static void showError(Activity activity,String title,String error) {
+        new AlertDialog.Builder(activity)
+                .setTitle(title)
+                .setMessage(error)
+                .setPositiveButton("ok", null)
+                .show();
+    }
+
+    public static void displayPopupWindow(Activity activity,View anchorView,String message) {
+        PopupWindow popup = new PopupWindow(activity);
+        View layout = activity.getLayoutInflater().inflate(R.layout.popup, null);
+        popup.setContentView(layout);
+        TextView popupText = (TextView)layout.findViewById(R.id.popupTxt);
+        popupText.setText(message);
+        // Set content width and height
+        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+        // Closes the popup window when touch outside of it - when looses focus
+        popup.setOutsideTouchable(true);
+        popup.setFocusable(true);
+        // Show anchored to button
+        popup.setBackgroundDrawable(new BitmapDrawable());
+        popup.showAsDropDown(anchorView);
     }
 
     public static void setListViewHeightBasedOnChildren(ListView listView){

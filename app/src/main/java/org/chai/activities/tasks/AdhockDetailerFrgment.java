@@ -2,21 +2,21 @@ package org.chai.activities.tasks;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
+import org.chai.adapter.CustomerAutocompleteAdapter;
 import org.chai.model.Customer;
-import org.chai.model.CustomerContact;
 import org.chai.model.DetailerCall;
 import org.chai.model.Task;
 import org.chai.util.CustomMultSelectDropDown;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.GpsWidgetView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -36,7 +36,7 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
         initDetailerInstance();
         List<Customer> customersList = customerDao.loadAll();
         AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.adhock_detailer_customer);
-        ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(getActivity(), android.R.layout.simple_dropdown_item_1line, customersList);
+        CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(getActivity(),android.R.layout.simple_dropdown_item_1line,new ArrayList<Customer>(customersList));
         textView.setAdapter(adapter);
 
         textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -48,6 +48,9 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
                     ((TextView)view. findViewById(R.id.adhoc_detailer_district)).setText(customer.getSubcounty().getDistrict().getName());
                     ((TextView)view. findViewById(R.id.adhoc_detailer_subcounty)).setText(customer.getSubcounty().getName());
                     detailerCallInstance = getLastDetailerInfo(customer);
+                    if (detailerCallInstance == null) {
+                        initDetailerInstance();
+                    }
                     detailerCallInstance.setIsNew(true);
                     detailerCallInstance.setIsHistory(false);
                     bindDetailerCallToUi(view);
@@ -68,14 +71,14 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
             @Override
             public void onClick(View view1) {
                 if(!allMandatoryFieldsFilled(view)){
-                    Toast.makeText(getActivity(), "Please fill in all the mandaory fields", Toast.LENGTH_LONG).show();
+                    Utils.showError(getActivity(),"Error:","Please fill in all the mandaory fields");
                 }else if(saveForm()){
-                    Toast.makeText(getActivity(), "Detailer Information has been  successfully added!", Toast.LENGTH_LONG).show();
+                    Utils.showError(getActivity(),"Infor","Detailer Information has been  successfully added!");
                     resetFragment(R.id.frame_container, new AdhockDetailerFrgment());
                     Intent i = new Intent(getActivity(), HomeActivity.class);
                     startActivity(i);
                 } else {
-                    Toast.makeText(getActivity(), "A problem Occured while saving a new Detialer Information,please ensure that data is entered correctly", Toast.LENGTH_LONG).show();
+                    Utils.showError(getActivity(),"Error:","A problem Occured while saving a new Detialer Information,please ensure that data is entered correctly");
                 }
             }
         });
@@ -88,11 +91,11 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
     }
 
     @Override
-    protected void initDetailerInstance() {
-        detailerCallInstance = new DetailerCall();
-        detailerCallInstance.setUuid(UUID.randomUUID().toString());
+    protected DetailerCall initDetailerInstance() {
+        detailerCallInstance = new DetailerCall(null);
         detailerCallInstance.setIsHistory(false);
         detailerCallInstance.setIsNew(true);
+        return detailerCallInstance;
     }
 
     @Override
@@ -109,6 +112,9 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
             taskDao.insert(task);
             detailerCallInstance.setTask(task);
             detailerCallInstance.setTaskId(task.getUuid());
+
+            detailerCallInstance.setUuid(UUID.randomUUID().toString());
+            detailerCallInstance.setIsNew(false);
             detailerCallDao.insert(detailerCallInstance);
             submitDetailerStock(detailerCallInstance);
             return true;
@@ -165,6 +171,7 @@ public class AdhockDetailerFrgment extends BaseDetailerFragment {
             detailerCallInstance.setLatitude(Double.parseDouble(latLongText.split(",")[0]));
             detailerCallInstance.setLongitude(Double.parseDouble(latLongText.split(",")[1]));
         }
+        detailerCallInstance.setObjections(((EditText) getActivity().findViewById(R.id.detailer_customer_objections)).getText().toString());
     }
 
     private void bindDetailerCallToUi(View view) {

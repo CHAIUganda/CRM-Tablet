@@ -1,20 +1,28 @@
 package org.chai.sync;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.model.*;
 import org.chai.rest.*;
+import org.chai.util.MyApplication;
 import org.chai.util.ServerResponse;
 import org.chai.util.SyncronizationException;
+import org.chai.util.migration.UpgradeOpenHelper;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by victor on 11/3/14.
@@ -48,6 +56,7 @@ public class CHAISynchroniser {
     private AdhockSaleDao adhockSaleDao;
     private SummaryReportDao summaryReportDao;
     private TaskOrderDao taskOrderDao;
+    private List<ServerResponse> syncronisationErros;
 
     public CHAISynchroniser(Activity activity) {
         this.parent = activity;
@@ -72,7 +81,7 @@ public class CHAISynchroniser {
 
     private void initialiseGreenDao() {
         try {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(parent.getApplicationContext(), "chai-crm-db", null);
+             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
@@ -99,6 +108,7 @@ public class CHAISynchroniser {
 
     public void startSyncronisationProcess() {
         try {
+            syncronisationErros = new ArrayList<ServerResponse>();
             uploadCustomers();
             uploadDirectSales();
             uploadSales();
@@ -132,6 +142,9 @@ public class CHAISynchroniser {
         } catch (Exception ex) {
             ex.printStackTrace();
             displayError("The Syncronisation Process is Unable to continue,Please ensure that there is a network connection");
+        }
+        if(!syncronisationErros.isEmpty()){
+            displaySyncErros(syncronisationErros);
         }
         Log.i("Synchroniser:", "=============================================done");
     }
@@ -217,10 +230,17 @@ public class CHAISynchroniser {
                 if (RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
                     DetailerCall detailerCall = task.getDetailers().get(0);
                     detailerCall.setIsHistory(true);
+                    detailerCall.setIsDirty(false);
+                    detailerCall.setSyncronisationStatus(BaseEntity.SYNC_SUCCESS);
                     detailerCallDao.update(detailerCall);
                 }
             }else{
-                throw new SyncronizationException(response.getMessage());
+                task.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
+                task.setSyncronisationMessage(response.getMessage());
+                task.setLastUpdated(new Date());
+                task.setIsDirty(true);
+                taskDao.update(task);
+                syncronisationErros.add(response);
             }
         }
 
@@ -245,11 +265,17 @@ public class CHAISynchroniser {
             updatePropgress("Uploading Customers...");
         }
         for (Customer customer : customersList) {
-            ServerResponse response = customerClient.uploadCustomer(customer);
+            ServerResponse response = customerClient.uploadCustomer(customer,RestClient.getRestTemplate());
             if (response.getStatus().equalsIgnoreCase("OK")) {
-                customerDao.delete(customer);
+                customer.setIsDirty(false);
+                customerDao.update(customer);
             }else{
-                throw new SyncronizationException(response.getMessage());
+                customer.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
+                customer.setSyncronisationMessage(response.getMessage());
+                customer.setLastUpdated(new Date());
+                customer.setIsDirty(true);
+                customerDao.update(customer);
+                syncronisationErros.add(response);
             }
         }
     }
@@ -271,9 +297,16 @@ public class CHAISynchroniser {
             ServerResponse response = salesClient.uploadSale(sale);
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 sale.setIsHistory(true);
+                sale.setSyncronisationStatus(BaseEntity.SYNC_SUCCESS);
+                sale.setIsDirty(false);
                 saleDao.update(sale);
             }else{
-                throw new SyncronizationException(response.getMessage());
+                sale.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
+                sale.setSyncronisationMessage(response.getMessage());
+                sale.setLastUpdated(new Date());
+                sale.setIsDirty(true);
+                saleDao.update(sale);
+                syncronisationErros.add(response);
             }
         }
     }
@@ -291,9 +324,16 @@ public class CHAISynchroniser {
             ServerResponse response = salesClient.uploadDirectSale(adhockSale);
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 adhockSale.setIsHistory(true);
+                adhockSale.setIsDirty(false);
+                adhockSale.setSyncronisationStatus(BaseEntity.SYNC_SUCCESS);
                 adhockSaleDao.update(adhockSale);
             }else{
-                throw new SyncronizationException(response.getMessage());
+                adhockSale.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
+                adhockSale.setSyncronisationMessage(response.getMessage());
+                adhockSale.setLastUpdated(new Date());
+                adhockSale.setIsDirty(true);
+                adhockSaleDao.update(adhockSale);
+                syncronisationErros.add(response);
             }
         }
     }
@@ -309,7 +349,12 @@ public class CHAISynchroniser {
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 orderDao.delete(order);
             }else{
-                throw new SyncronizationException(response.getMessage());
+                order.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
+                order.setSyncronisationMessage(response.getMessage());
+                order.setLastUpdated(new Date());
+                order.setIsDirty(true);
+                orderDao.update(order);
+                syncronisationErros.add(response);
             }
         }
     }
@@ -335,9 +380,37 @@ public class CHAISynchroniser {
         parent.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(parent.getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                Toast.makeText(parent.getApplicationContext(), message, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void displaySyncErros(final List<ServerResponse> errors){
+        parent.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                StringBuilder formartedErrors = new StringBuilder();
+                formartedErrors.append("The following errors were encountered during syncronisation process\n");
+                for(ServerResponse response:errors){
+                    String message = response.getMessage();
+                    ObjectMapper mapper = new ObjectMapper();
+                    try {
+                        Map<String, Object> mapObject = mapper.readValue(message,new TypeReference<Map<String, Object>>() {
+                        });
+                        formartedErrors.append(response.getItemRef()+":"+mapObject.get("message") +"\n");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                new AlertDialog.Builder(parent)
+                        .setTitle("Errors:")
+                        .setMessage(formartedErrors.toString())
+                        .setPositiveButton("ok", null)
+                        .show();
+            }
+        });
+
     }
 
 }

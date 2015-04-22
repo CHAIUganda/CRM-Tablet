@@ -25,16 +25,20 @@ public class CustomerClient extends RestClient {
         return null;
     }
 
-    public ServerResponse uploadCustomer(Customer customer) {
+    public ServerResponse uploadCustomer(Customer customer,RestTemplate restTemplate) {
         try {
-            RestTemplate restTemplate = getRestTemplate();
+//            RestTemplate restTemplate = getRestTemplate();
             HttpEntity<Customer> httpEntity = new HttpEntity<Customer>(customer, getHeaders());
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "customer/update", HttpMethod.PUT, httpEntity, ServerResponse.class);
             Log.i("Rest Customer post Response:", "==============================================================================" + responseEntity.getBody().getMessage());
-
-            return new ServerResponse("200", "Successfully uploaded Customers");
+            ServerResponse body = responseEntity.getBody();
+            body.setItemRef(customer.getOutletName());
+            return body;
         } catch (HttpClientErrorException ex) {
             ServerResponse serverResponse = ServerResponse.getServerErrorResponse(ex);
+            if(customer!=null){
+                serverResponse.setItemRef(customer.getOutletName());
+            }
             return serverResponse;
         }
     }
