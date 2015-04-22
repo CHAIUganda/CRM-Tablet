@@ -4,13 +4,51 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.widget.Toast;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.chai.activities.tasks.TaskMainFragment;
-import org.chai.model.*;
-import org.chai.rest.*;
+import org.chai.model.AdhockSale;
+import org.chai.model.AdhockSaleDao;
+import org.chai.model.BaseEntity;
+import org.chai.model.Customer;
+import org.chai.model.CustomerContact;
+import org.chai.model.CustomerContactDao;
+import org.chai.model.CustomerDao;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
+import org.chai.model.DetailerCall;
+import org.chai.model.DetailerCallDao;
+import org.chai.model.District;
+import org.chai.model.DistrictDao;
+import org.chai.model.Order;
+import org.chai.model.OrderDao;
+import org.chai.model.ParishDao;
+import org.chai.model.Product;
+import org.chai.model.ProductDao;
+import org.chai.model.Region;
+import org.chai.model.RegionDao;
+import org.chai.model.Sale;
+import org.chai.model.SaleDao;
+import org.chai.model.SaleDataDao;
+import org.chai.model.Subcounty;
+import org.chai.model.SubcountyDao;
+import org.chai.model.SummaryReport;
+import org.chai.model.SummaryReportDao;
+import org.chai.model.Task;
+import org.chai.model.TaskDao;
+import org.chai.model.TaskOrder;
+import org.chai.model.TaskOrderDao;
+import org.chai.model.User;
+import org.chai.model.VillageDao;
+import org.chai.rest.CustomerClient;
+import org.chai.rest.Place;
+import org.chai.rest.ProductClient;
+import org.chai.rest.RestClient;
+import org.chai.rest.SalesClient;
+import org.chai.rest.TaskClient;
 import org.chai.util.MyApplication;
 import org.chai.util.ServerResponse;
 import org.chai.util.SyncronizationException;
@@ -102,7 +140,6 @@ public class CHAISynchroniser {
             summaryReportDao = daoSession.getSummaryReportDao();
             taskOrderDao = daoSession.getTaskOrderDao();
         } catch (Exception ex) {
-            Log.d("Error=====================================", ex.getLocalizedMessage());
         }
     }
 
@@ -133,11 +170,9 @@ public class CHAISynchroniser {
         }catch (final SyncronizationException syncExc){
             displayError("The Syncronisation Process is Unable to continue,"+syncExc.getMessage());
         } catch (final HttpClientErrorException e) {
-            Log.i("Error:============================================", e.getResponseBodyAsString());
             e.printStackTrace();
             displayError("The Syncronisation Process is Unable to continue," + e.getMessage());
         } catch (HttpServerErrorException se) {
-            Log.i("Error:============================================", se.getResponseBodyAsString());
             displayError(se.getResponseBodyAsString());
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -146,7 +181,6 @@ public class CHAISynchroniser {
         if(!syncronisationErros.isEmpty()){
             displaySyncErros(syncronisationErros);
         }
-        Log.i("Synchroniser:", "=============================================done");
     }
 
     public void downloadRegions() {

@@ -222,7 +222,6 @@ public class HomeActivity extends FragmentActivity{
     }
     @Override
     public void onBackPressed(){
-        Log.i("Back Button Pressed:","==============================================================");
         if(!BaseContainerFragment.handleBackPressed(getSupportFragmentManager())){
             super.onBackPressed();
         }

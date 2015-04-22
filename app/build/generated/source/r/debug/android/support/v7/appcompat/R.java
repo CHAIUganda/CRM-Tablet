@@ -195,19 +195,19 @@ public final class R {
 		public static final int abc_config_showMenuShortcutsWhenKeyboardPresent = 0x7f090005;
 	}
 	public static final class color {
-		public static final int abc_background_cache_hint_selector_material_dark = 0x7f0a0065;
-		public static final int abc_background_cache_hint_selector_material_light = 0x7f0a0066;
+		public static final int abc_background_cache_hint_selector_material_dark = 0x7f0a0066;
+		public static final int abc_background_cache_hint_selector_material_light = 0x7f0a0067;
 		public static final int abc_input_method_navigation_guard = 0x7f0a0000;
-		public static final int abc_primary_text_disable_only_material_dark = 0x7f0a0067;
-		public static final int abc_primary_text_disable_only_material_light = 0x7f0a0068;
-		public static final int abc_primary_text_material_dark = 0x7f0a0069;
-		public static final int abc_primary_text_material_light = 0x7f0a006a;
-		public static final int abc_search_url_text = 0x7f0a006b;
+		public static final int abc_primary_text_disable_only_material_dark = 0x7f0a0068;
+		public static final int abc_primary_text_disable_only_material_light = 0x7f0a0069;
+		public static final int abc_primary_text_material_dark = 0x7f0a006a;
+		public static final int abc_primary_text_material_light = 0x7f0a006b;
+		public static final int abc_search_url_text = 0x7f0a006c;
 		public static final int abc_search_url_text_normal = 0x7f0a0001;
 		public static final int abc_search_url_text_pressed = 0x7f0a0002;
 		public static final int abc_search_url_text_selected = 0x7f0a0003;
-		public static final int abc_secondary_text_material_dark = 0x7f0a006c;
-		public static final int abc_secondary_text_material_light = 0x7f0a006d;
+		public static final int abc_secondary_text_material_dark = 0x7f0a006d;
+		public static final int abc_secondary_text_material_light = 0x7f0a006e;
 		public static final int accent_material_dark = 0x7f0a0005;
 		public static final int accent_material_light = 0x7f0a0006;
 		public static final int background_floating_material_dark = 0x7f0a0009;

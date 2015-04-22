@@ -1,7 +1,15 @@
 package org.chai.rest;
 
 import android.util.Log;
-import org.chai.model.*;
+
+import org.chai.model.District;
+import org.chai.model.Parish;
+import org.chai.model.Region;
+import org.chai.model.Subcounty;
+import org.chai.model.SummaryReport;
+import org.chai.model.User;
+import org.chai.model.Village;
+import org.chai.util.Utils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -94,15 +102,17 @@ public class Place extends RestClient {
     }
 
     public User login(String user, String pass) {
+        Utils.log("Login user -> " + user + " -> " + pass);
         try{
-            userName = user;
-            password = pass;
+            //userName = user;
+            //password = pass;
             RestTemplate restTemplate = getRestTemplate();
             HttpHeaders headers = getHeaders();
             HttpEntity<?> requestEntity = new HttpEntity<Object>(headers);
-            ResponseEntity<User> responseEntity = restTemplate.exchange(REST_URL+"info",HttpMethod.GET, requestEntity,User.class);
+            ResponseEntity<User> responseEntity = restTemplate.exchange(REST_URL + "info", HttpMethod.GET, requestEntity, User.class);
             User user1 = responseEntity.getBody();
-            if(user1!=null){
+            if(user1 != null){
+                Utils.log("User is not NULL");
                 return user1;
             }
         }catch (Exception ex){

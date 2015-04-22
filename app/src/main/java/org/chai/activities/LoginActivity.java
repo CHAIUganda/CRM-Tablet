@@ -51,21 +51,22 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         if(AccountManager.getUsername(this) != null){
-            Intent i = new Intent(LoginActivity.this, MalariaFormActivity.class);
+            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(i);
             return;
         }
 
         Mint.initAndStartSession(LoginActivity.this, "8255bd80");
+
         setContentView(R.layout.login_activity);
         initialiseGreenDao();
         List<Village> villages = villageDao.loadAll();
         Activity activity = this;
+
         Button loginBtn = (Button)findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-//                onLoginSuccessfull("sales1", "pass",User.ROLE_SALES);
-               final ProgressDialog dialog = showProgressDialog();
+                final ProgressDialog dialog = showProgressDialog();
                 final String user = ((EditText) findViewById(R.id.userTxt)).getText().toString();
                 final String pass = ((EditText) findViewById(R.id.passwordTxt)).getText().toString();
 
@@ -81,7 +82,7 @@ public class LoginActivity extends BaseActivity {
                             if (userDao.loadAll().isEmpty()) {
                                 User remoteUser = place.login(user, pass);
                                 //add this user to offline db
-                                if (remoteUser!=null) {
+                                if (remoteUser != null) {
                                     User newUser = new User(null);
                                     newUser.setUuid(UUID.randomUUID().toString());
                                     newUser.setUserName(remoteUser.getUserName());
@@ -93,7 +94,6 @@ public class LoginActivity extends BaseActivity {
                                 }else{
                                     islogin = false;
                                 }
-
                             }
                         } else {
                             islogin = true;
@@ -108,7 +108,7 @@ public class LoginActivity extends BaseActivity {
                                     new Runnable() {
                                         @Override
                                         public void run() {
-                                            Utils.showError(LoginActivity.this, "Error:", "Couldnt Login,Please check your Username or Password");
+                                            Utils.showError(LoginActivity.this, "Error:", "Couldnt Login, Please check your Username or Password");
                                         }
                                     }
                             );
@@ -131,7 +131,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void onLoginSuccessfull(String user, String pass,String role) {
-        Intent i = new Intent(getApplicationContext(), MalariaFormActivity.class);
+        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
         RestClient.userName = user;
         RestClient.password = pass;
         RestClient.role = role;

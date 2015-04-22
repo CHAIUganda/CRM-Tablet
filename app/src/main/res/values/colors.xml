@@ -9,6 +9,7 @@
     <color name="primary">#144881</color>
     <color name="primary_dark">#052a54</color>
     <color name="window_background">#d9e2ed</color>
+    <color name="window_background_dark">#cad5e3</color>
     <color name="accent">#9dc3ed</color>
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="swipe_color_1">#0099CC</color>
