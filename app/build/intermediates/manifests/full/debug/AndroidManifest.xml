@@ -47,6 +47,10 @@
         <activity
             android:name="org.chai.activities.customer.CustomersActivity"
             android:label="Customers" >
+        </activity>
+        <activity
+            android:name="org.chai.activities.calls.HistoryActivity"
+            android:label="History" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

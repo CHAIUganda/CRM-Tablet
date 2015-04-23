@@ -35,6 +35,8 @@
       <activity android:name=".activities.HomeActivity" android:configChanges="orientation|screenSize"/>
       <activity android:name=".activities.customer.CustomerDetailsActivity"/>
       <activity android:name=".activities.customer.CustomersActivity" android:label="Customers">
+      </activity>
+      <activity android:name=".activities.calls.HistoryActivity" android:label="History">
           <intent-filter>
               <action android:name="android.intent.action.MAIN" />
               <category android:name="android.intent.category.LAUNCHER" />

@@ -29,7 +29,7 @@
                 android:layout_marginBottom="@dimen/activity_horizontal_margin"
                 android:scaleType="fitCenter"
                 android:background="@color/transparent"
-                android:layout_gravity="bottom|right"
+                android:layout_gravity="bottom|end"
                 android:src="@drawable/ic_fab_add"/>
         </FrameLayout>
 
