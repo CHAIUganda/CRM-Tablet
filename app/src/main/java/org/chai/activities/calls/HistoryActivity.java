@@ -25,6 +25,8 @@ public class HistoryActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        CURRENT_SCREEN = SCREEN_HISTORY;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_activity);
 

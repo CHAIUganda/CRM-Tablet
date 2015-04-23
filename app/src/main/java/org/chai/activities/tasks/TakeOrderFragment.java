@@ -174,7 +174,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
             productDao = daoSession.getProductDao();
             orderDataDao = daoSession.getOrderDataDao();
         } catch (Exception ex) {
-            Log.d("Error=====================================", ex.getLocalizedMessage());
+            Log.d("Err", ex.getLocalizedMessage());
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }

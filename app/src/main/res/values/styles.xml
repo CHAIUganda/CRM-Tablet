@@ -75,6 +75,9 @@
     <style name="TextBoxStyle">
         <item name="android:textColor">@color/primary_dark</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:background">@drawable/form_text_field</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:padding">@dimen/text_field_padding</item>
     </style>
 
     <style name="TitleTextStyle">
@@ -87,5 +90,10 @@
         <item name="android:textColor">@color/app_text_color</item>
         <item name="android:layout_width">120dp</item>
         <item name="android:textSize">24sp</item>
+    </style>
+    <style name="SpinnerStyle">
+        <item name="android:layout_width">@dimen/spinner_max_wth</item>
+        <item name="android:background">@drawable/spinner_background_selector</item>
+        <item name="android:layout_height">45dp</item>
     </style>
 </resources>

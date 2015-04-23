@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="How do you suspect a patient has malaria?"/>
+                android:text="1. How do you suspect a patient has malaria?"/>
 
             <Spinner
                 android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="Do you know the MOH guideline of managing a patient with fever?"/>
+                android:text="2. Do you know the MOH guideline of managing a patient with fever?"/>
 
             <Spinner
                 android:layout_width="match_parent"
@@ -54,24 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="Do you know about antimalarias bearing a Green leaf?"/>
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/SpinnerKnowldgeLevel" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/LabelStyle"
-                android:text="Do you prescribe antimalarias without a Greenleaf?"/>
+                android:text="3. Do you know about antimalarias bearing a Green leaf?"/>
 
             <Spinner
                 android:layout_width="match_parent"
@@ -88,7 +71,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="Do patients with severe malaria come to your facility?"/>
+                android:text="4. Do you prescribe antimalarias without a Greenleaf?"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/SpinnerKnowldgeLevel" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="5. Do patients with severe malaria come to your facility?"/>
 
             <Spinner
                 android:layout_width="match_parent"

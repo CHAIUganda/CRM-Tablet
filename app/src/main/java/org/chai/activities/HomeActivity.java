@@ -1,6 +1,5 @@
 package org.chai.activities;
 
-import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -9,12 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.astuetz.PagerSlidingTabStrip;
@@ -202,47 +196,6 @@ public class HomeActivity extends BaseActivity{
                 return super.onOptionsItemSelected(item);
         }
     }*/
-
-
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.save_form_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        if(item.getItemId() == R.id.action_save){
-            Toast.makeText(this, "Form details saved", Toast.LENGTH_LONG).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        actionBarDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        actionBarDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(Gravity.START|Gravity.LEFT)){
-            drawerLayout.closeDrawers();
-            return;
-        }
-        super.onBackPressed();
-    }
-
 
     /***
      * Called when invalidateOptionsMenu() is triggered

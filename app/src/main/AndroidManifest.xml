@@ -26,7 +26,10 @@
 
     </activity>
       <activity android:name=".activities.org.chai.activities.forms.MalariaFormActivity" android:configChanges="orientation|screenSize" android:theme="@style/AppTheme" android:label="New Malaria Details">
-
+          <intent-filter>
+              <action android:name="android.intent.action.MAIN" />
+              <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
       </activity>
 
       <activity android:name=".activities.BlankActivity" android:configChanges="orientation|screenSize">
@@ -37,10 +40,11 @@
       <activity android:name=".activities.customer.CustomersActivity" android:label="Customers">
       </activity>
       <activity android:name=".activities.calls.HistoryActivity" android:label="History">
-          <intent-filter>
-              <action android:name="android.intent.action.MAIN" />
-              <category android:name="android.intent.category.LAUNCHER" />
-          </intent-filter>
+      </activity>
+      <activity android:name=".activities.tasks.NewOrderActivity" android:label="New Order">
+      </activity>
+      <activity android:name=".reports.ReportsActivity" android:label="Reports">
+
       </activity>
       <activity android:name=".activities.customer.AddNewCustomerActivity" android:label="New Customer">
 

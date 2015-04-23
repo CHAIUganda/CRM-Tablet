@@ -1,13 +1,11 @@
 package org.chai.activities.org.chai.activities.forms;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,6 +31,8 @@ public class MalariaFormActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        CURRENT_SCREEN = SCREEN_MALARIA_DETAIL_FORM;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.malaria_form_activity);
 
@@ -97,26 +97,5 @@ public class MalariaFormActivity extends BaseActivity {
             Toast.makeText(this, "Form details saved", Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        actionBarDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        actionBarDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(Gravity.START|Gravity.LEFT)){
-            drawerLayout.closeDrawers();
-            return;
-        }
-        super.onBackPressed();
     }
 }

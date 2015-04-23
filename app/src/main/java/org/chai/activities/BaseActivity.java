@@ -21,9 +21,12 @@ import com.androidquery.AQuery;
 
 import org.chai.Globals;
 import org.chai.R;
+import org.chai.activities.calls.HistoryActivity;
 import org.chai.activities.customer.CustomersActivity;
 import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
+import org.chai.activities.tasks.NewOrderActivity;
 import org.chai.model.User;
+import org.chai.reports.ReportsActivity;
 import org.chai.rest.RestClient;
 import org.chai.util.AccountManager;
 
@@ -40,7 +43,8 @@ public class BaseActivity extends ActionBarActivity{
     public int SCREEN_HISTORY = 2;
     public int SCREEN_NEW_ORDER = 3;
     public int SCREEN_DETAILING = 4;
-    public int SCREEN_REPORT = 5;
+    public int SCREEN_MALARIA_DETAIL_FORM = 5;
+    public int SCREEN_REPORT = 6;
 
     public int CURRENT_SCREEN = 0;
 
@@ -52,6 +56,7 @@ public class BaseActivity extends ActionBarActivity{
             "Customers",
             "History",
             "New Order",
+            "Malaria Detailing",
             "Unscheduled Detailing",
             "My Report"
     };
@@ -61,6 +66,7 @@ public class BaseActivity extends ActionBarActivity{
             R.drawable.ic_drawer_history,
             R.drawable.ic_drawer_order,
             R.drawable.ic_drawer_detailing,
+            R.drawable.ic_drawer_detailing,
             R.drawable.ic_drawer_reports
     };
     int[] iconsSelected = new int[]{
@@ -69,6 +75,7 @@ public class BaseActivity extends ActionBarActivity{
             R.drawable.ic_drawer_history_active,
             R.drawable.ic_drawer_order_active,
             R.drawable.ic_drawer_detailing_active,
+            R.drawable.ic_drawer_detailing_active,
             R.drawable.ic_drawer_reports_active
     };
     int[] screens = new int[]{
@@ -76,6 +83,7 @@ public class BaseActivity extends ActionBarActivity{
             SCREEN_CUSTOMERS,
             SCREEN_HISTORY,
             SCREEN_NEW_ORDER,
+            SCREEN_MALARIA_DETAIL_FORM,
             SCREEN_DETAILING,
             SCREEN_REPORT
     };
@@ -95,7 +103,7 @@ public class BaseActivity extends ActionBarActivity{
             AccountManager.offlineLogin(this, true);
 
             if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
-                drawerItems[4] = "Unscheduled Sale";
+                drawerItems[5] = "Unscheduled Sale";
             }
         }
     }
@@ -156,16 +164,19 @@ public class BaseActivity extends ActionBarActivity{
                         target = CustomersActivity.class;
                         break;
                     case 2:
-                        target = BlankActivity.class;
+                        target = HistoryActivity.class;
                         break;
                     case 3:
-                        target = BlankActivity.class;
+                        target = NewOrderActivity.class;
                         break;
                     case 4:
                         target = MalariaFormActivity.class;
                         break;
                     case 5:
                         target = BlankActivity.class;
+                        break;
+                    case 6:
+                        target = ReportsActivity.class;
                         break;
                 }
                 if (target != null) {
@@ -192,21 +203,28 @@ public class BaseActivity extends ActionBarActivity{
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        actionBarDrawerToggle.syncState();
+        if(actionBarDrawerToggle != null){
+            actionBarDrawerToggle.syncState();
+        }
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        actionBarDrawerToggle.onConfigurationChanged(newConfig);
+        if(actionBarDrawerToggle != null) {
+            actionBarDrawerToggle.onConfigurationChanged(newConfig);
+        }
     }
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(Gravity.START|Gravity.LEFT)){
-            drawerLayout.closeDrawers();
-            return;
+        if(drawerLayout != null){
+            if(drawerLayout.isDrawerOpen(Gravity.START|Gravity.LEFT)){
+                drawerLayout.closeDrawers();
+                return;
+            }
         }
+
         super.onBackPressed();
     }
 }

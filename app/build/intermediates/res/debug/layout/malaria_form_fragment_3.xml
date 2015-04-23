@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/LabelStyle"
-            android:text="Do you stock antimalarials?"/>
+            android:text="1. Do you stock antimalarials?"/>
         <LinearLayout
             android:id="@+id/ln_antimalarials_container"
             android:orientation="vertical"
