@@ -29,6 +29,24 @@
             android:name="org.chai.activities.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:label="CHAI CRM" >
+        </activity>
+        <activity
+            android:name="org.chai.activities.org.chai.activities.forms.MalariaFormActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="New Malaria Details"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="org.chai.activities.BlankActivity"
+            android:configChanges="orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="org.chai.activities.HomeActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name="org.chai.activities.customer.CustomerDetailsActivity" />
+        <activity
+            android:name="org.chai.activities.customer.CustomersActivity"
+            android:label="Customers" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,21 +54,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.chai.activities.MalariaFormActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="New Malaria Details"
-            android:theme="@style/AppTheme" >
+            android:name="org.chai.activities.customer.AddNewCustomerActivity"
+            android:label="New Customer" >
         </activity>
-        <activity
-            android:name="org.chai.activities.BlankActivity"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme" >
-        </activity>
-        <activity
-            android:name="org.chai.activities.HomeActivity"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme" />
-        <activity android:name="org.chai.activities.customer.CustomerDetailsActivity" />
         <activity
             android:name="org.chai.activities.customer.CustomerForm"
             android:configChanges="orientation|screenSize" />

@@ -23,20 +23,26 @@
         android:name=".activities.LoginActivity"
         android:configChanges="orientation|screenSize"
         android:label="CHAI CRM">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+
     </activity>
-      <activity android:name=".activities.MalariaFormActivity" android:configChanges="orientation|screenSize" android:theme="@style/AppTheme" android:label="New Malaria Details">
+      <activity android:name=".activities.org.chai.activities.forms.MalariaFormActivity" android:configChanges="orientation|screenSize" android:theme="@style/AppTheme" android:label="New Malaria Details">
 
       </activity>
 
-      <activity android:name=".activities.BlankActivity" android:configChanges="orientation|screenSize" android:theme="@style/AppTheme">
+      <activity android:name=".activities.BlankActivity" android:configChanges="orientation|screenSize">
 
       </activity>
-      <activity android:name=".activities.HomeActivity" android:configChanges="orientation|screenSize" android:theme="@style/AppTheme"/>
+      <activity android:name=".activities.HomeActivity" android:configChanges="orientation|screenSize"/>
       <activity android:name=".activities.customer.CustomerDetailsActivity"/>
+      <activity android:name=".activities.customer.CustomersActivity" android:label="Customers">
+          <intent-filter>
+              <action android:name="android.intent.action.MAIN" />
+              <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+      </activity>
+      <activity android:name=".activities.customer.AddNewCustomerActivity" android:label="New Customer">
+
+      </activity>
       <activity android:name=".activities.customer.CustomerForm" android:configChanges="orientation|screenSize"/>
       <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyC734nYWloXJZ-f7AIFvjOe5zHDfzWiNWY"/>
       <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />

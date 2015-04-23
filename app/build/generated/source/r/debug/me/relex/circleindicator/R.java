@@ -20,7 +20,7 @@ public final class R {
 		public static final int ci_width = 0x7f010022;
 	}
 	public static final class drawable {
-		public static final int white_radius = 0x7f02009c;
+		public static final int white_radius = 0x7f02009d;
 	}
 	public static final class styleable {
 		public static final int[] CircleIndicator = { 0x7f010022, 0x7f010023, 0x7f010024, 0x7f010025, 0x7f010026, 0x7f010027, 0x7f010028 };

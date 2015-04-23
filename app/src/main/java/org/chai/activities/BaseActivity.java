@@ -2,12 +2,14 @@ package org.chai.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ import com.androidquery.AQuery;
 
 import org.chai.Globals;
 import org.chai.R;
+import org.chai.activities.customer.CustomersActivity;
+import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
 import org.chai.model.User;
 import org.chai.rest.RestClient;
 import org.chai.util.AccountManager;
@@ -40,8 +44,8 @@ public class BaseActivity extends ActionBarActivity{
 
     public int CURRENT_SCREEN = 0;
 
-    DrawerLayout drawerLayout;
-    ActionBarDrawerToggle actionBarDrawerToggle;
+    public DrawerLayout drawerLayout;
+    public ActionBarDrawerToggle actionBarDrawerToggle;
 
     String[] drawerItems = new String[]{
             "Tasks",
@@ -146,10 +150,10 @@ public class BaseActivity extends ActionBarActivity{
                 Class target = null;
                 switch (position) {
                     case 0:
-                        target = BlankActivity.class;
+                        target = HomeActivity.class;
                         break;
                     case 1:
-                        target = BlankActivity.class;
+                        target = CustomersActivity.class;
                         break;
                     case 2:
                         target = BlankActivity.class;
@@ -183,5 +187,26 @@ public class BaseActivity extends ActionBarActivity{
         });
 
         aquery.id(R.id.txt_email).text(username);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        actionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(Gravity.START|Gravity.LEFT)){
+            drawerLayout.closeDrawers();
+            return;
+        }
+        super.onBackPressed();
     }
 }

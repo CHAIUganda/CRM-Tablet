@@ -339,5 +339,4 @@ public class HomeActivity extends BaseActivity{
         activity.startActivity(login);
         activity.finish();
     }*/
-
 }

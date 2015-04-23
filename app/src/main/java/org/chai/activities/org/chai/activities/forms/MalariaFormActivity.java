@@ -1,4 +1,4 @@
-package org.chai.activities;
+package org.chai.activities.org.chai.activities.forms;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -16,10 +16,7 @@ import android.widget.Toast;
 import com.androidquery.AQuery;
 
 import org.chai.R;
-import org.chai.activities.org.chai.activities.forms.MalariaFormFragment1;
-import org.chai.activities.org.chai.activities.forms.MalariaFormFragment2;
-import org.chai.activities.org.chai.activities.forms.MalariaFormFragment3;
-import org.chai.activities.org.chai.activities.forms.MalariaFormFragment4;
+import org.chai.activities.BaseActivity;
 import org.chai.util.Utils;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -27,7 +24,7 @@ import me.relex.circleindicator.CircleIndicator;
 /**
  * Created by Zed on 4/9/2015.
  */
-public class MalariaFormActivity extends BaseActivity{
+public class MalariaFormActivity extends BaseActivity {
     Toolbar toolbar;
     AQuery aq;
     int NUM_PAGES = 4;
