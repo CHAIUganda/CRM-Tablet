@@ -20,9 +20,9 @@ import com.androidquery.AQuery;
 import com.astuetz.PagerSlidingTabStrip;
 
 import org.chai.R;
-import org.chai.activities.tasks.CalenderFragmentContainer;
-import org.chai.activities.tasks.LocationFragmentContainer;
-import org.chai.activities.tasks.TaskMapFragmentContainer;
+import org.chai.activities.tasks.TaskByLocationFragment;
+import org.chai.activities.tasks.TaskCalenderFragment;
+import org.chai.activities.tasks.TaskViewOnMapFragment;
 import org.chai.adapter.NavDrawerListAdapter;
 import org.chai.util.NavDrawerItem;
 
@@ -141,13 +141,13 @@ public class HomeActivity extends BaseActivity{
             Fragment target = null;
             switch(position){
                 case 0:
-                    target = new CalenderFragmentContainer();
+                    target = new TaskCalenderFragment();
                     break;
                 case 1:
-                    target = new LocationFragmentContainer();
+                    target = new TaskByLocationFragment();
                     break;
                 case 2:
-                    target = new TaskMapFragmentContainer();
+                    target = new TaskViewOnMapFragment();
                     break;
             }
             target.setArguments(b);

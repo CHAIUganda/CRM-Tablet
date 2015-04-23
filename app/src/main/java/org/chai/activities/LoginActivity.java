@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.splunk.mint.Mint;
 
-import org.chai.Globals;
 import org.chai.R;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
@@ -50,9 +49,11 @@ public class LoginActivity extends BaseActivity {
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        skipLogin = true; //This is a login screen - don't check for logins
+
         super.onCreate(savedInstanceState);
 
-        if(AccountManager.getUsername(this) != null){
+        if(AccountManager.offlineLogin(this, false)){
             Intent i = new Intent(LoginActivity.this, HomeActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
@@ -143,8 +144,7 @@ public class LoginActivity extends BaseActivity {
         RestClient.password = pass;
         RestClient.role = role;
         AccountManager.saveUsername(user, this);
-        //we initialise gps tracker her to start computing to get accuracy quickly
-        Globals.getInstance().initGpsTracker(this);
+        AccountManager.savePassword(pass, this);
         startActivity(i);
     }
 

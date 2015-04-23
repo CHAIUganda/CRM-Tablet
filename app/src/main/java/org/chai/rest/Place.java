@@ -9,7 +9,6 @@ import org.chai.model.Subcounty;
 import org.chai.model.SummaryReport;
 import org.chai.model.User;
 import org.chai.model.Village;
-import org.chai.util.Utils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -102,7 +101,6 @@ public class Place extends RestClient {
     }
 
     public User login(String user, String pass) {
-        Utils.log("Login user -> " + user + " -> " + pass);
         try{
             userName = user;
             password = pass;

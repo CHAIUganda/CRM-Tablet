@@ -17,7 +17,10 @@ import android.widget.ListView;
 
 import com.androidquery.AQuery;
 
+import org.chai.Globals;
 import org.chai.R;
+import org.chai.model.User;
+import org.chai.rest.RestClient;
 import org.chai.util.AccountManager;
 
 /**
@@ -25,6 +28,8 @@ import org.chai.util.AccountManager;
  */
 public class BaseActivity extends ActionBarActivity{
     AQuery aquery;
+
+    boolean skipLogin = false;
 
     public int SCREEN_TASKS = 0;
     public int SCREEN_CUSTOMERS = 1;
@@ -78,6 +83,17 @@ public class BaseActivity extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceBundle) {
         super.onCreate(savedInstanceBundle);
         aquery = new AQuery(this);
+
+        //we initialise gps tracker her to start computing to get accuracy quickly
+        Globals.getInstance().initGpsTracker(this);
+
+        if(!skipLogin){
+            AccountManager.offlineLogin(this, true);
+
+            if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+                drawerItems[4] = "Unscheduled Sale";
+            }
+        }
     }
 
     public void setUpDrawer(Toolbar toolbar) {
