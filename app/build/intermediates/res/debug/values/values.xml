@@ -7,6 +7,15 @@
         <item>Medium</item>
         <item>Low</item>
     </array>
+    <array name="SpinnerNoSometimesAlways">
+        <item>No</item>
+        <item>Sometimes</item>
+        <item>Always</item>
+    </array>
+    <array name="SpinnerServerMalariaManagement">
+        <item>Treat with injectable Artesunate</item>
+        <item>Refer to a formal facility</item>
+    </array>
     <array name="SpinnerYesNo">
         <item>Yes</item>
         <item>No</item>
@@ -340,6 +349,7 @@
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="textColorPrimary">#FFFFFF</color>
+    <color name="tip_text_color">#83888d</color>
     <color name="transparent">#00000000</color>
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/wallet_colors.xml -->
     <eat-comment/>
@@ -453,7 +463,7 @@
     <dimen name="list_sub_sub_text_size">12dip</dimen>
     <dimen name="list_sub_text_size">14dip</dimen>
     <dimen name="login_label_size">18dp</dimen>
-    <dimen name="spinner_max_wth">100dp</dimen>
+    <dimen name="spinner_max_wth">240dp</dimen>
     <dimen name="tab_horizontal_padding">40dp</dimen>
     <dimen name="text_field_padding">4dp</dimen>
     <dimen name="text_label_size">12dp</dimen>
@@ -1703,6 +1713,12 @@ m>        <item name="android:textColorLink">@color/link_text_material_dark</ite
     <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light"/>
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/values/styles.xml -->
     <eat-comment/>
+    <style name="TipTextStyle">
+        <item name="android:textColor">@color/app_text_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
     <style name="TitleTextStyle">
         <item name="android:textColor">#7b98b8</item>
         <item name="android:textSize">24sp</item>

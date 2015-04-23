@@ -12,5 +12,5 @@
     <dimen name="tab_horizontal_padding">40dp</dimen>
     <dimen name="fab_button_dimensions">75dp</dimen>
     <dimen name="text_field_padding">4dp</dimen>
-    <dimen name="spinner_max_wth">100dp</dimen>
+    <dimen name="spinner_max_wth">240dp</dimen>
 </resources>

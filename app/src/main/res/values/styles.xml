@@ -72,6 +72,13 @@
         <item name="android:layout_marginBottom">10dp</item>
     </style>
 
+    <style name="TipTextStyle">
+        <item name="android:textColor">@color/app_text_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
     <style name="TextBoxStyle">
         <item name="android:textColor">@color/primary_dark</item>
         <item name="android:textSize">18sp</item>

@@ -23,10 +23,14 @@
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
                 android:text="1. How do you suspect a patient has malaria?"/>
-
-            <Spinner
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="Ask/examine for signs and symptoms of malaria which include high temperature, vomiting, body ache, diarrhea, low appetite"
+                />
+            <Spinner
+                style="@style/SpinnerStyle"
                 android:entries="@array/SpinnerKnowldgeLevel" />
         </LinearLayout>
         <LinearLayout
@@ -41,8 +45,23 @@
                 android:text="2. Do you know the MOH guideline of managing a patient with fever?"/>
 
             <Spinner
+                style="@style/SpinnerStyle"
+                android:entries="@array/SpinnerYesNo" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                style="@style/LabelStyle"
+                android:text="If Yes, probe"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="Test every fever and treat uncomplicated malaria with an ACT (bearing a green leaf)" />
+            <Spinner
+                style="@style/SpinnerStyle"
                 android:entries="@array/SpinnerKnowldgeLevel" />
         </LinearLayout>
         <LinearLayout
@@ -57,8 +76,23 @@
                 android:text="3. Do you know about antimalarias bearing a Green leaf?"/>
 
             <Spinner
+                style="@style/SpinnerStyle"
+                android:entries="@array/SpinnerYesNo" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                style="@style/LabelStyle"
+                android:text="If yes, what does it represent?"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="High quality antimalarials approved/recommended by MoH, It is expensive, others" />
+            <Spinner
+                style="@style/SpinnerStyle"
                 android:entries="@array/SpinnerKnowldgeLevel" />
         </LinearLayout>
 
@@ -74,8 +108,23 @@
                 android:text="4. Do you prescribe antimalarias without a Greenleaf?"/>
 
             <Spinner
+                style="@style/SpinnerStyle"
+                android:entries="@array/SpinnerNoSometimesAlways" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                style="@style/LabelStyle"
+                android:text="If sometimes and always, ask why"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="Its what patients can afford, patients demand for it, its very effective, I can access ACT with a green leaf" />
+            <Spinner
+                style="@style/SpinnerStyle"
                 android:entries="@array/SpinnerKnowldgeLevel" />
         </LinearLayout>
 
@@ -91,9 +140,34 @@
                 android:text="5. Do patients with severe malaria come to your facility?"/>
 
             <Spinner
+                style="@style/SpinnerStyle"
+                android:entries="@array/SpinnerYesNo" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                style="@style/LabelStyle"
+                android:text="If yes, what are signs of severe malaria?"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="Cerebral malaria, Convulsions, Severe anemia, Respiratory distress, unable to sit or stand" />
+            <Spinner
+                style="@style/SpinnerStyle"
                 android:entries="@array/SpinnerKnowldgeLevel" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="If yes, how do you manage patients with severe malaria?"/>
+
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:entries="@array/SpinnerServerMalariaManagement" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/malaria_form_fragment_2.xml -->
