@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/TitleTextStyle"
+            android:text="General"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="1. Outlet Name"/>
+
+            <EditText
+                android:id="@+id/outlet_name"
+                android:layout_width="match_parent"
+                style="@style/TextBoxStyle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="1. Outlet Type"/>
+
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="200dp"
+                android:popupBackground="@color/primary_dark"
+                android:entries="@array/outlettypes" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="3. Outlet Size"/>
+
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="200dp"
+                android:popupBackground="@color/primary_dark"
+                android:entries="@array/outletsize" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="4. Type of licence - is the licence certificate visible in the outlet?"/>
+
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="200dp"
+                android:popupBackground="@color/primary_dark"
+                android:entries="@array/SpinnerYesNo" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="4a. If yes, what type of licence?"/>
+
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="200dp"
+                android:popupBackground="@color/primary_dark"
+                android:entries="@array/licencetype2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="5. Rural or Urban?"/>
+
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="200dp"
+                android:popupBackground="@color/primary_dark"
+                android:entries="@array/split" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="6. District"/>
+
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="200dp"
+                android:popupBackground="@color/primary_dark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="7. Subcounty"/>
+
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="200dp"
+                android:popupBackground="@color/primary_dark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="8. Trading Center"/>
+
+            <EditText
+                android:id="@+id/trading_center"
+                android:layout_width="match_parent"
+                style="@style/TextBoxStyle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="9. Please give directions to the outlet from a key landmark"/>
+
+            <EditText
+                android:id="@+id/directions"
+                android:layout_width="match_parent"
+                style="@style/TextBoxStyle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="10. Location GPS"/>
+
+            <EditText
+                android:id="@+id/location_gps"
+                android:layout_width="match_parent"
+                style="@style/TextBoxStyle"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/customer_basics_form_fragment.xml -->
