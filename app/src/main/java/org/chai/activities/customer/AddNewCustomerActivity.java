@@ -47,6 +47,7 @@ public class AddNewCustomerActivity extends BaseActivity {
 
         indicator.setViewPager(pager);
 
+        pager.setCurrentItem(2);
 
         super.setUpDrawer(toolbar);
     }

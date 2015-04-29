@@ -84,7 +84,7 @@
         <item>Evening</item>
     </string-array>
     <string-array name="gender">
-        <item>""</item>
+        <item>Select Gender</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>
@@ -115,7 +115,7 @@
         <item>Ordinary</item>
     </string-array>
     <string-array name="type_of_role">
-        <item>""</item>
+        <item>Role</item>
         <item>Pharmacist</item>
         <item>Doctor</item>
         <item>Owner</item>
