@@ -6,13 +6,26 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.*;
-import android.widget.*;
-import de.greenrobot.dao.query.QueryBuilder;
+import android.view.ContextMenu;
+import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
+
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.adapter.TaskListAdapter;
-import org.chai.model.*;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
+import org.chai.model.Task;
+import org.chai.model.TaskDao;
+import org.chai.model.User;
 import org.chai.rest.RestClient;
 import org.chai.util.GPSTracker;
 import org.chai.util.MyApplication;
@@ -22,6 +35,8 @@ import org.osmdroid.util.GeoPoint;
 
 import java.util.Date;
 import java.util.List;
+
+import de.greenrobot.dao.query.QueryBuilder;
 
 /**
  * Created by victor on 12/8/14.

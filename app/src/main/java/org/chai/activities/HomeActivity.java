@@ -14,10 +14,12 @@ import com.androidquery.AQuery;
 import com.astuetz.PagerSlidingTabStrip;
 
 import org.chai.R;
+import org.chai.activities.tasks.AdhockDetailerFrgment;
 import org.chai.activities.tasks.TaskByLocationFragment;
 import org.chai.activities.tasks.TaskCalenderFragment;
 import org.chai.activities.tasks.TaskViewOnMapFragment;
 import org.chai.adapter.NavDrawerListAdapter;
+import org.chai.sync.CHAISynchroniser;
 import org.chai.util.NavDrawerItem;
 
 import java.util.ArrayList;
@@ -49,12 +51,20 @@ public class HomeActivity extends BaseActivity{
 
     ViewPager mViewPager;
 
-    String[] titles = new String[]{"CALENDAR", "VIEW BY LOCATION", "MAP"};
+    String[] titles = new String[]{"CALENDAR", "VIEW BY LOCATION", "MAP", "DETAIL"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_main_layout);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                CHAISynchroniser chaiSynchroniser = new CHAISynchroniser(HomeActivity.this);
+                chaiSynchroniser.startSyncronisationProcess();
+            }
+        }).start();
 
         aq = new AQuery(this);
 
@@ -142,6 +152,9 @@ public class HomeActivity extends BaseActivity{
                     break;
                 case 2:
                     target = new TaskViewOnMapFragment();
+                    break;
+                case 3:
+                    target = new AdhockDetailerFrgment();
                     break;
             }
             target.setArguments(b);

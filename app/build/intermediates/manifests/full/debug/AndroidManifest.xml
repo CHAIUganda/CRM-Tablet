@@ -29,12 +29,6 @@
             android:name="org.chai.activities.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:label="CHAI CRM" >
-        </activity>
-        <activity
-            android:name="org.chai.activities.org.chai.activities.forms.MalariaFormActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="New Malaria Details"
-            android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,12 +36,19 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="org.chai.activities.org.chai.activities.forms.MalariaFormActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="New Malaria Details"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
             android:name="org.chai.activities.BlankActivity"
             android:configChanges="orientation|screenSize" >
         </activity>
         <activity
             android:name="org.chai.activities.HomeActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize" >
+        </activity>
         <activity android:name="org.chai.activities.customer.CustomerDetailsActivity" />
         <activity
             android:name="org.chai.activities.customer.CustomersActivity"

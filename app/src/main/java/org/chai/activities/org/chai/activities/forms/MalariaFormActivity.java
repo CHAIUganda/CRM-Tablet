@@ -15,7 +15,6 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
-import org.chai.util.Utils;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -25,7 +24,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class MalariaFormActivity extends BaseActivity {
     Toolbar toolbar;
     AQuery aq;
-    int NUM_PAGES = 4;
+    int NUM_PAGES = 5;
     ViewPager pager;
     CircleIndicator indicator;
 
@@ -46,8 +45,6 @@ public class MalariaFormActivity extends BaseActivity {
         pager.setAdapter(new FormPagerAdapter(getSupportFragmentManager()));
         indicator.setViewPager(pager);
 
-        pager.setCurrentItem(1);
-
         super.setUpDrawer(toolbar);
     }
 
@@ -58,7 +55,6 @@ public class MalariaFormActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-            Utils.log("getting fragment at " + position);
             Fragment fragment = null;
             switch (position){
                 case 0:
@@ -71,6 +67,9 @@ public class MalariaFormActivity extends BaseActivity {
                     fragment = new MalariaFormFragment3();
                     break;
                 case 3:
+                    fragment = new MalariaFormFragment5();
+                    break;
+                case 4:
                     fragment = new MalariaFormFragment4();
                     break;
             }
@@ -97,6 +96,7 @@ public class MalariaFormActivity extends BaseActivity {
         }
         if(item.getItemId() == R.id.action_save){
             Toast.makeText(this, "Form details saved", Toast.LENGTH_LONG).show();
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -246,13 +246,21 @@ public class Utils {
         if(listAdapter == null){
             return;
         }
+        int maxHeight = 0;
+        int h = 0;
 
         int totalHeight = 0;
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, listView);
             listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
+            h = listItem.getMeasuredHeight();
+            totalHeight += h;
+            if(maxHeight < h){
+                maxHeight = h;
+            }
         }
+
+        totalHeight += (maxHeight * 2);
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));

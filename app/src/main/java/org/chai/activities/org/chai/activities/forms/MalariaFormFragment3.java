@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,10 +29,9 @@ import java.util.Arrays;
  */
 public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
     AQuery aq;
-    EditText antimalariaText;
-    LinearLayout antimalarialContainer, rdtContainer;
+    LinearLayout antimalarialContainer;
     View view;
-    ImageView addAntimalarialButton, addRdtButton;
+    ImageView addAntimalarialButton;
     ArrayList<View> rows;
     int currentPosition = -1;
 
@@ -42,7 +40,7 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
     String[] antimalarialItems = new String[]{
             "Artemether lumefantrine, such as Lonart, Artefan, Lumartem, Coartem, Lumaren",
             "Artesunate amodiaquine, such as DUAC, Coarsucam, Winthrop",
-            " Other artemisinin combination therapies, such as Arco",
+            "Other artemisinin combination therapies, such as Arco",
             "Artemether monotherapies, such as Larither, Artemether Rtitas, Artemedine, Artenam, Romether",
             "Artesunate monotherapies, such as Plasmotrim, Artesun, G-Sunate",
             "Chloroquine, such as Sugaquin, Mediquine, Kam quin, Bioquin, Renequin, Maxaquin, Oroquin",
@@ -54,40 +52,21 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
             "Injectables, such as Rogoquin, Artemether, Quinax, Larither, Kwinil"
     };
 
-    String[] rdtItems = new String[]{
-            "Parahit",
-            "SD Bioline",
-            "First Response Malaria",
-            "PAN/Pf",
-            "Clearview Malaria"
-    };
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(view != null){
-            Utils.log("View is not null");
             ((ViewGroup)view.getParent()).removeView(view);
         }else{
-            Utils.log("View is null");
             view = inflater.inflate(R.layout.malaria_form_fragment_3, container, false);
 
             aq = new AQuery(view);
             antimalarialContainer = (LinearLayout)view.findViewById(R.id.ln_antimalarials_container);
-            rdtContainer = (LinearLayout)view.findViewById(R.id.ln_rdts_container);
             addAntimalarialButton = (ImageView)view.findViewById(R.id.btn_add_antimalarial_row);
-            addRdtButton = (ImageView)view.findViewById(R.id.btn_add_rdt_row);
 
             aq.id(R.id.btn_add_antimalarial_row).clicked(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    addRow(antimalarialContainer, antimalarialItems, "Antimalarial");
-                }
-            });
-
-            aq.id(R.id.btn_add_rdt_row).clicked(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    addRow(rdtContainer, rdtItems, "RDT");
+                    addRow(antimalarialContainer, antimalarialItems, "Type or Select from list");
                 }
             });
 
@@ -158,7 +137,6 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
     }
 
     private void hideOtherRows(View exclude){
-        Utils.log("Hidding all rows");
         viewsHidden = true;
 
         for(View v: rows){
@@ -174,8 +152,6 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
 
         aq.id(R.id.btn_add_antimalarial_row).gone();
         aq.id(R.id.txt_antimalarial_title).gone();
-        aq.id(R.id.btn_add_rdt_row).gone();
-        aq.id(R.id.txt_rdts_title).gone();
         aq.id(R.id.txt_form_title).gone();
     }
 
@@ -193,8 +169,6 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
 
         aq.id(R.id.btn_add_antimalarial_row).visible();
         aq.id(R.id.txt_antimalarial_title).visible();
-        aq.id(R.id.btn_add_rdt_row).visible();
-        aq.id(R.id.txt_rdts_title).visible();
         aq.id(R.id.txt_form_title).visible();
     }
 }

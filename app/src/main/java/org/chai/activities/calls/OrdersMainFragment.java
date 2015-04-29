@@ -67,7 +67,7 @@ public class OrdersMainFragment extends Fragment {
 
     private void initialiseGreenDao() {
         try {
-             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
+            UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();

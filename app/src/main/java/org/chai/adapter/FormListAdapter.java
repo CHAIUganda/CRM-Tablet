@@ -11,7 +11,6 @@ import android.widget.Filterable;
 import com.androidquery.AQuery;
 
 import org.chai.R;
-import org.chai.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +55,6 @@ public class FormListAdapter extends ArrayAdapter<String> implements Filterable 
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            Utils.log("Filtering -> " + constraint);
             FilterResults results = new FilterResults();
             if (constraint == null || constraint.length() == 0) {
                 results.values = items;
@@ -65,7 +63,6 @@ public class FormListAdapter extends ArrayAdapter<String> implements Filterable 
                 List<String> nStringList = new ArrayList<String>();
                 for(String s : items){
                     if(s.toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))){
-                        Utils.log("Got item -> " + s);
                         nStringList.add(s);
                     }
                 }
@@ -79,17 +76,13 @@ public class FormListAdapter extends ArrayAdapter<String> implements Filterable 
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            if(results.count == 0){
-                notifyDataSetInvalidated();
-            }else{
-                ArrayList<String> filtered = (ArrayList<String>)results.values;
-                notifyDataSetChanged();
-                clear();
-                for(int i = 0; i < filtered.size(); i++){
-                    add(filtered.get(i));
-                }
-                notifyDataSetChanged();
+            ArrayList<String> filtered = (ArrayList<String>)results.values;
+            notifyDataSetChanged();
+            clear();
+            for(int i = 0; i < filtered.size(); i++){
+                add(filtered.get(i));
             }
+            notifyDataSetChanged();
         }
     }
 }

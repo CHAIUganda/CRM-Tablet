@@ -13,4 +13,5 @@
     <dimen name="fab_button_dimensions">75dp</dimen>
     <dimen name="text_field_padding">4dp</dimen>
     <dimen name="spinner_max_wth">240dp</dimen>
+    <dimen name="add_remove_row_button_dimensions">30dp</dimen>
 </resources>

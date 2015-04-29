@@ -27,6 +27,7 @@
             <EditText
                 android:id="@+id/patients_per_week"
                 android:layout_width="match_parent"
+                android:inputType="number"
                 style="@style/TextBoxStyle"/>
         </LinearLayout>
 
@@ -44,6 +45,7 @@
             <EditText
                 android:id="@+id/children"
                 android:layout_width="match_parent"
+                android:inputType="number"
                 style="@style/TextBoxStyle"/>
         </LinearLayout>
 

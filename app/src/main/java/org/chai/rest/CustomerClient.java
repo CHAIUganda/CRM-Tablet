@@ -30,7 +30,7 @@ public class CustomerClient extends RestClient {
 //            RestTemplate restTemplate = getRestTemplate();
             HttpEntity<Customer> httpEntity = new HttpEntity<Customer>(customer, getHeaders());
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "customer/update", HttpMethod.PUT, httpEntity, ServerResponse.class);
-            Log.i("Rest Customer post Response:", "==============================================================================" + responseEntity.getBody().getMessage());
+            Log.i("Rest Customer Response:", "" + responseEntity.getBody().getMessage());
             ServerResponse body = responseEntity.getBody();
             body.setItemRef(customer.getOutletName());
             return body;

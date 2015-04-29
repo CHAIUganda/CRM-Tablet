@@ -1,48 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:background="#F3F6FA"
-              android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#F3F6FA"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent">
 
     <LinearLayout
-            android:id="@+id/spinnerlayout"
+        android:id="@+id/spinnerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/task_location_district_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:prompt="@string/selectItem"
+            android:entries="@array/task_filters"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            style="@style/SpinnerStyle"/>
 
         <Spinner
-                android:id="@+id/task_location_district_spinner"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:prompt="@string/selectItem"
-                android:entries="@array/task_filters"
-                android:background="@drawable/btn_dropdown"/>
-
-        <Spinner
-                android:id="@+id/task_location_subcounty_spinner"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:prompt="@string/selectItem"
-                android:entries="@array/task_filters"
-                android:background="@drawable/btn_dropdown" />
+            android:id="@+id/task_location_subcounty_spinner"
+            android:layout_width="match_parent"
+            android:prompt="@string/selectItem"
+            android:entries="@array/task_filters"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            style="@style/SpinnerStyle" />
     </LinearLayout>
     <LinearLayout
-            android:id="@+id/location_listlayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:focusableInTouchMode="false">
+        android:id="@+id/location_listlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
 
         <ListView
-                android:id="@+id/location_tasks_list_view"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:divider="@color/list_divider"
-                android:dividerHeight="1dp"
-                android:listSelector="@drawable/list_row_selector">
+            android:id="@+id/location_tasks_list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:divider="@color/list_divider"
+            android:dividerHeight="1dp"
+            android:listSelector="@drawable/list_row_selector">
         </ListView>
     </LinearLayout>
 

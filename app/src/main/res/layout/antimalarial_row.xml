@@ -21,8 +21,8 @@
 
         <ImageView
             android:id="@+id/btn_remove_row"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/add_remove_row_button_dimensions"
+            android:layout_height="@dimen/add_remove_row_button_dimensions"
             android:layout_alignParentRight="true"
             android:scaleType="centerInside"
             android:background="@color/transparent"
@@ -33,8 +33,14 @@
         android:id="@+id/lst_items"
         android:layout_width="match_parent"
         android:visibility="gone"
-        android:layout_height="300dp">
+        android:padding="@dimen/activity_horizontal_margin"
+        android:background="@color/window_background_dark"
+        android:divider="@color/form_list_row_separator"
+        android:dividerHeight="1dp"
+        android:layout_height="10dp">
 
     </ListView>
+
+    <include layout="@layout/row_quantity_layout" />
 
 </LinearLayout>

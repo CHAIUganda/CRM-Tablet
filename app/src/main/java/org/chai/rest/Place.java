@@ -9,6 +9,7 @@ import org.chai.model.Subcounty;
 import org.chai.model.SummaryReport;
 import org.chai.model.User;
 import org.chai.model.Village;
+import org.chai.util.Utils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,16 +22,19 @@ import org.springframework.web.client.RestTemplate;
  */
 public class Place extends RestClient {
 
-    public Place(){}
+    public Place(){
+    }
 
     public Region[] downloadRegions(){
+        Utils.log("Place: Downloading regions");
         try{
             RestTemplate restTemplate = getRestTemplate();
             ResponseEntity<Region[]> responseEntity = restTemplate.exchange(REST_URL+"place/regions",HttpMethod.GET,getRequestEntity(),Region[].class);
             Region[] regions = responseEntity.getBody();
-            Log.i("REST CLIENT:","found "+regions.length+" Regions");
+            Utils.log("REST CLIENT: found " + regions.length+" Regions");
             return regions;
         }catch (HttpClientErrorException ex){
+            Utils.log("Error downloading regions -> " + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
@@ -111,9 +115,13 @@ public class Place extends RestClient {
             ResponseEntity<User> responseEntity = restTemplate.exchange(REST_URL + "info", HttpMethod.GET, requestEntity, User.class);
             User user1 = responseEntity.getBody();
             if(user1 != null){
+                Utils.log("user1 is not empty");
                 return user1;
+            }else{
+                Utils.log("User is empty");
             }
         }catch (Exception ex){
+            Utils.log("Error login user -> " + ex.getMessage());
             ex.printStackTrace();
         }
         return null;

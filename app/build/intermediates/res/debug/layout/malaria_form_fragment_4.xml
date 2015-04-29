@@ -36,6 +36,7 @@
                     android:id="@+id/poster"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox"
                     android:textColor="@color/app_text_color"
                     android:text="RRP Poster"/>
 
@@ -51,6 +52,7 @@
                     android:id="@+id/dangler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox"
                     android:textColor="@color/app_text_color"
                     android:text="Dangler"/>
 
@@ -69,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/app_text_color"
+            android:button="@drawable/checkbox"
             android:text="Start purchasing cheaper ACTs"/>
 
         <CheckBox
@@ -76,6 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/app_text_color"
+            android:button="@drawable/checkbox"
             android:text="Stock Greenleaf ACTs"/>
 
         <CheckBox
@@ -83,6 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/app_text_color"
+            android:button="@drawable/checkbox"
             android:text="Start selling Greenleaf ACTs at RRP"/>
     </LinearLayout>
 </ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/malaria_form_fragment_4.xml -->

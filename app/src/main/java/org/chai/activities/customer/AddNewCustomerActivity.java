@@ -2,6 +2,10 @@ package org.chai.activities.customer;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
@@ -28,5 +32,24 @@ public class AddNewCustomerActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         super.setUpDrawer(toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.save_form_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        if(item.getItemId() == R.id.action_save){
+            Toast.makeText(this, "Customer has been saved", Toast.LENGTH_LONG).show();
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

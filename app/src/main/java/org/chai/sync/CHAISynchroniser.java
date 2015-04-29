@@ -52,6 +52,7 @@ import org.chai.rest.TaskClient;
 import org.chai.util.MyApplication;
 import org.chai.util.ServerResponse;
 import org.chai.util.SyncronizationException;
+import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -68,7 +69,6 @@ import java.util.Map;
 public class CHAISynchroniser {
 
     private Activity parent;
-    private ProgressDialog progressDialog;
     private Place place;
     private CustomerClient customerClient;
     private ProductClient productClient;
@@ -108,7 +108,6 @@ public class CHAISynchroniser {
 
     public CHAISynchroniser(Activity parent, ProgressDialog progressDialog) {
         this.parent = parent;
-        this.progressDialog = progressDialog;
         place = new Place();
         customerClient = new CustomerClient();
         productClient = new ProductClient();
@@ -119,7 +118,7 @@ public class CHAISynchroniser {
 
     private void initialiseGreenDao() {
         try {
-             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
+            UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
@@ -151,22 +150,16 @@ public class CHAISynchroniser {
             uploadSales();
             uploadTasks();
             uploadOrders();
-            progressDialog.incrementProgressBy(30);
             regionDao.deleteAll();
             districtDao.deleteAll();
             subcountyDao.deleteAll();
             customerContactDao.deleteAll();
             customerDao.deleteAll();
             downloadRegions();
-            progressDialog.incrementProgressBy(10);
             downloadCustomers();
-            progressDialog.incrementProgressBy(20);
             downloadTasks();
-            progressDialog.incrementProgressBy(20);
             downloadProducts();
             downloadSummaryReports();
-
-            progressDialog.incrementProgressBy(20);
         }catch (final SyncronizationException syncExc){
             displayError("The Syncronisation Process is Unable to continue,"+syncExc.getMessage());
         } catch (final HttpClientErrorException e) {
@@ -249,17 +242,23 @@ public class CHAISynchroniser {
         taskOrderDao.insertOrReplaceInTx(taskOrders);
     }
 
-    public void uploadTasks() throws SyncronizationException {
+    public void uploadTasks() /*throws SyncronizationException*/ {
         List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_NEW)).list();
+
         if (!taskList.isEmpty()) {
             updatePropgress("Uploading Tasks..");
+        }else{
+            Utils.log("Tasks list is empty");
         }
         for (Task task : taskList) {
+            Utils.log("Syncrosnizing task -> " + task.getCustomerId());
             if (taskIsHistory(task)) {
                 continue;
             }
             ServerResponse response = taskClient.uploadTask(task);
+            Utils.log("After server response");
             if (response.getStatus().equalsIgnoreCase("OK")) {
+                Utils.log("Task syncronized succesfully");
                 //set all detailer and sale calls to isHistroy
                 if (RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
                     DetailerCall detailerCall = task.getDetailers().get(0);
@@ -269,6 +268,7 @@ public class CHAISynchroniser {
                     detailerCallDao.update(detailerCall);
                 }
             }else{
+                Utils.log("Error posting Tasks");
                 task.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
                 task.setSyncronisationMessage(response.getMessage());
                 task.setLastUpdated(new Date());
@@ -276,8 +276,8 @@ public class CHAISynchroniser {
                 taskDao.update(task);
                 syncronisationErros.add(response);
             }
+            Utils.log("After the sync");
         }
-
     }
 
     private boolean taskIsHistory(Task task) {
@@ -402,15 +402,11 @@ public class CHAISynchroniser {
     }
 
     private void updatePropgress(final String message) {
-        parent.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressDialog.setMessage(message);
-            }
-        });
+        Utils.log(message);
     }
 
     private void displayError(final String message){
+        Utils.log("Error -> " + message);
         parent.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -446,5 +442,4 @@ public class CHAISynchroniser {
         });
 
     }
-
 }

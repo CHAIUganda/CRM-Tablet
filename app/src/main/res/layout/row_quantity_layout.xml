@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:weightSum="4">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/LabelStyle"
+            android:text="Stock Level"/>
+
+        <EditText
+            android:id="@+id/txt_stock_level"
+            android:layout_width="match_parent"
+            style="@style/TextBoxStyle"
+            android:inputType="number"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/LabelStyle"
+            android:text="Buying Price"/>
+
+        <EditText
+            android:id="@+id/txt_buying_price"
+            android:layout_width="match_parent"
+            style="@style/TextBoxStyle"
+            android:inputType="number"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/LabelStyle"
+            android:text="Selling Price"/>
+
+        <EditText
+            android:id="@+id/txt_selling_price"
+            android:layout_width="match_parent"
+            style="@style/TextBoxStyle"
+            android:inputType="number"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/LabelStyle"
+            android:text="Lot Number"/>
+
+        <EditText
+            android:id="@+id/txt_lot_number"
+            android:layout_width="match_parent"
+            style="@style/TextBoxStyle"
+            android:inputType="number"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

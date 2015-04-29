@@ -14,12 +14,13 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             style="@style/TitleTextStyle"
-            android:text="Data Capture"/>
+            android:text="Antimalarials"/>
 
         <TextView
             android:id="@+id/txt_antimalarial_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             style="@style/LabelStyle"
             android:text="1. Do you stock antimalarials?"/>
         <LinearLayout
@@ -30,37 +31,8 @@
 
             <ImageView
                 android:id="@+id/btn_add_antimalarial_row"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_gravity="right"
-                android:src="@drawable/ic_add_row"
-                android:scaleType="centerInside"
-                android:background="@color/transparent"/>
-
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:background="@drawable/border_top_gray"/>
-        <TextView
-            android:id="@+id/txt_rdts_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/LabelStyle"
-            android:text="Do you stock RDTs?"/>
-        <LinearLayout
-            android:id="@+id/ln_rdts_container"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/btn_add_rdt_row"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/add_remove_row_button_dimensions"
+                android:layout_height="@dimen/add_remove_row_button_dimensions"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="right"
                 android:src="@drawable/ic_add_row"

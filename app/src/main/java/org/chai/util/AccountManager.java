@@ -62,7 +62,7 @@ public class AccountManager {
 
         if(!loggedInUser.isEmpty()){
             RestClient.userName = user;
-            RestClient.password = pass;
+            RestClient.password = Utils.decryptString(pass);
             RestClient.role = loggedInUser.get(0).getRole();
 
             return true;

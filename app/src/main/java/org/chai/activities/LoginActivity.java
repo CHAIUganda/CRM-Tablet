@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.splunk.mint.Mint;
 
 import org.chai.R;
+import org.chai.activities.customer.CustomersActivity;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.User;
@@ -31,8 +32,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class LoginActivity extends BaseActivity {
-
-    private static String TAG = "chai-crm-android";
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
@@ -54,7 +53,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         if(AccountManager.offlineLogin(this, false)){
-            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+            Intent i = new Intent(LoginActivity.this, CustomersActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
             finish();

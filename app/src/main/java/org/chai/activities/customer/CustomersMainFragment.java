@@ -1,25 +1,18 @@
 package org.chai.activities.customer;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.*;
-import android.widget.*;
-import org.chai.R;
+import android.widget.Toast;
+
 import org.chai.adapter.CustomerAdapter;
 import org.chai.model.Customer;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
-import org.chai.util.MyApplication;
-import org.chai.util.migration.UpgradeOpenHelper;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by victor on 10/15/14.
@@ -38,7 +31,7 @@ public class CustomersMainFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initialiseGreenDao();
+        //initialiseGreenDao();
         try {
             registerForContextMenu(getListView());
         } catch (Exception exception) {
@@ -46,7 +39,7 @@ public class CustomersMainFragment extends ListFragment {
         }
     }
 
-    private void loadDataFromDb() {
+    /*private void loadDataFromDb() {
         daoSession.clear();
         customerList.clear();
         customerList.addAll(customerDao.loadAll());
@@ -62,8 +55,7 @@ public class CustomersMainFragment extends ListFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.customer_list_fragment, container, false);
         Button newCustomerBtn = (Button)view.findViewById(R.id.btn_add_new_customer);
         newCustomerBtn.setOnClickListener(new View.OnClickListener() {
@@ -195,13 +187,12 @@ public class CustomersMainFragment extends ListFragment {
         return dialog;
 
     }
-
     @Override
      public void onResume() {
         super.onResume();
         loadDataFromDb();
         Log.d("Customer Main Fragment", "List Frag Resumed");
 
-    }
+    }*/
 
 }

@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import org.chai.R;
 import org.chai.model.Customer;
@@ -19,16 +21,14 @@ import java.util.Locale;
 /**
  * Created by victor on 10/16/14.
  */
-public class CustomerAdapter extends ArrayAdapter<Customer> {
-
+public class CustomerAdapter extends ArrayAdapter<Customer> implements Filterable {
+    private CustomerFilter filter;
     private List<Customer> customers;
-    private ArrayList<Customer> filterList;
 
-    public CustomerAdapter(Activity activity, List<Customer> customers) {
-        super(activity.getApplicationContext(), R.layout.customers_main_activity, customers);
-        this.customers = customers;
-        filterList = new ArrayList<Customer>();
-        filterList.addAll(customers);
+    public CustomerAdapter(Activity activity, List<Customer> items) {
+        super(activity.getApplicationContext(), R.layout.customers_main_activity, items);
+        this.customers = new ArrayList<Customer>();
+        this.customers.addAll(items);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Customer customer = customers.get(position);
+        Customer customer = getItem(position);
         CustomerContact customerCtct = null;
         if (customer.getCustomerContacts().size() > 0) {
             customerCtct = Utils.getKeyCustomerContact(customer.getCustomerContacts());
@@ -62,6 +62,8 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         } else {
             viewHolder.telephone.setText("No Contact Available");
         }
+
+        Utils.log("Setting outlet name -> " + customer.getOutletName());
 
         viewHolder.customerName.setText(customer.getOutletName());
         viewHolder.customerAddress.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(), 50));
@@ -74,19 +76,48 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         return convertView;
     }
 
-    public void filter(String term){
-        term = term.toLowerCase(Locale.getDefault());
-        customers.clear();
-        if(term.length()== 0){
-            customers.addAll(filterList);
-        }else{
-            for(Customer customer:filterList){
-                if(customer.getOutletName().toLowerCase(Locale.getDefault()).contains(term)){
-                    customers.add(customer);
-                }
-            }
+    @Override
+    public Filter getFilter() {
+        if(filter == null){
+            filter = new CustomerFilter();
         }
-        notifyDataSetChanged();
+        return  filter;
+    }
+
+    private class CustomerFilter extends Filter{
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if (constraint == null || constraint.length() == 0) {
+                results.values = customers;
+                results.count = customers.size();
+            }else{
+                List<Customer> cList = new ArrayList<Customer>();
+                for(Customer c : customers){
+                    if(c.getOutletName().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))){
+                        Utils.log("Adding " + c.getOutletName() + " -> " + constraint);
+                        cList.add(c);
+                    }
+                }
+                results.values = cList;
+                results.count = cList.size();
+            }
+
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            ArrayList<Customer> filtered = (ArrayList<Customer>)results.values;
+            notifyDataSetChanged();
+            clear();
+            for(int i = 0; i < filtered.size(); i++){
+                add(filtered.get(i));
+            }
+            notifyDataSetChanged();
+        }
     }
 
     static class ViewHolder {

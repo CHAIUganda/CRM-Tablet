@@ -1,8 +1,10 @@
 package org.chai.rest;
 
 import android.util.Log;
+
 import org.chai.model.Task;
 import org.chai.util.ServerResponse;
+import org.chai.util.Utils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +33,8 @@ public class TaskClient extends RestClient {
         try {
             RestTemplate restTemplate = getRestTemplate();
             HttpEntity<Task> httpEntity = new HttpEntity<Task>(task, getHeaders());
+            Utils.log("Entity Body -> " + httpEntity);
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "task/update", HttpMethod.PUT, httpEntity, ServerResponse.class);
-            Log.i("Rest Task post Response:", "==============================================================================" + responseEntity.getBody().getMessage());
             ServerResponse body = responseEntity.getBody();
             body.setItemRef(task.getDescription());
             return body;

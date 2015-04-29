@@ -138,10 +138,10 @@ public final class R {
 		public static final int abc_panel_menu_list_width = 0x7f0b0011;
 		public static final int abc_search_view_preferred_width = 0x7f0b0012;
 		public static final int abc_search_view_text_min_width = 0x7f0b0013;
-		public static final int dialog_fixed_height_major = 0x7f0b0028;
-		public static final int dialog_fixed_height_minor = 0x7f0b0029;
-		public static final int dialog_fixed_width_major = 0x7f0b002a;
-		public static final int dialog_fixed_width_minor = 0x7f0b002b;
+		public static final int dialog_fixed_height_major = 0x7f0b0029;
+		public static final int dialog_fixed_height_minor = 0x7f0b002a;
+		public static final int dialog_fixed_width_major = 0x7f0b002b;
+		public static final int dialog_fixed_width_minor = 0x7f0b002c;
 	}
 	public static final class drawable {
 		public static final int abc_ab_share_pack_holo_dark = 0x7f020000;
@@ -239,7 +239,7 @@ public final class R {
 		public static final int abc_popup_menu_item_layout = 0x7f03000f;
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030014;
 		public static final int abc_search_view = 0x7f030015;
-		public static final int support_simple_spinner_dropdown_item = 0x7f030049;
+		public static final int support_simple_spinner_dropdown_item = 0x7f03004a;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f0e0000;
