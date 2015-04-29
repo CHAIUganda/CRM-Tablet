@@ -57,6 +57,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
             <TextView
+                android:tag="required"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
@@ -75,6 +76,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
             <TextView
+                android:tag="required"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
@@ -92,6 +94,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
             <TextView
+                android:tag="required"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
@@ -132,8 +135,9 @@
                 android:text="16. How many times on average does the outlet stock up (per week)?"/>
 
             <Spinner
+                android:id="@+id/stock_frequency"
                 style="@style/SpinnerStyle"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark"
                 android:entries="@array/restock_frequency"/>
         </LinearLayout>

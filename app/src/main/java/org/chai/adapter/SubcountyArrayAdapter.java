@@ -1,11 +1,11 @@
 package org.chai.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
 import org.chai.model.Subcounty;
 
 /**
@@ -17,7 +17,7 @@ public class SubcountyArrayAdapter extends ArrayAdapter<Subcounty> {
     private Subcounty[] subcounties;
 
     public SubcountyArrayAdapter(Context context, int textViewResourceId, Subcounty[] subcounties) {
-        super(context, textViewResourceId,subcounties);
+        super(context, textViewResourceId, subcounties);
         this.context = context;
         this.subcounties = subcounties;
     }
@@ -37,16 +37,16 @@ public class SubcountyArrayAdapter extends ArrayAdapter<Subcounty> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView label = new TextView(context);
-        label.setTextColor(Color.BLACK);
+        //label.setTextColor(Color.BLACK);
         label.setText(subcounties[position].getName());
         return label;
     }
     @Override
     public View getDropDownView(int position, View convertView,ViewGroup parent) {
         TextView label = new TextView(context);
-        label.setTextColor(Color.BLACK);
+        //label.setTextColor(Color.w);
         label.setText(subcounties[position].getName());
-        label.setPadding(5,20,5,20);
+        //label.setPadding(5,20,5,20);
 
         return label;
     }

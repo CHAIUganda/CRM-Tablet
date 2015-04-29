@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import com.androidquery.AQuery;
 
 import org.chai.R;
-import org.chai.util.Utils;
 
 import java.util.ArrayList;
 
@@ -44,7 +43,6 @@ public class CustomerContactsFormFragment extends Fragment{
     }
 
     private void addRow(){
-        Utils.log("Adding new contact row");
         LayoutInflater inflator = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View row = inflator.inflate(R.layout.customer_contact_form_row, null);
@@ -62,5 +60,9 @@ public class CustomerContactsFormFragment extends Fragment{
 
         rowContainer.addView(row);
         rows.add(row);
+    }
+
+    public boolean saveFields(){
+        return true;
     }
 }

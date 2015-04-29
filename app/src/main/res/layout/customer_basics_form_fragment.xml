@@ -21,6 +21,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
             <TextView
+                android:tag="required"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
@@ -38,14 +39,16 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
             <TextView
+                android:tag="required"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
                 android:text="1. Outlet Type"/>
 
             <Spinner
+                android:id="@+id/outlettype"
                 style="@style/SpinnerStyle"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark"
                 android:entries="@array/outlettypes" />
         </LinearLayout>
@@ -56,14 +59,16 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
             <TextView
+                android:tag="required"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
                 android:text="3. Outlet Size"/>
 
             <Spinner
+                android:id="@+id/outletsize"
                 style="@style/SpinnerStyle"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark"
                 android:entries="@array/outletsize" />
         </LinearLayout>
@@ -80,8 +85,9 @@
                 android:text="4. Type of licence - is the licence certificate visible in the outlet?"/>
 
             <Spinner
+                android:id="@+id/licencevisible"
                 style="@style/SpinnerStyle"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark"
                 android:entries="@array/SpinnerYesNo" />
         </LinearLayout>
@@ -98,8 +104,9 @@
                 android:text="4a. If yes, what type of licence?"/>
 
             <Spinner
+                android:id="@+id/licencetype"
                 style="@style/SpinnerStyle"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark"
                 android:entries="@array/licencetype2" />
         </LinearLayout>
@@ -110,14 +117,16 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
             <TextView
+                android:tag="required"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
                 android:text="5. Rural or Urban?"/>
 
             <Spinner
+                android:id="@+id/ruralorurban"
                 style="@style/SpinnerStyle"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark"
                 android:entries="@array/split" />
         </LinearLayout>
@@ -128,14 +137,16 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
             <TextView
+                android:tag="required"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
                 android:text="6. District"/>
 
             <Spinner
+                android:id="@+id/district"
                 style="@style/SpinnerStyle"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark" />
         </LinearLayout>
 
@@ -145,14 +156,16 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
             <TextView
+                android:tag="required"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
                 android:text="7. Subcounty"/>
 
             <Spinner
+                android:id="@+id/subcounty"
                 style="@style/SpinnerStyle"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark" />
         </LinearLayout>
 
@@ -179,6 +192,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
             <TextView
+                android:tag="required"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
@@ -196,6 +210,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
             <TextView
+                android:tag="required"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
