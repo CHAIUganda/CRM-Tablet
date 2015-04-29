@@ -46,48 +46,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dad7d78f-c0b3-4a33-b333-77a49d84f0ba" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\java\org\chai\activities\org\chai\activities\forms\FormListPopupDialogFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\form_list_popup_dialog.xml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/user_active.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/user_inactive.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/util/AccountManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/util/AccountManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/AddNewCustomerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/AddNewCustomerActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/BlankActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/BlankActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/CustomerAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/CustomerAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/CustomerClient.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/CustomerClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomersActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomersActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomersMainFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomersMainFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/FormListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/FormListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/HomeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/HomeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/org/chai/activities/forms/MalariaFormActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/org/chai/activities/forms/MalariaFormActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/org/chai/activities/forms/MalariaFormFragment3.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/org/chai/activities/forms/MalariaFormFragment3.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/calls/OrdersMainFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/calls/OrdersMainFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/Place.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/Place.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/astuetz/pagerslidingtabstrip/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/astuetz/pagerslidingtabstrip/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/daimajia/easing/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/daimajia/easing/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/me/relex/circleindicator/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/me/relex/circleindicator/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/chai/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/chai/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/TaskClient.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/TaskClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/util/Utils.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/util/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/add_new_customer_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/add_new_customer_activity.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/antimalarial_row.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/antimalarial_row.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/customer_list_row.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/customer_list_row.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/customers_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/customers_activity.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/form_list_row.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/form_list_row.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/malaria_form_fragment_1.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/malaria_form_fragment_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/malaria_form_fragment_3.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/malaria_form_fragment_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/malaria_form_fragment_4.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/malaria_form_fragment_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/task_by_location.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/task_by_location.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/task_calender_fragment.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/task_calender_fragment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/task_list_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/task_list_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/task_map_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/task_map_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="chai-crm-android.iws" />
@@ -111,16 +77,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HomeActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/HomeActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4140" max-vertical-offset="5634">
-              <caret line="230" column="52" selection-start-line="230" selection-start-column="31" selection-end-line="230" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CustomersActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomersActivity.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -164,8 +120,46 @@
       <file leaf-file-name="customers_activity.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customers_activity.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.296296" vertical-offset="82" max-vertical-offset="972">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state vertical-scroll-proportion="-11.62963" vertical-offset="280" max-vertical-offset="990">
+              <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
+              <folding>
+                <element signature="e#1420#1455#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="colors.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
+              <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CustomerAdapter.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/adapter/CustomerAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6162625" vertical-offset="486" max-vertical-offset="2268">
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3341#3351#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="customer_list_row.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customer_list_row.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-32.0" vertical-offset="0" max-vertical-offset="1062">
+              <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -174,44 +168,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomerAdapter.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/adapter/CustomerAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.15263909" vertical-offset="847" max-vertical-offset="2412">
-              <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3578#3588#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FormListAdapter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/adapter/FormListAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="1440">
               <caret line="26" column="21" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3042" max-vertical-offset="4230">
-              <caret line="169" column="39" selection-start-line="169" selection-start-column="39" selection-end-line="169" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NewOrderActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/NewOrderActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="1080">
-              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -1064,7 +1025,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/Globals.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/history_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/calls/HistoryActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TakeOrderFragment.java" />
@@ -1108,12 +1068,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/HomeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/task_list_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/customers_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/add_new_customer_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/AddNewCustomerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomersMainFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomersActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/customers_activity.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/customer_list_row.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/CustomerAdapter.java" />
       </list>
     </option>
@@ -1190,6 +1151,24 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai-crm-android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1673,32 +1652,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/antimalarial_row.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.62963" vertical-offset="244" max-vertical-offset="918">
-          <caret line="43" column="52" selection-start-line="43" selection-start-column="52" selection-end-line="43" selection-end-column="52" />
-          <folding>
-            <element signature="e#940#981#0" expanded="false" />
-            <element signature="e#1016#1057#0" expanded="false" />
-            <element signature="e#1431#1466#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/row_quantity_layout.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.962963" vertical-offset="82" max-vertical-offset="1656">
-          <caret line="24" column="38" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/calls/AdhockSalesContainer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
@@ -1944,17 +1897,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customer_list_fragment.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34718102" vertical-offset="0" max-vertical-offset="674">
-          <caret line="13" column="15" selection-start-line="8" selection-start-column="4" selection-end-line="13" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerForm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1944" max-vertical-offset="7200">
@@ -2053,17 +1995,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customers_activity.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.296296" vertical-offset="82" max-vertical-offset="972">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/adapter/FormListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="1440">
@@ -2088,13 +2019,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customers_activity.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.62963" vertical-offset="280" max-vertical-offset="990">
+          <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
+          <folding>
+            <element signature="e#1420#1455#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
+          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customer_list_fragment.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34718102" vertical-offset="0" max-vertical-offset="674">
+          <caret line="13" column="15" selection-start-line="8" selection-start-column="4" selection-end-line="13" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customer_list_row.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-32.0" vertical-offset="0" max-vertical-offset="1062">
+          <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/adapter/CustomerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15263909" vertical-offset="847" max-vertical-offset="2412">
-          <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.6162625" vertical-offset="486" max-vertical-offset="2268">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3578#3588#0" expanded="true" />
+            <element signature="e#3341#3351#0" expanded="true" />
           </folding>
         </state>
       </provider>

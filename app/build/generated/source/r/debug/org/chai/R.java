@@ -2173,7 +2173,9 @@ containing a value of this type.
         public static final int task_icon=0x7f0200a1;
         public static final int task_selected=0x7f0200a2;
         public static final int unchecked=0x7f0200a3;
-        public static final int white_radius=0x7f0200a4;
+        public static final int user_active=0x7f0200a4;
+        public static final int user_inactive=0x7f0200a5;
+        public static final int white_radius=0x7f0200a6;
     }
     public static final class id {
         public static final int action_bar=0x7f0c004c;

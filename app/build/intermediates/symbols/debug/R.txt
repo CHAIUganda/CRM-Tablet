@@ -623,7 +623,9 @@ int drawable task_default 0x7f0200a0
 int drawable task_icon 0x7f0200a1
 int drawable task_selected 0x7f0200a2
 int drawable unchecked 0x7f0200a3
-int drawable white_radius 0x7f0200a4
+int drawable user_active 0x7f0200a4
+int drawable user_inactive 0x7f0200a5
+int drawable white_radius 0x7f0200a6
 int id action_bar 0x7f0c004c
 int id action_bar_activity_content 0x7f0c0000
 int id action_bar_container 0x7f0c004b

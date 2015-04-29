@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.TextView;
+
+import com.androidquery.AQuery;
+
 import org.chai.R;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
@@ -33,47 +35,44 @@ public class CustomerAdapter extends ArrayAdapter<Customer> implements Filterabl
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
-        if(convertView == null){
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.customer_list_row, parent, false);
-
-            viewHolder = new ViewHolder();
-            TextView customerNameView = (TextView) convertView.findViewById(R.id.customername);
-            TextView customerAddressView = (TextView) convertView.findViewById(R.id.customeraddress);
-            TextView customerViewTelephone = (TextView) convertView.findViewById(R.id.customertelephone);
-
-            viewHolder.customerName = customerNameView;
-            viewHolder.customerAddress = customerAddressView;
-            viewHolder.telephone = customerViewTelephone;
-            convertView.setTag(viewHolder);
-        }else{
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-
+        View row = convertView;
         Customer customer = getItem(position);
-        CustomerContact customerCtct = null;
+
+        if(row == null){
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            row = inflater.inflate(R.layout.customer_list_row, parent, false);
+        }
+
+        AQuery aq = new AQuery(row);
+
+        CustomerContact contact = null;
         if (customer.getCustomerContacts().size() > 0) {
-            customerCtct = Utils.getKeyCustomerContact(customer.getCustomerContacts());
+            contact = Utils.getKeyCustomerContact(customer.getCustomerContacts());
         }
 
-        if (customerCtct != null) {
-            viewHolder.telephone.setText(customerCtct.getContact());
+        if (contact != null) {
+            aq.id(R.id.customertelephone).text(contact.getContact());
         } else {
-            viewHolder.telephone.setText("No Contact Available");
+            aq.id(R.id.customertelephone).text("No Contact Available");
         }
 
-        Utils.log("Setting outlet name -> " + customer.getOutletName());
-
-        viewHolder.customerName.setText(customer.getOutletName());
-        viewHolder.customerAddress.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(), 50));
+        aq.id(R.id.customername).text(customer.getOutletName());
+        aq.id(R.id.customeraddress).text(Utils.truncateString(customer.getDescriptionOfOutletLocation(), 50));
         if(customer.getIsActive()!= null && !customer.getIsActive()){
-            viewHolder.customerName.setTextColor(Color.parseColor("#C0C0C0"));
-            viewHolder.customerAddress.setTextColor(Color.parseColor("#C0C0C0"));
-            viewHolder.telephone.setTextColor(Color.parseColor("#C0C0C0"));
+            int inactiveColor = Color.parseColor("#C0C0C0");
+            aq.id(R.id.customername).textColor(inactiveColor);
+            aq.id(R.id.customeraddress).textColor(inactiveColor);
+            aq.id(R.id.customertelephone).textColor(inactiveColor);
+            aq.id(R.id.thumbnail).image(R.drawable.user_inactive);
+        }else{
+            aq.id(R.id.customername).textColor(R.color.list_main_text_color);
+            aq.id(R.id.customeraddress).textColor(R.color.list_main_text_color);
+            aq.id(R.id.customertelephone).textColor(R.color.list_subtext_color);
+            aq.id(R.id.thumbnail).image(R.drawable.user_inactive);
+            aq.id(R.id.thumbnail).image(R.drawable.user_active);
         }
 
-        return convertView;
+        return row;
     }
 
     @Override
@@ -96,7 +95,6 @@ public class CustomerAdapter extends ArrayAdapter<Customer> implements Filterabl
                 List<Customer> cList = new ArrayList<Customer>();
                 for(Customer c : customers){
                     if(c.getOutletName().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))){
-                        Utils.log("Adding " + c.getOutletName() + " -> " + constraint);
                         cList.add(c);
                     }
                 }
@@ -118,11 +116,5 @@ public class CustomerAdapter extends ArrayAdapter<Customer> implements Filterabl
             }
             notifyDataSetChanged();
         }
-    }
-
-    static class ViewHolder {
-        TextView customerName;
-        TextView customerAddress;
-        TextView telephone;
     }
 }
