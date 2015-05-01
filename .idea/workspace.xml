@@ -42,23 +42,12 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="CHAI" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="AndroidRuntime" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dad7d78f-c0b3-4a33-b333-77a49d84f0ba" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/AddNewCustomerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/AddNewCustomerActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerContactsFormFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerContactsFormFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/NewOrderActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/NewOrderActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/ProductArrayAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/ProductArrayAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/astuetz/pagerslidingtabstrip/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/astuetz/pagerslidingtabstrip/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/daimajia/easing/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/daimajia/easing/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/chai/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/chai/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/customer_contacts_form_fragment.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/customer_contacts_form_fragment.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/new_order_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/new_order_activity.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -83,11 +72,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NewOrderActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="NewOrderActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/NewOrderActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1292" max-vertical-offset="2682">
-              <caret line="132" column="41" selection-start-line="132" selection-start-column="41" selection-end-line="132" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.5552326" vertical-offset="2300" max-vertical-offset="3006">
+              <caret line="190" column="55" selection-start-line="190" selection-start-column="55" selection-end-line="190" selection-end-column="55" />
               <folding>
                 <element signature="e#2771#3091#0" expanded="true" />
                 <element signature="e#3080#3081#0" expanded="true" />
@@ -112,6 +101,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="SaleslFormFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SaleslFormFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="9216">
+              <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="CustomDatePicker.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/util/customwidget/CustomDatePicker.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -130,13 +129,13 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-30.962963" vertical-offset="604" max-vertical-offset="1980">
-              <caret line="80" column="51" selection-start-line="80" selection-start-column="51" selection-end-line="80" selection-end-column="51" />
+            <state vertical-scroll-proportion="-14.0" vertical-offset="324" max-vertical-offset="1962">
+              <caret line="39" column="52" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="52" />
               <folding>
                 <element signature="e#1047#1082#0" expanded="true" />
-                <element signature="e#2552#2593#0" expanded="true" />
-                <element signature="e#2640#2681#0" expanded="true" />
-                <element signature="e#4261#4282#0" expanded="true" />
+                <element signature="e#2501#2542#0" expanded="true" />
+                <element signature="e#2589#2630#0" expanded="true" />
+                <element signature="e#4210#4231#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -152,13 +151,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="order_form_item_row.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="order_form_item_row.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/order_form_item_row.xml">
           <provider editor-type-id="android-designer">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.62068963" vertical-offset="54" max-vertical-offset="1278">
+            <state vertical-scroll-proportion="-8.666667" vertical-offset="54" max-vertical-offset="1278">
               <caret line="16" column="57" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
               <folding>
                 <element signature="e#257#292#0" expanded="true" />
@@ -1108,10 +1107,10 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/order_item_row.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerContactsFormFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/util/customwidget/CustomDatePicker.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/NewOrderActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/ProductArrayAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/new_order_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/order_form_item_row.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/new_order_activity.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/NewOrderActivity.java" />
       </list>
     </option>
   </component>
@@ -1705,7 +1704,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="886" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1718,7 +1717,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4074074" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4074074" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8587106" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5569273" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2089,14 +2088,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SaleslFormFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9216">
-          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1315" max-vertical-offset="2016">
@@ -2180,53 +2171,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/adapter/ProductArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
-          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/util/customwidget/CustomDatePicker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="648">
           <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/NewOrderActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1292" max-vertical-offset="2682">
-          <caret line="132" column="41" selection-start-line="132" selection-start-column="41" selection-end-line="132" selection-end-column="41" />
-          <folding>
-            <element signature="e#2771#3091#0" expanded="true" />
-            <element signature="e#3080#3081#0" expanded="true" />
-            <element signature="e#3135#3277#0" expanded="true" />
-            <element signature="e#3266#3267#0" expanded="true" />
-            <element signature="e#3395#3910#0" expanded="true" />
-            <element signature="e#3899#3900#0" expanded="true" />
-            <element signature="e#4530#4929#0" expanded="true" />
-            <element signature="e#4918#4919#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/new_order_activity.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-30.962963" vertical-offset="604" max-vertical-offset="1980">
-          <caret line="80" column="51" selection-start-line="80" selection-start-column="51" selection-end-line="80" selection-end-column="51" />
-          <folding>
-            <element signature="e#1047#1082#0" expanded="true" />
-            <element signature="e#2552#2593#0" expanded="true" />
-            <element signature="e#2640#2681#0" expanded="true" />
-            <element signature="e#4261#4282#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2247,7 +2197,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62068963" vertical-offset="54" max-vertical-offset="1278">
+        <state vertical-scroll-proportion="-8.666667" vertical-offset="54" max-vertical-offset="1278">
           <caret line="16" column="57" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
           <folding>
             <element signature="e#257#292#0" expanded="true" />
@@ -2255,6 +2205,55 @@
             <element signature="e#1095#1130#0" expanded="true" />
             <element signature="e#1929#1970#0" expanded="true" />
             <element signature="e#2009#2050#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/adapter/ProductArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
+          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SaleslFormFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9216">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/new_order_activity.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.0" vertical-offset="324" max-vertical-offset="1962">
+          <caret line="39" column="52" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="52" />
+          <folding>
+            <element signature="e#1047#1082#0" expanded="true" />
+            <element signature="e#2501#2542#0" expanded="true" />
+            <element signature="e#2589#2630#0" expanded="true" />
+            <element signature="e#4210#4231#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/NewOrderActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5552326" vertical-offset="2300" max-vertical-offset="3006">
+          <caret line="190" column="55" selection-start-line="190" selection-start-column="55" selection-end-line="190" selection-end-column="55" />
+          <folding>
+            <element signature="e#2771#3091#0" expanded="true" />
+            <element signature="e#3080#3081#0" expanded="true" />
+            <element signature="e#3135#3277#0" expanded="true" />
+            <element signature="e#3266#3267#0" expanded="true" />
+            <element signature="e#3395#3910#0" expanded="true" />
+            <element signature="e#3899#3900#0" expanded="true" />
+            <element signature="e#4530#4929#0" expanded="true" />
+            <element signature="e#4918#4919#0" expanded="true" />
           </folding>
         </state>
       </provider>

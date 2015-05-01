@@ -177,8 +177,26 @@ public class NewOrderActivity extends BaseActivity {
             return true;
         }
         if(item.getItemId() == R.id.action_save){
-            Toast.makeText(this, "Order has been saved", Toast.LENGTH_LONG).show();
+            saveOrder();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveOrder(){
+        String customeruuid = aq.id(R.id.customer_id).getText().toString();
+        if(customeruuid.isEmpty()){
+            Toast.makeText(this, "Please select customer", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(dateString == null || dateString.isEmpty()){
+            Toast.makeText(this, "Select the due date", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(rows.size() == 0){
+            Toast.makeText(this, "Add atleast one order", Toast.LENGTH_LONG).show();
+            return;
+        }
+        Toast.makeText(this, "New order has been saved", Toast.LENGTH_LONG).show();
+        finish();
     }
 }
