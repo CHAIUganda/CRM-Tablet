@@ -113,9 +113,17 @@ public class AddNewCustomerActivity extends BaseActivity {
             }
 
             if(validForm){
-                Utils.log("Inserting new customer");
-                customer.setUuid(UUID.randomUUID().toString());
-                customerDao.insert(customer);
+                customer.setIsDirty(true);
+                customer.setIsActive(true);
+
+                if(customer.getUuid() == null){
+                    Utils.log("Inserting new customer");
+                    customer.setUuid(UUID.randomUUID().toString());
+                    customerDao.insert(customer);
+                }else{
+                    customerDao.insert(customer);
+                }
+
                 finish();
                 Toast.makeText(this, "Customer has been saved", Toast.LENGTH_LONG).show();
             }else{

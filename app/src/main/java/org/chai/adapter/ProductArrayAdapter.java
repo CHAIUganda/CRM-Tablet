@@ -36,16 +36,16 @@ public class ProductArrayAdapter extends ArrayAdapter<Product> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView label = new TextView(context);
-        label.setTextColor(Color.BLACK);
+        label.setTextColor(Color.WHITE);
         label.setText(products[position].getName());
         return label;
     }
     @Override
     public View getDropDownView(int position, View convertView,ViewGroup parent) {
         TextView label = new TextView(context);
-        label.setTextColor(Color.BLACK);
+        label.setTextColor(Color.WHITE);
         label.setText(products[position].getName());
-        label.setPadding(5,20,5,20);
+        label.setPadding(10, 10, 10, 10);
 
         return label;
     }

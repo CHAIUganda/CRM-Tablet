@@ -297,6 +297,8 @@ public class CHAISynchroniser {
         List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
         if (!customersList.isEmpty()) {
             updatePropgress("Uploading Customers...");
+        }else{
+            Utils.log("No customers");
         }
         for (Customer customer : customersList) {
             ServerResponse response = customerClient.uploadCustomer(customer,RestClient.getRestTemplate());

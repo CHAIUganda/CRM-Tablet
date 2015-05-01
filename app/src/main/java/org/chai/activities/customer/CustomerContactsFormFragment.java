@@ -54,7 +54,8 @@ public class CustomerContactsFormFragment extends Fragment{
                 rows.remove(row);
                 LinearLayout parent = (LinearLayout)v.getParent();
                 LinearLayout root = (LinearLayout)parent.getParent();
-                rowContainer.removeView(root);
+                LinearLayout top = (LinearLayout)root.getParent();
+                rowContainer.removeView(top);
             }
         });
 

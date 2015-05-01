@@ -39,8 +39,6 @@
                 android:scaleType="centerInside"
                 android:background="@color/transparent"/>
 
-            <include layout="@layout/customer_contact_form_row" />
-
         </LinearLayout>
     </LinearLayout>
 </ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/customer_contacts_form_fragment.xml -->

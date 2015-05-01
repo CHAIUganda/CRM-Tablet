@@ -39,8 +39,6 @@
                 android:scaleType="centerInside"
                 android:background="@color/transparent"/>
 
-            <include layout="@layout/customer_contact_form_row" />
-
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
