@@ -2584,7 +2584,7 @@ containing a value of this type.
         public static final int txt_email=0x7f0c0123;
         public static final int txt_form_title=0x7f0c0141;
         public static final int txt_logout=0x7f0c0127;
-        public static final int txt_lot_number=0x7f0c0166;
+        public static final int txt_pack_size=0x7f0c0166;
         public static final int txt_placeholder=0x7f0c0089;
         public static final int txt_rdts_title=0x7f0c014a;
         public static final int txt_selling_price=0x7f0c0165;

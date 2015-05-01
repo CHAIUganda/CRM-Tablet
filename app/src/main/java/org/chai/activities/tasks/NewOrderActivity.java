@@ -12,11 +12,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
@@ -108,6 +110,8 @@ public class NewOrderActivity extends BaseActivity {
         });
 
         super.setUpDrawer(toolbar);
+
+        setRequiredFields();
     }
 
     private void showDatePicker(){
@@ -146,6 +150,18 @@ public class NewOrderActivity extends BaseActivity {
 
         rowContainer.addView(row);
         rows.add(row);
+    }
+
+    private void setRequiredFields(){
+        view = getWindow().getDecorView().findViewById(android.R.id.content);
+        List<View> required = Utils.getViewsByTag((ViewGroup)view, "required");
+        for(View v : required){
+            try{
+                Utils.setRequired((TextView)v);
+            }catch(Exception ex){
+                Utils.log("Error setting view by tag -> " + ex.getMessage());
+            }
+        }
     }
 
     private void initialiseGreenDao() {

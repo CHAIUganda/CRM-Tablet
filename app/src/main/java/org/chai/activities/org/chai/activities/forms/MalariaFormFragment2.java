@@ -5,15 +5,33 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.chai.R;
+import org.chai.util.Utils;
+
+import java.util.List;
 
 /**
  * Created by Zed on 4/9/2015.
  */
 public class MalariaFormFragment2 extends Fragment {
+    View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.malaria_form_fragment_2, container, false);
+        view = inflater.inflate(R.layout.malaria_form_fragment_2, container, false);
+        setRequiredFields();
+        return view;
+    }
+
+    private void setRequiredFields(){
+        List<View> required = Utils.getViewsByTag((ViewGroup) view, "required");
+        for(View v : required){
+            try{
+                Utils.setRequired((TextView)v);
+            }catch(Exception ex){
+                Utils.log("Error setting view by tag -> " + ex.getMessage());
+            }
+        }
     }
 }

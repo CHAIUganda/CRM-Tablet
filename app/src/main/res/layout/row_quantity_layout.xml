@@ -75,10 +75,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/LabelStyle"
-            android:text="Lot Number"/>
+            android:text="Pack Size"/>
 
         <EditText
-            android:id="@+id/txt_lot_number"
+            android:id="@+id/txt_pack_size"
             android:layout_width="match_parent"
             style="@style/TextBoxStyle"
             android:inputType="number"

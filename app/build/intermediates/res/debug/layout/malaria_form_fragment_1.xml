@@ -21,6 +21,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:tag="required"
                 style="@style/LabelStyle"
                 android:text="1. How many malaria patients do you see in your outlet/facility in a week?"/>
 
@@ -39,6 +40,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:tag="required"
                 style="@style/LabelStyle"
                 android:text="2. How many of these patients are children?"/>
 
@@ -62,7 +64,7 @@
 
             <Spinner
                 style="@style/SpinnerStyle"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark"
                 android:entries="@array/SpinnerYesNo">
 

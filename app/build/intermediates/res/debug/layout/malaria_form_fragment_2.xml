@@ -21,6 +21,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:tag="required"
                 style="@style/LabelStyle"
                 android:text="1. How do you suspect a patient has malaria?"/>
             <TextView
@@ -31,6 +32,7 @@
                 />
             <Spinner
                 style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
                 android:entries="@array/SpinnerKnowldgeLevel" />
         </LinearLayout>
         <LinearLayout
@@ -41,11 +43,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:tag="required"
                 style="@style/LabelStyle"
                 android:text="2. Do you know the MOH guideline of managing a patient with fever?"/>
 
             <Spinner
                 style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
                 android:entries="@array/SpinnerYesNo" />
 
             <TextView
@@ -62,6 +66,7 @@
                 android:text="Test every fever and treat uncomplicated malaria with an ACT (bearing a green leaf)" />
             <Spinner
                 style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
                 android:entries="@array/SpinnerKnowldgeLevel" />
         </LinearLayout>
         <LinearLayout
@@ -72,11 +77,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:tag="required"
                 style="@style/LabelStyle"
                 android:text="3. Do you know about antimalarias bearing a Green leaf?"/>
 
             <Spinner
                 style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
                 android:entries="@array/SpinnerYesNo" />
 
             <TextView
@@ -93,6 +100,7 @@
                 android:text="High quality antimalarials approved/recommended by MoH, It is expensive, others" />
             <Spinner
                 style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
                 android:entries="@array/SpinnerKnowldgeLevel" />
         </LinearLayout>
 
@@ -104,11 +112,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:tag="required"
                 style="@style/LabelStyle"
                 android:text="4. Do you prescribe antimalarias without a Greenleaf?"/>
 
             <Spinner
                 style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
                 android:entries="@array/SpinnerNoSometimesAlways" />
 
             <TextView
@@ -125,6 +135,7 @@
                 android:text="Its what patients can afford, patients demand for it, its very effective, I can access ACT with a green leaf" />
             <Spinner
                 style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
                 android:entries="@array/SpinnerKnowldgeLevel" />
         </LinearLayout>
 
@@ -141,6 +152,7 @@
 
             <Spinner
                 style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
                 android:entries="@array/SpinnerYesNo" />
 
             <TextView
@@ -157,6 +169,7 @@
                 android:text="Cerebral malaria, Convulsions, Severe anemia, Respiratory distress, unable to sit or stand" />
             <Spinner
                 style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
                 android:entries="@array/SpinnerKnowldgeLevel" />
 
             <TextView
@@ -167,6 +180,7 @@
 
             <Spinner
                 style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
                 android:entries="@array/SpinnerServerMalariaManagement" />
         </LinearLayout>
     </LinearLayout>
