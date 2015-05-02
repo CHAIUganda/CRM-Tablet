@@ -32,6 +32,10 @@
 
       </activity>
 
+      <activity android:name=".activities.tasks.DiarrheaFormActivity" android:configChanges="orientation|screenSize" android:theme="@style/AppTheme" android:label="New Malaria Details">
+
+      </activity>
+
       <activity android:name=".activities.BlankActivity" android:configChanges="orientation|screenSize">
 
       </activity>

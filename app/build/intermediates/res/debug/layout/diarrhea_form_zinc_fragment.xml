@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_form_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/TitleTextStyle"
+            android:text="Zinc"/>
+
+        <TextView
+            android:id="@+id/txt_prompt_title"
+            android:tag="required"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            style="@style/LabelStyle"
+            android:text="1. Do you stock zinc?"/>
+        <LinearLayout
+            android:id="@+id/ln_rows_container"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btn_add_row"
+                android:layout_width="@dimen/add_remove_row_button_dimensions"
+                android:layout_height="@dimen/add_remove_row_button_dimensions"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="right"
+                android:src="@drawable/ic_add_row"
+                android:scaleType="centerInside"
+                android:background="@color/transparent"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/diarrhea_form_zinc_fragment.xml -->

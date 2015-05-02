@@ -111,68 +111,78 @@ ADDED from AndroidManifest.xml:31:7
 		ADDED from AndroidManifest.xml:31:137
 	android:name
 		ADDED from AndroidManifest.xml:31:17
-activity#org.chai.activities.BlankActivity
+activity#org.chai.activities.tasks.DiarrheaFormActivity
 ADDED from AndroidManifest.xml:35:7
+	android:label
+		ADDED from AndroidManifest.xml:35:150
 	android:configChanges
-		ADDED from AndroidManifest.xml:35:58
+		ADDED from AndroidManifest.xml:35:71
+	android:theme
+		ADDED from AndroidManifest.xml:35:118
 	android:name
 		ADDED from AndroidManifest.xml:35:17
-activity#org.chai.activities.HomeActivity
-ADDED from AndroidManifest.xml:38:7
+activity#org.chai.activities.BlankActivity
+ADDED from AndroidManifest.xml:39:7
 	android:configChanges
-		ADDED from AndroidManifest.xml:38:57
+		ADDED from AndroidManifest.xml:39:58
 	android:name
-		ADDED from AndroidManifest.xml:38:17
-activity#org.chai.activities.customer.CustomerDetailsActivity
-ADDED from AndroidManifest.xml:41:7
-	android:name
-		ADDED from AndroidManifest.xml:41:17
-activity#org.chai.activities.customer.CustomersActivity
+		ADDED from AndroidManifest.xml:39:17
+activity#org.chai.activities.HomeActivity
 ADDED from AndroidManifest.xml:42:7
-	android:label
-		ADDED from AndroidManifest.xml:42:71
+	android:configChanges
+		ADDED from AndroidManifest.xml:42:57
 	android:name
 		ADDED from AndroidManifest.xml:42:17
-activity#org.chai.activities.calls.HistoryActivity
-ADDED from AndroidManifest.xml:44:7
-	android:label
-		ADDED from AndroidManifest.xml:44:66
+activity#org.chai.activities.customer.CustomerDetailsActivity
+ADDED from AndroidManifest.xml:45:7
 	android:name
-		ADDED from AndroidManifest.xml:44:17
-activity#org.chai.activities.tasks.NewOrderActivity
+		ADDED from AndroidManifest.xml:45:17
+activity#org.chai.activities.customer.CustomersActivity
 ADDED from AndroidManifest.xml:46:7
 	android:label
-		ADDED from AndroidManifest.xml:46:67
+		ADDED from AndroidManifest.xml:46:71
 	android:name
 		ADDED from AndroidManifest.xml:46:17
-activity#org.chai.reports.ReportsActivity
+activity#org.chai.activities.calls.HistoryActivity
 ADDED from AndroidManifest.xml:48:7
 	android:label
-		ADDED from AndroidManifest.xml:48:57
+		ADDED from AndroidManifest.xml:48:66
 	android:name
 		ADDED from AndroidManifest.xml:48:17
-activity#org.chai.activities.customer.AddNewCustomerActivity
-ADDED from AndroidManifest.xml:51:7
+activity#org.chai.activities.tasks.NewOrderActivity
+ADDED from AndroidManifest.xml:50:7
 	android:label
-		ADDED from AndroidManifest.xml:51:76
+		ADDED from AndroidManifest.xml:50:67
 	android:name
-		ADDED from AndroidManifest.xml:51:17
-activity#org.chai.activities.customer.CustomerForm
-ADDED from AndroidManifest.xml:54:7
-	android:configChanges
-		ADDED from AndroidManifest.xml:54:66
+		ADDED from AndroidManifest.xml:50:17
+activity#org.chai.reports.ReportsActivity
+ADDED from AndroidManifest.xml:52:7
+	android:label
+		ADDED from AndroidManifest.xml:52:57
 	android:name
-		ADDED from AndroidManifest.xml:54:17
-meta-data#com.google.android.maps.v2.API_KEY
+		ADDED from AndroidManifest.xml:52:17
+activity#org.chai.activities.customer.AddNewCustomerActivity
 ADDED from AndroidManifest.xml:55:7
+	android:label
+		ADDED from AndroidManifest.xml:55:76
 	android:name
-		ADDED from AndroidManifest.xml:55:18
+		ADDED from AndroidManifest.xml:55:17
+activity#org.chai.activities.customer.CustomerForm
+ADDED from AndroidManifest.xml:58:7
+	android:configChanges
+		ADDED from AndroidManifest.xml:58:66
+	android:name
+		ADDED from AndroidManifest.xml:58:17
+meta-data#com.google.android.maps.v2.API_KEY
+ADDED from AndroidManifest.xml:59:7
+	android:name
+		ADDED from AndroidManifest.xml:59:18
 	android:value
-		ADDED from AndroidManifest.xml:55:68
+		ADDED from AndroidManifest.xml:59:68
 meta-data#com.google.android.gms.version
-ADDED from AndroidManifest.xml:56:7
+ADDED from AndroidManifest.xml:60:7
 MERGED from com.google.android.gms:play-services:6.5.87:21:9
 	android:name
-		ADDED from AndroidManifest.xml:56:18
+		ADDED from AndroidManifest.xml:60:18
 	android:value
-		ADDED from AndroidManifest.xml:56:64
+		ADDED from AndroidManifest.xml:60:64
