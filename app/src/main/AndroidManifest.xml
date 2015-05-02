@@ -32,7 +32,7 @@
 
       </activity>
 
-      <activity android:name=".activities.tasks.DiarrheaFormActivity" android:configChanges="orientation|screenSize" android:theme="@style/AppTheme" android:label="New Malaria Details">
+      <activity android:name=".activities.tasks.DiarrheaFormActivity" android:configChanges="orientation|screenSize" android:theme="@style/AppTheme" android:label="New Diarrhea Details">
 
       </activity>
 

@@ -48,11 +48,9 @@
     <list default="true" id="dad7d78f-c0b3-4a33-b333-77a49d84f0ba" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/astuetz/pagerslidingtabstrip/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/astuetz/pagerslidingtabstrip/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/daimajia/easing/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/daimajia/easing/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/chai/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/chai/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_customer_fragment.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_customer_fragment.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="chai-crm-android.iws" />
@@ -76,24 +74,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DiarrheaFormZincFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormZincFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2359" max-vertical-offset="3114">
-              <caret line="162" column="30" selection-start-line="162" selection-start-column="30" selection-end-line="162" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1715#1925#0" expanded="true" />
-                <element signature="e#1910#1911#0" expanded="true" />
-                <element signature="e#2404#2734#0" expanded="true" />
-                <element signature="e#2723#2724#0" expanded="true" />
-                <element signature="e#3736#3996#0" expanded="true" />
-                <element signature="e#3985#3986#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DiarrheaOrsFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaOrsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -139,41 +119,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <file leaf-file-name="diarrhea_form_customer_fragment.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_customer_fragment.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.82978725" vertical-offset="378" max-vertical-offset="1260">
-              <caret line="34" column="130" selection-start-line="34" selection-start-column="130" selection-end-line="34" selection-end-column="130" />
+            <state vertical-scroll-proportion="1.495549" vertical-offset="0" max-vertical-offset="1296">
+              <caret line="56" column="47" selection-start-line="56" selection-start-column="47" selection-end-line="56" selection-end-column="47" />
               <folding>
-                <element signature="e#1060#1078#0" expanded="true" />
-                <element signature="e#3132#3171#0" expanded="true" />
+                <element signature="e#248#283#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MalariaFormFragment5.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/org/chai/activities/forms/MalariaFormFragment5.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="2574">
-              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="diarrhea_form_zinc_fragment.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_zinc_fragment.xml">
+      <file leaf-file-name="customer_basics_form_fragment.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customer_basics_form_fragment.xml">
           <provider editor-type-id="android-designer">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.666667" vertical-offset="0" max-vertical-offset="918">
-              <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+            <state vertical-scroll-proportion="-22.0" vertical-offset="0" max-vertical-offset="4140">
+              <caret line="33" column="23" selection-start-line="10" selection-start-column="8" selection-end-line="33" selection-end-column="23" />
               <folding>
-                <element signature="e#211#246#0" expanded="true" />
-                <element signature="e#1332#1373#0" expanded="true" />
-                <element signature="e#1412#1453#0" expanded="true" />
+                <element signature="e#362#397#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1097,7 +1067,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/org/chai/activities/forms/MalariaFormFragment2.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/malaria_form_fragment_2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_activity.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_customer_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormCustomerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_education_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormEducationFragment.java" />
@@ -1114,6 +1083,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_customer_fragment.xml" />
       </list>
     </option>
   </component>
@@ -1620,7 +1590,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1635,7 +1605,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4074074" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8587106" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5569273" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5569273" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8148148" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24935733" sideWeight="0.4989775" order="0" side_tool="false" content_ui="combo" />
@@ -1672,14 +1642,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.greenrobot/greendao/1.3.7/a1ed82f7646e0be45e8598fad085e1f0bfba2ddd/greendao-1.3.7-sources.jar!/de/greenrobot/dao/AbstractDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4240" max-vertical-offset="13482">
-          <caret line="292" column="0" selection-start-line="292" selection-start-column="0" selection-end-line="292" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="5130">
@@ -1983,17 +1945,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_customer_fragment.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="198">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_activity.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2117,21 +2068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_zinc_fragment.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.666667" vertical-offset="0" max-vertical-offset="918">
-          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
-          <folding>
-            <element signature="e#211#246#0" expanded="true" />
-            <element signature="e#1332#1373#0" expanded="true" />
-            <element signature="e#1412#1453#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_recommendation_fragment.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
@@ -2179,6 +2115,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_zinc_fragment.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34718102" vertical-offset="0" max-vertical-offset="918">
+          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+          <folding>
+            <element signature="e#211#246#0" expanded="true" />
+            <element signature="e#1332#1373#0" expanded="true" />
+            <element signature="e#1412#1453#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customer_basics_form_fragment.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.0" vertical-offset="0" max-vertical-offset="4140">
+          <caret line="33" column="23" selection-start-line="10" selection-start-column="8" selection-end-line="33" selection-end-column="23" />
+          <folding>
+            <element signature="e#362#397#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3401163" vertical-offset="378" max-vertical-offset="1260">
+          <caret line="34" column="176" selection-start-line="34" selection-start-column="176" selection-end-line="34" selection-end-column="176" />
+          <folding>
+            <element signature="e#1060#1078#0" expanded="true" />
+            <element signature="e#3133#3172#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="222" max-vertical-offset="2448">
@@ -2187,13 +2162,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_customer_fragment.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.82978725" vertical-offset="378" max-vertical-offset="1260">
-          <caret line="34" column="130" selection-start-line="34" selection-start-column="130" selection-end-line="34" selection-end-column="130" />
+        <state vertical-scroll-proportion="1.495549" vertical-offset="0" max-vertical-offset="1296">
+          <caret line="56" column="47" selection-start-line="56" selection-start-column="47" selection-end-line="56" selection-end-column="47" />
           <folding>
-            <element signature="e#1060#1078#0" expanded="true" />
-            <element signature="e#3132#3171#0" expanded="true" />
+            <element signature="e#248#283#0" expanded="true" />
           </folding>
         </state>
       </provider>

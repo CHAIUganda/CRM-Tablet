@@ -44,7 +44,7 @@
         <activity
             android:name="org.chai.activities.tasks.DiarrheaFormActivity"
             android:configChanges="orientation|screenSize"
-            android:label="New Malaria Details"
+            android:label="New Diarrhea Details"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
