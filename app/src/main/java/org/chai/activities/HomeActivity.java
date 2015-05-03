@@ -14,7 +14,7 @@ import com.androidquery.AQuery;
 import com.astuetz.PagerSlidingTabStrip;
 
 import org.chai.R;
-import org.chai.activities.tasks.AdhockDetailerFrgment;
+import org.chai.activities.tasks.AdhockSaleFragment;
 import org.chai.activities.tasks.TaskByLocationFragment;
 import org.chai.activities.tasks.TaskCalenderFragment;
 import org.chai.activities.tasks.TaskViewOnMapFragment;
@@ -51,7 +51,7 @@ public class HomeActivity extends BaseActivity{
 
     ViewPager mViewPager;
 
-    String[] titles = new String[]{"CALENDAR", "VIEW BY LOCATION", "MAP", "DETAIL"};
+    String[] titles = new String[]{"CALENDAR", "VIEW BY LOCATION", "MAP", "SALES"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +128,7 @@ public class HomeActivity extends BaseActivity{
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
-        final int PAGE_COUNT = 3;
+        final int PAGE_COUNT = 4;
 
         public ViewPagerAdapter() {
             super(getSupportFragmentManager());
@@ -154,7 +154,7 @@ public class HomeActivity extends BaseActivity{
                     target = new TaskViewOnMapFragment();
                     break;
                 case 3:
-                    target = new AdhockDetailerFrgment();
+                    target = new AdhockSaleFragment();
                     break;
             }
             target.setArguments(b);

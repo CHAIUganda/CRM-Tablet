@@ -184,7 +184,7 @@ public class AdhockSaleFragment extends BaseContainerFragment {
             String saleId = bundle.getString("saleId");
             saleInstance = adhockSaleDao.load(saleId);
             bindSalesInfoToUI(saleInstance, view);
-            if (saleInstance.getIsHistory() != null && saleInstance.getIsHistory()) {
+            if (saleInstance != null && saleInstance.getIsHistory() != null && saleInstance.getIsHistory()) {
                 setReadOnly(view);
             }
         }
@@ -203,7 +203,7 @@ public class AdhockSaleFragment extends BaseContainerFragment {
             customerDao = daoSession.getCustomerDao();
             stokeDataDao = daoSession.getStokeDataDao();
         } catch (Exception ex) {
-            Log.d("Error=====================================", ex.getLocalizedMessage());
+            Log.d("Error", ex.getLocalizedMessage());
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
