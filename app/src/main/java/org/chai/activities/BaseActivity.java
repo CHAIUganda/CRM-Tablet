@@ -24,6 +24,7 @@ import org.chai.R;
 import org.chai.activities.calls.HistoryActivity;
 import org.chai.activities.customer.CustomersActivity;
 import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
+import org.chai.activities.tasks.DiarrheaFormActivity;
 import org.chai.activities.tasks.NewOrderActivity;
 import org.chai.model.User;
 import org.chai.reports.ReportsActivity;
@@ -173,7 +174,7 @@ public class BaseActivity extends ActionBarActivity{
                         target = MalariaFormActivity.class;
                         break;
                     case 5:
-                        target = BlankActivity.class;
+                        target = DiarrheaFormActivity.class;
                         break;
                     case 6:
                         target = ReportsActivity.class;

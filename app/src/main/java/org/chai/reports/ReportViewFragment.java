@@ -69,5 +69,4 @@ public class ReportViewFragment extends BaseContainerFragment{
                     summaryReport.getMonth(),summaryReport.getTeamAverageThisWeek(),summaryReport.getTeamAverageThisMonth()),params);
         }
     }
-
 }

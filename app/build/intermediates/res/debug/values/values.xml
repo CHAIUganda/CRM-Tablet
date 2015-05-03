@@ -1624,6 +1624,15 @@ m>        <item name="android:textColorLink">@color/link_text_material_dark</ite
         <item name="android:background">@drawable/spinner_background_selector</item>
         <item name="android:layout_height">45dp</item>
     </style>
+    <style name="TableHeaderStyle">
+        <item name="android:background">@color/window_background_dark</item>
+        <item name="android:textColor">@color/app_text_color</item>
+        <item name="android:paddingTop">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingBottom">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment/>
     <style name="TextAppearance.AppCompat" parent="Base.TextAppearance.AppCompat"/>

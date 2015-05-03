@@ -18,12 +18,42 @@
 
         <include layout="@layout/toolbar"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <TableLayout
+            android:id="@+id/summary_report_table"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Resports Here"
-            android:id="@+id/textView3"
-            android:layout_gravity="center_horizontal" />
+            android:stretchColumns="1">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/TableHeaderStyle"
+                    android:layout_weight="1"
+                    android:text="Item"
+                    android:background="@drawable/border_right_blue_header"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/TableHeaderStyle"
+                    android:layout_weight="1"
+                    android:text="This Week"
+                    android:background="@drawable/border_right_blue_header"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/TableHeaderStyle"
+                    android:layout_weight="1"
+                    android:text="This Month"
+                    android:background="@drawable/border_right_blue_header"/>
+
+            </TableRow>
+        </TableLayout>
 
     </LinearLayout>
 
