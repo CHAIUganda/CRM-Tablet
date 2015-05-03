@@ -13,5 +13,146 @@
             android:gravity="center_horizontal"
             style="@style/TitleTextStyle"
             android:text="Education"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
+                android:text="2. Have you heard about the treatment of Diarrhea in children with ORS and Zinc combination?"/>
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/yesnolist" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="3. How did you hear/learn about ORS and Zinc treatment combination?"/>
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/sources_of_information" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="4. Please specify Other ways you heard about zinc"/>
+            <EditText
+                android:layout_width="match_parent"
+                style="@style/TextBoxStyle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
+                android:text="5. Tell me what you know about diarrhea and how it affects your community"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="@string/det_tell_me_whatyouknowaboutdiarrhea"
+                />
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/SpinnerKnowldgeLevel" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
+                android:text="6. Do you know the affect that diarrhea has on the body?"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="@string/det_doyouknowtheeffectdiarrheahasonthebody"
+                />
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/SpinnerKnowldgeLevel" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
+                android:text="7. What do you know about ORS and how it should be used?"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="@string/det_whatdoyouknowaboutors"
+                />
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/SpinnerKnowldgeLevel" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
+                android:text="8. Why should you not use antibiotics to treat diarrhea?"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="@string/det_whyshould_younot_use_antibiotics"
+                />
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/SpinnerKnowldgeLevel" />
+        </LinearLayout>
     </LinearLayout>
+
 </ScrollView>

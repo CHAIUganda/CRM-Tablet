@@ -46,6 +46,8 @@ public class DiarrheaFormActivity extends BaseActivity {
         indicator.setViewPager(pager);
 
         super.setUpDrawer(toolbar);
+
+        pager.setCurrentItem(4);
     }
 
     private class FormPagerAdapter extends FragmentPagerAdapter {
