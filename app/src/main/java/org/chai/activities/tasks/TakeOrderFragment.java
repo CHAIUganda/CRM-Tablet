@@ -303,7 +303,7 @@ public class TakeOrderFragment extends BaseContainerFragment {
             orderData.setDropSample(dropSampleChkBoxes.get(i).isChecked());
             Product product = (Product) spinnerList.get(i).getSelectedItem();
             orderData.setProductId(product.getUuid());
-            if(orderData.getUuid()!=null){
+            if(orderData.getUuid()!= null){
                 orderDataDao.update(orderData);
             }else{
                 orderData.setUuid(UUID.randomUUID().toString());

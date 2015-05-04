@@ -37,10 +37,17 @@
                         style="@style/LabelStyle"
                         android:text="Customer"/>
 
-                    <EditText
+                    <AutoCompleteTextView
                         android:id="@+id/customer_id"
                         android:layout_width="match_parent"
                         style="@style/TextBoxStyle"/>
+
+                    <TextView
+                        android:id="@+id/txt_customer_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/LabelStyle"
+                        android:textStyle="bold"/>
                 </LinearLayout>
                 <TextView
                     android:layout_width="match_parent"
@@ -53,6 +60,7 @@
                     android:id="@+id/ln_contacts_container"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="10dp"
                     android:gravity="right"
                     android:layout_height="wrap_content">
 
