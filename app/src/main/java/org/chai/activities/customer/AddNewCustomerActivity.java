@@ -17,6 +17,7 @@ import com.androidquery.AQuery;
 import org.chai.R;
 import org.chai.activities.BaseActivity;
 import org.chai.model.Customer;
+import org.chai.model.CustomerContact;
 import org.chai.model.CustomerContactDao;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
@@ -106,7 +107,7 @@ public class AddNewCustomerActivity extends BaseActivity {
             }
 
             if(validForm){
-                validForm = contactFragment.saveFields();
+                validForm = contactFragment.saveFields(); //This also sets the contacts which we'll get later and save
                 if(!validForm){
                     index = 2;
                 }
@@ -117,11 +118,21 @@ public class AddNewCustomerActivity extends BaseActivity {
                 customer.setIsActive(true);
 
                 if(customer.getUuid() == null){
-                    Utils.log("Inserting new customer");
                     customer.setUuid(UUID.randomUUID().toString());
                     customerDao.insert(customer);
                 }else{
                     customerDao.insert(customer);
+                }
+
+                for(CustomerContact c: contactFragment.contacts){
+                    if(c.getUuid() == null){
+                        c.setUuid(UUID.randomUUID().toString());
+                        c.setCustomerId(customer.getUuid());
+                        c.setCustomer(customer);
+                        customerContactDao.insert(c);
+                    }else{
+                        customerContactDao.update(c);
+                    }
                 }
 
                 finish();

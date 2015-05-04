@@ -131,6 +131,11 @@ public class CustomerBasicsFormFragment extends Fragment {
             return false;
         }
 
+        if(directions.isEmpty()){
+            Toast.makeText(getActivity(), "Give directions to the outlet.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
         AddNewCustomerActivity a = (AddNewCustomerActivity)getActivity();
         if(a.customer == null){
             a.customer = new Customer();

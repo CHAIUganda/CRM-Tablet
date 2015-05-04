@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="7.5"
             android:hint="Phone Number"
-            android:inputType="number"
+            android:inputType="phone"
             android:textColorHint="@color/window_background_dark"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             style="@style/TextBoxStyle"/>
@@ -26,8 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="7.5"
-            android:hint="Phone Number"
-            android:inputType="phone"
+            android:hint="Name"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:textColorHint="@color/window_background_dark"
             style="@style/TextBoxStyle"/>
@@ -55,6 +54,7 @@
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:weightSum="16">
         <Spinner
+            android:id="@+id/contact_gender"
             style="@style/SpinnerStyle"
             android:layout_width="0dp"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -64,6 +64,7 @@
             android:entries="@array/gender" />
 
         <Spinner
+            android:id="@+id/contact_role"
             style="@style/SpinnerStyle"
             android:layout_width="0dp"
             android:popupBackground="@color/primary_dark"

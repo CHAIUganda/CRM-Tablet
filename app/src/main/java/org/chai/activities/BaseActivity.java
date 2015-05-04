@@ -26,6 +26,7 @@ import org.chai.activities.customer.CustomersActivity;
 import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
 import org.chai.activities.tasks.DiarrheaFormActivity;
 import org.chai.activities.tasks.NewOrderActivity;
+import org.chai.activities.tasks.SalesFormActivity;
 import org.chai.model.User;
 import org.chai.reports.ReportsActivity;
 import org.chai.rest.RestClient;
@@ -43,8 +44,8 @@ public class BaseActivity extends ActionBarActivity{
     public int SCREEN_CUSTOMERS = 1;
     public int SCREEN_HISTORY = 2;
     public int SCREEN_NEW_ORDER = 3;
-    public int SCREEN_DETAILING = 4;
-    public int SCREEN_MALARIA_DETAIL_FORM = 5;
+    public int SCREEN_MALARIA_DETAILING = 4;
+    public int SCREEN_DIARRHEA_DETAILING = 5;
     public int SCREEN_REPORT = 6;
 
     public int CURRENT_SCREEN = 0;
@@ -58,7 +59,7 @@ public class BaseActivity extends ActionBarActivity{
             "History",
             "New Order",
             "Malaria Detailing",
-            "Unscheduled Detailing",
+            "Diarrhea Detailing",
             "My Report"
     };
     int[] iconsNormal = new int[]{
@@ -84,8 +85,8 @@ public class BaseActivity extends ActionBarActivity{
             SCREEN_CUSTOMERS,
             SCREEN_HISTORY,
             SCREEN_NEW_ORDER,
-            SCREEN_MALARIA_DETAIL_FORM,
-            SCREEN_DETAILING,
+            SCREEN_MALARIA_DETAILING,
+            SCREEN_DIARRHEA_DETAILING,
             SCREEN_REPORT
     };
 
@@ -174,7 +175,11 @@ public class BaseActivity extends ActionBarActivity{
                         target = MalariaFormActivity.class;
                         break;
                     case 5:
-                        target = DiarrheaFormActivity.class;
+                        if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+                            target = SalesFormActivity.class;
+                        }else{
+                            target = DiarrheaFormActivity.class;
+                        }
                         break;
                     case 6:
                         target = ReportsActivity.class;

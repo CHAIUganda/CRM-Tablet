@@ -36,7 +36,7 @@ public final class R {
 		public static final int bold = 0x7f0c0020;
 		public static final int italic = 0x7f0c0021;
 		public static final int normal = 0x7f0c000a;
-		public static final int psts_tab_title = 0x7f0c016e;
+		public static final int psts_tab_title = 0x7f0c0170;
 	}
 	public static final class layout {
 		public static final int psts_tab = 0x7f030050;

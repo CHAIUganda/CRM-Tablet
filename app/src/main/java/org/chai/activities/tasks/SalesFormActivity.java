@@ -30,7 +30,7 @@ public class SalesFormActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        CURRENT_SCREEN = SCREEN_MALARIA_DETAIL_FORM;
+        CURRENT_SCREEN = SCREEN_DIARRHEA_DETAILING;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sales_form_activity);

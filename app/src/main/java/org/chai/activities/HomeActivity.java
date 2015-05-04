@@ -128,7 +128,7 @@ public class HomeActivity extends BaseActivity{
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
-        final int PAGE_COUNT = 4;
+        final int PAGE_COUNT = 3;
 
         public ViewPagerAdapter() {
             super(getSupportFragmentManager());

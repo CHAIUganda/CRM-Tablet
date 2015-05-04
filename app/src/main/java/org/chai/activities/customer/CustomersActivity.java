@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -60,6 +61,18 @@ public class CustomersActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         listView = (ListView)findViewById(R.id.lst_customers);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Customer customer = customerList.get(position);
+
+                Intent intent = new Intent(CustomersActivity.this, CustomerDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", customer.getUuid());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
         aq.id(R.id.btn_add_new_customer).clicked(new View.OnClickListener() {
             @Override

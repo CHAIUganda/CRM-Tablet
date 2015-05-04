@@ -1,6 +1,7 @@
 package org.chai.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -37,7 +38,7 @@ public class SubcountyArrayAdapter extends ArrayAdapter<Subcounty> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView label = new TextView(context);
-        //label.setTextColor(Color.BLACK);
+        label.setTextColor(Color.WHITE);
         label.setText(subcounties[position].getName());
         return label;
     }
@@ -46,7 +47,7 @@ public class SubcountyArrayAdapter extends ArrayAdapter<Subcounty> {
         TextView label = new TextView(context);
         //label.setTextColor(Color.w);
         label.setText(subcounties[position].getName());
-        //label.setPadding(5,20,5,20);
+        label.setPadding(10, 10, 10, 10);
 
         return label;
     }

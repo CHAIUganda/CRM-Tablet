@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
 import org.chai.R;
+import org.chai.model.CustomerContact;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class CustomerContactsFormFragment extends Fragment{
     View view;
     LinearLayout rowContainer;
     ArrayList<View> rows;
+    public ArrayList<CustomerContact> contacts;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +41,8 @@ public class CustomerContactsFormFragment extends Fragment{
         });
 
         rows = new ArrayList<View>();
+
+        addRow(); //We need at least one row
 
         return view;
     }
@@ -64,6 +69,57 @@ public class CustomerContactsFormFragment extends Fragment{
     }
 
     public boolean saveFields(){
+        if(rows.size() == 0){
+            Toast.makeText(getActivity(), "Please enter atleast one contact person", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        contacts = new ArrayList<CustomerContact>();
+
+        AQuery a;
+        CustomerContact contact;
+        String name, phone, gender, role;
+        int i = 1;
+        for(View row: rows){
+            a = new AQuery(row);
+
+            name = a.id(R.id.txt_customer_name).getText().toString();
+            phone = a.id(R.id.txt_customer_phone).getText().toString();
+            int gPos = a.id(R.id.contact_gender).getSelectedItemPosition();
+            int rPos = a.id(R.id.contact_role).getSelectedItemPosition();
+
+            if(name.isEmpty()){
+                Toast.makeText(getActivity(), "Enter contact name for contact on row " + i, Toast.LENGTH_LONG).show();
+                return false;
+            }
+            if(phone.isEmpty()){
+                Toast.makeText(getActivity(), "Enter phone number for contact on row " + i, Toast.LENGTH_LONG).show();
+                return false;
+            }
+            if(gPos == 0){
+                Toast.makeText(getActivity(), "Select gender for contact on row " + i, Toast.LENGTH_LONG).show();
+                return false;
+            }else{
+                gender = a.id(R.id.contact_gender).getSelectedItem().toString();
+            }
+            if(rPos == 0){
+                Toast.makeText(getActivity(), "Select role for contact on row " + i, Toast.LENGTH_LONG).show();
+                return false;
+            }else{
+                role = a.id(R.id.contact_role).getSelectedItem().toString();
+            }
+
+            contact = new CustomerContact();
+            contact.setContact(phone);
+            contact.setNames(name);
+            contact.setGender(gender);
+            contact.setRole(role);
+
+            contacts.add(contact);
+
+            i++;
+        }
+
         return true;
     }
 }
