@@ -13,6 +13,31 @@
             android:gravity="center_horizontal"
             style="@style/TitleTextStyle"
             android:text="General"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
+                android:text="Customer"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/customer_id"
+                android:layout_width="match_parent"
+                style="@style/TextBoxStyle"/>
+
+            <TextView
+                android:id="@+id/txt_customer_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

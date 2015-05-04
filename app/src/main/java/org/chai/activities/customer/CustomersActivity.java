@@ -66,10 +66,8 @@ public class CustomersActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Customer customer = customerList.get(position);
 
-                Intent intent = new Intent(CustomersActivity.this, CustomerDetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("id", customer.getUuid());
-                intent.putExtras(bundle);
+                Intent intent = new Intent(CustomersActivity.this, AddNewCustomerActivity.class);
+                intent.putExtra("id", customer.getUuid());
                 startActivity(intent);
             }
         });

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -45,8 +46,12 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
             "Zincos"
     };
 
+    DiarrheaFormActivity activity;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        activity = (DiarrheaFormActivity)getActivity();
+
         if(view != null){
             ((ViewGroup)view.getParent()).removeView(view);
         }else{
@@ -60,6 +65,20 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
                 @Override
                 public void onClick(View v) {
                     addRow(rowsContainer, items, "Type or Select from list");
+                }
+            });
+
+            aq.id(R.id.do_you_stock_zinc).itemSelected(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(position == 2){
+                        activity.pager.setCurrentItem(3);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
                 }
             });
 

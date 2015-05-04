@@ -9,12 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.model.DetailerCall;
+import org.chai.model.Task;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -25,8 +26,17 @@ public class DiarrheaFormActivity extends BaseActivity {
     Toolbar toolbar;
     AQuery aq;
     int NUM_PAGES = 5;
-    ViewPager pager;
+    public ViewPager pager;
     CircleIndicator indicator;
+
+    DiarrheaFormCustomerFragment customerFragment;
+    DiarrheaFormEducationFragment educationFragment;
+    DiarrheaFormZincFragment zincFragment;
+    DiarrheaOrsFragment orsFragment;
+    DiarrheaFormRecommendationFragment recommendationFragment;
+
+    public Task task;
+    public DetailerCall call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +50,17 @@ public class DiarrheaFormActivity extends BaseActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        task = new Task();
+        call = new DetailerCall();
+
         pager = (ViewPager) findViewById(R.id.pager);
         indicator = (CircleIndicator) findViewById(R.id.indicator);
         pager.setAdapter(new FormPagerAdapter(getSupportFragmentManager()));
         indicator.setViewPager(pager);
 
         super.setUpDrawer(toolbar);
+
+        pager.setCurrentItem(1);
     }
 
     private class FormPagerAdapter extends FragmentPagerAdapter {
@@ -58,19 +73,24 @@ public class DiarrheaFormActivity extends BaseActivity {
             Fragment fragment = null;
             switch (position){
                 case 0:
-                    fragment = new DiarrheaFormCustomerFragment();
+                    customerFragment = new DiarrheaFormCustomerFragment();
+                    fragment = customerFragment;
                     break;
                 case 1:
-                    fragment = new DiarrheaFormEducationFragment();
+                    educationFragment = new DiarrheaFormEducationFragment();
+                    fragment = educationFragment;
                     break;
                 case 2:
-                    fragment = new DiarrheaFormZincFragment();
+                    zincFragment = new DiarrheaFormZincFragment();
+                    fragment = zincFragment;
                     break;
                 case 3:
-                    fragment = new DiarrheaOrsFragment();
+                    orsFragment = new DiarrheaOrsFragment();
+                    fragment = orsFragment;
                     break;
                 case 4:
-                    fragment = new DiarrheaFormRecommendationFragment();
+                    recommendationFragment = new DiarrheaFormRecommendationFragment();
+                    fragment = recommendationFragment;
                     break;
             }
             return fragment;
@@ -95,9 +115,20 @@ public class DiarrheaFormActivity extends BaseActivity {
             return true;
         }
         if(item.getItemId() == R.id.action_save){
-            Toast.makeText(this, "Form details saved", Toast.LENGTH_LONG).show();
-            finish();
+            saveForm();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveForm(){
+        if(!customerFragment.saveFields()){
+            pager.setCurrentItem(0);
+            return;
+        }
+
+        if(!educationFragment.saveFields()){
+            pager.setCurrentItem(1);
+            return;
+        }
     }
 }

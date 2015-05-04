@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             style="@style/TitleTextStyle"
-            android:text="Zinc"/>
+            android:text="ORS"/>
 
         <TextView
             android:id="@+id/txt_prompt_title"
@@ -24,11 +24,19 @@
             android:layout_marginBottom="10dp"
             style="@style/LabelStyle"
             android:text="1. Do you stock ORS?"/>
+
+        <Spinner
+            android:id="@+id/do_you_stock_ors"
+            style="@style/SpinnerStyle"
+            android:layout_width="match_parent"
+            android:entries="@array/yesnolist" />
+
         <LinearLayout
             android:id="@+id/ln_rows_container"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/btn_add_row"

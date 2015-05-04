@@ -87,8 +87,6 @@ public class AddNewCustomerActivity extends BaseActivity {
         indicator.setViewPager(pager);
 
         super.setUpDrawer(toolbar);
-
-        pager.setCurrentItem(2);
     }
 
     @Override

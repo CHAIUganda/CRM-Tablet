@@ -14,19 +14,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:orientation="vertical">
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:tag="required"
+            style="@style/LabelStyle"
+            android:text="Customer"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/customer_id"
+            android:layout_width="match_parent"
+            style="@style/TextBoxStyle"/>
+
+        <TextView
+            android:id="@+id/txt_customer_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/LabelStyle"
-            android:text="1. Customer"/>
-
-        <EditText
-            android:id="@+id/customer"
-            android:layout_width="match_parent"
-            style="@style/TextBoxStyle"/>
+            android:textStyle="bold"/>
     </LinearLayout>
 
     <LinearLayout
@@ -62,6 +68,7 @@
         <EditText
             android:id="@+id/diarrhea_patients"
             android:layout_width="match_parent"
+            android:inputType="number"
             style="@style/TextBoxStyle"/>
     </LinearLayout>
 </LinearLayout>

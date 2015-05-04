@@ -141,7 +141,7 @@ public class NewOrderActivity extends BaseActivity {
             }
         });
 
-        orderId = "5452a886-5968-487e-b202-7b0eb6a6e789";//getIntent().getStringExtra("id");
+        orderId = getIntent().getStringExtra("id");
         if(orderId != null){
             order = orderDao.load(orderId);
             if(order != null){
@@ -329,7 +329,7 @@ public class NewOrderActivity extends BaseActivity {
                 data.setDateCreated(new Date());
                 orderDataDao.insert(data);
             }else{
-                Utils.log("Updating order data");
+                orderDataDao.update(data);
             }
         }
 
