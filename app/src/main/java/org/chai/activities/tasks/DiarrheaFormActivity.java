@@ -1,5 +1,6 @@
 package org.chai.activities.tasks;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,13 +10,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.model.CustomerDao;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
 import org.chai.model.DetailerCall;
+import org.chai.model.DetailerCallDao;
+import org.chai.model.DetailerStock;
+import org.chai.model.DetailerStockDao;
 import org.chai.model.Task;
+import org.chai.model.TaskDao;
+import org.chai.model.VillageDao;
+import org.chai.util.MyApplication;
+import org.chai.util.migration.UpgradeOpenHelper;
+
+import java.util.Date;
+import java.util.UUID;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -23,6 +38,8 @@ import me.relex.circleindicator.CircleIndicator;
  * Created by Zed on 5/2/2015.
  */
 public class DiarrheaFormActivity extends BaseActivity {
+    public final static String STATUS_NEW = "new", STATUS_COMPLETE = "complete",STATUS_CANCELLED = "cancelled";
+
     Toolbar toolbar;
     AQuery aq;
     int NUM_PAGES = 5;
@@ -38,12 +55,23 @@ public class DiarrheaFormActivity extends BaseActivity {
     public Task task;
     public DetailerCall call;
 
+    protected SQLiteDatabase db;
+    protected DaoMaster daoMaster;
+    protected DaoSession daoSession;
+    protected VillageDao villageDao;
+    protected TaskDao taskDao;
+    protected DetailerCallDao detailerCallDao;
+    protected CustomerDao customerDao;
+    protected DetailerStockDao detailerStockDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         CURRENT_SCREEN = SCREEN_DIARRHEA_DETAILING;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.diarrhea_form_activity);
+
+        initialiseGreenDao();
 
         aq = new AQuery(this);
 
@@ -59,8 +87,6 @@ public class DiarrheaFormActivity extends BaseActivity {
         indicator.setViewPager(pager);
 
         super.setUpDrawer(toolbar);
-
-        pager.setCurrentItem(4);
     }
 
     private class FormPagerAdapter extends FragmentPagerAdapter {
@@ -159,6 +185,60 @@ public class DiarrheaFormActivity extends BaseActivity {
                 pager.setCurrentItem(4);
                 return;
             }
+        }
+
+        task.setUuid(UUID.randomUUID().toString());
+        task.setStatus(STATUS_COMPLETE);
+        task.setType("detailer");
+        task.setIsAdhock(true);
+        task.setCompletionDate(new Date());
+        task.setIsDirty(true);
+
+        taskDao.insert(task);
+
+        call.setIsDirty(true);
+        call.setUuid(UUID.randomUUID().toString());
+        call.setDateOfSurvey(new Date());
+        call.setTaskId(task.getUuid());
+        call.setTask(task);
+
+        //Save stocks
+        for(DetailerStock stock: zincFragment.stocks){
+            stock.setUuid(UUID.randomUUID().toString());
+            stock.setIsDirty(true);
+            stock.setDateCreated(new Date());
+            stock.setDetailerId(call.getUuid());
+            stock.setDetailerCall(call);
+            stock.setCategory("zinc");
+
+            detailerStockDao.insert(stock);
+        }
+
+        for(DetailerStock stock: orsFragment.stocks){
+            stock.setUuid(UUID.randomUUID().toString());
+            stock.setIsDirty(true);
+            stock.setDateCreated(new Date());
+            stock.setDetailerId(call.getUuid());
+            stock.setDetailerCall(call);
+            stock.setCategory("ors");
+
+            detailerStockDao.insert(stock);
+        }
+
+        detailerCallDao.insert(call);
+    }
+
+    protected void initialiseGreenDao() {
+        try {
+            UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
+            db = helper.getWritableDatabase();
+            daoMaster = new DaoMaster(db);
+            daoSession = daoMaster.newSession();
+            taskDao = daoSession.getTaskDao();
+            detailerCallDao = daoSession.getDetailerCallDao();
+            detailerStockDao = daoSession.getDetailerStockDao();
+        } catch (Exception ex) {
+            Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }

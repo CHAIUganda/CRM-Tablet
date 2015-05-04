@@ -187,6 +187,7 @@
                 style="@style/LabelStyle"
                 android:text="15. Based on your interaction, do you believe this retailer will recommend ORS and/or Zinc as a 1st-line treatment for diarrhea?"/>
             <Spinner
+                android:id="@+id/spn_customer_recommendation"
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
                 android:entries="@array/yesnolist" />
