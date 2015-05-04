@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/LabelStyle"
-            android:text="2. How many diarrhea patients do you see in your outlet/facility per week?"/>
+            android:text="3. How many diarrhea patients do you see in your outlet/facility per week?"/>
 
         <EditText
             android:id="@+id/diarrhea_patients"

@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="2. Have you heard about the treatment of Diarrhea in children with ORS and Zinc combination?"/>
+                android:text="4. Have you heard about the treatment of Diarrhea in children with ORS and Zinc combination?"/>
             <Spinner
                 android:id="@+id/heardofdiarrheatreament"
                 style="@style/SpinnerStyle"
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="3. How did you hear/learn about ORS and Zinc treatment combination?"/>
+                android:text="5. How did you hear/learn about ORS and Zinc treatment combination?"/>
             <Spinner
                 android:id="@+id/how_did_you_hear"
                 style="@style/SpinnerStyle"
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="4. Please specify Other ways you heard about zinc"/>
+                android:text="6. Please specify Other ways you heard about zinc"/>
             <EditText
                 android:id="@+id/other_source_of_information"
                 android:layout_width="match_parent"
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="5. Tell me what you know about diarrhea and how it affects your community"/>
+                android:text="7. Tell me what you know about diarrhea and how it affects your community"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="6. Do you know the affect that diarrhea has on the body?"/>
+                android:text="8. Do you know the affect that diarrhea has on the body?"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="7. What do you know about ORS and how it should be used?"/>
+                android:text="9. What do you know about ORS and how it should be used?"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="8. Why should you not use antibiotics to treat diarrhea?"/>
+                android:text="10. Why should you not use antibiotics to treat diarrhea?"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

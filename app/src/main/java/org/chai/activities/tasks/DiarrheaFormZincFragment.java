@@ -13,12 +13,14 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.IViewManipulator;
 import org.chai.adapter.FormListAdapter;
+import org.chai.model.DetailerStock;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.FormSearchTextField;
 
@@ -34,7 +36,7 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
     View view;
     ImageView addButton;
     ArrayList<View> rows;
-    int currentPosition = -1;
+    public ArrayList<DetailerStock> stocks;
 
     boolean viewsHidden = false;
 
@@ -64,7 +66,7 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
             aq.id(R.id.btn_add_row).clicked(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    addRow(rowsContainer, items, "Type or Select from list");
+                    addRow(null);
                 }
             });
 
@@ -83,24 +85,29 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
             });
 
             rows = new ArrayList<View>();
+            stocks = new ArrayList<DetailerStock>();
         }
 
         return view;
     }
 
-    private void addRow(final LinearLayout container, String[] items, String hint){
+    private void addRow(DetailerStock stock){
+        if(stock == null){
+            stock = new DetailerStock();
+        }
         LayoutInflater inflator = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View row = inflator.inflate(R.layout.antimalarial_row, null);
-
+        AQuery a = new AQuery(row);
         final ImageView remove = (ImageView)row.findViewById(R.id.btn_remove_row);
         remove.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 rows.remove(row);
+                stocks.remove(rows.indexOf(row));
                 LinearLayout parent = (LinearLayout)v.getParent();
                 LinearLayout root = (LinearLayout)parent.getParent();
-                container.removeView(root);
+                rowsContainer.removeView(root);
             }
         });
 
@@ -113,7 +120,18 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
         final FormSearchTextField text = (FormSearchTextField)row.findViewById(R.id.txt_antimalarial);
         text.setViewManipulator(this);
         text.setListView(list);
-        text.setHint(hint);
+        text.setHint("Type or Select");
+
+        if(stock.getUuid() != null){
+            try{
+                text.setText(stock.getBrand());
+                a.id(R.id.txt_stock_level).text(Double.toString(stock.getStockLevel()));
+                a.id(R.id.txt_buying_price).text(Double.toString(stock.getBuyingPrice()));
+                a.id(R.id.txt_selling_price).text(Double.toString(stock.getSellingPrice()));
+            }catch (Exception ex){
+                Utils.log("Error populating stock items");
+            }
+        }
 
         text.addTextChangedListener(new TextWatcher() {
             @Override
@@ -142,8 +160,9 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
             }
         });
 
-        container.addView(row);
+        rowsContainer.addView(row);
         rows.add(row);
+        stocks.add(stock);
 
         hideOtherRows(row);
     }
@@ -182,5 +201,36 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
         aq.id(R.id.btn_add_row).visible();
         aq.id(R.id.txt_prompt_title).visible();
         aq.id(R.id.txt_form_title).visible();
+    }
+
+    public boolean saveFields(){
+        if(aq.id(R.id.do_you_stock_zinc).getSelectedItem().toString().isEmpty()){
+            Toast.makeText(getActivity(), "Please select wether customer stocks Zinc or not", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        int i = 1;
+        for(View row: rows){
+            AQuery a = new AQuery(row);
+            String brand = a.id(R.id.txt_antimalarial).getText().toString();
+            if(brand.isEmpty()){
+                Toast.makeText(getActivity(), "Select Zinc brand on row " + i, Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            DetailerStock stock = stocks.get(rows.indexOf(row));
+            stock.setBrand(brand);
+            try{
+                stock.setBuyingPrice(Double.parseDouble(aq.id(R.id.txt_buying_price).getText().toString()));
+                stock.setSellingPrice(Double.parseDouble(aq.id(R.id.txt_selling_price).getText().toString()));
+                stock.setStockLevel(Double.parseDouble(aq.id(R.id.txt_stock_level).getText().toString()));
+            }catch(Exception ex){
+                Toast.makeText(getActivity(), "Please enter Prices and Quantities for Zinc Brand on row " + i, Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            i++;
+        }
+        return true;
     }
 }

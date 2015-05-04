@@ -60,7 +60,7 @@ public class DiarrheaFormActivity extends BaseActivity {
 
         super.setUpDrawer(toolbar);
 
-        pager.setCurrentItem(1);
+        pager.setCurrentItem(4);
     }
 
     private class FormPagerAdapter extends FragmentPagerAdapter {
@@ -129,6 +129,36 @@ public class DiarrheaFormActivity extends BaseActivity {
         if(!educationFragment.saveFields()){
             pager.setCurrentItem(1);
             return;
+        }
+
+        if(zincFragment == null){ //Make sure the detailer has atleast been to the Zinc Screen
+            pager.setCurrentItem(2);
+            return;
+        }else{
+            if(!zincFragment.saveFields()){
+                pager.setCurrentItem(2);
+                return;
+            }
+        }
+
+        if(orsFragment == null){ //Make sure the detailer has atleast been to the ORS Screen
+            pager.setCurrentItem(3);
+            return;
+        }else{
+            if(!orsFragment.saveFields()){
+                pager.setCurrentItem(3);
+                return;
+            }
+        }
+
+        if(recommendationFragment == null){
+            pager.setCurrentItem(4);
+            return;
+        }else{
+            if(!recommendationFragment.saveFields()){
+                pager.setCurrentItem(4);
+                return;
+            }
         }
     }
 }

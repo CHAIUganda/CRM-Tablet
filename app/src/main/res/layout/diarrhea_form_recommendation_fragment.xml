@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/LabelStyle"
-            android:text="1. Point of sales materials dropped"/>
+            android:text="13. Point of sales materials dropped"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -158,16 +158,19 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ln_other_material_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:visibility="gone"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="17. Other Specify"/>
+                android:text="14. Other Specify"/>
             <EditText
+                android:id="@+id/txt_other_material"
                 android:layout_width="match_parent"
                 style="@style/TextBoxStyle"/>
         </LinearLayout>
@@ -182,7 +185,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="18. Based on your interaction, do you believe this retailer will recommend ORS and/or Zinc as a 1st-line treatment for diarrhea?"/>
+                android:text="15. Based on your interaction, do you believe this retailer will recommend ORS and/or Zinc as a 1st-line treatment for diarrhea?"/>
             <Spinner
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
@@ -195,7 +198,7 @@
             android:tag="required"
             android:layout_marginTop="10dp"
             style="@style/LabelStyle"
-            android:text="19. What did you recommend as next steps for the retailer?"/>
+            android:text="16. What did you recommend as next steps for the retailer?"/>
         <CheckBox
             android:id="@+id/none"
             android:layout_width="match_parent"
@@ -245,7 +248,7 @@
             android:text="Purchase Zinc or/and ORS from cheaper supply source"/>
 
         <CheckBox
-            android:id="@+id/chk_recommendation"
+            android:id="@+id/chk_other_recommendation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/app_text_color"
@@ -253,16 +256,19 @@
             android:text="Other"/>
 
         <LinearLayout
+            android:id="@+id/ln_other_recommendation_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="20. Other Specify"/>
+                android:text="17. Other Specify"/>
             <EditText
+                android:id="@+id/txt_other_recommendation"
                 android:layout_width="match_parent"
                 style="@style/TextBoxStyle"/>
         </LinearLayout>
