@@ -47,6 +47,7 @@ public class AddNewCustomerActivity extends BaseActivity {
     private CustomerDao customerDao;
     private CustomerContactDao customerContactDao;
 
+    String customerId;
     public Customer customer;
 
     private CustomerBasicsFormFragment basicFragment;
@@ -60,10 +61,20 @@ public class AddNewCustomerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_new_customer_activity);
 
+        initialiseGreenDao();
+
         aq = new AQuery(this);
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        customerId = "59afe896-39fa-4f0d-bb18-fadeeb274a7a";//getIntent().getStringExtra("id");
+        if(customerId != null){
+            customer = customerDao.load(customerId);
+            if(customer != null){
+                getSupportActionBar().setTitle("Edit Customer");
+            }
+        }
 
         basicFragment = new CustomerBasicsFormFragment();
         commercialFragment = new CustomerCommercialFormFragment();
@@ -75,9 +86,9 @@ public class AddNewCustomerActivity extends BaseActivity {
 
         indicator.setViewPager(pager);
 
-        initialiseGreenDao();
-
         super.setUpDrawer(toolbar);
+
+        pager.setCurrentItem(2);
     }
 
     @Override
@@ -115,13 +126,13 @@ public class AddNewCustomerActivity extends BaseActivity {
 
             if(validForm){
                 customer.setIsDirty(true);
-                customer.setIsActive(true);
 
                 if(customer.getUuid() == null){
                     customer.setUuid(UUID.randomUUID().toString());
+                    customer.setIsActive(true);
                     customerDao.insert(customer);
                 }else{
-                    customerDao.insert(customer);
+                    customerDao.update(customer);
                 }
 
                 for(CustomerContact c: contactFragment.contacts){
@@ -165,6 +176,7 @@ public class AddNewCustomerActivity extends BaseActivity {
                     fragment = contactFragment;
                     break;
             }
+
             return fragment;
         }
 

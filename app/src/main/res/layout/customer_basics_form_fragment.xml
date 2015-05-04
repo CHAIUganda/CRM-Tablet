@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="1. Outlet Type"/>
+                android:text="2. Outlet Type"/>
 
             <Spinner
                 android:id="@+id/outlettype"
@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="3. Outlet Size"/>
+                android:text="4. Outlet Size"/>
 
             <Spinner
                 android:id="@+id/outletsize"
@@ -82,14 +82,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="4. Type of licence - is the licence certificate visible in the outlet?"/>
+                android:text="5. Type of licence - is the licence certificate visible in the outlet?"/>
 
             <Spinner
                 android:id="@+id/licencevisible"
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark"
-                android:entries="@array/SpinnerYesNo" />
+                android:entries="@array/yesnolist" />
         </LinearLayout>
 
         <LinearLayout
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="4a. If yes, what type of licence?"/>
+                android:text="5a. If yes, what type of licence?"/>
 
             <Spinner
                 android:id="@+id/licencetype"
@@ -121,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="5. Rural or Urban?"/>
+                android:text="6. Rural or Urban?"/>
 
             <Spinner
                 android:id="@+id/ruralorurban"
@@ -141,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="6. District"/>
+                android:text="7. District"/>
 
             <Spinner
                 android:id="@+id/district"
@@ -160,7 +160,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="7. Subcounty"/>
+                android:text="8. Subcounty"/>
 
             <Spinner
                 android:id="@+id/subcounty"
@@ -178,7 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="8. Trading Center"/>
+                android:text="9. Trading Center"/>
 
             <EditText
                 android:id="@+id/trading_center"
@@ -196,7 +196,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="9. Please give directions to the outlet from a key landmark"/>
+                android:text="10. Please give directions to the outlet from a key landmark"/>
 
             <EditText
                 android:id="@+id/directions"
@@ -214,7 +214,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="10. Location GPS"/>
+                android:text="11. Location GPS"/>
 
             <EditText
                 android:id="@+id/location_gps"

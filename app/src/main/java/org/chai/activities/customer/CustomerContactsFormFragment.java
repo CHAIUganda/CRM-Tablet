@@ -6,13 +6,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
 import org.chai.R;
+import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 
 import java.util.ArrayList;
@@ -36,27 +39,45 @@ public class CustomerContactsFormFragment extends Fragment{
         aq.id(R.id.btn_add_row).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addRow();
+                addRow(null);
             }
         });
 
         rows = new ArrayList<View>();
+        contacts = new ArrayList<CustomerContact>();
 
-        addRow(); //We need at least one row
+        AddNewCustomerActivity ac = (AddNewCustomerActivity)getActivity();
+        if(ac.customer != null){
+            populateFields(ac.customer);
+        }else{
+            addRow(null); //We need at least one row
+        }
 
         return view;
     }
 
-    private void addRow(){
+    private void populateFields(Customer c){
+        for(CustomerContact contact: c.getCustomerContacts()){
+            addRow(contact);
+        }
+    }
+
+    private void addRow(CustomerContact contact){
+        if(contact == null){
+            contact = new CustomerContact();
+        }
+
         LayoutInflater inflator = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View row = inflator.inflate(R.layout.customer_contact_form_row, null);
-
+        AQuery a = new AQuery(row);
         final ImageView remove = (ImageView)row.findViewById(R.id.btn_remove_row);
         remove.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 rows.remove(row);
+                contacts.remove(rows.indexOf(row));
+
                 LinearLayout parent = (LinearLayout)v.getParent();
                 LinearLayout root = (LinearLayout)parent.getParent();
                 LinearLayout top = (LinearLayout)root.getParent();
@@ -64,8 +85,17 @@ public class CustomerContactsFormFragment extends Fragment{
             }
         });
 
+        a.id(R.id.txt_customer_name).text(contact.getNames());
+        a.id(R.id.txt_customer_phone).text(contact.getContact());
+        Spinner gender = a.id(R.id.contact_gender).getSpinner();
+        gender.setSelection(((ArrayAdapter<String>) gender.getAdapter()).getPosition(contact.getGender()));
+        Spinner role = a.id(R.id.contact_role).getSpinner();
+        role.setSelection(((ArrayAdapter<String>) role.getAdapter()).getPosition(contact.getRole()));
+
         rowContainer.addView(row);
+
         rows.add(row);
+        contacts.add(contact);
     }
 
     public boolean saveFields(){
@@ -73,8 +103,6 @@ public class CustomerContactsFormFragment extends Fragment{
             Toast.makeText(getActivity(), "Please enter atleast one contact person", Toast.LENGTH_LONG).show();
             return false;
         }
-
-        contacts = new ArrayList<CustomerContact>();
 
         AQuery a;
         CustomerContact contact;
@@ -109,13 +137,11 @@ public class CustomerContactsFormFragment extends Fragment{
                 role = a.id(R.id.contact_role).getSelectedItem().toString();
             }
 
-            contact = new CustomerContact();
+            contact = contacts.get(rows.indexOf(row));
             contact.setContact(phone);
             contact.setNames(name);
             contact.setGender(gender);
             contact.setRole(role);
-
-            contacts.add(contact);
 
             i++;
         }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +53,11 @@ public class CustomerBasicsFormFragment extends Fragment {
 
         initialiseGreenDao();
 
+        AddNewCustomerActivity ac = (AddNewCustomerActivity)getActivity();
+        if(ac.customer != null){
+            populateFields(ac.customer);
+        }
+
         List<Subcounty> subcountiesList = subcountyDao.loadAll();
         List<District> districtList = districtDao.loadAll();
 
@@ -89,6 +95,26 @@ public class CustomerBasicsFormFragment extends Fragment {
                 Utils.log("Error setting view by tag -> " + ex.getMessage());
             }
         }
+    }
+
+    private void populateFields(Customer c){
+        Utils.log("Populating basic customer fields -> " + c.getOutletSize());
+        aq.id(R.id.outlet_name).text(c.getOutletName());
+        Spinner type = aq.id(R.id.outlettype).getSpinner();
+        type.setSelection(((ArrayAdapter<String>)type.getAdapter()).getPosition(c.getOutletType()));
+        Spinner size = aq.id(R.id.outletsize).getSpinner();
+        size.setSelection(((ArrayAdapter<String>)size.getAdapter()).getPosition(c.getOutletSize()));
+        if(c.getLicenceVisible() != null){
+            int visible = (c.getLicenceVisible()) ? 1 : 2;
+            aq.id(R.id.licencevisible).setSelection(visible);
+        }
+        Spinner licenceType = aq.id(R.id.licencetype).getSpinner();
+        licenceType.setSelection(((ArrayAdapter<String>)licenceType.getAdapter()).getPosition(c.getTypeOfLicence()));
+        Spinner ruralUrban = aq.id(R.id.ruralorurban).getSpinner();
+        ruralUrban.setSelection(((ArrayAdapter<String>)ruralUrban.getAdapter()).getPosition(c.getSplit()));
+        aq.id(R.id.trading_center).text(c.getTradingCenter());
+        aq.id(R.id.directions).text(c.getDescriptionOfOutletLocation());
+        aq.id(R.id.gps).text(c.getLatitude() + "," + c.getLongitude());
     }
 
     public boolean saveFields(){

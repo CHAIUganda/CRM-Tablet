@@ -5,12 +5,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
 import org.chai.R;
+import org.chai.model.Customer;
 import org.chai.util.Utils;
 
 import java.util.List;
@@ -26,7 +29,25 @@ public class CustomerCommercialFormFragment extends Fragment {
         view = inflater.inflate(R.layout.customer_commercial_form_fragment, container, false);
         aq = new AQuery(view);
         setRequiredFields();
+
+        AddNewCustomerActivity ac = (AddNewCustomerActivity)getActivity();
+        if(ac.customer != null){
+            populateFields(ac.customer);
+        }
+
         return view;
+    }
+
+    private void populateFields(Customer c){
+        aq.id(R.id.months_open).text(c.getLengthOpen());
+        aq.id(R.id.number_of_employees).text(Integer.toString(c.getNumberOfEmployees()));
+        aq.id(R.id.diarrhea_patients).text(Integer.toString(c.getNumberOfCustomersPerDay()));
+        aq.id(R.id.main_supplier).text(c.getMajoritySourceOfSupply());
+        aq.id(R.id.key_wholesaler).text(c.getKeyWholeSalerName());
+        aq.id(R.id.key_wholesaler_contact).text(c.getKeyWholeSalerContact());
+
+        Spinner freq = aq.id(R.id.stock_frequency).getSpinner();
+        freq.setSelection(((ArrayAdapter<String>)freq.getAdapter()).getPosition(c.getRestockFrequency()));
     }
 
     public boolean saveFields(){
