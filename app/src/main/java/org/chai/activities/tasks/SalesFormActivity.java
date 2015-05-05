@@ -46,8 +46,6 @@ public class SalesFormActivity extends BaseActivity {
         indicator.setViewPager(pager);
 
         super.setUpDrawer(toolbar);
-
-        pager.setCurrentItem(3);
     }
 
     private class FormPagerAdapter extends FragmentPagerAdapter {

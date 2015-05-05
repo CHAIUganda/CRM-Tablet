@@ -196,3 +196,39 @@ MERGED from com.google.android.gms:play-services:6.5.87:21:9
 		ADDED from AndroidManifest.xml:64:18
 	android:value
 		ADDED from AndroidManifest.xml:64:64
+receiver#org.chai.sync.TaskReceiver
+ADDED from AndroidManifest.xml:66:7
+	android:name
+		ADDED from AndroidManifest.xml:66:17
+intent-filter#android.intent.action.BATTERY_LOW+android.intent.action.BATTERY_OKAY+com.example.app.SYNCRONISE_ACTION
+ADDED from AndroidManifest.xml:67:11
+action#android.intent.action.BATTERY_LOW
+ADDED from AndroidManifest.xml:68:15
+	android:name
+		ADDED from AndroidManifest.xml:68:23
+action#android.intent.action.BATTERY_OKAY
+ADDED from AndroidManifest.xml:69:15
+	android:name
+		ADDED from AndroidManifest.xml:69:23
+action#com.example.app.SYNCRONISE_ACTION
+ADDED from AndroidManifest.xml:70:15
+	android:name
+		ADDED from AndroidManifest.xml:70:23
+receiver#org.chai.sync.BootAndUpdateReceiver
+ADDED from AndroidManifest.xml:74:7
+	android:name
+		ADDED from AndroidManifest.xml:74:17
+intent-filter#android.intent.action.BOOT_COMPLETED+android.intent.action.org.chai
+ADDED from AndroidManifest.xml:75:11
+action#android.intent.action.org.chai
+ADDED from AndroidManifest.xml:76:15
+	android:name
+		ADDED from AndroidManifest.xml:76:23
+action#android.intent.action.BOOT_COMPLETED
+ADDED from AndroidManifest.xml:77:15
+	android:name
+		ADDED from AndroidManifest.xml:77:23
+service#org.chai.sync.CHAISynchroniser
+ADDED from AndroidManifest.xml:81:7
+	android:name
+		ADDED from AndroidManifest.xml:81:16

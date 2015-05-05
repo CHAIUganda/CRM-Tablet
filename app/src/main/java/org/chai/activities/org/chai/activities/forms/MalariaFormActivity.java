@@ -51,8 +51,6 @@ public class MalariaFormActivity extends BaseActivity {
         indicator.setViewPager(pager);
 
         super.setUpDrawer(toolbar);
-
-        pager.setCurrentItem(1);
     }
 
     private class FormPagerAdapter extends FragmentPagerAdapter {

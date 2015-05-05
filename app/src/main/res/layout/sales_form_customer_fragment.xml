@@ -23,10 +23,17 @@
             style="@style/LabelStyle"
             android:text="1. Customer"/>
 
-        <EditText
-            android:id="@+id/customer"
+        <AutoCompleteTextView
+            android:id="@+id/customer_id"
             android:layout_width="match_parent"
             style="@style/TextBoxStyle"/>
+
+        <TextView
+            android:id="@+id/txt_customer_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/LabelStyle"
+            android:textStyle="bold"/>
     </LinearLayout>
 
     <LinearLayout

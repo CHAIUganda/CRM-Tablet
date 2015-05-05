@@ -40,6 +40,7 @@ public class MalariaFormFragment1 extends Fragment {
     private CustomerDao customerDao;
     List<Customer> customers;
     Customer customer;
+    String customerId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +50,15 @@ public class MalariaFormFragment1 extends Fragment {
         initialiseGreenDao();
 
         customers = customerDao.loadAll();
+
+        customerId = getActivity().getIntent().getStringExtra("id");
+        if(customerId != null){
+            customer = customerDao.load(customerId);
+            if(customer != null){
+                aq.id(R.id.customer_id).text(customer.getOutletName());
+                aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+            }
+        }
 
         AutoCompleteTextView textView = (AutoCompleteTextView)view.findViewById(R.id.customer_id);
         CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, new ArrayList<Customer>(customers));

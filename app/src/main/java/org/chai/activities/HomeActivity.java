@@ -58,14 +58,6 @@ public class HomeActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_main_layout);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                CHAISynchroniser chaiSynchroniser = new CHAISynchroniser(HomeActivity.this);
-                chaiSynchroniser.startSyncronisationProcess();
-            }
-        }).start();
-
         aq = new AQuery(this);
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -78,6 +70,14 @@ public class HomeActivity extends BaseActivity{
         tabs.setViewPager(mViewPager);
 
         super.setUpDrawer(toolbar);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                CHAISynchroniser chaiSynchroniser = new CHAISynchroniser(HomeActivity.this);
+                chaiSynchroniser.startSyncronisationProcess();
+            }
+        }).start();
 
         /*
         removeAnyFragmentsOnStack();

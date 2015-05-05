@@ -3,10 +3,7 @@ package org.chai.sync;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.app.Service;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.IBinder;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -69,7 +66,7 @@ import java.util.Map;
 /**
  * Created by victor on 11/3/14.
  */
-public class CHAISynchroniser extends Service{
+public class CHAISynchroniser/* extends Service*/{
 
     private Activity parent;
     private Place place;
@@ -99,7 +96,7 @@ public class CHAISynchroniser extends Service{
     private TaskOrderDao taskOrderDao;
     private List<ServerResponse> syncronisationErros;
 
-    @Override
+    /*@Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Utils.log("Sync service started");
         return START_STICKY;
@@ -108,7 +105,7 @@ public class CHAISynchroniser extends Service{
     @Override
     public IBinder onBind(Intent intent) {
         return null;
-    }
+    }*/
 
     public CHAISynchroniser(Activity activity) {
         this.parent = activity;
@@ -167,8 +164,7 @@ public class CHAISynchroniser extends Service{
             regionDao.deleteAll();
             districtDao.deleteAll();
             subcountyDao.deleteAll();
-            customerContactDao.deleteAll();
-            customerDao.deleteAll();
+
             downloadRegions();
             downloadCustomers();
             downloadTasks();
@@ -186,7 +182,7 @@ public class CHAISynchroniser extends Service{
             displayError("The Syncronisation Process is Unable to continue,Please ensure that there is a network connection");
         }
         if(!syncronisationErros.isEmpty()){
-            displaySyncErros(syncronisationErros);
+            //displaySyncErros(syncronisationErros);
         }
     }
 

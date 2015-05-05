@@ -110,7 +110,6 @@ public class TaskCalenderFragment extends Fragment {
                     i.putExtra("id", task.getCustomerId());
                     getActivity().startActivity(i);
                 }
-
             }
         });
 
