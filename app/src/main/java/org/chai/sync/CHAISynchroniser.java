@@ -91,7 +91,7 @@ public class CHAISynchroniser extends Service {
     private TaskOrderDao taskOrderDao;
     private List<ServerResponse> syncronisationErros;
 
-    private static boolean isSyncing = false;
+    public static boolean isSyncing = false;
     private static final String PREFS = "sync_prefs";
     private static final String LAST_SYNCED = "last_synced";
 

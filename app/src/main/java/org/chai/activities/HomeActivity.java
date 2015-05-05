@@ -22,6 +22,7 @@ import org.chai.activities.tasks.TaskViewOnMapFragment;
 import org.chai.adapter.NavDrawerListAdapter;
 import org.chai.sync.CHAISynchroniser;
 import org.chai.util.NavDrawerItem;
+import org.chai.util.Utils;
 
 import java.util.ArrayList;
 
@@ -80,7 +81,12 @@ public class HomeActivity extends BaseActivity{
             }
         }).start();*/
 
-        startService(new Intent(this, CHAISynchroniser.class));
+        if(!CHAISynchroniser.isSyncing && CHAISynchroniser.getLastSynced(this) == -1){ //Start service only when we've never and we are not currently syncing
+            Utils.log("Service has never run before - starting it");
+            startService(new Intent(this, CHAISynchroniser.class));
+        }else{
+            Utils.log("Cannot start service - has been started before");
+        }
 
         /*
         removeAnyFragmentsOnStack();

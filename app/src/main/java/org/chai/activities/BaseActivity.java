@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
@@ -32,6 +33,7 @@ import org.chai.reports.ReportsActivity;
 import org.chai.rest.RestClient;
 import org.chai.sync.CHAISynchroniser;
 import org.chai.util.AccountManager;
+import org.chai.util.Utils;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.Date;
@@ -232,6 +234,20 @@ public class BaseActivity extends ActionBarActivity{
         });
 
         updateLastSynced();
+
+        aquery.id(R.id.sync).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.log("Manual sync initiated");
+                if(!CHAISynchroniser.isSyncing){
+                    startService(new Intent(BaseActivity.this, CHAISynchroniser.class));
+                    updateLastSynced();
+                }else{
+                    Utils.log("Sync is already running...please wait");
+                    Toast.makeText(BaseActivity.this, "Sync is already running...", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void updateLastSynced(){
@@ -239,6 +255,9 @@ public class BaseActivity extends ActionBarActivity{
         String lastSynced = "Never";
         if(last != -1){
             lastSynced = new PrettyTime().format(new Date(last));
+        }
+        if(CHAISynchroniser.isSyncing){
+            lastSynced = "Syncing...";
         }
 
         aquery.id(R.id.sync).text("Last Synced: " + lastSynced);
