@@ -3,7 +3,10 @@ package org.chai.sync;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.app.Service;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.IBinder;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -66,7 +69,7 @@ import java.util.Map;
 /**
  * Created by victor on 11/3/14.
  */
-public class CHAISynchroniser {
+public class CHAISynchroniser extends Service{
 
     private Activity parent;
     private Place place;
@@ -95,6 +98,17 @@ public class CHAISynchroniser {
     private SummaryReportDao summaryReportDao;
     private TaskOrderDao taskOrderDao;
     private List<ServerResponse> syncronisationErros;
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Utils.log("Sync service started");
+        return START_STICKY;
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
 
     public CHAISynchroniser(Activity activity) {
         this.parent = activity;

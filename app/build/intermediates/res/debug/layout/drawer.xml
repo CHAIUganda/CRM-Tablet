@@ -43,7 +43,15 @@
 	    android:choiceMode="singleChoice"
 	    android:divider="@android:color/transparent"
 	    android:dividerHeight="0dp"/>
-	
+
+    <TextView
+        android:id="@+id/sync"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#5c5b5b"
+        android:textSize="16sp"
+        android:text="Sync"/>
+
      <LinearLayout
          android:id="@+id/ln_about"
          android:layout_width="match_parent"
@@ -51,7 +59,8 @@
          android:gravity="center_vertical"
          android:padding="@dimen/content_padding"
          android:background="@drawable/border_top_gray"
-         android:layout_gravity="bottom" >
+         android:layout_gravity="bottom">
+
          <ImageView
 	         android:id="@+id/img_logout"
 	         android:layout_width="20dp"

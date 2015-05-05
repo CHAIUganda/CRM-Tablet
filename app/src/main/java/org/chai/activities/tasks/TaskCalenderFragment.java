@@ -2,6 +2,7 @@ package org.chai.activities.tasks;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,7 +20,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.chai.R;
-import org.chai.activities.BaseContainerFragment;
+import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
 import org.chai.adapter.TaskListAdapter;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
@@ -88,19 +89,26 @@ public class TaskCalenderFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Task task = (Task) adapterView.getItemAtPosition(position);
                 if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
-                    SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
+                    /*SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
                     Bundle bundle = new Bundle();
                     Task itemAtPosition = (Task) adapterView.getItemAtPosition(position);
                     bundle.putString("taskId", itemAtPosition.getUuid());
                     commercialFormActivity.setArguments(bundle);
-                    ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity, true);
+                    ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity, true);*/
+                    Intent i = new Intent(getActivity(), SalesFormActivity.class);
+                    i.putExtra("id", task.getCustomerId());
+                    getActivity().startActivity(i);
                 }else{
-                    DetailersActivity detailersActivity = new DetailersActivity();
+                    /*DetailersActivity detailersActivity = new DetailersActivity();
                     Bundle bundle = new Bundle();
                     bundle.putString("taskId", ((Task) adapterView.getItemAtPosition(position)).getUuid());
                     detailersActivity.setArguments(bundle);
-                    ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);
+                    ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);*/
+                    Intent i = new Intent(getActivity(), MalariaFormActivity.class);
+                    i.putExtra("id", task.getCustomerId());
+                    getActivity().startActivity(i);
                 }
 
             }
