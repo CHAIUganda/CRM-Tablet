@@ -51,16 +51,17 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
 
         Task task = taskList.get(position);
         Customer customer = task.getCustomer();
-        if(customer!=null){
+        if(customer != null){
+            Utils.log("Task for customer -> " + customer);
             viewHolder.subcounty.setText(customer.getSubcounty().getName());
             viewHolder.outlet.setText(customer.getOutletName());
-            viewHolder.locationDescription.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(),20));
+            viewHolder.locationDescription.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(), 20));
         }
-        if (customer!= null && customer.getCustomerContacts().size() > 0) {
+        if (customer != null && customer.getCustomerContacts().size() > 0) {
             CustomerContact customerCtct = null;
             customerCtct = Utils.getKeyCustomerContact(customer.getCustomerContacts());
             if(customerCtct != null){
-                viewHolder.contact.setText(customerCtct.getContact()!=null?customerCtct.getContact():"No Contact");
+                viewHolder.contact.setText(customerCtct.getContact() != null ? customerCtct.getContact() : "No Contact");
             }
         }
 

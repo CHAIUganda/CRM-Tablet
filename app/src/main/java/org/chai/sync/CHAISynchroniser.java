@@ -3,7 +3,9 @@ package org.chai.sync;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.IBinder;
@@ -89,6 +91,10 @@ public class CHAISynchroniser extends Service {
     private TaskOrderDao taskOrderDao;
     private List<ServerResponse> syncronisationErros;
 
+    private static boolean isSyncing = false;
+    private static final String PREFS = "sync_prefs";
+    private static final String LAST_SYNCED = "last_synced";
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Utils.log("Starting sync service");
@@ -102,8 +108,6 @@ public class CHAISynchroniser extends Service {
 
         //Sync everything here
         new SyncTask().execute();
-
-        stopSelf();
 
         return START_NOT_STICKY;
     }
@@ -120,7 +124,7 @@ public class CHAISynchroniser extends Service {
         AlarmManager alarm = (AlarmManager)getSystemService(ALARM_SERVICE);
         alarm.set(
                 alarm.RTC_WAKEUP,
-                System.currentTimeMillis() + (1000 * 60),
+                System.currentTimeMillis() + (1000 * 60 * 60),
                 PendingIntent.getService(this, 0, new Intent(this, CHAISynchroniser.class), 0)
         );
     }
@@ -153,6 +157,7 @@ public class CHAISynchroniser extends Service {
     }
 
     public void startSyncronisationProcess() {
+        Utils.log("startSyncronisationProcess()");
         try{
             syncronisationErros = new ArrayList<ServerResponse>();
             uploadCustomers();
@@ -224,9 +229,10 @@ public class CHAISynchroniser extends Service {
     }
 
     public void downloadTasks() {
-        updatePropgress("Downloading Tasks..");
+        updatePropgress("Downloading Tasks...");
 
         Task[] tasks = taskClient.downloadTasks();
+        Utils.log("Got tasks -> " + tasks.length);
         taskDao.insertOrReplaceInTx(tasks);
         List<TaskOrder> taskOrders = new ArrayList<TaskOrder>();
         for (Task task : tasks) {
@@ -447,17 +453,39 @@ public class CHAISynchroniser extends Service {
     }
 
     private class SyncTask extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected Void doInBackground(Void... params) {
-            for (int i = 0; i < 5; i++) {
-                startSyncronisationProcess();
-            }
+            startSyncronisationProcess();
 
             return null;
         }
 
         @Override
+        protected void onPreExecute() {
+            isSyncing = true;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            saveLastSynced(getApplicationContext(), System.currentTimeMillis());
+            isSyncing = false;
+            stopSelf();
+        }
+
+        @Override
         protected void onProgressUpdate(Void... values) {}
+    }
+
+    public static long getLastSynced(Context cxt){
+        SharedPreferences prefs = cxt.getSharedPreferences(PREFS, 0);
+        return prefs.getLong(LAST_SYNCED, -1);
+    }
+
+    public static void saveLastSynced(Context cxt, long lastsynced){
+        Utils.log("Saving last synced -> " + lastsynced);
+        SharedPreferences prefs = cxt.getSharedPreferences(PREFS, 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong(LAST_SYNCED, lastsynced);
+        editor.commit();
     }
 }

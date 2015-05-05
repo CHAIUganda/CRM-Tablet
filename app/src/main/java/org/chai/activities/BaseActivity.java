@@ -30,7 +30,11 @@ import org.chai.activities.tasks.SalesFormActivity;
 import org.chai.model.User;
 import org.chai.reports.ReportsActivity;
 import org.chai.rest.RestClient;
+import org.chai.sync.CHAISynchroniser;
 import org.chai.util.AccountManager;
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.util.Date;
 
 /**
  * Created by Zed on 2/4/2015.
@@ -204,6 +208,40 @@ public class BaseActivity extends ActionBarActivity{
         });
 
         aquery.id(R.id.txt_email).text(username);
+
+        drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                updateLastSynced();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
+
+        updateLastSynced();
+    }
+
+    private void updateLastSynced(){
+        long last = CHAISynchroniser.getLastSynced(this);
+        String lastSynced = "Never";
+        if(last != -1){
+            lastSynced = new PrettyTime().format(new Date(last));
+        }
+
+        aquery.id(R.id.sync).text("Last Synced: " + lastSynced);
     }
 
     @Override

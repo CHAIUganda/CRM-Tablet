@@ -1,5 +1,6 @@
 package org.chai.activities.tasks;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -13,12 +14,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import com.google.android.gms.maps.GoogleMap;
-import de.greenrobot.dao.query.QueryBuilder;
+
 import org.chai.Globals;
 import org.chai.R;
-import org.chai.activities.BaseContainerFragment;
-import org.chai.model.*;
+import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
+import org.chai.model.Customer;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
+import org.chai.model.Task;
+import org.chai.model.TaskDao;
+import org.chai.model.User;
 import org.chai.rest.RestClient;
 import org.chai.util.GPSTracker;
 import org.chai.util.MyApplication;
@@ -37,6 +44,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import de.greenrobot.dao.query.QueryBuilder;
 
 /**
  * Created by victor on 12/11/14.
@@ -220,18 +229,14 @@ public class TaskViewOnMapFragment extends Fragment {
 
 
     private void showForm(String taskId){
-        if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
-            SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("taskId", taskId);
-            commercialFormActivity.setArguments(bundle);
-            ((BaseContainerFragment) getParentFragment()).replaceFragment(commercialFormActivity, true);
-        } else {
-            DetailersActivity detailersActivity = new DetailersActivity();
-            Bundle bundle = new Bundle();
-            bundle.putString("taskId", taskId);
-            detailersActivity.setArguments(bundle);
-            ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);
+        if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+            Intent i = new Intent(getActivity(), SalesFormActivity.class);
+            i.putExtra("id", taskDao.load(taskId).getCustomerId());
+            getActivity().startActivity(i);
+        }else{
+            Intent i = new Intent(getActivity(), MalariaFormActivity.class);
+            i.putExtra("id", taskDao.load(taskId).getCustomerId());
+            getActivity().startActivity(i);
         }
         runner = null;
     }
