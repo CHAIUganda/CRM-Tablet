@@ -61,14 +61,18 @@ uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from AndroidManifest.xml:15:5
 	android:name
 		ADDED from AndroidManifest.xml:15:22
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from AndroidManifest.xml:16:5
+	android:name
+		ADDED from AndroidManifest.xml:16:22
 uses-feature#0x00020000
-ADDED from AndroidManifest.xml:17:5
+ADDED from AndroidManifest.xml:18:5
 	android:required
-		ADDED from AndroidManifest.xml:19:13
+		ADDED from AndroidManifest.xml:20:13
 	android:glEsVersion
-		ADDED from AndroidManifest.xml:18:13
+		ADDED from AndroidManifest.xml:19:13
 application
-ADDED from AndroidManifest.xml:21:3
+ADDED from AndroidManifest.xml:22:3
 MERGED from com.android.support:appcompat-v7:21.0.0:16:5
 MERGED from com.android.support:support-v4:21.0.3:16:5
 MERGED from com.google.android.gms:play-services:6.5.87:20:5
@@ -76,159 +80,137 @@ MERGED from com.android.support:support-v4:21.0.3:16:5
 MERGED from com.jpardogo.materialtabstrip:library:1.0.9:9:5
 MERGED from com.android.support:support-v4:21.0.3:16:5
 	android:label
-		ADDED from AndroidManifest.xml:21:46
+		ADDED from AndroidManifest.xml:22:46
 	android:icon
-		ADDED from AndroidManifest.xml:21:16
+		ADDED from AndroidManifest.xml:22:16
 	android:theme
-		ADDED from AndroidManifest.xml:21:79
+		ADDED from AndroidManifest.xml:22:79
 	android:name
-		ADDED from AndroidManifest.xml:21:111
+		ADDED from AndroidManifest.xml:22:111
 activity#org.chai.activities.LoginActivity
-ADDED from AndroidManifest.xml:22:5
+ADDED from AndroidManifest.xml:23:5
 	android:label
-		ADDED from AndroidManifest.xml:25:9
+		ADDED from AndroidManifest.xml:26:9
 	android:configChanges
+		ADDED from AndroidManifest.xml:25:9
+	android:name
 		ADDED from AndroidManifest.xml:24:9
-	android:name
-		ADDED from AndroidManifest.xml:23:9
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:26:9
+ADDED from AndroidManifest.xml:27:9
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:27:13
-	android:name
-		ADDED from AndroidManifest.xml:27:21
-category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:28:13
 	android:name
-		ADDED from AndroidManifest.xml:28:23
+		ADDED from AndroidManifest.xml:28:21
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:29:13
+	android:name
+		ADDED from AndroidManifest.xml:29:23
 activity#org.chai.activities.org.chai.activities.forms.MalariaFormActivity
-ADDED from AndroidManifest.xml:31:7
+ADDED from AndroidManifest.xml:32:7
 	android:label
-		ADDED from AndroidManifest.xml:31:169
+		ADDED from AndroidManifest.xml:32:169
 	android:configChanges
-		ADDED from AndroidManifest.xml:31:90
+		ADDED from AndroidManifest.xml:32:90
 	android:theme
-		ADDED from AndroidManifest.xml:31:137
+		ADDED from AndroidManifest.xml:32:137
 	android:name
-		ADDED from AndroidManifest.xml:31:17
+		ADDED from AndroidManifest.xml:32:17
 activity#org.chai.activities.tasks.DiarrheaFormActivity
-ADDED from AndroidManifest.xml:35:7
+ADDED from AndroidManifest.xml:36:7
 	android:label
-		ADDED from AndroidManifest.xml:35:150
+		ADDED from AndroidManifest.xml:36:150
 	android:configChanges
-		ADDED from AndroidManifest.xml:35:71
+		ADDED from AndroidManifest.xml:36:71
 	android:theme
-		ADDED from AndroidManifest.xml:35:118
+		ADDED from AndroidManifest.xml:36:118
 	android:name
-		ADDED from AndroidManifest.xml:35:17
+		ADDED from AndroidManifest.xml:36:17
 activity#org.chai.activities.tasks.SalesFormActivity
-ADDED from AndroidManifest.xml:39:7
+ADDED from AndroidManifest.xml:40:7
 	android:label
-		ADDED from AndroidManifest.xml:39:147
+		ADDED from AndroidManifest.xml:40:147
 	android:configChanges
-		ADDED from AndroidManifest.xml:39:68
+		ADDED from AndroidManifest.xml:40:68
 	android:theme
-		ADDED from AndroidManifest.xml:39:115
+		ADDED from AndroidManifest.xml:40:115
 	android:name
-		ADDED from AndroidManifest.xml:39:17
+		ADDED from AndroidManifest.xml:40:17
 activity#org.chai.activities.BlankActivity
-ADDED from AndroidManifest.xml:43:7
+ADDED from AndroidManifest.xml:44:7
 	android:configChanges
-		ADDED from AndroidManifest.xml:43:58
+		ADDED from AndroidManifest.xml:44:58
 	android:name
-		ADDED from AndroidManifest.xml:43:17
+		ADDED from AndroidManifest.xml:44:17
 activity#org.chai.activities.HomeActivity
-ADDED from AndroidManifest.xml:46:7
+ADDED from AndroidManifest.xml:47:7
 	android:configChanges
-		ADDED from AndroidManifest.xml:46:57
+		ADDED from AndroidManifest.xml:47:57
 	android:name
-		ADDED from AndroidManifest.xml:46:17
+		ADDED from AndroidManifest.xml:47:17
 activity#org.chai.activities.customer.CustomerDetailsActivity
-ADDED from AndroidManifest.xml:49:7
-	android:name
-		ADDED from AndroidManifest.xml:49:17
-activity#org.chai.activities.customer.CustomersActivity
 ADDED from AndroidManifest.xml:50:7
-	android:label
-		ADDED from AndroidManifest.xml:50:71
 	android:name
 		ADDED from AndroidManifest.xml:50:17
+activity#org.chai.activities.customer.CustomersActivity
+ADDED from AndroidManifest.xml:51:7
+	android:label
+		ADDED from AndroidManifest.xml:51:71
+	android:name
+		ADDED from AndroidManifest.xml:51:17
 activity#org.chai.activities.calls.HistoryActivity
-ADDED from AndroidManifest.xml:52:7
+ADDED from AndroidManifest.xml:53:7
 	android:label
-		ADDED from AndroidManifest.xml:52:66
+		ADDED from AndroidManifest.xml:53:66
 	android:name
-		ADDED from AndroidManifest.xml:52:17
+		ADDED from AndroidManifest.xml:53:17
 activity#org.chai.activities.tasks.NewOrderActivity
-ADDED from AndroidManifest.xml:54:7
+ADDED from AndroidManifest.xml:55:7
 	android:label
-		ADDED from AndroidManifest.xml:54:67
+		ADDED from AndroidManifest.xml:55:67
 	android:name
-		ADDED from AndroidManifest.xml:54:17
+		ADDED from AndroidManifest.xml:55:17
 activity#org.chai.reports.ReportsActivity
-ADDED from AndroidManifest.xml:56:7
+ADDED from AndroidManifest.xml:57:7
 	android:label
-		ADDED from AndroidManifest.xml:56:57
+		ADDED from AndroidManifest.xml:57:57
 	android:name
-		ADDED from AndroidManifest.xml:56:17
+		ADDED from AndroidManifest.xml:57:17
 activity#org.chai.activities.customer.AddNewCustomerActivity
-ADDED from AndroidManifest.xml:59:7
+ADDED from AndroidManifest.xml:60:7
 	android:label
-		ADDED from AndroidManifest.xml:59:76
+		ADDED from AndroidManifest.xml:60:76
 	android:name
-		ADDED from AndroidManifest.xml:59:17
+		ADDED from AndroidManifest.xml:60:17
 activity#org.chai.activities.customer.CustomerForm
-ADDED from AndroidManifest.xml:62:7
-	android:configChanges
-		ADDED from AndroidManifest.xml:62:66
-	android:name
-		ADDED from AndroidManifest.xml:62:17
-meta-data#com.google.android.maps.v2.API_KEY
 ADDED from AndroidManifest.xml:63:7
+	android:configChanges
+		ADDED from AndroidManifest.xml:63:66
 	android:name
-		ADDED from AndroidManifest.xml:63:18
-	android:value
-		ADDED from AndroidManifest.xml:63:68
-meta-data#com.google.android.gms.version
+		ADDED from AndroidManifest.xml:63:17
+meta-data#com.google.android.maps.v2.API_KEY
 ADDED from AndroidManifest.xml:64:7
-MERGED from com.google.android.gms:play-services:6.5.87:21:9
 	android:name
 		ADDED from AndroidManifest.xml:64:18
 	android:value
-		ADDED from AndroidManifest.xml:64:64
-receiver#org.chai.sync.TaskReceiver
-ADDED from AndroidManifest.xml:66:7
+		ADDED from AndroidManifest.xml:64:68
+meta-data#com.google.android.gms.version
+ADDED from AndroidManifest.xml:65:7
+MERGED from com.google.android.gms:play-services:6.5.87:21:9
 	android:name
-		ADDED from AndroidManifest.xml:66:17
-intent-filter#android.intent.action.BATTERY_LOW+android.intent.action.BATTERY_OKAY+com.example.app.SYNCRONISE_ACTION
-ADDED from AndroidManifest.xml:67:11
-action#android.intent.action.BATTERY_LOW
-ADDED from AndroidManifest.xml:68:15
+		ADDED from AndroidManifest.xml:65:18
+	android:value
+		ADDED from AndroidManifest.xml:65:64
+receiver#org.chai.sync.BootAndUpdateReceiver
+ADDED from AndroidManifest.xml:67:7
 	android:name
-		ADDED from AndroidManifest.xml:68:23
-action#android.intent.action.BATTERY_OKAY
+		ADDED from AndroidManifest.xml:67:17
+intent-filter#android.intent.action.BOOT_COMPLETED
+ADDED from AndroidManifest.xml:68:11
+action#android.intent.action.BOOT_COMPLETED
 ADDED from AndroidManifest.xml:69:15
 	android:name
 		ADDED from AndroidManifest.xml:69:23
-action#com.example.app.SYNCRONISE_ACTION
-ADDED from AndroidManifest.xml:70:15
-	android:name
-		ADDED from AndroidManifest.xml:70:23
-receiver#org.chai.sync.BootAndUpdateReceiver
-ADDED from AndroidManifest.xml:74:7
-	android:name
-		ADDED from AndroidManifest.xml:74:17
-intent-filter#android.intent.action.BOOT_COMPLETED+android.intent.action.org.chai
-ADDED from AndroidManifest.xml:75:11
-action#android.intent.action.org.chai
-ADDED from AndroidManifest.xml:76:15
-	android:name
-		ADDED from AndroidManifest.xml:76:23
-action#android.intent.action.BOOT_COMPLETED
-ADDED from AndroidManifest.xml:77:15
-	android:name
-		ADDED from AndroidManifest.xml:77:23
 service#org.chai.sync.CHAISynchroniser
-ADDED from AndroidManifest.xml:81:7
+ADDED from AndroidManifest.xml:73:7
 	android:name
-		ADDED from AndroidManifest.xml:81:16
+		ADDED from AndroidManifest.xml:73:16

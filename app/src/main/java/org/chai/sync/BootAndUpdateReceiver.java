@@ -13,9 +13,6 @@ public class BootAndUpdateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Utils.log("Boot completed recieved");
-        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED") || intent.getAction().equals("android.intent.action.org.chai")) {
-            Intent startServiceIntent = new Intent(context, CHAISynchroniser.class);
-            context.startService(startServiceIntent);
-        }
+        context.startService(new Intent(context, CHAISynchroniser.class));
     }
 }

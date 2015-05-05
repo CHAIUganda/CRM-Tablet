@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import org.chai.R;
-import org.chai.sync.CHAISynchroniser;
 
 /**
  * Created by Zed on 4/10/2015.
@@ -25,7 +24,5 @@ public class BlankActivity extends BaseActivity{
         getSupportActionBar().setTitle(title);
 
         super.setUpDrawer(toolbar);
-
-        new CHAISynchroniser(this).startSyncronisationProcess();
     }
 }

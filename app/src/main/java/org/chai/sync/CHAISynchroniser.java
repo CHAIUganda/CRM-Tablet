@@ -1,13 +1,12 @@
 package org.chai.sync;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import android.os.AsyncTask;
+import android.os.IBinder;
 
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.model.AdhockSale;
@@ -51,24 +50,18 @@ import org.chai.rest.SalesClient;
 import org.chai.rest.TaskClient;
 import org.chai.util.MyApplication;
 import org.chai.util.ServerResponse;
-import org.chai.util.SyncronizationException;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by victor on 11/3/14.
  */
-public class CHAISynchroniser/* extends Service*/{
+public class CHAISynchroniser extends Service {
 
-    private Activity parent;
     private Place place;
     private CustomerClient customerClient;
     private ProductClient productClient;
@@ -96,35 +89,40 @@ public class CHAISynchroniser/* extends Service*/{
     private TaskOrderDao taskOrderDao;
     private List<ServerResponse> syncronisationErros;
 
-    /*@Override
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Utils.log("Sync service started");
-        return START_STICKY;
+        Utils.log("Starting sync service");
+        place = new Place();
+        customerClient = new CustomerClient();
+        productClient = new ProductClient();
+        taskClient = new TaskClient();
+        salesClient = new SalesClient();
+
+        initialiseGreenDao();
+
+        //Sync everything here
+        new SyncTask().execute();
+
+        stopSelf();
+
+        return START_NOT_STICKY;
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         return null;
-    }*/
-
-    public CHAISynchroniser(Activity activity) {
-        this.parent = activity;
-        place = new Place();
-        customerClient = new CustomerClient();
-        productClient = new ProductClient();
-        taskClient = new TaskClient();
-        salesClient = new SalesClient();
-        initialiseGreenDao();
     }
 
-    public CHAISynchroniser(Activity parent, ProgressDialog progressDialog) {
-        this.parent = parent;
-        place = new Place();
-        customerClient = new CustomerClient();
-        productClient = new ProductClient();
-        taskClient = new TaskClient();
-        salesClient = new SalesClient();
-        initialiseGreenDao();
+    @Override
+    public void onDestroy() {
+        Utils.log("Destroying service and setting alarm");
+        // Restart every 1 hour
+        AlarmManager alarm = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarm.set(
+                alarm.RTC_WAKEUP,
+                System.currentTimeMillis() + (1000 * 60),
+                PendingIntent.getService(this, 0, new Intent(this, CHAISynchroniser.class), 0)
+        );
     }
 
     private void initialiseGreenDao() {
@@ -150,11 +148,12 @@ public class CHAISynchroniser/* extends Service*/{
             summaryReportDao = daoSession.getSummaryReportDao();
             taskOrderDao = daoSession.getTaskOrderDao();
         } catch (Exception ex) {
+            Utils.log("Error initializing greendao for sync");
         }
     }
 
     public void startSyncronisationProcess() {
-        try {
+        try{
             syncronisationErros = new ArrayList<ServerResponse>();
             uploadCustomers();
             uploadDirectSales();
@@ -170,16 +169,8 @@ public class CHAISynchroniser/* extends Service*/{
             downloadTasks();
             downloadProducts();
             downloadSummaryReports();
-        }catch (final SyncronizationException syncExc){
-            displayError("The Syncronisation Process is Unable to continue,"+syncExc.getMessage());
-        } catch (final HttpClientErrorException e) {
-            e.printStackTrace();
-            displayError("The Syncronisation Process is Unable to continue," + e.getMessage());
-        } catch (HttpServerErrorException se) {
-            displayError(se.getResponseBodyAsString());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            displayError("The Syncronisation Process is Unable to continue,Please ensure that there is a network connection");
+        }catch(Exception ex){
+            Utils.log("Error syncing -> " + ex.getMessage());
         }
         if(!syncronisationErros.isEmpty()){
             //displaySyncErros(syncronisationErros);
@@ -260,6 +251,7 @@ public class CHAISynchroniser/* extends Service*/{
         }else{
             Utils.log("Tasks list is empty");
         }
+
         for (Task task : taskList) {
             Utils.log("Syncrosnizing task -> " + task.getCustomerId());
             if (taskIsHistory(task)) {
@@ -303,7 +295,7 @@ public class CHAISynchroniser/* extends Service*/{
         return false;
     }
 
-    public void uploadCustomers() throws SyncronizationException{
+    public void uploadCustomers() /*throws SyncronizationException*/{
         List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
         if (!customersList.isEmpty()) {
             updatePropgress("Uploading Customers...");
@@ -334,7 +326,7 @@ public class CHAISynchroniser/* extends Service*/{
         }
     }
 
-    private void uploadSales()throws SyncronizationException{
+    private void uploadSales() /*throws SyncronizationException*/{
         List<Sale> saleList = saleDao.queryBuilder().where(SaleDao.Properties.IsHistory.notEq(true)).list();
         if (!saleList.isEmpty()) {
             updatePropgress("Uploading Sales...");
@@ -357,7 +349,7 @@ public class CHAISynchroniser/* extends Service*/{
         }
     }
 
-    private void uploadDirectSales()throws SyncronizationException{
+    private void uploadDirectSales() /*throws SyncronizationException*/{
         List<AdhockSale> saleList = adhockSaleDao.loadAll();
         if (!saleList.isEmpty()) {
             updatePropgress("Uploading Sales...");
@@ -384,7 +376,7 @@ public class CHAISynchroniser/* extends Service*/{
         }
     }
 
-    private void uploadOrders() throws SyncronizationException{
+    private void uploadOrders() /*throws SyncronizationException*/{
         List<Order> orderList = orderDao.loadAll();
         if (!orderList.isEmpty()) {
             updatePropgress("Uploading Orders...");
@@ -419,16 +411,16 @@ public class CHAISynchroniser/* extends Service*/{
 
     private void displayError(final String message){
         Utils.log("Error -> " + message);
-        parent.runOnUiThread(new Runnable() {
+        /*parent.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Toast.makeText(parent.getApplicationContext(), message, Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
     }
 
     private void displaySyncErros(final List<ServerResponse> errors){
-        parent.runOnUiThread(new Runnable() {
+        /*parent.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 StringBuilder formartedErrors = new StringBuilder();
@@ -451,7 +443,21 @@ public class CHAISynchroniser/* extends Service*/{
                         .setPositiveButton("ok", null)
                         .show();
             }
-        });
+        });*/
+    }
 
+    private class SyncTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            for (int i = 0; i < 5; i++) {
+                startSyncronisationProcess();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
     }
 }

@@ -3,9 +3,13 @@ package org.chai.rest;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+
 import org.chai.util.MyApplication;
-import org.chai.util.Utils;
-import org.springframework.http.*;
+import org.springframework.http.HttpAuthentication;
+import org.springframework.http.HttpBasicAuthentication;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,8 +19,8 @@ import java.util.Collections;
  * Created by victor on 11/3/14.
  */
 public class RestClient {
-    public static String userName ;
-    public static String password  ;
+    public static String userName;
+    public static String password;
     public static String role;
     //public static String REST_URL = "http://23.239.27.196:8080/web-crm/rest/";
     //public static String REST_URL = "http://192.168.1.107:8080/chai-crm/rest/";
@@ -28,7 +32,6 @@ public class RestClient {
         headers.set("device-imei", "Samsung Galaxy S3");
         headers.set("app-version-code",getVersionCode(MyApplication.getContext())+"");
         headers.set("app-version-name",getVersionName(MyApplication.getContext())+"");
-        Utils.log("Setting username -> " + userName + " Password: " + password);
         HttpAuthentication authHeader = new HttpBasicAuthentication(userName, password);
         headers.setAuthorization(authHeader);
         return headers;

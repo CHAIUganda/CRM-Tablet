@@ -20,14 +20,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.chai.R;
-import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
 import org.chai.adapter.TaskListAdapter;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.Task;
 import org.chai.model.TaskDao;
-import org.chai.model.User;
-import org.chai.rest.RestClient;
 import org.chai.util.GPSTracker;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
@@ -90,7 +87,7 @@ public class TaskCalenderFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Task task = (Task) adapterView.getItemAtPosition(position);
-                if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+                //if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
                     /*SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
                     Bundle bundle = new Bundle();
                     Task itemAtPosition = (Task) adapterView.getItemAtPosition(position);
@@ -100,16 +97,16 @@ public class TaskCalenderFragment extends Fragment {
                     Intent i = new Intent(getActivity(), SalesFormActivity.class);
                     i.putExtra("id", task.getCustomerId());
                     getActivity().startActivity(i);
-                }else{
+                //}else{
                     /*DetailersActivity detailersActivity = new DetailersActivity();
                     Bundle bundle = new Bundle();
                     bundle.putString("taskId", ((Task) adapterView.getItemAtPosition(position)).getUuid());
                     detailersActivity.setArguments(bundle);
                     ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);*/
-                    Intent i = new Intent(getActivity(), MalariaFormActivity.class);
+                    /*Intent i = new Intent(getActivity(), MalariaFormActivity.class);
                     i.putExtra("id", task.getCustomerId());
                     getActivity().startActivity(i);
-                }
+                }*/
             }
         });
 

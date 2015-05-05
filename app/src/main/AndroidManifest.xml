@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- Required OpenGL ES 2.0. for Maps V2 -->
     <uses-feature
             android:glEsVersion="0x00020000"
@@ -63,17 +64,8 @@
       <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyC734nYWloXJZ-f7AIFvjOe5zHDfzWiNWY"/>
       <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 
-      <receiver android:name=".sync.TaskReceiver">
-          <intent-filter>
-              <action android:name="android.intent.action.BATTERY_LOW" />
-              <action android:name="android.intent.action.BATTERY_OKAY" />
-              <action android:name="com.example.app.SYNCRONISE_ACTION" />
-          </intent-filter>
-      </receiver>
-
       <receiver android:name=".sync.BootAndUpdateReceiver">
           <intent-filter>
-              <action android:name="android.intent.action.org.chai" />
               <action android:name="android.intent.action.BOOT_COMPLETED" />
           </intent-filter>
       </receiver>

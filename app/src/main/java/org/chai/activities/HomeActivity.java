@@ -1,5 +1,6 @@
 package org.chai.activities;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -71,13 +72,15 @@ public class HomeActivity extends BaseActivity{
 
         super.setUpDrawer(toolbar);
 
-        new Thread(new Runnable() {
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
                 CHAISynchroniser chaiSynchroniser = new CHAISynchroniser(HomeActivity.this);
                 chaiSynchroniser.startSyncronisationProcess();
             }
-        }).start();
+        }).start();*/
+
+        startService(new Intent(this, CHAISynchroniser.class));
 
         /*
         removeAnyFragmentsOnStack();
