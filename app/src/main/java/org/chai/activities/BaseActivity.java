@@ -238,8 +238,8 @@ public class BaseActivity extends ActionBarActivity{
         aquery.id(R.id.sync).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.log("Manual sync initiated");
                 if(!CHAISynchroniser.isSyncing){
+                    CHAISynchroniser.isSyncing = true;
                     startService(new Intent(BaseActivity.this, CHAISynchroniser.class));
                     updateLastSynced();
                 }else{

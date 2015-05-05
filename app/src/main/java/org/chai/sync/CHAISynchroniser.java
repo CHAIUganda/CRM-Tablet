@@ -165,9 +165,6 @@ public class CHAISynchroniser extends Service {
             uploadSales();
             uploadTasks();
             uploadOrders();
-            regionDao.deleteAll();
-            districtDao.deleteAll();
-            subcountyDao.deleteAll();
 
             downloadRegions();
             downloadCustomers();
@@ -186,6 +183,7 @@ public class CHAISynchroniser extends Service {
         updatePropgress("Downloading Regions...");
         Region[] regions = place.downloadRegions();
         if (regions != null) {
+            regionDao.deleteAll();
             for (Region region : regions) {
                 regionDao.insert(region);
             }
@@ -196,8 +194,11 @@ public class CHAISynchroniser extends Service {
     public void downloadDistricts() {
         updatePropgress("Downloading Districts...");
         District[] districts = place.downloadDistricts();
-        for (District district : districts) {
-            districtDao.insert(district);
+        if(districts != null){
+            districtDao.deleteAll();
+            for (District district : districts) {
+                districtDao.insert(district);
+            }
         }
         downloadSubcounties();
     }
@@ -205,8 +206,11 @@ public class CHAISynchroniser extends Service {
     public void downloadSubcounties() {
         updatePropgress("Downloading Subcounties...");
         Subcounty[] subcounties = place.downloadSubcounties();
-        for (Subcounty subcounty : subcounties) {
-            subcountyDao.insert(subcounty);
+        if(subcounties != null){
+            subcountyDao.deleteAll();
+            for (Subcounty subcounty : subcounties) {
+                subcountyDao.insert(subcounty);
+            }
         }
     }
 
@@ -325,10 +329,12 @@ public class CHAISynchroniser extends Service {
     }
 
     private void downloadProducts() {
-        productDao.deleteAll();
         Product[] products = productClient.downloadProducts();
-        for (Product product : products) {
-            productDao.insert(product);
+        if(products != null){
+            productDao.deleteAll();
+            for (Product product : products) {
+                productDao.insert(product);
+            }
         }
     }
 
@@ -404,10 +410,12 @@ public class CHAISynchroniser extends Service {
     }
 
     private void downloadSummaryReports() {
-        summaryReportDao.deleteAll();
         SummaryReport[] summaryReports = place.getSummaryReports();
-        for (SummaryReport summaryReport : summaryReports) {
-            summaryReportDao.insert(summaryReport);
+        if(summaryReports != null){
+            summaryReportDao.deleteAll();
+            for (SummaryReport summaryReport : summaryReports) {
+                summaryReportDao.insert(summaryReport);
+            }
         }
     }
 

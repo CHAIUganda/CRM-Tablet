@@ -46,11 +46,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dad7d78f-c0b3-4a33-b333-77a49d84f0ba" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/HomeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/HomeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/drawer.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/drawer.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/Place.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/Place.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="chai-crm-android.iws" />
@@ -74,29 +72,39 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CHAISynchroniser.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="CHAISynchroniser.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="7830">
-              <caret line="129" column="5" selection-start-line="129" selection-start-column="5" selection-end-line="129" selection-end-column="5" />
+            <state vertical-scroll-proportion="16.36027" vertical-offset="523" max-vertical-offset="7974">
+              <caret line="356" column="31" selection-start-line="356" selection-start-column="21" selection-end-line="356" selection-end-column="31" />
               <folding>
                 <element signature="e#3629#3630#0" expanded="true" />
                 <element signature="e#3656#3657#0" expanded="true" />
-                <element signature="e#7314#7331#0" expanded="true" />
-                <element signature="e#8101#8112#0" expanded="true" />
+                <element signature="e#7422#7439#0" expanded="true" />
+                <element signature="e#8209#8220#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Place.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/rest/Place.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="239" max-vertical-offset="2394">
+              <caret line="51" column="15" selection-start-line="51" selection-start-column="15" selection-end-line="51" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.057239" vertical-offset="3268" max-vertical-offset="4572">
-              <caret line="243" column="39" selection-start-line="243" selection-start-column="39" selection-end-line="243" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3322" max-vertical-offset="4572">
+              <caret line="245" column="47" selection-start-line="245" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
               <folding>
-                <element signature="e#8025#8595#0" expanded="true" />
-                <element signature="e#8584#8585#0" expanded="true" />
+                <element signature="e#8025#8598#0" expanded="true" />
+                <element signature="e#8587#8588#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -973,7 +981,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/customer_selection_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/fragments/CustomerSelectionFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/new_order_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TakeOrderFragment.java" />
@@ -1020,10 +1027,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/TaskListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskViewOnMapFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/HomeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/rest/Place.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" />
       </list>
     </option>
   </component>
@@ -1600,14 +1608,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/values.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="701">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/arrays.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4068">
@@ -2049,26 +2049,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="7830">
-          <caret line="129" column="5" selection-start-line="129" selection-start-column="5" selection-end-line="129" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3322" max-vertical-offset="4572">
+          <caret line="245" column="47" selection-start-line="245" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
           <folding>
-            <element signature="e#3629#3630#0" expanded="true" />
-            <element signature="e#3656#3657#0" expanded="true" />
-            <element signature="e#7314#7331#0" expanded="true" />
-            <element signature="e#8101#8112#0" expanded="true" />
+            <element signature="e#8025#8598#0" expanded="true" />
+            <element signature="e#8587#8588#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/rest/Place.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.057239" vertical-offset="3268" max-vertical-offset="4572">
-          <caret line="243" column="39" selection-start-line="243" selection-start-column="39" selection-end-line="243" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="239" max-vertical-offset="2394">
+          <caret line="51" column="15" selection-start-line="51" selection-start-column="15" selection-end-line="51" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="16.36027" vertical-offset="523" max-vertical-offset="7974">
+          <caret line="356" column="31" selection-start-line="356" selection-start-column="21" selection-end-line="356" selection-end-column="31" />
           <folding>
-            <element signature="e#8025#8595#0" expanded="true" />
-            <element signature="e#8584#8585#0" expanded="true" />
+            <element signature="e#3629#3630#0" expanded="true" />
+            <element signature="e#3656#3657#0" expanded="true" />
+            <element signature="e#7422#7439#0" expanded="true" />
+            <element signature="e#8209#8220#0" expanded="true" />
           </folding>
         </state>
       </provider>

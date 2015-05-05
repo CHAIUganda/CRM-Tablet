@@ -31,7 +31,6 @@ public class Place extends RestClient {
             RestTemplate restTemplate = getRestTemplate();
             ResponseEntity<Region[]> responseEntity = restTemplate.exchange(REST_URL+"place/regions",HttpMethod.GET,getRequestEntity(),Region[].class);
             Region[] regions = responseEntity.getBody();
-            Utils.log("REST CLIENT: found " + regions.length+" Regions");
             return regions;
         }catch (HttpClientErrorException ex){
             Utils.log("Error downloading regions -> " + ex.getMessage());
@@ -50,7 +49,7 @@ public class Place extends RestClient {
         }catch (Exception ex){
             ex.printStackTrace();
         }
-        return  null;
+        return null;
     }
 
     public Subcounty[] downloadSubcounties(){
