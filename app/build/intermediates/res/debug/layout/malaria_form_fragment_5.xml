@@ -23,11 +23,19 @@
             android:layout_marginBottom="10dp"
             style="@style/LabelStyle"
             android:text="Do you stock RDTs?"/>
+
+        <Spinner
+            android:id="@+id/do_you_stock"
+            style="@style/SpinnerStyle"
+            android:layout_width="match_parent"
+            android:entries="@array/yesnolist" />
+
         <LinearLayout
             android:id="@+id/ln_rdts_container"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/btn_add_rdt_row"

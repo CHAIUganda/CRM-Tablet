@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
@@ -45,8 +47,11 @@ public class MalariaFormFragment5 extends Fragment implements IViewManipulator{
             "Clearview Malaria"
     };
 
+    MalariaFormActivity activity;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        activity = (MalariaFormActivity)getActivity();
         if(view != null){
             ((ViewGroup)view.getParent()).removeView(view);
         }else{
@@ -60,6 +65,20 @@ public class MalariaFormFragment5 extends Fragment implements IViewManipulator{
                 @Override
                 public void onClick(View v) {
                     addRow(rdtContainer, rdtItems, "Type or Select from list");
+                }
+            });
+
+            aq.id(R.id.do_you_stock).itemSelected(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(position == 2){
+                        activity.pager.setCurrentItem(4);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
                 }
             });
 
@@ -164,5 +183,13 @@ public class MalariaFormFragment5 extends Fragment implements IViewManipulator{
         aq.id(R.id.btn_add_rdt_row).visible();
         aq.id(R.id.txt_rdts_title).visible();
         aq.id(R.id.txt_form_title).visible();
+    }
+
+    public boolean saveFields(){
+        if(aq.id(R.id.do_you_stock).getSelectedItem().toString().isEmpty()){
+            Toast.makeText(getActivity(), "Please select wether customer stocks RDTs or not", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 }

@@ -89,5 +89,13 @@
             android:textColor="@color/app_text_color"
             android:button="@drawable/checkbox"
             android:text="Start selling Greenleaf ACTs at RRP"/>
+
+        <CheckBox
+            android:id="@+id/refer_patients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/app_text_color"
+            android:button="@drawable/checkbox"
+            android:text="Refer patients with severe malaria to a health facility"/>
     </LinearLayout>
 </ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/malaria_form_fragment_4.xml -->

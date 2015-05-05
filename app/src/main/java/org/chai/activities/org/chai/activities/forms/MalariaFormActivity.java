@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
@@ -27,6 +26,12 @@ public class MalariaFormActivity extends BaseActivity {
     int NUM_PAGES = 5;
     ViewPager pager;
     CircleIndicator indicator;
+
+    MalariaFormFragment1 customerFragment;
+    MalariaFormFragment2 educationFragment;
+    MalariaFormFragment3 antimalarialFragment;
+    MalariaFormFragment4 recommendationFragment;
+    MalariaFormFragment5 rdtFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,8 @@ public class MalariaFormActivity extends BaseActivity {
         indicator.setViewPager(pager);
 
         super.setUpDrawer(toolbar);
+
+        pager.setCurrentItem(1);
     }
 
     private class FormPagerAdapter extends FragmentPagerAdapter {
@@ -58,19 +65,24 @@ public class MalariaFormActivity extends BaseActivity {
             Fragment fragment = null;
             switch (position){
                 case 0:
-                    fragment = new MalariaFormFragment1();
+                    customerFragment = new MalariaFormFragment1();
+                    fragment = customerFragment;
                     break;
                 case 1:
-                    fragment = new MalariaFormFragment2();
+                    educationFragment = new MalariaFormFragment2();
+                    fragment = educationFragment;
                     break;
                 case 2:
-                    fragment = new MalariaFormFragment3();
+                    antimalarialFragment = new MalariaFormFragment3();
+                    fragment = antimalarialFragment;
                     break;
                 case 3:
-                    fragment = new MalariaFormFragment5();
+                    rdtFragment = new MalariaFormFragment5();
+                    fragment = rdtFragment;
                     break;
                 case 4:
-                    fragment = new MalariaFormFragment4();
+                    recommendationFragment = new MalariaFormFragment4();
+                    fragment = recommendationFragment;
                     break;
             }
             return fragment;
@@ -95,9 +107,45 @@ public class MalariaFormActivity extends BaseActivity {
             return true;
         }
         if(item.getItemId() == R.id.action_save){
-            Toast.makeText(this, "Form details saved", Toast.LENGTH_LONG).show();
-            finish();
+            saveForm();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveForm(){
+        if(customerFragment == null){
+            pager.setCurrentItem(0);
+        }else if(!customerFragment.saveFields()){
+            pager.setCurrentItem(0);
+            return;
+        }
+
+        if(educationFragment == null){
+            pager.setCurrentItem(1);
+        }else if(!educationFragment.saveFields()){
+            pager.setCurrentItem(1);
+            return;
+        }
+
+        if(antimalarialFragment == null){
+            pager.setCurrentItem(2);
+        }else if(!antimalarialFragment.saveFields()){
+            pager.setCurrentItem(2);
+            return;
+        }
+
+        if(rdtFragment == null){
+            pager.setCurrentItem(3);
+        }else if(!rdtFragment.saveFields()){
+            pager.setCurrentItem(3);
+            return;
+        }
+
+        if(recommendationFragment == null){
+            pager.setCurrentItem(4);
+        }else if(!recommendationFragment.saveFields()){
+            pager.setCurrentItem(4);
+            return;
+        }
     }
 }

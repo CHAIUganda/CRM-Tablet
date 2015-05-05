@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
@@ -52,8 +54,12 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
             "Injectables, such as Rogoquin, Artemether, Quinax, Larither, Kwinil"
     };
 
+    MalariaFormActivity activity;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        activity = (MalariaFormActivity)getActivity();
+
         if(view != null){
             ((ViewGroup)view.getParent()).removeView(view);
         }else{
@@ -72,6 +78,20 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
 
             rows = new ArrayList<View>();
         }
+
+        aq.id(R.id.do_you_stock).itemSelected(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 2){
+                    activity.pager.setCurrentItem(3);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         return view;
     }
@@ -170,5 +190,13 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
         aq.id(R.id.btn_add_antimalarial_row).visible();
         aq.id(R.id.txt_antimalarial_title).visible();
         aq.id(R.id.txt_form_title).visible();
+    }
+
+    public boolean saveFields(){
+        if(aq.id(R.id.do_you_stock).getSelectedItem().toString().isEmpty()){
+            Toast.makeText(getActivity(), "Please select wether customer stocks Antimalarials or not", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 }

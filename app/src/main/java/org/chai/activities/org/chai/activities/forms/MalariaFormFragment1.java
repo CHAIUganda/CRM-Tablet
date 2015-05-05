@@ -65,6 +65,22 @@ public class MalariaFormFragment1 extends Fragment {
             }
         });
 
+        aq.id(R.id.heard_about_green_leaf).itemSelected(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 1){
+                    aq.id(R.id.ln_heard_about_container).visible();
+                }else{
+                    aq.id(R.id.ln_heard_about_container).gone();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         return view;
     }
 
@@ -90,5 +106,25 @@ public class MalariaFormFragment1 extends Fragment {
             Log.d("Err", ex.getLocalizedMessage());
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    public boolean saveFields(){
+        if(customer == null){
+            Toast.makeText(getActivity(), "Please select a customer", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        String malariaPatients = aq.id(R.id.patients_per_week).getText().toString();
+        String children = aq.id(R.id.children).getText().toString();
+        if(malariaPatients.isEmpty()){
+            Toast.makeText(getActivity(), "Please enter number of Malaria patients per week", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(children.isEmpty()){
+            Toast.makeText(getActivity(), "Please enter how many of the patients are children", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        int heardsAboutGreenLeaf = aq.id(R.id.heard_about_green_leaf).getSelectedItemPosition();
+
+        return true;
     }
 }

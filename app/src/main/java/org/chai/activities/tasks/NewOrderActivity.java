@@ -193,11 +193,17 @@ public class NewOrderActivity extends BaseActivity {
         spinner.setAdapter(new ProductArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, products.toArray(new Product[products.size()])));
 
         AQuery a = new AQuery(row);
-        spinner.setSelection(((ProductArrayAdapter)spinner.getAdapter()).getPosition(data.getProduct()));
-        if(data.getQuantity() != 0){
-            a.id(R.id.quantity).text(Integer.toString(data.getQuantity()));
+        if(data.getUuid() != null){
+            try{
+                spinner.setSelection(((ProductArrayAdapter)spinner.getAdapter()).getPosition(data.getProduct()));
+                a.id(R.id.drop_sample).checked(data.getDropSample());
+                if(data.getQuantity() != 0){
+                    a.id(R.id.quantity).text(Integer.toString(data.getQuantity()));
+                }
+            }catch (Exception ex){
+                Utils.log("Error populating order row");
+            }
         }
-        a.id(R.id.drop_sample).checked(data.getDropSample());
 
         final ImageView remove = (ImageView)row.findViewById(R.id.btn_remove_row);
         remove.setOnClickListener(new View.OnClickListener(){
@@ -311,7 +317,6 @@ public class NewOrderActivity extends BaseActivity {
             order.setOrderDate(new Date());
             orderDao.insert(order);
         }else{
-            Utils.log("Updating order");
             order.setIsDirty(true);
             order.setCustomerId(customer.getUuid());
             order.setCustomer(customer);

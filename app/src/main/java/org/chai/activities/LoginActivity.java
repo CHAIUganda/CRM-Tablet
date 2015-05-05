@@ -1,6 +1,5 @@
 package org.chai.activities;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,12 +13,11 @@ import android.widget.Toast;
 import com.splunk.mint.Mint;
 
 import org.chai.R;
-import org.chai.activities.tasks.DiarrheaFormActivity;
+import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.User;
 import org.chai.model.UserDao;
-import org.chai.model.Village;
 import org.chai.model.VillageDao;
 import org.chai.rest.Place;
 import org.chai.rest.RestClient;
@@ -53,7 +51,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         if(AccountManager.offlineLogin(this, false)){
-            Intent i = new Intent(LoginActivity.this, DiarrheaFormActivity.class);
+            Intent i = new Intent(LoginActivity.this, MalariaFormActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
             finish();
@@ -67,8 +65,6 @@ public class LoginActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         initialiseGreenDao();
-        List<Village> villages = villageDao.loadAll();
-        Activity activity = this;
 
         Button loginBtn = (Button)findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener(){

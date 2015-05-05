@@ -36,6 +36,12 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    <array name="how_you_prescribe_for_malaria">
+        <item>""</item>
+        <item>I prescribe and convince the patient of the right treatment</item>
+        <item>I provide options to the patients and the patient decides</item>
+        <item>The patient demands a specific treatment</item>
+    </array>
     <string-array name="licencetype">
         <item>""</item>
         <item>National Drug Authority</item>

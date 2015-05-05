@@ -85,13 +85,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="3. Have you heard about the treatment of malaria using antimalarial bearing a green leaf - ACTs?"/>
+                android:text="3. When a patient with suspected malaria comes to your shop, do you usually prescribe the treatment or does the patient request something specifically?"/>
 
             <Spinner
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark"
-                android:entries="@array/SpinnerYesNo">
+                android:entries="@array/how_you_prescribe_for_malaria">
 
             </Spinner>
         </LinearLayout>
@@ -105,7 +105,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="4. If yes, how did you hear about it?"/>
+                android:text="4. Have you heard about the treatment of malaria using antimalarial bearing a green leaf - ACTs?"/>
+
+            <Spinner
+                android:id="@+id/heard_about_green_leaf"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:popupBackground="@color/primary_dark"
+                android:entries="@array/yesnolist">
+
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_heard_about_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="5. If yes, how did you hear about it?"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

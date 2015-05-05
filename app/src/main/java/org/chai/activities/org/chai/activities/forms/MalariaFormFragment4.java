@@ -16,4 +16,8 @@ public class MalariaFormFragment4 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.malaria_form_fragment_4, container, false);
     }
+
+    public boolean saveFields(){
+        return true;
+    }
 }

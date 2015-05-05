@@ -22,12 +22,20 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             style="@style/LabelStyle"
-            android:text="1. Do you stock antimalarials?"/>
+            android:text="11. Do you stock antimalarials?"/>
+
+        <Spinner
+            android:id="@+id/do_you_stock"
+            style="@style/SpinnerStyle"
+            android:layout_width="match_parent"
+            android:entries="@array/yesnolist" />
+
         <LinearLayout
             android:id="@+id/ln_antimalarials_container"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/btn_add_antimalarial_row"
