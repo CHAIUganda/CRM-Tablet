@@ -48,7 +48,7 @@ public class GPSTracker extends Service implements LocationListener {
             if(!isGPSEnabled && !isNetworkEnabled){
                 // no network provider is enabled
             }else{
-                this.canGetLocation =true;
+                this.canGetLocation = true;
                 if(isNetworkEnabled){
                     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,MIN_TIME_BW_UPDATES,MIN_DISTANCE_CHANGE_FOR_UPDATES,this);
                     Log.d("Network:",LocationManager.NETWORK_PROVIDER);
@@ -86,7 +86,7 @@ public class GPSTracker extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         this.location = location;
-        if(this.location!=null){
+        if(this.location != null){
             ++mLocationCount;
             Log.i("GPS Tracker","GpsTracker: " + System.currentTimeMillis() +
                     " onLocationChanged(" + mLocationCount + ") lat: " +

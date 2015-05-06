@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
+import org.chai.Globals;
 import org.chai.R;
 import org.chai.adapter.DistrictArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
@@ -24,6 +25,7 @@ import org.chai.model.District;
 import org.chai.model.DistrictDao;
 import org.chai.model.Subcounty;
 import org.chai.model.SubcountyDao;
+import org.chai.util.GPSTracker;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
@@ -83,7 +85,14 @@ public class CustomerBasicsFormFragment extends Fragment {
 
         setRequiredFields();
 
+        setLatLong();
+
         return view;
+    }
+
+    private void setLatLong(){
+        GPSTracker tracker = Globals.getInstance().getGpsTracker();
+        aq.id(R.id.location_gps).text(tracker.getLatitude() + "," + tracker.getLongitude());
     }
 
     private void setRequiredFields(){

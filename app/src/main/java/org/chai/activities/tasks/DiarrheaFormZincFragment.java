@@ -44,8 +44,12 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
             "DT Zinc",
             "Zincocet",
             "Zinkid",
-            "Zinc Sulphate",
-            "Zincos"
+            "Zinc Sulphate (FDC)",
+            "Zinc Sulphate (Medicamen)",
+            "Zincos",
+            "Zinc Syrup (60mL)",
+            "Zinc Syrup (100mL)",
+            "ReZn"
     };
 
     DiarrheaFormActivity activity;

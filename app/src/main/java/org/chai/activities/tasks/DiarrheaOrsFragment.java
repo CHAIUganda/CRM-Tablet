@@ -41,9 +41,13 @@ public class DiarrheaOrsFragment extends Fragment implements IViewManipulator {
     boolean viewsHidden = false;
 
     String[] items = new String[]{
-            "Oralyte",
+            "Oralyte (plain)",
+            "Oralyte (orange)",
             "Restors",
-            "Revive"
+            "Revive (plain)",
+            "Revive (orange)",
+            "Oralyte (500mL) – plain",
+            "Oralyte (500mL) – orange"
     };
 
     DiarrheaFormActivity activity;
