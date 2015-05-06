@@ -92,7 +92,7 @@ public class MalariaFormFragment1 extends Fragment {
         if(customerId != null){
             customer = customerDao.load(customerId);
             if(customer != null){
-                aq.id(R.id.customer_id).text(customer.getOutletName());
+                aq.id(R.id.customer_id).text(customer.getOutletName()).enabled(false);
                 aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
             }
         }
