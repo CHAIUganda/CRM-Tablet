@@ -50,6 +50,7 @@
         <EditText
             android:id="@+id/gps"
             android:layout_width="match_parent"
+            android:enabled="false"
             style="@style/TextBoxStyle"/>
     </LinearLayout>
 

@@ -219,6 +219,7 @@
             <EditText
                 android:id="@+id/location_gps"
                 android:layout_width="match_parent"
+                android:enabled="false"
                 style="@style/TextBoxStyle"/>
         </LinearLayout>
     </LinearLayout>
