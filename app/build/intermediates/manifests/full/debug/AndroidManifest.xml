@@ -30,11 +30,6 @@
             android:name="org.chai.activities.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:label="CHAI CRM" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="org.chai.activities.org.chai.activities.forms.MalariaFormActivity"
@@ -101,6 +96,16 @@
         </receiver>
 
         <service android:name="org.chai.sync.CHAISynchroniser" />
+
+        <activity
+            android:name="com.omnitech.ChaiAndroidDaoGenerator"
+            android:label="Generator" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
