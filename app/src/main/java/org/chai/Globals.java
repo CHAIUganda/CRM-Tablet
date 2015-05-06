@@ -3,6 +3,7 @@ package org.chai;
 import android.app.Activity;
 
 import org.chai.util.GPSTracker;
+import org.chai.util.Utils;
 
 /**
  * Created by victor on 2/24/15.
@@ -15,6 +16,7 @@ public class Globals{
     private Globals(){}
 
     public void initGpsTracker(final Activity activity){
+        Utils.log("Initializing GPS Tracker");
        if(gpsTracker == null){
            activity.runOnUiThread(new Runnable() {
                @Override

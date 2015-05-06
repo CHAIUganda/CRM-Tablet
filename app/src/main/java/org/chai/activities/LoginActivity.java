@@ -133,6 +133,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void onLoginSuccessfull(String user, String pass,String role) {
+
         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
         RestClient.userName = user;
         RestClient.password = pass;
