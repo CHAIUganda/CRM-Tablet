@@ -46,6 +46,7 @@ public class CustomerBasicsFormFragment extends Fragment {
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
+    GPSTracker tracker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,11 +55,6 @@ public class CustomerBasicsFormFragment extends Fragment {
         aq = new AQuery(view);
 
         initialiseGreenDao();
-
-        AddNewCustomerActivity ac = (AddNewCustomerActivity)getActivity();
-        if(ac.customer != null){
-            populateFields(ac.customer);
-        }
 
         List<Subcounty> subcountiesList = subcountyDao.loadAll();
         List<District> districtList = districtDao.loadAll();
@@ -84,14 +80,18 @@ public class CustomerBasicsFormFragment extends Fragment {
         subcountySpinner.setAdapter(new SubcountyArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, subcountiesList.toArray(new Subcounty[subcountiesList.size()])));
 
         setRequiredFields();
-
         setLatLong();
+
+        AddNewCustomerActivity ac = (AddNewCustomerActivity)getActivity();
+        if(ac.customer != null){
+            populateFields(ac.customer);
+        }
 
         return view;
     }
 
     private void setLatLong(){
-        GPSTracker tracker = Globals.getInstance().getGpsTracker();
+        tracker = Globals.getInstance().getGpsTracker();
         aq.id(R.id.location_gps).text(tracker.getLatitude() + "," + tracker.getLongitude());
     }
 
@@ -124,6 +124,7 @@ public class CustomerBasicsFormFragment extends Fragment {
         aq.id(R.id.trading_center).text(c.getTradingCenter());
         aq.id(R.id.directions).text(c.getDescriptionOfOutletLocation());
         aq.id(R.id.gps).text(c.getLatitude() + "," + c.getLongitude());
+        aq.id(R.id.location_gps).text(c.getLatitude() + "," + c.getLongitude());
     }
 
     public boolean saveFields(){
@@ -139,7 +140,7 @@ public class CustomerBasicsFormFragment extends Fragment {
         String directions = aq.id(R.id.directions).getText().toString().trim();
         String gps = aq.id(R.id.location_gps).getText().toString().trim();
 
-        Utils.log("Saving fields -> " + name);
+        double lat = tracker.getLatitude(), lon = tracker.getLongitude();
 
         if(name.isEmpty()){
             Toast.makeText(getActivity(), "Enter the outlet name", Toast.LENGTH_LONG).show();
@@ -171,6 +172,19 @@ public class CustomerBasicsFormFragment extends Fragment {
             return false;
         }
 
+        if(!gps.isEmpty()){
+            try{
+                String[] split = gps.split(",");
+                lat = Double.parseDouble(split[0]);
+                lon = Double.parseDouble(split[1]);
+            }catch(Exception ex){
+                Utils.log("Error setting cordinates");
+            }
+        }else{
+            Toast.makeText(getActivity(), "Location codinates are not set. Please turn on your GPS and try again.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
         AddNewCustomerActivity a = (AddNewCustomerActivity)getActivity();
         if(a.customer == null){
             a.customer = new Customer();
@@ -187,8 +201,8 @@ public class CustomerBasicsFormFragment extends Fragment {
         a.customer.setTypeOfLicence(licenceType);
         a.customer.setTradingCenter(tradingCenter);
         a.customer.setDescriptionOfOutletLocation(directions);
-        a.customer.setLatitude(32.390303); //to fix
-        a.customer.setLongitude(1.2829093); //to fix
+        a.customer.setLatitude(lat);
+        a.customer.setLongitude(lon);
 
         return true;
     }
