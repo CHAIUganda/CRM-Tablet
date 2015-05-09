@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/window_background_dark" />
+    <stroke android:width="1dip" android:color="#88aad3" />
+</shape><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/drawable/dark_background_border.xml -->

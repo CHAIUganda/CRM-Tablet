@@ -1,4 +1,4 @@
-project(':MyDaoGenerator') {
+project(':mydaogenerator') {
     apply plugin: 'application'
     apply plugin: 'java'
 

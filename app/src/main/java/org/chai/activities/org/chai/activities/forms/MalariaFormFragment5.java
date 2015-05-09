@@ -52,38 +52,44 @@ public class MalariaFormFragment5 extends Fragment implements IViewManipulator{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         activity = (MalariaFormActivity)getActivity();
-        if(view != null){
-            ((ViewGroup)view.getParent()).removeView(view);
-        }else{
-            view = inflater.inflate(R.layout.malaria_form_fragment_5, container, false);
 
-            aq = new AQuery(view);
-            rdtContainer = (LinearLayout)view.findViewById(R.id.ln_rdts_container);
-            addRdtButton = (ImageView)view.findViewById(R.id.btn_add_rdt_row);
+        view = inflater.inflate(R.layout.malaria_form_fragment_5, container, false);
 
-            aq.id(R.id.btn_add_rdt_row).clicked(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    addRow(rdtContainer, rdtItems, "Type or Select from list");
+        aq = new AQuery(view);
+        rdtContainer = (LinearLayout)view.findViewById(R.id.ln_rdts_container);
+        addRdtButton = (ImageView)view.findViewById(R.id.btn_add_rdt_row);
+
+        aq.id(R.id.btn_add_rdt_row).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addRow(rdtContainer, rdtItems, "Type or Select from list");
+            }
+        });
+
+        aq.id(R.id.do_you_stock).itemSelected(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 2){
+                    activity.pager.setCurrentItem(4);
                 }
-            });
+            }
 
-            aq.id(R.id.do_you_stock).itemSelected(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    if(position == 2){
-                        activity.pager.setCurrentItem(4);
-                    }
-                }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
-                }
-            });
-
+        if(rows == null){
             rows = new ArrayList<View>();
+        }else{
+            for(View row : rows){
+                ((ViewGroup)row.getParent()).removeView(row);
+                rdtContainer.addView(row);
+            }
         }
+
+        Utils.log("Creating Fragment -> " + rows.size());
 
         return view;
     }

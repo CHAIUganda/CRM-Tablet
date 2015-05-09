@@ -21,7 +21,7 @@ public class DetailerStock {
         detailerStock.addDoubleProperty("sellingPrice");
 
         Property detailerId = detailerStock.addStringProperty("detailerId").notNull().getProperty();
-        Property malariaDetailId = malariadetail.addStringProperty("malariadetailId").notNull().getProperty();
+        Property malariaDetailId = detailerStock.addStringProperty("malariadetailId").notNull().getProperty();
 
         ToMany detailerStockToDetailer = detailer.addToMany(detailerStock, detailerId);
         detailerStockToDetailer.setName("detailerStocks");

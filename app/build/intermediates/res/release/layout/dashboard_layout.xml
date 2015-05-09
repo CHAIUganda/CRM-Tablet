@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/home_root"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#f8f9fe">
+    <!-- Include Action Bar -->
+    <include layout="@layout/header_layout"/>
+
+    <!--  Include Fragmented dashboard -->
+    <include layout="@layout/fragment_layout"/>
+
+    <!--  Include Footer -->
+    <include layout="@layout/footer_layout"/>
+
+</LinearLayout><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/dashboard_layout.xml -->

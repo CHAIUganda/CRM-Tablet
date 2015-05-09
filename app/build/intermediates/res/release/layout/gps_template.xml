@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <EditText
+            android:text=""
+            android:minWidth="90dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:width="150dip"
+            android:height="40dip"
+            android:textColor="@color/list_main_text_color"
+            android:background="@drawable/bordertextfield"
+            android:editable="false"
+            android:textCursorDrawable="@null"/>
+
+    <Button
+            android:text="Record GPS"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="#0091CC"
+            android:layout_marginLeft="5dp"
+            android:textColor="#fff"/>
+
+</merge><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/gps_template.xml -->

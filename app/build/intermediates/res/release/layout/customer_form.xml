@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/background_light">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_below="@+id/header">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="New Outlet Details"
+                        android:textColor="@color/list_main_text_color"
+                        android:textSize="25dp"
+                        android:textStyle="bold"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/detailsnameview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1.Outlet Name:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/detailsname"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:background="@drawable/bordertextfield"
+                        android:textStyle="italic"
+                        android:text=""
+                        android:singleLine="true"
+                        android:textCursorDrawable="@null"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_outlet_type_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2.Outlet Type:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+                <Spinner
+                        android:id="@+id/details_outlet_type"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:entries="@array/outlettypes"
+                        android:background="@drawable/btn_dropdown"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_size_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3.Outlet Size:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+                <Spinner
+                        android:id="@+id/details_size"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:entries="@array/outletsize"
+                        android:background="@drawable/btn_dropdown"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_licence_type_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4.Type of licence->Is the licence certificate visible in the outlet?"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <Spinner
+                        android:id="@+id/details_licence_visible"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:entries="@array/yesnolist"
+                        android:background="@drawable/btn_dropdown"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/type_of_licence_layout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4-a.If yes, what type of license?"
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Do NOT ask this question.  Look around outlet for license."
+                        android:textSize="10dp"/>
+
+            <Spinner
+                    android:id="@+id/details_licence_type"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/selectItem"
+                    android:layout_width="fill_parent"
+                    android:entries="@array/licencetype2"
+                    android:background="@drawable/btn_dropdown"/>
+
+        </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/outlet_rural_village"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5.Rural or Urban:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+
+                <Spinner
+                        android:id="@+id/details_split"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:entries="@array/split"
+                        android:background="@drawable/btn_dropdown"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_district_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="6.District:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <Spinner
+                        android:id="@+id/details_district"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:background="@drawable/btn_dropdown"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_subcounty_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7.Subcounty:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <Spinner
+                        android:id="@+id/details_subcounty"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:background="@drawable/btn_dropdown"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_trading_center_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8.Trading Center:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_trading_center"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:background="@drawable/bordertextfield"
+                        android:textStyle="italic"
+                        android:text=""
+                        android:singleLine="true"
+                        android:textCursorDrawable="@null"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_desc_location_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="9.Please give directions to the outlet from a key landmark"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_desc_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@null"/>
+
+            </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent">
+
+            <TextView
+                    android:id="@+id/customer_gps_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/list_main_text_color"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="5dp"/>
+
+
+            <org.chai.util.customwidget.GpsWidgetView
+                        android:id="@+id/customer_gps_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_date_outlet_opened_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12.How long has this outlet been open(Months)"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_date_outlet_opened"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:textCursorDrawable="@null"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_number_of_employees_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13.Number of employees who work at the outlet:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_number_of_employees"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:textCursorDrawable="@null"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_num_customers_per_day_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="16.How many children under 5 do you see at your shop on a weekly basis?"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_num_customers_per_day"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:textCursorDrawable="@null"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_sources_of_supply_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="17.Where does the outlet source the majority of it's supply?"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_sources_of_supply"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@null"/>
+
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="18.Key Wholesaler Name:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_key_wholesaler_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@null"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="19.Key Wholesaler Contact:"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <EditText
+                        android:id="@+id/details_key_wholesaler_contact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="@dimen/list_sub_text_size"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="italic"
+                        android:background="@drawable/bordertextfield"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@null"
+                        android:inputType="phone"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/details_restock_frequency_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20.How many times on average does the outlet stock up(Per week):"
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"/>
+
+                <Spinner
+                        android:id="@+id/details_restock_frequency"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/selectItem"
+                        android:layout_width="fill_parent"
+                        android:background="@drawable/btn_dropdown"
+                        android:entries="@array/restock_frequency"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/customer_contacts_layout"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/customer_add_contact_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/list_main_text_color"
+                        android:textStyle="bold"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="5dp"/>
+
+                <Button
+                        android:id="@+id/menu_add_new_customer_contact"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Add new Contact details to this customer"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:background="#428bca"/>
+
+            </LinearLayout>
+
+            <LinearLayout android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:padding="10dp">
+                <Button
+                        android:id="@+id/menu_add_new_customer"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/addnewcustomerlabel"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:background="#428bca"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/customer_form.xml -->

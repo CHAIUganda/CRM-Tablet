@@ -35,12 +35,12 @@ public class DetailerStockDao extends AbstractDao<DetailerStock, String> {
         public final static Property BuyingPrice = new Property(4, Double.class, "buyingPrice", false, "BUYING_PRICE");
         public final static Property SellingPrice = new Property(5, Double.class, "sellingPrice", false, "SELLING_PRICE");
         public final static Property DetailerId = new Property(6, String.class, "detailerId", false, "DETAILER_ID");
-        public final static Property IsDirty = new Property(7, Boolean.class, "isDirty", false, "IS_DIRTY");
-        public final static Property SyncronisationStatus = new Property(8, Integer.class, "syncronisationStatus", false, "SYNCRONISATION_STATUS");
-        public final static Property SyncronisationMessage = new Property(9, String.class, "syncronisationMessage", false, "SYNCRONISATION_MESSAGE");
-        public final static Property DateCreated = new Property(10, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
-        public final static Property LastUpdated = new Property(11, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
-        public final static Property MalariadetailId = new Property(12, String.class, "malariadetailId", false, "MALARIADETAIL_ID");
+        public final static Property MalariadetailId = new Property(7, String.class, "malariadetailId", false, "MALARIADETAIL_ID");
+        public final static Property IsDirty = new Property(8, Boolean.class, "isDirty", false, "IS_DIRTY");
+        public final static Property SyncronisationStatus = new Property(9, Integer.class, "syncronisationStatus", false, "SYNCRONISATION_STATUS");
+        public final static Property SyncronisationMessage = new Property(10, String.class, "syncronisationMessage", false, "SYNCRONISATION_MESSAGE");
+        public final static Property DateCreated = new Property(11, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(12, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
     };
 
     private DaoSession daoSession;
@@ -68,12 +68,12 @@ public class DetailerStockDao extends AbstractDao<DetailerStock, String> {
                 "'BUYING_PRICE' REAL," + // 4: buyingPrice
                 "'SELLING_PRICE' REAL," + // 5: sellingPrice
                 "'DETAILER_ID' TEXT NOT NULL ," + // 6: detailerId
-                "'IS_DIRTY' INTEGER," + // 7: isDirty
-                "'SYNCRONISATION_STATUS' INTEGER," + // 8: syncronisationStatus
-                "'SYNCRONISATION_MESSAGE' TEXT," + // 9: syncronisationMessage
-                "'DATE_CREATED' INTEGER," + // 10: dateCreated
-                "'LAST_UPDATED' INTEGER," + // 11: lastUpdated
-                "'MALARIADETAIL_ID' TEXT NOT NULL );"); // 12: malariadetailId
+                "'MALARIADETAIL_ID' TEXT NOT NULL ," + // 7: malariadetailId
+                "'IS_DIRTY' INTEGER," + // 8: isDirty
+                "'SYNCRONISATION_STATUS' INTEGER," + // 9: syncronisationStatus
+                "'SYNCRONISATION_MESSAGE' TEXT," + // 10: syncronisationMessage
+                "'DATE_CREATED' INTEGER," + // 11: dateCreated
+                "'LAST_UPDATED' INTEGER);"); // 12: lastUpdated
     }
 
     /** Drops the underlying database table. */
@@ -101,30 +101,31 @@ public class DetailerStockDao extends AbstractDao<DetailerStock, String> {
             stmt.bindDouble(6, sellingPrice);
         }
         stmt.bindString(7, entity.getDetailerId());
+        stmt.bindString(8, entity.getMalariadetailId());
  
         Boolean isDirty = entity.getIsDirty();
         if (isDirty != null) {
-            stmt.bindLong(8, isDirty ? 1l: 0l);
+            stmt.bindLong(9, isDirty ? 1l: 0l);
         }
  
         Integer syncronisationStatus = entity.getSyncronisationStatus();
         if (syncronisationStatus != null) {
-            stmt.bindLong(9, syncronisationStatus);
+            stmt.bindLong(10, syncronisationStatus);
         }
  
         String syncronisationMessage = entity.getSyncronisationMessage();
         if (syncronisationMessage != null) {
-            stmt.bindString(10, syncronisationMessage);
+            stmt.bindString(11, syncronisationMessage);
         }
  
         java.util.Date dateCreated = entity.getDateCreated();
         if (dateCreated != null) {
-            stmt.bindLong(11, dateCreated.getTime());
+            stmt.bindLong(12, dateCreated.getTime());
         }
  
         java.util.Date lastUpdated = entity.getLastUpdated();
         if (lastUpdated != null) {
-            stmt.bindLong(12, lastUpdated.getTime());
+            stmt.bindLong(13, lastUpdated.getTime());
         }
     }
 
@@ -151,11 +152,12 @@ public class DetailerStockDao extends AbstractDao<DetailerStock, String> {
             cursor.isNull(offset + 4) ? null : cursor.getDouble(offset + 4), // buyingPrice
             cursor.isNull(offset + 5) ? null : cursor.getDouble(offset + 5), // sellingPrice
             cursor.getString(offset + 6), // detailerId
-            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0, // isDirty
-            cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // syncronisationStatus
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // syncronisationMessage
-            cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)), // dateCreated
-            cursor.isNull(offset + 11) ? null : new java.util.Date(cursor.getLong(offset + 11)) // lastUpdated
+            cursor.getString(offset + 7), // malariadetailId
+            cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8) != 0, // isDirty
+            cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // syncronisationStatus
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // syncronisationMessage
+            cursor.isNull(offset + 11) ? null : new java.util.Date(cursor.getLong(offset + 11)), // dateCreated
+            cursor.isNull(offset + 12) ? null : new java.util.Date(cursor.getLong(offset + 12)) // lastUpdated
         );
         return entity;
     }
@@ -170,11 +172,12 @@ public class DetailerStockDao extends AbstractDao<DetailerStock, String> {
         entity.setBuyingPrice(cursor.isNull(offset + 4) ? null : cursor.getDouble(offset + 4));
         entity.setSellingPrice(cursor.isNull(offset + 5) ? null : cursor.getDouble(offset + 5));
         entity.setDetailerId(cursor.getString(offset + 6));
-        entity.setIsDirty(cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0);
-        entity.setSyncronisationStatus(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
-        entity.setSyncronisationMessage(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setDateCreated(cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)));
-        entity.setLastUpdated(cursor.isNull(offset + 11) ? null : new java.util.Date(cursor.getLong(offset + 11)));
+        entity.setMalariadetailId(cursor.getString(offset + 7));
+        entity.setIsDirty(cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8) != 0);
+        entity.setSyncronisationStatus(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
+        entity.setSyncronisationMessage(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setDateCreated(cursor.isNull(offset + 11) ? null : new java.util.Date(cursor.getLong(offset + 11)));
+        entity.setLastUpdated(cursor.isNull(offset + 12) ? null : new java.util.Date(cursor.getLong(offset + 12)));
      }
     
     /** @inheritdoc */

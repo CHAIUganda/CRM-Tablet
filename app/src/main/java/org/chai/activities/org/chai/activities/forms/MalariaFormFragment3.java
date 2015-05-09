@@ -58,26 +58,32 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Utils.log("Creating Fragment");
         activity = (MalariaFormActivity)getActivity();
 
-        if(view != null){
-            ((ViewGroup)view.getParent()).removeView(view);
-        }else{
-            view = inflater.inflate(R.layout.malaria_form_fragment_3, container, false);
+        view = inflater.inflate(R.layout.malaria_form_fragment_3, container, false);
 
-            aq = new AQuery(view);
-            antimalarialContainer = (LinearLayout)view.findViewById(R.id.ln_antimalarials_container);
-            addAntimalarialButton = (ImageView)view.findViewById(R.id.btn_add_antimalarial_row);
+        aq = new AQuery(view);
+        antimalarialContainer = (LinearLayout)view.findViewById(R.id.ln_antimalarials_container);
+        addAntimalarialButton = (ImageView)view.findViewById(R.id.btn_add_antimalarial_row);
 
-            aq.id(R.id.btn_add_antimalarial_row).clicked(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    addRow(antimalarialContainer, antimalarialItems, "Type or Select from list");
-                }
-            });
+        aq.id(R.id.btn_add_antimalarial_row).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addRow(antimalarialContainer, antimalarialItems, "Type or Select from list");
+            }
+        });
 
+        if(rows == null){
             rows = new ArrayList<View>();
+        }else{
+            for(View row : rows){
+                ((ViewGroup)row.getParent()).removeView(row);
+                antimalarialContainer.addView(row);
+            }
         }
+
+        Utils.log("Creating Fragment -> " + rows.size());
 
         aq.id(R.id.do_you_stock).itemSelected(new AdapterView.OnItemSelectedListener() {
             @Override

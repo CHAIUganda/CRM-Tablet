@@ -23,6 +23,8 @@ public class DetailerStock implements BaseEntity {
     private Double sellingPrice;
     /** Not-null value. */
     private String detailerId;
+    /** Not-null value. */
+    private String malariadetailId;
     private Boolean isDirty;
     private Integer syncronisationStatus;
     private String syncronisationMessage;
@@ -52,7 +54,7 @@ public class DetailerStock implements BaseEntity {
         this.uuid = uuid;
     }
 
-    public DetailerStock(String uuid, String brand, String category, double stockLevel, Double buyingPrice, Double sellingPrice, String detailerId, Boolean isDirty, Integer syncronisationStatus, String syncronisationMessage, java.util.Date dateCreated, java.util.Date lastUpdated) {
+    public DetailerStock(String uuid, String brand, String category, double stockLevel, Double buyingPrice, Double sellingPrice, String detailerId, String malariadetailId, Boolean isDirty, Integer syncronisationStatus, String syncronisationMessage, java.util.Date dateCreated, java.util.Date lastUpdated) {
         this.uuid = uuid;
         this.brand = brand;
         this.category = category;
@@ -60,6 +62,7 @@ public class DetailerStock implements BaseEntity {
         this.buyingPrice = buyingPrice;
         this.sellingPrice = sellingPrice;
         this.detailerId = detailerId;
+        this.malariadetailId = malariadetailId;
         this.isDirty = isDirty;
         this.syncronisationStatus = syncronisationStatus;
         this.syncronisationMessage = syncronisationMessage;
@@ -135,6 +138,16 @@ public class DetailerStock implements BaseEntity {
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setDetailerId(String detailerId) {
         this.detailerId = detailerId;
+    }
+
+    /** Not-null value. */
+    public String getMalariadetailId() {
+        return malariadetailId;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setMalariadetailId(String malariadetailId) {
+        this.malariadetailId = malariadetailId;
     }
 
     public Boolean getIsDirty() {

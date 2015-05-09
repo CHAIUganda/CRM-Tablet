@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/TitleTextStyle"
+            android:text="Next Steps"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:tag="required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="8. Did you describe the new government approved MRP of 1,500 UGX?"/>
+
+            <Spinner
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:popupBackground="@color/primary_dark"
+                android:entries="@array/SpinnerYesNo">
+
+            </Spinner>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/LabelStyle"
+            android:text="8. Point of sales materials dropped"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:paddingRight="5dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/dangler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox"
+                    android:textColor="@color/app_text_color"
+                    android:text="ORS/Zinc Dangler"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:paddingLeft="5dp"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/tent_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox"
+                    android:textColor="@color/app_text_color"
+                    android:text="Tent Card"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:paddingRight="5dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/poster"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox"
+                    android:textColor="@color/app_text_color"
+                    android:text="Poster"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:paddingLeft="5dp"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/bunting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox"
+                    android:textColor="@color/app_text_color"
+                    android:text="Bunting"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:paddingRight="5dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/mrp_dangler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox"
+                    android:textColor="@color/app_text_color"
+                    android:text="MRP Dangler"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:paddingLeft="5dp"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/pen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox"
+                    android:textColor="@color/app_text_color"
+                    android:text="Pen"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:paddingRight="5dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/other"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox"
+                    android:textColor="@color/app_text_color"
+                    android:text="Other"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="17. Other Specify"/>
+            <EditText
+                android:layout_width="match_parent"
+                style="@style/TextBoxStyle"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="required"
+            android:layout_marginTop="10dp"
+            style="@style/LabelStyle"
+            android:text="19. What did you recommend as next steps for the retailer?"/>
+        <CheckBox
+            android:id="@+id/none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/app_text_color"
+            android:button="@drawable/checkbox"
+            android:text="No next step needed"/>
+
+        <CheckBox
+            android:id="@+id/stock_ors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/app_text_color"
+            android:button="@drawable/checkbox"
+            android:text="Stock ORS"/>
+
+        <CheckBox
+            android:id="@+id/stock_zinc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/app_text_color"
+            android:button="@drawable/checkbox"
+            android:text="Stock Zinc"/>
+
+        <CheckBox
+            android:id="@+id/start_recommending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/app_text_color"
+            android:button="@drawable/checkbox"
+            android:text="Start Recommending ORS and Zinc together"/>
+
+        <CheckBox
+            android:id="@+id/start_selling"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/app_text_color"
+            android:button="@drawable/checkbox"
+            android:text="Start selling ORS and Zinc at MRP"/>
+
+        <CheckBox
+            android:id="@+id/start_purchasing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/app_text_color"
+            android:button="@drawable/checkbox"
+            android:text="Purchase Zinc or/and ORS from cheaper supply source"/>
+
+        <CheckBox
+            android:id="@+id/chk_recommendation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/app_text_color"
+            android:button="@drawable/checkbox"
+            android:text="Other"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="20. Other Specify"/>
+            <EditText
+                android:layout_width="match_parent"
+                style="@style/TextBoxStyle"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/sales_form_next_steps_fragment.xml -->
