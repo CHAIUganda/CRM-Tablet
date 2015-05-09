@@ -29,7 +29,7 @@ public class Place extends RestClient {
         Utils.log("Place: Downloading regions");
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Region[]> responseEntity = restTemplate.exchange(REST_URL+"place/regions",HttpMethod.GET,getRequestEntity(),Region[].class);
+            ResponseEntity<Region[]> responseEntity = restTemplate.exchange(REST_URL + "place/regions", HttpMethod.GET,getRequestEntity(), Region[].class);
             Region[] regions = responseEntity.getBody();
             return regions;
         }catch (HttpClientErrorException ex){

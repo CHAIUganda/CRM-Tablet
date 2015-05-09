@@ -1,5 +1,6 @@
 package org.chai.activities.org.chai.activities.forms;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,11 +10,28 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.activities.tasks.DiarrheaFormActivity;
+import org.chai.model.CustomerDao;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
+import org.chai.model.DetailerStock;
+import org.chai.model.DetailerStockDao;
+import org.chai.model.MalariaDetail;
+import org.chai.model.MalariaDetailDao;
+import org.chai.model.Task;
+import org.chai.model.TaskDao;
+import org.chai.util.MyApplication;
+import org.chai.util.Utils;
+import org.chai.util.migration.UpgradeOpenHelper;
+
+import java.util.Date;
+import java.util.UUID;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -33,14 +51,29 @@ public class MalariaFormActivity extends BaseActivity {
     MalariaFormFragment4 recommendationFragment;
     MalariaFormFragment5 rdtFragment;
 
+    public Task task;
+    public MalariaDetail call;
+
+    protected SQLiteDatabase db;
+    protected DaoMaster daoMaster;
+    protected DaoSession daoSession;
+    protected TaskDao taskDao;
+    protected MalariaDetailDao malariaDetailDao;
+    protected CustomerDao customerDao;
+    protected DetailerStockDao detailerStockDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         CURRENT_SCREEN = SCREEN_MALARIA_DETAILING;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.malaria_form_activity);
+        initialiseGreenDao();
 
         aq = new AQuery(this);
+
+        task = new Task();
+        call = new MalariaDetail();
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -144,6 +177,62 @@ public class MalariaFormActivity extends BaseActivity {
         }else if(!recommendationFragment.saveFields()){
             pager.setCurrentItem(4);
             return;
+        }
+
+        task.setUuid(UUID.randomUUID().toString());
+        task.setStatus(DiarrheaFormActivity.STATUS_COMPLETE);
+        task.setType("malaria");
+        task.setIsAdhock(true);
+        task.setCompletionDate(new Date());
+        task.setIsDirty(true);
+
+        taskDao.insert(task);
+
+        call.setIsDirty(true);
+        call.setUuid(UUID.randomUUID().toString());
+        call.setDateOfSurvey(new Date());
+        call.setTaskId(task.getUuid());
+        call.setTask(task);
+
+        //Save stocks
+        for(DetailerStock stock: antimalarialFragment.stocks){
+            stock.setUuid(UUID.randomUUID().toString());
+            stock.setIsDirty(true);
+            stock.setDateCreated(new Date());
+            stock.setMalariadetailId(call.getUuid());
+            stock.setMalariaDetail(call);
+            stock.setCategory("antimalarial");
+
+            detailerStockDao.insert(stock);
+        }
+
+        for(DetailerStock stock: rdtFragment.stocks){
+            stock.setUuid(UUID.randomUUID().toString());
+            stock.setIsDirty(true);
+            stock.setDateCreated(new Date());
+            stock.setMalariadetailId(call.getUuid());
+            stock.setMalariaDetail(call);
+            stock.setCategory("rdt");
+
+            detailerStockDao.insert(stock);
+        }
+
+        malariaDetailDao.insert(call);
+
+        Utils.log("Malaria detail saved");
+    }
+
+    protected void initialiseGreenDao() {
+        try {
+            UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
+            db = helper.getWritableDatabase();
+            daoMaster = new DaoMaster(db);
+            daoSession = daoMaster.newSession();
+            taskDao = daoSession.getTaskDao();
+            malariaDetailDao = daoSession.getMalariaDetailDao();
+            detailerStockDao = daoSession.getDetailerStockDao();
+        } catch (Exception ex) {
+            Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }

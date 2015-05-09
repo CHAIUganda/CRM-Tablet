@@ -144,7 +144,42 @@ public class MalariaFormFragment1 extends Fragment {
             Toast.makeText(getActivity(), "Please enter how many of the patients are children", Toast.LENGTH_LONG).show();
             return false;
         }
-        int heardsAboutGreenLeaf = aq.id(R.id.heard_about_green_leaf).getSelectedItemPosition();
+        String gps = aq.id(R.id.gps).getText().toString();
+
+        MalariaFormActivity ac = (MalariaFormActivity)getActivity();
+        ac.task.setCustomerId(customer.getUuid());
+        ac.task.setCustomer(customer);
+        ac.task.setDescription("Detailing " + customer.getOutletName() + " - Malaria");
+
+        ac.call.setLatitude(Utils.getLatFromLatLong(gps));
+        ac.call.setLongitude(Utils.getLongFromLatLong(gps));
+        ac.call.setMalariaPatientsInFacility(Integer.parseInt(malariaPatients));
+        ac.call.setNumberOfChildren(Integer.parseInt(children));
+        ac.call.setDoYouPrescribeTreatment(aq.id(R.id.do_you_prescribe_treatment).getSelectedItem().toString());
+        ac.call.setHeardAboutGreenLeaf(aq.id(R.id.heard_about_green_leaf).getSelectedItem().toString());
+
+        String sourceofInfo = "";
+
+        if(aq.id(R.id.radio).isChecked()){
+            sourceofInfo += aq.id(R.id.radio).getText().toString() + ", ";
+        }
+        if(aq.id(R.id.tv).isChecked()){
+            sourceofInfo += aq.id(R.id.tv).getText().toString() + ", ";
+        }
+        if(aq.id(R.id.billboards).isChecked()){
+            sourceofInfo += aq.id(R.id.billboards).getText().toString() + ", ";
+        }
+        if(aq.id(R.id.newspaper).isChecked()){
+            sourceofInfo += aq.id(R.id.newspaper).getText().toString() + ", ";
+        }
+        if(aq.id(R.id.religious).isChecked()){
+            sourceofInfo += aq.id(R.id.religious).getText().toString() + ", ";
+        }
+        if(aq.id(R.id.friend).isChecked()){
+            sourceofInfo += aq.id(R.id.friend).getText().toString() + ", ";
+        }
+
+        ac.call.setHowDidYouHear(sourceofInfo);
 
         return true;
     }

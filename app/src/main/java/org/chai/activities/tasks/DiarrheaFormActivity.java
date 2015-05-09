@@ -25,7 +25,6 @@ import org.chai.model.DetailerStock;
 import org.chai.model.DetailerStockDao;
 import org.chai.model.Task;
 import org.chai.model.TaskDao;
-import org.chai.model.VillageDao;
 import org.chai.util.MyApplication;
 import org.chai.util.migration.UpgradeOpenHelper;
 
@@ -58,7 +57,6 @@ public class DiarrheaFormActivity extends BaseActivity {
     protected SQLiteDatabase db;
     protected DaoMaster daoMaster;
     protected DaoSession daoSession;
-    protected VillageDao villageDao;
     protected TaskDao taskDao;
     protected DetailerCallDao detailerCallDao;
     protected CustomerDao customerDao;

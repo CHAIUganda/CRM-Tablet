@@ -285,4 +285,26 @@ public class Utils {
         }
         return views;
     }
+
+    public static double getLatFromLatLong(String latlong){
+        try{
+            String[] split = latlong.split(",");
+            return Double.parseDouble(split[0]);
+        }catch(Exception ex){
+            Utils.log("Error parsing latlong");
+        }
+
+        return 0;
+    }
+
+    public static double getLongFromLatLong(String latlong){
+        try{
+            String[] split = latlong.split(",");
+            return Double.parseDouble(split[1]);
+        }catch(Exception ex){
+            Utils.log("Error parsing latlong");
+        }
+
+        return 0;
+    }
 }

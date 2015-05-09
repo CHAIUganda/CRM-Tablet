@@ -20,6 +20,7 @@ import com.androidquery.AQuery;
 import org.chai.R;
 import org.chai.activities.IViewManipulator;
 import org.chai.adapter.FormListAdapter;
+import org.chai.model.DetailerStock;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.FormSearchTextField;
 
@@ -35,11 +36,11 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
     View view;
     ImageView addAntimalarialButton;
     ArrayList<View> rows;
-    int currentPosition = -1;
+    public ArrayList<DetailerStock> stocks;
 
     boolean viewsHidden = false;
 
-    String[] antimalarialItems = new String[]{
+    String[] items = new String[]{
             "Artemether lumefantrine, such as Lonart, Artefan, Lumartem, Coartem, Lumaren",
             "Artesunate amodiaquine, such as DUAC, Coarsucam, Winthrop",
             "Other artemisinin combination therapies, such as Arco",
@@ -70,20 +71,19 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
         aq.id(R.id.btn_add_antimalarial_row).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addRow(antimalarialContainer, antimalarialItems, "Type or Select from list");
+                addRow(null);
             }
         });
 
         if(rows == null){
             rows = new ArrayList<View>();
+            stocks = new ArrayList<DetailerStock>();
         }else{
             for(View row : rows){
                 ((ViewGroup)row.getParent()).removeView(row);
                 antimalarialContainer.addView(row);
             }
         }
-
-        Utils.log("Creating Fragment -> " + rows.size());
 
         aq.id(R.id.do_you_stock).itemSelected(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -102,19 +102,23 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
         return view;
     }
 
-    private void addRow(final LinearLayout container, String[] items, String hint){
+    private void addRow(DetailerStock stock){
+        if(stock == null){
+            stock = new DetailerStock();
+        }
         LayoutInflater inflator = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View row = inflator.inflate(R.layout.antimalarial_row, null);
-
+        AQuery a = new AQuery(row);
         final ImageView remove = (ImageView)row.findViewById(R.id.btn_remove_row);
-        remove.setOnClickListener(new View.OnClickListener(){
+        remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rows.remove(row);
-                LinearLayout parent = (LinearLayout)v.getParent();
-                LinearLayout root = (LinearLayout)parent.getParent();
-                container.removeView(root);
+                stocks.remove(rows.indexOf(row));
+                LinearLayout parent = (LinearLayout) v.getParent();
+                LinearLayout root = (LinearLayout) parent.getParent();
+                antimalarialContainer.removeView(root);
             }
         });
 
@@ -127,7 +131,18 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
         final FormSearchTextField text = (FormSearchTextField)row.findViewById(R.id.txt_antimalarial);
         text.setViewManipulator(this);
         text.setListView(list);
-        text.setHint(hint);
+        text.setHint("Type or select brand");
+
+        if(stock.getUuid() != null){
+            try{
+                text.setText(stock.getBrand());
+                a.id(R.id.txt_stock_level).text(Double.toString(stock.getStockLevel()));
+                a.id(R.id.txt_buying_price).text(Double.toString(stock.getBuyingPrice()));
+                a.id(R.id.txt_selling_price).text(Double.toString(stock.getSellingPrice()));
+            }catch (Exception ex){
+                Utils.log("Error populating stock items");
+            }
+        }
 
         text.addTextChangedListener(new TextWatcher() {
             @Override
@@ -149,15 +164,16 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
         text.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(!viewsHidden){
+                if (!viewsHidden) {
                     hideOtherRows(row);
                 }
                 return false;
             }
         });
 
-        container.addView(row);
+        antimalarialContainer.addView(row);
         rows.add(row);
+        stocks.add(stock);
 
         hideOtherRows(row);
     }
@@ -202,6 +218,29 @@ public class MalariaFormFragment3 extends Fragment implements IViewManipulator {
         if(aq.id(R.id.do_you_stock).getSelectedItem().toString().isEmpty()){
             Toast.makeText(getActivity(), "Please select wether customer stocks Antimalarials or not", Toast.LENGTH_LONG).show();
             return false;
+        }
+
+        int i = 1;
+        for(View row: rows){
+            AQuery a = new AQuery(row);
+            String brand = a.id(R.id.txt_antimalarial).getText().toString();
+            if(brand.isEmpty()){
+                Toast.makeText(getActivity(), "Select Antimalarial brand on row " + i, Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            DetailerStock stock = stocks.get(rows.indexOf(row));
+            stock.setBrand(brand);
+            try{
+                stock.setBuyingPrice(Double.parseDouble(aq.id(R.id.txt_buying_price).getText().toString()));
+                stock.setSellingPrice(Double.parseDouble(aq.id(R.id.txt_selling_price).getText().toString()));
+                stock.setStockLevel(Double.parseDouble(aq.id(R.id.txt_stock_level).getText().toString()));
+            }catch(Exception ex){
+                Toast.makeText(getActivity(), "Please enter Prices and Quantities for Antimalarial Brand on row " + i, Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            i++;
         }
         return true;
     }

@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.util.Log;
 import org.chai.model.DaoMaster;
+import org.chai.util.Utils;
 
 /**
  * Created by victor on 06-Apr-15.
@@ -19,6 +20,7 @@ public class UpgradeOpenHelper extends DaoMaster.OpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        Utils.log("Migrating from " + oldVersion + " to " + newVersion);
         for (int i = oldVersion; i < newVersion; i++) {
             try {
 //                MigrationHelper+i is the class that migrates from i to i++

@@ -107,6 +107,7 @@
                 android:text="3. When a patient with suspected malaria comes to your shop, do you usually prescribe the treatment or does the patient request something specifically?"/>
 
             <Spinner
+                android:id="@+id/do_you_prescribe_treatment"
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark"

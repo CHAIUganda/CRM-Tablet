@@ -24,7 +24,7 @@ public class MigrationHelper1 extends MigratorHelper {
         updateAdhockSale(db);
         updateCustomer(db);
         updateDetailerCall(db);
-        TaskOrderDao.createTable(db,true);
+        TaskOrderDao.createTable(db, true);
         updateReportSummary(db);
 
     }

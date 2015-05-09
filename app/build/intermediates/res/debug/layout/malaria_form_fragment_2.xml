@@ -73,6 +73,7 @@
                     style="@style/TipTextStyle"
                     android:text="Test every fever and treat malaria positive results with an ACT for uncomplicated malaria\nMonotherapie, like Fancidar (Artemether, Artesunate, Chloroquin, Amodiaquin, mefloquin) are not effective in treating malaria\nRefer patients with severe malaria to a higher facility" />
                 <Spinner
+                    android:id="@+id/spn_moh_guidelines"
                     style="@style/SpinnerStyle"
                     android:layout_width="match_parent"
                     android:entries="@array/ratings" />
@@ -134,7 +135,7 @@
                 android:text="6. Do you prescribe antimalarials without a Greenleaf?"/>
 
             <Spinner
-                android:id="@+id/do_you_prescribe_antimalarials"
+                android:id="@+id/do_you_prescribe_without_greenleaf"
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
                 android:entries="@array/SpinnerNoSometimesAlways" />
@@ -199,6 +200,7 @@
                     style="@style/TipTextStyle"
                     android:text="Severe malaria is when uncomplicated malaria progresses.  If a patient has severe malaria, he/she is in danger of dying soon!\nThe signs/symptoms of severe malaria are dehydration, sunken eyes, confusion/delirium, rare or black-colored urine, rapid breathing\nIf a patient has severe malaria, refer to a hospital immediately" />
                 <Spinner
+                    android:id="@+id/signs_of_severe_malaria"
                     style="@style/SpinnerStyle"
                     android:layout_width="match_parent"
                     android:entries="@array/SpinnerKnowldgeLevel" />
@@ -210,6 +212,7 @@
                     android:text="10. If yes, how do you manage patients with severe malaria?"/>
 
                 <Spinner
+                    android:id="@+id/how_to_manage_malaria_patients"
                     style="@style/SpinnerStyle"
                     android:layout_width="match_parent"
                     android:entries="@array/SpinnerServerMalariaManagement" />
