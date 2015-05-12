@@ -84,6 +84,7 @@ public class DiarrheaFormEducationFragment extends Fragment {
         ac.call.setWhyNotUseAntibiotics(aq.id(R.id.why_should_you_not_use_antobiotics).getSelectedItem().toString());
         ac.call.setDiarrheaEffectsOnBody(aq.id(R.id.diarrhea_effects_on_the_body).getSelectedItem().toString());
         ac.call.setKnowledgeAbtOrsAndUsage(aq.id(R.id.ors_usage).getSelectedItem().toString());
+        ac.call.setKnowledgeAbtZincAndUsage(aq.id(R.id.zinc_usage).getSelectedItem().toString());
         ac.call.setOtherWaysHowYouHeard(otherSources);
         ac.call.setWhatYouKnowAbtDiarrhea(aq.id(R.id.diarrhea_effects_on_the_community).getSelectedItem().toString());
 

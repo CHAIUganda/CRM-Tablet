@@ -107,6 +107,8 @@ public class DiarrheaFormCustomerFragment extends Fragment {
         ac.task.setCustomer(customer);
         ac.task.setDescription("Go check on " + customer.getOutletName());
         ac.call.setDiarrheaPatientsInFacility(Integer.parseInt(patients));
+        ac.call.setLongitude(Utils.getLongFromLatLong(aq.id(R.id.gps).getText().toString()));
+        ac.call.setLatitude(Utils.getLatFromLatLong(aq.id(R.id.gps).getText().toString()));
 
         return true;
     }

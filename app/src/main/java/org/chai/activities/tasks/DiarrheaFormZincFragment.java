@@ -213,6 +213,10 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
             return false;
         }
 
+        DiarrheaFormActivity ac = (DiarrheaFormActivity)getActivity();
+        ac.call.setDoYouStockZinc(aq.id(R.id.do_you_stock_zinc).getSelectedItem().toString().equalsIgnoreCase("Yes"));
+        ac.call.setIfNoZincWhy("");
+
         int i = 1;
         for(View row: rows){
             AQuery a = new AQuery(row);

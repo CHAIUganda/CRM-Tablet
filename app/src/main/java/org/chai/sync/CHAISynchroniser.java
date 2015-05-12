@@ -20,7 +20,6 @@ import org.chai.model.CustomerContactDao;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
-import org.chai.model.DetailerCall;
 import org.chai.model.DetailerCallDao;
 import org.chai.model.District;
 import org.chai.model.DistrictDao;
@@ -42,7 +41,6 @@ import org.chai.model.Task;
 import org.chai.model.TaskDao;
 import org.chai.model.TaskOrder;
 import org.chai.model.TaskOrderDao;
-import org.chai.model.User;
 import org.chai.model.VillageDao;
 import org.chai.rest.CustomerClient;
 import org.chai.rest.Place;
@@ -160,9 +158,9 @@ public class CHAISynchroniser extends Service {
         Utils.log("startSyncronisationProcess()");
         try{
             syncronisationErros = new ArrayList<ServerResponse>();
-            uploadCustomers();
+            /*uploadCustomers();
             uploadDirectSales();
-            uploadSales();
+            uploadSales();*/
             uploadTasks();
             uploadOrders();
 
@@ -263,8 +261,11 @@ public class CHAISynchroniser extends Service {
         }
 
         for (Task task : taskList) {
-            Utils.log("Syncrosnizing task -> " + task.getCustomerId());
-            if (taskIsHistory(task)) {
+            Utils.log("Sycn task -> " + task.getDescription() + " : " + task.getType());
+            /*if (taskIsHistory(task)) {
+                continue;
+            }*/
+            if(task.getType().equalsIgnoreCase("malaria")){
                 continue;
             }
             ServerResponse response = taskClient.uploadTask(task);
@@ -272,23 +273,22 @@ public class CHAISynchroniser extends Service {
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 Utils.log("Task syncronized succesfully");
                 //set all detailer and sale calls to isHistroy
-                if (RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
+                /*if (RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
                     DetailerCall detailerCall = task.getDetailers().get(0);
                     detailerCall.setIsHistory(true);
                     detailerCall.setIsDirty(false);
                     detailerCall.setSyncronisationStatus(BaseEntity.SYNC_SUCCESS);
                     detailerCallDao.update(detailerCall);
-                }
+                }*/
             }else{
                 Utils.log("Error posting Tasks");
-                task.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
+                /*task.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
                 task.setSyncronisationMessage(response.getMessage());
                 task.setLastUpdated(new Date());
                 task.setIsDirty(true);
                 taskDao.update(task);
-                syncronisationErros.add(response);
+                syncronisationErros.add(response);*/
             }
-            Utils.log("After the sync");
         }
     }
 

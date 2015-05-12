@@ -210,6 +210,10 @@ public class DiarrheaOrsFragment extends Fragment implements IViewManipulator {
             return false;
         }
 
+        DiarrheaFormActivity ac = (DiarrheaFormActivity)getActivity();
+        ac.call.setDoYouStockOrs(aq.id(R.id.do_you_stock_ors).getSelectedItem().toString().equalsIgnoreCase("Yes"));
+        ac.call.setIfNoOrsWhy("");
+
         int i = 1;
         for(View row: rows){
             AQuery a = new AQuery(row);
