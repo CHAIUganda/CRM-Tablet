@@ -184,6 +184,7 @@ public class MalariaFormActivity extends BaseActivity {
         task.setType("malaria");
         task.setIsAdhock(true);
         task.setCompletionDate(new Date());
+        task.setDateCreated(new Date());
         task.setIsDirty(true);
 
         taskDao.insert(task);
@@ -201,6 +202,7 @@ public class MalariaFormActivity extends BaseActivity {
             stock.setDateCreated(new Date());
             stock.setMalariadetailId(call.getUuid());
             stock.setMalariaDetail(call);
+            stock.setDetailerId("");
             stock.setCategory("antimalarial");
 
             detailerStockDao.insert(stock);
@@ -212,6 +214,7 @@ public class MalariaFormActivity extends BaseActivity {
             stock.setDateCreated(new Date());
             stock.setMalariadetailId(call.getUuid());
             stock.setMalariaDetail(call);
+            stock.setDetailerId("");
             stock.setCategory("rdt");
 
             detailerStockDao.insert(stock);
