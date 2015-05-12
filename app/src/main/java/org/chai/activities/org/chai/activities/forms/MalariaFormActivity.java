@@ -1,5 +1,6 @@
 package org.chai.activities.org.chai.activities.forms;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.activities.calls.HistoryActivity;
 import org.chai.activities.tasks.DiarrheaFormActivity;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
@@ -221,6 +223,9 @@ public class MalariaFormActivity extends BaseActivity {
         }
 
         malariaDetailDao.insert(call);
+
+        Intent i = new Intent(this, HistoryActivity.class);
+        startActivity(i);
 
         Utils.log("Malaria detail saved");
     }

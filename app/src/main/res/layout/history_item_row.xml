@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/list_bg_round_white">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_task_list"
+        android:scaleType="centerInside"
+        android:layout_marginRight="10dp"
+        android:id="@+id/img_icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txt_customer_name"
+        android:layout_alignParentTop="true"
+        android:textSize="18sp"
+        android:textColor="#242527"
+        android:layout_toRightOf="@+id/img_icon"
+        android:layout_toEndOf="@+id/img_icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0772686277"
+        android:textColor="#55595d"
+        android:textSize="14sp"
+        android:id="@+id/txt_customer_contact"
+        android:layout_below="@+id/txt_customer_name"
+        android:layout_toRightOf="@+id/img_icon"
+        android:layout_toEndOf="@+id/img_icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textColor="#55595d"
+        android:textSize="12sp"
+        android:id="@+id/txt_customer_location"
+        android:layout_below="@+id/txt_customer_contact"
+        android:layout_toRightOf="@+id/img_icon"
+        android:layout_toEndOf="@+id/img_icon" />
+</RelativeLayout>
