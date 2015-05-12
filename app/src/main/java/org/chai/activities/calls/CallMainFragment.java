@@ -7,11 +7,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.*;
+import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
@@ -19,9 +26,18 @@ import org.chai.activities.tasks.DetailersActivity;
 import org.chai.activities.tasks.SaleslFormFragment;
 import org.chai.adapter.DetailerCallAdapter;
 import org.chai.adapter.SalesAdapter;
-import org.chai.model.*;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
+import org.chai.model.DetailerCall;
+import org.chai.model.DetailerCallDao;
+import org.chai.model.MalariaDetail;
+import org.chai.model.MalariaDetailDao;
+import org.chai.model.Sale;
+import org.chai.model.SaleDao;
+import org.chai.model.User;
 import org.chai.rest.RestClient;
 import org.chai.util.MyApplication;
+import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
@@ -36,9 +52,11 @@ public class CallMainFragment extends Fragment {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private DetailerCallDao detailerCallDao;
+    private MalariaDetailDao malariaDetailDao;
     private SaleDao saleDao;
 
     private List<DetailerCall> detailerCalls = null;
+    private List<MalariaDetail> malariaForms = null;
     private List<Sale> sales = null;
     private ListView listView;
     private DetailerCallAdapter detailerCallAdapter;
@@ -90,8 +108,10 @@ public class CallMainFragment extends Fragment {
         }else {
             detailerCalls = new ArrayList<DetailerCall>();
             detailerCalls.addAll(detailerCallDao.loadAll());
-            detailerCallAdapter = new DetailerCallAdapter(getActivity(),detailerCalls);
+            malariaForms = new ArrayList<MalariaDetail>();
+            malariaForms.addAll(malariaDetailDao.loadAll());
             listView.setAdapter(detailerCallAdapter);
+            Utils.log("Loaded details from DB -> " + detailerCalls.size());
         }
     }
 
@@ -118,6 +138,7 @@ public class CallMainFragment extends Fragment {
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
             detailerCallDao = daoSession.getDetailerCallDao();
+            malariaDetailDao = daoSession.getMalariaDetailDao();
             saleDao = daoSession.getSaleDao();
         } catch (Exception ex) {
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -207,6 +228,4 @@ public class CallMainFragment extends Fragment {
         Log.d("Customer Main Fragment", "List Frag Resumed");
 
     }
-
-
 }

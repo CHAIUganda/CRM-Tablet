@@ -11,6 +11,8 @@ import com.astuetz.PagerSlidingTabStrip;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.model.User;
+import org.chai.rest.RestClient;
 
 /**
  * Created by Zed on 4/23/2015.
@@ -21,7 +23,8 @@ public class HistoryActivity extends BaseActivity {
 
     ViewPager mViewPager;
 
-    String[] titles = new String[]{"CALL DATA", "ORDERS"};
+    String[] titles;
+    int PAGES = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,14 @@ public class HistoryActivity extends BaseActivity {
         setContentView(R.layout.history_activity);
 
         aq = new AQuery(this);
+
+        if(RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)){
+            titles = new String[]{"MALARIA FORMS", "DIARRHEA FORMS", "ORDERS"};
+            PAGES = 3;
+        }else{
+            titles = new String[]{"SALES FORMS", "ORDERS"};
+            PAGES = 2;
+        }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -45,28 +56,40 @@ public class HistoryActivity extends BaseActivity {
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
-        final int PAGE_COUNT = 2;
-
         public ViewPagerAdapter() {
             super(getSupportFragmentManager());
         }
 
         @Override
         public int getCount() {
-            return PAGE_COUNT;
+            return PAGES;
         }
 
         @Override
         public Fragment getItem(int position) {
             Bundle b = new Bundle();
             Fragment target = null;
-            switch(position){
-                case 0:
-                    target = new CallMainFragment();
-                    break;
-                case 1:
-                    target = new OrdersMainFragment();
-                    break;
+            if(RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)){
+                switch(position){
+                    case 0:
+                        target = new MalariaHistoryFragment();
+                        break;
+                    case 1:
+                        target = new DiarrheaHistoryFragment();
+                        break;
+                    case 2:
+                        target = new OrdersHistoryFragment();
+                        break;
+                }
+            }else{
+                switch(position){
+                    case 0:
+                        target = new SalesHistoryFragment();
+                        break;
+                    case 1:
+                        target = new OrdersHistoryFragment();
+                        break;
+                }
             }
             target.setArguments(b);
             return target;

@@ -95,7 +95,7 @@ public class Utils {
     }
 
     public static String decryptString(String encryptedText){
-        byte[]  decrypted = Base64.decode(encryptedText.getBytes(),Base64.NO_WRAP);
+        byte[]  decrypted = Base64.decode(encryptedText.getBytes(), Base64.NO_WRAP);
         return new String(decrypted);
     }
 
@@ -306,5 +306,9 @@ public class Utils {
         }
 
         return 0;
+    }
+
+    public static boolean taskIsHistory(Task task){
+        return false;
     }
 }
