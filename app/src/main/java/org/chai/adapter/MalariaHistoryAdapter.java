@@ -12,6 +12,7 @@ import org.chai.R;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.MalariaDetail;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.List;
 
@@ -37,8 +38,8 @@ public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> {
 
         AQuery aq = new AQuery(row);
         aq.id(R.id.txt_customer_name).text(c.getOutletName());
-        aq.id(R.id.txt_customer_contact).text(contact.getContact());
-        aq.id(R.id.txt_customer_location).text(c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
+        aq.id(R.id.txt_time).text(new PrettyTime().format(m.getTask().getCompletionDate()));
+        aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
         return row;
     }
 }

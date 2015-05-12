@@ -18,7 +18,6 @@ import org.chai.model.DaoSession;
 import org.chai.model.MalariaDetail;
 import org.chai.model.MalariaDetailDao;
 import org.chai.util.MyApplication;
-import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
@@ -51,8 +50,6 @@ public class MalariaHistoryFragment extends Fragment {
         items.addAll(malariaDetailDao.loadAll());
         adapter = new MalariaHistoryAdapter(getActivity(), R.layout.history_item_row, items);
         listView.setAdapter(adapter);
-
-        Utils.log("Got items -> " + items.size());
 
         return view;
     }

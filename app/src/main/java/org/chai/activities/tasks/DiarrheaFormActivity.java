@@ -227,6 +227,8 @@ public class DiarrheaFormActivity extends BaseActivity {
 
         detailerCallDao.insert(call);
 
+        Toast.makeText(this, "Diarrhea form has been saved", Toast.LENGTH_LONG).show();
+
         Intent i = new Intent(this, HistoryActivity.class);
         i.putExtra("tab", 1);
         startActivity(i);

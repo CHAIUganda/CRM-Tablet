@@ -29,7 +29,6 @@ import org.chai.model.MalariaDetailDao;
 import org.chai.model.Task;
 import org.chai.model.TaskDao;
 import org.chai.util.MyApplication;
-import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.Date;
@@ -224,10 +223,10 @@ public class MalariaFormActivity extends BaseActivity {
 
         malariaDetailDao.insert(call);
 
+        Toast.makeText(this, "Diarrhea form has been saved", Toast.LENGTH_LONG).show();
+
         Intent i = new Intent(this, HistoryActivity.class);
         startActivity(i);
-
-        Utils.log("Malaria detail saved");
     }
 
     protected void initialiseGreenDao() {

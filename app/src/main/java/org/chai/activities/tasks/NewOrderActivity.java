@@ -1,6 +1,7 @@
 package org.chai.activities.tasks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -27,6 +28,7 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.activities.calls.HistoryActivity;
 import org.chai.adapter.CustomerAutocompleteAdapter;
 import org.chai.adapter.ProductArrayAdapter;
 import org.chai.model.Customer;
@@ -39,6 +41,8 @@ import org.chai.model.OrderData;
 import org.chai.model.OrderDataDao;
 import org.chai.model.Product;
 import org.chai.model.ProductDao;
+import org.chai.model.User;
+import org.chai.rest.RestClient;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.CustomDatePicker;
@@ -339,6 +343,9 @@ public class NewOrderActivity extends BaseActivity {
         }
 
         Toast.makeText(this, "New order has been saved", Toast.LENGTH_LONG).show();
-        finish();
+
+        Intent i = new Intent(this, HistoryActivity.class);
+        i.putExtra("tab", RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER) ? 2 : 1);
+        startActivity(i);
     }
 }
