@@ -1,5 +1,6 @@
 package org.chai.activities.tasks;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.activities.calls.HistoryActivity;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
@@ -224,6 +226,10 @@ public class DiarrheaFormActivity extends BaseActivity {
         }
 
         detailerCallDao.insert(call);
+
+        Intent i = new Intent(this, HistoryActivity.class);
+        i.putExtra("tab", 1);
+        startActivity(i);
     }
 
     protected void initialiseGreenDao() {

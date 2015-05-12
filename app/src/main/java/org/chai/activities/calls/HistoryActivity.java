@@ -25,6 +25,7 @@ public class HistoryActivity extends BaseActivity {
 
     String[] titles;
     int PAGES = 0;
+    int currentTab = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class HistoryActivity extends BaseActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_activity);
+        currentTab = getIntent().getIntExtra("tab", -1);
 
         aq = new AQuery(this);
 
@@ -53,6 +55,10 @@ public class HistoryActivity extends BaseActivity {
         tabs.setViewPager(mViewPager);
 
         super.setUpDrawer(toolbar);
+
+        if(currentTab != -1){
+            mViewPager.setCurrentItem(currentTab);
+        }
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
