@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.splunk.mint.Mint;
 
 import org.chai.R;
-import org.chai.activities.tasks.DiarrheaFormActivity;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.User;
@@ -50,14 +49,14 @@ public class LoginActivity extends BaseActivity {
 
         super.onCreate(savedInstanceState);
 
+        Mint.initAndStartSession(LoginActivity.this, "8255bd80");
+
         if(AccountManager.offlineLogin(this, false)){
-            Intent i = new Intent(LoginActivity.this, DiarrheaFormActivity.class);
+            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
             finish();
         }
-
-        Mint.initAndStartSession(LoginActivity.this, "8255bd80");
 
         setContentView(R.layout.login_activity);
 
@@ -134,7 +133,6 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void onLoginSuccessfull(String user, String pass,String role) {
-
         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
         RestClient.userName = user;
         RestClient.password = pass;

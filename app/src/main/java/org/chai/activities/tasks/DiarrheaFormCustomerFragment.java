@@ -77,6 +77,7 @@ public class DiarrheaFormCustomerFragment extends Fragment {
 
     private void setLatLong(){
         tracker = Globals.getInstance().getGpsTracker();
+        Utils.log("Setting latlong -> " + tracker.getLatitude() + "," + tracker.getLongitude());
         aq.id(R.id.gps).text(tracker.getLatitude() + "," + tracker.getLongitude());
     }
 

@@ -19,8 +19,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.androidquery.AQuery;
+
 import org.chai.R;
-import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
 import org.chai.adapter.TaskListAdapter;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
@@ -43,41 +44,47 @@ import de.greenrobot.dao.query.QueryBuilder;
  * Created by victor on 12/8/14.
  */
 public class TaskCalenderFragment extends Fragment {
-    public final static String STATUS_NEW = "new", STATUS_COMPLETE = "complete", STATUS_CANCELLED = "cancelled";
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private TaskDao taskDao;
-    TaskListAdapter taskListAdapter;
+
+    TaskListAdapter adapter;
+
     private ListView listView;
     private Spinner spinner;
-    private List<Task> taskList;
+
+    private List<Task> items;
+
+    AQuery aq;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.task_calender_fragment, container, false);
+        aq = new AQuery(view);
+
         initialiseGreenDao();
-        taskList = loadTasksFromDb((getResources().getStringArray(R.array.task_filters))[0]);
-        taskListAdapter = new TaskListAdapter(getActivity(), taskList);
+
+        items = loadTasksFromDb((getResources().getStringArray(R.array.task_filters))[0]);
+        adapter = new TaskListAdapter(getActivity(), items);
         listView = (ListView) view.findViewById(R.id.calender_tasks_list_view);
         spinner = (Spinner) view.findViewById(R.id.task_filter_spinner);
-        listView.setAdapter(taskListAdapter);
+        listView.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 try {
                     String item = (String) spinner.getSelectedItem();
-                    taskList.clear();
-                    taskList = loadTasksFromDb(item);
-                    taskListAdapter = new TaskListAdapter(getActivity(), taskList);
-                    listView.setAdapter(taskListAdapter);
-                    taskListAdapter.notifyDataSetChanged();
+                    items.clear();
+                    items = loadTasksFromDb(item);
+                    adapter = new TaskListAdapter(getActivity(), items);
+                    listView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     Toast.makeText(getActivity().getApplicationContext(), "error loading tasks:" + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
-
             }
 
             @Override
@@ -90,26 +97,19 @@ public class TaskCalenderFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Task task = (Task) adapterView.getItemAtPosition(position);
+
+                Intent i = new Intent();
+
+                i.putExtra("task_id", task.getUuid());
+                i.putExtra("id", task.getCustomerId());
+
                 if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
-                    /*SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
-                    Bundle bundle = new Bundle();
-                    Task itemAtPosition = (Task) adapterView.getItemAtPosition(position);
-                    bundle.putString("taskId", itemAtPosition.getUuid());
-                    commercialFormActivity.setArguments(bundle);
-                    ((BaseContainerFragment)getParentFragment()).replaceFragment(commercialFormActivity, true);*/
-                    Intent i = new Intent(getActivity(), SalesFormActivity.class);
-                    i.putExtra("id", task.getCustomerId());
-                    getActivity().startActivity(i);
+                    i.setClass(getActivity(), SalesFormActivity.class);
                 }else{
-                    /*DetailersActivity detailersActivity = new DetailersActivity();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("taskId", ((Task) adapterView.getItemAtPosition(position)).getUuid());
-                    detailersActivity.setArguments(bundle);
-                    ((BaseContainerFragment)getParentFragment()).replaceFragment(detailersActivity,true);*/
-                    Intent i = new Intent(getActivity(), MalariaFormActivity.class);
-                    i.putExtra("id", task.getCustomerId());
-                    getActivity().startActivity(i);
+                    i.setClass(getActivity(), SalesFormActivity.class);
                 }
+
+                getActivity().startActivity(i);
             }
         });
 
@@ -141,15 +141,23 @@ public class TaskCalenderFragment extends Fragment {
             itemPosition = itemPosition==0?itemPosition:itemPosition - 1;
             Date dueDateOffset = Utils.addToDateOffset(new Date(), itemPosition);
             Date dueDatemax = Utils.addToDateMax(new Date(), itemPosition);
-            Log.i("Due Date:",dueDateOffset.toString()+":max-"+dueDatemax.toString());
+            Log.i("Due Date:", dueDateOffset.toString() + ":max-" + dueDatemax.toString());
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         }else if(itemPosition == 6){
             //nearby tasks
             GeoPoint geoPoint = getCurrentLocation();
             List list =taskQueryBuilder.where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
-            outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(geoPoint, list,TaskViewOnMapFragment.MAX_RADIUS_IN_KM);
+            outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(geoPoint, list, TaskViewOnMapFragment.MAX_RADIUS_IN_KM);
         }else if(itemPosition == 7){
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
+        }
+
+        if(outstandingTasks.size() == 0){
+            aq.id(R.id.calender_tasks_list_view).gone();
+            aq.id(R.id.txt_no_tasks).visible();
+        }else{
+            aq.id(R.id.calender_tasks_list_view).visible();
+            aq.id(R.id.txt_no_tasks).gone();
         }
         return outstandingTasks;
     }
@@ -191,12 +199,12 @@ public class TaskCalenderFragment extends Fragment {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String reason = ((EditText) promptView.findViewById(R.id.promptDialogUserInput)).getText().toString();
-                        Task task = taskList.get(position);
+                        Task task = items.get(position);
                         task.setStatus(TaskMainFragment.STATUS_CANCELLED);
                         task.setDescription(task.getDescription() + "(" + reason + ")");
                         taskDao.update(task);
-                        taskList.remove(position);
-                        taskListAdapter.notifyDataSetChanged();
+                        items.remove(position);
+                        adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
 
@@ -222,7 +230,7 @@ public class TaskCalenderFragment extends Fragment {
         }else{
             gpsTracker.showSettingsAlert();
         }
-        GeoPoint currentLocation = new GeoPoint(latitude,longitude);
+        GeoPoint currentLocation = new GeoPoint(latitude, longitude);
         return currentLocation;
     }
 

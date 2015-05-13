@@ -356,6 +356,7 @@
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="textColorPrimary">#FFFFFF</color>
+    <color name="text_color_faint">#88a2c2</color>
     <color name="tip_text_color">#83888d</color>
     <color name="transparent">#00000000</color>
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/wallet_colors.xml -->

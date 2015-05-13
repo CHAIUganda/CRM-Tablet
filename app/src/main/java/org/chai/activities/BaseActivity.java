@@ -42,6 +42,8 @@ import java.util.Date;
  * Created by Zed on 2/4/2015.
  */
 public class BaseActivity extends ActionBarActivity{
+    public final static String STATUS_NEW = "new", STATUS_COMPLETE = "complete", STATUS_CANCELLED = "cancelled";
+
     AQuery aquery;
 
     boolean skipLogin = false;

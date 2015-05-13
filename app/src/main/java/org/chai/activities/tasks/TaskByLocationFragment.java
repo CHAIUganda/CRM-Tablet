@@ -17,8 +17,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.androidquery.AQuery;
+
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
+import org.chai.activities.HomeActivity;
 import org.chai.adapter.DistrictArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.adapter.TaskListAdapter;
@@ -34,6 +37,7 @@ import org.chai.model.TaskDao;
 import org.chai.model.User;
 import org.chai.rest.RestClient;
 import org.chai.util.MyApplication;
+import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.List;
@@ -51,21 +55,30 @@ public class TaskByLocationFragment extends Fragment {
     private TaskDao taskDao;
     private SubcountyDao subcountyDao;
     private DistrictDao districtDao;
-    TaskListAdapter taskListAdapter;
+
+    TaskListAdapter adapter;
     private ListView listView;
+
     private Spinner districtSpinner;
     private Spinner subcountySpinner;
-    private List<Task> taskList;
+
+    private List<Task> items;
+
+    AQuery aq;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.task_by_location, container, false);
         initialiseGreenDao();
+        aq = new AQuery(view);
+
         listView = (ListView) view.findViewById(R.id.location_tasks_list_view);
         districtSpinner = (Spinner) view.findViewById(R.id.task_location_district_spinner);
         subcountySpinner = (Spinner)view.findViewById(R.id.task_location_subcounty_spinner);
 
         List<Subcounty> subcountiesList = subcountyDao.loadAll();
         List<District> districtList = districtDao.loadAll();
+
         districtSpinner.setAdapter(new DistrictArrayAdapter(getActivity(),R.id.task_location_district_spinner,districtList.toArray(new District[districtList.size()])));
         subcountySpinner.setAdapter(new SubcountyArrayAdapter(getActivity(), R.id.task_location_subcounty_spinner, subcountiesList.toArray(new Subcounty[subcountiesList.size()])));
 
@@ -88,12 +101,22 @@ public class TaskByLocationFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 String subcountyId = ((Subcounty) subcountySpinner.getSelectedItem()).getUuid();
 
-                Query query = taskDao.queryBuilder().where(new WhereCondition.StringCondition("T.'"+TaskDao.Properties.Status.columnName+"' != '"+TaskMainFragment.STATUS_COMPLETE+"' and T.'"+TaskDao.Properties.Status.columnName+"' != '"+TaskMainFragment.STATUS_CANCELLED+"' and T.'"+TaskDao.Properties.
+                Query query = taskDao.queryBuilder().where(new WhereCondition.StringCondition("T.'"+TaskDao.Properties.Status.columnName+"' != '"+ HomeActivity.STATUS_COMPLETE+"' and T.'"+TaskDao.Properties.Status.columnName+"' != '"+HomeActivity.STATUS_CANCELLED+"' and T.'"+TaskDao.Properties.
                         CustomerId.columnName + "' IN " + "(SELECT " + CustomerDao.Properties.Uuid.columnName + " FROM " + CustomerDao.TABLENAME + " C WHERE C.'" + CustomerDao.Properties.SubcountyId.columnName + "' = '" + subcountyId+"')")).build();
-                taskList = query.list();
-                taskListAdapter = new TaskListAdapter(getActivity(), taskList);
-                listView.setAdapter(taskListAdapter);
-                taskListAdapter.notifyDataSetChanged();
+                items = query.list();
+                adapter = new TaskListAdapter(getActivity(), items);
+                listView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+                if(items.size() == 0){
+                    Utils.log("No tasks found in area");
+                    aq.id(R.id.location_tasks_list_view).gone();
+                    aq.id(R.id.txt_no_tasks).visible();
+                }else{
+                    Utils.log("Tasks found in area -> " + items.size());
+                    aq.id(R.id.location_tasks_list_view).visible();
+                    aq.id(R.id.txt_no_tasks).gone();
+                }
             }
 
             @Override
@@ -101,6 +124,7 @@ public class TaskByLocationFragment extends Fragment {
 
             }
         });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -119,7 +143,9 @@ public class TaskByLocationFragment extends Fragment {
                 }
             }
         });
+
         registerForContextMenu(view.findViewById(R.id.location_tasks_list_view));
+
         return view;
     }
 
@@ -175,12 +201,12 @@ public class TaskByLocationFragment extends Fragment {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String reason = ((EditText) promptView.findViewById(R.id.promptDialogUserInput)).getText().toString();
-                        Task task = taskList.get(position);
+                        Task task = items.get(position);
                         task.setStatus(TaskMainFragment.STATUS_CANCELLED);
                         task.setDescription(task.getDescription() + "(" + reason + ")");
                         taskDao.update(task);
-                        taskList.remove(position);
-                        taskListAdapter.notifyDataSetChanged();
+                        items.remove(position);
+                        adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
 

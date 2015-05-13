@@ -19,4 +19,5 @@
     <color name="swipe_color_4">#669900</color>
     <color name="transparent">#00000000</color>
     <color name="form_list_row_separator">#6988b0</color>
+    <color name="text_color_faint">#88a2c2</color>
 </resources>

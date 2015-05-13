@@ -1,16 +1,18 @@
 package org.chai.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+
+import com.androidquery.AQuery;
+
 import org.chai.R;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.Task;
-import org.chai.util.Utils;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,64 +22,35 @@ import java.util.List;
  * Created by victor on 10/23/14.
  */
 public class TaskListAdapter extends ArrayAdapter<Task> {
-    private List<Task> taskList;
+    private List<Task> tasks;
 
     public TaskListAdapter(Activity activity,List<Task> aTaskList){
         super(activity.getApplicationContext(), R.layout.task_calender_fragment, aTaskList);
-        this.taskList = aTaskList;
+        this.tasks = aTaskList;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
-        if(convertView == null){
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.task_list_item, parent, false);
-
-            viewHolder = new ViewHolder();
-            TextView taskListOutlet = (TextView) convertView.findViewById(R.id.task_list_outlet);
-            TextView taskListAddress = (TextView) convertView.findViewById(R.id.task_list_outlet_contact);
-            TextView taskListSubcounty = (TextView) convertView.findViewById(R.id.task_list_subcounty);
-            TextView taskListLocationDesc = (TextView) convertView.findViewById(R.id.task_list_location_desc);
-
-            viewHolder.subcounty = taskListSubcounty;
-            viewHolder.outlet = taskListOutlet;
-            viewHolder.contact = taskListAddress;
-            viewHolder.locationDescription = taskListLocationDesc;
-            convertView.setTag(viewHolder);
-        }else{
-            viewHolder = (ViewHolder) convertView.getTag();
+        View row = convertView;
+        if(row == null){
+            LayoutInflater inflator = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            row = inflator.inflate(R.layout.history_item_row, null);
         }
 
-        Task task = taskList.get(position);
-        Customer customer = task.getCustomer();
-        if(customer != null){
-            Utils.log("Task for customer -> " + customer);
-            viewHolder.subcounty.setText(customer.getSubcounty().getName());
-            viewHolder.outlet.setText(customer.getOutletName());
-            viewHolder.locationDescription.setText(Utils.truncateString(customer.getDescriptionOfOutletLocation(), 20));
-        }
-        if (customer != null && customer.getCustomerContacts().size() > 0) {
-            CustomerContact customerCtct = null;
-            customerCtct = Utils.getKeyCustomerContact(customer.getCustomerContacts());
-            if(customerCtct != null){
-                viewHolder.contact.setText(customerCtct.getContact() != null ? customerCtct.getContact() : "No Contact");
-            }
-        }
+        Task t = getItem(position);
+        Customer c = t.getCustomer();
+        CustomerContact contact = c.getCustomerContacts().get(0);
 
-        return convertView;
-    }
-
-    static class ViewHolder {
-        TextView outlet;
-        TextView contact;
-        TextView subcounty;
-        TextView locationDescription;
+        AQuery aq = new AQuery(row);
+        aq.id(R.id.txt_customer_name).text(c.getOutletName());
+        aq.id(R.id.txt_time).text(c.getDescriptionOfOutletLocation());
+        aq.id(R.id.txt_customer_contact).text(contact.getContact());
+        return row;
     }
 
     @Override
      public void notifyDataSetChanged() {
-        Collections.sort(taskList, new Comparator<Task>() {
+        Collections.sort(tasks, new Comparator<Task>() {
             @Override
             public int compare(Task task1, Task task2) {
                 Customer customer1 = task1.getCustomer();
@@ -102,5 +75,4 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         });
         super.notifyDataSetChanged();
     }
-
 }

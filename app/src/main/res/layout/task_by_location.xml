@@ -2,14 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="#F3F6FA"
-    android:padding="@dimen/activity_horizontal_margin"
+    android:padding="10dp"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/spinnerlayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <Spinner
@@ -30,21 +29,31 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/location_listlayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:focusable="false"
+        android:orientation="vertical"
         android:focusableInTouchMode="false">
 
         <ListView
             android:id="@+id/location_tasks_list_view"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:divider="@color/list_divider"
-            android:dividerHeight="1dp"
+            android:dividerHeight="10dp"
             android:listSelector="@drawable/list_row_selector">
-        </ListView>
-    </LinearLayout>
 
+        </ListView>
+
+        <TextView
+            android:id="@+id/txt_no_tasks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/text_color_faint"
+            android:text="No Tasks"/>
+    </LinearLayout>
 </LinearLayout>
