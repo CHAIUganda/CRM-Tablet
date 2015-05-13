@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.androidquery.AQuery;
 
 import org.chai.R;
+import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
 import org.chai.adapter.TaskListAdapter;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
@@ -106,7 +107,7 @@ public class TaskCalenderFragment extends Fragment {
                 if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
                     i.setClass(getActivity(), SalesFormActivity.class);
                 }else{
-                    i.setClass(getActivity(), SalesFormActivity.class);
+                    i.setClass(getActivity(), MalariaFormActivity.class);
                 }
 
                 getActivity().startActivity(i);

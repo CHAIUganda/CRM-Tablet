@@ -45,7 +45,6 @@
             android:layout_height="match_parent"
             android:textSize="24sp"
             android:gravity="center"
-            
             android:textColor="@color/text_color_faint"
             android:text="No Tasks"/>
     </LinearLayout>

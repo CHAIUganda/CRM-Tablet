@@ -39,6 +39,7 @@ public class DistrictArrayAdapter extends ArrayAdapter<District> {
         TextView label = new TextView(context);
         label.setTextColor(Color.WHITE);
         label.setText(districts[position].getName());
+        label.setPadding(10, 10, 10, 10);
         return label;
     }
     @Override

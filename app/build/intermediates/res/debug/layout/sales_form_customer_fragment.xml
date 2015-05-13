@@ -51,6 +51,7 @@
         <EditText
             android:id="@+id/gps"
             android:layout_width="match_parent"
+            android:enabled="false"
             style="@style/TextBoxStyle"/>
     </LinearLayout>
 </LinearLayout><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/sales_form_customer_fragment.xml -->

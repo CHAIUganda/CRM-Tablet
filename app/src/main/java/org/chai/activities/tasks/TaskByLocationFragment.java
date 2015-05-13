@@ -2,6 +2,7 @@ package org.chai.activities.tasks;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,8 +21,8 @@ import android.widget.Toast;
 import com.androidquery.AQuery;
 
 import org.chai.R;
-import org.chai.activities.BaseContainerFragment;
 import org.chai.activities.HomeActivity;
+import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
 import org.chai.adapter.DistrictArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.adapter.TaskListAdapter;
@@ -37,7 +38,6 @@ import org.chai.model.TaskDao;
 import org.chai.model.User;
 import org.chai.rest.RestClient;
 import org.chai.util.MyApplication;
-import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.List;
@@ -109,11 +109,9 @@ public class TaskByLocationFragment extends Fragment {
                 adapter.notifyDataSetChanged();
 
                 if(items.size() == 0){
-                    Utils.log("No tasks found in area");
                     aq.id(R.id.location_tasks_list_view).gone();
                     aq.id(R.id.txt_no_tasks).visible();
                 }else{
-                    Utils.log("Tasks found in area -> " + items.size());
                     aq.id(R.id.location_tasks_list_view).visible();
                     aq.id(R.id.txt_no_tasks).gone();
                 }
@@ -128,19 +126,20 @@ public class TaskByLocationFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                if (RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)) {
-                    SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("taskId", ((Task) adapterView.getItemAtPosition(position)).getUuid());
-                    commercialFormActivity.setArguments(bundle);
-                    ((BaseContainerFragment) getParentFragment()).replaceFragment(commercialFormActivity, true);
-                } else {
-                    DetailersActivity detailersActivity = new DetailersActivity();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("taskId", ((Task) adapterView.getItemAtPosition(position)).getUuid());
-                    detailersActivity.setArguments(bundle);
-                    ((BaseContainerFragment) getParentFragment()).replaceFragment(detailersActivity, true);
+                Task task = (Task) adapterView.getItemAtPosition(position);
+
+                Intent i = new Intent();
+
+                i.putExtra("task_id", task.getUuid());
+                i.putExtra("id", task.getCustomerId());
+
+                if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
+                    i.setClass(getActivity(), SalesFormActivity.class);
+                }else{
+                    i.setClass(getActivity(), MalariaFormActivity.class);
                 }
+
+                getActivity().startActivity(i);
             }
         });
 

@@ -51,7 +51,7 @@
         <activity
             android:name="org.chai.activities.tasks.SalesFormActivity"
             android:configChanges="orientation|screenSize"
-            android:label="New Diarrhea Details"
+            android:label="New Sales Detail"
             android:theme="@style/AppTheme" >
         </activity>
         <activity

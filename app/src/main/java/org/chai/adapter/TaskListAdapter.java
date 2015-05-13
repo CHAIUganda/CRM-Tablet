@@ -38,6 +38,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         }
 
         Task t = getItem(position);
+
         Customer c = t.getCustomer();
         CustomerContact contact = c.getCustomerContacts().get(0);
 
