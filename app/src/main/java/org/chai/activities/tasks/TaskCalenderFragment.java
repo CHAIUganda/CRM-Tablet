@@ -199,7 +199,7 @@ public class TaskCalenderFragment extends Fragment {
                 startActivity(in);
                 break;
         }
-        return super.onContextItemSelected(menuItem);
+        return true;
     }
 
     private AlertDialog.Builder askBeforeDelete(final int position) {
@@ -210,7 +210,6 @@ public class TaskCalenderFragment extends Fragment {
 
         dialog.setTitle("Cancel Task")
                 .setMessage("Are you sure you want to cancel this task?")
-                .setIcon(R.drawable.delete_icon)
                 .setPositiveButton("Cancel Task", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -232,7 +231,6 @@ public class TaskCalenderFragment extends Fragment {
                 })
                 .create();
         return dialog;
-
     }
 
     private GeoPoint getCurrentLocation(){

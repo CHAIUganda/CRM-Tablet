@@ -46,35 +46,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dad7d78f-c0b3-4a33-b333-77a49d84f0ba" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/AddNewCustomerActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/AddNewCustomerActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/CallMainFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/CallMainFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/customwidget/ContactWidgetView.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/customwidget/ContactWidgetView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/adapter/CustomerAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/adapter/CustomerAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerForm$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerForm$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerForm.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomersActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomersActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DetailersActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DetailersActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/MalariaFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/MalariaFormActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/org/chai/activities/forms/MalariaFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/org/chai/activities/forms/MalariaFormActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/NewOrderActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/NewOrderActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/astuetz/pagerslidingtabstrip/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/astuetz/pagerslidingtabstrip/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/me/relex/circleindicator/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/me/relex/circleindicator/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$menu.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$menu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$raw.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$raw.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$xml.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$xml.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/rest/RestClient.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/rest/RestClient.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment.class" />
@@ -87,17 +62,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/astuetz/pagerslidingtabstrip/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/astuetz/pagerslidingtabstrip/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/me/relex/circleindicator/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/me/relex/circleindicator/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/chai/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/chai/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskByLocationFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskByLocationFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/debug/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/debug/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="chai-crm-android.iws" />
@@ -225,44 +193,44 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskByLocationFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="203" column="29" selection-start-line="203" selection-start-column="29" selection-end-line="203" selection-end-column="29" />
+              <caret line="201" column="20" selection-start-line="201" selection-start-column="8" selection-end-line="201" selection-end-column="20" />
               <folding>
-                <element signature="e#5289#6017#0" expanded="true" />
-                <element signature="e#6016#6017#0" expanded="true" />
-                <element signature="e#8125#8827#0" expanded="true" />
-                <element signature="e#8826#8827#0" expanded="true" />
-                <element signature="e#8872#9070#0" expanded="true" />
-                <element signature="e#9069#9070#0" expanded="true" />
+                <element signature="e#5317#6045#0" expanded="true" />
+                <element signature="e#6044#6045#0" expanded="true" />
+                <element signature="e#8850#9554#0" expanded="true" />
+                <element signature="e#9553#9554#0" expanded="true" />
+                <element signature="e#9597#9795#0" expanded="true" />
+                <element signature="e#9794#9795#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RestClient.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RestClient.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="48" column="17" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
+            <state vertical-scroll-proportion="-0.43794578">
+              <caret line="34" column="91" selection-start-line="34" selection-start-column="91" selection-end-line="34" selection-end-column="91" />
               <folding>
                 <element signature="e#1761#1762#0" expanded="true" />
-                <element signature="e#1809#1810#0" expanded="true" />
-                <element signature="e#1852#1853#0" expanded="true" />
-                <element signature="e#1876#1877#0" expanded="true" />
+                <element signature="e#1806#1807#0" expanded="true" />
+                <element signature="e#1849#1850#0" expanded="true" />
+                <element signature="e#1873#1874#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaskCalenderFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TaskCalenderFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25677603">
-              <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="204" column="69" selection-start-line="204" selection-start-column="69" selection-end-line="204" selection-end-column="69" />
               <folding>
-                <element signature="e#9078#9782#0" expanded="true" />
-                <element signature="e#9781#9782#0" expanded="true" />
-                <element signature="e#9825#10023#0" expanded="true" />
-                <element signature="e#10022#10023#0" expanded="true" />
+                <element signature="e#8996#9700#0" expanded="true" />
+                <element signature="e#9699#9700#0" expanded="true" />
+                <element signature="e#9743#9941#0" expanded="true" />
+                <element signature="e#9940#9941#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1674,8 +1642,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/detailer_task_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/sale_task_menu.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskByLocationFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java" />
       </list>
     </option>
@@ -2834,40 +2802,40 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskByLocationFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="203" column="29" selection-start-line="203" selection-start-column="29" selection-end-line="203" selection-end-column="29" />
+          <caret line="201" column="20" selection-start-line="201" selection-start-column="8" selection-end-line="201" selection-end-column="20" />
           <folding>
-            <element signature="e#5289#6017#0" expanded="true" />
-            <element signature="e#6016#6017#0" expanded="true" />
-            <element signature="e#8125#8827#0" expanded="true" />
-            <element signature="e#8826#8827#0" expanded="true" />
-            <element signature="e#8872#9070#0" expanded="true" />
-            <element signature="e#9069#9070#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="17" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
-          <folding>
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#1809#1810#0" expanded="true" />
-            <element signature="e#1852#1853#0" expanded="true" />
-            <element signature="e#1876#1877#0" expanded="true" />
+            <element signature="e#5317#6045#0" expanded="true" />
+            <element signature="e#6044#6045#0" expanded="true" />
+            <element signature="e#8850#9554#0" expanded="true" />
+            <element signature="e#9553#9554#0" expanded="true" />
+            <element signature="e#9597#9795#0" expanded="true" />
+            <element signature="e#9794#9795#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25677603">
-          <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="204" column="69" selection-start-line="204" selection-start-column="69" selection-end-line="204" selection-end-column="69" />
           <folding>
-            <element signature="e#9078#9782#0" expanded="true" />
-            <element signature="e#9781#9782#0" expanded="true" />
-            <element signature="e#9825#10023#0" expanded="true" />
-            <element signature="e#10022#10023#0" expanded="true" />
+            <element signature="e#8996#9700#0" expanded="true" />
+            <element signature="e#9699#9700#0" expanded="true" />
+            <element signature="e#9743#9941#0" expanded="true" />
+            <element signature="e#9940#9941#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.43794578">
+          <caret line="34" column="91" selection-start-line="34" selection-start-column="91" selection-end-line="34" selection-end-column="91" />
+          <folding>
+            <element signature="e#1761#1762#0" expanded="true" />
+            <element signature="e#1806#1807#0" expanded="true" />
+            <element signature="e#1849#1850#0" expanded="true" />
+            <element signature="e#1873#1874#0" expanded="true" />
           </folding>
         </state>
       </provider>

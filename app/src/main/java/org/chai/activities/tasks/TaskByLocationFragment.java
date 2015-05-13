@@ -38,6 +38,7 @@ import org.chai.model.TaskDao;
 import org.chai.model.User;
 import org.chai.rest.RestClient;
 import org.chai.util.MyApplication;
+import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.List;
@@ -162,29 +163,43 @@ public class TaskByLocationFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.cancel_context_menu, menu);
-
+        int m = -1;
+        if(RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)){
+            m = R.menu.detailer_task_menu;
+        }else{
+            m = R.menu.sale_task_menu;
+        }
+        inflater.inflate(m, menu);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem menuItem) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
+        int position = (int) info.id;
+        Task task = items.get(position);
+        Utils.log("Context menu selected -> " + menuItem.getItemId());
         switch (menuItem.getItemId()) {
-            case R.id.cancel_task_menu_item:
-                try {
-                    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
-                    int position = (int) info.id;
-                    askBeforeDelete(position).show();
-                } catch (Exception ex) {
-
-                }
-                return true;
+            case R.id.cancel_task:
+                askBeforeDelete(position).show();
+                break;
+            case R.id.detail_malaria:
+                Intent i = new Intent(getActivity(), MalariaFormActivity.class);
+                i.putExtra("id", task.getCustomerId());
+                i.putExtra("task_id", task.getUuid());
+                startActivity(i);
+                break;
+            case R.id.detail_sale:
+                Intent in = new Intent(getActivity(), SalesFormActivity.class);
+                in.putExtra("id", task.getCustomerId());
+                in.putExtra("task_id", task.getUuid());
+                startActivity(in);
+                break;
         }
-        return super.onContextItemSelected(menuItem);
+        return true;
     }
 
     private AlertDialog.Builder askBeforeDelete(final int position) {
@@ -196,6 +211,7 @@ public class TaskByLocationFragment extends Fragment {
         dialog.setTitle("Cancel Task")
                 .setMessage("Are you sure you want to cancel this task?")
                 .setPositiveButton("Cancel Task", new DialogInterface.OnClickListener() {
+
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String reason = ((EditText) promptView.findViewById(R.id.promptDialogUserInput)).getText().toString();
                         Task task = items.get(position);
@@ -206,14 +222,14 @@ public class TaskByLocationFragment extends Fragment {
                         adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
+
                 })
-                .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 })
                 .create();
         return dialog;
-
     }
 }
