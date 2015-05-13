@@ -5,6 +5,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 
 import com.androidquery.AQuery;
@@ -23,6 +25,7 @@ import java.util.List;
  */
 public class TaskListAdapter extends ArrayAdapter<Task> {
     private List<Task> tasks;
+    private int lastPosition = -1;
 
     public TaskListAdapter(Activity activity,List<Task> aTaskList){
         super(activity.getApplicationContext(), R.layout.task_calender_fragment, aTaskList);
@@ -46,6 +49,11 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         aq.id(R.id.txt_customer_name).text(c.getOutletName());
         aq.id(R.id.txt_time).text(c.getDescriptionOfOutletLocation());
         aq.id(R.id.txt_customer_contact).text(contact.getContact());
+
+        Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+        row.startAnimation(animation);
+        lastPosition = position;
+
         return row;
     }
 

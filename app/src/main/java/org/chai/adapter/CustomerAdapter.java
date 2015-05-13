@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -26,6 +28,7 @@ import java.util.Locale;
 public class CustomerAdapter extends ArrayAdapter<Customer> implements Filterable {
     private CustomerFilter filter;
     private List<Customer> customers;
+    private int lastPosition = -1;
 
     public CustomerAdapter(Activity activity, List<Customer> items) {
         super(activity.getApplicationContext(), R.layout.customers_main_activity, items);
@@ -68,9 +71,12 @@ public class CustomerAdapter extends ArrayAdapter<Customer> implements Filterabl
             aq.id(R.id.customername).textColor(R.color.list_main_text_color);
             aq.id(R.id.customeraddress).textColor(R.color.list_main_text_color);
             aq.id(R.id.customertelephone).textColor(R.color.list_subtext_color);
-            aq.id(R.id.thumbnail).image(R.drawable.user_inactive);
             aq.id(R.id.thumbnail).image(R.drawable.user_active);
         }
+
+        Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+        row.startAnimation(animation);
+        lastPosition = position;
 
         return row;
     }

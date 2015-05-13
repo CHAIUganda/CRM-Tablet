@@ -15,8 +15,10 @@ public final class R {
         public static final int abc_slide_in_top=0x7f040003;
         public static final int abc_slide_out_bottom=0x7f040004;
         public static final int abc_slide_out_top=0x7f040005;
-        public static final int slide_down=0x7f040006;
-        public static final int slide_up=0x7f040007;
+        public static final int down_from_top=0x7f040006;
+        public static final int slide_down=0x7f040007;
+        public static final int slide_up=0x7f040008;
+        public static final int up_from_bottom=0x7f040009;
     }
     public static final class animator {
         public static final int scale_with_alpha=0x7f050000;
@@ -2194,15 +2196,15 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f0c003a;
         public static final int action_bar_title=0x7f0c0039;
         public static final int action_context_bar=0x7f0c004d;
-        public static final int action_logout=0x7f0c01e0;
+        public static final int action_logout=0x7f0c01e1;
         public static final int action_menu_divider=0x7f0c0002;
         public static final int action_menu_presenter=0x7f0c0003;
         public static final int action_mode_bar=0x7f0c0049;
         public static final int action_mode_bar_stub=0x7f0c0048;
         public static final int action_mode_close_button=0x7f0c003b;
-        public static final int action_save=0x7f0c01e5;
+        public static final int action_save=0x7f0c01e6;
         public static final int action_search=0x7f0c01db;
-        public static final int action_sync=0x7f0c01df;
+        public static final int action_sync=0x7f0c01e0;
         public static final int activity_chooser_view_content=0x7f0c003c;
         public static final int adhoc_detailer_district=0x7f0c0066;
         public static final int adhoc_detailer_subcounty=0x7f0c0067;
@@ -2263,7 +2265,7 @@ containing a value of this type.
         public static final int call_task_description=0x7f0c008b;
         public static final int callslistview=0x7f0c008f;
         public static final int callthumbnail=0x7f0c008a;
-        public static final int cancel_task=0x7f0c01de;
+        public static final int cancel_task=0x7f0c01df;
         public static final int cancel_task_menu_item=0x7f0c01d6;
         public static final int capture_call_data_view=0x7f0c0063;
         public static final int checkbox=0x7f0c0044;
@@ -2285,12 +2287,12 @@ containing a value of this type.
         public static final int customer_contacts_layout=0x7f0c00e2;
         public static final int customer_details_edit=0x7f0c01d7;
         public static final int customer_details_inactive=0x7f0c01d8;
-        public static final int customer_form_home=0x7f0c01e2;
+        public static final int customer_form_home=0x7f0c01e3;
         public static final int customer_gps_lbl=0x7f0c00d4;
         public static final int customer_gps_view=0x7f0c00d5;
         public static final int customer_id=0x7f0c0123;
-        public static final int customer_logout=0x7f0c01e3;
-        public static final int customer_mark_inactive=0x7f0c01e1;
+        public static final int customer_logout=0x7f0c01e4;
+        public static final int customer_mark_inactive=0x7f0c01e2;
         public static final int customer_profile_desc_location=0x7f0c00b6;
         public static final int customer_profile_district=0x7f0c00b0;
         public static final int customer_profile_how_long_opened=0x7f0c00b8;
@@ -2308,10 +2310,11 @@ containing a value of this type.
         public static final int customer_profile_split=0x7f0c00b4;
         public static final int customer_profile_subcounty=0x7f0c00b1;
         public static final int customer_profile_trading_center=0x7f0c00b5;
-        public static final int customeraddress=0x7f0c00e9;
+        public static final int customeraddress=0x7f0c00ea;
         public static final int customername=0x7f0c00e8;
-        public static final int customertelephone=0x7f0c00ea;
+        public static final int customertelephone=0x7f0c00e9;
         public static final int dangler=0x7f0c0134;
+        public static final int deactivate=0x7f0c01de;
         public static final int decor_content_parent=0x7f0c004a;
         public static final int default_activity_button=0x7f0c003f;
         public static final int delete_icon=0x7f0c00ee;
@@ -2319,7 +2322,7 @@ containing a value of this type.
         public static final int description_container=0x7f0c0090;
         public static final int description_content=0x7f0c0091;
         public static final int detail_malaria=0x7f0c01dd;
-        public static final int detail_sale=0x7f0c01e4;
+        public static final int detail_sale=0x7f0c01e5;
         public static final int detailer_customer_objections=0x7f0c0119;
         public static final int detailer_desc_location=0x7f0c011d;
         public static final int detailer_district=0x7f0c011e;
@@ -2794,13 +2797,15 @@ containing a value of this type.
         public static final int customer_details_menu=0x7f100001;
         public static final int customer_list_menu=0x7f100002;
         public static final int delete_context_menu=0x7f100003;
-        public static final int detailer_task_menu=0x7f100004;
-        public static final int home_main_menu=0x7f100005;
-        public static final int inactivate_context_menu=0x7f100006;
-        public static final int new_customer_form_menu=0x7f100007;
-        public static final int sale_task_menu=0x7f100008;
-        public static final int save_form_menu=0x7f100009;
-        public static final int search_menu=0x7f10000a;
+        public static final int detailer_customer_menu=0x7f100004;
+        public static final int detailer_task_menu=0x7f100005;
+        public static final int home_main_menu=0x7f100006;
+        public static final int inactivate_context_menu=0x7f100007;
+        public static final int new_customer_form_menu=0x7f100008;
+        public static final int sale_customer_menu=0x7f100009;
+        public static final int sale_task_menu=0x7f10000a;
+        public static final int save_form_menu=0x7f10000b;
+        public static final int search_menu=0x7f10000c;
     }
     public static final class raw {
         public static final int gtm_analytics=0x7f070000;

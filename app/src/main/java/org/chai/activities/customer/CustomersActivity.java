@@ -1,10 +1,13 @@
 package org.chai.activities.customer;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,11 +20,15 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
+import org.chai.activities.tasks.SalesFormActivity;
 import org.chai.adapter.CustomerAdapter;
 import org.chai.model.Customer;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
+import org.chai.model.User;
+import org.chai.rest.RestClient;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
@@ -45,7 +52,6 @@ public class CustomersActivity extends BaseActivity {
 
     private List<Customer> customerList = new ArrayList<Customer>();
     private CustomerAdapter adapter;
-    private String currentQuery = null;
     ListView listView;
 
     @Override
@@ -79,6 +85,8 @@ public class CustomersActivity extends BaseActivity {
                 startActivity(i);
             }
         });
+
+        registerForContextMenu(listView);
 
         super.setUpDrawer(toolbar);
 
@@ -136,6 +144,69 @@ public class CustomersActivity extends BaseActivity {
 
         });
         return true;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        int m = -1;
+        if(RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)){
+            m = R.menu.detailer_customer_menu;
+        }else{
+            m = R.menu.sale_customer_menu;
+        }
+        inflater.inflate(m, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem menuItem) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
+        int position = (int) info.id;
+        Customer customer = customerList.get(position);
+
+        switch (menuItem.getItemId()) {
+            case R.id.deactivate:
+                askBeforeDeactivate(position).show();
+                break;
+            case R.id.detail_malaria:
+                Intent i = new Intent(this, MalariaFormActivity.class);
+                i.putExtra("id", customer.getUuid());
+                startActivity(i);
+                break;
+            case R.id.detail_sale:
+                Intent in = new Intent(this, SalesFormActivity.class);
+                in.putExtra("id", customer.getUuid());
+                startActivity(in);
+                break;
+        }
+        return true;
+    }
+
+    private AlertDialog askBeforeDeactivate(final int position) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Deactivate Customer")
+                .setMessage("Are you sure you want to mark this customer as inactive?")
+                .setPositiveButton("Deactivate", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Customer customer = customerList.get(position);
+                        customer.setIsDirty(true);
+                        customer.setIsActive(false);
+                        customerDao.update(customer);
+                        customerList.remove(position);
+                        adapter.notifyDataSetChanged();
+                        listView.invalidateViews();
+                        onResume();
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        return dialog;
     }
 
     private void filterList(String filter){

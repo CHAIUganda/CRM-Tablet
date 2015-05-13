@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 
 import com.androidquery.AQuery;
@@ -20,6 +22,8 @@ import java.util.List;
  * Created by Zed on 5/12/2015.
  */
 public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> {
+    private int lastPosition = -1;
+
     public MalariaHistoryAdapter(Context context, int resource, List<MalariaDetail> items) {
         super(context, resource, items);
     }
@@ -40,6 +44,11 @@ public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> {
         aq.id(R.id.txt_customer_name).text(c.getOutletName());
         aq.id(R.id.txt_time).text(new PrettyTime().format(m.getTask().getCompletionDate()));
         aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
+
+        Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+        row.startAnimation(animation);
+        lastPosition = position;
+
         return row;
     }
 }

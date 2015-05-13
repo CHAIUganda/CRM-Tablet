@@ -304,7 +304,7 @@
     <eat-comment/>
     <color name="list_background">#303030</color>
     <color name="list_divider">#d9d9d9</color>
-    <color name="list_main_text_color">#000000</color>
+    <color name="list_main_text_color">#242527</color>
     <color name="list_row_end_color">#ffffff</color>
     <color name="list_row_hover_end_color">#ebeef0</color>
     <color name="list_row_hover_start_color">#ebeef0</color>

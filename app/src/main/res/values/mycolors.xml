@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="list_main_text_color">#000000</color>
+    <color name="list_main_text_color">#242527</color>
     <color name="list_subtext_color">#888888</color>
     <color name="list_sub_subtext_color">#428bca</color>
     <color name="list_divider">#d9d9d9</color>
