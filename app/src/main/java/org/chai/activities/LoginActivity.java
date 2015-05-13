@@ -138,7 +138,7 @@ public class LoginActivity extends BaseActivity {
         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
         RestClient.userName = user;
         RestClient.password = pass;
-        RestClient.role = role;
+        RestClient.setRole(role);
         AccountManager.saveUsername(user, this);
         AccountManager.savePassword(pass, this);
         startActivity(i);

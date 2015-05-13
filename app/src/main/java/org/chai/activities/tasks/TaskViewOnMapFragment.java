@@ -229,7 +229,7 @@ public class TaskViewOnMapFragment extends Fragment {
 
 
     private void showForm(String taskId){
-        if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+        if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
             Intent i = new Intent(getActivity(), SalesFormActivity.class);
             i.putExtra("id", taskDao.load(taskId).getCustomerId());
             getActivity().startActivity(i);

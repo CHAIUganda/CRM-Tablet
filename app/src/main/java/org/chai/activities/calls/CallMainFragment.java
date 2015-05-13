@@ -73,7 +73,7 @@ public class CallMainFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 try{
-                    if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+                    if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
                         Sale sale = (Sale)adapterView.getItemAtPosition(position);
                         if(sale.getTask().getCustomer() == null){
                             Toast.makeText(getActivity(), "Error Loading commercial form:The customer was not found,please ensure this customer was not deleted from the server", Toast.LENGTH_LONG).show();
@@ -100,7 +100,7 @@ public class CallMainFragment extends Fragment {
 
     private void loadDataFromDb() {
         daoSession.clear();
-        if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+        if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
             sales = new ArrayList<Sale>();
             sales.addAll(saleDao.loadAll());
             salesAdapter = new SalesAdapter(getActivity(),sales);
@@ -196,7 +196,7 @@ public class CallMainFragment extends Fragment {
                 .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
+                        if (RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)) {
                             saleDao.delete(sales.get(position));
                             sales.remove(position);
                             salesAdapter.notifyDataSetChanged();

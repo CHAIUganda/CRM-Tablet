@@ -29,14 +29,12 @@ import org.chai.model.District;
 import org.chai.model.DistrictDao;
 import org.chai.model.Order;
 import org.chai.model.OrderDao;
-import org.chai.model.ParishDao;
 import org.chai.model.Product;
 import org.chai.model.ProductDao;
 import org.chai.model.Region;
 import org.chai.model.RegionDao;
 import org.chai.model.Sale;
 import org.chai.model.SaleDao;
-import org.chai.model.SaleDataDao;
 import org.chai.model.Subcounty;
 import org.chai.model.SubcountyDao;
 import org.chai.model.SummaryReport;
@@ -46,7 +44,6 @@ import org.chai.model.TaskDao;
 import org.chai.model.TaskOrder;
 import org.chai.model.TaskOrderDao;
 import org.chai.model.User;
-import org.chai.model.VillageDao;
 import org.chai.rest.CustomerClient;
 import org.chai.rest.Place;
 import org.chai.rest.ProductClient;
@@ -82,15 +79,12 @@ public class CHAISynchroniser extends Service {
     private RegionDao regionDao;
     private DistrictDao districtDao;
     private SubcountyDao subcountyDao;
-    private ParishDao parishDao;
-    private VillageDao villageDao;
     private CustomerDao customerDao;
     private CustomerContactDao customerContactDao;
     private TaskDao taskDao;
     private DetailerCallDao detailerCallDao;
     private ProductDao productDao;
     private SaleDao saleDao;
-    private SaleDataDao saleDataDao;
     private OrderDao orderDao;
     private AdhockSaleDao adhockSaleDao;
     private SummaryReportDao summaryReportDao;
@@ -143,15 +137,12 @@ public class CHAISynchroniser extends Service {
             regionDao = daoSession.getRegionDao();
             districtDao = daoSession.getDistrictDao();
             subcountyDao = daoSession.getSubcountyDao();
-            parishDao = daoSession.getParishDao();
-            villageDao = daoSession.getVillageDao();
             customerDao = daoSession.getCustomerDao();
             customerContactDao = daoSession.getCustomerContactDao();
             taskDao = daoSession.getTaskDao();
             detailerCallDao = daoSession.getDetailerCallDao();
             productDao = daoSession.getProductDao();
             saleDao = daoSession.getSaleDao();
-            saleDataDao = daoSession.getSaleDataDao();
             orderDao = daoSession.getOrderDao();
             adhockSaleDao = daoSession.getAdhockSaleDao();
             summaryReportDao = daoSession.getSummaryReportDao();
@@ -165,17 +156,17 @@ public class CHAISynchroniser extends Service {
         Utils.log("startSyncronisationProcess()");
         try{
             syncronisationErros = new ArrayList<ServerResponse>();
-            /*uploadCustomers();
+            uploadCustomers();
             uploadDirectSales();
-            uploadSales();*/
-            //uploadTasks();
-            /*uploadOrders();
+            uploadSales();
+            uploadTasks();
+            uploadOrders();
 
             downloadRegions();
             downloadCustomers();
             downloadTasks();
             downloadProducts();
-            downloadSummaryReports();*/
+            downloadSummaryReports();
         }catch(Exception ex){
             Utils.log("Error syncing -> " + ex.getMessage());
         }
@@ -276,7 +267,7 @@ public class CHAISynchroniser extends Service {
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 Utils.log("Task syncronized succesfully");
                 //set all detailer and sale calls to isHistroy
-                if (RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
+                if (RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)) {
                     DetailerCall detailerCall = task.getDetailers().get(0);
                     detailerCall.setIsHistory(true);
                     detailerCall.setIsDirty(false);
@@ -308,13 +299,8 @@ public class CHAISynchroniser extends Service {
         return false;
     }
 
-    public void uploadCustomers() /*throws SyncronizationException*/{
+    public void uploadCustomers(){
         List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
-        if (!customersList.isEmpty()) {
-            updatePropgress("Uploading Customers...");
-        }else{
-            Utils.log("No customers");
-        }
         for (Customer customer : customersList) {
             ServerResponse response = customerClient.uploadCustomer(customer,RestClient.getRestTemplate());
             if (response.getStatus().equalsIgnoreCase("OK")) {
@@ -341,7 +327,7 @@ public class CHAISynchroniser extends Service {
         }
     }
 
-    private void uploadSales() /*throws SyncronizationException*/{
+    private void uploadSales(){
         List<Sale> saleList = saleDao.queryBuilder().where(SaleDao.Properties.IsHistory.notEq(true)).list();
         if (!saleList.isEmpty()) {
             updatePropgress("Uploading Sales...");
@@ -364,7 +350,7 @@ public class CHAISynchroniser extends Service {
         }
     }
 
-    private void uploadDirectSales() /*throws SyncronizationException*/{
+    private void uploadDirectSales(){
         List<AdhockSale> saleList = adhockSaleDao.loadAll();
         if (!saleList.isEmpty()) {
             updatePropgress("Uploading Sales...");
@@ -448,7 +434,6 @@ public class CHAISynchroniser extends Service {
         @Override
         protected Void doInBackground(Void... params) {
             startSyncronisationProcess();
-
             return null;
         }
 
@@ -474,7 +459,6 @@ public class CHAISynchroniser extends Service {
     }
 
     public static void saveLastSynced(Context cxt, long lastsynced){
-        Utils.log("Saving last synced -> " + lastsynced);
         SharedPreferences prefs = cxt.getSharedPreferences(PREFS, 0);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putLong(LAST_SYNCED, lastsynced);

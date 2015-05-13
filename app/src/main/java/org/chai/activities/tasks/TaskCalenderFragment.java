@@ -90,7 +90,7 @@ public class TaskCalenderFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Task task = (Task) adapterView.getItemAtPosition(position);
-                if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+                if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
                     /*SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
                     Bundle bundle = new Bundle();
                     Task itemAtPosition = (Task) adapterView.getItemAtPosition(position);

@@ -5,21 +5,41 @@ import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.*;
-import android.widget.*;
-import de.greenrobot.dao.query.Query;
-import de.greenrobot.dao.query.WhereCondition;
+import android.view.ContextMenu;
+import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
+
 import org.chai.R;
 import org.chai.activities.BaseContainerFragment;
 import org.chai.adapter.DistrictArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.adapter.TaskListAdapter;
-import org.chai.model.*;
+import org.chai.model.CustomerDao;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
+import org.chai.model.District;
+import org.chai.model.DistrictDao;
+import org.chai.model.Subcounty;
+import org.chai.model.SubcountyDao;
+import org.chai.model.Task;
+import org.chai.model.TaskDao;
+import org.chai.model.User;
 import org.chai.rest.RestClient;
 import org.chai.util.MyApplication;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.List;
+
+import de.greenrobot.dao.query.Query;
+import de.greenrobot.dao.query.WhereCondition;
 
 /**
  * Created by victor on 12/8/14.
@@ -84,7 +104,7 @@ public class TaskByLocationFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                if (RestClient.role.equalsIgnoreCase(User.ROLE_SALES)) {
+                if (RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)) {
                     SaleslFormFragment commercialFormActivity = new SaleslFormFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("taskId", ((Task) adapterView.getItemAtPosition(position)).getUuid());

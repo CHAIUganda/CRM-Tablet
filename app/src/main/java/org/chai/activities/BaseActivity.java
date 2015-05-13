@@ -110,7 +110,7 @@ public class BaseActivity extends ActionBarActivity{
         if(!skipLogin){
             AccountManager.offlineLogin(this, true);
 
-            if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+            if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
                 drawerItems[5] = "Unscheduled Sale";
             }
         }
@@ -181,7 +181,7 @@ public class BaseActivity extends ActionBarActivity{
                         target = MalariaFormActivity.class;
                         break;
                     case 5:
-                        if(RestClient.role.equalsIgnoreCase(User.ROLE_SALES)){
+                        if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
                             target = SalesFormActivity.class;
                         }else{
                             target = DiarrheaFormActivity.class;

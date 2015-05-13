@@ -21,7 +21,7 @@ import java.util.Collections;
 public class RestClient {
     public static String userName;
     public static String password;
-    public static String role;
+    private static String role;
     //public static String REST_URL = "http://23.239.27.196:8080/web-crm/rest/";
     //public static String REST_URL = "http://192.168.1.107:8080/chai-crm/rest/";
     public static String REST_URL = "http://178.79.178.121:8080/test-web-crm/rest/";
@@ -35,6 +35,14 @@ public class RestClient {
         HttpAuthentication authHeader = new HttpBasicAuthentication(userName, password);
         headers.setAuthorization(authHeader);
         return headers;
+    }
+
+    public static String getRole(){
+        return role;
+    }
+
+    public static void setRole(String r){
+        role = r;
     }
 
     public static  HttpEntity<?> getRequestEntity() {

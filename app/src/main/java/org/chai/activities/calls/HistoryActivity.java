@@ -37,7 +37,7 @@ public class HistoryActivity extends BaseActivity {
 
         aq = new AQuery(this);
 
-        if(RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)){
+        if(RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)){
             titles = new String[]{"MALARIA FORMS", "DIARRHEA FORMS", "ORDERS"};
             PAGES = 3;
         }else{
@@ -75,7 +75,7 @@ public class HistoryActivity extends BaseActivity {
         public Fragment getItem(int position) {
             Bundle b = new Bundle();
             Fragment target = null;
-            if(RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)){
+            if(RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)){
                 switch(position){
                     case 0:
                         target = new MalariaHistoryFragment();
