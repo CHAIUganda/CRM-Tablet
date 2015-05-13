@@ -195,9 +195,7 @@ public class TaskByLocationFragment extends Fragment {
 
         dialog.setTitle("Cancel Task")
                 .setMessage("Are you sure you want to cancel this task?")
-                .setIcon(R.drawable.delete_icon)
                 .setPositiveButton("Cancel Task", new DialogInterface.OnClickListener() {
-
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String reason = ((EditText) promptView.findViewById(R.id.promptDialogUserInput)).getText().toString();
                         Task task = items.get(position);
@@ -208,13 +206,10 @@ public class TaskByLocationFragment extends Fragment {
                         adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
-
                 })
                 .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
                         dialog.dismiss();
-
                     }
                 })
                 .create();

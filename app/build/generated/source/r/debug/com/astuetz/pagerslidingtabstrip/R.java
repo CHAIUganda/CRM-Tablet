@@ -30,7 +30,7 @@ public final class R {
 		public static final int psts_background_tab_pressed = 0x7f0a0048;
 	}
 	public static final class drawable {
-		public static final int psts_background_tab = 0x7f02009b;
+		public static final int psts_background_tab = 0x7f02009c;
 	}
 	public static final class id {
 		public static final int bold = 0x7f0c0020;

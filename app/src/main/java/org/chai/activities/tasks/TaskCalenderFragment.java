@@ -167,22 +167,37 @@ public class TaskCalenderFragment extends Fragment {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.cancel_context_menu, menu);
-
+        int m = -1;
+        if(RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)){
+            m = R.menu.detailer_task_menu;
+        }else{
+            m = R.menu.sale_task_menu;
+        }
+        inflater.inflate(m, menu);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.cancel_task_menu_item:
-                try {
-                    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
-                    int position = (int) info.id;
-                    askBeforeDelete(position).show();
-                } catch (Exception ex) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
+        int position = (int) info.id;
+        Task task = items.get(position);
 
-                }
-                return true;
+        switch (menuItem.getItemId()) {
+            case R.id.cancel_task:
+                askBeforeDelete(position).show();
+                break;
+            case R.id.detail_malaria:
+                Intent i = new Intent(getActivity(), MalariaFormActivity.class);
+                i.putExtra("id", task.getCustomerId());
+                i.putExtra("task_id", task.getUuid());
+                startActivity(i);
+                break;
+            case R.id.detail_sale:
+                Intent in = new Intent(getActivity(), SalesFormActivity.class);
+                in.putExtra("id", task.getCustomerId());
+                in.putExtra("task_id", task.getUuid());
+                startActivity(in);
+                break;
         }
         return super.onContextItemSelected(menuItem);
     }
@@ -210,11 +225,9 @@ public class TaskCalenderFragment extends Fragment {
                     }
 
                 })
-                .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
                         dialog.dismiss();
-
                     }
                 })
                 .create();
