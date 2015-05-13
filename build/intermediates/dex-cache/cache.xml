@@ -107,13 +107,6 @@
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\jackson-databind-2.4.3-45d30529fde5b1793f56eef894226172019cb75d.jar" />
     </item>
     <item
-        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\de.greenrobot\DaoGenerator\1.3.0\afbf2dbc35fb8dcbc697658bc0278c78d9262ae\DaoGenerator-1.3.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="0afbf2dbc35fb8dcbc697658bc0278c78d9262ae">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\DaoGenerator-1.3.0-830ea924e251e221eb3046feba2116fe8cdb83c5.jar" />
-    </item>
-    <item
         jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-rest-template\1.0.1.RELEASE\e132d929bd181941f79b0d63edafb8a86ae6fd33\spring-android-rest-template-1.0.1.RELEASE.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -154,13 +147,6 @@
         revision="21.1.2"
         sha1="f3a0c73a9ed04a5d0959789c53da9f08462bfcc2">
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\osmdroid-android-4.2-5ccc5b610f7d4376fcbbf95f35a2e6fc51a5caa3.jar" />
-    </item>
-    <item
-        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\org.freemarker\freemarker\2.3.19\a251045e5fadd02824d17f1aa8c412accf1aa1c9\freemarker-2.3.19.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a251045e5fadd02824d17f1aa8c412accf1aa1c9">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\debug\freemarker-2.3.19-d0d38ca203892fbf3014a514e4275352af915bdd.jar" />
     </item>
     <item
         jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.0\classes.jar"

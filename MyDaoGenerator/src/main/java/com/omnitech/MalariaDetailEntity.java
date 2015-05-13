@@ -9,7 +9,7 @@ import de.greenrobot.daogenerator.ToMany;
  * Created by Zed on 5/6/2015.
  */
 public class MalariaDetailEntity {
-    public static Entity createMalariaDetailEntity(Schema schema,Entity task){
+    public static Entity createMalariaDetailEntity(Schema schema, Entity task){
         Entity malaria = schema.addEntity("MalariaDetail");
 
         malaria.addStringProperty("uuid").unique().notNull().primaryKey();
@@ -40,9 +40,9 @@ public class MalariaDetailEntity {
         malaria.addBooleanProperty("isHistory");
 
         Property taskId = malaria.addStringProperty("taskId").notNull().getProperty();
-        ToMany taskToDetailer = task.addToMany(malaria, taskId);
+        ToMany taskToMalaria = task.addToMany(malaria, taskId);
 
-        taskToDetailer.setName("malariadetails");
+        taskToMalaria.setName("malariadetails");
         malaria.addToOne(task, taskId);
 
         malaria.addBooleanProperty("isDirty");

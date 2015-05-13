@@ -1,5 +1,6 @@
 package org.chai.model;
 
+import java.util.List;
 import org.chai.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -56,8 +57,33 @@ public class MalariaDetail implements BaseEntity {
     private Task task;
     private String task__resolvedKey;
 
+    private List<DetailerStock> detailerMalariaStocks;
 
     // KEEP FIELDS - put your custom fields here
+    @JsonIgnore
+    private String taskId;
+    @JsonIgnore
+    private Boolean isDirty;
+    @JsonIgnore
+    private Integer syncronisationStatus;
+    @JsonIgnore
+    private String syncronisationMessage;
+    @JsonIgnore
+    private java.util.Date dateCreated;
+    @JsonIgnore
+    private java.util.Date lastUpdated;
+
+    /** Used to resolve relations */
+    @JsonIgnore
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    @JsonIgnore
+    private transient MalariaDetailDao myDao;
+    @JsonIgnore
+    private Task task;
+    @JsonIgnore
+    private String task__resolvedKey;
     // KEEP FIELDS END
 
     public MalariaDetail() {
@@ -394,6 +420,28 @@ public class MalariaDetail implements BaseEntity {
             taskId = task.getUuid();
             task__resolvedKey = taskId;
         }
+    }
+
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<DetailerStock> getDetailerMalariaStocks() {
+        if (detailerMalariaStocks == null) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            DetailerStockDao targetDao = daoSession.getDetailerStockDao();
+            List<DetailerStock> detailerMalariaStocksNew = targetDao._queryMalariaDetail_DetailerMalariaStocks(uuid);
+            synchronized (this) {
+                if(detailerMalariaStocks == null) {
+                    detailerMalariaStocks = detailerMalariaStocksNew;
+                }
+            }
+        }
+        return detailerMalariaStocks;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetDetailerMalariaStocks() {
+        detailerMalariaStocks = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

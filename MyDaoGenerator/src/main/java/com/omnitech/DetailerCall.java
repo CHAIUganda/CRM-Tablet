@@ -9,7 +9,7 @@ import de.greenrobot.daogenerator.ToMany;
  * Created by victor on 10/30/14.
  */
 public class DetailerCall {
-    public static Entity createDetailerCallEntity(Schema schema,Entity task){
+    public static Entity createDetailerCallEntity(Schema schema, Entity task){
         Entity detailer = schema.addEntity("DetailerCall");
         detailer.addStringProperty("uuid").unique().notNull().primaryKey();
         detailer.addDateProperty("dateOfSurvey");

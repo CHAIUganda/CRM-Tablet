@@ -31,11 +31,13 @@ public class TaskClient extends RestClient {
 
     public ServerResponse uploadTask(Task task) {
         try {
+            Utils.log("Uploading task -> " + task.getDescription());
             RestTemplate restTemplate = getRestTemplate();
             HttpEntity<Task> httpEntity = new HttpEntity<Task>(task, getHeaders());
             Utils.log("HTTPEntity -> " + httpEntity.getBody());
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "task/update", HttpMethod.PUT, httpEntity, ServerResponse.class);
             ServerResponse body = responseEntity.getBody();
+            Utils.log("After getting body -> " + body.toString());
             body.setItemRef(task.getDescription());
             return body;
         } catch (HttpClientErrorException ex) {

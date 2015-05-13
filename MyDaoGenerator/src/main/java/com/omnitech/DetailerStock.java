@@ -27,7 +27,7 @@ public class DetailerStock {
         detailerStockToDetailer.setName("detailerStocks");
         detailerStock.addToOne(detailer, detailerId);
 
-        ToMany detailerStockToMalariaDetail = detailer.addToMany(detailerStock, malariaDetailId);
+        ToMany detailerStockToMalariaDetail = malariadetail.addToMany(detailerStock, malariaDetailId);
         detailerStockToMalariaDetail.setName("detailerMalariaStocks");
         detailerStock.addToOne(malariadetail, malariaDetailId);
 

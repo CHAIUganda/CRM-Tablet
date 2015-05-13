@@ -40,6 +40,31 @@ public class Order implements BaseEntity {
     private List<OrderData> orderDatas;
 
     // KEEP FIELDS - put your custom fields here
+    @JsonIgnore
+    private Boolean isDirty;
+    @JsonIgnore
+    private Integer syncronisationStatus;
+    @JsonIgnore
+    private String syncronisationMessage;
+    @JsonIgnore
+    private java.util.Date dateCreated;
+    @JsonIgnore
+    private java.util.Date lastUpdated;
+    /** Used to resolve relations */
+    @JsonIgnore
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    @JsonIgnore
+    private transient OrderDao myDao;
+
+    @JsonIgnore
+    private Customer customer;
+    @JsonIgnore
+    private String customer__resolvedKey;
+
+    @JsonIgnore
+    private List<Sale> sales;
     // KEEP FIELDS END
 
     public Order() {

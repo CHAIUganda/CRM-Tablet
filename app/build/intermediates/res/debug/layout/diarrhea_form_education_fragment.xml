@@ -149,6 +149,30 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
+                android:text="9. What do you know about Zinc and how it should be used?"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="@string/det_whatdoyouknowaboutzink"
+                />
+            <Spinner
+                android:id="@+id/zinc_usage"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/SpinnerKnowldgeLevel" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
                 android:text="10. Why should you not use antibiotics to treat diarrhea?"/>
             <TextView
                 android:layout_width="wrap_content"

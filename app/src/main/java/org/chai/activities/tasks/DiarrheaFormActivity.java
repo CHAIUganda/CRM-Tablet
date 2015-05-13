@@ -210,7 +210,7 @@ public class DiarrheaFormActivity extends BaseActivity {
             stock.setDetailerId(call.getUuid());
             stock.setDetailerCall(call);
             stock.setCategory("zinc");
-            stock.setMalariadetailId("");
+            //stock.setMalariadetailId("");
 
             detailerStockDao.insert(stock);
         }
@@ -221,7 +221,7 @@ public class DiarrheaFormActivity extends BaseActivity {
             stock.setDateCreated(new Date());
             stock.setDetailerId(call.getUuid());
             stock.setDetailerCall(call);
-            stock.setMalariadetailId("");
+            //stock.setMalariadetailId("");
             stock.setCategory("ors");
 
             detailerStockDao.insert(stock);

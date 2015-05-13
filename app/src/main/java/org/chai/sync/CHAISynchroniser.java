@@ -10,6 +10,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.IBinder;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.chai.activities.tasks.TaskMainFragment;
 import org.chai.model.AdhockSale;
 import org.chai.model.AdhockSaleDao;
@@ -20,6 +23,7 @@ import org.chai.model.CustomerContactDao;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
+import org.chai.model.DetailerCall;
 import org.chai.model.DetailerCallDao;
 import org.chai.model.District;
 import org.chai.model.DistrictDao;
@@ -41,6 +45,7 @@ import org.chai.model.Task;
 import org.chai.model.TaskDao;
 import org.chai.model.TaskOrder;
 import org.chai.model.TaskOrderDao;
+import org.chai.model.User;
 import org.chai.model.VillageDao;
 import org.chai.rest.CustomerClient;
 import org.chai.rest.Place;
@@ -50,12 +55,15 @@ import org.chai.rest.SalesClient;
 import org.chai.rest.TaskClient;
 import org.chai.util.MyApplication;
 import org.chai.util.ServerResponse;
+import org.chai.util.SyncronizationException;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by victor on 11/3/14.
@@ -95,7 +103,6 @@ public class CHAISynchroniser extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Utils.log("Starting sync service");
         place = new Place();
         customerClient = new CustomerClient();
         productClient = new ProductClient();
@@ -161,19 +168,19 @@ public class CHAISynchroniser extends Service {
             /*uploadCustomers();
             uploadDirectSales();
             uploadSales();*/
-            uploadTasks();
-            uploadOrders();
+            //uploadTasks();
+            /*uploadOrders();
 
             downloadRegions();
             downloadCustomers();
             downloadTasks();
             downloadProducts();
-            downloadSummaryReports();
+            downloadSummaryReports();*/
         }catch(Exception ex){
             Utils.log("Error syncing -> " + ex.getMessage());
         }
         if(!syncronisationErros.isEmpty()){
-            //displaySyncErros(syncronisationErros);
+            displaySyncErros(syncronisationErros);
         }
     }
 
@@ -251,7 +258,7 @@ public class CHAISynchroniser extends Service {
         taskOrderDao.insertOrReplaceInTx(taskOrders);
     }
 
-    public void uploadTasks() /*throws SyncronizationException*/ {
+    public void uploadTasks() throws SyncronizationException {
         List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_NEW)).list();
 
         if (!taskList.isEmpty()) {
@@ -262,32 +269,28 @@ public class CHAISynchroniser extends Service {
 
         for (Task task : taskList) {
             Utils.log("Sycn task -> " + task.getDescription() + " : " + task.getType());
-            /*if (taskIsHistory(task)) {
-                continue;
-            }*/
-            if(task.getType().equalsIgnoreCase("malaria")){
+            if (taskIsHistory(task)) {
                 continue;
             }
             ServerResponse response = taskClient.uploadTask(task);
-            Utils.log("After server response");
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 Utils.log("Task syncronized succesfully");
                 //set all detailer and sale calls to isHistroy
-                /*if (RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
+                if (RestClient.role.equalsIgnoreCase(User.ROLE_DETAILER)) {
                     DetailerCall detailerCall = task.getDetailers().get(0);
                     detailerCall.setIsHistory(true);
                     detailerCall.setIsDirty(false);
                     detailerCall.setSyncronisationStatus(BaseEntity.SYNC_SUCCESS);
                     detailerCallDao.update(detailerCall);
-                }*/
+                }
             }else{
                 Utils.log("Error posting Tasks");
-                /*task.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
+                task.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
                 task.setSyncronisationMessage(response.getMessage());
                 task.setLastUpdated(new Date());
                 task.setIsDirty(true);
                 taskDao.update(task);
-                syncronisationErros.add(response);*/
+                syncronisationErros.add(response);
             }
         }
     }
@@ -423,41 +426,22 @@ public class CHAISynchroniser extends Service {
         Utils.log(message);
     }
 
-    private void displayError(final String message){
-        Utils.log("Error -> " + message);
-        /*parent.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(parent.getApplicationContext(), message, Toast.LENGTH_LONG).show();
-            }
-        });*/
-    }
-
     private void displaySyncErros(final List<ServerResponse> errors){
-        /*parent.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                StringBuilder formartedErrors = new StringBuilder();
-                formartedErrors.append("The following errors were encountered during syncronisation process\n");
-                for(ServerResponse response:errors){
-                    String message = response.getMessage();
-                    ObjectMapper mapper = new ObjectMapper();
-                    try {
-                        Map<String, Object> mapObject = mapper.readValue(message,new TypeReference<Map<String, Object>>() {
-                        });
-                        formartedErrors.append(response.getItemRef()+":"+mapObject.get("message") +"\n");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-                new AlertDialog.Builder(parent)
-                        .setTitle("Errors:")
-                        .setMessage(formartedErrors.toString())
-                        .setPositiveButton("ok", null)
-                        .show();
+        StringBuilder formartedErrors = new StringBuilder();
+        formartedErrors.append("The following errors were encountered during syncronisation process\n");
+        for(ServerResponse response:errors){
+            String message = response.getMessage();
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                Map<String, Object> mapObject = mapper.readValue(message,new TypeReference<Map<String, Object>>() {
+                });
+                formartedErrors.append(response.getItemRef()+":"+mapObject.get("message") +"\n");
+                Utils.log(formartedErrors.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });*/
+
+        }
     }
 
     private class SyncTask extends AsyncTask<Void, Void, Void> {

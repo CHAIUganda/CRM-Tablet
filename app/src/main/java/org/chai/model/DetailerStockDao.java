@@ -46,7 +46,7 @@ public class DetailerStockDao extends AbstractDao<DetailerStock, String> {
     private DaoSession daoSession;
 
     private Query<DetailerStock> detailerCall_DetailerStocksQuery;
-    private Query<DetailerStock> detailerCall_DetailerMalariaStocksQuery;
+    private Query<DetailerStock> malariaDetail_DetailerMalariaStocksQuery;
 
     public DetailerStockDao(DaoConfig config) {
         super(config);
@@ -216,16 +216,16 @@ public class DetailerStockDao extends AbstractDao<DetailerStock, String> {
         return query.list();
     }
 
-    /** Internal query to resolve the "detailerMalariaStocks" to-many relationship of DetailerCall. */
-    public List<DetailerStock> _queryDetailerCall_DetailerMalariaStocks(String malariadetailId) {
+    /** Internal query to resolve the "detailerMalariaStocks" to-many relationship of MalariaDetail. */
+    public List<DetailerStock> _queryMalariaDetail_DetailerMalariaStocks(String malariadetailId) {
         synchronized (this) {
-            if (detailerCall_DetailerMalariaStocksQuery == null) {
+            if (malariaDetail_DetailerMalariaStocksQuery == null) {
                 QueryBuilder<DetailerStock> queryBuilder = queryBuilder();
                 queryBuilder.where(Properties.MalariadetailId.eq(null));
-                detailerCall_DetailerMalariaStocksQuery = queryBuilder.build();
+                malariaDetail_DetailerMalariaStocksQuery = queryBuilder.build();
             }
         }
-        Query<DetailerStock> query = detailerCall_DetailerMalariaStocksQuery.forCurrentThread();
+        Query<DetailerStock> query = malariaDetail_DetailerMalariaStocksQuery.forCurrentThread();
         query.setParameter(0, malariadetailId);
         return query.list();
     }

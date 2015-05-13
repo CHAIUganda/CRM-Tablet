@@ -133,12 +133,12 @@ public class CallMainFragment extends Fragment {
 
     private void initialiseGreenDao() {
         try {
-             UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
+            UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
             detailerCallDao = daoSession.getDetailerCallDao();
-            malariaDetailDao = daoSession.getMalariaDetailDao();
+            //malariaDetailDao = daoSession.getMalariaDetailDao();
             saleDao = daoSession.getSaleDao();
         } catch (Exception ex) {
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();

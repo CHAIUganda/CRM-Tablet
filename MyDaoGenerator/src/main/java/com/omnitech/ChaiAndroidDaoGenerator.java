@@ -11,7 +11,7 @@ public class ChaiAndroidDaoGenerator{
     private static final int DATABASE_VERSION = 1;
 
     public static void main(String args[]) throws Exception {
-        Schema schema = new Schema(5, "org.chai.model");
+        Schema schema = new Schema(4, "org.chai.model");
         schema.setDefaultJavaPackageDao("org.chai.model");
         schema.enableKeepSectionsByDefault();
         schema.enableActiveEntitiesByDefault();
