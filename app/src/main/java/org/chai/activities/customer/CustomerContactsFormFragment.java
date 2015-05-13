@@ -17,6 +17,7 @@ import com.androidquery.AQuery;
 import org.chai.R;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
+import org.chai.util.Utils;
 
 import java.util.ArrayList;
 
@@ -50,7 +51,7 @@ public class CustomerContactsFormFragment extends Fragment{
         if(ac.customer != null){
             populateFields(ac.customer);
         }else{
-            addRow(null); //We need at least one row
+            addRow(new CustomerContact()); //We need at least one row
         }
 
         return view;
@@ -62,28 +63,11 @@ public class CustomerContactsFormFragment extends Fragment{
         }
     }
 
-    private void addRow(CustomerContact contact){
-        if(contact == null){
-            contact = new CustomerContact();
-        }
-
+    private void addRow(final CustomerContact contact){
         LayoutInflater inflator = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View row = inflator.inflate(R.layout.customer_contact_form_row, null);
         AQuery a = new AQuery(row);
-        final ImageView remove = (ImageView)row.findViewById(R.id.btn_remove_row);
-        remove.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                rows.remove(row);
-                contacts.remove(rows.indexOf(row));
-
-                LinearLayout parent = (LinearLayout)v.getParent();
-                LinearLayout root = (LinearLayout)parent.getParent();
-                LinearLayout top = (LinearLayout)root.getParent();
-                rowContainer.removeView(top);
-            }
-        });
 
         a.id(R.id.txt_customer_name).text(contact.getNames());
         a.id(R.id.txt_customer_phone).text(contact.getContact());
@@ -96,6 +80,21 @@ public class CustomerContactsFormFragment extends Fragment{
 
         rows.add(row);
         contacts.add(contact);
+
+        final ImageView remove = (ImageView)row.findViewById(R.id.btn_remove_row);
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rows.remove(row);
+                Utils.log("Index -> " + rows.indexOf(row));
+                contacts.remove(contact);
+
+                LinearLayout parent = (LinearLayout) v.getParent();
+                LinearLayout root = (LinearLayout) parent.getParent();
+                LinearLayout top = (LinearLayout) root.getParent();
+                rowContainer.removeView(top);
+            }
+        });
     }
 
     public boolean saveFields(){

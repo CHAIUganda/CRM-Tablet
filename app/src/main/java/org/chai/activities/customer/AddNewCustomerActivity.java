@@ -1,5 +1,6 @@
 package org.chai.activities.customer;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -144,8 +145,8 @@ public class AddNewCustomerActivity extends BaseActivity {
                     }
                 }
 
-                finish();
                 Toast.makeText(this, "Customer has been saved", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this, CustomersActivity.class));
             }else{
                 pager.setCurrentItem(index);
             }

@@ -42,7 +42,7 @@ public class RestClient {
     }
 
     public static String getRole(){
-        return User.ROLE_DETAILER;//role;
+        return User.ROLE_SALES;//role;
     }
 
     public static void setRole(String r){
