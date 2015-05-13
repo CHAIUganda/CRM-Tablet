@@ -77,10 +77,6 @@ public class AddNewCustomerActivity extends BaseActivity {
             }
         }
 
-        basicFragment = new CustomerBasicsFormFragment();
-        commercialFragment = new CustomerCommercialFormFragment();
-        contactFragment = new CustomerContactsFormFragment();
-
         pager = (ViewPager) findViewById(R.id.pager);
         indicator = (CircleIndicator) findViewById(R.id.indicator);
         pager.setAdapter(new FormPagerAdapter(getSupportFragmentManager()));
@@ -102,58 +98,70 @@ public class AddNewCustomerActivity extends BaseActivity {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+
         if(item.getItemId() == R.id.action_save){
-            int index = -1;
-            boolean validForm = basicFragment.saveFields();
-            if(!validForm){
-                index = 0;
-            }
-
-            if(validForm){
-                validForm = commercialFragment.saveFields();
-                if(!validForm){
-                    index = 1;
-                }
-            }
-
-            if(validForm){
-                validForm = contactFragment.saveFields(); //This also sets the contacts which we'll get later and save
-                if(!validForm){
-                    index = 2;
-                }
-            }
-
-            if(validForm){
-                customer.setIsDirty(true);
-
-                if(customer.getUuid() == null){
-                    customer.setUuid(UUID.randomUUID().toString());
-                    customer.setIsActive(true);
-                    customerDao.insert(customer);
-                }else{
-                    customerDao.update(customer);
-                }
-
-                for(CustomerContact c: contactFragment.contacts){
-                    if(c.getUuid() == null){
-                        c.setUuid(UUID.randomUUID().toString());
-                        c.setCustomerId(customer.getUuid());
-                        c.setCustomer(customer);
-                        customerContactDao.insert(c);
-                    }else{
-                        customerContactDao.update(c);
-                    }
-                }
-
-                Toast.makeText(this, "Customer has been saved", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(this, CustomersActivity.class));
-            }else{
-                pager.setCurrentItem(index);
-            }
-
-            return true;
+            saveForm();
         }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveForm(){
+        if(basicFragment == null){
+            pager.setCurrentItem(0);
+            return;
+        }
+        if(!basicFragment.saveFields()){
+            pager.setCurrentItem(0);
+            return;
+        }
+
+        if(commercialFragment == null){
+            pager.setCurrentItem(1);
+            return;
+        }
+        if(!commercialFragment.saveFields()){
+            pager.setCurrentItem(1);
+            return;
+        }
+
+        if(contactFragment == null){
+            pager.setCurrentItem(2);
+            return;
+        }
+        if(!contactFragment.saveFields()){
+            pager.setCurrentItem(2);
+            return;
+        }
+
+        customer.setIsDirty(true);
+
+        if(customer.getUuid() == null){
+            customer.setUuid(UUID.randomUUID().toString());
+            customer.setIsActive(true);
+            customerDao.insert(customer);
+        }else{
+            customerDao.update(customer);
+        }
+
+        //First remove all customer contacts
+        for(CustomerContact contact : customer.getCustomerContacts()){
+            customerContactDao.delete(contact);
+        }
+
+        //Re-ad customer contacts
+        for(CustomerContact c: contactFragment.contacts){
+            if(c.getUuid() == null){
+                c.setUuid(UUID.randomUUID().toString());
+            }
+
+            c.setCustomerId(customer.getUuid());
+            c.setCustomer(customer);
+            customerContactDao.insert(c);
+        }
+
+        Toast.makeText(this, "Customer has been saved", Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, CustomersActivity.class));
     }
 
     private class FormPagerAdapter extends FragmentPagerAdapter {
@@ -166,12 +174,15 @@ public class AddNewCustomerActivity extends BaseActivity {
             Fragment fragment = null;
             switch (position){
                 case 0:
+                    basicFragment = new CustomerBasicsFormFragment();
                     fragment = basicFragment;
                     break;
                 case 1:
+                    commercialFragment = new CustomerCommercialFormFragment();
                     fragment = commercialFragment;
                     break;
                 case 2:
+                    contactFragment = new CustomerContactsFormFragment();
                     fragment = contactFragment;
                     break;
             }

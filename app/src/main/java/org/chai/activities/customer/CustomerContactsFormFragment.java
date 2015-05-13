@@ -17,7 +17,6 @@ import com.androidquery.AQuery;
 import org.chai.R;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
-import org.chai.util.Utils;
 
 import java.util.ArrayList;
 
@@ -40,7 +39,7 @@ public class CustomerContactsFormFragment extends Fragment{
         aq.id(R.id.btn_add_row).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addRow(null);
+                addRow(new CustomerContact());
             }
         });
 
@@ -69,12 +68,14 @@ public class CustomerContactsFormFragment extends Fragment{
         final View row = inflator.inflate(R.layout.customer_contact_form_row, null);
         AQuery a = new AQuery(row);
 
-        a.id(R.id.txt_customer_name).text(contact.getNames());
-        a.id(R.id.txt_customer_phone).text(contact.getContact());
-        Spinner gender = a.id(R.id.contact_gender).getSpinner();
-        gender.setSelection(((ArrayAdapter<String>) gender.getAdapter()).getPosition(contact.getGender()));
-        Spinner role = a.id(R.id.contact_role).getSpinner();
-        role.setSelection(((ArrayAdapter<String>) role.getAdapter()).getPosition(contact.getRole()));
+        if(contact.getUuid() != null){
+            a.id(R.id.txt_customer_name).text(contact.getNames());
+            a.id(R.id.txt_customer_phone).text(contact.getContact());
+            Spinner gender = a.id(R.id.contact_gender).getSpinner();
+            gender.setSelection(((ArrayAdapter<String>) gender.getAdapter()).getPosition(contact.getGender()));
+            Spinner role = a.id(R.id.contact_role).getSpinner();
+            role.setSelection(((ArrayAdapter<String>) role.getAdapter()).getPosition(contact.getRole()));
+        }
 
         rowContainer.addView(row);
 
@@ -86,9 +87,7 @@ public class CustomerContactsFormFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 rows.remove(row);
-                Utils.log("Index -> " + rows.indexOf(row));
                 contacts.remove(contact);
-
                 LinearLayout parent = (LinearLayout) v.getParent();
                 LinearLayout root = (LinearLayout) parent.getParent();
                 LinearLayout top = (LinearLayout) root.getParent();

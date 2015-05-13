@@ -147,6 +147,7 @@ public class MalariaFormActivity extends BaseActivity {
     private void saveForm(){
         if(customerFragment == null){
             pager.setCurrentItem(0);
+            return;
         }else if(!customerFragment.saveFields()){
             pager.setCurrentItem(0);
             return;
@@ -154,6 +155,7 @@ public class MalariaFormActivity extends BaseActivity {
 
         if(educationFragment == null){
             pager.setCurrentItem(1);
+            return;
         }else if(!educationFragment.saveFields()){
             pager.setCurrentItem(1);
             return;
@@ -161,6 +163,7 @@ public class MalariaFormActivity extends BaseActivity {
 
         if(antimalarialFragment == null){
             pager.setCurrentItem(2);
+            return;
         }else if(!antimalarialFragment.saveFields()){
             pager.setCurrentItem(2);
             return;
@@ -168,6 +171,7 @@ public class MalariaFormActivity extends BaseActivity {
 
         if(rdtFragment == null){
             pager.setCurrentItem(3);
+            return;
         }else if(!rdtFragment.saveFields()){
             pager.setCurrentItem(3);
             return;
@@ -175,6 +179,7 @@ public class MalariaFormActivity extends BaseActivity {
 
         if(recommendationFragment == null){
             pager.setCurrentItem(4);
+            return;
         }else if(!recommendationFragment.saveFields()){
             pager.setCurrentItem(4);
             return;
