@@ -34,6 +34,7 @@ import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -61,6 +62,9 @@ public class SalesFormActivity extends BaseActivity {
     public Task task;
     public Sale sale;
 
+    public ArrayList<StokeData> stocks;
+    public ArrayList<SaleData> sales;
+
     SalesFormCustomerFragment customerFragment;
     SalesFormStockFragment stockFragment;
     SalesFormSaleFragment salesFragment;
@@ -76,6 +80,8 @@ public class SalesFormActivity extends BaseActivity {
 
         task = new Task();
         sale = new Sale();
+        stocks = new ArrayList<StokeData>();
+        sales = new ArrayList<SaleData>();
 
         aq = new AQuery(this);
 
@@ -207,7 +213,7 @@ public class SalesFormActivity extends BaseActivity {
 
         stokeDataDao.deleteInTx(sale.getStockDatas()); //First remove all to avoid stock data remaining even when removed
 
-        for(StokeData stock : stockFragment.stocks){
+        for(StokeData stock : stocks){
             if(stock.getUuid() == null){
                 stock.setUuid(UUID.randomUUID().toString());
             }
@@ -220,7 +226,7 @@ public class SalesFormActivity extends BaseActivity {
 
         saleDataDao.deleteInTx(sale.getSalesDatas()); //First remove all to avoid sale data remaining even when removed
 
-        for(SaleData s : salesFragment.sales){
+        for(SaleData s : sales){
             if(s.getUuid() == null){
                 s.setUuid(UUID.randomUUID().toString());
             }

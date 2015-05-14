@@ -37,7 +37,6 @@ public class SalesFormSaleFragment extends Fragment {
     View view;
     LinearLayout rowContainer;
     ArrayList<View> rows;
-    public ArrayList<SaleData> sales;
 
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
@@ -46,8 +45,12 @@ public class SalesFormSaleFragment extends Fragment {
 
     private List<Product> products;
 
+    SalesFormActivity parent;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        parent = (SalesFormActivity)getActivity();
+
         view = inflater.inflate(R.layout.sales_form_sale_fragment, container, false);
         aq = new AQuery(view);
         rowContainer = (LinearLayout)view.findViewById(R.id.ln_rows_container);
@@ -73,13 +76,20 @@ public class SalesFormSaleFragment extends Fragment {
             }
         });
 
-        rows = new ArrayList<View>();
-        sales = new ArrayList<SaleData>();
         initialiseGreenDao();
 
         products = productDao.loadAll();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        rows = new ArrayList<View>();
+        for(SaleData data : parent.sales){
+            addRow(data);
+        }
     }
 
     private void addRow(final SaleData sale){
@@ -92,7 +102,7 @@ public class SalesFormSaleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 rows.remove(row);
-                sales.remove(sale);
+                parent.sales.remove(sale);
 
                 LinearLayout parent = (LinearLayout) v.getParent();
                 LinearLayout root = (LinearLayout) parent.getParent();
@@ -106,7 +116,7 @@ public class SalesFormSaleFragment extends Fragment {
 
         rowContainer.addView(row);
         rows.add(row);
-        sales.add(sale);
+        parent.sales.add(sale);
     }
 
     private void initialiseGreenDao() {
@@ -129,7 +139,7 @@ public class SalesFormSaleFragment extends Fragment {
             return false;
         }
 
-        if(sales.size() == 0 && salesMade.equalsIgnoreCase("Yes")){
+        if(parent.sales.size() == 0 && salesMade.equalsIgnoreCase("Yes")){
             Toast.makeText(getActivity(), "Please enter Zinc and ORS sales made", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -155,7 +165,7 @@ public class SalesFormSaleFragment extends Fragment {
                 return false;
             }
 
-            sale = sales.get(rows.indexOf(row));
+            sale = parent.sales.get(rows.indexOf(row));
             sale.setQuantity(Integer.parseInt(quantity));
             sale.setProduct(product);
             sale.setProductId(product.getUuid());

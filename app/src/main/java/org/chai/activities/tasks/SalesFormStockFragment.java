@@ -38,7 +38,6 @@ public class SalesFormStockFragment extends Fragment{
     View view;
     LinearLayout rowContainer;
     ArrayList<View> rows;
-    public ArrayList<StokeData> stocks;
 
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
@@ -47,10 +46,17 @@ public class SalesFormStockFragment extends Fragment{
 
     private List<Product> products;
 
+    SalesFormActivity parent;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Utils.log("Creating Stock Fragment");
-        view = inflater.inflate(R.layout.sales_form_stock_fragment, container, false);
+        parent = (SalesFormActivity)getActivity();
+
+        if(view == null){
+            view = inflater.inflate(R.layout.sales_form_stock_fragment, container, false);
+        }else{
+            ((ViewGroup) view.getParent()).removeView(view);
+        }
         aq = new AQuery(view);
         rowContainer = (LinearLayout)view.findViewById(R.id.ln_rows_container);
         initialiseGreenDao();
@@ -78,30 +84,78 @@ public class SalesFormStockFragment extends Fragment{
 
         products = productDao.loadAll();
 
-        if(rows == null){
-            rows = new ArrayList<View>();
-            stocks = new ArrayList<StokeData>();
-        }else{
-            for(View row : rows){
-                ((ViewGroup)row.getParent()).removeView(row);
-                rowContainer.addView(row);
-            }
-        }
-
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Utils.log("onResume()");
+        if(rows != null){
+            for(View row: rows){
+                ((ViewGroup)row.getParent()).removeView(row);
+            }
+        }
+        Utils.log("Restoring -> " + parent.stocks.size() + " stocks");
+        int count = parent.stocks.size();
+
+        ArrayList<StokeData> temp = new ArrayList<StokeData>();
+        temp.addAll(parent.stocks);
+
+        rows = new ArrayList<View>();
+        parent.stocks = new ArrayList<StokeData>();
+
+        for(int i = 0; i < count; i++){
+            Utils.log("Adding row -> " + temp.get(i).getProductId());
+            addRow(temp.get(i));
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Utils.log("onPause()");
+        StokeData stock;
+        Product product;
+        int productIndex;
+        for(View row : rows){
+            AQuery a = new AQuery(row);
+            productIndex = a.id(R.id.product).getSelectedItemPosition();
+            product = products.get(productIndex);
+            String quantity = a.id(R.id.txt_quantity).getText().toString();
+
+            stock = parent.stocks.get(rows.indexOf(row));
+            if(!quantity.isEmpty()){
+                stock.setQuantity(Integer.parseInt(quantity));
+            }
+            stock.setProductId(product.getUuid());
+        }
+    }
+
+    /*@Override
+    public void onResume(Bundle savedInstanceState) {
+        Utils.log("onViewStateRestored()");
+        super.onViewStateRestored(savedInstanceState);
+        rows = new ArrayList<View>();
+        for(int i = 0; i < parent.stocks.size(); i++){
+            Utils.log("Adding row -> " + parent.stocks.get(i).getProductId());
+            addRow(parent.stocks.get(i));
+        }
+    }*/
 
     private void addRow(final StokeData stock){
         LayoutInflater inflator = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View row = inflator.inflate(R.layout.stock_form_row, null);
 
+        AQuery a = new AQuery(row);
+
         final ImageView remove = (ImageView)row.findViewById(R.id.btn_remove_row);
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rows.remove(row);
-                stocks.remove(stock);
+                parent.stocks.remove(stock);
                 LinearLayout parent = (LinearLayout) v.getParent();
                 LinearLayout root = (LinearLayout) parent.getParent();
                 LinearLayout top = (LinearLayout) root.getParent();
@@ -112,9 +166,27 @@ public class SalesFormStockFragment extends Fragment{
         Spinner spinner = (Spinner)row.findViewById(R.id.product);
         spinner.setAdapter(new ProductArrayAdapter(getActivity(),android.R.layout.simple_spinner_dropdown_item, products.toArray(new Product[products.size()])));
 
+        try{
+            if(stock.getQuantity() != 0){
+                a.id(R.id.txt_quantity).text(stock.getQuantity());
+            }
+            int index = 0;
+            if(stock.getProductId() != null){
+                for(Product p: products){
+                    if(p.getUuid().equalsIgnoreCase(stock.getProductId())){
+                        index = products.indexOf(p);
+                        break;
+                    }
+                }
+            }
+            spinner.setSelection(index);
+        }catch(Exception ex){
+            Utils.log("Error while adding row -> " + ex.getMessage());
+        }
+
         rowContainer.addView(row);
         rows.add(row);
-        stocks.add(stock);
+        parent.stocks.add(stock);
     }
 
     private void initialiseGreenDao() {
@@ -137,7 +209,7 @@ public class SalesFormStockFragment extends Fragment{
             return false;
         }
 
-        if(stocks.size() == 0 && stocksZincOrs.equalsIgnoreCase("Yes")){
+        if(parent.stocks.size() == 0 && stocksZincOrs.equalsIgnoreCase("Yes")){
             Toast.makeText(getActivity(), "Please enter Zinc and ORS stock", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -155,7 +227,7 @@ public class SalesFormStockFragment extends Fragment{
                 Toast.makeText(getActivity(), "Please enter stock quanity on row " + i, Toast.LENGTH_LONG).show();
                 return false;
             }
-            stock = stocks.get(rows.indexOf(row));
+            stock = parent.stocks.get(rows.indexOf(row));
             stock.setQuantity(Integer.parseInt(quantity));
             stock.setProduct(product);
             stock.setProductId(product.getUuid());
