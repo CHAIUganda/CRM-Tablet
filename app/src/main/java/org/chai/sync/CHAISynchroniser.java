@@ -156,17 +156,17 @@ public class CHAISynchroniser extends Service {
         Utils.log("startSyncronisationProcess()");
         try{
             syncronisationErros = new ArrayList<ServerResponse>();
-            /*uploadCustomers();
+            uploadCustomers();
             uploadDirectSales();
-            uploadSales();*/
+            uploadSales();
             uploadTasks();
-            /*uploadOrders();
+            uploadOrders();
 
             downloadRegions();
             downloadCustomers();
             downloadTasks();
             downloadProducts();
-            downloadSummaryReports();*/
+            downloadSummaryReports();
         }catch(Exception ex){
             Utils.log("Error syncing -> " + ex.getMessage());
         }

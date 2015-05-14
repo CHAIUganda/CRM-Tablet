@@ -1,6 +1,7 @@
 package org.chai.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,17 @@ public class OrderHistoryAdapter extends ArrayAdapter<Order> {
         aq.id(R.id.txt_customer_name).text(c.getOutletName());
         aq.id(R.id.txt_time).text(new PrettyTime().format(m.getOrderDate()));
         aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
+
+        if(m.getIsDirty()){
+            aq.id(R.id.txt_customer_name).textColor(Color.parseColor("#242527"));
+            aq.id(R.id.txt_time).textColor(Color.parseColor("#55595d"));
+            aq.id(R.id.txt_customer_contact).textColor(Color.parseColor("#55595d"));
+        }else{
+            int inactiveColor = Color.parseColor("#C0C0C0");
+            aq.id(R.id.txt_customer_name).textColor(inactiveColor);
+            aq.id(R.id.txt_time).textColor(inactiveColor);
+            aq.id(R.id.txt_customer_contact).textColor(inactiveColor);
+        }
 
         Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         row.startAnimation(animation);

@@ -108,22 +108,6 @@ public class NewOrderActivity extends BaseActivity {
         Calendar c = new GregorianCalendar();
 
         products = productDao.loadAll();
-        customers = customerDao.loadAll();
-
-        AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.customer_id);
-        CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(this, android.R.layout.simple_dropdown_item_1line, new ArrayList<Customer>(customers));
-        textView.setAdapter(adapter);
-
-        textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view1, int position, long l) {
-                Customer selected = (Customer)adapterView.getAdapter().getItem(position);
-                customer = selected;
-                if(customer != null){
-                    aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
-                }
-            }
-        });
 
         dateField = aq.id(R.id.due_date).getEditText();
         dateField.setHint(dateFormat.format(new Date(c.getTimeInMillis())));
@@ -141,16 +125,35 @@ public class NewOrderActivity extends BaseActivity {
         aq.id(R.id.btn_add_row).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addRow(null);
+                addRow(new OrderData());
             }
         });
 
-        orderId = getIntent().getStringExtra("id");
+        orderId = getIntent().getStringExtra("order_id");
         if(orderId != null){
             order = orderDao.load(orderId);
             if(order != null){
                 populateFields();
             }
+        }
+
+        if(order == null){
+            customers = customerDao.loadAll();
+
+            AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.customer_id);
+            CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(this, android.R.layout.simple_dropdown_item_1line, new ArrayList<Customer>(customers));
+            textView.setAdapter(adapter);
+
+            textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view1, int position, long l) {
+                    Customer selected = (Customer)adapterView.getAdapter().getItem(position);
+                    customer = selected;
+                    if(customer != null){
+                        aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+                    }
+                }
+            });
         }
 
         super.setUpDrawer(toolbar);
@@ -161,7 +164,7 @@ public class NewOrderActivity extends BaseActivity {
     private void populateFields(){
         customer = order.getCustomer();
         date = order.getDeliveryDate();
-        aq.id(R.id.customer_id).text(customer.getOutletName());
+        aq.id(R.id.customer_id).text(customer.getOutletName()).enabled(false);
         aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
         aq.id(R.id.due_date).text(dateFormat.format(date));
 
@@ -185,11 +188,11 @@ public class NewOrderActivity extends BaseActivity {
         datepicker.show(getSupportFragmentManager(), "date");
     }
 
-    private void addRow(OrderData data){
-        if(data == null){
-            data = new OrderData();
+    private void addRow(final OrderData data){
+        if(data.getUuid() == null){
             data.setDateCreated(new Date());
         }
+
         LayoutInflater inflator = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View row = inflator.inflate(R.layout.order_form_item_row, null);
@@ -214,7 +217,7 @@ public class NewOrderActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 rows.remove(row);
-                orderDataItems.remove(rows.indexOf(row));
+                orderDataItems.remove(data);
 
                 LinearLayout parent = (LinearLayout)v.getParent();
                 LinearLayout root = (LinearLayout)parent.getParent();
@@ -283,6 +286,10 @@ public class NewOrderActivity extends BaseActivity {
             Toast.makeText(this, "Select the due date", Toast.LENGTH_LONG).show();
             return;
         }
+        if(date.compareTo(new Date()) < 0){
+            Toast.makeText(this, "Due date cannot be in the past", Toast.LENGTH_LONG).show();
+            return;
+        }
         if(rows.size() == 0){
             Toast.makeText(this, "Add atleast one order", Toast.LENGTH_LONG).show();
             return;
@@ -297,7 +304,6 @@ public class NewOrderActivity extends BaseActivity {
             p = products.get(a.id(R.id.item).getSelectedItemPosition());
             String quantity = a.id(R.id.quantity).getText().toString();
             boolean sample = a.id(R.id.drop_sample).isChecked();
-            Utils.log(p.getName() + " : " + quantity + " -> " + sample);
             if(quantity.isEmpty()){
                 Toast.makeText(this, "Please select quantity for " + p.getName(), Toast.LENGTH_LONG).show();
                 return;
@@ -312,7 +318,6 @@ public class NewOrderActivity extends BaseActivity {
         }
 
         if(order == null){
-            Utils.log("Inserting order");
             order = new Order(UUID.randomUUID().toString());
             order.setIsDirty(true);
             order.setCustomerId(customer.getUuid());
@@ -322,8 +327,6 @@ public class NewOrderActivity extends BaseActivity {
             orderDao.insert(order);
         }else{
             order.setIsDirty(true);
-            order.setCustomerId(customer.getUuid());
-            order.setCustomer(customer);
             order.setDeliveryDate(date);
             orderDao.update(order);
         }
