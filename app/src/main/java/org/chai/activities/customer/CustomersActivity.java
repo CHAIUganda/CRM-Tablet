@@ -73,7 +73,7 @@ public class CustomersActivity extends BaseActivity {
                 Customer customer = customerList.get(position);
 
                 Intent intent = new Intent(CustomersActivity.this, AddNewCustomerActivity.class);
-                intent.putExtra("id", customer.getUuid());
+                intent.putExtra("customer_id", customer.getUuid());
                 startActivity(intent);
             }
         });

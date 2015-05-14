@@ -24,6 +24,7 @@ import org.chai.model.Product;
 import org.chai.model.ProductDao;
 import org.chai.model.SaleData;
 import org.chai.util.MyApplication;
+import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class SalesFormSaleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         parent = (SalesFormActivity)getActivity();
-
+        initialiseGreenDao();
         view = inflater.inflate(R.layout.sales_form_sale_fragment, container, false);
         aq = new AQuery(view);
         rowContainer = (LinearLayout)view.findViewById(R.id.ln_rows_container);
@@ -76,8 +77,6 @@ public class SalesFormSaleFragment extends Fragment {
             }
         });
 
-        initialiseGreenDao();
-
         products = productDao.loadAll();
 
         return view;
@@ -86,9 +85,44 @@ public class SalesFormSaleFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        if(rows != null){
+            for(View row: rows){
+                ((ViewGroup)row.getParent()).removeView(row);
+            }
+        }
+
+        ArrayList<SaleData> temp = new ArrayList<SaleData>();
+        temp.addAll(parent.sales);
+
         rows = new ArrayList<View>();
-        for(SaleData data : parent.sales){
-            addRow(data);
+        parent.sales = new ArrayList<SaleData>();
+
+        for(int i = 0; i < temp.size(); i++){
+            addRow(temp.get(i));
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SaleData sale;
+        Product product;
+        int productIndex;
+        for(View row : rows){
+            AQuery a = new AQuery(row);
+            productIndex = a.id(R.id.product).getSelectedItemPosition();
+            product = products.get(productIndex);
+            String quantity = a.id(R.id.txt_quantity).getText().toString();
+            String unitPrice = a.id(R.id.txt_unit_price).getText().toString();
+
+            sale = parent.sales.get(rows.indexOf(row));
+            if(!quantity.isEmpty()){
+                sale.setQuantity(Integer.parseInt(quantity));
+            }
+            if(!unitPrice.isEmpty()){
+                sale.setPrice(Integer.parseInt(unitPrice));
+            }
+            sale.setProductId(product.getUuid());
         }
     }
 
@@ -96,7 +130,7 @@ public class SalesFormSaleFragment extends Fragment {
         LayoutInflater inflator = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View row = inflator.inflate(R.layout.sale_form_row, null);
-
+        AQuery a = new AQuery(row);
         final ImageView remove = (ImageView)row.findViewById(R.id.btn_remove_row);
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +148,26 @@ public class SalesFormSaleFragment extends Fragment {
         Spinner spinner = (Spinner)row.findViewById(R.id.product);
         spinner.setAdapter(new ProductArrayAdapter(getActivity(),android.R.layout.simple_spinner_dropdown_item, products.toArray(new Product[products.size()])));
 
+        try{
+            if(sale.getQuantity() != 0){
+                a.id(R.id.txt_quantity).text(Integer.toString(sale.getQuantity()));
+            }
+            if(sale.getPrice() != 0){
+                a.id(R.id.txt_unit_price).text(Integer.toString(sale.getQuantity()));
+            }
+            int index = 0;
+            if(sale.getProductId() != null){
+                for(Product p: products){
+                    if(p.getUuid().equalsIgnoreCase(sale.getProductId())){
+                        index = products.indexOf(p);
+                        break;
+                    }
+                }
+            }
+            spinner.setSelection(index);
+        }catch(Exception ex){
+            Utils.log("Error loading row -> " + ex.getMessage());
+        }
         rowContainer.addView(row);
         rows.add(row);
         parent.sales.add(sale);

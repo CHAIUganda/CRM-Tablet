@@ -1,17 +1,20 @@
 package org.chai.activities.calls;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
 import org.chai.R;
+import org.chai.activities.tasks.SalesFormActivity;
 import org.chai.adapter.SaleHistoryAdapter;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
@@ -51,6 +54,16 @@ public class SalesHistoryFragment extends Fragment {
         items.addAll(saleDao.loadAll());
         adapter = new SaleHistoryAdapter(getActivity(), R.layout.history_item_row, items);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Sale sale = items.get(position);
+                Intent i = new Intent(getActivity(), SalesFormActivity.class);
+                i.putExtra("sale_id", sale.getUuid());
+                i.putExtra("task_id", sale.getTaskId());
+                getActivity().startActivity(i);
+            }
+        });
 
         return view;
     }

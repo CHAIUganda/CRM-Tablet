@@ -102,7 +102,6 @@ public class TaskCalenderFragment extends Fragment {
                 Intent i = new Intent();
 
                 i.putExtra("task_id", task.getUuid());
-                i.putExtra("id", task.getCustomerId());
 
                 if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
                     i.setClass(getActivity(), SalesFormActivity.class);

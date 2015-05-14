@@ -21,7 +21,6 @@ import org.chai.activities.HomeActivity;
 import org.chai.activities.calls.HistoryActivity;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
-import org.chai.model.ProductDao;
 import org.chai.model.Sale;
 import org.chai.model.SaleDao;
 import org.chai.model.SaleData;
@@ -36,6 +35,7 @@ import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -57,18 +57,20 @@ public class SalesFormActivity extends BaseActivity {
     private SaleDao saleDao;
     private SaleDataDao saleDataDao;
     private StokeDataDao stokeDataDao;
-    private ProductDao productDao;
 
     public Task task;
     public Sale sale;
 
-    public ArrayList<StokeData> stocks;
-    public ArrayList<SaleData> sales;
+    public List<StokeData> stocks;
+    public List<SaleData> sales;
 
     SalesFormCustomerFragment customerFragment;
     SalesFormStockFragment stockFragment;
     SalesFormSaleFragment salesFragment;
     SalesFormNextStepsFragment nextStepsFragment;
+
+    String saledId;
+    String taskId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +80,32 @@ public class SalesFormActivity extends BaseActivity {
         setContentView(R.layout.sales_form_activity);
         initialiseGreenDao();
 
-        task = new Task();
-        sale = new Sale();
-        stocks = new ArrayList<StokeData>();
-        sales = new ArrayList<SaleData>();
+        saledId = getIntent().getStringExtra("sale_id");
+        taskId = getIntent().getStringExtra("task_id");
+
+        if(saledId != null){
+            sale = saleDao.load(saledId);
+            if(sale != null){
+                task = sale.getTask();
+            }
+        }else{
+            if(taskId != null){
+                task = taskDao.load(taskId);
+            }
+        }
+
+        if(sale == null){
+            sale = new Sale();
+            stocks = new ArrayList<StokeData>();
+            sales = new ArrayList<SaleData>();
+        }else{
+            stocks = sale.getStockDatas();
+            sales = sale.getSalesDatas();
+        }
+
+        if(task == null){
+            task = new Task();
+        }
 
         aq = new AQuery(this);
 
@@ -140,7 +164,6 @@ public class SalesFormActivity extends BaseActivity {
             taskDao = daoSession.getTaskDao();
             saleDao = daoSession.getSaleDao();
             saleDataDao = daoSession.getSaleDataDao();
-            productDao = daoSession.getProductDao();
             stokeDataDao = daoSession.getStokeDataDao();
         } catch (Exception ex) {
             Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();

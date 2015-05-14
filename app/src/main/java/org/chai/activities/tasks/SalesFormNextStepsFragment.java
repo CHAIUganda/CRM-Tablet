@@ -21,10 +21,36 @@ public class SalesFormNextStepsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        activity = (SalesFormActivity)getActivity();
         view = inflater.inflate(R.layout.sales_form_next_steps_fragment, container, false);
         aq = new AQuery(view);
-
+        populateFields();
         return view;
+    }
+
+    private void populateFields(){
+        String gov = activity.sale.getGovernmentApproval();
+        if(!gov.isEmpty()){
+            aq.id(R.id.spn_described_government_approved_mrp).setSelection(gov.equalsIgnoreCase("Yes") ? 0 : 1);
+        }
+        String materials = activity.sale.getPointOfsaleMaterial();
+        if(materials != null){
+            aq.id(R.id.dangler).checked(materials.indexOf(aq.id(R.id.dangler).getText().toString()) != -1);
+            aq.id(R.id.tent_card).checked(materials.indexOf(aq.id(R.id.tent_card).getText().toString()) != -1);
+            aq.id(R.id.poster).checked(materials.indexOf(aq.id(R.id.poster).getText().toString()) != -1);
+            aq.id(R.id.bunting).checked(materials.indexOf(aq.id(R.id.bunting).getText().toString()) != -1);
+            aq.id(R.id.mrp_dangler).checked(materials.indexOf(aq.id(R.id.mrp_dangler).getText().toString()) != -1);
+            aq.id(R.id.pen).checked(materials.indexOf(aq.id(R.id.pen).getText().toString()) != -1);
+        }
+        String recommendations = activity.sale.getRecommendationNextStep();
+        if(recommendations != null){
+            aq.id(R.id.none).checked(recommendations.indexOf(aq.id(R.id.none).getText().toString()) != -1);
+            aq.id(R.id.stock_ors).checked(recommendations.indexOf(aq.id(R.id.stock_ors).getText().toString()) != -1);
+            aq.id(R.id.stock_zinc).checked(recommendations.indexOf(aq.id(R.id.stock_zinc).getText().toString()) != -1);
+            aq.id(R.id.start_recommending).checked(recommendations.indexOf(aq.id(R.id.start_recommending).getText().toString()) != -1);
+            aq.id(R.id.start_selling).checked(recommendations.indexOf(aq.id(R.id.start_selling).getText().toString()) != -1);
+            aq.id(R.id.start_purchasing).checked(recommendations.indexOf(aq.id(R.id.start_purchasing).getText().toString()) != -1);
+        }
     }
 
     public boolean saveFields(){
@@ -77,7 +103,6 @@ public class SalesFormNextStepsFragment extends Fragment {
             recommendations += aq.id(R.id.txt_other_recommendation).getText().toString();
         }
 
-        activity = (SalesFormActivity)getActivity();
         activity.sale.setGovernmentApproval(aq.id(R.id.spn_described_government_approved_mrp).getSelectedItem().toString());
         activity.sale.setRecommendationNextStep(recommendations);
         activity.sale.setPointOfsaleMaterial(materials);

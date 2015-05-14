@@ -39,38 +39,30 @@ public class SalesFormCustomerFragment extends Fragment {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private CustomerDao customerDao;
+
     List<Customer> customers;
     Customer customer;
     String customerId;
 
     GPSTracker tracker;
 
+    SalesFormActivity parent;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        parent = (SalesFormActivity)getActivity();
+
         view = inflater.inflate(R.layout.sales_form_customer_fragment, container, false);
         aq = new AQuery(view);
 
         setRequiredFields();
         initialiseGreenDao();
 
-        customers = customerDao.loadAll();
+        customerId = getActivity().getIntent().getStringExtra("customer_id");
+        if(customerId == null){
+            customerId = parent.task.getCustomerId();
+        }
 
-        AutoCompleteTextView textView = (AutoCompleteTextView)view.findViewById(R.id.customer_id);
-        CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, new ArrayList<Customer>(customers));
-        textView.setAdapter(adapter);
-
-        textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view1, int position, long l) {
-                Customer selected = (Customer) adapterView.getAdapter().getItem(position);
-                customer = selected;
-                if (customer != null) {
-                    aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
-                }
-            }
-        });
-
-        customerId = getActivity().getIntent().getStringExtra("id");
         if(customerId != null){
             customer = customerDao.load(customerId);
             if(customer != null){
@@ -78,6 +70,25 @@ public class SalesFormCustomerFragment extends Fragment {
                 aq.id(R.id.customer_id).text(customer.getOutletName());
                 aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
             }
+        }
+
+        if(customer == null){
+            customers = customerDao.loadAll();
+
+            AutoCompleteTextView textView = (AutoCompleteTextView)view.findViewById(R.id.customer_id);
+            CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, new ArrayList<Customer>(customers));
+            textView.setAdapter(adapter);
+
+            textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view1, int position, long l) {
+                    Customer selected = (Customer) adapterView.getAdapter().getItem(position);
+                    customer = selected;
+                    if (customer != null) {
+                        aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+                    }
+                }
+            });
         }
 
         setLatLong();
@@ -96,11 +107,10 @@ public class SalesFormCustomerFragment extends Fragment {
             return false;
         }
 
-        SalesFormActivity ac = (SalesFormActivity)getActivity();
-        ac.task.setCustomerId(customer.getUuid());
-        ac.task.setCustomer(customer);
-        ac.sale.setLatitude(Utils.getLatFromLatLong(aq.id(R.id.gps).getText().toString()));
-        ac.sale.setLongitude(Utils.getLongFromLatLong(aq.id(R.id.gps).getText().toString()));
+        parent.task.setCustomerId(customer.getUuid());
+        parent.task.setCustomer(customer);
+        parent.sale.setLatitude(Utils.getLatFromLatLong(aq.id(R.id.gps).getText().toString()));
+        parent.sale.setLongitude(Utils.getLongFromLatLong(aq.id(R.id.gps).getText().toString()));
 
         return true;
     }

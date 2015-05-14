@@ -84,20 +84,29 @@ public class SalesFormStockFragment extends Fragment{
 
         products = productDao.loadAll();
 
+        populateFields();
+
         return view;
+    }
+
+    private void populateFields(){
+        if(parent.sale.getDoYouStockOrsZinc() != null){
+            if(parent.sale.getDoYouStockOrsZinc() == true){
+                aq.id(R.id.spn_do_you_stock_ors_and_zinc).setSelection(1);
+            }else{
+                aq.id(R.id.spn_do_you_stock_ors_and_zinc).setSelection(2);
+            }
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Utils.log("onResume()");
         if(rows != null){
             for(View row: rows){
                 ((ViewGroup)row.getParent()).removeView(row);
             }
         }
-        Utils.log("Restoring -> " + parent.stocks.size() + " stocks");
-        int count = parent.stocks.size();
 
         ArrayList<StokeData> temp = new ArrayList<StokeData>();
         temp.addAll(parent.stocks);
@@ -105,8 +114,7 @@ public class SalesFormStockFragment extends Fragment{
         rows = new ArrayList<View>();
         parent.stocks = new ArrayList<StokeData>();
 
-        for(int i = 0; i < count; i++){
-            Utils.log("Adding row -> " + temp.get(i).getProductId());
+        for(int i = 0; i < temp.size(); i++){
             addRow(temp.get(i));
         }
     }
@@ -114,7 +122,6 @@ public class SalesFormStockFragment extends Fragment{
     @Override
     public void onPause() {
         super.onPause();
-        Utils.log("onPause()");
         StokeData stock;
         Product product;
         int productIndex;
@@ -131,17 +138,6 @@ public class SalesFormStockFragment extends Fragment{
             stock.setProductId(product.getUuid());
         }
     }
-
-    /*@Override
-    public void onResume(Bundle savedInstanceState) {
-        Utils.log("onViewStateRestored()");
-        super.onViewStateRestored(savedInstanceState);
-        rows = new ArrayList<View>();
-        for(int i = 0; i < parent.stocks.size(); i++){
-            Utils.log("Adding row -> " + parent.stocks.get(i).getProductId());
-            addRow(parent.stocks.get(i));
-        }
-    }*/
 
     private void addRow(final StokeData stock){
         LayoutInflater inflator = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -168,7 +164,7 @@ public class SalesFormStockFragment extends Fragment{
 
         try{
             if(stock.getQuantity() != 0){
-                a.id(R.id.txt_quantity).text(stock.getQuantity());
+                a.id(R.id.txt_quantity).text(Integer.toString(stock.getQuantity()));
             }
             int index = 0;
             if(stock.getProductId() != null){
