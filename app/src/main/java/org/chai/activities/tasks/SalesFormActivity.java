@@ -205,6 +205,11 @@ public class SalesFormActivity extends BaseActivity {
             return;
         }
 
+        if(nextStepsFragment == null || !nextStepsFragment.saveFields()){
+            pager.setCurrentItem(3);
+            return;
+        }
+
         task.setIsDirty(true);
         task.setCompletionDate(new Date());
         task.setStatus(HomeActivity.STATUS_COMPLETE);

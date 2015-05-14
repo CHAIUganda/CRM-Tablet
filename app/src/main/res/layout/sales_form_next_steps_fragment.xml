@@ -190,6 +190,7 @@
                 style="@style/LabelStyle"
                 android:text="17. Other Specify"/>
             <EditText
+                android:id="@+id/txt_other_material"
                 android:layout_width="match_parent"
                 style="@style/TextBoxStyle"/>
         </LinearLayout>
@@ -268,6 +269,7 @@
                 style="@style/LabelStyle"
                 android:text="20. Other Specify"/>
             <EditText
+                android:id="@+id/txt_other_recommendation"
                 android:layout_width="match_parent"
                 style="@style/TextBoxStyle"/>
         </LinearLayout>

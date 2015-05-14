@@ -30,11 +30,12 @@ public class SalesFormNextStepsFragment extends Fragment {
 
     private void populateFields(){
         String gov = activity.sale.getGovernmentApproval();
-        if(!gov.isEmpty()){
+        if(gov != null){
             aq.id(R.id.spn_described_government_approved_mrp).setSelection(gov.equalsIgnoreCase("Yes") ? 0 : 1);
         }
         String materials = activity.sale.getPointOfsaleMaterial();
         if(materials != null){
+            Utils.log("Materials -> " + materials);
             aq.id(R.id.dangler).checked(materials.indexOf(aq.id(R.id.dangler).getText().toString()) != -1);
             aq.id(R.id.tent_card).checked(materials.indexOf(aq.id(R.id.tent_card).getText().toString()) != -1);
             aq.id(R.id.poster).checked(materials.indexOf(aq.id(R.id.poster).getText().toString()) != -1);
@@ -44,6 +45,7 @@ public class SalesFormNextStepsFragment extends Fragment {
         }
         String recommendations = activity.sale.getRecommendationNextStep();
         if(recommendations != null){
+            Utils.log("Recommendations -> " + recommendations);
             aq.id(R.id.none).checked(recommendations.indexOf(aq.id(R.id.none).getText().toString()) != -1);
             aq.id(R.id.stock_ors).checked(recommendations.indexOf(aq.id(R.id.stock_ors).getText().toString()) != -1);
             aq.id(R.id.stock_zinc).checked(recommendations.indexOf(aq.id(R.id.stock_zinc).getText().toString()) != -1);
