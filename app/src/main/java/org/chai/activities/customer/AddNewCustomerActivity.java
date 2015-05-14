@@ -69,7 +69,7 @@ public class AddNewCustomerActivity extends BaseActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        customerId = getIntent().getStringExtra("id");
+        customerId = getIntent().getStringExtra("customer_id");
         if(customerId != null){
             customer = customerDao.load(customerId);
             if(customer != null){

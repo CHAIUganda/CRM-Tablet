@@ -135,12 +135,14 @@ public class LoginActivity extends BaseActivity {
 
     private void onLoginSuccessfull(String user, String pass,String role) {
         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         RestClient.userName = user;
         RestClient.password = pass;
         RestClient.setRole(role);
         AccountManager.saveUsername(user, this);
         AccountManager.savePassword(pass, this);
         startActivity(i);
+        finish();
     }
 
 

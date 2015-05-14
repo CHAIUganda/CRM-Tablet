@@ -171,12 +171,12 @@ public class CustomersActivity extends BaseActivity {
                 break;
             case R.id.detail_malaria:
                 Intent i = new Intent(this, MalariaFormActivity.class);
-                i.putExtra("id", customer.getUuid());
+                i.putExtra("customer_id", customer.getUuid());
                 startActivity(i);
                 break;
             case R.id.detail_sale:
                 Intent in = new Intent(this, SalesFormActivity.class);
-                in.putExtra("id", customer.getUuid());
+                in.putExtra("customer_id", customer.getUuid());
                 startActivity(in);
                 break;
         }
