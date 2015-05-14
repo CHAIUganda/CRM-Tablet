@@ -24,6 +24,7 @@ import org.chai.model.Product;
 import org.chai.model.ProductDao;
 import org.chai.model.StokeData;
 import org.chai.util.MyApplication;
+import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class SalesFormStockFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Utils.log("Creating Stock Fragment");
         view = inflater.inflate(R.layout.sales_form_stock_fragment, container, false);
         aq = new AQuery(view);
         rowContainer = (LinearLayout)view.findViewById(R.id.ln_rows_container);
@@ -74,10 +76,17 @@ public class SalesFormStockFragment extends Fragment{
             }
         });
 
-        rows = new ArrayList<View>();
-        stocks = new ArrayList<StokeData>();
-
         products = productDao.loadAll();
+
+        if(rows == null){
+            rows = new ArrayList<View>();
+            stocks = new ArrayList<StokeData>();
+        }else{
+            for(View row : rows){
+                ((ViewGroup)row.getParent()).removeView(row);
+                rowContainer.addView(row);
+            }
+        }
 
         return view;
     }

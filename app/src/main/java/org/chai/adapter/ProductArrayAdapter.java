@@ -38,6 +38,7 @@ public class ProductArrayAdapter extends ArrayAdapter<Product> {
         TextView label = new TextView(context);
         label.setTextColor(Color.WHITE);
         label.setText(products[position].getName());
+        label.setPadding(10, 10, 10, 10);
         return label;
     }
     @Override

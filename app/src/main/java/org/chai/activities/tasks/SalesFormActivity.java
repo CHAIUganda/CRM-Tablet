@@ -17,19 +17,25 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.activities.HomeActivity;
 import org.chai.activities.calls.HistoryActivity;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.ProductDao;
 import org.chai.model.Sale;
 import org.chai.model.SaleDao;
+import org.chai.model.SaleData;
 import org.chai.model.SaleDataDao;
+import org.chai.model.StokeData;
 import org.chai.model.StokeDataDao;
 import org.chai.model.Task;
 import org.chai.model.TaskDao;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
+
+import java.util.Date;
+import java.util.UUID;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -168,6 +174,61 @@ public class SalesFormActivity extends BaseActivity {
         if(salesFragment == null || !salesFragment.saveFields()){
             pager.setCurrentItem(2);
             return;
+        }
+
+        task.setIsDirty(true);
+        task.setCompletionDate(new Date());
+        task.setStatus(HomeActivity.STATUS_COMPLETE);
+        task.setType("detailer");
+
+        if(task.getUuid() == null){
+            task.setUuid(UUID.randomUUID().toString());
+            task.setDateCreated(new Date());
+            task.setIsAdhock(true);
+            task.setDescription("Sale detailing [" + task.getCustomer().getOutletName() + "]");
+            taskDao.insert(task);
+        }else{
+            taskDao.update(task);
+        }
+
+        sale.setIsDirty(true);
+        sale.setDateOfSale(new Date());
+        sale.setTaskId(task.getUuid());
+        sale.setTask(task);
+        sale.setOrderId(task.getUuid());
+
+        if(sale.getUuid() == null){
+            sale.setUuid(UUID.randomUUID().toString());
+            sale.setDateCreated(new Date());
+            saleDao.insert(sale);
+        }else{
+            saleDao.update(sale);
+        }
+
+        stokeDataDao.deleteInTx(sale.getStockDatas()); //First remove all to avoid stock data remaining even when removed
+
+        for(StokeData stock : stockFragment.stocks){
+            if(stock.getUuid() == null){
+                stock.setUuid(UUID.randomUUID().toString());
+            }
+            stock.setSaleId(sale.getUuid());
+            stock.setSale(sale);
+            stock.setLastUpdated(new Date());
+            stock.setIsDirty(true);
+            stokeDataDao.insert(stock);
+        }
+
+        saleDataDao.deleteInTx(sale.getSalesDatas()); //First remove all to avoid sale data remaining even when removed
+
+        for(SaleData s : salesFragment.sales){
+            if(s.getUuid() == null){
+                s.setUuid(UUID.randomUUID().toString());
+            }
+            s.setSaleId(sale.getUuid());
+            s.setSale(sale);
+            s.setLastUpdated(new Date());
+            s.setIsDirty(true);
+            saleDataDao.insert(s);
         }
 
         Toast.makeText(this, "Sale details have been saved", Toast.LENGTH_LONG).show();
