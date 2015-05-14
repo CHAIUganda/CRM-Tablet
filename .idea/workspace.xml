@@ -46,21 +46,79 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dad7d78f-c0b3-4a33-b333-77a49d84f0ba" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/AddNewCustomerActivity$FormPagerAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/AddNewCustomerActivity$FormPagerAdapter.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/AddNewCustomerActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/AddNewCustomerActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/AdhockSalesListFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/AdhockSalesListFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BlankActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BlankActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/CallMainFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/CallMainFragment.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerContactsFormFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerContactsFormFragment$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerContactsFormFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerContactsFormFragment$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerContactsFormFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerContactsFormFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerDetailsActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerDetailsActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerForm.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomersActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomersActivity$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomersActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomersActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DetailersActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DetailersActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/HistoryActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/HistoryActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/HistoryMainFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/HistoryMainFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/HomeActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/HomeActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/LoginActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/LoginActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/MalariaFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/MalariaFormActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/org/chai/activities/forms/MalariaFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/org/chai/activities/forms/MalariaFormActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/NewOrderActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/NewOrderActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/OrdersMainFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/OrdersMainFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$integer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$menu.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$menu.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$raw.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$raw.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$string.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$style.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$styleable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$xml.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$xml.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/reports/ReportsActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/reports/ReportsActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormActivity$FormPagerAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormActivity$FormPagerAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormCustomerFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormCustomerFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormStockFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormStockFragment$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormStockFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormStockFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormStockFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormStockFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskMainFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskMainFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskViewOnMapFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskViewOnMapFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TasksMainActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TasksMainActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/AddNewCustomerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/AddNewCustomerActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerContactsFormFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerContactsFormFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/org/chai/activities/forms/MalariaFormActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/org/chai/activities/forms/MalariaFormActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/chai/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/chai/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormStockFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormStockFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/malaria_form_fragment_2.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/malaria_form_fragment_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/malaria_form_fragment_2.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/malaria_form_fragment_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/debug/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/debug/merger.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/sales_form_stock_fragment.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/sales_form_stock_fragment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/sales_form_stock_fragment.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/sales_form_stock_fragment.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="chai-crm-android.iws" />
@@ -184,120 +242,111 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java">
+      <file leaf-file-name="SalesFormActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="50" column="43" selection-start-line="50" selection-start-column="43" selection-end-line="50" selection-end-column="43" />
+              <caret line="163" column="36" selection-start-line="163" selection-start-column="36" selection-end-line="163" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RestClient.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java">
+      <file leaf-file-name="TakeOrderFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TakeOrderFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="37" column="64" selection-start-line="37" selection-start-column="64" selection-end-line="37" selection-end-column="64" />
+              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SalesFormStockFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormStockFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.64194006">
+              <caret line="154" column="25" selection-start-line="154" selection-start-column="25" selection-end-line="154" selection-end-column="25" />
               <folding>
-                <element signature="e#1761#1762#0" expanded="true" />
-                <element signature="e#1806#1807#0" expanded="true" />
+                <element signature="e#2074#2231#0" expanded="true" />
+                <element signature="e#2230#2231#0" expanded="true" />
+                <element signature="e#3239#3680#0" expanded="true" />
+                <element signature="e#3679#3680#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddNewCustomerActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/AddNewCustomerActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="184" column="73" selection-start-line="184" selection-start-column="73" selection-end-line="184" selection-end-column="73" />
-              <folding>
-                <element signature="e#4809#4810#0" expanded="true" />
-                <element signature="e#4842#4843#0" expanded="true" />
-                <element signature="e#5604#5605#0" expanded="true" />
-                <element signature="e#5644#5645#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DiarrheaFormActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="155" column="17" selection-start-line="155" selection-start-column="12" selection-end-line="155" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MalariaFormActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/org/chai/activities/forms/MalariaFormActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="142" column="9" selection-start-line="140" selection-start-column="8" selection-end-line="142" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CustomerBasicsFormFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerBasicsFormFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="82" column="13" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CustomerContactsFormFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CustomerContactsFormFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerContactsFormFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.71754634">
-              <caret line="144" column="9" selection-start-line="144" selection-start-column="9" selection-end-line="144" selection-end-column="9" />
-              <folding>
-                <element signature="e#1152#1315#0" expanded="true" />
-                <element signature="e#1314#1315#0" expanded="true" />
-                <element signature="e#2879#3324#0" expanded="true" />
-                <element signature="e#3323#3324#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IViewManipulator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/IViewManipulator.java">
-          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <caret line="128" column="80" selection-start-line="128" selection-start-column="80" selection-end-line="128" selection-end-column="80" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add_new_customer_activity.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/add_new_customer_activity.xml">
-          <provider selected="true" editor-type-id="android-designer">
+      <file leaf-file-name="stock_form_row.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/stock_form_row.xml">
+          <provider editor-type-id="android-designer">
             <state />
           </provider>
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="customer_commercial_form_fragment.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customer_commercial_form_fragment.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
+      <file leaf-file-name="DiarrheaFormRecommendationFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormRecommendationFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.275862">
-              <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DiarrheaFormZincFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormZincFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="81" column="21" selection-start-line="79" selection-start-column="20" selection-end-line="81" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SaleslFormFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SaleslFormFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.972973">
+              <caret line="235" column="17" selection-start-line="235" selection-start-column="17" selection-end-line="235" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StokeData.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/model/StokeData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SalesFormCustomerFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="102" column="28" selection-start-line="102" selection-start-column="16" selection-end-line="102" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -1631,10 +1680,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/model/OrderData.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/model/Product.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/model/Region.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/model/Sale.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/model/SaleData.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/model/SummaryReport.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/model/Task.java" />
@@ -1650,7 +1695,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskViewOnMapFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/util/AccountManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/HomeActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/list_row_selector.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormCustomerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
@@ -1659,7 +1703,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/task_calender_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/task_by_location.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/sales_form_customer_fragment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/detailer_task_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/sale_task_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskByLocationFragment.java" />
@@ -1678,10 +1721,16 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/CustomerAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/customer_commercial_form_fragment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/org/chai/activities/forms/MalariaFormActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/AddNewCustomerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerContactsFormFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/malaria_form_fragment_2.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/sales_form_stock_fragment.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormStockFragment.java" />
       </list>
     </option>
   </component>
@@ -1806,6 +1855,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1926,6 +1976,28 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai-crm-android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="adapter" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -2000,32 +2072,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chai-crm-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chai" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="customer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -2046,7 +2092,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -2379,13 +2424,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8587106" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.55418384" sideWeight="0.5051414" order="7" side_tool="true" content_ui="tabs" />
@@ -2399,7 +2443,7 @@
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969153" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23457584" sideWeight="0.4989775" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2377892" sideWeight="0.4989775" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4074074" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2407,6 +2451,7 @@
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5569273" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -2428,175 +2473,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/task_by_location.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.551724">
-          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/task_calender_fragment.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.793103">
-          <caret line="19" column="57" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormCustomerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6162625">
-          <caret line="69" column="11" selection-start-line="60" selection-start-column="8" selection-end-line="69" selection-end-column="11" />
-          <folding>
-            <element signature="e#1917#2469#0" expanded="false" />
-            <element signature="e#2468#2469#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56348073">
-          <caret line="70" column="11" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
-          <folding>
-            <element signature="e#2488#2489#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sales_form_customer_fragment.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42857143">
-          <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5392297">
-          <caret line="39" column="177" selection-start-line="39" selection-start-column="177" selection-end-line="39" selection-end-column="177" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/21.0.3/support-v4-21.0.3-sources.jar!/android/support/v4/app/Fragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33238232">
-          <caret line="1349" column="16" selection-start-line="1349" selection-start-column="16" selection-end-line="1349" selection-end-column="16" />
-          <folding>
-            <element signature="e#50294#50295#0" expanded="false" />
-            <element signature="e#50351#50352#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/sale_task_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/cancel_context_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskByLocationFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="201" column="20" selection-start-line="201" selection-start-column="8" selection-end-line="201" selection-end-column="20" />
-          <folding>
-            <element signature="e#5317#6045#0" expanded="false" />
-            <element signature="e#6044#6045#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customer_form.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customer_list_fragment.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.793103">
-          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerDetailsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/delete_context_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#189#212#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/detailer_task_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/sale_customer_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="7" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="202" column="5" selection-start-line="165" selection-start-column="4" selection-end-line="202" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerForm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="367" column="46" selection-start-line="367" selection-start-column="46" selection-end-line="367" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2623,7 +2503,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="188" column="5" selection-start-line="157" selection-start-column="4" selection-end-line="188" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2631,16 +2510,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="173" column="42" selection-start-line="173" selection-start-column="42" selection-end-line="173" selection-end-column="42" />
-          <folding>
-            <element signature="e#2069#2510#0" expanded="false" />
-            <element signature="e#2509#2510#0" expanded="false" />
-            <element signature="e#2563#2806#0" expanded="false" />
-            <element signature="e#2805#2806#0" expanded="false" />
-            <element signature="e#6536#7169#0" expanded="false" />
-            <element signature="e#7168#7169#0" expanded="false" />
-            <element signature="e#7216#7414#0" expanded="false" />
-            <element signature="e#7413#7414#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2648,7 +2517,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2656,12 +2524,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="265" column="55" selection-start-line="265" selection-start-column="55" selection-end-line="265" selection-end-column="55" />
-          <folding>
-            <element signature="e#7221#7238#0" expanded="false" />
-            <element signature="e#8008#8019#0" expanded="false" />
-            <element signature="e#14984#14985#0" expanded="false" />
-            <element signature="e#15018#15019#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2669,7 +2531,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="40" column="48" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2677,7 +2538,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="49" column="32" selection-start-line="47" selection-start-column="8" selection-end-line="49" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2685,7 +2545,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2693,7 +2552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2701,7 +2559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="60" selection-start-line="41" selection-start-column="60" selection-end-line="41" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2709,7 +2566,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2717,10 +2573,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="80" column="51" selection-start-line="80" selection-start-column="51" selection-end-line="80" selection-end-column="51" />
-          <folding>
-            <element signature="e#3165#3467#0" expanded="false" />
-            <element signature="e#3466#3467#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2750,7 +2602,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2777,9 +2628,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="87" column="9" selection-start-line="87" selection-start-column="9" selection-end-line="87" selection-end-column="9" />
-          <folding>
-            <element signature="e#3617#3627#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2791,19 +2639,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseContainerFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2811,7 +2650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2819,10 +2657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="37" column="64" selection-start-line="37" selection-start-column="64" selection-end-line="37" selection-end-column="64" />
-          <folding>
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#1806#1807#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2852,15 +2686,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="43" selection-start-line="50" selection-start-column="43" selection-end-line="50" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2868,7 +2693,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="82" column="13" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2884,32 +2708,214 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="142" column="9" selection-start-line="140" selection-start-column="8" selection-end-line="142" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/malaria_form_fragment_3.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="12.827586">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/malaria_form_fragment_2.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.413794">
+          <caret line="176" column="67" selection-start-line="176" selection-start-column="67" selection-end-line="176" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+          <folding>
+            <element signature="e#7212#9029#0" expanded="false" />
+            <element signature="e#9028#9029#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/model/SaleData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/model/AdhockSale.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/model/DistrictDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="6" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1300#1301#0" expanded="false" />
+            <element signature="e#1329#1330#0" expanded="false" />
+            <element signature="e#2705#2706#0" expanded="false" />
+            <element signature="e#2756#2757#0" expanded="false" />
+            <element signature="e#3498#3499#0" expanded="false" />
+            <element signature="e#3537#3538#0" expanded="false" />
+            <element signature="e#3834#3835#0" expanded="false" />
+            <element signature="e#3861#3862#0" expanded="false" />
+            <element signature="e#6596#6606#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormSaleFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/util/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="223" column="24" selection-start-line="223" selection-start-column="24" selection-end-line="223" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#831#832#0" expanded="false" />
+            <element signature="e#865#866#0" expanded="false" />
+            <element signature="e#4253#4259#0" expanded="false" />
+            <element signature="e#9822#9828#0" expanded="false" />
+            <element signature="e#10928#10929#0" expanded="false" />
+            <element signature="e#10956#10957#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/AddNewCustomerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="184" column="73" selection-start-line="184" selection-start-column="73" selection-end-line="184" selection-end-column="73" />
+          <caret line="187" column="13" selection-start-line="187" selection-start-column="13" selection-end-line="187" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TakeOrderFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="102" column="28" selection-start-line="102" selection-start-column="16" selection-end-line="102" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="163" column="36" selection-start-line="163" selection-start-column="36" selection-end-line="163" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormZincFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="21" selection-start-line="79" selection-start-column="20" selection-end-line="81" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sales_form_stock_fragment.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.77678573">
+          <caret line="29" column="62" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormRecommendationFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SaleslFormFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.972973">
+          <caret line="235" column="17" selection-start-line="235" selection-start-column="17" selection-end-line="235" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/model/StokeData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding>
-            <element signature="e#4809#4810#0" expanded="true" />
-            <element signature="e#4842#4843#0" expanded="true" />
-            <element signature="e#5604#5605#0" expanded="true" />
-            <element signature="e#5644#5645#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/stock_form_row.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerContactsFormFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71754634">
-          <caret line="144" column="9" selection-start-line="144" selection-start-column="9" selection-end-line="144" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="128" column="80" selection-start-line="128" selection-start-column="80" selection-end-line="128" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormStockFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.64194006">
+          <caret line="154" column="25" selection-start-line="154" selection-start-column="25" selection-end-line="154" selection-end-column="25" />
           <folding>
-            <element signature="e#1152#1315#0" expanded="true" />
-            <element signature="e#1314#1315#0" expanded="true" />
-            <element signature="e#2879#3324#0" expanded="true" />
-            <element signature="e#3323#3324#0" expanded="true" />
+            <element signature="e#2074#2231#0" expanded="true" />
+            <element signature="e#2230#2231#0" expanded="true" />
+            <element signature="e#3239#3680#0" expanded="true" />
+            <element signature="e#3679#3680#0" expanded="true" />
           </folding>
         </state>
       </provider>

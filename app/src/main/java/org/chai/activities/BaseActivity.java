@@ -55,12 +55,14 @@ public class BaseActivity extends ActionBarActivity{
     public int SCREEN_MALARIA_DETAILING = 4;
     public int SCREEN_DIARRHEA_DETAILING = 5;
     public int SCREEN_REPORT = 6;
+    public int SCREEN_SALES = 7;
 
     public int CURRENT_SCREEN = 0;
 
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
 
+    //Detailers
     String[] drawerItems = new String[]{
             "Tasks",
             "Customers",
@@ -98,6 +100,40 @@ public class BaseActivity extends ActionBarActivity{
             SCREEN_REPORT
     };
 
+    //Sales peeps
+    String[] drawerItemsSales = new String[]{
+            "Tasks",
+            "Customers",
+            "History",
+            "New Order",
+            "Unscheduled Sale",
+            "My Report"
+    };
+    int[] iconsNormalSales = new int[]{
+            R.drawable.ic_drawer_tasks,
+            R.drawable.ic_drawer_customers,
+            R.drawable.ic_drawer_history,
+            R.drawable.ic_drawer_order,
+            R.drawable.ic_drawer_detailing,
+            R.drawable.ic_drawer_reports
+    };
+    int[] iconsSelectedSales = new int[]{
+            R.drawable.ic_drawer_tasks_active,
+            R.drawable.ic_drawer_customers_active,
+            R.drawable.ic_drawer_history_active,
+            R.drawable.ic_drawer_order_active,
+            R.drawable.ic_drawer_detailing_active,
+            R.drawable.ic_drawer_reports_active
+    };
+    int[] screensSales = new int[]{
+            SCREEN_TASKS,
+            SCREEN_CUSTOMERS,
+            SCREEN_HISTORY,
+            SCREEN_NEW_ORDER,
+            SCREEN_SALES,
+            SCREEN_REPORT
+    };
+
     ListView drawerMenuListView;
 
     String username;
@@ -126,15 +162,18 @@ public class BaseActivity extends ActionBarActivity{
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         drawerMenuListView = (ListView) findViewById(R.id.lst_drawer);
-        drawerMenuListView.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_item, drawerItems) {
+        drawerMenuListView.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_item, RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER) ? drawerItems : drawerItemsSales) {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View row = convertView;
-                boolean active = (CURRENT_SCREEN == screens[position]);
-                int[] icons = iconsNormal;
+
+                int[] theScreens = RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER) ? screens : screensSales;
+                boolean active = (CURRENT_SCREEN == theScreens[position]);
+
+                int[] icons = RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER) ? iconsNormal : iconsNormalSales;
                 if (active) {
-                    icons = iconsSelected;
+                    icons = RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER) ? iconsSelected : iconsSelectedSales;
                 }
 
                 if (row == null) {
@@ -149,8 +188,10 @@ public class BaseActivity extends ActionBarActivity{
                     aq.background(android.R.color.transparent);
                 }
 
+                String[] items = RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER) ? drawerItems : drawerItemsSales;
+
                 aq.id(R.id.img_icon).image(icons[position]);
-                aq.id(R.id.txt_title).text(drawerItems[position]);
+                aq.id(R.id.txt_title).text(items[position]);
 
                 if (active) {
                     aq.id(R.id.txt_title).textColor(R.color.primary);
@@ -180,11 +221,15 @@ public class BaseActivity extends ActionBarActivity{
                         target = NewOrderActivity.class;
                         break;
                     case 4:
-                        target = MalariaFormActivity.class;
+                        if(RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)){
+                            target = MalariaFormActivity.class;
+                        }else{
+                            target = SalesFormActivity.class;
+                        }
                         break;
                     case 5:
                         if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
-                            target = SalesFormActivity.class;
+                            target = ReportsActivity.class;
                         }else{
                             target = DiarrheaFormActivity.class;
                         }
@@ -195,7 +240,6 @@ public class BaseActivity extends ActionBarActivity{
                 }
                 if (target != null) {
                     Intent i = new Intent(BaseActivity.this, target);
-                    i.putExtra("title", drawerItems[position]);
                     i.putExtra("username", username);
                     i.putExtra("position", position);
                     startActivity(i);

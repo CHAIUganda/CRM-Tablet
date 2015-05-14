@@ -27,6 +27,7 @@
                 style="@style/LabelStyle"
                 android:text="3. Do you stock ORS and Zinc?"/>
             <Spinner
+                android:id="@+id/spn_do_you_stock_ors_and_zinc"
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
                 android:entries="@array/yesnolist" />

@@ -174,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="8. Do you know what severe malaria, how to identify it, and deal with severe malaria patients?"/>
+                android:text="8. Do you know what severe malaria is, how to identify it, and deal with severe malaria patients?"/>
 
             <Spinner
                 android:id="@+id/do_you_know_server_malaria"

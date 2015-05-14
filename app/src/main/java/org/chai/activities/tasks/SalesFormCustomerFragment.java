@@ -90,6 +90,21 @@ public class SalesFormCustomerFragment extends Fragment {
         aq.id(R.id.gps).text(tracker.getLatitude() + "," + tracker.getLongitude());
     }
 
+    public boolean saveFields(){
+        if(customer == null){
+            Toast.makeText(getActivity(), "Please select customer", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        SalesFormActivity ac = (SalesFormActivity)getActivity();
+        ac.task.setCustomerId(customer.getUuid());
+        ac.task.setCustomer(customer);
+        ac.sale.setLatitude(Utils.getLatFromLatLong(aq.id(R.id.gps).getText().toString()));
+        ac.sale.setLongitude(Utils.getLongFromLatLong(aq.id(R.id.gps).getText().toString()));
+
+        return true;
+    }
+
     private void setRequiredFields(){
         List<View> required = Utils.getViewsByTag((ViewGroup) view, "required");
         for(View v : required){

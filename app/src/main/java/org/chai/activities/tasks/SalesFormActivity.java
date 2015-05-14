@@ -1,5 +1,7 @@
 package org.chai.activities.tasks;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +17,19 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.activities.calls.HistoryActivity;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
+import org.chai.model.ProductDao;
+import org.chai.model.Sale;
+import org.chai.model.SaleDao;
+import org.chai.model.SaleDataDao;
+import org.chai.model.StokeDataDao;
+import org.chai.model.Task;
+import org.chai.model.TaskDao;
+import org.chai.util.MyApplication;
+import org.chai.util.Utils;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -28,12 +43,33 @@ public class SalesFormActivity extends BaseActivity {
     ViewPager pager;
     CircleIndicator indicator;
 
+    private SQLiteDatabase db;
+    private DaoMaster daoMaster;
+    private DaoSession daoSession;
+    private TaskDao taskDao;
+    private SaleDao saleDao;
+    private SaleDataDao saleDataDao;
+    private StokeDataDao stokeDataDao;
+    private ProductDao productDao;
+
+    public Task task;
+    public Sale sale;
+
+    SalesFormCustomerFragment customerFragment;
+    SalesFormStockFragment stockFragment;
+    SalesFormSaleFragment salesFragment;
+    SalesFormNextStepsFragment nextStepsFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        CURRENT_SCREEN = SCREEN_DIARRHEA_DETAILING;
+        CURRENT_SCREEN = SCREEN_SALES;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sales_form_activity);
+        initialiseGreenDao();
+
+        task = new Task();
+        sale = new Sale();
 
         aq = new AQuery(this);
 
@@ -58,16 +94,20 @@ public class SalesFormActivity extends BaseActivity {
             Fragment fragment = null;
             switch (position){
                 case 0:
-                    fragment = new SalesFormCustomerFragment();
+                    customerFragment = new SalesFormCustomerFragment();
+                    fragment = customerFragment;
                     break;
                 case 1:
-                    fragment = new SalesFormStockFragment();
+                    stockFragment = new SalesFormStockFragment();
+                    fragment = stockFragment;
                     break;
                 case 2:
-                    fragment = new SalesFormSaleFragment();
+                    salesFragment = new SalesFormSaleFragment();
+                    fragment = salesFragment;
                     break;
                 case 3:
-                    fragment = new SalesFormNextStepsFragment();
+                    nextStepsFragment = new SalesFormNextStepsFragment();
+                    fragment = nextStepsFragment;
                     break;
             }
             return fragment;
@@ -76,6 +116,22 @@ public class SalesFormActivity extends BaseActivity {
         @Override
         public int getCount() {
             return NUM_PAGES;
+        }
+    }
+
+    private void initialiseGreenDao() {
+        try {
+            UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
+            db = helper.getWritableDatabase();
+            daoMaster = new DaoMaster(db);
+            daoSession = daoMaster.newSession();
+            taskDao = daoSession.getTaskDao();
+            saleDao = daoSession.getSaleDao();
+            saleDataDao = daoSession.getSaleDataDao();
+            productDao = daoSession.getProductDao();
+            stokeDataDao = daoSession.getStokeDataDao();
+        } catch (Exception ex) {
+            Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -92,9 +148,25 @@ public class SalesFormActivity extends BaseActivity {
             return true;
         }
         if(item.getItemId() == R.id.action_save){
-            Toast.makeText(this, "Form details saved", Toast.LENGTH_LONG).show();
-            finish();
+            saveForm();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveForm(){
+        Utils.log("Saving sales form");
+        if(customerFragment == null || !customerFragment.saveFields()){
+            pager.setCurrentItem(0);
+            return;
+        }
+
+        if(stockFragment == null || !stockFragment.saveFields()){
+            pager.setCurrentItem(1);
+            return;
+        }
+
+        Toast.makeText(this, "Sale details have been saved", Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this, HistoryActivity.class);
+        startActivity(i);
     }
 }
