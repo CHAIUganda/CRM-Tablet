@@ -165,6 +165,11 @@ public class SalesFormActivity extends BaseActivity {
             return;
         }
 
+        if(salesFragment == null || !salesFragment.saveFields()){
+            pager.setCurrentItem(2);
+            return;
+        }
+
         Toast.makeText(this, "Sale details have been saved", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, HistoryActivity.class);
         startActivity(i);

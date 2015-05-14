@@ -18,17 +18,11 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.adapter.ProductArrayAdapter;
-import org.chai.model.AdhockSale;
-import org.chai.model.AdhockSaleDao;
-import org.chai.model.Customer;
-import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.Product;
 import org.chai.model.ProductDao;
-import org.chai.model.SaleDataDao;
 import org.chai.model.StokeData;
-import org.chai.model.StokeDataDao;
 import org.chai.util.MyApplication;
 import org.chai.util.migration.UpgradeOpenHelper;
 
@@ -43,19 +37,13 @@ public class SalesFormStockFragment extends Fragment{
     View view;
     LinearLayout rowContainer;
     ArrayList<View> rows;
-    ArrayList<StokeData> stocks;
+    public ArrayList<StokeData> stocks;
 
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
-    private AdhockSaleDao adhockSaleDao;
-    private SaleDataDao saleDataDao;
-    private StokeDataDao stokeDataDao;
     private ProductDao productDao;
-    private CustomerDao customerDao;
 
-    private AdhockSale saleInstance;
-    private Customer salesCustomer;
     private List<Product> products;
 
     @Override
@@ -126,11 +114,7 @@ public class SalesFormStockFragment extends Fragment{
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
-            adhockSaleDao = daoSession.getAdhockSaleDao();
-            saleDataDao = daoSession.getSaleDataDao();
             productDao = daoSession.getProductDao();
-            customerDao = daoSession.getCustomerDao();
-            stokeDataDao = daoSession.getStokeDataDao();
         } catch (Exception ex) {
             Log.d("Error", ex.getLocalizedMessage());
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -169,6 +153,9 @@ public class SalesFormStockFragment extends Fragment{
 
             i++;
         }
+
+        SalesFormActivity ac = (SalesFormActivity)getActivity();
+        ac.sale.setDoYouStockOrsZinc(stocksZincOrs.equalsIgnoreCase("Yes"));
 
         return true;
     }

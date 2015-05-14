@@ -28,6 +28,7 @@
                 android:text="8. Did you describe the new government approved MRP of 1,500 UGX?"/>
 
             <Spinner
+                android:id="@+id/spn_described_government_approved_mrp"
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
                 android:popupBackground="@color/primary_dark"
