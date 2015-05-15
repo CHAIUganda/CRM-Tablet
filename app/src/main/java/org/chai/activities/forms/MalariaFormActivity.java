@@ -29,6 +29,7 @@ import org.chai.model.MalariaDetailDao;
 import org.chai.model.Task;
 import org.chai.model.TaskDao;
 import org.chai.util.MyApplication;
+import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class MalariaFormActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Utils.log("onCreate() Main Activity");
         CURRENT_SCREEN = SCREEN_MALARIA_DETAILING;
 
         super.onCreate(savedInstanceState);
@@ -258,6 +260,7 @@ public class MalariaFormActivity extends BaseActivity {
         //Clear all stocks first
         detailerStockDao.deleteInTx(call.getDetailerMalariaStocks());
 
+        Utils.log("Anitmalarials -> " + antimalarials.size());
         //Save stocks
         stocks = new ArrayList<DetailerStock>();
         stocks.addAll(antimalarials);
@@ -265,6 +268,7 @@ public class MalariaFormActivity extends BaseActivity {
         stocks.addAll(copacks);
 
         for(DetailerStock stock: stocks){
+            Utils.log("Saving stock -> " + stock.getCategory() + " : " + stock.getBrand());
             stock.setIsDirty(true);
             stock.setMalariadetailId(call.getUuid());
             stock.setMalariaDetail(call);
@@ -273,10 +277,8 @@ public class MalariaFormActivity extends BaseActivity {
             if(stock.getUuid() == null){
                 stock.setUuid(UUID.randomUUID().toString());
                 stock.setDateCreated(new Date());
-                detailerStockDao.insert(stock);
-            }else{
-                detailerStockDao.update(stock);
             }
+            detailerStockDao.insert(stock);
         }
 
         Toast.makeText(this, "Diarrhea form has been saved", Toast.LENGTH_LONG).show();

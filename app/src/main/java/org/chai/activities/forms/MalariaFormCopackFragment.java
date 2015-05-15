@@ -100,7 +100,6 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
 
     @Override
     public void onResume() {
-        Utils.log("onResume()");
         super.onResume();
         if(rows != null){
             for(View row: rows){

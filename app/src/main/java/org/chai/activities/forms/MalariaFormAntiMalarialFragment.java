@@ -129,6 +129,7 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
 
     @Override
     public void onPause() {
+        Utils.log("onPause()");
         super.onPause();
         DetailerStock stock;
         try{

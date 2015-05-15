@@ -102,7 +102,6 @@ public class MalariaFormRdtFragment extends Fragment implements IViewManipulator
 
     @Override
     public void onResume() {
-        Utils.log("onResume()");
         super.onResume();
         if(rows != null){
             for(View row: rows){
