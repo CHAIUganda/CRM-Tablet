@@ -72,6 +72,7 @@ public class SalesFormStockFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 2) {
+                    clearStocks();
                     ((SalesFormActivity) getActivity()).pager.setCurrentItem(2);
                 }
             }
@@ -87,6 +88,13 @@ public class SalesFormStockFragment extends Fragment{
         populateFields();
 
         return view;
+    }
+
+    private void clearStocks(){
+        for(View row : rows){
+            ((ViewGroup)row.getParent()).removeView(row);
+            parent.stocks = new ArrayList<StokeData>();
+        }
     }
 
     private void populateFields(){

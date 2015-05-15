@@ -67,6 +67,7 @@ public class SalesFormSaleFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 2) {
+                    clearSales();
                     ((SalesFormActivity) getActivity()).pager.setCurrentItem(3);
                 }
             }
@@ -80,6 +81,13 @@ public class SalesFormSaleFragment extends Fragment {
         products = productDao.loadAll();
 
         return view;
+    }
+
+    private void clearSales(){
+        for(View row : rows){
+            ((ViewGroup)row.getParent()).removeView(row);
+            parent.sales = new ArrayList<SaleData>();
+        }
     }
 
     @Override

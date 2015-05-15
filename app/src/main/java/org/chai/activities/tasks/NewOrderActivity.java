@@ -286,6 +286,14 @@ public class NewOrderActivity extends BaseActivity {
             Toast.makeText(this, "Select the due date", Toast.LENGTH_LONG).show();
             return;
         }
+        if(RestClient.getRole() == User.ROLE_DETAILER){
+            Date d = Utils.addToDateOffset(new Date(), 7); //One week from now
+            Utils.log("7 days from now -> " + dateFormat.format(d) + " Delivery date -> " + dateFormat.format(date));
+            if(date.compareTo(d) < 0){
+                Toast.makeText(this, "Due date cannot be in less than a week", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
         if(date.compareTo(new Date()) < 0){
             Toast.makeText(this, "Due date cannot be in the past", Toast.LENGTH_LONG).show();
             return;
