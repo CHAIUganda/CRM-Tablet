@@ -75,6 +75,9 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
                     clearStocks();
                     activity.pager.setCurrentItem(5);
                 }
+                if(position == 1 && rows.size() == 0){
+                    addRow(new DetailerStock(), true);
+                }
             }
 
             @Override

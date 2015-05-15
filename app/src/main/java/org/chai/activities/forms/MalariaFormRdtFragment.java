@@ -77,6 +77,9 @@ public class MalariaFormRdtFragment extends Fragment implements IViewManipulator
                     clearStocks();
                     activity.pager.setCurrentItem(4);
                 }
+                if(position == 1 && rows.size() == 0){
+                    addRow(new DetailerStock(), true);
+                }
             }
 
             @Override

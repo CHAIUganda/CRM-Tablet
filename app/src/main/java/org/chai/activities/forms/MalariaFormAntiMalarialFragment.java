@@ -83,6 +83,9 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
                     clearStocks();
                     activity.pager.setCurrentItem(3);
                 }
+                if(position == 1 && rows.size() == 0){
+                    addRow(new DetailerStock(), true);
+                }
             }
 
             @Override
