@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.splunk.mint.Mint;
 
 import org.chai.R;
-import org.chai.activities.tasks.DiarrheaFormActivity;
+import org.chai.activities.calls.HistoryActivity;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.User;
@@ -53,7 +53,7 @@ public class LoginActivity extends BaseActivity {
         Mint.initAndStartSession(LoginActivity.this, "8255bd80");
 
         if(AccountManager.offlineLogin(this, false)){
-            Intent i = new Intent(LoginActivity.this, DiarrheaFormActivity.class);
+            Intent i = new Intent(LoginActivity.this, HistoryActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
             finish();

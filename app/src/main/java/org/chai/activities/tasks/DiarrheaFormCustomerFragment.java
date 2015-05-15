@@ -92,6 +92,10 @@ public class DiarrheaFormCustomerFragment extends Fragment {
         tracker = Globals.getInstance().getGpsTracker();
         setLatLong();
 
+        if(activity.call.getUuid() != null){
+            populateFields();
+        }
+
         return view;
     }
 
@@ -109,6 +113,11 @@ public class DiarrheaFormCustomerFragment extends Fragment {
                 Utils.log("Error setting view by tag -> " + ex.getMessage());
             }
         }
+    }
+
+    private void populateFields(){
+        int patients = activity.call.getDiarrheaPatientsInFacility();
+        aq.id(R.id.diarrhea_patients).text(Integer.toString(patients));
     }
 
     public boolean saveFields(){

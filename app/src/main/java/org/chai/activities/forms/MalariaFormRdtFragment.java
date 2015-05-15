@@ -88,7 +88,7 @@ public class MalariaFormRdtFragment extends Fragment implements IViewManipulator
             }
         });
 
-        if(activity.call != null){
+        if(activity.call.getUuid() != null){
             populateFields();
         }
 

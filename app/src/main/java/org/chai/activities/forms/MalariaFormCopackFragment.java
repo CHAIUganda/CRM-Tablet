@@ -86,7 +86,7 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
             }
         });
 
-        if(activity.call != null){
+        if(activity.call.getUuid() != null){
             populateFields();
         }
 

@@ -24,7 +24,9 @@ public class SalesFormNextStepsFragment extends Fragment {
         activity = (SalesFormActivity)getActivity();
         view = inflater.inflate(R.layout.sales_form_next_steps_fragment, container, false);
         aq = new AQuery(view);
-        populateFields();
+        if(activity.sale.getUuid() != null){
+            populateFields();
+        }
         return view;
     }
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,11 @@ public class DiarrheaFormEducationFragment extends Fragment {
 
             }
         });
+
+        if(activity.call.getUuid() != null){
+            populateFields();
+        }
+
         return view;
     }
 
@@ -61,6 +67,48 @@ public class DiarrheaFormEducationFragment extends Fragment {
             }catch(Exception ex){
                 Utils.log("Error setting view by tag -> " + ex.getMessage());
             }
+        }
+    }
+
+    private void populateFields(){
+        String headoftreatment = activity.call.getHeardAboutDiarrheaTreatmentInChildren();
+        if(headoftreatment != null){
+            Spinner s1 = aq.id(R.id.heardofdiarrheatreament).getSpinner();
+            s1.setSelection(((ArrayAdapter<String>)s1.getAdapter()).getPosition(headoftreatment));
+        }
+        String how = activity.call.getHowDidYouHear();
+        if(how != null){
+            Spinner s2 = aq.id(R.id.how_did_you_hear).getSpinner();
+            s2.setSelection(((ArrayAdapter<String>)s2.getAdapter()).getPosition(how));
+        }
+        String otherways = activity.call.getOtherWaysHowYouHeard();
+        if(otherways != null){
+            aq.id(R.id.other_source_of_information).text(otherways);
+        }
+        String diarrheaeffects = activity.call.getDiarrheaEffectsOnBody();
+        if(diarrheaeffects != null){
+            Spinner s3 = aq.id(R.id.diarrhea_effects_on_the_body).getSpinner();
+            s3.setSelection(((ArrayAdapter<String>) s3.getAdapter()).getPosition(diarrheaeffects));
+        }
+        String whatyouknow = activity.call.getWhatYouKnowAbtDiarrhea();
+        if(whatyouknow != null){
+            Spinner s4 = aq.id(R.id.diarrhea_effects_on_the_community).getSpinner();
+            s4.setSelection(((ArrayAdapter<String>)s4.getAdapter()).getPosition(whatyouknow));
+        }
+        String aboutors = activity.call.getKnowledgeAbtOrsAndUsage();
+        if(aboutors != null){
+            Spinner s5 = aq.id(R.id.ors_usage).getSpinner();
+            s5.setSelection(((ArrayAdapter<String>)s5.getAdapter()).getPosition(aboutors));
+        }
+        String aboutzinc = activity.call.getKnowledgeAbtZincAndUsage();
+        if(aboutzinc != null){
+            Spinner s6 = aq.id(R.id.zinc_usage).getSpinner();
+            s6.setSelection(((ArrayAdapter<String>)s6.getAdapter()).getPosition(aboutzinc));
+        }
+        String antibiotics = activity.call.getWhyNotUseAntibiotics();
+        if(antibiotics != null){
+            Spinner s7 = aq.id(R.id.why_should_you_not_use_antobiotics).getSpinner();
+            s7.setSelection(((ArrayAdapter<String>)s7.getAdapter()).getPosition(antibiotics));
         }
     }
 

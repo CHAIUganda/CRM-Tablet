@@ -91,6 +91,10 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
             }
         });
 
+        if(activity.call.getUuid() != null){
+            populateFields();
+        }
+
         return view;
     }
 
@@ -280,6 +284,19 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
         aq.id(R.id.btn_add_row).visible();
         aq.id(R.id.txt_prompt_title).visible();
         aq.id(R.id.txt_form_title).visible();
+    }
+
+    private void populateFields(){
+        try{
+            boolean doyoustock = activity.call.getDoYouStockZinc();
+            if(doyoustock){
+                aq.id(R.id.do_you_stock_zinc).setSelection(1);
+            }else{
+                aq.id(R.id.do_you_stock_zinc).setSelection(2);
+            }
+        }catch (Exception ex){
+
+        }
     }
 
     public boolean saveFields(){

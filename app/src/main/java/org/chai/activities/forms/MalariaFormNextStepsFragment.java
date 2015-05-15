@@ -25,7 +25,7 @@ public class MalariaFormNextStepsFragment extends Fragment {
         activity = (MalariaFormActivity)getActivity();
         view = inflater.inflate(R.layout.malaria_form_fragment_4, container, false);
         aq = new AQuery(view);
-        if(activity.call != null){
+        if(activity.call.getUuid() != null){
             populateFields();
         }
         return view;

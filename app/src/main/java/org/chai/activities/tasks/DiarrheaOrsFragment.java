@@ -88,6 +88,10 @@ public class DiarrheaOrsFragment extends Fragment implements IViewManipulator {
             }
         });
 
+        if(activity.call.getUuid() != null){
+            populateFields();
+        }
+
         return view;
     }
 
@@ -273,6 +277,19 @@ public class DiarrheaOrsFragment extends Fragment implements IViewManipulator {
         aq.id(R.id.btn_add_row).visible();
         aq.id(R.id.txt_prompt_title).visible();
         aq.id(R.id.txt_form_title).visible();
+    }
+
+    private void populateFields(){
+        try{
+            boolean doyoustock = activity.call.getDoYouStockOrs();
+            if(doyoustock){
+                aq.id(R.id.do_you_stock_ors).setSelection(1);
+            }else{
+                aq.id(R.id.do_you_stock_ors).setSelection(2);
+            }
+        }catch (Exception ex){
+
+        }
     }
 
     public boolean saveFields(){

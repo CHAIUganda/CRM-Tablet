@@ -33,7 +33,7 @@ public class MalariaFormEducationFragment extends Fragment {
         setRequiredFields();
         aq = new AQuery(view);
         manageToogleFields();
-        if(activity.call != null){
+        if(activity.call.getUuid() != null){
             populateFields();
         }
         return view;

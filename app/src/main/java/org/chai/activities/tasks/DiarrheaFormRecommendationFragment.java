@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
@@ -50,7 +52,40 @@ public class DiarrheaFormRecommendationFragment extends Fragment {
             }
         });
 
+        if(activity.call.getUuid() != null){
+            populateFields();
+        }
+
         return view;
+    }
+
+    private void populateFields(){
+        String recommendation = activity.call.getRecommendationLevel();
+        if(recommendation != null){
+            Spinner spinner = aq.id(R.id.spn_customer_recommendation).getSpinner();
+            spinner.setSelection(((ArrayAdapter<String>)spinner.getAdapter()).getPosition(recommendation));
+        }
+
+        String materials = activity.call.getPointOfsaleMaterial();
+        if(materials != null){
+            aq.id(R.id.dangler).checked(materials.indexOf(aq.id(R.id.dangler).getText().toString()) != -1);
+            aq.id(R.id.poster).checked(materials.indexOf(aq.id(R.id.poster).getText().toString()) != -1);
+            aq.id(R.id.tent_card).checked(materials.indexOf(aq.id(R.id.tent_card).getText().toString()) != -1);
+            aq.id(R.id.bunting).checked(materials.indexOf(aq.id(R.id.bunting).getText().toString()) != -1);
+            aq.id(R.id.mrp_dangler).checked(materials.indexOf(aq.id(R.id.mrp_dangler).getText().toString()) != -1);
+            aq.id(R.id.pen).checked(materials.indexOf(aq.id(R.id.pen).getText().toString()) != -1);
+
+        }
+
+        String recommendations = activity.call.getRecommendationNextStep();
+        if(recommendations != null){
+            aq.id(R.id.start_purchasing).checked(recommendations.indexOf(aq.id(R.id.start_purchasing).getText().toString()) != -1);
+            aq.id(R.id.none).checked(recommendations.indexOf(aq.id(R.id.none).getText().toString()) != -1);
+            aq.id(R.id.stock_ors).checked(recommendations.indexOf(aq.id(R.id.stock_ors).getText().toString()) != -1);
+            aq.id(R.id.stock_zinc).checked(recommendations.indexOf(aq.id(R.id.stock_zinc).getText().toString()) != -1);
+            aq.id(R.id.start_recommending).checked(recommendations.indexOf(aq.id(R.id.start_recommending).getText().toString()) != -1);
+            aq.id(R.id.start_selling).checked(recommendations.indexOf(aq.id(R.id.start_selling).getText().toString()) != -1);
+        }
     }
 
     public boolean saveFields(){

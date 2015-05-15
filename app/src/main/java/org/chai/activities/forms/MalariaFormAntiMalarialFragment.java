@@ -94,7 +94,7 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
             }
         });
 
-        if(activity.call != null){
+        if(activity.call.getUuid() != null){
             populateFields();
         }
 

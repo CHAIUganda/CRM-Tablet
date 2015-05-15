@@ -85,7 +85,9 @@ public class SalesFormStockFragment extends Fragment{
 
         products = productDao.loadAll();
 
-        populateFields();
+        if(parent.sale.getUuid() != null){
+            populateFields();
+        }
 
         return view;
     }

@@ -110,7 +110,7 @@ public class MalariaFormCustomerFragment extends Fragment {
             });
         }
 
-        if(parent.call != null){
+        if(parent.call.getUuid() != null){
             populateFields();
         }
 
