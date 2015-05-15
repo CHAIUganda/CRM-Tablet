@@ -31,6 +31,7 @@ import java.util.Arrays;
  * Created by Zed on 4/9/2015.
  */
 public class MalariaFormAntiMalarialFragment extends Fragment implements IViewManipulator {
+    public static final String STOCK_TYPE = "antimalarial";
     AQuery aq;
     LinearLayout antimalarialContainer;
     View view;

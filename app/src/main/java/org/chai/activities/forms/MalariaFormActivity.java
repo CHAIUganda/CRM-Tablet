@@ -17,8 +17,8 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.activities.HomeActivity;
 import org.chai.activities.calls.HistoryActivity;
-import org.chai.activities.tasks.DiarrheaFormActivity;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
@@ -31,7 +31,9 @@ import org.chai.model.TaskDao;
 import org.chai.util.MyApplication;
 import org.chai.util.migration.UpgradeOpenHelper;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -55,6 +57,8 @@ public class MalariaFormActivity extends BaseActivity {
 
     public Task task;
     public MalariaDetail call;
+    private String taskId;
+    private String detailId;
 
     protected SQLiteDatabase db;
     protected DaoMaster daoMaster;
@@ -64,18 +68,43 @@ public class MalariaFormActivity extends BaseActivity {
     protected CustomerDao customerDao;
     protected DetailerStockDao detailerStockDao;
 
+    List<DetailerStock> stocks;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         CURRENT_SCREEN = SCREEN_MALARIA_DETAILING;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.malaria_form_activity);
+
         initialiseGreenDao();
 
         aq = new AQuery(this);
 
-        task = new Task();
-        call = new MalariaDetail();
+        detailId = getIntent().getStringExtra("detail_id");
+        taskId = getIntent().getStringExtra("task_id");
+
+        if(detailId != null){
+            call = malariaDetailDao.load(detailId);
+            if(call != null){
+                task = call.getTask();
+            }
+        }else{
+            if(taskId != null){
+                task = taskDao.load(taskId);
+            }
+        }
+
+        if(call == null){
+            call = new MalariaDetail();
+            stocks = new ArrayList<DetailerStock>();
+        }else{
+            stocks = call.getDetailerMalariaStocks();
+        }
+
+        if(task == null){
+            task = new Task();
+        }
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -150,88 +179,80 @@ public class MalariaFormActivity extends BaseActivity {
     }
 
     private void saveForm(){
-        if(customerFragment == null){
-            pager.setCurrentItem(0);
-            return;
-        }else if(!customerFragment.saveFields()){
+        if(customerFragment == null || !customerFragment.saveFields()){
             pager.setCurrentItem(0);
             return;
         }
 
-        if(educationFragment == null){
-            pager.setCurrentItem(1);
-            return;
-        }else if(!educationFragment.saveFields()){
+        if(educationFragment == null || !educationFragment.saveFields()){
             pager.setCurrentItem(1);
             return;
         }
 
-        if(antimalarialFragment == null){
-            pager.setCurrentItem(2);
-            return;
-        }else if(!antimalarialFragment.saveFields()){
+        if(antimalarialFragment == null || !antimalarialFragment.saveFields()){
             pager.setCurrentItem(2);
             return;
         }
 
-        if(rdtFragment == null){
-            pager.setCurrentItem(3);
-            return;
-        }else if(!rdtFragment.saveFields()){
+        if(rdtFragment == null || !rdtFragment.saveFields()){
             pager.setCurrentItem(3);
             return;
         }
 
-        if(recommendationFragment == null){
-            pager.setCurrentItem(4);
-            return;
-        }else if(!recommendationFragment.saveFields()){
+        if(recommendationFragment == null || !recommendationFragment.saveFields()){
             pager.setCurrentItem(4);
             return;
         }
 
-        task.setUuid(UUID.randomUUID().toString());
-        task.setStatus(DiarrheaFormActivity.STATUS_COMPLETE);
+        if(copackFragment == null || !copackFragment.saveFields()){
+            pager.setCurrentItem(5);
+            return;
+        }
+
+        task.setStatus(HomeActivity.STATUS_COMPLETE);
         task.setType("malaria");
-        task.setIsAdhock(true);
         task.setCompletionDate(new Date());
-        task.setDateCreated(new Date());
         task.setIsDirty(true);
 
-        taskDao.insert(task);
+        if(task.getUuid() == null){
+            task.setUuid(UUID.randomUUID().toString());
+            taskDao.insert(task);
+        }else{
+            task.setIsAdhock(true);
+            task.setDateCreated(new Date());
+            taskDao.update(task);
+        }
 
-        call.setIsDirty(true);
-        call.setUuid(UUID.randomUUID().toString());
-        call.setDateOfSurvey(new Date());
         call.setTaskId(task.getUuid());
         call.setTask(task);
+        call.setDateOfSurvey(new Date());
+        call.setIsDirty(true);
+
+        if(call.getUuid() == null){
+            call.setUuid(UUID.randomUUID().toString());
+            malariaDetailDao.insert(call);
+        }else{
+            malariaDetailDao.update(call);
+        }
+
+        //Clear all stocks first
+        detailerStockDao.deleteInTx(call.getDetailerMalariaStocks());
 
         //Save stocks
-        for(DetailerStock stock: antimalarialFragment.stocks){
-            stock.setUuid(UUID.randomUUID().toString());
+        for(DetailerStock stock: stocks){
             stock.setIsDirty(true);
-            stock.setDateCreated(new Date());
             stock.setMalariadetailId(call.getUuid());
             stock.setMalariaDetail(call);
             stock.setDetailerId("");
-            stock.setCategory("antimalarial");
 
-            detailerStockDao.insert(stock);
+            if(stock.getUuid() == null){
+                stock.setUuid(UUID.randomUUID().toString());
+                stock.setDateCreated(new Date());
+                detailerStockDao.insert(stock);
+            }else{
+                detailerStockDao.update(stock);
+            }
         }
-
-        for(DetailerStock stock: rdtFragment.stocks){
-            stock.setUuid(UUID.randomUUID().toString());
-            stock.setIsDirty(true);
-            stock.setDateCreated(new Date());
-            stock.setMalariadetailId(call.getUuid());
-            stock.setMalariaDetail(call);
-            stock.setDetailerId("");
-            stock.setCategory("rdt");
-
-            detailerStockDao.insert(stock);
-        }
-
-        malariaDetailDao.insert(call);
 
         Toast.makeText(this, "Diarrhea form has been saved", Toast.LENGTH_LONG).show();
 

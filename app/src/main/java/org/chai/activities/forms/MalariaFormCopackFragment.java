@@ -31,6 +31,7 @@ import java.util.Arrays;
  * Created by Zed on 5/15/2015.
  */
 public class MalariaFormCopackFragment extends Fragment implements IViewManipulator {
+    public static final String STOCK_TYPE = "copack";
     AQuery aq;
     LinearLayout copackContainer;
     View view;

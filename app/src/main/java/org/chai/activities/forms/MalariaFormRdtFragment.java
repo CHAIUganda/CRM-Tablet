@@ -31,6 +31,7 @@ import java.util.Arrays;
  * Created by Zed on 4/23/2015.
  */
 public class MalariaFormRdtFragment extends Fragment implements IViewManipulator{
+    public static final String STOCK_TYPE = "rdt";
     AQuery aq;
     LinearLayout rdtContainer;
     View view;
@@ -45,7 +46,8 @@ public class MalariaFormRdtFragment extends Fragment implements IViewManipulator
             "SD Bioline",
             "First Response Malaria",
             "PAN/Pf",
-            "Clearview Malaria"
+            "Clearview Malaria",
+            "CareStart"
     };
 
     MalariaFormActivity activity;
