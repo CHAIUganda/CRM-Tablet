@@ -260,7 +260,6 @@ public class MalariaFormActivity extends BaseActivity {
         //Clear all stocks first
         detailerStockDao.deleteInTx(call.getDetailerMalariaStocks());
 
-        Utils.log("Anitmalarials -> " + antimalarials.size());
         //Save stocks
         stocks = new ArrayList<DetailerStock>();
         stocks.addAll(antimalarials);

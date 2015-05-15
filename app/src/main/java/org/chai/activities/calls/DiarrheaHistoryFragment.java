@@ -1,17 +1,20 @@
 package org.chai.activities.calls;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
 import org.chai.R;
+import org.chai.activities.tasks.DiarrheaFormActivity;
 import org.chai.adapter.DiarrheaHistoryAdapter;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
@@ -50,6 +53,16 @@ public class DiarrheaHistoryFragment extends Fragment {
         items.addAll(detailerCallDao.loadAll());
         adapter = new DiarrheaHistoryAdapter(getActivity(), R.layout.history_item_row, items);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                DetailerCall detail = items.get(position);
+                Intent i = new Intent(getActivity(), DiarrheaFormActivity.class);
+                i.putExtra("detail_id", detail.getUuid());
+                i.putExtra("task_id", detail.getTaskId());
+                getActivity().startActivity(i);
+            }
+        });
 
         return view;
     }

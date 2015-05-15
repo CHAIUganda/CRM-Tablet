@@ -24,9 +24,11 @@ public class DiarrheaFormEducationFragment extends Fragment {
     View view;
     AQuery aq;
     Spinner heardAboutTreatmentSpinner;
+    DiarrheaFormActivity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        activity = (DiarrheaFormActivity)getActivity();
         view = inflater.inflate(R.layout.diarrhea_form_education_fragment, container, false);
         setRequiredFields();
         aq = new AQuery(view);
@@ -78,15 +80,14 @@ public class DiarrheaFormEducationFragment extends Fragment {
             return false;
         }
 
-        DiarrheaFormActivity ac = (DiarrheaFormActivity)getActivity();
-        ac.call.setHeardAboutDiarrheaTreatmentInChildren(heardOfTreatment);
-        ac.call.setHowDidYouHear(howDidYouHear);
-        ac.call.setWhyNotUseAntibiotics(aq.id(R.id.why_should_you_not_use_antobiotics).getSelectedItem().toString());
-        ac.call.setDiarrheaEffectsOnBody(aq.id(R.id.diarrhea_effects_on_the_body).getSelectedItem().toString());
-        ac.call.setKnowledgeAbtOrsAndUsage(aq.id(R.id.ors_usage).getSelectedItem().toString());
-        ac.call.setKnowledgeAbtZincAndUsage(aq.id(R.id.zinc_usage).getSelectedItem().toString());
-        ac.call.setOtherWaysHowYouHeard(otherSources);
-        ac.call.setWhatYouKnowAbtDiarrhea(aq.id(R.id.diarrhea_effects_on_the_community).getSelectedItem().toString());
+        activity.call.setHeardAboutDiarrheaTreatmentInChildren(heardOfTreatment);
+        activity.call.setHowDidYouHear(howDidYouHear);
+        activity.call.setWhyNotUseAntibiotics(aq.id(R.id.why_should_you_not_use_antobiotics).getSelectedItem().toString());
+        activity.call.setDiarrheaEffectsOnBody(aq.id(R.id.diarrhea_effects_on_the_body).getSelectedItem().toString());
+        activity.call.setKnowledgeAbtOrsAndUsage(aq.id(R.id.ors_usage).getSelectedItem().toString());
+        activity.call.setKnowledgeAbtZincAndUsage(aq.id(R.id.zinc_usage).getSelectedItem().toString());
+        activity.call.setOtherWaysHowYouHeard(otherSources);
+        activity.call.setWhatYouKnowAbtDiarrhea(aq.id(R.id.diarrhea_effects_on_the_community).getSelectedItem().toString());
 
         return true;
     }

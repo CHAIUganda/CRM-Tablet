@@ -17,6 +17,7 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.activities.HomeActivity;
 import org.chai.activities.calls.HistoryActivity;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
@@ -28,9 +29,12 @@ import org.chai.model.DetailerStockDao;
 import org.chai.model.Task;
 import org.chai.model.TaskDao;
 import org.chai.util.MyApplication;
+import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -39,8 +43,6 @@ import me.relex.circleindicator.CircleIndicator;
  * Created by Zed on 5/2/2015.
  */
 public class DiarrheaFormActivity extends BaseActivity {
-    public final static String STATUS_NEW = "new", STATUS_COMPLETE = "complete",STATUS_CANCELLED = "cancelled";
-
     Toolbar toolbar;
     AQuery aq;
     int NUM_PAGES = 5;
@@ -55,6 +57,12 @@ public class DiarrheaFormActivity extends BaseActivity {
 
     public Task task;
     public DetailerCall call;
+    private String detailId;
+    private String taskId;
+
+    List<DetailerStock> stocks;
+    List<DetailerStock> zincStocks;
+    List<DetailerStock> orsStocks;
 
     protected SQLiteDatabase db;
     protected DaoMaster daoMaster;
@@ -78,8 +86,43 @@ public class DiarrheaFormActivity extends BaseActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        task = new Task();
-        call = new DetailerCall();
+        detailId = getIntent().getStringExtra("detail_id");
+        taskId = getIntent().getStringExtra("task_id");
+
+        if(detailId != null){
+            call = detailerCallDao.load(detailId);
+            if(call != null){
+                task = call.getTask();
+                toolbar.setTitle("Edit Diarrhea Details");
+            }
+        }else{
+            if(taskId != null){
+                task = taskDao.load(taskId);
+            }
+        }
+
+        if(call == null){
+            call = new DetailerCall();
+            stocks = new ArrayList<DetailerStock>();
+        }else{
+            stocks = call.getDetailerStocks();
+        }
+
+        if(task == null){
+            task = new Task();
+        }
+
+        zincStocks = new ArrayList<DetailerStock>();
+        orsStocks = new ArrayList<DetailerStock>();
+
+        for(DetailerStock stock: stocks){
+            if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(DiarrheaFormZincFragment.STOCK_TYPE)){
+                zincStocks.add(stock);
+            }
+            if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(DiarrheaOrsFragment.STOCK_TYPE)){
+                orsStocks.add(stock);
+            }
+        }
 
         pager = (ViewPager) findViewById(R.id.pager);
         indicator = (CircleIndicator) findViewById(R.id.indicator);
@@ -147,87 +190,79 @@ public class DiarrheaFormActivity extends BaseActivity {
     }
 
     private void saveForm(){
-        if(!customerFragment.saveFields()){
+        if(customerFragment == null || !customerFragment.saveFields()){
             pager.setCurrentItem(0);
             return;
         }
 
-        if(!educationFragment.saveFields()){
+        if(educationFragment == null || !educationFragment.saveFields()){
             pager.setCurrentItem(1);
             return;
         }
 
-        if(zincFragment == null){ //Make sure the detailer has atleast been to the Zinc Screen
+        if(zincFragment == null || !zincFragment.saveFields()){ //Make sure the detailer has atleast been to the Zinc Screen
             pager.setCurrentItem(2);
             return;
-        }else{
-            if(!zincFragment.saveFields()){
-                pager.setCurrentItem(2);
-                return;
-            }
         }
 
-        if(orsFragment == null){ //Make sure the detailer has atleast been to the ORS Screen
+        if(orsFragment == null || !orsFragment.saveFields()){ //Make sure the detailer has atleast been to the ORS Screen
             pager.setCurrentItem(3);
             return;
-        }else{
-            if(!orsFragment.saveFields()){
-                pager.setCurrentItem(3);
-                return;
-            }
         }
 
-        if(recommendationFragment == null){
+        if(recommendationFragment == null || !recommendationFragment.saveFields()){
             pager.setCurrentItem(4);
             return;
-        }else{
-            if(!recommendationFragment.saveFields()){
-                pager.setCurrentItem(4);
-                return;
-            }
         }
 
-        task.setUuid(UUID.randomUUID().toString());
-        task.setStatus(STATUS_COMPLETE);
+        task.setStatus(HomeActivity.STATUS_COMPLETE);
         task.setType("detailer");
-        task.setIsAdhock(true);
         task.setCompletionDate(new Date());
         task.setIsDirty(true);
 
-        taskDao.insert(task);
+        if(task.getUuid() == null){
+            task.setUuid(UUID.randomUUID().toString());
+            taskDao.insert(task);
+        }else{
+            task.setIsAdhock(true);
+            task.setDateCreated(new Date());
+            taskDao.update(task);
+        }
 
-        call.setIsDirty(true);
-        call.setUuid(UUID.randomUUID().toString());
-        call.setDateOfSurvey(new Date());
         call.setTaskId(task.getUuid());
         call.setTask(task);
+        call.setDateOfSurvey(new Date());
+        call.setIsDirty(true);
+
+        if(call.getUuid() == null){
+            call.setUuid(UUID.randomUUID().toString());
+            detailerCallDao.insert(call);
+        }else{
+            detailerCallDao.update(call);
+        }
+
+        //Clear all stocks first
+        detailerStockDao.deleteInTx(call.getDetailerStocks());
 
         //Save stocks
-        for(DetailerStock stock: zincFragment.stocks){
-            stock.setUuid(UUID.randomUUID().toString());
+        stocks = new ArrayList<DetailerStock>();
+        stocks.addAll(zincStocks);
+        stocks.addAll(orsStocks);
+        Utils.log("Zincs -> " + zincStocks.size() + " ORS : -> " + orsStocks.size() + " Stocks: " + stocks.size());
+
+        for(DetailerStock stock: stocks){
+            Utils.log("Saving stock -> " + stock.getCategory() + " : " + stock.getBrand());
             stock.setIsDirty(true);
-            stock.setDateCreated(new Date());
+            stock.setMalariadetailId("");
             stock.setDetailerId(call.getUuid());
             stock.setDetailerCall(call);
-            stock.setCategory("zinc");
-            //stock.setMalariadetailId("");
 
+            if(stock.getUuid() == null){
+                stock.setUuid(UUID.randomUUID().toString());
+                stock.setDateCreated(new Date());
+            }
             detailerStockDao.insert(stock);
         }
-
-        for(DetailerStock stock: orsFragment.stocks){
-            stock.setUuid(UUID.randomUUID().toString());
-            stock.setIsDirty(true);
-            stock.setDateCreated(new Date());
-            stock.setDetailerId(call.getUuid());
-            stock.setDetailerCall(call);
-            //stock.setMalariadetailId("");
-            stock.setCategory("ors");
-
-            detailerStockDao.insert(stock);
-        }
-
-        detailerCallDao.insert(call);
 
         Toast.makeText(this, "Diarrhea form has been saved", Toast.LENGTH_LONG).show();
 

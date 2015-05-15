@@ -44,30 +44,50 @@ public class DiarrheaFormCustomerFragment extends Fragment {
     List<Customer> customers;
     Customer customer;
     GPSTracker tracker;
+    String customerId;
+
+    DiarrheaFormActivity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        activity = (DiarrheaFormActivity)getActivity();
         view = inflater.inflate(R.layout.diarrhea_form_customer_fragment, container, false);
         aq = new AQuery(view);
         setRequiredFields();
         initialiseGreenDao();
 
-        customers = customerDao.loadAll();
+        customerId = getActivity().getIntent().getStringExtra("customer_id");
+        if(customerId == null){
+            customerId = activity.task.getCustomerId();
+        }
 
-        AutoCompleteTextView textView = (AutoCompleteTextView)view.findViewById(R.id.customer_id);
-        CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, new ArrayList<Customer>(customers));
-        textView.setAdapter(adapter);
-
-        textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view1, int position, long l) {
-                Customer selected = (Customer)adapterView.getAdapter().getItem(position);
-                customer = selected;
-                if(customer != null){
-                    aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
-                }
+        if(customerId != null){
+            customer = customerDao.load(customerId);
+            if(customer != null){
+                aq.id(R.id.customer_id).enabled(false);
+                aq.id(R.id.customer_id).text(customer.getOutletName()).enabled(false);
+                aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
             }
-        });
+        }
+
+        if(customer == null) {
+            customers = customerDao.loadAll();
+
+            AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.customer_id);
+            CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, new ArrayList<Customer>(customers));
+            textView.setAdapter(adapter);
+
+            textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view1, int position, long l) {
+                    Customer selected = (Customer) adapterView.getAdapter().getItem(position);
+                    customer = selected;
+                    if (customer != null) {
+                        aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+                    }
+                }
+            });
+        }
 
         tracker = Globals.getInstance().getGpsTracker();
         setLatLong();
@@ -77,7 +97,6 @@ public class DiarrheaFormCustomerFragment extends Fragment {
 
     private void setLatLong(){
         tracker = Globals.getInstance().getGpsTracker();
-        Utils.log("Setting latlong -> " + tracker.getLatitude() + "," + tracker.getLongitude());
         aq.id(R.id.gps).text(tracker.getLatitude() + "," + tracker.getLongitude());
     }
 
@@ -103,13 +122,12 @@ public class DiarrheaFormCustomerFragment extends Fragment {
             return false;
         }
 
-        DiarrheaFormActivity ac = (DiarrheaFormActivity)getActivity();
-        ac.task.setCustomerId(customer.getUuid());
-        ac.task.setCustomer(customer);
-        ac.task.setDescription("Go check on " + customer.getOutletName());
-        ac.call.setDiarrheaPatientsInFacility(Integer.parseInt(patients));
-        ac.call.setLongitude(Utils.getLongFromLatLong(aq.id(R.id.gps).getText().toString()));
-        ac.call.setLatitude(Utils.getLatFromLatLong(aq.id(R.id.gps).getText().toString()));
+        activity.task.setCustomerId(customer.getUuid());
+        activity.task.setCustomer(customer);
+        activity.task.setDescription("Go check on " + customer.getOutletName());
+        activity.call.setDiarrheaPatientsInFacility(Integer.parseInt(patients));
+        activity.call.setLongitude(Utils.getLongFromLatLong(aq.id(R.id.gps).getText().toString()));
+        activity.call.setLatitude(Utils.getLatFromLatLong(aq.id(R.id.gps).getText().toString()));
 
         return true;
     }
