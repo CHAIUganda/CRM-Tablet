@@ -82,6 +82,14 @@ public class MalariaFormActivity extends BaseActivity {
 
         initialiseGreenDao();
 
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        pager = (ViewPager) findViewById(R.id.pager);
+        indicator = (CircleIndicator) findViewById(R.id.indicator);
+        pager.setAdapter(new FormPagerAdapter(getSupportFragmentManager()));
+        indicator.setViewPager(pager);
+
         aq = new AQuery(this);
 
         detailId = getIntent().getStringExtra("detail_id");
@@ -91,6 +99,7 @@ public class MalariaFormActivity extends BaseActivity {
             call = malariaDetailDao.load(detailId);
             if(call != null){
                 task = call.getTask();
+                toolbar.setTitle("Edit Malaria Details");
             }
         }else{
             if(taskId != null){
@@ -124,14 +133,6 @@ public class MalariaFormActivity extends BaseActivity {
                 copacks.add(stock);
             }
         }
-
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        pager = (ViewPager) findViewById(R.id.pager);
-        indicator = (CircleIndicator) findViewById(R.id.indicator);
-        pager.setAdapter(new FormPagerAdapter(getSupportFragmentManager()));
-        indicator.setViewPager(pager);
 
         super.setUpDrawer(toolbar);
     }

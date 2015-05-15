@@ -10,9 +10,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
@@ -37,7 +39,6 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
     View view;
     ImageView addRdtButton;
     ArrayList<View> rows;
-    public ArrayList<DetailerStock> stocks;
 
     boolean viewsHidden = false;
 
@@ -63,7 +64,7 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
         aq.id(R.id.btn_add_row).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addRow(null);
+                addRow(new DetailerStock(), true);
             }
         });
 
@@ -71,6 +72,7 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 2) {
+                    clearStocks();
                     activity.pager.setCurrentItem(5);
                 }
             }
@@ -81,23 +83,78 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
             }
         });
 
-        if(rows == null){
-            rows = new ArrayList<View>();
-            stocks = new ArrayList<DetailerStock>();
-        }else{
-            for(View row : rows){
-                ((ViewGroup)row.getParent()).removeView(row);
-                copackContainer.addView(row);
-            }
+        if(activity.call != null){
+            populateFields();
         }
 
         return view;
     }
 
-    private void addRow(DetailerStock stock){
-        if(stock == null){
-            stock = new DetailerStock();
+    private void clearStocks(){
+        for(View row : rows){
+            ((ViewGroup)row.getParent()).removeView(row);
+            activity.copacks = new ArrayList<DetailerStock>();
+            rows = new ArrayList<View>();
         }
+    }
+
+    @Override
+    public void onResume() {
+        Utils.log("onResume()");
+        super.onResume();
+        if(rows != null){
+            for(View row: rows){
+                ((ViewGroup)row.getParent()).removeView(row);
+            }
+        }
+
+        ArrayList<DetailerStock> temp = new ArrayList<DetailerStock>();
+        temp.addAll(activity.copacks);
+
+        rows = new ArrayList<View>();
+        activity.copacks = new ArrayList<DetailerStock>();
+
+        for(int i = 0; i < temp.size(); i++){
+            addRow(temp.get(i), false);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        DetailerStock stock;
+        try{
+            for(View row : rows){
+                AQuery a = new AQuery(row);
+                String brand = a.id(R.id.txt_antimalarial).getText().toString();
+                String level = a.id(R.id.txt_stock_level).getText().toString();
+                String buying = a.id(R.id.txt_buying_price).getText().toString();
+                String selling = a.id(R.id.txt_selling_price).getText().toString();
+                String pack = a.id(R.id.spn_pack_size).getSelectedItem().toString();
+
+                stock = activity.copacks.get(rows.indexOf(row));
+                stock.setCategory(STOCK_TYPE);
+                if(!brand.isEmpty()){
+                    stock.setBrand(brand);
+                }
+                if(!level.isEmpty()){
+                    stock.setStockLevel(Double.parseDouble(level));
+                }
+                if(!buying.isEmpty()){
+                    stock.setBuyingPrice(Double.parseDouble(buying));
+                }
+                if(!selling.isEmpty()){
+                    stock.setSellingPrice(Double.parseDouble(selling));
+                }
+                stock.setPackSize(pack);
+            }
+        }catch(Exception ex){
+            Utils.log("Error saving stock state -> " + ex.getMessage());
+        }
+    }
+
+    private void addRow(final DetailerStock stock, boolean hideOthers){
+        Utils.log("Adding row -> " + stock.getBrand() + " : " + hideOthers);
         LayoutInflater inflator = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View row = inflator.inflate(R.layout.antimalarial_row, null);
@@ -107,7 +164,7 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
             @Override
             public void onClick(View v) {
                 rows.remove(row);
-                stocks.remove(rows.indexOf(row));
+                activity.copacks.remove(stock);
                 LinearLayout parent = (LinearLayout) v.getParent();
                 LinearLayout root = (LinearLayout) parent.getParent();
                 copackContainer.removeView(root);
@@ -125,15 +182,26 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
         text.setListView(list);
         text.setHint("Type or select brand");
 
-        if(stock.getUuid() != null){
-            try{
+        Spinner packsizeSpinner = a.id(R.id.spn_pack_size).getSpinner();
+
+        try{
+            if(stock.getBrand() != null){
                 text.setText(stock.getBrand());
-                a.id(R.id.txt_stock_level).text(Double.toString(stock.getStockLevel()));
-                a.id(R.id.txt_buying_price).text(Double.toString(stock.getBuyingPrice()));
-                a.id(R.id.txt_selling_price).text(Double.toString(stock.getSellingPrice()));
-            }catch (Exception ex){
-                Utils.log("Error populating stock items");
             }
+            if(stock.getStockLevel() != 0){
+                a.id(R.id.txt_stock_level).text(Double.toString(stock.getStockLevel()));
+            }
+            if(stock.getBuyingPrice() != null){
+                a.id(R.id.txt_buying_price).text(Double.toString(stock.getBuyingPrice()));
+            }
+            if(stock.getSellingPrice() != null){
+                a.id(R.id.txt_selling_price).text(Double.toString(stock.getSellingPrice()));
+            }
+            if(stock.getPackSize() != null){
+                packsizeSpinner.setSelection(((ArrayAdapter<String>)packsizeSpinner.getAdapter()).getPosition(stock.getPackSize()));
+            }
+        }catch (Exception ex){
+            Utils.log("Error populating stock items -> " + ex.getMessage());
         }
 
         text.addTextChangedListener(new TextWatcher() {
@@ -165,9 +233,11 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
 
         copackContainer.addView(row);
         rows.add(row);
-        stocks.add(stock);
+        activity.copacks.add(stock);
 
-        hideOtherRows(row);
+        if(hideOthers){
+            hideOtherRows(row);
+        }
     }
 
     private void hideOtherRows(View exclude){
@@ -207,6 +277,15 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
         aq.id(R.id.txt_form_title).visible();
     }
 
+    private void populateFields(){
+        boolean doyoustock = activity.copacks.size() > 0;
+        if(doyoustock){
+            aq.id(R.id.do_you_stock).setSelection(1);
+        }else{
+            aq.id(R.id.do_you_stock).setSelection(2);
+        }
+    }
+
     public boolean saveFields(){
         if(aq.id(R.id.do_you_stock).getSelectedItem().toString().isEmpty()){
             Toast.makeText(getActivity(), "Please select wether customer stocks Copacks or not", Toast.LENGTH_LONG).show();
@@ -221,8 +300,10 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
                 return false;
             }
 
-            DetailerStock stock = stocks.get(rows.indexOf(row));
+            DetailerStock stock = activity.copacks.get(rows.indexOf(row));
             stock.setBrand(brand);
+            stock.setCategory(STOCK_TYPE);
+            stock.setPackSize(a.id(R.id.spn_pack_size).getSelectedItem().toString());
             try{
                 stock.setBuyingPrice(Double.parseDouble(aq.id(R.id.txt_buying_price).getText().toString()));
                 stock.setSellingPrice(Double.parseDouble(aq.id(R.id.txt_selling_price).getText().toString()));

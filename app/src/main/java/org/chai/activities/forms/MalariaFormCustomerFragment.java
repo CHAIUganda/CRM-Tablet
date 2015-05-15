@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,23 +91,27 @@ public class MalariaFormCustomerFragment extends Fragment {
             }
         }
 
-        if(customer == null){
+        if(customer == null) {
             customers = customerDao.loadAll();
 
-            AutoCompleteTextView textView = (AutoCompleteTextView)view.findViewById(R.id.customer_id);
+            AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.customer_id);
             CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, new ArrayList<Customer>(customers));
             textView.setAdapter(adapter);
 
             textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view1, int position, long l) {
-                    Customer selected = (Customer)adapterView.getAdapter().getItem(position);
+                    Customer selected = (Customer) adapterView.getAdapter().getItem(position);
                     customer = selected;
-                    if(customer != null){
+                    if (customer != null) {
                         aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
                     }
                 }
             });
+        }
+
+        if(parent.call != null){
+            populateFields();
         }
 
         return view;
@@ -137,6 +143,30 @@ public class MalariaFormCustomerFragment extends Fragment {
         } catch (Exception ex) {
             Log.d("Err", ex.getLocalizedMessage());
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void populateFields(){
+        aq.id(R.id.patients_per_week).text(Integer.toString(parent.call.getMalariaPatientsInFacility()));
+        aq.id(R.id.children).text(Integer.toString(parent.call.getNumberOfChildren()));
+        String doyouprescribe = parent.call.getDoYouPrescribeTreatment();
+        if(doyouprescribe != null){
+            Spinner s1 = aq.id(R.id.do_you_prescribe_treatment).getSpinner();
+            s1.setSelection(((ArrayAdapter<String>)s1.getAdapter()).getPosition(doyouprescribe));
+        }
+        String heard = parent.call.getHeardAboutGreenLeaf();
+        if(heard != null){
+            Spinner s2 = aq.id(R.id.heard_about_green_leaf).getSpinner();
+            s2.setSelection(((ArrayAdapter<String>)s2.getAdapter()).getPosition(heard));
+        }
+        String sources = parent.call.getHowDidYouHear();
+        if(sources != null){
+            aq.id(R.id.radio).checked(sources.indexOf(aq.id(R.id.radio).getText().toString()) != -1);
+            aq.id(R.id.tv).checked(sources.indexOf(aq.id(R.id.tv).getText().toString()) != -1);
+            aq.id(R.id.billboards).checked(sources.indexOf(aq.id(R.id.billboards).getText().toString()) != -1);
+            aq.id(R.id.newspaper).checked(sources.indexOf(aq.id(R.id.newspaper).getText().toString()) != -1);
+            aq.id(R.id.religious).checked(sources.indexOf(aq.id(R.id.religious).getText().toString()) != -1);
+            aq.id(R.id.friend).checked(sources.indexOf(aq.id(R.id.friend).getText().toString()) != -1);
         }
     }
 

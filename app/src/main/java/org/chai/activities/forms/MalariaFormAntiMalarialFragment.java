@@ -91,6 +91,10 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
             }
         });
 
+        if(activity.call != null){
+            populateFields();
+        }
+
         return view;
     }
 
@@ -134,7 +138,7 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
                 String level = a.id(R.id.txt_stock_level).getText().toString();
                 String buying = a.id(R.id.txt_buying_price).getText().toString();
                 String selling = a.id(R.id.txt_selling_price).getText().toString();
-                String pack = a.id(R.id.spn_pack_size).getText().toString();
+                String pack = a.id(R.id.spn_pack_size).getSelectedItem().toString();
 
                 stock = activity.antimalarials.get(rows.indexOf(row));
                 stock.setCategory(STOCK_TYPE);
@@ -142,7 +146,7 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
                     stock.setBrand(brand);
                 }
                 if(!level.isEmpty()){
-                    stock.setStockLevel(Integer.parseInt(level));
+                    stock.setStockLevel(Double.parseDouble(level));
                 }
                 if(!buying.isEmpty()){
                     stock.setBuyingPrice(Double.parseDouble(buying));
@@ -153,7 +157,7 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
                 stock.setPackSize(pack);
             }
         }catch(Exception ex){
-
+            Utils.log("Error saving stock state -> " + ex.getMessage());
         }
     }
 
@@ -189,25 +193,23 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
         Spinner packsizeSpinner = a.id(R.id.spn_pack_size).getSpinner();
 
         try{
-
+            if(stock.getBrand() != null){
+                text.setText(stock.getBrand());
+            }
+            if(stock.getStockLevel() != 0){
+                a.id(R.id.txt_stock_level).text(Double.toString(stock.getStockLevel()));
+            }
+            if(stock.getBuyingPrice() != null){
+                a.id(R.id.txt_buying_price).text(Double.toString(stock.getBuyingPrice()));
+            }
+            if(stock.getSellingPrice() != null){
+                a.id(R.id.txt_selling_price).text(Double.toString(stock.getSellingPrice()));
+            }
+            if(stock.getPackSize() != null){
+                packsizeSpinner.setSelection(((ArrayAdapter<String>)packsizeSpinner.getAdapter()).getPosition(stock.getPackSize()));
+            }
         }catch (Exception ex){
             Utils.log("Error populating stock items -> " + ex.getMessage());
-        }
-
-        if(stock.getBrand() != null){
-            text.setText(stock.getBrand());
-        }
-        if(stock.getStockLevel() != 0){
-            a.id(R.id.txt_stock_level).text(Double.toString(stock.getStockLevel()));
-        }
-        if(stock.getBuyingPrice() != null){
-            a.id(R.id.txt_buying_price).text(Double.toString(stock.getBuyingPrice()));
-        }
-        if(stock.getSellingPrice() != null){
-            a.id(R.id.txt_selling_price).text(Double.toString(stock.getSellingPrice()));
-        }
-        if(stock.getPackSize() != null){
-            packsizeSpinner.setSelection(((ArrayAdapter<String>)packsizeSpinner.getAdapter()).getPosition(stock.getPackSize()));
         }
 
         text.addTextChangedListener(new TextWatcher() {
@@ -282,11 +284,26 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
         aq.id(R.id.txt_form_title).visible();
     }
 
+    private void populateFields(){
+        try{
+            boolean doyoustock = activity.call.getDoYouStockAntimalarials();
+            if(doyoustock){
+                aq.id(R.id.do_you_stock).setSelection(1);
+            }else{
+                aq.id(R.id.do_you_stock).setSelection(2);
+            }
+        }catch (Exception ex){
+
+        }
+    }
+
     public boolean saveFields(){
         if(aq.id(R.id.do_you_stock).getSelectedItem().toString().isEmpty()){
             Toast.makeText(getActivity(), "Please select wether customer stocks Antimalarials or not", Toast.LENGTH_LONG).show();
             return false;
         }
+
+        activity.call.setDoYouStockAntimalarials(aq.id(R.id.do_you_stock).getSelectedItemPosition() == 1);
 
         int i = 1;
         for(View row: rows){
