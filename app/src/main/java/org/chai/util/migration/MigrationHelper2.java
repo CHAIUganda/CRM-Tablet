@@ -12,13 +12,6 @@ import org.chai.util.Utils;
 public class MigrationHelper2 extends MigratorHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db) {
-        MalariaDetailDao.createTable(db, true);
-        try{
-            String sql = "ALTER TABLE " + DetailerStockDao.TABLENAME + " ADD COLUMN " + DetailerStockDao.Properties.PackSize.columnName + " TEXT";
-            db.execSQL(sql);
-            Utils.log("Update chai_crm: " + sql);
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
+
     }
 }

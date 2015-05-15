@@ -3,6 +3,7 @@ package org.chai.util.migration;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import org.chai.model.*;
+import org.chai.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,15 @@ public class MigrationHelper1 extends MigratorHelper {
         TaskOrderDao.createTable(db, true);
         updateReportSummary(db);
 
+        //The new Malaria form and pack size
+        MalariaDetailDao.createTable(db, true);
+        try{
+            String sql = "ALTER TABLE " + DetailerStockDao.TABLENAME + " ADD COLUMN " + DetailerStockDao.Properties.PackSize.columnName + " TEXT";
+            db.execSQL(sql);
+            Utils.log("Update chai_crm: " + sql);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     private void updateReportSummary(SQLiteDatabase db) {
