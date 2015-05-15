@@ -1,7 +1,6 @@
 package org.chai.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import org.chai.model.CustomerContact;
 import org.chai.model.Order;
 import org.ocpsoft.prettytime.PrettyTime;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,10 +43,13 @@ public class OrderHistoryAdapter extends ArrayAdapter<Order> {
 
         AQuery aq = new AQuery(row);
         aq.id(R.id.txt_customer_name).text(c.getOutletName());
-        aq.id(R.id.txt_time).text(new PrettyTime().format(m.getOrderDate()));
+        Date d = m.getLastUpdated();
+        if(d != null){
+            aq.id(R.id.txt_time).text(new PrettyTime().format(d));
+        }
         aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
 
-        if(m.getIsDirty()){
+        /*if(m.getIsDirty()){
             aq.id(R.id.txt_customer_name).textColor(Color.parseColor("#242527"));
             aq.id(R.id.txt_time).textColor(Color.parseColor("#55595d"));
             aq.id(R.id.txt_customer_contact).textColor(Color.parseColor("#55595d"));
@@ -55,7 +58,7 @@ public class OrderHistoryAdapter extends ArrayAdapter<Order> {
             aq.id(R.id.txt_customer_name).textColor(inactiveColor);
             aq.id(R.id.txt_time).textColor(inactiveColor);
             aq.id(R.id.txt_customer_contact).textColor(inactiveColor);
-        }
+        }*/
 
         Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         row.startAnimation(animation);

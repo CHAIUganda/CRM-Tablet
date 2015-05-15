@@ -227,6 +227,7 @@ public class SalesFormActivity extends BaseActivity {
 
         sale.setIsDirty(true);
         sale.setDateOfSale(new Date());
+        sale.setLastUpdated(new Date());
         sale.setTaskId(task.getUuid());
         sale.setTask(task);
         sale.setOrderId(task.getUuid());

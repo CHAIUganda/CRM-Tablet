@@ -33,6 +33,8 @@ public class MigrationHelper1 extends MigratorHelper {
         try{
             String sql = "ALTER TABLE " + DetailerStockDao.TABLENAME + " ADD COLUMN " + DetailerStockDao.Properties.PackSize.columnName + " TEXT";
             db.execSQL(sql);
+            String sql2 = "ALTER TABLE " + DetailerStockDao.TABLENAME + " ADD COLUMN " + DetailerStockDao.Properties.MalariadetailId.columnName + " TEXT";
+            db.execSQL(sql2);
             Utils.log("Update chai_crm: " + sql);
         }catch (Exception ex){
             ex.printStackTrace();

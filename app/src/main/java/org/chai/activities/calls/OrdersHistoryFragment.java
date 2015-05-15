@@ -58,13 +58,9 @@ public class OrdersHistoryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Order order = items.get(position);
-                if(order.getIsDirty()){
-                    Intent i = new Intent(getActivity(), NewOrderActivity.class);
-                    i.putExtra("order_id", order.getUuid());
-                    getActivity().startActivity(i);
-                }else{
-                    Toast.makeText(getActivity(), "Cannot edit this order", Toast.LENGTH_LONG).show();
-                }
+                Intent i = new Intent(getActivity(), NewOrderActivity.class);
+                i.putExtra("order_id", order.getUuid());
+                getActivity().startActivity(i);
             }
         });
 
