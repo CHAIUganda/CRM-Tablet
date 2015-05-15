@@ -217,7 +217,7 @@ public class TaskByLocationFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String reason = ((EditText) promptView.findViewById(R.id.promptDialogUserInput)).getText().toString();
                         Task task = items.get(position);
-                        task.setStatus(TaskMainFragment.STATUS_CANCELLED);
+                        task.setStatus(HomeActivity.STATUS_CANCELLED);
                         task.setDescription(task.getDescription() + "(" + reason + ")");
                         taskDao.update(task);
                         items.remove(position);

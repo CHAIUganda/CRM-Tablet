@@ -44,6 +44,9 @@ public class OrderHistoryAdapter extends ArrayAdapter<Order> {
         AQuery aq = new AQuery(row);
         aq.id(R.id.txt_customer_name).text(c.getOutletName());
         Date d = m.getLastUpdated();
+        if(d == null){
+            d = m.getOrderDate();
+        }
         if(d != null){
             aq.id(R.id.txt_time).text(new PrettyTime().format(d));
         }

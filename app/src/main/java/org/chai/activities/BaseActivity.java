@@ -43,6 +43,7 @@ import java.util.Date;
  */
 public class BaseActivity extends ActionBarActivity{
     public final static String STATUS_NEW = "new", STATUS_COMPLETE = "complete", STATUS_CANCELLED = "cancelled";
+    public final static String TASK_TYPE_ORDER = "Order";
 
     AQuery aquery;
 

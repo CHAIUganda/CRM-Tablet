@@ -19,6 +19,7 @@ import com.google.android.gms.maps.GoogleMap;
 
 import org.chai.Globals;
 import org.chai.R;
+import org.chai.activities.HomeActivity;
 import org.chai.activities.forms.MalariaFormActivity;
 import org.chai.model.Customer;
 import org.chai.model.DaoMaster;
@@ -163,7 +164,7 @@ public class TaskViewOnMapFragment extends Fragment {
                 Log.i("Longitude===========",longitude+"");
                 if(longitude != 0&&latitude!= 0){
                     OverlayItem taskMarker = new OverlayItem(task.getUuid(), task.getDescription(), new GeoPoint(latitude, longitude));
-                    if(task.getType().equalsIgnoreCase(TaskMainFragment.TASK_TYPE_ORDER)){
+                    if(task.getType().equalsIgnoreCase(HomeActivity.TASK_TYPE_ORDER)){
                         Drawable myCurrentLocationMarker = this.getResources().getDrawable(R.drawable.drugstore_order);
                         taskMarker.setMarker(myCurrentLocationMarker);
                     }else{
@@ -208,20 +209,20 @@ public class TaskViewOnMapFragment extends Fragment {
         QueryBuilder<Task> taskQueryBuilder = taskDao.queryBuilder();
         List<Task> outstandingTasks=null;
         if(itemPosition==1){
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).orderAsc(TaskDao.Properties.Description).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE)).orderAsc(TaskDao.Properties.Description).list();
         } else if (itemPosition >= 0 && itemPosition < 6) {
             itemPosition = itemPosition==0?itemPosition:itemPosition - 1;
             Date dueDateOffset = Utils.addToDateOffset(new Date(), itemPosition);
             Date dueDatemax = Utils.addToDateMax(new Date(), itemPosition + 1);
             Log.i("Due Date:",dueDateOffset.toString()+":max-"+dueDatemax.toString());
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE)).orderAsc(TaskDao.Properties.Description).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE)).orderAsc(TaskDao.Properties.Description).list();
         } else if (itemPosition == 6) {
             //nearby tasks
-            List list = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
+            List list = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
             outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(new GeoPoint(gpsTracker.getLatitude(), gpsTracker.getLongitude()), list,MAX_RADIUS_IN_KM);
 
         } else if (itemPosition == 7) {
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         }
         return outstandingTasks;
     }

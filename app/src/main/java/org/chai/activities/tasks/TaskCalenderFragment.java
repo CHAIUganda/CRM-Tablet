@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.androidquery.AQuery;
 
 import org.chai.R;
+import org.chai.activities.HomeActivity;
 import org.chai.activities.forms.MalariaFormActivity;
 import org.chai.adapter.TaskListAdapter;
 import org.chai.model.DaoMaster;
@@ -136,20 +137,20 @@ public class TaskCalenderFragment extends Fragment {
         QueryBuilder<Task> taskQueryBuilder = taskDao.queryBuilder();
         List<Task> outstandingTasks=null;
         if(itemPosition==1){
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(Utils.addToDateOffset(new Date(), 0)),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(Utils.addToDateOffset(new Date(), 0)),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         } else if (itemPosition >= 0 && itemPosition < 6) {
             itemPosition = itemPosition==0?itemPosition:itemPosition - 1;
             Date dueDateOffset = Utils.addToDateOffset(new Date(), itemPosition);
             Date dueDatemax = Utils.addToDateMax(new Date(), itemPosition);
             Log.i("Due Date:", dueDateOffset.toString() + ":max-" + dueDatemax.toString());
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         }else if(itemPosition == 6){
             //nearby tasks
             GeoPoint geoPoint = getCurrentLocation();
-            List list =taskQueryBuilder.where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
+            List list =taskQueryBuilder.where(TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
             outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(geoPoint, list, TaskViewOnMapFragment.MAX_RADIUS_IN_KM);
         }else if(itemPosition == 7){
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         }
 
         if(outstandingTasks.size() == 0){
@@ -217,7 +218,7 @@ public class TaskCalenderFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String reason = ((EditText) promptView.findViewById(R.id.promptDialogUserInput)).getText().toString();
                         Task task = items.get(position);
-                        task.setStatus(TaskMainFragment.STATUS_CANCELLED);
+                        task.setStatus(HomeActivity.STATUS_CANCELLED);
                         task.setDescription(task.getDescription() + "(" + reason + ")");
                         taskDao.update(task);
                         items.remove(position);

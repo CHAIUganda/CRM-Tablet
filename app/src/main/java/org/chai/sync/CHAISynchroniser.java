@@ -13,7 +13,7 @@ import android.os.IBinder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.chai.activities.tasks.TaskMainFragment;
+import org.chai.activities.HomeActivity;
 import org.chai.model.AdhockSale;
 import org.chai.model.AdhockSaleDao;
 import org.chai.model.BaseEntity;
@@ -250,7 +250,7 @@ public class CHAISynchroniser extends Service {
     }
 
     public void uploadTasks() throws SyncronizationException {
-        List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.notEq(TaskMainFragment.STATUS_NEW)).list();
+        List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.notEq(HomeActivity.STATUS_NEW)).list();
 
         if (!taskList.isEmpty()) {
             updatePropgress("Uploading Tasks..");

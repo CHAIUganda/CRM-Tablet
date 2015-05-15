@@ -147,16 +147,12 @@ ADDED from AndroidManifest.xml:47:7
 		ADDED from AndroidManifest.xml:47:57
 	android:name
 		ADDED from AndroidManifest.xml:47:17
-activity#org.chai.activities.customer.CustomerDetailsActivity
+activity#org.chai.activities.customer.CustomersActivity
 ADDED from AndroidManifest.xml:50:7
+	android:label
+		ADDED from AndroidManifest.xml:50:71
 	android:name
 		ADDED from AndroidManifest.xml:50:17
-activity#org.chai.activities.customer.CustomersActivity
-ADDED from AndroidManifest.xml:51:7
-	android:label
-		ADDED from AndroidManifest.xml:51:71
-	android:name
-		ADDED from AndroidManifest.xml:51:17
 activity#org.chai.activities.calls.HistoryActivity
 ADDED from AndroidManifest.xml:53:7
 	android:label
@@ -181,36 +177,30 @@ ADDED from AndroidManifest.xml:60:7
 		ADDED from AndroidManifest.xml:60:76
 	android:name
 		ADDED from AndroidManifest.xml:60:17
-activity#org.chai.activities.customer.CustomerForm
-ADDED from AndroidManifest.xml:63:7
-	android:configChanges
-		ADDED from AndroidManifest.xml:63:66
-	android:name
-		ADDED from AndroidManifest.xml:63:17
 meta-data#com.google.android.maps.v2.API_KEY
+ADDED from AndroidManifest.xml:63:7
+	android:name
+		ADDED from AndroidManifest.xml:63:18
+	android:value
+		ADDED from AndroidManifest.xml:63:68
+meta-data#com.google.android.gms.version
 ADDED from AndroidManifest.xml:64:7
+MERGED from com.google.android.gms:play-services:6.5.87:21:9
 	android:name
 		ADDED from AndroidManifest.xml:64:18
 	android:value
-		ADDED from AndroidManifest.xml:64:68
-meta-data#com.google.android.gms.version
-ADDED from AndroidManifest.xml:65:7
-MERGED from com.google.android.gms:play-services:6.5.87:21:9
-	android:name
-		ADDED from AndroidManifest.xml:65:18
-	android:value
-		ADDED from AndroidManifest.xml:65:64
+		ADDED from AndroidManifest.xml:64:64
 receiver#org.chai.sync.BootAndUpdateReceiver
-ADDED from AndroidManifest.xml:67:7
+ADDED from AndroidManifest.xml:66:7
 	android:name
-		ADDED from AndroidManifest.xml:67:17
+		ADDED from AndroidManifest.xml:66:17
 intent-filter#android.intent.action.BOOT_COMPLETED
-ADDED from AndroidManifest.xml:68:11
+ADDED from AndroidManifest.xml:67:11
 action#android.intent.action.BOOT_COMPLETED
-ADDED from AndroidManifest.xml:69:15
+ADDED from AndroidManifest.xml:68:15
 	android:name
-		ADDED from AndroidManifest.xml:69:23
+		ADDED from AndroidManifest.xml:68:23
 service#org.chai.sync.CHAISynchroniser
-ADDED from AndroidManifest.xml:73:7
+ADDED from AndroidManifest.xml:72:7
 	android:name
-		ADDED from AndroidManifest.xml:73:16
+		ADDED from AndroidManifest.xml:72:16

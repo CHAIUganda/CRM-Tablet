@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
@@ -19,7 +18,6 @@ import org.chai.model.SummaryReport;
 import org.chai.model.SummaryReportDao;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
-import org.chai.util.customwidget.SummaryReportTable;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.List;
@@ -80,14 +78,6 @@ public class ReportsActivity extends BaseActivity {
         } catch (Exception ex) {
             Utils.log("Error initializing databse");
             Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void  addReportToTable( List<SummaryReport> summaryReportList){
-        TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-        for(SummaryReport summaryReport:summaryReportList){
-            tableLayout.addView(new SummaryReportTable(this, summaryReport.getItem().replace("_"," "),summaryReport.getWeek(),
-                    summaryReport.getMonth(),summaryReport.getTeamAverageThisWeek(),summaryReport.getTeamAverageThisMonth()),params);
         }
     }
 }
