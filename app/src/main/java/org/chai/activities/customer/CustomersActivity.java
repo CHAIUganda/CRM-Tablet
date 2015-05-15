@@ -21,6 +21,7 @@ import com.androidquery.AQuery;
 import org.chai.R;
 import org.chai.activities.BaseActivity;
 import org.chai.activities.forms.MalariaFormActivity;
+import org.chai.activities.tasks.DiarrheaFormActivity;
 import org.chai.activities.tasks.SalesFormActivity;
 import org.chai.adapter.CustomerAdapter;
 import org.chai.model.Customer;
@@ -173,6 +174,11 @@ public class CustomersActivity extends BaseActivity {
                 Intent i = new Intent(this, MalariaFormActivity.class);
                 i.putExtra("customer_id", customer.getUuid());
                 startActivity(i);
+                break;
+            case R.id.detail_diarrhea:
+                Intent id = new Intent(this, DiarrheaFormActivity.class);
+                id.putExtra("customer_id", customer.getUuid());
+                startActivity(id);
                 break;
             case R.id.detail_sale:
                 Intent in = new Intent(this, SalesFormActivity.class);

@@ -71,7 +71,7 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 2) {
-                    activity.pager.setCurrentItem(4);
+                    activity.pager.setCurrentItem(5);
                 }
             }
 

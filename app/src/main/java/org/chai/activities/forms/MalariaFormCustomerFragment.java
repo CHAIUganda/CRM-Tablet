@@ -46,29 +46,16 @@ public class MalariaFormCustomerFragment extends Fragment {
 
     GPSTracker tracker;
 
+    MalariaFormActivity parent;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        parent = (MalariaFormActivity)getActivity();
+
         view = inflater.inflate(R.layout.malaria_form_fragment_1, container, false);
         setRequiredFields();
         aq = new AQuery(view);
         initialiseGreenDao();
-
-        customers = customerDao.loadAll();
-
-        AutoCompleteTextView textView = (AutoCompleteTextView)view.findViewById(R.id.customer_id);
-        CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, new ArrayList<Customer>(customers));
-        textView.setAdapter(adapter);
-
-        textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view1, int position, long l) {
-                Customer selected = (Customer)adapterView.getAdapter().getItem(position);
-                customer = selected;
-                if(customer != null){
-                    aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
-                }
-            }
-        });
 
         aq.id(R.id.heard_about_green_leaf).itemSelected(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -89,12 +76,36 @@ public class MalariaFormCustomerFragment extends Fragment {
         setLatLong();
 
         customerId = getActivity().getIntent().getStringExtra("customer_id");
+        if(customerId == null){
+            customerId = parent.task.getCustomerId();
+        }
+
         if(customerId != null){
             customer = customerDao.load(customerId);
             if(customer != null){
-                aq.id(R.id.customer_id).text(customer.getOutletName()).enabled(false);
+                aq.id(R.id.customer_id).enabled(false);
+                aq.id(R.id.customer_id).text(customer.getOutletName());
                 aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
             }
+        }
+
+        if(customer == null){
+            customers = customerDao.loadAll();
+
+            AutoCompleteTextView textView = (AutoCompleteTextView)view.findViewById(R.id.customer_id);
+            CustomerAutocompleteAdapter adapter = new CustomerAutocompleteAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, new ArrayList<Customer>(customers));
+            textView.setAdapter(adapter);
+
+            textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view1, int position, long l) {
+                    Customer selected = (Customer)adapterView.getAdapter().getItem(position);
+                    customer = selected;
+                    if(customer != null){
+                        aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+                    }
+                }
+            });
         }
 
         return view;

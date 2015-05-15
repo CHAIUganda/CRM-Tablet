@@ -77,11 +77,11 @@
             style="@style/LabelStyle"
             android:text="Pack Size"/>
 
-        <EditText
-            android:id="@+id/txt_pack_size"
+        <Spinner
+            android:id="@+id/spn_pack_size"
             android:layout_width="match_parent"
-            style="@style/TextBoxStyle"
-            android:inputType="number"
-            android:layout_height="wrap_content" />
+            style="@style/SpinnerStyle"
+            android:layout_height="wrap_content"
+            android:entries="@array/pack_sizes"/>
     </LinearLayout>
 </LinearLayout>

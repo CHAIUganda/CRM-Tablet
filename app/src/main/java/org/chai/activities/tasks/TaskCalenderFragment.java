@@ -187,13 +187,16 @@ public class TaskCalenderFragment extends Fragment {
                 break;
             case R.id.detail_malaria:
                 Intent i = new Intent(getActivity(), MalariaFormActivity.class);
-                i.putExtra("id", task.getCustomerId());
                 i.putExtra("task_id", task.getUuid());
                 startActivity(i);
                 break;
+            case R.id.detail_diarrhea:
+                Intent id = new Intent(getActivity(), DiarrheaFormActivity.class);
+                id.putExtra("task_id", task.getUuid());
+                startActivity(id);
+                break;
             case R.id.detail_sale:
                 Intent in = new Intent(getActivity(), SalesFormActivity.class);
-                in.putExtra("id", task.getCustomerId());
                 in.putExtra("task_id", task.getUuid());
                 startActivity(in);
                 break;

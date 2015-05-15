@@ -113,6 +113,12 @@
         <item>Public Hospital</item>
         <item>Private Hospital</item>
     </string-array>
+    <array name="pack_sizes">
+        <item>1 x 6</item>
+        <item>1 x 12</item>
+        <item>1 x 18</item>
+        <item>1 x 24</item>
+    </array>
     <string-array name="point_of_sale_material">
         <item>ORS/zinc dangler</item>
         <item>Tent card</item>

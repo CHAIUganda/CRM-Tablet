@@ -19,6 +19,7 @@ public class DetailerStock {
         detailerStock.addDoubleProperty("stockLevel").notNull();
         detailerStock.addDoubleProperty("buyingPrice");
         detailerStock.addDoubleProperty("sellingPrice");
+        detailerStock.addStringProperty("packSize");
 
         Property detailerId = detailerStock.addStringProperty("detailerId").notNull().getProperty();
         Property malariaDetailId = detailerStock.addStringProperty("malariadetailId").notNull().getProperty();

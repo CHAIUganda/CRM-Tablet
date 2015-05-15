@@ -10,9 +10,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
@@ -37,7 +39,6 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
     View view;
     ImageView addAntimalarialButton;
     ArrayList<View> rows;
-    public ArrayList<DetailerStock> stocks;
 
     boolean viewsHidden = false;
 
@@ -60,7 +61,6 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Utils.log("Creating Fragment");
         activity = (MalariaFormActivity)getActivity();
 
         view = inflater.inflate(R.layout.malaria_form_fragment_3, container, false);
@@ -72,24 +72,15 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
         aq.id(R.id.btn_add_antimalarial_row).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addRow(null);
+                addRow(new DetailerStock(), true);
             }
         });
-
-        if(rows == null){
-            rows = new ArrayList<View>();
-            stocks = new ArrayList<DetailerStock>();
-        }else{
-            for(View row : rows){
-                ((ViewGroup)row.getParent()).removeView(row);
-                antimalarialContainer.addView(row);
-            }
-        }
 
         aq.id(R.id.do_you_stock).itemSelected(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 2){
+                    clearStocks();
                     activity.pager.setCurrentItem(3);
                 }
             }
@@ -103,10 +94,71 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
         return view;
     }
 
-    private void addRow(DetailerStock stock){
-        if(stock == null){
-            stock = new DetailerStock();
+    private void clearStocks(){
+        for(View row : rows){
+            ((ViewGroup)row.getParent()).removeView(row);
+            activity.antimalarials = new ArrayList<DetailerStock>();
+            rows = new ArrayList<View>();
         }
+    }
+
+    @Override
+    public void onResume() {
+        Utils.log("onResume()");
+        super.onResume();
+        if(rows != null){
+            for(View row: rows){
+                ((ViewGroup)row.getParent()).removeView(row);
+            }
+        }
+
+        ArrayList<DetailerStock> temp = new ArrayList<DetailerStock>();
+        temp.addAll(activity.antimalarials);
+
+        rows = new ArrayList<View>();
+        activity.antimalarials = new ArrayList<DetailerStock>();
+
+        for(int i = 0; i < temp.size(); i++){
+            addRow(temp.get(i), false);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        DetailerStock stock;
+        try{
+            for(View row : rows){
+                AQuery a = new AQuery(row);
+                String brand = a.id(R.id.txt_antimalarial).getText().toString();
+                String level = a.id(R.id.txt_stock_level).getText().toString();
+                String buying = a.id(R.id.txt_buying_price).getText().toString();
+                String selling = a.id(R.id.txt_selling_price).getText().toString();
+                String pack = a.id(R.id.spn_pack_size).getText().toString();
+
+                stock = activity.antimalarials.get(rows.indexOf(row));
+                stock.setCategory(STOCK_TYPE);
+                if(!brand.isEmpty()){
+                    stock.setBrand(brand);
+                }
+                if(!level.isEmpty()){
+                    stock.setStockLevel(Integer.parseInt(level));
+                }
+                if(!buying.isEmpty()){
+                    stock.setBuyingPrice(Double.parseDouble(buying));
+                }
+                if(!selling.isEmpty()){
+                    stock.setSellingPrice(Double.parseDouble(selling));
+                }
+                stock.setPackSize(pack);
+            }
+        }catch(Exception ex){
+
+        }
+    }
+
+    private void addRow(final DetailerStock stock, boolean hideOthers){
+        Utils.log("Adding row -> " + stock.getBrand() + " : " + hideOthers);
         LayoutInflater inflator = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View row = inflator.inflate(R.layout.antimalarial_row, null);
@@ -116,7 +168,7 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
             @Override
             public void onClick(View v) {
                 rows.remove(row);
-                stocks.remove(rows.indexOf(row));
+                activity.antimalarials.remove(stock);
                 LinearLayout parent = (LinearLayout) v.getParent();
                 LinearLayout root = (LinearLayout) parent.getParent();
                 antimalarialContainer.removeView(root);
@@ -134,15 +186,28 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
         text.setListView(list);
         text.setHint("Type or select brand");
 
-        if(stock.getUuid() != null){
-            try{
-                text.setText(stock.getBrand());
-                a.id(R.id.txt_stock_level).text(Double.toString(stock.getStockLevel()));
-                a.id(R.id.txt_buying_price).text(Double.toString(stock.getBuyingPrice()));
-                a.id(R.id.txt_selling_price).text(Double.toString(stock.getSellingPrice()));
-            }catch (Exception ex){
-                Utils.log("Error populating stock items");
-            }
+        Spinner packsizeSpinner = a.id(R.id.spn_pack_size).getSpinner();
+
+        try{
+
+        }catch (Exception ex){
+            Utils.log("Error populating stock items -> " + ex.getMessage());
+        }
+
+        if(stock.getBrand() != null){
+            text.setText(stock.getBrand());
+        }
+        if(stock.getStockLevel() != 0){
+            a.id(R.id.txt_stock_level).text(Double.toString(stock.getStockLevel()));
+        }
+        if(stock.getBuyingPrice() != null){
+            a.id(R.id.txt_buying_price).text(Double.toString(stock.getBuyingPrice()));
+        }
+        if(stock.getSellingPrice() != null){
+            a.id(R.id.txt_selling_price).text(Double.toString(stock.getSellingPrice()));
+        }
+        if(stock.getPackSize() != null){
+            packsizeSpinner.setSelection(((ArrayAdapter<String>)packsizeSpinner.getAdapter()).getPosition(stock.getPackSize()));
         }
 
         text.addTextChangedListener(new TextWatcher() {
@@ -174,9 +239,11 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
 
         antimalarialContainer.addView(row);
         rows.add(row);
-        stocks.add(stock);
+        activity.antimalarials.add(stock);
 
-        hideOtherRows(row);
+        if(hideOthers){
+            hideOtherRows(row);
+        }
     }
 
     private void hideOtherRows(View exclude){
@@ -230,12 +297,14 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
                 return false;
             }
 
-            DetailerStock stock = stocks.get(rows.indexOf(row));
+            DetailerStock stock = activity.antimalarials.get(rows.indexOf(row));
             stock.setBrand(brand);
+            stock.setCategory(STOCK_TYPE);
+            stock.setPackSize(a.id(R.id.spn_pack_size).getSelectedItem().toString());
             try{
-                stock.setBuyingPrice(Double.parseDouble(aq.id(R.id.txt_buying_price).getText().toString()));
-                stock.setSellingPrice(Double.parseDouble(aq.id(R.id.txt_selling_price).getText().toString()));
-                stock.setStockLevel(Double.parseDouble(aq.id(R.id.txt_stock_level).getText().toString()));
+                stock.setBuyingPrice(Double.parseDouble(a.id(R.id.txt_buying_price).getText().toString()));
+                stock.setSellingPrice(Double.parseDouble(a.id(R.id.txt_selling_price).getText().toString()));
+                stock.setStockLevel(Double.parseDouble(a.id(R.id.txt_stock_level).getText().toString()));
             }catch(Exception ex){
                 Toast.makeText(getActivity(), "Please enter Prices and Quantities for Antimalarial Brand on row " + i, Toast.LENGTH_LONG).show();
                 return false;

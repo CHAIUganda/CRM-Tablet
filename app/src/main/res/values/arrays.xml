@@ -218,4 +218,10 @@
         <item>I provide options to the patients and the patient decides</item>
         <item>The patient demands a specific treatment</item>
     </array>
+    <array name="pack_sizes">
+        <item>1 x 6</item>
+        <item>1 x 12</item>
+        <item>1 x 18</item>
+        <item>1 x 24</item>
+    </array>
 </resources>

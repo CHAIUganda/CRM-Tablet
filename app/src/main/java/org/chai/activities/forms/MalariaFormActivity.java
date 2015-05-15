@@ -45,7 +45,7 @@ public class MalariaFormActivity extends BaseActivity {
     Toolbar toolbar;
     AQuery aq;
     int NUM_PAGES = 6;
-    ViewPager pager;
+    public ViewPager pager;
     CircleIndicator indicator;
 
     MalariaFormCustomerFragment customerFragment;
@@ -69,6 +69,9 @@ public class MalariaFormActivity extends BaseActivity {
     protected DetailerStockDao detailerStockDao;
 
     List<DetailerStock> stocks;
+    List<DetailerStock> antimalarials;
+    List<DetailerStock> rdts;
+    List<DetailerStock> copacks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +107,22 @@ public class MalariaFormActivity extends BaseActivity {
 
         if(task == null){
             task = new Task();
+        }
+
+        antimalarials = new ArrayList<DetailerStock>();
+        rdts = new ArrayList<DetailerStock>();
+        copacks = new ArrayList<DetailerStock>();
+
+        for(DetailerStock stock: stocks){
+            if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(MalariaFormAntiMalarialFragment.STOCK_TYPE)){
+                antimalarials.add(stock);
+            }
+            if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(MalariaFormRdtFragment.STOCK_TYPE)){
+                rdts.add(stock);
+            }
+            if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(MalariaFormCopackFragment.STOCK_TYPE)){
+                copacks.add(stock);
+            }
         }
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -239,6 +258,11 @@ public class MalariaFormActivity extends BaseActivity {
         detailerStockDao.deleteInTx(call.getDetailerMalariaStocks());
 
         //Save stocks
+        stocks = new ArrayList<DetailerStock>();
+        stocks.addAll(antimalarials);
+        stocks.addAll(rdts);
+        stocks.addAll(copacks);
+
         for(DetailerStock stock: stocks){
             stock.setIsDirty(true);
             stock.setMalariadetailId(call.getUuid());

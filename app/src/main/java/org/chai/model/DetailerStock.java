@@ -24,10 +24,13 @@ public class DetailerStock implements BaseEntity {
     private double stockLevel;
     private Double buyingPrice;
     private Double sellingPrice;
+    private String packSize;
     /** Not-null value. */
     private String detailerId;
     /** Not-null value. */
     private String malariadetailId;
+    private String malariaDetail__resolvedKey;
+
 
     // KEEP FIELDS - put your custom fields here
     @JsonIgnore
@@ -55,8 +58,6 @@ public class DetailerStock implements BaseEntity {
     private DetailerCall detailerCall;
     @JsonIgnore
     private String detailerCall__resolvedKey;
-    @JsonIgnore
-    private String malariaDetail__resolvedKey;
     // KEEP FIELDS END
 
     public DetailerStock() {
@@ -66,13 +67,14 @@ public class DetailerStock implements BaseEntity {
         this.uuid = uuid;
     }
 
-    public DetailerStock(String uuid, String brand, String category, double stockLevel, Double buyingPrice, Double sellingPrice, String detailerId, String malariadetailId, Boolean isDirty, Integer syncronisationStatus, String syncronisationMessage, java.util.Date dateCreated, java.util.Date lastUpdated) {
+    public DetailerStock(String uuid, String brand, String category, double stockLevel, Double buyingPrice, Double sellingPrice, String packSize, String detailerId, String malariadetailId, Boolean isDirty, Integer syncronisationStatus, String syncronisationMessage, java.util.Date dateCreated, java.util.Date lastUpdated) {
         this.uuid = uuid;
         this.brand = brand;
         this.category = category;
         this.stockLevel = stockLevel;
         this.buyingPrice = buyingPrice;
         this.sellingPrice = sellingPrice;
+        this.packSize = packSize;
         this.detailerId = detailerId;
         this.malariadetailId = malariadetailId;
         this.isDirty = isDirty;
@@ -140,6 +142,14 @@ public class DetailerStock implements BaseEntity {
 
     public void setSellingPrice(Double sellingPrice) {
         this.sellingPrice = sellingPrice;
+    }
+
+    public String getPackSize() {
+        return packSize;
+    }
+
+    public void setPackSize(String packSize) {
+        this.packSize = packSize;
     }
 
     /** Not-null value. */
