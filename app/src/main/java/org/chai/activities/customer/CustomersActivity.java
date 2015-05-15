@@ -20,7 +20,7 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
-import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
+import org.chai.activities.forms.MalariaFormActivity;
 import org.chai.activities.tasks.SalesFormActivity;
 import org.chai.adapter.CustomerAdapter;
 import org.chai.model.Customer;

@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.chai.activities.org.chai.activities.forms.MalariaFormActivity"
+            android:name="org.chai.activities.forms.MalariaFormActivity"
             android:configChanges="orientation|screenSize"
             android:label="New Malaria Details"
             android:theme="@style/AppTheme" >

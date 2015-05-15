@@ -105,14 +105,14 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:29:13
 	android:name
 		ADDED from AndroidManifest.xml:29:23
-activity#org.chai.activities.org.chai.activities.forms.MalariaFormActivity
+activity#org.chai.activities.forms.MalariaFormActivity
 ADDED from AndroidManifest.xml:32:7
 	android:label
-		ADDED from AndroidManifest.xml:32:169
+		ADDED from AndroidManifest.xml:32:149
 	android:configChanges
-		ADDED from AndroidManifest.xml:32:90
+		ADDED from AndroidManifest.xml:32:70
 	android:theme
-		ADDED from AndroidManifest.xml:32:137
+		ADDED from AndroidManifest.xml:32:117
 	android:name
 		ADDED from AndroidManifest.xml:32:17
 activity#org.chai.activities.tasks.DiarrheaFormActivity

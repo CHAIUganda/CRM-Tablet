@@ -29,7 +29,7 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-      <activity android:name=".activities.org.chai.activities.forms.MalariaFormActivity" android:configChanges="orientation|screenSize" android:theme="@style/AppTheme" android:label="New Malaria Details">
+      <activity android:name=".activities.forms.MalariaFormActivity" android:configChanges="orientation|screenSize" android:theme="@style/AppTheme" android:label="New Malaria Details">
 
       </activity>
 

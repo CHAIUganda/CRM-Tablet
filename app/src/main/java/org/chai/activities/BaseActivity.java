@@ -24,7 +24,7 @@ import org.chai.Globals;
 import org.chai.R;
 import org.chai.activities.calls.HistoryActivity;
 import org.chai.activities.customer.CustomersActivity;
-import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
+import org.chai.activities.forms.MalariaFormActivity;
 import org.chai.activities.tasks.DiarrheaFormActivity;
 import org.chai.activities.tasks.NewOrderActivity;
 import org.chai.activities.tasks.SalesFormActivity;

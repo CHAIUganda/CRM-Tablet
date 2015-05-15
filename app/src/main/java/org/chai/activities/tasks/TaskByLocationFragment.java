@@ -22,7 +22,7 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.HomeActivity;
-import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
+import org.chai.activities.forms.MalariaFormActivity;
 import org.chai.adapter.DistrictArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
 import org.chai.adapter.TaskListAdapter;

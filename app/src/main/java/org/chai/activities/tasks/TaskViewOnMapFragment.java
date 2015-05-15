@@ -19,7 +19,7 @@ import com.google.android.gms.maps.GoogleMap;
 
 import org.chai.Globals;
 import org.chai.R;
-import org.chai.activities.org.chai.activities.forms.MalariaFormActivity;
+import org.chai.activities.forms.MalariaFormActivity;
 import org.chai.model.Customer;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
