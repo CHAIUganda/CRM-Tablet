@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -40,7 +41,7 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
     ImageView addAntimalarialButton;
     ArrayList<View> rows;
 
-    boolean viewsHidden = false;
+    public boolean viewsHidden = false;
 
     String[] items = new String[]{
             "Artemether lumefantrine, such as Lonart, Artefan, Lumartem, Coartem, Lumaren",
@@ -79,11 +80,11 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
         aq.id(R.id.do_you_stock).itemSelected(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 2){
+                if (position == 2) {
                     clearStocks();
                     activity.pager.setCurrentItem(3);
                 }
-                if(position == 1 && rows.size() == 0){
+                if (position == 1 && rows.size() == 0) {
                     addRow(new DetailerStock(), true);
                 }
             }
@@ -98,8 +99,22 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
             populateFields();
         }
 
+        view.setFocusable(true);
+        view.setFocusableInTouchMode(true);
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(keyCode == KeyEvent.KEYCODE_BACK && viewsHidden){
+                    showAllViews();
+                    return true;
+                }
+                return false;
+            }
+        });
         return view;
     }
+
+
 
     private void clearStocks(){
         for(View row : rows){
@@ -113,6 +128,7 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
     public void onResume() {
         Utils.log("onResume()");
         super.onResume();
+
         if(rows != null){
             for(View row: rows){
                 ((ViewGroup)row.getParent()).removeView(row);

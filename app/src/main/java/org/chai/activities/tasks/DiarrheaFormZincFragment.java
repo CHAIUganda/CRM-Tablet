@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -94,6 +95,19 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
         if(activity.call.getUuid() != null){
             populateFields();
         }
+
+        view.setFocusable(true);
+        view.setFocusableInTouchMode(true);
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && viewsHidden) {
+                    showAllViews();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         return view;
     }

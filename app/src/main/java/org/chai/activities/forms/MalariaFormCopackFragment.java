@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -40,7 +41,7 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
     ImageView addRdtButton;
     ArrayList<View> rows;
 
-    boolean viewsHidden = false;
+    public boolean viewsHidden = false;
 
     String[] items = new String[]{
             "Oralyte & Zinc syrup (60mL)",
@@ -89,6 +90,19 @@ public class MalariaFormCopackFragment extends Fragment implements IViewManipula
         if(activity.call.getUuid() != null){
             populateFields();
         }
+
+        view.setFocusable(true);
+        view.setFocusableInTouchMode(true);
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && viewsHidden) {
+                    showAllViews();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         return view;
     }
