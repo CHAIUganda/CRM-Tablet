@@ -87,6 +87,7 @@ public class SalesFormSaleFragment extends Fragment {
         for(View row : rows){
             ((ViewGroup)row.getParent()).removeView(row);
             parent.sales = new ArrayList<SaleData>();
+            rows = new ArrayList<View>();
         }
     }
 

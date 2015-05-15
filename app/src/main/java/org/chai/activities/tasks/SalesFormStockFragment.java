@@ -94,6 +94,7 @@ public class SalesFormStockFragment extends Fragment{
         for(View row : rows){
             ((ViewGroup)row.getParent()).removeView(row);
             parent.stocks = new ArrayList<StokeData>();
+            rows = new ArrayList<View>();
         }
     }
 
@@ -133,17 +134,21 @@ public class SalesFormStockFragment extends Fragment{
         StokeData stock;
         Product product;
         int productIndex;
-        for(View row : rows){
-            AQuery a = new AQuery(row);
-            productIndex = a.id(R.id.product).getSelectedItemPosition();
-            product = products.get(productIndex);
-            String quantity = a.id(R.id.txt_quantity).getText().toString();
+        try{
+            for(View row : rows){
+                AQuery a = new AQuery(row);
+                productIndex = a.id(R.id.product).getSelectedItemPosition();
+                product = products.get(productIndex);
+                String quantity = a.id(R.id.txt_quantity).getText().toString();
 
-            stock = parent.stocks.get(rows.indexOf(row));
-            if(!quantity.isEmpty()){
-                stock.setQuantity(Integer.parseInt(quantity));
+                stock = parent.stocks.get(rows.indexOf(row));
+                if(!quantity.isEmpty()){
+                    stock.setQuantity(Integer.parseInt(quantity));
+                }
+                stock.setProductId(product.getUuid());
             }
-            stock.setProductId(product.getUuid());
+        }catch(Exception ex){
+
         }
     }
 
