@@ -3,7 +3,7 @@ package org.chai.util.migration;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.util.Log;
+
 import org.chai.model.DaoMaster;
 import org.chai.util.Utils;
 
@@ -23,13 +23,13 @@ public class UpgradeOpenHelper extends DaoMaster.OpenHelper {
         Utils.log("Migrating from " + oldVersion + " to " + newVersion);
         for (int i = oldVersion; i < newVersion; i++) {
             try {
-//                MigrationHelper+i is the class that migrates from i to i++
+                //MigrationHelper+i is the class that migrates from i to i++
                 MigratorHelper migratorHelper = (MigratorHelper) Class.forName("org.chai.util.migration.MigrationHelper" + i).newInstance();
                 if (migratorHelper != null) {
                     migratorHelper.onUpgrade(sqLiteDatabase);
                 }
             } catch (Exception ex) {
-                Log.e(TAG, "Could not migrate from schema: " + i + " to " + i++);
+                Utils.log("Could not migrate from schema: " + i + " to " + i++);
                 /* If something fail prevent the DB to be updated to future version if the previous version has not been upgraded successfully */
                 break;
             }

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/TitleTextStyle"
+            android:text="Education"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
+                android:text="4. Have you heard about the treatment of Diarrhea in children with ORS and Zinc combination?"/>
+            <Spinner
+                android:id="@+id/heardofdiarrheatreament"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/yesnolist" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_how_did_you_hear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="5. How did you hear/learn about ORS and Zinc treatment combination?"/>
+            <Spinner
+                android:id="@+id/how_did_you_hear"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/sources_of_information" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_other_source_of_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="6. Please specify Other ways you heard about zinc"/>
+            <EditText
+                android:id="@+id/other_source_of_information"
+                android:layout_width="match_parent"
+                style="@style/TextBoxStyle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
+                android:text="7. Tell me what you know about diarrhea and how it affects your community"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="@string/det_tell_me_whatyouknowaboutdiarrhea"
+                />
+            <Spinner
+                android:id="@+id/diarrhea_effects_on_the_community"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/SpinnerKnowldgeLevel" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
+                android:text="8. Do you know the affect that diarrhea has on the body?"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="@string/det_doyouknowtheeffectdiarrheahasonthebody"
+                />
+            <Spinner
+                android:id="@+id/diarrhea_effects_on_the_body"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/SpinnerKnowldgeLevel" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
+                android:text="9. What do you know about ORS and how it should be used?"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="@string/det_whatdoyouknowaboutors"
+                />
+            <Spinner
+                android:id="@+id/ors_usage"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/SpinnerKnowldgeLevel" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
+                android:text="9. What do you know about Zinc and how it should be used?"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="@string/det_whatdoyouknowaboutzink"
+                />
+            <Spinner
+                android:id="@+id/zinc_usage"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/SpinnerKnowldgeLevel" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="required"
+                style="@style/LabelStyle"
+                android:text="10. Why should you not use antibiotics to treat diarrhea?"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="@string/det_whyshould_younot_use_antibiotics"
+                />
+            <Spinner
+                android:id="@+id/why_should_you_not_use_antobiotics"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/SpinnerKnowldgeLevel" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/diarrhea_form_education_fragment.xml -->

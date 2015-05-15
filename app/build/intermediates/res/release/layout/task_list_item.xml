@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_row_selector"
+    android:padding="8dp" >
+    <!-- Thumbnail Image -->
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/task_icon"/>
+    <TextView
+        android:id="@+id/task_list_outlet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textSize="@dimen/list_main_text_size"
+        android:textColor="@color/list_main_text_color"
+        android:textStyle="bold"
+        android:text="Kisizi Medical center"/>
+    <TextView
+        android:id="@+id/task_list_outlet_contact"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/task_list_outlet"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textSize="@dimen/list_sub_text_size"
+        android:text="No Contact"/>
+    <TextView
+        android:id="@+id/task_list_subcounty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/task_list_outlet_contact"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textColor="@color/list_sub_subtext_color"
+        android:textSize="@dimen/list_sub_sub_text_size"
+        android:textStyle="italic"
+        android:text="Kamuganguzi"/>
+    <TextView
+        android:id="@+id/task_list_location_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/task_list_outlet_contact"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/task_list_subcounty"
+        android:textColor="@color/list_sub_subtext_color"
+        android:textSize="@dimen/list_sub_sub_text_size"
+        android:textStyle="italic"
+        android:text="No location description"/>
+
+</RelativeLayout><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/task_list_item.xml -->

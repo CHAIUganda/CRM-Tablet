@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="4" by="lint 24.2">
+
+    <issue
+        id="ResAuto"
+        severity="Fatal"
+        message="In Gradle projects, always use `http://schemas.android.com/apk/res-auto` for custom attributes"
+        category="Correctness"
+        priority="9"
+        summary="Hardcoded Package in Namespace"
+        explanation="In Gradle projects, the actual package used in the final APK can vary; for example,you can add a `.debug` package suffix in one version and not the other. Therefore, you should *not* hardcode the application package in the resource; instead, use the special namespace `http://schemas.android.com/apk/res-auto` which will cause the tools to figure out the right namespace for the resource regardless of the actual package used during the build."
+        errorLine1="              xmlns:chai=&quot;http://schemas.android.com/apk/res/org.chai&quot;"
+        errorLine2="              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\expandable_view_template.xml"
+            line="4"
+            column="15"/>
+    </issue>
+
+    <issue
+        id="DuplicateIds"
+        severity="Fatal"
+        message="Duplicate id `@+id/tableRow3`, already defined earlier in this layout"
+        category="Correctness"
+        priority="7"
+        summary="Duplicate ids within a single layout"
+        explanation="Within a layout, id&apos;s should be unique since otherwise `findViewById()` can return an unexpected view."
+        errorLine1="                    android:id=&quot;@+id/tableRow3&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\adhock_sale_form.xml"
+            line="299"
+            column="21"/>
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\adhock_sale_form.xml"
+            line="212"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="DuplicateIds"
+        severity="Fatal"
+        message="Duplicate id `@+id/detailer_stock_tableRow1`, already defined earlier in this layout"
+        category="Correctness"
+        priority="7"
+        summary="Duplicate ids within a single layout"
+        explanation="Within a layout, id&apos;s should be unique since otherwise `findViewById()` can return an unexpected view."
+        errorLine1="                      android:id=&quot;@+id/detailer_stock_tableRow1&quot;"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\detailer_general_info.xml"
+            line="466"
+            column="23"/>
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\detailer_general_info.xml"
+            line="347"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="DuplicateIds"
+        severity="Fatal"
+        message="Duplicate id `@+id/detailer_row2`, already defined earlier in this layout"
+        category="Correctness"
+        priority="7"
+        summary="Duplicate ids within a single layout"
+        explanation="Within a layout, id&apos;s should be unique since otherwise `findViewById()` can return an unexpected view."
+        errorLine1="                      android:id=&quot;@+id/detailer_row2&quot;"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\detailer_general_info.xml"
+            line="482"
+            column="23"/>
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\detailer_general_info.xml"
+            line="363"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="DuplicateIds"
+        severity="Fatal"
+        message="Duplicate id `@+id/tableRow22`, already defined earlier in this layout"
+        category="Correctness"
+        priority="7"
+        summary="Duplicate ids within a single layout"
+        explanation="Within a layout, id&apos;s should be unique since otherwise `findViewById()` can return an unexpected view."
+        errorLine1="            &lt;TableRow android:id=&quot;@+id/tableRow22&quot;"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\sales_form.xml"
+            line="292"
+            column="23"/>
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\sales_form.xml"
+            line="208"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="DuplicateIds"
+        severity="Fatal"
+        message="Duplicate id `@+id/tableRow2`, already defined earlier in this layout"
+        category="Correctness"
+        priority="7"
+        summary="Duplicate ids within a single layout"
+        explanation="Within a layout, id&apos;s should be unique since otherwise `findViewById()` can return an unexpected view."
+        errorLine1="                    android:id=&quot;@+id/tableRow2&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\sales_form.xml"
+            line="305"
+            column="21"/>
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\sales_form.xml"
+            line="221"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="DuplicateIds"
+        severity="Fatal"
+        message="Duplicate id `@+id/tableRow3`, already defined earlier in this layout"
+        category="Correctness"
+        priority="7"
+        summary="Duplicate ids within a single layout"
+        explanation="Within a layout, id&apos;s should be unique since otherwise `findViewById()` can return an unexpected view."
+        errorLine1="                    android:id=&quot;@+id/tableRow3&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\sales_form.xml"
+            line="324"
+            column="21"/>
+        <location
+            file="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\res\layout\sales_form.xml"
+            line="238"
+            column="21"/>
+    </issue>
+
+</issues>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/TitleTextStyle"
+            android:text="Zinc/ORS"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="3. Do you stock ORS and Zinc?"/>
+            <Spinner
+                android:id="@+id/spn_do_you_stock_ors_and_zinc"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/yesnolist" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_rows_container"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btn_add_row"
+                android:layout_width="@dimen/add_remove_row_button_dimensions"
+                android:layout_height="@dimen/add_remove_row_button_dimensions"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="right"
+                android:src="@drawable/ic_add_row"
+                android:scaleType="centerInside"
+                android:background="@color/transparent"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/sales_form_stock_fragment.xml -->

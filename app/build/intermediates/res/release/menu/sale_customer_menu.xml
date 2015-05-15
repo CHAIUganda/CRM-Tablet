@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/detail_sale"
+        android:title="Detail Sale"/>
+
+    <item
+        android:id="@+id/deactivate"
+        android:title="Set Inactive"/>
+</menu><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/menu/sale_customer_menu.xml -->

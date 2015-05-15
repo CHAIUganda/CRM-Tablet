@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/TitleTextStyle"
+            android:text="General"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:tag="required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="1. Outlet Name"/>
+
+            <EditText
+                android:id="@+id/outlet_name"
+                android:layout_width="match_parent"
+                style="@style/TextBoxStyle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:tag="required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="2. Outlet Type"/>
+
+            <Spinner
+                android:id="@+id/outlettype"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:popupBackground="@color/primary_dark"
+                android:entries="@array/outlettypes" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:tag="required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="4. Outlet Size"/>
+
+            <Spinner
+                android:id="@+id/outletsize"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:popupBackground="@color/primary_dark"
+                android:entries="@array/outletsize" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="5. Type of licence - is the licence certificate visible in the outlet?"/>
+
+            <Spinner
+                android:id="@+id/licencevisible"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:popupBackground="@color/primary_dark"
+                android:entries="@array/yesnolist" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="5a. If yes, what type of licence?"/>
+
+            <Spinner
+                android:id="@+id/licencetype"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:popupBackground="@color/primary_dark"
+                android:entries="@array/licencetype2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:tag="required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="6. Rural or Urban?"/>
+
+            <Spinner
+                android:id="@+id/ruralorurban"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:popupBackground="@color/primary_dark"
+                android:entries="@array/split" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:tag="required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="7. District"/>
+
+            <Spinner
+                android:id="@+id/district"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:popupBackground="@color/primary_dark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:tag="required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="8. Subcounty"/>
+
+            <Spinner
+                android:id="@+id/subcounty"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:popupBackground="@color/primary_dark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="9. Trading Center"/>
+
+            <EditText
+                android:id="@+id/trading_center"
+                android:layout_width="match_parent"
+                style="@style/TextBoxStyle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:tag="required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="10. Please give directions to the outlet from a key landmark"/>
+
+            <EditText
+                android:id="@+id/directions"
+                android:layout_width="match_parent"
+                style="@style/TextBoxStyle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:tag="required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="11. Location GPS"/>
+
+            <EditText
+                android:id="@+id/location_gps"
+                android:layout_width="match_parent"
+                android:enabled="false"
+                style="@style/TextBoxStyle"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/customer_basics_form_fragment.xml -->
