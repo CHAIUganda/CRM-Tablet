@@ -104,6 +104,7 @@ public class Place extends RestClient {
     }
 
     public User login(String user, String pass) {
+        Utils.log("Place login");
         try{
             userName = user;
             password = pass;

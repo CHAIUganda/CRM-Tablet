@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.splunk.mint.Mint;
 
 import org.chai.R;
-import org.chai.activities.calls.HistoryActivity;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.User;
@@ -53,7 +52,7 @@ public class LoginActivity extends BaseActivity {
         Mint.initAndStartSession(LoginActivity.this, "8255bd80");
 
         if(AccountManager.offlineLogin(this, false)){
-            Intent i = new Intent(LoginActivity.this, HistoryActivity.class);
+            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
             finish();
@@ -81,6 +80,7 @@ public class LoginActivity extends BaseActivity {
                         //check ofline login
                         List<User> loggedInUser = userDao.queryBuilder().where(UserDao.Properties.UserName.eq(user), UserDao.Properties.Password.eq(Utils.encrypeString(pass))).list();
                         if (loggedInUser.isEmpty()) {
+                            Utils.log("Logged in user is null");
                             //ensure we dont have more than one user on one tablet
                             if (userDao.loadAll().isEmpty()) {
                                 User remoteUser = place.login(user, pass);
@@ -97,11 +97,29 @@ public class LoginActivity extends BaseActivity {
                                 }else{
                                     islogin = false;
                                 }
+                            }else{
+                                userDao.deleteAll();
+                                User remoteUser = place.login(user, pass);
+                                //add this user to offline db
+                                if (remoteUser != null) {
+                                    User newUser = new User(null);
+                                    newUser.setUuid(UUID.randomUUID().toString());
+                                    newUser.setUserName(remoteUser.getUserName());
+                                    newUser.setPassword(Utils.encrypeString(pass));
+                                    newUser.setRole(remoteUser.getRole());
+                                    userDao.insert(newUser);
+                                    role = remoteUser.getRole();
+                                    islogin = true;
+                                }else{
+                                    islogin = false;
+                                }
                             }
                         } else {
+                            Utils.log("Logged in user not null");
                             islogin = true;
                             role = loggedInUser.get(0).getRole();
                         }
+
                         if (islogin) {
                             dialog.dismiss();
                             onLoginSuccessfull(user, pass,role);
@@ -115,7 +133,6 @@ public class LoginActivity extends BaseActivity {
                                         }
                                     }
                             );
-
                         }
                     }
                 }).start();
