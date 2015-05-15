@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-            android:id="@+id/customer_mark_inactive"
-            android:title="Mark as Inactive"/>
-</menu><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/menu/inactivate_context_menu.xml -->

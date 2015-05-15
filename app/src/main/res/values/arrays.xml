@@ -174,13 +174,6 @@
         <item >Unscheduled Detailing</item>
         <item>My Report</item>
     </string-array>
-    <array name="nav_drawer_icons">
-        <item>@drawable/task_default</item>
-        <item>@drawable/customer_default</item>
-        <item>@drawable/call_selected</item>
-        <item>@drawable/cart</item>
-        <item>@drawable/statistics_48</item>
-    </array>
     <array name="restock_frequency">
         <item>""</item>
         <item>Daily</item>

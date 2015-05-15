@@ -206,7 +206,7 @@ public class TaskByLocationFragment extends Fragment {
 
     private AlertDialog.Builder askBeforeDelete(final int position) {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
-        final View promptView = inflater.inflate(R.layout.task_cancel_prompt,null);
+        final View promptView = inflater.inflate(R.layout.task_cancel_prompt, null);
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
         dialog.setView(promptView);
 

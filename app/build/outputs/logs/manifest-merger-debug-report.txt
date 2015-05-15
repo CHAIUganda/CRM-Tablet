@@ -80,13 +80,13 @@ MERGED from com.android.support:support-v4:21.0.3:16:5
 MERGED from com.jpardogo.materialtabstrip:library:1.0.9:9:5
 MERGED from com.android.support:support-v4:21.0.3:16:5
 	android:label
-		ADDED from AndroidManifest.xml:22:46
+		ADDED from AndroidManifest.xml:22:53
 	android:icon
 		ADDED from AndroidManifest.xml:22:16
 	android:theme
-		ADDED from AndroidManifest.xml:22:79
+		ADDED from AndroidManifest.xml:22:86
 	android:name
-		ADDED from AndroidManifest.xml:22:111
+		ADDED from AndroidManifest.xml:22:118
 activity#org.chai.activities.LoginActivity
 ADDED from AndroidManifest.xml:23:5
 	android:label

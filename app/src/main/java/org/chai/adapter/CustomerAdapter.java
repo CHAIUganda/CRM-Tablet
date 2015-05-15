@@ -31,7 +31,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> implements Filterabl
     private int lastPosition = -1;
 
     public CustomerAdapter(Activity activity, List<Customer> items) {
-        super(activity.getApplicationContext(), R.layout.customers_main_activity, items);
+        super(activity.getApplicationContext(), R.layout.customer_list_row, items);
         this.customers = new ArrayList<Customer>();
         this.customers.addAll(items);
     }

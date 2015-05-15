@@ -192,53 +192,12 @@ public class Utils {
         }
     }
 
-    public static void setMinimumDateInDatePicker(Date date,DatePickerDialog datePickerDialog){
-        Date currentDate = Utils.flattenDate(date);
-        datePickerDialog.getDatePicker().setMinDate(currentDate.getTime());
-        fixUpDatePickerCalendarView(currentDate,datePickerDialog);
-    }
-
-    public static boolean mandatoryFieldFilled(EditText editText){
-        if (editText.getText().toString().equals("")) {
-            editText.setError("This Field is mandatory!");
-            return false;
-        }else{
-            return true;
-        }
-    }
-
-    public static boolean mandatorySpinnerFieldSelected(Spinner spinner){
-        if (spinner.getSelectedItem().toString().equals("")) {
-            ((TextView)spinner.getChildAt(0)).setError("This Field is mandatory!");
-            return false;
-        }else{
-            return true;
-        }
-    }
-
     public static void showError(Activity activity,String title,String error) {
         new AlertDialog.Builder(activity)
                 .setTitle(title)
                 .setMessage(error)
                 .setPositiveButton("ok", null)
                 .show();
-    }
-
-    public static void displayPopupWindow(Activity activity,View anchorView,String message) {
-        PopupWindow popup = new PopupWindow(activity);
-        View layout = activity.getLayoutInflater().inflate(R.layout.popup, null);
-        popup.setContentView(layout);
-        TextView popupText = (TextView)layout.findViewById(R.id.popupTxt);
-        popupText.setText(message);
-        // Set content width and height
-        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-        popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
-        // Closes the popup window when touch outside of it - when looses focus
-        popup.setOutsideTouchable(true);
-        popup.setFocusable(true);
-        // Show anchored to button
-        popup.setBackgroundDrawable(new BitmapDrawable());
-        popup.showAsDropDown(anchorView);
     }
 
     public static void setListViewHeightBasedOnChildren(ListView listView){

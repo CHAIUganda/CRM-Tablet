@@ -72,13 +72,6 @@
         <item>11</item>
         <item>12</item>
     </string-array>
-    <array name="nav_drawer_icons">
-        <item>@drawable/task_default</item>
-        <item>@drawable/customer_default</item>
-        <item>@drawable/call_selected</item>
-        <item>@drawable/cart</item>
-        <item>@drawable/statistics_48</item>
-    </array>
     <string-array name="nav_drawer_items">
         <item>Tasks</item>
         <item>Customers</item>
@@ -1395,11 +1388,6 @@ m>        <item name="android:textColorLink">@color/link_text_material_dark</ite
         <item name="android:scaleType">center</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
-    <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/values/styles_theme.xml -->
-    <eat-comment/>
-    <style name="CustomActionBarTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/MyActionBar</item>
-    </style>
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="DashboardButton">
@@ -1426,12 +1414,6 @@ m>        <item name="android:textColorLink">@color/link_text_material_dark</ite
         <item name="android:orientation">horizontal</item>
         <item name="android:background">#dedede</item>
     </style>
-    <style name="HeaderBar">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">100dp</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:background">@drawable/bar_grad</item>
-    </style>
     <style name="LabelStyle">
         <item name="android:textColor">@color/app_text_color</item>
         <item name="android:textSize">18sp</item>
@@ -1448,18 +1430,6 @@ m>        <item name="android:textColorLink">@color/link_text_material_dark</ite
     </style>
     <style name="MooTextAppearanceSpinnerItem" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
         <item name="android:textColor">@color/app_text_color</item>
-    </style>
-    <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/values/styles_theme.xml -->
-    <eat-comment/>
-    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">#0091CC</item>
-        <item name="android:paddingLeft">0dp</item>
-    </style>
-    <style name="MyActionBarTabText" parent="@android:style/Widget.Holo.ActionBar.TabText">
-        <item name="android:textColor">#ffffff</item>
-    </style>
-    <style name="MyActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">#ffffff</item>
     </style>
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment/>
@@ -1843,10 +1813,6 @@ m>        <item name="android:textColorLink">@color/link_text_material_dark</ite
         <item name="android:textColor">#00FF00</item>
         <item name="android:typeface">monospace</item>
         <item name="android:textSize">20dp</item>
-    </style>
-    <style name="myCheckBox">
-        <item name="android:background">@drawable/btn_check_label_background</item>
-        <item name="android:button">@drawable/my_checkbox</item>
     </style>
     <style name="myEditText">
         <item name="android:height">40dp</item>
