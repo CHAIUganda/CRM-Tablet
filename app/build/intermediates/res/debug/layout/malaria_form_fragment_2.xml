@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/TipTextStyle"
-                android:text="Ask/examine for signs and symptoms of malaria\nProbe specifically on fever. Other symptoms include: shivering, body/head aches, vomiting, loss of appetite\nTest with RDT or refer to a facility that can"
+                android:text="Ask/examine for signs and symptoms of malaria\nProbe specifically on fever. Other symptoms include: shivering, body/head aches, vomiting, loss of appetite, red or dark coloured urine\nTest with RDT or refer to a facility that can"
                 />
             <Spinner
                 style="@style/SpinnerStyle"

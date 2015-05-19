@@ -27,6 +27,8 @@ import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -55,6 +57,8 @@ public class AddNewCustomerActivity extends BaseActivity {
     private CustomerCommercialFormFragment commercialFragment;
     private CustomerContactsFormFragment contactFragment;
 
+    public List<CustomerContact> contacts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         CURRENT_SCREEN = SCREEN_CUSTOMERS;
@@ -75,6 +79,12 @@ public class AddNewCustomerActivity extends BaseActivity {
             if(customer != null){
                 getSupportActionBar().setTitle("Edit Customer");
             }
+        }
+
+        if(customer != null){
+            contacts = customer.getCustomerContacts();
+        }else{
+            contacts = new ArrayList<CustomerContact>();
         }
 
         pager = (ViewPager) findViewById(R.id.pager);
@@ -107,29 +117,17 @@ public class AddNewCustomerActivity extends BaseActivity {
     }
 
     private void saveForm(){
-        if(basicFragment == null){
-            pager.setCurrentItem(0);
-            return;
-        }
-        if(!basicFragment.saveFields()){
+        if(basicFragment == null || !basicFragment.saveFields()){
             pager.setCurrentItem(0);
             return;
         }
 
-        if(commercialFragment == null){
-            pager.setCurrentItem(1);
-            return;
-        }
-        if(!commercialFragment.saveFields()){
+        if(commercialFragment == null || !commercialFragment.saveFields()){
             pager.setCurrentItem(1);
             return;
         }
 
-        if(contactFragment == null){
-            pager.setCurrentItem(2);
-            return;
-        }
-        if(!contactFragment.saveFields()){
+        if(contactFragment == null || !contactFragment.saveFields()){
             pager.setCurrentItem(2);
             return;
         }
@@ -145,12 +143,10 @@ public class AddNewCustomerActivity extends BaseActivity {
         }
 
         //First remove all customer contacts
-        for(CustomerContact contact : customer.getCustomerContacts()){
-            customerContactDao.delete(contact);
-        }
+        customerContactDao.deleteInTx(customer.getCustomerContacts());
 
         //Re-ad customer contacts
-        for(CustomerContact c: contactFragment.contacts){
+        for(CustomerContact c: contacts){
             if(c.getUuid() == null){
                 c.setUuid(UUID.randomUUID().toString());
             }

@@ -15,8 +15,8 @@ import android.widget.Toast;
 import com.androidquery.AQuery;
 
 import org.chai.R;
-import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
+import org.chai.util.Utils;
 
 import java.util.ArrayList;
 
@@ -28,10 +28,12 @@ public class CustomerContactsFormFragment extends Fragment{
     View view;
     LinearLayout rowContainer;
     ArrayList<View> rows;
-    public ArrayList<CustomerContact> contacts;
+    AddNewCustomerActivity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        activity = (AddNewCustomerActivity)getActivity();
+
         view = inflater.inflate(R.layout.customer_contacts_form_fragment, container, false);
         aq = new AQuery(view);
         rowContainer = (LinearLayout)view.findViewById(R.id.ln_contacts_container);
@@ -44,21 +46,51 @@ public class CustomerContactsFormFragment extends Fragment{
         });
 
         rows = new ArrayList<View>();
-        contacts = new ArrayList<CustomerContact>();
-
-        AddNewCustomerActivity ac = (AddNewCustomerActivity)getActivity();
-        if(ac.customer != null){
-            populateFields(ac.customer);
-        }else{
-            addRow(new CustomerContact()); //We need at least one row
-        }
 
         return view;
     }
 
-    private void populateFields(Customer c){
-        for(CustomerContact contact: c.getCustomerContacts()){
-            addRow(contact);
+    @Override
+    public void onPause() {
+        Utils.log("onPause()");
+        super.onPause();
+        CustomerContact contact;
+        try{
+            for(View row : rows){
+                AQuery a = new AQuery(row);
+                String name = a.id(R.id.txt_customer_name).getText().toString();
+                String phone = a.id(R.id.txt_customer_phone).getText().toString();
+                String gender = a.id(R.id.contact_gender).getSelectedItem().toString();
+                String role = a.id(R.id.contact_role).getSelectedItem().toString();
+                contact = activity.contacts.get(rows.indexOf(row));
+                contact.setContact(phone);
+                contact.setNames(name);
+                contact.setGender(gender);
+                contact.setRole(role);
+            }
+        }catch(Exception ex){
+            Utils.log("Error saving stock state -> " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onResume() {
+        Utils.log("onResume()");
+        super.onResume();
+        if(rows != null){
+            for(View row: rows){
+                ((ViewGroup)row.getParent()).removeView(row);
+            }
+        }
+
+        ArrayList<CustomerContact> temp = new ArrayList<CustomerContact>();
+        temp.addAll(activity.contacts);
+
+        rows = new ArrayList<View>();
+        activity.contacts = new ArrayList<CustomerContact>();
+
+        for(int i = 0; i < temp.size(); i++){
+            addRow(temp.get(i));
         }
     }
 
@@ -80,14 +112,14 @@ public class CustomerContactsFormFragment extends Fragment{
         rowContainer.addView(row);
 
         rows.add(row);
-        contacts.add(contact);
+        activity.contacts.add(contact);
 
         final ImageView remove = (ImageView)row.findViewById(R.id.btn_remove_row);
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rows.remove(row);
-                contacts.remove(contact);
+                activity.contacts.remove(contact);
                 LinearLayout parent = (LinearLayout) v.getParent();
                 LinearLayout root = (LinearLayout) parent.getParent();
                 LinearLayout top = (LinearLayout) root.getParent();
@@ -135,7 +167,7 @@ public class CustomerContactsFormFragment extends Fragment{
                 role = a.id(R.id.contact_role).getSelectedItem().toString();
             }
 
-            contact = contacts.get(rows.indexOf(row));
+            contact = activity.contacts.get(rows.indexOf(row));
             contact.setContact(phone);
             contact.setNames(name);
             contact.setGender(gender);

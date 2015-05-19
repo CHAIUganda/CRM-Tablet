@@ -167,6 +167,7 @@ public class MalariaFormCustomerFragment extends Fragment {
             aq.id(R.id.newspaper).checked(sources.indexOf(aq.id(R.id.newspaper).getText().toString()) != -1);
             aq.id(R.id.religious).checked(sources.indexOf(aq.id(R.id.religious).getText().toString()) != -1);
             aq.id(R.id.friend).checked(sources.indexOf(aq.id(R.id.friend).getText().toString()) != -1);
+            aq.id(R.id.training).checked(sources.indexOf(aq.id(R.id.training).getText().toString()) != -1);
         }
     }
 
