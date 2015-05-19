@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@color/window_background">
+
+    <include layout="@layout/toolbar" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="480dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="@drawable/dark_background_border"
+            android:padding="40dp">
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo"/>
+
+            <TextView
+                android:id="@+id/signin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:text="Login"
+                android:textColor="#88a7c8"
+                android:textSize="40sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/LoginFormLabel"
+                    android:text="Username"/>
+
+                <EditText
+                    android:id="@+id/userTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bordertextfield"
+                    android:textColor="@color/app_text_color"
+                    android:padding="5dp"
+                    android:textSize="24sp"
+                    android:singleLine="true"
+                    android:text="det54"
+                    android:layout_weight="1"
+                    android:textCursorDrawable="@null"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/LoginFormLabel"
+                    android:text="Password"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bordertextfield"
+                    android:textColor="@color/app_text_color"
+                    android:padding="5dp"
+                    android:textSize="24sp"
+                    android:singleLine="true"
+                    android:id="@+id/passwordTxt"
+                    android:password="true"
+                    android:text="tataga"
+                    android:textCursorDrawable="@null"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/loginBtn"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:textColor="#FFFFFF"
+                android:background="@color/primary"
+                android:text="Login"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/login_activity.xml -->

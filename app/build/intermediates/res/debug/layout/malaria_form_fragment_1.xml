@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="Customer"/>
+                android:text="1. Customer"/>
 
             <AutoCompleteTextView
                 android:id="@+id/customer_id"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="1. How many malaria patients do you see in your outlet/facility in a week?"/>
+                android:text="3. How many malaria patients do you see in your outlet/facility in a week?"/>
 
             <EditText
                 android:id="@+id/patients_per_week"
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="2. How many of these patients are children under 5?"/>
+                android:text="4. How many of these patients are children under 5?"/>
 
             <EditText
                 android:id="@+id/children"
@@ -104,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="3. When a patient with suspected malaria comes to your shop, do you usually prescribe the treatment or does the patient request something specifically?"/>
+                android:text="5. When a patient with suspected malaria comes to your shop, do you usually prescribe the treatment or does the patient request something specifically?"/>
 
             <Spinner
                 android:id="@+id/do_you_prescribe_treatment"
@@ -125,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="4. Have you heard about the treatment of malaria using antimalarial bearing a green leaf - ACTs?"/>
+                android:text="6. Have you heard about the treatment of malaria using antimalarial bearing a green leaf - ACTs?"/>
 
             <Spinner
                 android:id="@+id/heard_about_green_leaf"
@@ -148,7 +148,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="5. If yes, how did you hear about it?"/>
+                android:text="7. If yes, how did you hear about it?"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -183,6 +183,14 @@
                         android:textColor="@color/app_text_color"
                         android:button="@drawable/checkbox"
                         android:text="Billboards"/>
+
+                    <CheckBox
+                        android:id="@+id/training"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/app_text_color"
+                        android:button="@drawable/checkbox"
+                        android:text="Training"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"

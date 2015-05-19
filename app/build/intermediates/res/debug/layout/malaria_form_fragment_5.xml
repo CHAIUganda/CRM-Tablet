@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             style="@style/LabelStyle"
-            android:text="Do you stock RDTs?"/>
+            android:text="18. Do you stock RDTs?"/>
 
         <Spinner
             android:id="@+id/do_you_stock"

@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="1. How do you suspect a patient has malaria?"/>
+                android:text="8. How do you suspect a patient has malaria?"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="2. Do you know the MOH guideline of managing a patient with fever?"/>
+                android:text="9. Do you know the MOH guideline of managing a patient with fever?"/>
 
             <Spinner
                 android:id="@+id/doyouknow_moh_guidelines"
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="4. Do you know about antimalarias bearing a Green leaf?"/>
+                android:text="10. Have you heard about the treatment of malaria using antimalarial medicine with a green leaf logo?"/>
 
             <Spinner
                 android:id="@+id/know_about_green_leaf"
@@ -107,13 +107,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     style="@style/LabelStyle"
-                    android:text="5. If yes, what does it represent?"/>
+                    android:text="11. If yes, what does it represent?"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/TipTextStyle"
-                    android:text="It is MOH and WHO recommended treatment for uncomplicated malaria\nIt is highly effective against malaria. There is no documented cases of resistance in Uganda\nMOH makes these drugs cheaper in the private sector" />
+                    android:text="It is MOH and WHO recommended treatment for uncomplicated malaria\nIt is highly effective against malaria. There is no documented cases of resistance in Uganda\nMOH makes these drugs cheaper in the private sector." />
                 <Spinner
                     android:id="@+id/green_leaf_representation"
                     style="@style/SpinnerStyle"
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="6. Do you prescribe antimalarials without a Greenleaf?"/>
+                android:text="12. Do you prescribe antimalarials without a Greenleaf?"/>
 
             <Spinner
                 android:id="@+id/do_you_prescribe_without_greenleaf"
@@ -150,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     style="@style/LabelStyle"
-                    android:text="7. If sometimes and always, ask why"/>
+                    android:text="13. If sometimes and always, ask why"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="8. Do you know what severe malaria is, how to identify it, and deal with severe malaria patients?"/>
+                android:text="14. Do you know what severe malaria is, how to identify it, and deal with severe malaria patients?"/>
 
             <Spinner
                 android:id="@+id/do_you_know_server_malaria"
@@ -192,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     style="@style/LabelStyle"
-                    android:text="9. If yes, what are signs of severe malaria?"/>
+                    android:text="15. If yes, what are signs of severe malaria?"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -209,7 +209,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/LabelStyle"
-                    android:text="10. If yes, how do you manage patients with severe malaria?"/>
+                    android:text="16. If yes, how do you manage patients with severe malaria?"/>
 
                 <Spinner
                     android:id="@+id/how_to_manage_malaria_patients"

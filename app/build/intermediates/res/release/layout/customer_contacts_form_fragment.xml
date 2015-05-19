@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/TitleTextStyle"
+            android:text="Contacts"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/LabelStyle"
+            android:text="Add contact persons for the customer"/>
+
+        <LinearLayout
+            android:id="@+id/ln_contacts_container"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btn_add_row"
+                android:layout_width="@dimen/add_remove_row_button_dimensions"
+                android:layout_height="@dimen/add_remove_row_button_dimensions"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="right"
+                android:src="@drawable/ic_add_row"
+                android:scaleType="centerInside"
+                android:background="@color/transparent"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/customer_contacts_form_fragment.xml -->
