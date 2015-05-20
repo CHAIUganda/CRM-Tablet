@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,7 +18,7 @@ import com.androidquery.AQuery;
 import org.chai.R;
 import org.chai.activities.BaseActivity;
 import org.chai.activities.HomeActivity;
-import org.chai.activities.calls.HistoryActivity;
+import org.chai.activities.tasks.DiarrheaFormActivity;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
@@ -281,9 +280,10 @@ public class MalariaFormActivity extends BaseActivity {
             detailerStockDao.insert(stock);
         }
 
-        Toast.makeText(this, "Diarrhea form has been saved", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Malaria form has been saved. Please complete Diarrhea details too.", Toast.LENGTH_LONG).show();
 
-        Intent i = new Intent(this, HistoryActivity.class);
+        Intent i = new Intent(this, DiarrheaFormActivity.class);
+        i.putExtra("customer_id", task.getCustomerId());
         startActivity(i);
     }
 

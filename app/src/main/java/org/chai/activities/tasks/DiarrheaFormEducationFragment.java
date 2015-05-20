@@ -52,7 +52,7 @@ public class DiarrheaFormEducationFragment extends Fragment {
             }
         });
 
-        if(activity.call.getUuid() != null){
+        if(activity.call.getUuid() != null && activity.inferedCall == false){ //only populate when it's not from a previous call
             populateFields();
         }
 

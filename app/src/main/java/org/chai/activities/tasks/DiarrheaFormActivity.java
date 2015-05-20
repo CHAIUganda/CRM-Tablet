@@ -19,7 +19,6 @@ import org.chai.R;
 import org.chai.activities.BaseActivity;
 import org.chai.activities.HomeActivity;
 import org.chai.activities.calls.HistoryActivity;
-import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.DetailerCall;
@@ -29,7 +28,6 @@ import org.chai.model.DetailerStockDao;
 import org.chai.model.Task;
 import org.chai.model.TaskDao;
 import org.chai.util.MyApplication;
-import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
@@ -37,6 +35,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import de.greenrobot.dao.query.Query;
+import de.greenrobot.dao.query.WhereCondition;
 import me.relex.circleindicator.CircleIndicator;
 
 /**
@@ -59,6 +59,7 @@ public class DiarrheaFormActivity extends BaseActivity {
     public DetailerCall call;
     private String detailId;
     private String taskId;
+    private String customerId;
 
     List<DetailerStock> stocks;
     List<DetailerStock> zincStocks;
@@ -69,8 +70,9 @@ public class DiarrheaFormActivity extends BaseActivity {
     protected DaoSession daoSession;
     protected TaskDao taskDao;
     protected DetailerCallDao detailerCallDao;
-    protected CustomerDao customerDao;
     protected DetailerStockDao detailerStockDao;
+
+    public boolean inferedCall = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,15 +103,30 @@ public class DiarrheaFormActivity extends BaseActivity {
             }
         }
 
+        if(task == null){
+            task = new Task();
+        }else{
+            customerId = task.getCustomerId();
+        }
+
+        if(customerId == null){
+            //Try to get it directly from intent
+            customerId = getIntent().getStringExtra("customer_id");
+        }
+
+        if(customerId != null && call == null){
+            //Try to get the last known call
+            call = getLastDetailerInfo(customerId);
+            if(call != null){
+                inferedCall = true;
+            }
+        }
+
         if(call == null){
             call = new DetailerCall();
             stocks = new ArrayList<DetailerStock>();
         }else{
             stocks = call.getDetailerStocks();
-        }
-
-        if(task == null){
-            task = new Task();
         }
 
         zincStocks = new ArrayList<DetailerStock>();
@@ -234,7 +251,7 @@ public class DiarrheaFormActivity extends BaseActivity {
         call.setDateOfSurvey(new Date());
         call.setIsDirty(true);
 
-        if(call.getUuid() == null){
+        if(call.getUuid() == null || inferedCall){
             call.setUuid(UUID.randomUUID().toString());
             detailerCallDao.insert(call);
         }else{
@@ -248,10 +265,8 @@ public class DiarrheaFormActivity extends BaseActivity {
         stocks = new ArrayList<DetailerStock>();
         stocks.addAll(zincStocks);
         stocks.addAll(orsStocks);
-        Utils.log("Zincs -> " + zincStocks.size() + " ORS : -> " + orsStocks.size() + " Stocks: " + stocks.size());
 
         for(DetailerStock stock: stocks){
-            Utils.log("Saving stock -> " + stock.getCategory() + " : " + stock.getBrand());
             stock.setIsDirty(true);
             stock.setMalariadetailId("");
             stock.setDetailerId(call.getUuid());
@@ -283,5 +298,24 @@ public class DiarrheaFormActivity extends BaseActivity {
         } catch (Exception ex) {
             Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private DetailerCall getLastDetailerInfo(String customerUuid){
+        if(customerUuid == null){
+            return null;
+        }
+        try{
+            Query query = detailerCallDao.queryBuilder().where(new WhereCondition.StringCondition(" T.'" + DetailerCallDao.Properties.
+                    TaskId.columnName + "' IN " + "(SELECT " + TaskDao.Properties.Uuid.columnName + " FROM " + TaskDao.TABLENAME + " C WHERE C.'" + TaskDao.Properties.CustomerId.columnName + "' = '" + customerUuid + "')")).build();
+            List<DetailerCall> detailerCallList = query.list();
+            if (!detailerCallList.isEmpty()) {
+                DetailerCall d = detailerCallList.get(0);
+                //d.setUuid(null); //to set it as a new call
+                return d;
+            }
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 }

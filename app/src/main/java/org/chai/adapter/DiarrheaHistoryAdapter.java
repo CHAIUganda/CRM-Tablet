@@ -14,6 +14,7 @@ import org.chai.R;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.DetailerCall;
+import org.chai.util.Utils;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.Date;
@@ -39,6 +40,7 @@ public class DiarrheaHistoryAdapter extends ArrayAdapter<DetailerCall> {
 
         DetailerCall m = getItem(position);
         Customer c = m.getTask().getCustomer();
+        Utils.log("Loading custoomer -> " + c.getUuid());
 
         CustomerContact contact = c.getCustomerContacts().get(0);
 
