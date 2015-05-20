@@ -51,7 +51,7 @@ public class OrdersHistoryFragment extends Fragment {
         listView = (ListView)view.findViewById(R.id.lst_items);
         aq = new AQuery(view);
         items = new ArrayList<Order>();
-        items.addAll(orderDao.loadAll());
+        items.addAll(orderDao.queryBuilder().orderDesc(OrderDao.Properties.OrderDate).list());
         adapter = new OrderHistoryAdapter(getActivity(), R.layout.history_item_row, items);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

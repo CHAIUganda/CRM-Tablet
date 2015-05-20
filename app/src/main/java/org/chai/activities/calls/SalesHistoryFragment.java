@@ -51,7 +51,7 @@ public class SalesHistoryFragment extends Fragment {
         listView = (ListView)view.findViewById(R.id.lst_items);
         aq = new AQuery(view);
         items = new ArrayList<Sale>();
-        items.addAll(saleDao.loadAll());
+        items.addAll(saleDao.queryBuilder().orderDesc(SaleDao.Properties.DateCreated).list());
         adapter = new SaleHistoryAdapter(getActivity(), R.layout.history_item_row, items);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

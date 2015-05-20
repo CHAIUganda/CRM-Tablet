@@ -50,7 +50,7 @@ public class DiarrheaHistoryFragment extends Fragment {
         listView = (ListView)view.findViewById(R.id.lst_items);
         aq = new AQuery(view);
         items = new ArrayList<DetailerCall>();
-        items.addAll(detailerCallDao.loadAll());
+        items.addAll(detailerCallDao.queryBuilder().orderDesc(DetailerCallDao.Properties.DateOfSurvey).list());
         adapter = new DiarrheaHistoryAdapter(getActivity(), R.layout.history_item_row, items);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

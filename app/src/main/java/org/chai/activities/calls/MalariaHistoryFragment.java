@@ -50,7 +50,7 @@ public class MalariaHistoryFragment extends Fragment {
         listView = (ListView)view.findViewById(R.id.lst_items);
         aq = new AQuery(view);
         items = new ArrayList<MalariaDetail>();
-        items.addAll(malariaDetailDao.loadAll());
+        items.addAll(malariaDetailDao.queryBuilder().orderDesc(MalariaDetailDao.Properties.DateOfSurvey).list());
         adapter = new MalariaHistoryAdapter(getActivity(), R.layout.history_item_row, items);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
