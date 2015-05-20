@@ -63,6 +63,7 @@ public class CustomerContactsFormFragment extends Fragment{
                 String gender = a.id(R.id.contact_gender).getSelectedItem().toString();
                 String role = a.id(R.id.contact_role).getSelectedItem().toString();
                 contact = activity.contacts.get(rows.indexOf(row));
+                Utils.log("Saving contact -> " + name);
                 contact.setContact(phone);
                 contact.setNames(name);
                 contact.setGender(gender);
@@ -95,18 +96,29 @@ public class CustomerContactsFormFragment extends Fragment{
     }
 
     private void addRow(final CustomerContact contact){
+        Utils.log("Adding contact -> " + contact.getNames());
         LayoutInflater inflator = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View row = inflator.inflate(R.layout.customer_contact_form_row, null);
         AQuery a = new AQuery(row);
 
-        if(contact.getUuid() != null){
-            a.id(R.id.txt_customer_name).text(contact.getNames());
-            a.id(R.id.txt_customer_phone).text(contact.getContact());
-            Spinner gender = a.id(R.id.contact_gender).getSpinner();
-            gender.setSelection(((ArrayAdapter<String>) gender.getAdapter()).getPosition(contact.getGender()));
-            Spinner role = a.id(R.id.contact_role).getSpinner();
-            role.setSelection(((ArrayAdapter<String>) role.getAdapter()).getPosition(contact.getRole()));
+        try{
+            if(contact.getNames() != null){
+                a.id(R.id.txt_customer_name).text(contact.getNames());
+            }
+            if(contact.getContact() != null){
+                a.id(R.id.txt_customer_phone).text(contact.getContact());
+            }
+            if(contact.getGender() != null){
+                Spinner gender = a.id(R.id.contact_gender).getSpinner();
+                gender.setSelection(((ArrayAdapter<String>) gender.getAdapter()).getPosition(contact.getGender()));
+            }
+            if(contact.getRole() != null){
+                Spinner role = a.id(R.id.contact_role).getSpinner();
+                role.setSelection(((ArrayAdapter<String>) role.getAdapter()).getPosition(contact.getRole()));
+            }
+        }catch (Exception ex){
+            Utils.log("Error adding contact row -> " + ex.getMessage());
         }
 
         rowContainer.addView(row);

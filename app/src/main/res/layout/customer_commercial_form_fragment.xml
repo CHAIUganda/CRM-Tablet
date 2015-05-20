@@ -121,6 +121,7 @@
             <EditText
                 android:id="@+id/key_wholesaler_contact"
                 android:layout_width="match_parent"
+                android:inputType="phone"
                 style="@style/TextBoxStyle"/>
         </LinearLayout>
 
