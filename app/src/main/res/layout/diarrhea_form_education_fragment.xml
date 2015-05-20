@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="6. Please specify Other ways you heard about zinc"/>
+                android:text="6. Please specify other ways you heard about ORS and Zinc"/>
             <EditText
                 android:id="@+id/other_source_of_information"
                 android:layout_width="match_parent"

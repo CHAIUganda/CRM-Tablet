@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:tag="required"
             style="@style/LabelStyle"
-            android:text="Customer"/>
+            android:text="1. Customer"/>
 
         <AutoCompleteTextView
             android:id="@+id/customer_id"
