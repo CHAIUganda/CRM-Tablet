@@ -96,6 +96,7 @@ public class DiarrheaFormActivity extends BaseActivity {
         if(detailId != null){
             call = detailerCallDao.load(detailId);
             if(call != null){
+                call.setIsHistory(true);
                 task = call.getTask();
                 toolbar.setTitle("Edit Diarrhea Details");
             }

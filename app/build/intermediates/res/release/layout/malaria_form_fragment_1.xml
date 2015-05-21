@@ -125,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="6. Have you heard about the treatment of malaria using antimalarial bearing a green leaf - ACTs?"/>
+                android:text="6. Have you heard about the treatment of malaria using anatimalarial medicine bearing a green leaf logo (ACTs)?" />
 
             <Spinner
                 android:id="@+id/heard_about_green_leaf"

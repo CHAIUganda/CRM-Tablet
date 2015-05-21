@@ -31,6 +31,9 @@
         <item>Key</item>
         <item>Ordinary</item>
     </string-array>
+    <array name="copack_pack_sizes">
+        <item>1 (One)</item>
+    </array>
     <string-array name="gender">
         <item>Select Gender</item>
         <item>Male</item>
@@ -90,6 +93,10 @@
         <item>Late afternoon</item>
         <item>Evening</item>
     </string-array>
+    <array name="ors_pack_sizes">
+        <item>1L</item>
+        <item>500ml</item>
+    </array>
     <string-array name="outletsize">
         <item>""</item>
         <item>Large (50 or more products)</item>
@@ -137,6 +144,9 @@
         <item>Medium(2 points addressed)</item>
         <item>Low(0 or 1 point addressed)</item>
     </string-array>
+    <array name="rdt_pack_sizes">
+        <item>1 (One)</item>
+    </array>
     <string-array name="recommendation_nextstep">
         <item>No Next Step Needed</item>
         <item>Stock ORS</item>
@@ -217,6 +227,10 @@
         <item>@string/yes</item>
         <item>@string/no</item>
     </string-array>
+    <array name="zinc_pack_sizes">
+        <item>1 x 10</item>
+        <item>Syrup bottle</item>
+    </array>
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>

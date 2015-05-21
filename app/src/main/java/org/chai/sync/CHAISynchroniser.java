@@ -27,6 +27,8 @@ import org.chai.model.DetailerCall;
 import org.chai.model.DetailerCallDao;
 import org.chai.model.District;
 import org.chai.model.DistrictDao;
+import org.chai.model.MalariaDetail;
+import org.chai.model.MalariaDetailDao;
 import org.chai.model.Order;
 import org.chai.model.OrderDao;
 import org.chai.model.Product;
@@ -52,7 +54,6 @@ import org.chai.rest.SalesClient;
 import org.chai.rest.TaskClient;
 import org.chai.util.MyApplication;
 import org.chai.util.ServerResponse;
-import org.chai.util.SyncronizationException;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
@@ -83,6 +84,7 @@ public class CHAISynchroniser extends Service {
     private CustomerContactDao customerContactDao;
     private TaskDao taskDao;
     private DetailerCallDao detailerCallDao;
+    private MalariaDetailDao malariaDetailDao;
     private ProductDao productDao;
     private SaleDao saleDao;
     private OrderDao orderDao;
@@ -141,6 +143,7 @@ public class CHAISynchroniser extends Service {
             customerContactDao = daoSession.getCustomerContactDao();
             taskDao = daoSession.getTaskDao();
             detailerCallDao = daoSession.getDetailerCallDao();
+            malariaDetailDao = daoSession.getMalariaDetailDao();
             productDao = daoSession.getProductDao();
             saleDao = daoSession.getSaleDao();
             orderDao = daoSession.getOrderDao();
@@ -154,7 +157,7 @@ public class CHAISynchroniser extends Service {
 
     public void startSyncronisationProcess() {
         Utils.log("startSyncronisationProcess()");
-        try{
+        try {
             syncronisationErros = new ArrayList<ServerResponse>();
             uploadCustomers();
             uploadDirectSales();
@@ -167,11 +170,11 @@ public class CHAISynchroniser extends Service {
             downloadTasks();
             downloadProducts();
             downloadSummaryReports();
-        }catch(Exception ex){
+            if (!syncronisationErros.isEmpty()) {
+                displaySyncErros(syncronisationErros);
+            }
+        }catch (Exception ex){
             Utils.log("Error syncing -> " + ex.getMessage());
-        }
-        if(!syncronisationErros.isEmpty()){
-            displaySyncErros(syncronisationErros);
         }
     }
 
@@ -249,7 +252,7 @@ public class CHAISynchroniser extends Service {
         taskOrderDao.insertOrReplaceInTx(taskOrders);
     }
 
-    public void uploadTasks() throws SyncronizationException {
+    public void uploadTasks() /*throws SyncronizationException*/ {
         List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.notEq(HomeActivity.STATUS_NEW)).list();
 
         if (!taskList.isEmpty()) {
@@ -261,6 +264,7 @@ public class CHAISynchroniser extends Service {
         for (Task task : taskList) {
             Utils.log("Sycn task -> " + task.getDescription() + " : " + task.getType());
             if (taskIsHistory(task)) {
+                Utils.log("Task is history");
                 continue;
             }
             ServerResponse response = taskClient.uploadTask(task);
@@ -268,14 +272,22 @@ public class CHAISynchroniser extends Service {
                 Utils.log("Task syncronized succesfully");
                 //set all detailer and sale calls to isHistroy
                 if (RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)) {
-                    DetailerCall detailerCall = task.getDetailers().get(0);
-                    detailerCall.setIsHistory(true);
-                    detailerCall.setIsDirty(false);
-                    detailerCall.setSyncronisationStatus(BaseEntity.SYNC_SUCCESS);
-                    detailerCallDao.update(detailerCall);
+                    if(task.getType().equalsIgnoreCase("malaria")){
+                        MalariaDetail detail = task.getMalariadetails().get(0);
+                        detail.setIsHistory(true);
+                        detail.setIsDirty(false);
+                        detail.setSyncronisationStatus(BaseEntity.SYNC_SUCCESS);
+                        malariaDetailDao.update(detail);
+                    }else{
+                        DetailerCall detailerCall = task.getDetailers().get(0);
+                        detailerCall.setIsHistory(true);
+                        detailerCall.setIsDirty(false);
+                        detailerCall.setSyncronisationStatus(BaseEntity.SYNC_SUCCESS);
+                        detailerCallDao.update(detailerCall);
+                    }
                 }
             }else{
-                Utils.log("Error posting Tasks");
+                Utils.log("Error posting  -> " + response.getMessage());
                 task.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
                 task.setSyncronisationMessage(response.getMessage());
                 task.setLastUpdated(new Date());
@@ -289,6 +301,8 @@ public class CHAISynchroniser extends Service {
     private boolean taskIsHistory(Task task) {
         try {
             if (!task.getDetailers().isEmpty() && task.getDetailers().get(0).getIsHistory()) {
+                return true;
+            }else if (!task.getMalariadetails().isEmpty() && task.getMalariadetails().get(0).getIsHistory()) {
                 return true;
             } else if (!task.getSales().isEmpty() && task.getSales().get(0).getIsHistory()) {
                 return true;

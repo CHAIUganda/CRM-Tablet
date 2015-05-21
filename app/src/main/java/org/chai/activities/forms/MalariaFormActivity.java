@@ -96,6 +96,7 @@ public class MalariaFormActivity extends BaseActivity {
         if(detailId != null){
             call = malariaDetailDao.load(detailId);
             if(call != null){
+                call.setIsHistory(true);
                 task = call.getTask();
                 toolbar.setTitle("Edit Malaria Details");
             }

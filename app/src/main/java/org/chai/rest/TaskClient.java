@@ -34,7 +34,6 @@ public class TaskClient extends RestClient {
             Utils.log("Uploading task -> " + task.getDescription());
             RestTemplate restTemplate = getRestTemplate();
             HttpEntity<Task> httpEntity = new HttpEntity<Task>(task, getHeaders());
-            Utils.log("HTTPEntity -> " + httpEntity.getBody());
             String url = REST_URL + "task/update";
             if(task.getType().equalsIgnoreCase("malaria")){
                 url = REST_URL + "task/malariaUpdate";
@@ -42,7 +41,6 @@ public class TaskClient extends RestClient {
             }
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, httpEntity, ServerResponse.class);
             ServerResponse body = responseEntity.getBody();
-            Utils.log("After getting body -> " + body.toString());
             body.setItemRef(task.getDescription());
             return body;
         } catch (HttpClientErrorException ex) {

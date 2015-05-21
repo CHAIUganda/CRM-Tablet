@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="6. Please specify Other ways you heard about zinc"/>
+                android:text="6. Please specify other ways you heard about ORS and Zinc"/>
             <EditText
                 android:id="@+id/other_source_of_information"
                 android:layout_width="match_parent"
@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="9. What do you know about Zinc and how it should be used?"/>
+                android:text="10. What do you know about Zinc and how it should be used?"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="10. Why should you not use antibiotics to treat diarrhea?"/>
+                android:text="11. Why should you not use antibiotics to treat diarrhea?"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

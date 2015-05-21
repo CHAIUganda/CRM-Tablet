@@ -86,6 +86,7 @@ public class SalesFormActivity extends BaseActivity {
         if(saledId != null){
             sale = saleDao.load(saledId);
             if(sale != null){
+                sale.setIsHistory(true);
                 task = sale.getTask();
             }
         }else{
