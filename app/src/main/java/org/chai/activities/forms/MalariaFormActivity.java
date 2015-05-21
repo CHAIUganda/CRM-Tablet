@@ -19,7 +19,6 @@ import org.chai.R;
 import org.chai.activities.BaseActivity;
 import org.chai.activities.HomeActivity;
 import org.chai.activities.tasks.DiarrheaFormActivity;
-import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.DetailerStock;
@@ -45,7 +44,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class MalariaFormActivity extends BaseActivity {
     Toolbar toolbar;
     AQuery aq;
-    int NUM_PAGES = 6;
+    int NUM_PAGES = 5;
     public ViewPager pager;
     CircleIndicator indicator;
 
@@ -54,7 +53,6 @@ public class MalariaFormActivity extends BaseActivity {
     MalariaFormAntiMalarialFragment antimalarialFragment;
     MalariaFormNextStepsFragment recommendationFragment;
     MalariaFormRdtFragment rdtFragment;
-    MalariaFormCopackFragment copackFragment;
 
     public Task task;
     public MalariaDetail call;
@@ -66,13 +64,11 @@ public class MalariaFormActivity extends BaseActivity {
     protected DaoSession daoSession;
     protected TaskDao taskDao;
     protected MalariaDetailDao malariaDetailDao;
-    protected CustomerDao customerDao;
     protected DetailerStockDao detailerStockDao;
 
     List<DetailerStock> stocks;
     List<DetailerStock> antimalarials;
     List<DetailerStock> rdts;
-    List<DetailerStock> copacks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +118,6 @@ public class MalariaFormActivity extends BaseActivity {
 
         antimalarials = new ArrayList<DetailerStock>();
         rdts = new ArrayList<DetailerStock>();
-        copacks = new ArrayList<DetailerStock>();
 
         for(DetailerStock stock: stocks){
             if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(MalariaFormAntiMalarialFragment.STOCK_TYPE)){
@@ -130,9 +125,6 @@ public class MalariaFormActivity extends BaseActivity {
             }
             if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(MalariaFormRdtFragment.STOCK_TYPE)){
                 rdts.add(stock);
-            }
-            if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(MalariaFormCopackFragment.STOCK_TYPE)){
-                copacks.add(stock);
             }
         }
 
@@ -165,10 +157,6 @@ public class MalariaFormActivity extends BaseActivity {
                     fragment = rdtFragment;
                     break;
                 case 4:
-                    copackFragment = new MalariaFormCopackFragment();
-                    fragment = copackFragment;
-                    break;
-                case 5:
                     recommendationFragment = new MalariaFormNextStepsFragment();
                     fragment = recommendationFragment;
                     break;
@@ -226,11 +214,6 @@ public class MalariaFormActivity extends BaseActivity {
             return;
         }
 
-        if(copackFragment == null || !copackFragment.saveFields()){
-            pager.setCurrentItem(5);
-            return;
-        }
-
         task.setStatus(HomeActivity.STATUS_COMPLETE);
         task.setType("malaria");
         task.setCompletionDate(new Date());
@@ -264,7 +247,6 @@ public class MalariaFormActivity extends BaseActivity {
         stocks = new ArrayList<DetailerStock>();
         stocks.addAll(antimalarials);
         stocks.addAll(rdts);
-        stocks.addAll(copacks);
 
         for(DetailerStock stock: stocks){
             Utils.log("Saving stock -> " + stock.getCategory() + " : " + stock.getBrand());

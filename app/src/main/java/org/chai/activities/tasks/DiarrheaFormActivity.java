@@ -45,7 +45,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class DiarrheaFormActivity extends BaseActivity {
     Toolbar toolbar;
     AQuery aq;
-    int NUM_PAGES = 5;
+    int NUM_PAGES = 6;
     public ViewPager pager;
     CircleIndicator indicator;
 
@@ -53,6 +53,7 @@ public class DiarrheaFormActivity extends BaseActivity {
     DiarrheaFormEducationFragment educationFragment;
     DiarrheaFormZincFragment zincFragment;
     DiarrheaOrsFragment orsFragment;
+    DiarrheaFormCopackFragment copackFragment;
     DiarrheaFormRecommendationFragment recommendationFragment;
 
     public Task task;
@@ -64,6 +65,7 @@ public class DiarrheaFormActivity extends BaseActivity {
     List<DetailerStock> stocks;
     List<DetailerStock> zincStocks;
     List<DetailerStock> orsStocks;
+    List<DetailerStock> copacks;
 
     protected SQLiteDatabase db;
     protected DaoMaster daoMaster;
@@ -131,6 +133,7 @@ public class DiarrheaFormActivity extends BaseActivity {
 
         zincStocks = new ArrayList<DetailerStock>();
         orsStocks = new ArrayList<DetailerStock>();
+        copacks = new ArrayList<DetailerStock>();
 
         for(DetailerStock stock: stocks){
             if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(DiarrheaFormZincFragment.STOCK_TYPE)){
@@ -138,6 +141,9 @@ public class DiarrheaFormActivity extends BaseActivity {
             }
             if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(DiarrheaOrsFragment.STOCK_TYPE)){
                 orsStocks.add(stock);
+            }
+            if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(DiarrheaFormCopackFragment.STOCK_TYPE)){
+                copacks.add(stock);
             }
         }
 
@@ -175,6 +181,10 @@ public class DiarrheaFormActivity extends BaseActivity {
                     fragment = orsFragment;
                     break;
                 case 4:
+                    copackFragment = new DiarrheaFormCopackFragment();
+                    fragment = copackFragment;
+                    break;
+                case 5:
                     recommendationFragment = new DiarrheaFormRecommendationFragment();
                     fragment = recommendationFragment;
                     break;
@@ -227,8 +237,12 @@ public class DiarrheaFormActivity extends BaseActivity {
             return;
         }
 
-        if(recommendationFragment == null || !recommendationFragment.saveFields()){
+        if(copackFragment == null || !copackFragment.saveFields()){
             pager.setCurrentItem(4);
+        }
+
+        if(recommendationFragment == null || !recommendationFragment.saveFields()){
+            pager.setCurrentItem(5);
             return;
         }
 
@@ -265,6 +279,7 @@ public class DiarrheaFormActivity extends BaseActivity {
         stocks = new ArrayList<DetailerStock>();
         stocks.addAll(zincStocks);
         stocks.addAll(orsStocks);
+        stocks.addAll(copacks);
 
         for(DetailerStock stock: stocks){
             stock.setIsDirty(true);
