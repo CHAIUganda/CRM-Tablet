@@ -217,4 +217,8 @@
         <item>1 x 18</item>
         <item>1 x 24</item>
     </array>
+    <array name="zinc_pack_sizes">
+        <item>1 x 10</item>
+        <item>Syrup bottle</item>
+    </array>
 </resources>

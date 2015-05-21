@@ -53,6 +53,7 @@ public final class R {
         public static final int type_of_role=0x7f08001a;
         public static final int years=0x7f08001b;
         public static final int yesnolist=0x7f08001c;
+        public static final int zinc_pack_sizes=0x7f08001d;
     }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -2463,13 +2464,14 @@ containing a value of this type.
         public static final int sales_form_next_steps_fragment=0x7f030040;
         public static final int sales_form_sale_fragment=0x7f030041;
         public static final int sales_form_stock_fragment=0x7f030042;
-        public static final int stock_form_row=0x7f030043;
-        public static final int support_simple_spinner_dropdown_item=0x7f030044;
-        public static final int task_by_location=0x7f030045;
-        public static final int task_calender_fragment=0x7f030046;
-        public static final int task_cancel_prompt=0x7f030047;
-        public static final int task_map_layout=0x7f030048;
-        public static final int toolbar=0x7f030049;
+        public static final int spinner_drop_down=0x7f030043;
+        public static final int stock_form_row=0x7f030044;
+        public static final int support_simple_spinner_dropdown_item=0x7f030045;
+        public static final int task_by_location=0x7f030046;
+        public static final int task_calender_fragment=0x7f030047;
+        public static final int task_cancel_prompt=0x7f030048;
+        public static final int task_map_layout=0x7f030049;
+        public static final int toolbar=0x7f03004a;
     }
     public static final class menu {
         public static final int detailer_customer_menu=0x7f100000;
