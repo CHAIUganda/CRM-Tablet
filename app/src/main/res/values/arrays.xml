@@ -221,4 +221,8 @@
         <item>1 x 10</item>
         <item>Syrup bottle</item>
     </array>
+    <array name="ors_pack_sizes">
+        <item>1L</item>
+        <item>500ml</item>
+    </array>
 </resources>

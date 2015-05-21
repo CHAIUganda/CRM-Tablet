@@ -48,9 +48,7 @@ public class DiarrheaOrsFragment extends Fragment implements IViewManipulator {
             "Oralyte (orange)",
             "Restors",
             "Revive (plain)",
-            "Revive (orange)",
-            "Oralyte (500mL) – plain",
-            "Oralyte (500mL) – orange"
+            "Revive (orange)"
     };
 
     DiarrheaFormActivity activity;
@@ -200,6 +198,9 @@ public class DiarrheaOrsFragment extends Fragment implements IViewManipulator {
         text.setHint("Type or select brand");
 
         Spinner packsizeSpinner = a.id(R.id.spn_pack_size).getSpinner();
+        ArrayAdapter<CharSequence> packAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.ors_pack_sizes, android.R.layout.simple_spinner_item);
+        packAdapter.setDropDownViewResource(R.layout.spinner_drop_down);
+        packsizeSpinner.setAdapter(packAdapter);
 
         try{
             if(stock.getBrand() != null){

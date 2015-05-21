@@ -37,23 +37,24 @@ public final class R {
         public static final int months=0x7f08000a;
         public static final int nav_drawer_items=0x7f08000b;
         public static final int openingdays=0x7f08000c;
-        public static final int outletsize=0x7f08000d;
-        public static final int outlettypes=0x7f08000e;
-        public static final int pack_sizes=0x7f08000f;
-        public static final int point_of_sale_material=0x7f080010;
-        public static final int productlist=0x7f080011;
-        public static final int promotiontypelist=0x7f080012;
-        public static final int ratings=0x7f080013;
-        public static final int recommendation_nextstep=0x7f080014;
-        public static final int restock_frequency=0x7f080015;
-        public static final int sources_of_information=0x7f080016;
-        public static final int split=0x7f080017;
-        public static final int task_filters=0x7f080018;
-        public static final int turnover=0x7f080019;
-        public static final int type_of_role=0x7f08001a;
-        public static final int years=0x7f08001b;
-        public static final int yesnolist=0x7f08001c;
-        public static final int zinc_pack_sizes=0x7f08001d;
+        public static final int ors_pack_sizes=0x7f08000d;
+        public static final int outletsize=0x7f08000e;
+        public static final int outlettypes=0x7f08000f;
+        public static final int pack_sizes=0x7f080010;
+        public static final int point_of_sale_material=0x7f080011;
+        public static final int productlist=0x7f080012;
+        public static final int promotiontypelist=0x7f080013;
+        public static final int ratings=0x7f080014;
+        public static final int recommendation_nextstep=0x7f080015;
+        public static final int restock_frequency=0x7f080016;
+        public static final int sources_of_information=0x7f080017;
+        public static final int split=0x7f080018;
+        public static final int task_filters=0x7f080019;
+        public static final int turnover=0x7f08001a;
+        public static final int type_of_role=0x7f08001b;
+        public static final int years=0x7f08001c;
+        public static final int yesnolist=0x7f08001d;
+        public static final int zinc_pack_sizes=0x7f08001e;
     }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"

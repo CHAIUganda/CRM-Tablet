@@ -90,6 +90,10 @@
         <item>Late afternoon</item>
         <item>Evening</item>
     </string-array>
+    <array name="ors_pack_sizes">
+        <item>1L</item>
+        <item>500ml</item>
+    </array>
     <string-array name="outletsize">
         <item>""</item>
         <item>Large (50 or more products)</item>
