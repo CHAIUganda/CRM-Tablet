@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="9. What do you know about Zinc and how it should be used?"/>
+                android:text="10. What do you know about Zinc and how it should be used?"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="10. Why should you not use antibiotics to treat diarrhea?"/>
+                android:text="11. Why should you not use antibiotics to treat diarrhea?"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

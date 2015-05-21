@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     style="@style/LabelStyle"
-                    android:text="3. If Yes, probe"/>
+                    android:text="10. If Yes, probe"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="10. Have you heard about the treatment of malaria using antimalarial medicine with a green leaf logo?"/>
+                android:text="11. Have you heard about the treatment of malaria using antimalarial medicine with a green leaf logo?"/>
 
             <Spinner
                 android:id="@+id/know_about_green_leaf"
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     style="@style/LabelStyle"
-                    android:text="11. If yes, what does it represent?"/>
+                    android:text="12. If yes, what does it represent?"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="12. Do you prescribe antimalarials without a Greenleaf?"/>
+                android:text="13. Do you prescribe antimalarials without a Greenleaf?"/>
 
             <Spinner
                 android:id="@+id/do_you_prescribe_without_greenleaf"
@@ -150,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     style="@style/LabelStyle"
-                    android:text="13. If sometimes and always, ask why"/>
+                    android:text="14. If sometimes and always, ask why"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="14. Do you know what severe malaria is, how to identify it, and deal with severe malaria patients?"/>
+                android:text="15. Do you know what severe malaria is, how to identify it, and deal with severe malaria patients?"/>
 
             <Spinner
                 android:id="@+id/do_you_know_server_malaria"
@@ -192,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     style="@style/LabelStyle"
-                    android:text="15. If yes, what are signs of severe malaria?"/>
+                    android:text="16. If yes, what are signs of severe malaria?"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -209,7 +209,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/LabelStyle"
-                    android:text="16. If yes, how do you manage patients with severe malaria?"/>
+                    android:text="17. If yes, how do you manage patients with severe malaria?"/>
 
                 <Spinner
                     android:id="@+id/how_to_manage_malaria_patients"
