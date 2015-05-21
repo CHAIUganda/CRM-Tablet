@@ -31,6 +31,9 @@
         <item>Key</item>
         <item>Ordinary</item>
     </string-array>
+    <array name="copack_pack_sizes">
+        <item>1 (One)</item>
+    </array>
     <string-array name="gender">
         <item>Select Gender</item>
         <item>Male</item>
@@ -141,6 +144,9 @@
         <item>Medium(2 points addressed)</item>
         <item>Low(0 or 1 point addressed)</item>
     </string-array>
+    <array name="rdt_pack_sizes">
+        <item>1 (One)</item>
+    </array>
     <string-array name="recommendation_nextstep">
         <item>No Next Step Needed</item>
         <item>Stock ORS</item>

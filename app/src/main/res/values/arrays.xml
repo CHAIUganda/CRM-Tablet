@@ -225,4 +225,10 @@
         <item>1L</item>
         <item>500ml</item>
     </array>
+    <array name="copack_pack_sizes">
+        <item>1 (One)</item>
+    </array>
+    <array name="rdt_pack_sizes">
+        <item>1 (One)</item>
+    </array>
 </resources>
