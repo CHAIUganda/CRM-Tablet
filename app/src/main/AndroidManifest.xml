@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="org.chai" android:versionCode="8" android:versionName="1.1-SNAPSHOT">
-    <uses-sdk
-            android:minSdkVersion="14"
-            android:targetSdkVersion="21" />
-
+  package="org.chai">
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
