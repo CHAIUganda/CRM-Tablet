@@ -2,8 +2,20 @@ package org.chai.util.migration;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import org.chai.model.*;
-import org.chai.util.Utils;
+
+import org.chai.model.AdhockSaleDao;
+import org.chai.model.CustomerContactDao;
+import org.chai.model.CustomerDao;
+import org.chai.model.DetailerCallDao;
+import org.chai.model.DetailerStockDao;
+import org.chai.model.OrderDao;
+import org.chai.model.OrderDataDao;
+import org.chai.model.SaleDao;
+import org.chai.model.SaleDataDao;
+import org.chai.model.StokeDataDao;
+import org.chai.model.SummaryReportDao;
+import org.chai.model.TaskDao;
+import org.chai.model.TaskOrderDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +39,6 @@ public class MigrationHelper1 extends MigratorHelper {
         updateDetailerCall(db);
         TaskOrderDao.createTable(db, true);
         updateReportSummary(db);
-
-        //The new Malaria form and pack size
-        MalariaDetailDao.createTable(db, true);
-        try{
-            String sql = "ALTER TABLE " + DetailerStockDao.TABLENAME + " ADD COLUMN " + DetailerStockDao.Properties.PackSize.columnName + " TEXT";
-            db.execSQL(sql);
-            String sql2 = "ALTER TABLE " + DetailerStockDao.TABLENAME + " ADD COLUMN " + DetailerStockDao.Properties.MalariadetailId.columnName + " TEXT";
-            db.execSQL(sql2);
-            Utils.log("Update chai_crm: " + sql);
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
     }
 
     private void updateReportSummary(SQLiteDatabase db) {
