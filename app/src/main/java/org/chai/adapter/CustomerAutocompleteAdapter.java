@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
 import org.chai.model.Customer;
+import org.chai.util.Utils;
 
 import java.util.ArrayList;
 
@@ -78,8 +79,12 @@ public class CustomerAutocompleteAdapter extends ArrayAdapter<Customer> {
             ArrayList<Customer> filteredList = (ArrayList<Customer>) results.values;
             if(results != null && results.count > 0) {
                 clear();
-                for (Customer c : filteredList) {
-                    add(c);
+                try{
+                    for (int i = 0; i < filteredList.size(); i++) {
+                        add(filteredList.get(i));
+                    }
+                }catch (Exception ex){
+                    Utils.log("Error in publishResults");
                 }
                 notifyDataSetChanged();
             }
