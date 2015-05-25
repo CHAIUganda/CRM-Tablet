@@ -105,10 +105,10 @@ public class CHAISynchroniser extends Service {
         taskClient = new TaskClient();
         salesClient = new SalesClient();
 
-        //initialiseGreenDao();
+        initialiseGreenDao();
 
         //Sync everything here
-        //new SyncTask().execute();
+        new SyncTask().execute();
 
         return START_NOT_STICKY;
     }

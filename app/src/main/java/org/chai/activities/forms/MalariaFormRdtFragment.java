@@ -49,7 +49,8 @@ public class MalariaFormRdtFragment extends Fragment implements IViewManipulator
             "First Response Malaria",
             "PAN/Pf",
             "Clearview Malaria",
-            "CareStart"
+            "CareStart",
+            "Paracheck"
     };
 
     MalariaFormActivity activity;

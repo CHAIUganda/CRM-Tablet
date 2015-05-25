@@ -41,31 +41,18 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:tag="required"
-                style="@style/LabelStyle"
-                android:text="9. Do you know the MOH guideline of managing a patient with fever?"/>
-
-            <Spinner
-                android:id="@+id/doyouknow_moh_guidelines"
-                style="@style/SpinnerStyle"
-                android:layout_width="match_parent"
-                android:entries="@array/yesnolist" />
 
             <LinearLayout
                 android:id="@+id/ln_moh_guidelines_probe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     style="@style/LabelStyle"
-                    android:text="10. If Yes, probe"/>
+                    android:text="9. What is the MoH guideline of managing a patient with fever?"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -84,18 +71,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:tag="required"
-                style="@style/LabelStyle"
-                android:text="11. Have you heard about the treatment of malaria using antimalarial medicine with a green leaf logo?"/>
-
-            <Spinner
-                android:id="@+id/know_about_green_leaf"
-                style="@style/SpinnerStyle"
-                android:layout_width="match_parent"
-                android:entries="@array/yesnolist" />
 
             <LinearLayout
                 android:id="@+id/ln_green_leaf_container"
@@ -107,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     style="@style/LabelStyle"
-                    android:text="12. If yes, what does it represent?"/>
+                    android:text="10. What have you heard about the treatment of malaria using antimalarial medicine with the green leaf logo?"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -132,37 +107,13 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="13. Do you prescribe antimalarials without a Greenleaf?"/>
+                android:text="11. Why should you only prescribe antimalarials with a green leaf logo?"/>
 
             <Spinner
-                android:id="@+id/do_you_prescribe_without_greenleaf"
+                android:id="@+id/why_prescribe_antimalarials_without_green_leaf"
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
-                android:entries="@array/SpinnerNoSometimesAlways" />
-
-            <LinearLayout
-                android:id="@+id/ln_prescribe_antimalarials_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    style="@style/LabelStyle"
-                    android:text="14. If sometimes and always, ask why"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/TipTextStyle"
-                    android:text="Other antimalarials without green leaf are not as effective for treating malaria\nFancidar is not recommended for treatment of malaria anymore\nTreatments like Artemether, Artesunate, Chloroquin, Amodiaquin, mefloquin are not effective against malaria parasites" />
-                <Spinner
-                    android:id="@+id/why_prescribe_antimalarials_without_green_leaf"
-                    style="@style/SpinnerStyle"
-                    android:layout_width="match_parent"
-                    android:entries="@array/ratings" />
-            </LinearLayout>
+                android:entries="@array/ratings" />
         </LinearLayout>
 
         <LinearLayout
@@ -170,17 +121,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/LabelStyle"
-                android:text="15. Do you know what severe malaria is, how to identify it, and deal with severe malaria patients?"/>
-
-            <Spinner
-                android:id="@+id/do_you_know_server_malaria"
-                style="@style/SpinnerStyle"
-                android:layout_width="match_parent"
-                android:entries="@array/yesnolist" />
 
             <LinearLayout
                 android:id="@+id/ln_server_malaria_container"
@@ -192,30 +132,36 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     style="@style/LabelStyle"
-                    android:text="16. If yes, what are signs of severe malaria?"/>
+                    android:text="12. What are signs of severe malaria?"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/TipTextStyle"
-                    android:text="Severe malaria is when uncomplicated malaria progresses.  If a patient has severe malaria, he/she is in danger of dying soon!\nThe signs/symptoms of severe malaria are dehydration, sunken eyes, confusion/delirium, rare or black-colored urine, rapid breathing\nIf a patient has severe malaria, refer to a hospital immediately" />
+                    android:text="Severe malaria is when uncomplicated malaria progresses.  If a patient has severe malaria, he/she is in danger of dying soon!\nThe signs/symptoms of severe malaria are dehydration, sunken eyes, confusion/delirium, red or black coloured urine, little or no urine, rapid breathing, vomiting everything, weak/faint pulse, jaundice\nIf a patient has severe malaria, refer to a hospital immediately" />
                 <Spinner
                     android:id="@+id/signs_of_severe_malaria"
                     style="@style/SpinnerStyle"
                     android:layout_width="match_parent"
-                    android:entries="@array/SpinnerKnowldgeLevel" />
+                    android:entries="@array/ratings" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/LabelStyle"
-                    android:text="17. If yes, how do you manage patients with severe malaria?"/>
+                    android:text="13. How do you manage patients with severe malaria?"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TipTextStyle"
+                    android:text="Treat with injectable Artesunate\nRefer to a formal facility\nTreat with IV artesunate\nRefer to a formal facility"
+                    />
 
                 <Spinner
                     android:id="@+id/how_to_manage_malaria_patients"
                     style="@style/SpinnerStyle"
                     android:layout_width="match_parent"
-                    android:entries="@array/SpinnerServerMalariaManagement" />
+                    android:entries="@array/ratings" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
