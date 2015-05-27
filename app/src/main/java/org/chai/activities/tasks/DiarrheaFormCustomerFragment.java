@@ -66,7 +66,11 @@ public class DiarrheaFormCustomerFragment extends Fragment {
             if(customer != null){
                 aq.id(R.id.customer_id).enabled(false);
                 aq.id(R.id.customer_id).text(customer.getOutletName()).enabled(false);
-                aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+                try{
+                    aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+                }catch (Exception ex){
+                    aq.id(R.id.txt_customer_location).text("Failed to load District & Subcounty");
+                }
             }
         }
 
@@ -83,7 +87,11 @@ public class DiarrheaFormCustomerFragment extends Fragment {
                     Customer selected = (Customer) adapterView.getAdapter().getItem(position);
                     customer = selected;
                     if (customer != null) {
-                        aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+                        try{
+                            aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+                        }catch (Exception ex){
+                            aq.id(R.id.txt_customer_location).text("Failed to load District & Subcounty");
+                        }
                     }
                 }
             });

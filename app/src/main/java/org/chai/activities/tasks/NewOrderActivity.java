@@ -150,7 +150,11 @@ public class NewOrderActivity extends BaseActivity {
                     Customer selected = (Customer)adapterView.getAdapter().getItem(position);
                     customer = selected;
                     if(customer != null){
-                        aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+                        try{
+                            aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+                        }catch (Exception ex){
+                            aq.id(R.id.txt_customer_location).text("Failed to load District & Subcounty");
+                        }
                     }
                 }
             });
@@ -165,7 +169,11 @@ public class NewOrderActivity extends BaseActivity {
         customer = order.getCustomer();
         date = order.getDeliveryDate();
         aq.id(R.id.customer_id).text(customer.getOutletName()).enabled(false);
-        aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+        try{
+            aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+        }catch (Exception ex){
+            aq.id(R.id.txt_customer_location).text("Failed to load District & Subcounty");
+        }
         aq.id(R.id.due_date).text(dateFormat.format(date));
 
         for(OrderData data : order.getOrderDatas()){
