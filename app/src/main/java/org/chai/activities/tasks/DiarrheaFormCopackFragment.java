@@ -108,10 +108,16 @@ public class DiarrheaFormCopackFragment extends Fragment implements IViewManipul
     }
 
     private void clearStocks(){
-        for(View row : rows){
-            ((ViewGroup)row.getParent()).removeView(row);
-            activity.copacks = new ArrayList<DetailerStock>();
-            rows = new ArrayList<View>();
+        if(rows != null){
+            try{
+                for(View row : rows){
+                    ((ViewGroup)row.getParent()).removeView(row);
+                    activity.copacks = new ArrayList<DetailerStock>();
+                    rows = new ArrayList<View>();
+                }
+            }catch (Exception ex){
+
+            }
         }
     }
 

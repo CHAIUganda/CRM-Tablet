@@ -114,13 +114,17 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
         return view;
     }
 
-
-
     private void clearStocks(){
-        for(View row : rows){
-            ((ViewGroup)row.getParent()).removeView(row);
-            activity.antimalarials = new ArrayList<DetailerStock>();
-            rows = new ArrayList<View>();
+        if(rows != null){
+            try{
+                for(View row : rows){
+                    ((ViewGroup)row.getParent()).removeView(row);
+                    activity.antimalarials = new ArrayList<DetailerStock>();
+                    rows = new ArrayList<View>();
+                }
+            }catch(Exception ex){
+
+            }
         }
     }
 

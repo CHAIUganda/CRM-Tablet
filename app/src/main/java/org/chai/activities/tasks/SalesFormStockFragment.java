@@ -93,10 +93,16 @@ public class SalesFormStockFragment extends Fragment{
     }
 
     private void clearStocks(){
-        for(View row : rows){
-            ((ViewGroup)row.getParent()).removeView(row);
-            parent.stocks = new ArrayList<StokeData>();
-            rows = new ArrayList<View>();
+        if(rows != null){
+            try{
+                for(View row : rows){
+                    ((ViewGroup)row.getParent()).removeView(row);
+                    parent.stocks = new ArrayList<StokeData>();
+                    rows = new ArrayList<View>();
+                }
+            }catch (Exception ex){
+
+            }
         }
     }
 

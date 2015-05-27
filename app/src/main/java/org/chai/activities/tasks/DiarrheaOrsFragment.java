@@ -108,10 +108,16 @@ public class DiarrheaOrsFragment extends Fragment implements IViewManipulator {
     }
 
     private void clearStocks(){
-        for(View row : rows){
-            ((ViewGroup)row.getParent()).removeView(row);
-            activity.orsStocks = new ArrayList<DetailerStock>();
-            rows = new ArrayList<View>();
+        if(rows != null){
+            try{
+                for(View row : rows){
+                    ((ViewGroup)row.getParent()).removeView(row);
+                    activity.orsStocks = new ArrayList<DetailerStock>();
+                    rows = new ArrayList<View>();
+                }
+            }catch (Exception ex){
+
+            }
         }
     }
 
