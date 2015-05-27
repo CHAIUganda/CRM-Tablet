@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:button="@drawable/checkbox"
                     android:textColor="@color/app_text_color"
-                    android:text="RRP Poster"/>
+                    android:text="Poster"/>
 
             </LinearLayout>
             <LinearLayout
@@ -81,14 +81,6 @@
             android:textColor="@color/app_text_color"
             android:button="@drawable/checkbox"
             android:text="Stock Greenleaf ACTs"/>
-
-        <CheckBox
-            android:id="@+id/start_selling"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/app_text_color"
-            android:button="@drawable/checkbox"
-            android:text="Start selling Greenleaf ACTs at RRP"/>
 
         <CheckBox
             android:id="@+id/refer_patients"

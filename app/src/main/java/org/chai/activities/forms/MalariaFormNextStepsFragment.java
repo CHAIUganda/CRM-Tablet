@@ -42,7 +42,6 @@ public class MalariaFormNextStepsFragment extends Fragment {
         if(recommendations != null){
             aq.id(R.id.start_purchasing).checked(recommendations.indexOf(aq.id(R.id.start_purchasing).getText().toString()) != -1);
             aq.id(R.id.stock_green_leaf).checked(recommendations.indexOf(aq.id(R.id.stock_green_leaf).getText().toString()) != -1);
-            aq.id(R.id.start_selling).checked(recommendations.indexOf(aq.id(R.id.start_selling).getText().toString()) != -1);
             aq.id(R.id.refer_patients).checked(recommendations.indexOf(aq.id(R.id.refer_patients).getText().toString()) != -1);
         }
     }
