@@ -109,6 +109,12 @@
                 style="@style/LabelStyle"
                 android:text="11. Why should you only prescribe antimalarials with a green leaf logo?"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TipTextStyle"
+                android:text="Other antimalarials without green leaf are not as effective for treating malaria\nSP is not recommended for treatment of malaria anymore\nTreatments like Artemether, Artesunate, Chloroquin, Amodiaquin, mefloquin are not effective against malaria parasites" />
+
             <Spinner
                 android:id="@+id/why_prescribe_antimalarials_without_green_leaf"
                 style="@style/SpinnerStyle"
@@ -154,7 +160,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/TipTextStyle"
-                    android:text="Treat with injectable Artesunate\nRefer to a formal facility\nTreat with IV artesunate\nRefer to a formal facility"
+                    android:text="Treat with injectable Artesunate\nRefer to a formal facility"
                     />
 
                 <Spinner

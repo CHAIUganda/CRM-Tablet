@@ -215,6 +215,9 @@ public class MalariaFormAntiMalarialFragment extends Fragment implements IViewMa
         text.setHint("Type or select brand");
 
         Spinner packsizeSpinner = a.id(R.id.spn_pack_size).getSpinner();
+        ArrayAdapter<CharSequence> packAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.antimalarial_pack_sizes, android.R.layout.simple_spinner_item);
+        packAdapter.setDropDownViewResource(R.layout.spinner_drop_down);
+        packsizeSpinner.setAdapter(packAdapter);
 
         try{
             if(stock.getBrand() != null){

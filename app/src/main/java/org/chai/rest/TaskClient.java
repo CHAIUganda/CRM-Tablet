@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 public class TaskClient extends RestClient {
 
     public Task[] downloadTasks() {
+        Utils.log("TaskClient -> downloadTasks");
         try {
             RestTemplate restTemplate = getRestTemplate();
             ResponseEntity<Task[]> responseEntity = restTemplate.exchange(REST_URL + "task/list?max=" + Integer.MAX_VALUE, HttpMethod.GET, getRequestEntity(), Task[].class);

@@ -55,8 +55,10 @@ public class DiarrheaHistoryAdapter extends ArrayAdapter<DetailerCall> {
         try{
             CustomerContact contact = c.getCustomerContacts().get(0);
             aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
+            aq.id(R.id.txt_customer_name).text("Could not find customer");
         }catch (Exception ex){
             Utils.log("No customer contact found");
+            aq.id(R.id.txt_customer_contact).text("N/A");
         }
 
         Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
