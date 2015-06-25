@@ -1,6 +1,7 @@
 package org.chai;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentManager;
 
 import org.chai.util.GPSTracker;
 import org.chai.util.Utils;
@@ -27,7 +28,10 @@ public class Globals{
        }
     }
 
-    public GPSTracker getGpsTracker() {
+    public GPSTracker getGpsTracker(FragmentManager fragmentManager) {
+        if(!gpsTracker.isGPSEnabled){
+            //new GPSSettingsDialog().show(fragmentManager, "gps_settings_dialog");
+        }
         return gpsTracker;
     }
 

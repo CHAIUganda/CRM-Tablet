@@ -12,8 +12,6 @@ import org.chai.util.Utils;
  */
 public class UpgradeOpenHelper extends DaoMaster.OpenHelper {
 
-    private static final String TAG = "UpgradeOpenHelper";
-
     public UpgradeOpenHelper(Context context, String name, CursorFactory factory) {
         super(context, name, factory);
     }

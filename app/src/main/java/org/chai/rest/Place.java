@@ -26,7 +26,6 @@ public class Place extends RestClient {
     }
 
     public Region[] downloadRegions(){
-        Utils.log("Place: Downloading regions");
         try{
             RestTemplate restTemplate = getRestTemplate();
             ResponseEntity<Region[]> responseEntity = restTemplate.exchange(REST_URL + "place/regions", HttpMethod.GET,getRequestEntity(), Region[].class);

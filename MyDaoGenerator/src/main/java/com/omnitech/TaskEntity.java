@@ -38,7 +38,7 @@ public class TaskEntity {
 
     }
 
-    public static void createTaskOrderEntity(Schema schema,Entity task,Entity product){
+    public static void createTaskOrderEntity(Schema schema,Entity task, Entity product){
         Entity taskOrder = schema.addEntity("TaskOrder");
         taskOrder.addIdProperty();
         taskOrder.addStringProperty("quantity");

@@ -12,6 +12,7 @@ import org.chai.util.Utils;
 public class MigrationHelper3 extends MigratorHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db) {
+        Utils.log("Doing MigrationHelper 3 Upgrade");
         //The new Malaria form and pack size
         MalariaDetailDao.createTable(db, true);
         try{
@@ -19,7 +20,6 @@ public class MigrationHelper3 extends MigratorHelper {
             db.execSQL(sql);
             String sql2 = "ALTER TABLE " + DetailerStockDao.TABLENAME + " ADD COLUMN " + DetailerStockDao.Properties.MalariadetailId.columnName + " TEXT";
             db.execSQL(sql2);
-            Utils.log("Update chai_crm: " + sql);
         }catch (Exception ex){
             ex.printStackTrace();
         }

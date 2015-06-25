@@ -55,7 +55,7 @@ public class Task implements BaseEntity {
     @JsonIgnore
     private transient TaskDao myDao;
     @JsonIgnore
-    private List<Sale> sales = new ArrayList<Sale>();
+    private List<Sale> sales;
     private List<DetailerCall> detailers;
     private List<TaskOrder> lineItems;
     private List<MalariaDetail> malariadetails;

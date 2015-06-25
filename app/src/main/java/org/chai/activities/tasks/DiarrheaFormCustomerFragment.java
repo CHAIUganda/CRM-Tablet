@@ -97,7 +97,7 @@ public class DiarrheaFormCustomerFragment extends Fragment {
             });
         }
 
-        tracker = Globals.getInstance().getGpsTracker();
+        tracker = Globals.getInstance().getGpsTracker(getActivity().getSupportFragmentManager());
         setLatLong();
 
         if(activity.call.getUuid() != null){
@@ -108,7 +108,7 @@ public class DiarrheaFormCustomerFragment extends Fragment {
     }
 
     private void setLatLong(){
-        tracker = Globals.getInstance().getGpsTracker();
+        tracker = Globals.getInstance().getGpsTracker(getActivity().getSupportFragmentManager());
         aq.id(R.id.gps).text(tracker.getLatitude() + "," + tracker.getLongitude());
     }
 

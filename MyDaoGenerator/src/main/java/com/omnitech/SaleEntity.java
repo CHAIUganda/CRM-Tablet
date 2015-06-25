@@ -35,7 +35,6 @@ public class SaleEntity {
         taskToSales.orderAsc(dateOfSale);
         sale.addToOne(task,taskId);
 
-
         sale.addBooleanProperty("isDirty");
         sale.addIntProperty("syncronisationStatus");
         sale.addStringProperty("syncronisationMessage");

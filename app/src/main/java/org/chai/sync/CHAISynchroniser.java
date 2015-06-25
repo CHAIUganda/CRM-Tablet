@@ -158,18 +158,18 @@ public class CHAISynchroniser extends Service {
     public void startSyncronisationProcess() {
         Utils.log("startSyncronisationProcess()");
         try {
-            syncronisationErros = new ArrayList<ServerResponse>();
-            uploadCustomers();
-            uploadDirectSales();
-            uploadSales();
-            uploadTasks();
-            uploadOrders();
-
+            syncronisationErros = new ArrayList<>();
             downloadRegions();
             downloadCustomers();
             downloadTasks();
             downloadProducts();
             downloadSummaryReports();
+
+            uploadCustomers();
+            uploadDirectSales();
+            uploadSales();
+            uploadTasks();
+            uploadOrders();
             if (!syncronisationErros.isEmpty()) {
                 displaySyncErros(syncronisationErros);
             }
@@ -217,7 +217,7 @@ public class CHAISynchroniser extends Service {
         updatePropgress("Downloading Customers..");
         Customer[] customers = customerClient.downloadCustomers();
         customerDao.insertOrReplaceInTx(customers);
-        List<CustomerContact> contacts = new ArrayList<CustomerContact>();
+        List<CustomerContact> contacts = new ArrayList<>();
         for (Customer customer : customers) {
             List<CustomerContact> customerContacts = customer.getCustomerContacts();
             if (customerContacts != null) {
@@ -237,7 +237,7 @@ public class CHAISynchroniser extends Service {
         Task[] tasks = taskClient.downloadTasks();
         Utils.log("Got tasks -> " + tasks.length);
         taskDao.insertOrReplaceInTx(tasks);
-        List<TaskOrder> taskOrders = new ArrayList<TaskOrder>();
+        List<TaskOrder> taskOrders = new ArrayList<>();
         for (Task task : tasks) {
             List<TaskOrder> lineItems = task.getLineItems();
             if (lineItems != null) {
@@ -256,7 +256,7 @@ public class CHAISynchroniser extends Service {
         List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.notEq(HomeActivity.STATUS_NEW)).list();
 
         if (!taskList.isEmpty()) {
-            updatePropgress("Uploading Tasks..");
+            updatePropgress("Uploading Tasks.. " + taskList.size());
         }else{
             Utils.log("Tasks list is empty");
         }
@@ -269,7 +269,7 @@ public class CHAISynchroniser extends Service {
             }
             ServerResponse response = taskClient.uploadTask(task);
             if (response.getStatus().equalsIgnoreCase("OK")) {
-                Utils.log("Task syncronized succesfully");
+                Utils.log("Task syncronized succesfully -> " + task.getDescription() + " : " + task.getUuid());
                 //set all detailer and sale calls to isHistroy
                 if (RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)) {
                     if(task.getType().equalsIgnoreCase("malaria")){
@@ -286,14 +286,6 @@ public class CHAISynchroniser extends Service {
                         detailerCallDao.update(detailerCall);
                     }
                 }
-            }else{
-                Utils.log("Error posting  -> " + response.getMessage());
-                task.setSyncronisationStatus(BaseEntity.SYNC_FAIL);
-                task.setSyncronisationMessage(response.getMessage());
-                task.setLastUpdated(new Date());
-                task.setIsDirty(true);
-                taskDao.update(task);
-                syncronisationErros.add(response);
             }
         }
     }
@@ -349,6 +341,7 @@ public class CHAISynchroniser extends Service {
         for (Sale sale : saleList) {
             ServerResponse response = salesClient.uploadSale(sale);
             if (response.getStatus().equalsIgnoreCase("OK")) {
+                Utils.log("Sale synced successfully -> " + sale.getTask().getCustomer().getOutletName());
                 sale.setIsHistory(true);
                 sale.setSyncronisationStatus(BaseEntity.SYNC_SUCCESS);
                 sale.setIsDirty(false);

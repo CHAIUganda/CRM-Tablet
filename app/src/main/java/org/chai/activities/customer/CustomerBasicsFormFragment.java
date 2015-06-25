@@ -91,8 +91,10 @@ public class CustomerBasicsFormFragment extends Fragment {
     }
 
     private void setLatLong(){
-        tracker = Globals.getInstance().getGpsTracker();
-        aq.id(R.id.location_gps).text(tracker.getLatitude() + "," + tracker.getLongitude());
+        tracker = Globals.getInstance().getGpsTracker(getActivity().getSupportFragmentManager());
+        if(tracker != null){
+            aq.id(R.id.location_gps).text(tracker.getLatitude() + "," + tracker.getLongitude());
+        }
     }
 
     private void setRequiredFields(){

@@ -22,8 +22,8 @@ public class GPSTracker extends Service implements LocationListener {
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
     public static final double DEFAULT_LOCATION_ACCURACY = 100.0;
     private Context context;
-    private boolean isGPSEnabled = false;
-    private boolean isNetworkEnabled = false;
+    public boolean isGPSEnabled = false;
+    public boolean isNetworkEnabled = false;
     private boolean canGetLocation = false;
     private boolean isBetterAccurracy = false;
 
@@ -46,7 +46,7 @@ public class GPSTracker extends Service implements LocationListener {
             isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
             if(!isGPSEnabled && !isNetworkEnabled){
-                // no network provider is enabled
+                showSettingsAlert();
             }else{
                 this.canGetLocation = true;
                 if(isNetworkEnabled){
@@ -144,7 +144,7 @@ public class GPSTracker extends Service implements LocationListener {
         alertDialog.setTitle("GPS Settings");
         alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
+            public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 context.startActivity(intent);
             }
@@ -156,7 +156,7 @@ public class GPSTracker extends Service implements LocationListener {
         });
 
         // Showing Alert Message
-        alertDialog.show();
+        //alertDialog.show();
     }
     public void stopUsingGPS(){
         if(locationManager != null){

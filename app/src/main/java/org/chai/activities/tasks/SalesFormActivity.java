@@ -97,8 +97,8 @@ public class SalesFormActivity extends BaseActivity {
 
         if(sale == null){
             sale = new Sale();
-            stocks = new ArrayList<StokeData>();
-            sales = new ArrayList<SaleData>();
+            stocks = new ArrayList<>();
+            sales = new ArrayList<>();
         }else{
             stocks = sale.getStockDatas();
             sales = sale.getSalesDatas();
@@ -214,7 +214,7 @@ public class SalesFormActivity extends BaseActivity {
         task.setIsDirty(true);
         task.setCompletionDate(new Date());
         task.setStatus(HomeActivity.STATUS_COMPLETE);
-        task.setType("detailer");
+        task.setType("SalesCall");
 
         if(task.getUuid() == null){
             task.setUuid(UUID.randomUUID().toString());

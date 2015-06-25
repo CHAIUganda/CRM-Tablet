@@ -112,7 +112,7 @@ public class TaskViewOnMapFragment extends Fragment {
         mapController = this.mapView.getController();
 
         this.mapView.getOverlays().add(mMyLocationOverlay);
-        gpsTracker  = Globals.getInstance().getGpsTracker();
+        gpsTracker  = Globals.getInstance().getGpsTracker(getActivity().getSupportFragmentManager());
         if(gpsTracker.canGetLocation()){
             MAP_DEFAULT_LATITUDE = gpsTracker.getLatitude();
             MAP_DEFAULT_LONGITUDE = gpsTracker.getLongitude();

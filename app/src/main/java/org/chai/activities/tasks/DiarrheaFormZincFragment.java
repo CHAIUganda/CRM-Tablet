@@ -342,7 +342,6 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
 
             DetailerStock stock = activity.zincStocks.get(rows.indexOf(row));
             stock.setBrand(brand);
-            Utils.log("Saving brand -> " + stock.getBrand());
             stock.setCategory(STOCK_TYPE);
             stock.setPackSize(a.id(R.id.spn_pack_size).getSelectedItem().toString());
             try{

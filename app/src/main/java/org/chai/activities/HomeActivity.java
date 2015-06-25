@@ -52,6 +52,9 @@ public class HomeActivity extends BaseActivity{
         }else{
             Utils.log("Cannot start service - has been started before");
         }
+
+        //Upgrade DB - never leave this in production
+        //new MigrationHelper3().onUpgrade(new MyApplication().getDbOpenHelper().getWritableDatabase());
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
