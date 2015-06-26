@@ -14,7 +14,6 @@ import org.chai.R;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.DetailerCall;
-import org.chai.util.Utils;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.Date;
@@ -52,13 +51,15 @@ public class DiarrheaHistoryAdapter extends ArrayAdapter<DetailerCall> {
             aq.id(R.id.txt_time).text(new PrettyTime().format(d));
         }
 
-        try{
-            CustomerContact contact = c.getCustomerContacts().get(0);
-            aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
-        }catch (Exception ex){
-            Utils.log("No customer contact found");
-            aq.id(R.id.txt_customer_contact).text("N/A");
+        CustomerContact contact = c.getCustomerContacts().get(0);
+        String customerline = contact.getContact();
+        if(c.getSubcounty() != null){
+            customerline += " - " + c.getSubcounty().getName();
+            if(c.getSubcounty().getDistrict() != null){
+                customerline += " | " + c.getSubcounty().getDistrict().getName();
+            }
         }
+        aq.id(R.id.txt_customer_contact).text(customerline);
 
         Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         row.startAnimation(animation);

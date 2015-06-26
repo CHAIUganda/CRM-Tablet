@@ -53,7 +53,7 @@ public class HomeActivity extends BaseActivity{
             Utils.log("Cannot start service - has been started before");
         }
 
-        //Upgrade DB - never leave this in production
+        //Manually Upgrade DB - NEVER leave this in production
         //new MigrationHelper3().onUpgrade(new MyApplication().getDbOpenHelper().getWritableDatabase());
     }
 

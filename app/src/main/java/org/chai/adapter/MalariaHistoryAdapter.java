@@ -50,7 +50,14 @@ public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> {
         if(d != null){
             aq.id(R.id.txt_time).text(new PrettyTime().format(d));
         }
-        aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
+        String customerline = contact.getContact();
+        if(c.getSubcounty() != null){
+            customerline += " - " + c.getSubcounty().getName();
+            if(c.getSubcounty().getDistrict() != null){
+                customerline += " | " + c.getSubcounty().getDistrict().getName();
+            }
+        }
+        aq.id(R.id.txt_customer_contact).text(customerline);
 
         Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         row.startAnimation(animation);
