@@ -354,7 +354,7 @@
     <color name="material_deep_teal_500">#ff009688</color>
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/values/colors.xml -->
     <eat-comment/>
-    <color name="primary">#144881</color>
+    <color name="primary">#1B5E20</color>
     <color name="primary_dark">#052a54</color>
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment/>
@@ -552,7 +552,7 @@
     <string name="action_search">Search</string>
     <string name="action_settings">Settings</string>
     <string name="addnewcustomerlabel">Save and New Customer information</string>
-    <string name="app_name">CHAI CRM</string>
+    <string name="app_name">CHAI CRM - Test Server</string>
     <string name="cancel">Cancel</string>
     <string name="cancellabel">Cancel</string>
     <string name="close">Close</string>

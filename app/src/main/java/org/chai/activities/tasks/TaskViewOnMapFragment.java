@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 
-import org.chai.Globals;
 import org.chai.R;
 import org.chai.activities.HomeActivity;
 import org.chai.activities.forms.MalariaFormActivity;
@@ -28,7 +27,7 @@ import org.chai.model.Task;
 import org.chai.model.TaskDao;
 import org.chai.model.User;
 import org.chai.rest.RestClient;
-import org.chai.util.GPSTracker;
+import org.chai.util.GPSSettingsDialog;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
@@ -47,6 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.greenrobot.dao.query.QueryBuilder;
+import fr.quentinklein.slt.LocationTracker;
 
 /**
  * Created by victor on 12/11/14.
@@ -78,8 +78,6 @@ public class TaskViewOnMapFragment extends Fragment {
     private ItemizedIconOverlay<OverlayItem> currentLocationOverlay;
     private DefaultResourceProxyImpl resourceProxy;
     private ArrayList<OverlayItem> items;
-    private GPSTracker gpsTracker;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
@@ -112,12 +110,12 @@ public class TaskViewOnMapFragment extends Fragment {
         mapController = this.mapView.getController();
 
         this.mapView.getOverlays().add(mMyLocationOverlay);
-        gpsTracker  = Globals.getInstance().getGpsTracker(getActivity().getSupportFragmentManager());
-        if(gpsTracker.canGetLocation()){
-            MAP_DEFAULT_LATITUDE = gpsTracker.getLatitude();
-            MAP_DEFAULT_LONGITUDE = gpsTracker.getLongitude();
+
+        if(LocationTracker.getLocation() != null){
+            MAP_DEFAULT_LATITUDE = LocationTracker.getLocation().getLatitude();
+            MAP_DEFAULT_LONGITUDE = LocationTracker.getLocation().getLongitude();
         }else{
-            gpsTracker.showSettingsAlert();
+            new GPSSettingsDialog().show(getActivity().getSupportFragmentManager(), "gps_settings");
         }
 
         GeoPoint currentLocation = new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE);
@@ -219,7 +217,7 @@ public class TaskViewOnMapFragment extends Fragment {
         } else if (itemPosition == 6) {
             //nearby tasks
             List list = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
-            outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(new GeoPoint(gpsTracker.getLatitude(), gpsTracker.getLongitude()), list,MAX_RADIUS_IN_KM);
+            outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(new GeoPoint(LocationTracker.getLocation().getLatitude(), LocationTracker.getLocation().getLongitude()), list,MAX_RADIUS_IN_KM);
 
         } else if (itemPosition == 7) {
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();

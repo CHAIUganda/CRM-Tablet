@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
-import org.chai.Globals;
 import org.chai.R;
 import org.chai.adapter.DistrictArrayAdapter;
 import org.chai.adapter.SubcountyArrayAdapter;
@@ -25,12 +24,13 @@ import org.chai.model.District;
 import org.chai.model.DistrictDao;
 import org.chai.model.Subcounty;
 import org.chai.model.SubcountyDao;
-import org.chai.util.GPSTracker;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.List;
+
+import fr.quentinklein.slt.LocationTracker;
 
 /**
  * Created by Zed on 4/29/2015.
@@ -46,7 +46,7 @@ public class CustomerBasicsFormFragment extends Fragment {
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
-    GPSTracker tracker;
+    LocationTracker tracker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,10 +91,7 @@ public class CustomerBasicsFormFragment extends Fragment {
     }
 
     private void setLatLong(){
-        tracker = Globals.getInstance().getGpsTracker(getActivity().getSupportFragmentManager());
-        if(tracker != null){
-            aq.id(R.id.location_gps).text(tracker.getLatitude() + "," + tracker.getLongitude());
-        }
+        MyApplication.registerEditTextForLocationUpdates(aq.id(R.id.location_gps).getEditText(), getActivity());
     }
 
     private void setRequiredFields(){
@@ -131,7 +128,7 @@ public class CustomerBasicsFormFragment extends Fragment {
 
     public boolean saveFields(){
         String name = aq.id(R.id.outlet_name).getText().toString().trim();
-        String type = aq.id (R.id.outlettype).getSelectedItem().toString();
+        String type = aq.id(R.id.outlettype).getSelectedItem().toString();
         String size = aq.id(R.id.outletsize).getSelectedItem().toString();
         String licenceVisible = aq.id(R.id.licencevisible).getSelectedItem().toString();
         String ruralOrUrban = aq.id(R.id.ruralorurban).getSelectedItem().toString();
@@ -142,7 +139,7 @@ public class CustomerBasicsFormFragment extends Fragment {
         String directions = aq.id(R.id.directions).getText().toString().trim();
         String gps = aq.id(R.id.location_gps).getText().toString().trim();
 
-        double lat = tracker.getLatitude(), lon = tracker.getLongitude();
+        double lat = 0, lon = 0;
 
         if(name.isEmpty()){
             Toast.makeText(getActivity(), "Enter the outlet name", Toast.LENGTH_LONG).show();

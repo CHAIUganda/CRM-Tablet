@@ -21,7 +21,7 @@ public class GPSSettingsDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("GPS is disabled. Please enabled GPS now to get accurate location");
+        builder.setMessage("GPS is disabled. Please enabled GPS now to get accurate location.");
         builder.setPositiveButton("Enable GPS", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -30,6 +30,10 @@ public class GPSSettingsDialog extends DialogFragment {
             }
         });
 
-        return builder.create();
+        this.setCancelable(false);
+
+        Dialog dialog = builder.create();
+
+        return dialog;
     }
 }

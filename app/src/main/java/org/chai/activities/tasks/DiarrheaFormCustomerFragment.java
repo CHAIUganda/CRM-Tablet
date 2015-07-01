@@ -14,14 +14,12 @@ import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
-import org.chai.Globals;
 import org.chai.R;
 import org.chai.adapter.CustomerAutocompleteAdapter;
 import org.chai.model.Customer;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
-import org.chai.util.GPSTracker;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
@@ -43,7 +41,6 @@ public class DiarrheaFormCustomerFragment extends Fragment {
 
     List<Customer> customers;
     Customer customer;
-    GPSTracker tracker;
     String customerId;
 
     DiarrheaFormActivity activity;
@@ -97,7 +94,6 @@ public class DiarrheaFormCustomerFragment extends Fragment {
             });
         }
 
-        tracker = Globals.getInstance().getGpsTracker(getActivity().getSupportFragmentManager());
         setLatLong();
 
         if(activity.call.getUuid() != null){
@@ -108,8 +104,7 @@ public class DiarrheaFormCustomerFragment extends Fragment {
     }
 
     private void setLatLong(){
-        tracker = Globals.getInstance().getGpsTracker(getActivity().getSupportFragmentManager());
-        aq.id(R.id.gps).text(tracker.getLatitude() + "," + tracker.getLongitude());
+        MyApplication.registerEditTextForLocationUpdates(aq.id(R.id.gps).getEditText(), getActivity());
     }
 
     private void setRequiredFields(){

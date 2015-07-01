@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -31,7 +32,7 @@ import org.chai.model.Task;
 import org.chai.model.TaskDao;
 import org.chai.model.User;
 import org.chai.rest.RestClient;
-import org.chai.util.GPSTracker;
+import org.chai.util.GPSSettingsDialog;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
@@ -41,6 +42,7 @@ import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.dao.query.QueryBuilder;
+import fr.quentinklein.slt.LocationTracker;
 
 /**
  * Created by victor on 12/8/14.
@@ -237,13 +239,13 @@ public class TaskCalenderFragment extends Fragment {
     }
 
     private GeoPoint getCurrentLocation(){
-        double latitude = 0,longitude = 0;
-        GPSTracker gpsTracker = new GPSTracker(getActivity());
-        if(gpsTracker.canGetLocation()){
-            latitude = gpsTracker.getLatitude();
-            longitude = gpsTracker.getLongitude();
+        double latitude = 0, longitude = 0;
+        Location location = LocationTracker.getLocation();
+        if(location != null){
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
         }else{
-            gpsTracker.showSettingsAlert();
+            new GPSSettingsDialog().show(getActivity().getSupportFragmentManager(), "gps_settings");
         }
         GeoPoint currentLocation = new GeoPoint(latitude, longitude);
         return currentLocation;

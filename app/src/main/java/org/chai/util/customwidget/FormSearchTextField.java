@@ -19,7 +19,6 @@ import org.chai.util.Utils;
  */
 public class FormSearchTextField extends EditText {
     public boolean isFocused = false;
-    public boolean keyboardShowing = false;
 
     IViewManipulator activity;
     ListView listView;

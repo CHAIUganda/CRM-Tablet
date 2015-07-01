@@ -265,7 +265,7 @@ public class CHAISynchroniser extends Service {
             Utils.log("Sycn task -> " + task.getDescription() + " : " + task.getType());
             if (taskIsHistory(task)) {
                 Utils.log("Task is history");
-                //continue;
+                continue;
             }
             ServerResponse response = taskClient.uploadTask(task);
             Utils.log("Task upload response -> " + response.getStatus() + " : " + response.getMessage());

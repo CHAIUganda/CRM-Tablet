@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
-import org.chai.Globals;
 import org.chai.R;
 import org.chai.activities.calls.HistoryActivity;
 import org.chai.activities.customer.CustomersActivity;
@@ -144,7 +143,7 @@ public class BaseActivity extends ActionBarActivity{
         aquery = new AQuery(this);
 
         //we initialise gps tracker her to start computing to get accuracy quickly
-        Globals.getInstance().initGpsTracker(this);
+        //Globals.getInstance().initGpsTracker(this);
 
         if(!skipLogin){
             AccountManager.offlineLogin(this, true);
@@ -153,6 +152,12 @@ public class BaseActivity extends ActionBarActivity{
                 drawerItems[5] = "Unscheduled Sale";
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        Utils.log("BaseActivity onResume()");
+        super.onResume();
     }
 
     public void setUpDrawer(Toolbar toolbar) {
