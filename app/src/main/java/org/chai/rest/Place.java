@@ -28,7 +28,7 @@ public class Place extends RestClient {
     public Region[] downloadRegions(){
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Region[]> responseEntity = restTemplate.exchange(REST_URL + "place/regions", HttpMethod.GET,getRequestEntity(), Region[].class);
+            ResponseEntity<Region[]> responseEntity = restTemplate.exchange(getRestUrl() + "place/regions", HttpMethod.GET,getRequestEntity(), Region[].class);
             Region[] regions = responseEntity.getBody();
             return regions;
         }catch (HttpClientErrorException ex){
@@ -41,7 +41,7 @@ public class Place extends RestClient {
     public District[] downloadDistricts(){
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<District[]> responseEntity = restTemplate.exchange(REST_URL+"place/districts",HttpMethod.GET,getRequestEntity(),District[].class);
+            ResponseEntity<District[]> responseEntity = restTemplate.exchange(getRestUrl() + "place/districts",HttpMethod.GET,getRequestEntity(),District[].class);
             District[] districts = responseEntity.getBody();
             Log.i("REST CLIENT:","found "+districts.length+" Districts");
             return districts;
@@ -54,7 +54,7 @@ public class Place extends RestClient {
     public Subcounty[] downloadSubcounties(){
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Subcounty[]> responseEntity = restTemplate.exchange(REST_URL+"place/subCounties",HttpMethod.GET,getRequestEntity(),Subcounty[].class);
+            ResponseEntity<Subcounty[]> responseEntity = restTemplate.exchange(getRestUrl() + "place/subCounties",HttpMethod.GET,getRequestEntity(),Subcounty[].class);
             Subcounty[] subcounties = responseEntity.getBody();
             Log.i("REST CLIENT:","found "+subcounties.length+" Subcounties");
             return subcounties;
@@ -71,7 +71,7 @@ public class Place extends RestClient {
     public Parish[] downloadParishes(){
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Parish[]> responseEntity = restTemplate.exchange(REST_URL+"place/parishes",HttpMethod.GET,getRequestEntity(),Parish[].class);
+            ResponseEntity<Parish[]> responseEntity = restTemplate.exchange(getRestUrl() + "place/parishes",HttpMethod.GET,getRequestEntity(),Parish[].class);
             Parish[] parishs = responseEntity.getBody();
             Log.i("REST CLIENT:","found "+parishs.length+" Parishes");
             return parishs;
@@ -88,7 +88,7 @@ public class Place extends RestClient {
     public Village[] downloadVillages(){
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Village[]> responseEntity = restTemplate.exchange(REST_URL+"place/villages",HttpMethod.GET,getRequestEntity(),Village[].class);
+            ResponseEntity<Village[]> responseEntity = restTemplate.exchange(getRestUrl() + "place/villages",HttpMethod.GET,getRequestEntity(),Village[].class);
             Village[] villages = responseEntity.getBody();
             Log.i("REST CLIENT:","found "+villages.length+" Villages");
             return villages;
@@ -111,7 +111,7 @@ public class Place extends RestClient {
             RestTemplate restTemplate = getRestTemplate();
             HttpHeaders headers = getHeaders();
             HttpEntity<?> requestEntity = new HttpEntity<Object>(headers);
-            ResponseEntity<User> responseEntity = restTemplate.exchange(REST_URL + "info", HttpMethod.GET, requestEntity, User.class);
+            ResponseEntity<User> responseEntity = restTemplate.exchange(getRestUrl() + "info", HttpMethod.GET, requestEntity, User.class);
             User user1 = responseEntity.getBody();
             if(user1 != null){
                 Utils.log("user1 is not empty");
@@ -129,7 +129,7 @@ public class Place extends RestClient {
     public SummaryReport[] getSummaryReports(){
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<SummaryReport[]> responseEntity = restTemplate.exchange(REST_URL+"dashboard",HttpMethod.GET,getRequestEntity(),SummaryReport[].class);
+            ResponseEntity<SummaryReport[]> responseEntity = restTemplate.exchange(getRestUrl() + "dashboard",HttpMethod.GET,getRequestEntity(),SummaryReport[].class);
             SummaryReport[] summaryReports = responseEntity.getBody();
             Log.i("REST CLIENT:","found "+summaryReports.length+" Reports");
             return summaryReports;

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.chai.util.MyApplication;
+import org.chai.util.Utils;
 import org.springframework.http.HttpAuthentication;
 import org.springframework.http.HttpBasicAuthentication;
 import org.springframework.http.HttpEntity;
@@ -22,12 +23,13 @@ import java.util.Collections;
  * Created by victor on 11/3/14.
  */
 public class RestClient {
+    public static boolean PRODUCTION_SERVER = false;
     public static String userName;
     public static String password;
     private static String role;
-    //public static String REST_URL = "http://23.239.27.196:8080/web-crm/rest/";
+    private static String PROD_REST_URL = "http://23.239.27.196:8080/web-crm/rest/";
     //public static String REST_URL = "http://192.168.1.107:8080/chai-crm/rest/";
-    public static String REST_URL = "http://178.79.178.121:8080/test-web-crm/rest/";
+    private static String TEST_REST_URL = "http://178.79.178.121:8080/test-web-crm/rest/";
 
     public static HttpHeaders getHeaders() {
         HttpHeaders headers = new HttpHeaders();
@@ -38,6 +40,11 @@ public class RestClient {
         HttpAuthentication authHeader = new HttpBasicAuthentication(userName, password);
         headers.setAuthorization(authHeader);
         return headers;
+    }
+
+    public static String getRestUrl(){
+        Utils.log("Getting rest URL -> Production " + PRODUCTION_SERVER);
+        return (PRODUCTION_SERVER) ? PROD_REST_URL : TEST_REST_URL;
     }
 
     public static String getRole(){

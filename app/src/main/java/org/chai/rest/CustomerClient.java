@@ -16,7 +16,7 @@ public class CustomerClient extends RestClient {
     public Customer[] downloadCustomers() {
         try {
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Customer[]> responseEntity = restTemplate.exchange(REST_URL + "customer/list?max=" + Integer.MAX_VALUE, HttpMethod.GET, getRequestEntity(), Customer[].class);
+            ResponseEntity<Customer[]> responseEntity = restTemplate.exchange(getRestUrl() + "customer/list?max=" + Integer.MAX_VALUE, HttpMethod.GET, getRequestEntity(), Customer[].class);
             return responseEntity.getBody();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -28,7 +28,7 @@ public class CustomerClient extends RestClient {
         try {
 //            RestTemplate restTemplate = getRestTemplate();
             HttpEntity<Customer> httpEntity = new HttpEntity<Customer>(customer, getHeaders());
-            ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(REST_URL + "customer/update", HttpMethod.PUT, httpEntity, ServerResponse.class);
+            ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(getRestUrl() + "customer/update", HttpMethod.PUT, httpEntity, ServerResponse.class);
             ServerResponse body = responseEntity.getBody();
             body.setItemRef(customer.getOutletName());
             return body;

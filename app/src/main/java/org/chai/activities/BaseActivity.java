@@ -161,6 +161,8 @@ public class BaseActivity extends ActionBarActivity{
     }
 
     public void setUpDrawer(Toolbar toolbar) {
+        toolbar.setBackgroundColor(getResources().getColor(RestClient.PRODUCTION_SERVER ? R.color.primary : R.color.primary_test_server));
+
         username = AccountManager.getUsername(this);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -313,6 +315,15 @@ public class BaseActivity extends ActionBarActivity{
         }
 
         aquery.id(R.id.sync).text("Last Synced: " + lastSynced);
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+        if(!RestClient.PRODUCTION_SERVER){
+            title = title + " - Test Server";
+        }
+        getSupportActionBar().setTitle(title);
     }
 
     @Override

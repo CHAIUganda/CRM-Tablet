@@ -195,19 +195,19 @@ public final class R {
 		public static final int abc_config_showMenuShortcutsWhenKeyboardPresent = 0x7f090005;
 	}
 	public static final class color {
-		public static final int abc_background_cache_hint_selector_material_dark = 0x7f0a0069;
-		public static final int abc_background_cache_hint_selector_material_light = 0x7f0a006a;
+		public static final int abc_background_cache_hint_selector_material_dark = 0x7f0a006a;
+		public static final int abc_background_cache_hint_selector_material_light = 0x7f0a006b;
 		public static final int abc_input_method_navigation_guard = 0x7f0a0000;
-		public static final int abc_primary_text_disable_only_material_dark = 0x7f0a006b;
-		public static final int abc_primary_text_disable_only_material_light = 0x7f0a006c;
-		public static final int abc_primary_text_material_dark = 0x7f0a006d;
-		public static final int abc_primary_text_material_light = 0x7f0a006e;
-		public static final int abc_search_url_text = 0x7f0a006f;
+		public static final int abc_primary_text_disable_only_material_dark = 0x7f0a006c;
+		public static final int abc_primary_text_disable_only_material_light = 0x7f0a006d;
+		public static final int abc_primary_text_material_dark = 0x7f0a006e;
+		public static final int abc_primary_text_material_light = 0x7f0a006f;
+		public static final int abc_search_url_text = 0x7f0a0070;
 		public static final int abc_search_url_text_normal = 0x7f0a0001;
 		public static final int abc_search_url_text_pressed = 0x7f0a0002;
 		public static final int abc_search_url_text_selected = 0x7f0a0003;
-		public static final int abc_secondary_text_material_dark = 0x7f0a0070;
-		public static final int abc_secondary_text_material_light = 0x7f0a0071;
+		public static final int abc_secondary_text_material_dark = 0x7f0a0071;
+		public static final int abc_secondary_text_material_light = 0x7f0a0072;
 		public static final int accent_material_dark = 0x7f0a0005;
 		public static final int accent_material_light = 0x7f0a0006;
 		public static final int background_floating_material_dark = 0x7f0a0009;
@@ -241,18 +241,18 @@ public final class R {
 		public static final int primary_dark_material_light = 0x7f0a0041;
 		public static final int primary_material_dark = 0x7f0a0042;
 		public static final int primary_material_light = 0x7f0a0043;
-		public static final int primary_text_default_material_dark = 0x7f0a0044;
-		public static final int primary_text_default_material_light = 0x7f0a0045;
-		public static final int primary_text_disabled_material_dark = 0x7f0a0046;
-		public static final int primary_text_disabled_material_light = 0x7f0a0047;
-		public static final int ripple_material_dark = 0x7f0a0049;
-		public static final int ripple_material_light = 0x7f0a004a;
-		public static final int secondary_text_default_material_dark = 0x7f0a004b;
-		public static final int secondary_text_default_material_light = 0x7f0a004c;
-		public static final int secondary_text_disabled_material_dark = 0x7f0a004d;
-		public static final int secondary_text_disabled_material_light = 0x7f0a004e;
-		public static final int switch_thumb_normal_material_dark = 0x7f0a0053;
-		public static final int switch_thumb_normal_material_light = 0x7f0a0054;
+		public static final int primary_text_default_material_dark = 0x7f0a0045;
+		public static final int primary_text_default_material_light = 0x7f0a0046;
+		public static final int primary_text_disabled_material_dark = 0x7f0a0047;
+		public static final int primary_text_disabled_material_light = 0x7f0a0048;
+		public static final int ripple_material_dark = 0x7f0a004a;
+		public static final int ripple_material_light = 0x7f0a004b;
+		public static final int secondary_text_default_material_dark = 0x7f0a004c;
+		public static final int secondary_text_default_material_light = 0x7f0a004d;
+		public static final int secondary_text_disabled_material_dark = 0x7f0a004e;
+		public static final int secondary_text_disabled_material_light = 0x7f0a004f;
+		public static final int switch_thumb_normal_material_dark = 0x7f0a0054;
+		public static final int switch_thumb_normal_material_light = 0x7f0a0055;
 	}
 	public static final class dimen {
 		public static final int abc_action_bar_default_height_material = 0x7f0b0000;
