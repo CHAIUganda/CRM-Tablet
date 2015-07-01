@@ -183,7 +183,7 @@ public class TaskCalenderFragment extends Fragment {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
         int position = (int) info.id;
         Task task = items.get(position);
-
+        Utils.log("Context menu clicked -> " + menuItem.getItemId());
         switch (menuItem.getItemId()) {
             case R.id.cancel_task:
                 askBeforeDelete(position).show();

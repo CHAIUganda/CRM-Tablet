@@ -267,6 +267,10 @@ public class CHAISynchroniser extends Service {
                 Utils.log("Task is history");
                 continue;
             }
+            if(!taskHasDetails(task)){
+                Utils.log("Task has no details -> skipping");
+                continue;
+            }
             ServerResponse response = taskClient.uploadTask(task);
             Utils.log("Task upload response -> " + response.getStatus() + " : " + response.getMessage());
             if (response.getStatus().equalsIgnoreCase("OK")) {
@@ -302,6 +306,15 @@ public class CHAISynchroniser extends Service {
             }
         } catch (Exception ex) {
 
+        }
+        return false;
+    }
+
+    private boolean taskHasDetails(Task task){
+        try {
+            return !task.getDetailers().isEmpty() || !task.getSales().isEmpty() || !task.getMalariadetails().isEmpty();
+        } catch (Exception ex) {
+            Utils.log("Error checking for task details");
         }
         return false;
     }
