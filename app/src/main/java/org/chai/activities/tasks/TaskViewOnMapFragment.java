@@ -15,8 +15,6 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.GoogleMap;
-
 import org.chai.R;
 import org.chai.activities.HomeActivity;
 import org.chai.activities.forms.MalariaFormActivity;
@@ -58,7 +56,6 @@ public class TaskViewOnMapFragment extends Fragment {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private TaskDao taskDao;
-    private GoogleMap googleMap;
     private HashMap<String,String> markers = new HashMap<String, String>();
     private Spinner calenderSpinner;
     private AsyncTaskRunner runner;
@@ -230,11 +227,11 @@ public class TaskViewOnMapFragment extends Fragment {
     private void showForm(String taskId){
         if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
             Intent i = new Intent(getActivity(), SalesFormActivity.class);
-            i.putExtra("id", taskDao.load(taskId).getCustomerId());
+            i.putExtra("task_id", taskId);
             getActivity().startActivity(i);
         }else{
             Intent i = new Intent(getActivity(), MalariaFormActivity.class);
-            i.putExtra("id", taskDao.load(taskId).getCustomerId());
+            i.putExtra("task_id", taskId);
             getActivity().startActivity(i);
         }
         runner = null;

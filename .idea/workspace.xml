@@ -46,143 +46,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dad7d78f-c0b3-4a33-b333-77a49d84f0ba" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\classes\debug\org\chai\Globals$1.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\classes\debug\org\chai\Globals.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\classes\debug\org\chai\util\GPSTracker$1.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\classes\debug\org\chai\util\GPSTracker$2.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\classes\debug\org\chai\util\GPSTracker.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\outputs\lint-results-release-fatal_files\lint-error.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\outputs\lint-results-release-fatal_files\lint-run.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\outputs\lint-results-release-fatal_files\lint-warning.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\java\org\chai\Globals.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\java\org\chai\util\GPSTracker.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BaseActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/BuildConfig.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/BuildConfig.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/sync/CHAISynchroniser$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/sync/CHAISynchroniser$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/sync/CHAISynchroniser$SyncTask.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/sync/CHAISynchroniser$SyncTask.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/sync/CHAISynchroniser.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/sync/CHAISynchroniser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerBasicsFormFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomerBasicsFormFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormCustomerFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormCustomerFragment$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormCustomerFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormCustomerFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormZincFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormZincFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/adapter/DiarrheaHistoryAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/adapter/DiarrheaHistoryAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/customwidget/FormSearchTextField$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/customwidget/FormSearchTextField$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/org/chai/util/customwidget/FormSearchTextField$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/org/chai/util/customwidget/FormSearchTextField$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/customwidget/FormSearchTextField.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/customwidget/FormSearchTextField.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/org/chai/util/customwidget/FormSearchTextField.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/org/chai/util/customwidget/FormSearchTextField.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/GPSSettingsDialog.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/GPSSettingsDialog.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/HomeActivity$ViewPagerAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/HomeActivity$ViewPagerAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/HomeActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/HomeActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormCustomerFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormCustomerFragment$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormCustomerFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormCustomerFragment$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormCustomerFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormCustomerFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/adapter/MalariaHistoryAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/adapter/MalariaHistoryAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/migration/MigrationHelper3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/migration/MigrationHelper3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/MyApplication.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/MyApplication.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/org/chai/rest/RestClient.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/org/chai/rest/RestClient.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/model/SaleDao$Properties.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/model/SaleDao$Properties.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/model/SaleDao.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/model/SaleDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/rest/SalesClient.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/rest/SalesClient.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormCustomerFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormCustomerFragment$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormCustomerFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormCustomerFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/model/Task.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/model/Task.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskViewOnMapFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskViewOnMapFragment$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskViewOnMapFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskViewOnMapFragment$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskViewOnMapFragment$AsyncTaskRunner.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskViewOnMapFragment$AsyncTaskRunner.class" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\classes\debug\org\chai\util\customwidget\GPSEditText.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\src\main\java\org\chai\util\customwidget\GPSEditText.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskViewOnMapFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskViewOnMapFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/migration/UpgradeOpenHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/util/migration/UpgradeOpenHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/android-query-full.0.26.8-c7ed0ccb708bba875b137beedc7dd469adcaa6e2.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/android-query-full.0.26.8-c7ed0ccb708bba875b137beedc7dd469adcaa6e2.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/android-query-full.0.26.8-c7ed0ccb708bba875b137beedc7dd469adcaa6e2.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/android-query-full.0.26.8-c7ed0ccb708bba875b137beedc7dd469adcaa6e2.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-release-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-release-unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app-release.apk" afterPath="$PROJECT_DIR$/app/app-release.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-186a90e4b44a8a8996f06ec79e82c3d33a691204.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-186a90e4b44a8a8996f06ec79e82c3d33a691204.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-186a90e4b44a8a8996f06ec79e82c3d33a691204.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-186a90e4b44a8a8996f06ec79e82c3d33a691204.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-33adbeea190fadb8f06f986e3622c967a3980c5e.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-33adbeea190fadb8f06f986e3622c967a3980c5e.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-33adbeea190fadb8f06f986e3622c967a3980c5e.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-33adbeea190fadb8f06f986e3622c967a3980c5e.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-3911bdeda280bcf05dd7ef9fad3e1d29f2738ff8.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-3911bdeda280bcf05dd7ef9fad3e1d29f2738ff8.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-3911bdeda280bcf05dd7ef9fad3e1d29f2738ff8.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-3911bdeda280bcf05dd7ef9fad3e1d29f2738ff8.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-936272368bcc7fe84391d9d88dc9025e8e538aab.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-936272368bcc7fe84391d9d88dc9025e8e538aab.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-936272368bcc7fe84391d9d88dc9025e8e538aab.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-936272368bcc7fe84391d9d88dc9025e8e538aab.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-be5fd432c91d1decd26852c7f71d98e9a9518136.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-be5fd432c91d1decd26852c7f71d98e9a9518136.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-be5fd432c91d1decd26852c7f71d98e9a9518136.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-be5fd432c91d1decd26852c7f71d98e9a9518136.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-da40540635cceb60a102ffbc411b4c3c4b5331c2.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-da40540635cceb60a102ffbc411b4c3c4b5331c2.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-da40540635cceb60a102ffbc411b4c3c4b5331c2.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-da40540635cceb60a102ffbc411b4c3c4b5331c2.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-e301d02ff8958afea76fa4f06b96d5ac5620e5c0.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-e301d02ff8958afea76fa4f06b96d5ac5620e5c0.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-e301d02ff8958afea76fa4f06b96d5ac5620e5c0.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-e301d02ff8958afea76fa4f06b96d5ac5620e5c0.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-fa914c74e967e4d6480f4dbf3718b9b4064777aa.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-fa914c74e967e4d6480f4dbf3718b9b4064777aa.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-fa914c74e967e4d6480f4dbf3718b9b4064777aa.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/classes-fa914c74e967e4d6480f4dbf3718b9b4064777aa.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/release/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/release/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/gradle_project_sync_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/gradle_project_sync_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/greendao-1.3.7-ad1bf6f6753d02289e38097fbf8a985ca10e48e1.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/greendao-1.3.7-ad1bf6f6753d02289e38097fbf8a985ca10e48e1.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/greendao-1.3.7-ad1bf6f6753d02289e38097fbf8a985ca10e48e1.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/greendao-1.3.7-ad1bf6f6753d02289e38097fbf8a985ca10e48e1.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-4bc38ec8327ef0fa7bbbc4215efa511c61f4719a.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-4bc38ec8327ef0fa7bbbc4215efa511c61f4719a.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/internal_impl-21.0.3-4bc38ec8327ef0fa7bbbc4215efa511c61f4719a.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/internal_impl-21.0.3-4bc38ec8327ef0fa7bbbc4215efa511c61f4719a.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/jackson-annotations-2.4.0-2cc5cc24a6fbd0fca790bf6fcab23fa620e8c413.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/jackson-annotations-2.4.0-2cc5cc24a6fbd0fca790bf6fcab23fa620e8c413.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/jackson-annotations-2.4.0-2cc5cc24a6fbd0fca790bf6fcab23fa620e8c413.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/jackson-annotations-2.4.0-2cc5cc24a6fbd0fca790bf6fcab23fa620e8c413.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/jackson-core-2.4.3-2fe98417063a207dc2556dc17634edc372e5d50c.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/jackson-core-2.4.3-2fe98417063a207dc2556dc17634edc372e5d50c.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/jackson-core-2.4.3-2fe98417063a207dc2556dc17634edc372e5d50c.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/jackson-core-2.4.3-2fe98417063a207dc2556dc17634edc372e5d50c.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/jackson-databind-2.4.3-45d30529fde5b1793f56eef894226172019cb75d.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/jackson-databind-2.4.3-45d30529fde5b1793f56eef894226172019cb75d.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/jackson-databind-2.4.3-45d30529fde5b1793f56eef894226172019cb75d.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/jackson-databind-2.4.3-45d30529fde5b1793f56eef894226172019cb75d.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/library-2.4.0-ef71d2ac51b4b3a20dcffb6ec4bcd337c6bb108b.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/library-2.4.0-ef71d2ac51b4b3a20dcffb6ec4bcd337c6bb108b.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/library-2.4.0-ef71d2ac51b4b3a20dcffb6ec4bcd337c6bb108b.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/library-2.4.0-ef71d2ac51b4b3a20dcffb6ec4bcd337c6bb108b.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/mint-4.1-93441d1510ecd029b102445334787e91677d5f2d.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/mint-4.1-93441d1510ecd029b102445334787e91677d5f2d.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/mint-4.1-93441d1510ecd029b102445334787e91677d5f2d.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/mint-4.1-93441d1510ecd029b102445334787e91677d5f2d.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/osmdroid-android-4.2-5ccc5b610f7d4376fcbbf95f35a2e6fc51a5caa3.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/osmdroid-android-4.2-5ccc5b610f7d4376fcbbf95f35a2e6fc51a5caa3.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/osmdroid-android-4.2-5ccc5b610f7d4376fcbbf95f35a2e6fc51a5caa3.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/osmdroid-android-4.2-5ccc5b610f7d4376fcbbf95f35a2e6fc51a5caa3.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/prettytime-3.2.7.Final-f425a7ab0af37b18347c6e4944b750d54e675924.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/prettytime-3.2.7.Final-f425a7ab0af37b18347c6e4944b750d54e675924.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/prettytime-3.2.7.Final-f425a7ab0af37b18347c6e4944b750d54e675924.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/prettytime-3.2.7.Final-f425a7ab0af37b18347c6e4944b750d54e675924.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug-androidTest.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-release.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-release.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/slf4j-android-1.6.1-RC1-709086912b825392d2033c98b244985c915c5fe3.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/slf4j-android-1.6.1-RC1-709086912b825392d2033c98b244985c915c5fe3.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/slf4j-android-1.6.1-RC1-709086912b825392d2033c98b244985c915c5fe3.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/slf4j-android-1.6.1-RC1-709086912b825392d2033c98b244985c915c5fe3.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/spring-android-core-1.0.1.RELEASE-b4211d7f81387e4d8bad8640b2855a3b1bee801f.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/spring-android-core-1.0.1.RELEASE-b4211d7f81387e4d8bad8640b2855a3b1bee801f.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/spring-android-core-1.0.1.RELEASE-b4211d7f81387e4d8bad8640b2855a3b1bee801f.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/spring-android-core-1.0.1.RELEASE-b4211d7f81387e4d8bad8640b2855a3b1bee801f.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/spring-android-rest-template-1.0.1.RELEASE-27e7a28e2e2c8b69e876c9d6a187ecdbd3d5f6a1.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/spring-android-rest-template-1.0.1.RELEASE-27e7a28e2e2c8b69e876c9d6a187ecdbd3d5f6a1.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/spring-android-rest-template-1.0.1.RELEASE-27e7a28e2e2c8b69e876c9d6a187ecdbd3d5f6a1.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/spring-android-rest-template-1.0.1.RELEASE-27e7a28e2e2c8b69e876c9d6a187ecdbd3d5f6a1.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-d07ae5a61dcaa51c97af7baa732a64c5cdd4262f.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-d07ae5a61dcaa51c97af7baa732a64c5cdd4262f.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/support-annotations-21.0.3-d07ae5a61dcaa51c97af7baa732a64c5cdd4262f.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/release/support-annotations-21.0.3-d07ae5a61dcaa51c97af7baa732a64c5cdd4262f.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/BaseActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerBasicsFormFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/CustomerBasicsFormFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormCustomerFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormCustomerFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/util/customwidget/FormSearchTextField.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/util/customwidget/FormSearchTextField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/util/GPSSettingsDialog.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/util/GPSSettingsDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/forms/MalariaFormCustomerFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/forms/MalariaFormCustomerFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/util/MyApplication.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/util/MyApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskViewOnMapFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskViewOnMapFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/lint-results-release-fatal.html" afterPath="$PROJECT_DIR$/app/build/outputs/lint-results-release-fatal.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/debug/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/debug/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/release/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/release/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/release/values/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/release/values/values.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="chai-crm-android.iws" />
@@ -306,102 +180,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BootAndUpdateReceiver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/sync/BootAndUpdateReceiver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CHAISynchroniser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="171" column="27" selection-start-line="171" selection-start-column="27" selection-end-line="171" selection-end-column="27" />
-              <folding>
-                <element signature="e#3649#3650#0" expanded="true" />
-                <element signature="e#3676#3677#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MalariaFormCustomerFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/forms/MalariaFormCustomerFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DiarrheaFormCustomerFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormCustomerFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SalesFormCustomerFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TaskCalenderFragment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.51212555">
-              <caret line="241" column="43" selection-start-line="241" selection-start-column="43" selection-end-line="241" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TaskViewOnMapFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TaskViewOnMapFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskViewOnMapFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="244" column="0" selection-start-line="244" selection-start-column="0" selection-end-line="244" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.42087543">
+              <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/util/MyApplication.java">
+      <file leaf-file-name="TaskCalenderFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-              <folding />
+              <caret line="242" column="45" selection-start-line="242" selection-start-column="45" selection-end-line="242" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LocationTracker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/quentinklein/slt/LocationTracker.java">
+      <file leaf-file-name="HomeActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/HomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="154" column="17" selection-start-line="154" selection-start-column="17" selection-end-line="154" selection-end-column="17" />
+              <caret line="83" column="40" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -2343,12 +2148,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/util/GPSSettingsDialog.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/fr/quentinklein/slt/LocationTracker.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskViewOnMapFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/forms/MalariaFormCustomerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/Globals.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormCustomerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskViewOnMapFragment.java" />
       </list>
     </option>
   </component>
@@ -2456,6 +2261,32 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="migration" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai-crm-android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="sync" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -2476,6 +2307,72 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="chai" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai-crm-android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reports" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai-crm-android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai-crm-android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adapter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2514,8 +2411,30 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="slt" />
+              <option name="myItemId" value="chai" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tasks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai-crm-android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -2955,7 +2874,7 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5010225" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8148148" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8148148" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.55418384" sideWeight="0.48971722" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.55418384" sideWeight="0.48971722" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969153" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3214,16 +3133,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/util/customwidget/GPSEditText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/AddNewCustomerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17974323">
@@ -3236,14 +3145,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33238232">
           <caret line="6303" column="19" selection-start-line="6303" selection-start-column="19" selection-end-line="6303" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/HomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5392297">
-          <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -3317,23 +3218,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/quentinklein/slt/LocationTracker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.71754634">
           <caret line="154" column="17" selection-start-line="154" selection-start-column="17" selection-end-line="154" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskViewOnMapFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="244" column="0" selection-start-line="244" selection-start-column="0" selection-end-line="244" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/util/MyApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.025677603">
           <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
           <folding />
         </state>
@@ -3344,7 +3237,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3360,9 +3253,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormCustomerFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.025677603">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -3370,23 +3263,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormCustomerFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormCustomerFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.049928673">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="83" column="40" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskCalenderFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51212555">
-          <caret line="241" column="43" selection-start-line="241" selection-start-column="43" selection-end-line="241" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="242" column="45" selection-start-line="242" selection-start-column="45" selection-end-line="242" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/TaskViewOnMapFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42087543">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
