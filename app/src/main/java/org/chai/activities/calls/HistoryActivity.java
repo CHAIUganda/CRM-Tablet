@@ -38,8 +38,8 @@ public class HistoryActivity extends BaseActivity {
         aq = new AQuery(this);
 
         if(RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)){
-            titles = new String[]{"MALARIA FORMS", "DIARRHEA FORMS", "ORDERS"};
-            PAGES = 3;
+            titles = new String[]{"MALARIA FORMS", "DIARRHEA FORMS"};
+            PAGES = 2;
         }else{
             titles = new String[]{"SALES FORMS", "ORDERS"};
             PAGES = 2;
@@ -82,9 +82,6 @@ public class HistoryActivity extends BaseActivity {
                         break;
                     case 1:
                         target = new DiarrheaHistoryFragment();
-                        break;
-                    case 2:
-                        target = new OrdersHistoryFragment();
                         break;
                 }
             }else{

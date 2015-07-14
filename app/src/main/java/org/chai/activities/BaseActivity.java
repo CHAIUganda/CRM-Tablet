@@ -67,7 +67,6 @@ public class BaseActivity extends ActionBarActivity{
             "Tasks",
             "Customers",
             "History",
-            "New Order",
             "Malaria Detailing",
             "Diarrhea Detailing",
             "My Report"
@@ -76,7 +75,6 @@ public class BaseActivity extends ActionBarActivity{
             R.drawable.ic_drawer_tasks,
             R.drawable.ic_drawer_customers,
             R.drawable.ic_drawer_history,
-            R.drawable.ic_drawer_order,
             R.drawable.ic_drawer_detailing,
             R.drawable.ic_drawer_detailing,
             R.drawable.ic_drawer_reports
@@ -85,7 +83,6 @@ public class BaseActivity extends ActionBarActivity{
             R.drawable.ic_drawer_tasks_active,
             R.drawable.ic_drawer_customers_active,
             R.drawable.ic_drawer_history_active,
-            R.drawable.ic_drawer_order_active,
             R.drawable.ic_drawer_detailing_active,
             R.drawable.ic_drawer_detailing_active,
             R.drawable.ic_drawer_reports_active
@@ -94,7 +91,6 @@ public class BaseActivity extends ActionBarActivity{
             SCREEN_TASKS,
             SCREEN_CUSTOMERS,
             SCREEN_HISTORY,
-            SCREEN_NEW_ORDER,
             SCREEN_MALARIA_DETAILING,
             SCREEN_DIARRHEA_DETAILING,
             SCREEN_REPORT
@@ -215,36 +211,48 @@ public class BaseActivity extends ActionBarActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Class target = null;
-                switch (position) {
-                    case 0:
-                        target = HomeActivity.class;
-                        break;
-                    case 1:
-                        target = CustomersActivity.class;
-                        break;
-                    case 2:
-                        target = HistoryActivity.class;
-                        break;
-                    case 3:
-                        target = NewOrderActivity.class;
-                        break;
-                    case 4:
-                        if(RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)){
+                if(RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)){
+                    switch (position) {
+                        case 0:
+                            target = HomeActivity.class;
+                            break;
+                        case 1:
+                            target = CustomersActivity.class;
+                            break;
+                        case 2:
+                            target = HistoryActivity.class;
+                            break;
+                        case 3:
                             target = MalariaFormActivity.class;
-                        }else{
-                            target = SalesFormActivity.class;
-                        }
-                        break;
-                    case 5:
-                        if(RestClient.getRole().equalsIgnoreCase(User.ROLE_SALES)){
-                            target = ReportsActivity.class;
-                        }else{
+                            break;
+                        case 4:
                             target = DiarrheaFormActivity.class;
-                        }
-                        break;
-                    case 6:
-                        target = ReportsActivity.class;
-                        break;
+                            break;
+                        case 5:
+                            target = ReportsActivity.class;
+                            break;
+                    }
+                }else{
+                    switch (position) {
+                        case 0:
+                            target = HomeActivity.class;
+                            break;
+                        case 1:
+                            target = CustomersActivity.class;
+                            break;
+                        case 2:
+                            target = HistoryActivity.class;
+                            break;
+                        case 3:
+                            target = NewOrderActivity.class;
+                            break;
+                        case 4:
+                            target = SalesFormActivity.class;
+                            break;
+                        case 5:
+                            target = ReportsActivity.class;
+                            break;
+                    }
                 }
                 if (target != null) {
                     Intent i = new Intent(BaseActivity.this, target);

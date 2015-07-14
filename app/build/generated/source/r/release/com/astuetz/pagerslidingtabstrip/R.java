@@ -27,7 +27,7 @@ public final class R {
 		public static final int pstsUnderlineHeight = 0x7f010052;
 	}
 	public static final class color {
-		public static final int psts_background_tab_pressed = 0x7f0a0048;
+		public static final int psts_background_tab_pressed = 0x7f0a0049;
 	}
 	public static final class drawable {
 		public static final int psts_background_tab = 0x7f02007b;
