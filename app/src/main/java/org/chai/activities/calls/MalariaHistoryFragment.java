@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,6 +24,7 @@ import org.chai.model.DaoSession;
 import org.chai.model.MalariaDetail;
 import org.chai.model.MalariaDetailDao;
 import org.chai.util.MyApplication;
+import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
@@ -43,13 +47,19 @@ public class MalariaHistoryFragment extends Fragment {
     ListView listView;
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.form_history_fragment, container, false);
         initialiseGreenDao();
 
         listView = (ListView)view.findViewById(R.id.lst_items);
         aq = new AQuery(view);
-        items = new ArrayList<MalariaDetail>();
+        items = new ArrayList<>();
         items.addAll(malariaDetailDao.queryBuilder().orderDesc(MalariaDetailDao.Properties.DateOfSurvey).list());
         adapter = new MalariaHistoryAdapter(getActivity(), R.layout.history_item_row, items);
         listView.setAdapter(adapter);
@@ -77,5 +87,29 @@ public class MalariaHistoryFragment extends Fragment {
         } catch (Exception ex) {
             Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(final Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.search_menu, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                menu.findItem(R.id.action_search).collapseActionView();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Utils.log("Query changed: " + newText);
+                if(adapter != null){
+                    adapter.getFilter().filter(newText);
+                }
+                return false;
+            }
+
+        });
     }
 }

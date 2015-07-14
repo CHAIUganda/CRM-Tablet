@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import com.androidquery.AQuery;
 
@@ -16,17 +18,28 @@ import org.chai.model.CustomerContact;
 import org.chai.model.MalariaDetail;
 import org.ocpsoft.prettytime.PrettyTime;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Zed on 5/12/2015.
  */
-public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> {
+public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> implements Filterable {
     private int lastPosition = -1;
+    private ArrayList<MalariaDetail> originalItems;
+    private ArrayList<MalariaDetail> filteredItems;
+    private HistoryFilter historyFilter;
 
     public MalariaHistoryAdapter(Context context, int resource, List<MalariaDetail> items) {
         super(context, resource, items);
+
+        originalItems = new ArrayList<>();
+        originalItems.addAll(items);
+
+        filteredItems = new ArrayList<>();
+        filteredItems.addAll(items);
     }
 
     @Override
@@ -64,5 +77,61 @@ public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> {
         lastPosition = position;
 
         return row;
+    }
+
+    @Override
+    public Filter getFilter() {
+        if(historyFilter == null){
+            historyFilter = new HistoryFilter();
+        }
+
+        return historyFilter;
+    }
+
+    private class HistoryFilter extends Filter{
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if (constraint == null || constraint.length() == 0) {
+                results.values = originalItems;
+                results.count = originalItems.size();
+            }else{
+                List<MalariaDetail> nFilteredList = new ArrayList<>();
+                for(MalariaDetail m : originalItems){
+                    Customer c = m.getTask().getCustomer();
+                    if(c != null){
+                        if(c.getOutletName().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))){
+                            nFilteredList.add(m);
+                        }else if(c.getSubcounty() != null){
+                            if(c.getSubcounty().getName().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))){
+                                nFilteredList.add(m);
+                            }else if(c.getSubcounty().getDistrict() != null){
+                                if(c.getSubcounty().getDistrict().getName().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))) {
+                                    nFilteredList.add(m);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                results.values = nFilteredList;
+                results.count = nFilteredList.size();
+            }
+
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            List<MalariaDetail> filtered = (List<MalariaDetail>)results.values;
+            notifyDataSetChanged();
+            clear();
+            for(int i = 0; i < filtered.size(); i++){
+                add(filtered.get(i));
+            }
+            notifyDataSetChanged();
+        }
     }
 }

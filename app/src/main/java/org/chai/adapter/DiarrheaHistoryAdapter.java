@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 
 import com.androidquery.AQuery;
 
@@ -16,8 +17,10 @@ import org.chai.model.CustomerContact;
 import org.chai.model.DetailerCall;
 import org.ocpsoft.prettytime.PrettyTime;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Zed on 5/12/2015.
@@ -25,8 +28,18 @@ import java.util.List;
 public class DiarrheaHistoryAdapter extends ArrayAdapter<DetailerCall> {
     private int lastPosition = -1;
 
+    private ArrayList<DetailerCall> originalItems;
+    private ArrayList<DetailerCall> filteredItems;
+    private HistoryFilter historyFilter;
+
     public DiarrheaHistoryAdapter(Context context, int resource, List<DetailerCall> items) {
         super(context, resource, items);
+
+        originalItems = new ArrayList<>();
+        originalItems.addAll(items);
+
+        filteredItems = new ArrayList<>();
+        filteredItems.addAll(items);
     }
 
     @Override
@@ -66,5 +79,61 @@ public class DiarrheaHistoryAdapter extends ArrayAdapter<DetailerCall> {
         lastPosition = position;
 
         return row;
+    }
+
+    @Override
+    public Filter getFilter() {
+        if(historyFilter == null){
+            historyFilter = new HistoryFilter();
+        }
+
+        return historyFilter;
+    }
+
+    private class HistoryFilter extends Filter{
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if (constraint == null || constraint.length() == 0) {
+                results.values = originalItems;
+                results.count = originalItems.size();
+            }else{
+                List<DetailerCall> nFilteredList = new ArrayList<>();
+                for(DetailerCall m : originalItems){
+                    Customer c = m.getTask().getCustomer();
+                    if(c != null){
+                        if(c.getOutletName().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))){
+                            nFilteredList.add(m);
+                        }else if(c.getSubcounty() != null){
+                            if(c.getSubcounty().getName().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))){
+                                nFilteredList.add(m);
+                            }else if(c.getSubcounty().getDistrict() != null){
+                                if(c.getSubcounty().getDistrict().getName().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))) {
+                                    nFilteredList.add(m);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                results.values = nFilteredList;
+                results.count = nFilteredList.size();
+            }
+
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            List<DetailerCall> filtered = (List<DetailerCall>)results.values;
+            notifyDataSetChanged();
+            clear();
+            for(int i = 0; i < filtered.size(); i++){
+                add(filtered.get(i));
+            }
+            notifyDataSetChanged();
+        }
     }
 }
