@@ -71,6 +71,7 @@ public class SalesHistoryFragment extends Fragment {
                 Intent i = new Intent(getActivity(), SalesFormActivity.class);
                 i.putExtra("sale_id", sale.getUuid());
                 i.putExtra("task_id", sale.getTaskId());
+                i.putExtra("is_from_history", true);
                 getActivity().startActivity(i);
             }
         });

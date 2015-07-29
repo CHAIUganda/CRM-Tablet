@@ -70,6 +70,7 @@ public class OrdersHistoryFragment extends Fragment {
                 Order order = items.get(position);
                 Intent i = new Intent(getActivity(), NewOrderActivity.class);
                 i.putExtra("order_id", order.getUuid());
+                i.putExtra("is_from_history", true);
                 getActivity().startActivity(i);
             }
         });

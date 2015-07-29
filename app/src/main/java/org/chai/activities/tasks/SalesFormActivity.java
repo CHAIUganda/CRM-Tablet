@@ -71,6 +71,7 @@ public class SalesFormActivity extends BaseActivity {
 
     String saledId;
     String taskId;
+    private boolean isFromHistory = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,7 @@ public class SalesFormActivity extends BaseActivity {
 
         saledId = getIntent().getStringExtra("sale_id");
         taskId = getIntent().getStringExtra("task_id");
+        isFromHistory = getIntent().getBooleanExtra("is_from_history", false);
 
         if(saledId != null){
             sale = saleDao.load(saledId);
@@ -173,8 +175,10 @@ public class SalesFormActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.save_form_menu, menu);
+        if(!isFromHistory){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.save_form_menu, menu);
+        }
         return true;
     }
 

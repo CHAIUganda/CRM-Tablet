@@ -86,6 +86,8 @@ public class NewOrderActivity extends BaseActivity {
     private ProductDao productDao;
     private OrderDataDao orderDataDao;
 
+    private boolean isFromHistory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         CURRENT_SCREEN = SCREEN_NEW_ORDER;
@@ -97,8 +99,8 @@ public class NewOrderActivity extends BaseActivity {
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        rows = new ArrayList<View>();
-        orderDataItems = new ArrayList<OrderData>();
+        rows = new ArrayList<>();
+        orderDataItems = new ArrayList<>();
 
         rowContainer = (LinearLayout)findViewById(R.id.ln_orders_container);
 
@@ -111,10 +113,10 @@ public class NewOrderActivity extends BaseActivity {
 
         dateField = aq.id(R.id.due_date).getEditText();
         dateField.setHint(dateFormat.format(new Date(c.getTimeInMillis())));
-        dateField.setOnTouchListener(new View.OnTouchListener(){
+        dateField.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_UP){
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     showDatePicker();
                     return true;
                 }
@@ -130,6 +132,8 @@ public class NewOrderActivity extends BaseActivity {
         });
 
         orderId = getIntent().getStringExtra("order_id");
+        isFromHistory = getIntent().getBooleanExtra("is_from_history", false);
+
         if(orderId != null){
             order = orderDao.load(orderId);
             if(order != null){
@@ -269,8 +273,10 @@ public class NewOrderActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.save_form_menu, menu);
+        if(!isFromHistory){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.save_form_menu, menu);
+        }
         return true;
     }
 
