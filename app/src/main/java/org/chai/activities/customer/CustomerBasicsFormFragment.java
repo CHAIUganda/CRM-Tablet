@@ -30,14 +30,18 @@ import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.List;
 
-import fr.quentinklein.slt.LocationTracker;
-
 /**
  * Created by Zed on 4/29/2015.
  */
 public class CustomerBasicsFormFragment extends Fragment {
     Spinner subcountySpinner;
     Spinner districtSpinner;
+
+    List<Subcounty> subcountiesList;
+    List<District> districtList;
+
+    AddNewCustomerActivity ac;
+
     View view;
     AQuery aq;
 
@@ -46,7 +50,6 @@ public class CustomerBasicsFormFragment extends Fragment {
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
-    LocationTracker tracker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,8 +59,8 @@ public class CustomerBasicsFormFragment extends Fragment {
 
         initialiseGreenDao();
 
-        List<Subcounty> subcountiesList = subcountyDao.loadAll();
-        List<District> districtList = districtDao.loadAll();
+        subcountiesList = subcountyDao.loadAll();
+        districtList = districtDao.loadAll();
 
         subcountySpinner = aq.id(R.id.subcounty).getSpinner();
         districtSpinner = aq.id(R.id.district).getSpinner();
@@ -66,9 +69,13 @@ public class CustomerBasicsFormFragment extends Fragment {
         districtSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Utils.log("District spinner changed");
                 String districtId = ((District) districtSpinner.getSelectedItem()).getUuid();
                 List<Subcounty> subcounties = subcountyDao.queryBuilder().where(SubcountyDao.Properties.DistrictId.eq(districtId)).list();
                 subcountySpinner.setAdapter(new SubcountyArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, subcounties.toArray(new Subcounty[subcounties.size()])));
+                if(ac.customer != null){
+                    setCustomerLocationDetails(ac.customer);
+                }
             }
 
             @Override
@@ -82,7 +89,7 @@ public class CustomerBasicsFormFragment extends Fragment {
         setRequiredFields();
         setLatLong();
 
-        AddNewCustomerActivity ac = (AddNewCustomerActivity)getActivity();
+        ac = (AddNewCustomerActivity)getActivity();
         if(ac.customer != null){
             populateFields(ac.customer);
         }
@@ -106,7 +113,6 @@ public class CustomerBasicsFormFragment extends Fragment {
     }
 
     private void populateFields(Customer c){
-        Utils.log("Populating basic customer fields -> " + c.getOutletSize());
         aq.id(R.id.outlet_name).text(c.getOutletName());
         Spinner type = aq.id(R.id.outlettype).getSpinner();
         type.setSelection(((ArrayAdapter<String>)type.getAdapter()).getPosition(c.getOutletType()));
@@ -124,6 +130,37 @@ public class CustomerBasicsFormFragment extends Fragment {
         aq.id(R.id.directions).text(c.getDescriptionOfOutletLocation());
         aq.id(R.id.gps).text(c.getLatitude() + "," + c.getLongitude());
         aq.id(R.id.location_gps).text(c.getLatitude() + "," + c.getLongitude());
+
+        setCustomerLocationDetails(c);
+    }
+
+    private void setCustomerLocationDetails(Customer c){
+        Subcounty s = c.getSubcounty();
+        Utils.log("My SC -> " + s.getName() + " : " + s.getUuid());
+        if(s != null) {
+            District d = s.getDistrict();
+            if(d != null){
+                int dIndex = -1;
+                for(District di : districtList){
+                    if(di.getUuid().equals(d.getUuid())){
+                        dIndex = districtList.indexOf(di);
+                        break;
+                    }
+                }
+                districtSpinner.setSelection(dIndex);
+
+                Subcounty sc;
+                for(int i = 0; i < subcountySpinner.getAdapter().getCount(); i++){
+                    sc = ((SubcountyArrayAdapter)subcountySpinner.getAdapter()).getItem(i);
+                    Utils.log("Checking sc -> " + sc.getName() + " : " + sc.getUuid());
+                    if(sc.getUuid().equals(s.getUuid())){
+                        Utils.log("Found it - - " + i);
+                        subcountySpinner.setSelection(i);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public boolean saveFields(){

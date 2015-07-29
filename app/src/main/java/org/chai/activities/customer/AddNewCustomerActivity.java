@@ -84,7 +84,7 @@ public class AddNewCustomerActivity extends BaseActivity {
         if(customer != null){
             contacts = customer.getCustomerContacts();
         }else{
-            contacts = new ArrayList<CustomerContact>();
+            contacts = new ArrayList<>();
         }
 
         pager = (ViewPager) findViewById(R.id.pager);
