@@ -75,6 +75,7 @@ public class DiarrheaFormActivity extends BaseActivity {
     protected DetailerStockDao detailerStockDao;
 
     public boolean inferedCall = false;
+    private boolean isFromHistory = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,7 @@ public class DiarrheaFormActivity extends BaseActivity {
 
         detailId = getIntent().getStringExtra("detail_id");
         taskId = getIntent().getStringExtra("task_id");
+        isFromHistory = getIntent().getBooleanExtra("is_from_history", false);
 
         if(detailId != null){
             call = detailerCallDao.load(detailId);
@@ -127,14 +129,14 @@ public class DiarrheaFormActivity extends BaseActivity {
 
         if(call == null){
             call = new DetailerCall();
-            stocks = new ArrayList<DetailerStock>();
+            stocks = new ArrayList<>();
         }else{
             stocks = call.getDetailerStocks();
         }
 
-        zincStocks = new ArrayList<DetailerStock>();
-        orsStocks = new ArrayList<DetailerStock>();
-        copacks = new ArrayList<DetailerStock>();
+        zincStocks = new ArrayList<>();
+        orsStocks = new ArrayList<>();
+        copacks = new ArrayList<>();
 
         for(DetailerStock stock: stocks){
             if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(DiarrheaFormZincFragment.STOCK_TYPE)){
@@ -201,8 +203,10 @@ public class DiarrheaFormActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.save_form_menu, menu);
+        if(!isFromHistory){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.save_form_menu, menu);
+        }
         return true;
     }
 
@@ -277,7 +281,7 @@ public class DiarrheaFormActivity extends BaseActivity {
         detailerStockDao.deleteInTx(call.getDetailerStocks());
 
         //Save stocks
-        stocks = new ArrayList<DetailerStock>();
+        stocks = new ArrayList<>();
         stocks.addAll(zincStocks);
         stocks.addAll(orsStocks);
         stocks.addAll(copacks);

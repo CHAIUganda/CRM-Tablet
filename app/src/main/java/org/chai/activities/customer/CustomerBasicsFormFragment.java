@@ -69,7 +69,6 @@ public class CustomerBasicsFormFragment extends Fragment {
         districtSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Utils.log("District spinner changed");
                 String districtId = ((District) districtSpinner.getSelectedItem()).getUuid();
                 List<Subcounty> subcounties = subcountyDao.queryBuilder().where(SubcountyDao.Properties.DistrictId.eq(districtId)).list();
                 subcountySpinner.setAdapter(new SubcountyArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, subcounties.toArray(new Subcounty[subcounties.size()])));
@@ -136,7 +135,6 @@ public class CustomerBasicsFormFragment extends Fragment {
 
     private void setCustomerLocationDetails(Customer c){
         Subcounty s = c.getSubcounty();
-        Utils.log("My SC -> " + s.getName() + " : " + s.getUuid());
         if(s != null) {
             District d = s.getDistrict();
             if(d != null){
@@ -152,9 +150,7 @@ public class CustomerBasicsFormFragment extends Fragment {
                 Subcounty sc;
                 for(int i = 0; i < subcountySpinner.getAdapter().getCount(); i++){
                     sc = ((SubcountyArrayAdapter)subcountySpinner.getAdapter()).getItem(i);
-                    Utils.log("Checking sc -> " + sc.getName() + " : " + sc.getUuid());
                     if(sc.getUuid().equals(s.getUuid())){
-                        Utils.log("Found it - - " + i);
                         subcountySpinner.setSelection(i);
                         break;
                     }

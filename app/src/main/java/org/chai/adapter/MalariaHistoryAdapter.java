@@ -71,6 +71,7 @@ public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> implement
             }
         }
         aq.id(R.id.txt_customer_contact).text(customerline);
+        aq.id(R.id.img_segment).gone();
 
         Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         row.startAnimation(animation);

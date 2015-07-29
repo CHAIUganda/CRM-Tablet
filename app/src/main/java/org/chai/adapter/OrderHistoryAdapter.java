@@ -80,6 +80,8 @@ public class OrderHistoryAdapter extends ArrayAdapter<Order> {
             aq.id(R.id.txt_customer_contact).textColor(inactiveColor);
         }*/
 
+        aq.id(R.id.img_segment).gone();
+
         Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         row.startAnimation(animation);
         lastPosition = position;

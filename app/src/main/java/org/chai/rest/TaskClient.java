@@ -2,6 +2,8 @@ package org.chai.rest;
 
 import android.util.Log;
 
+import org.chai.model.DetailerCall;
+import org.chai.model.MalariaDetail;
 import org.chai.model.Task;
 import org.chai.util.ServerResponse;
 import org.chai.util.Utils;
@@ -34,7 +36,7 @@ public class TaskClient extends RestClient {
         try {
             Utils.log("Uploading task -> " + task.getDescription());
             RestTemplate restTemplate = getRestTemplate();
-            HttpEntity<Task> httpEntity = new HttpEntity<Task>(task, getHeaders());
+            HttpEntity<Task> httpEntity = new HttpEntity<>(task, getHeaders());
             String url = getRestUrl() + "task/update";
             if(task.getType().equalsIgnoreCase("malaria")){
                 url = getRestUrl() + "task/malariaUpdate";
@@ -49,5 +51,35 @@ public class TaskClient extends RestClient {
             serverResponse.setItemRef(task.getDescription());
             return serverResponse;
         }
+    }
+
+    public DetailerCall[] downloadDiarrheaHistory(){
+        try {
+            RestTemplate restTemplate = getRestTemplate();
+            ResponseEntity<DetailerCall[]> responseEntity = restTemplate.exchange(getRestUrl() + "task/listCompleteDiarrhoea?max=" + Integer.MAX_VALUE, HttpMethod.GET, getRequestEntity(), DetailerCall[].class);
+            return responseEntity.getBody();
+        } catch (HttpClientErrorException se) {
+            Log.i("Server Error:", se.getResponseBodyAsString());
+            Utils.log("HttpClientErrorException -> " + se.getMessage());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Utils.log("Exception -> " + ex.getMessage());
+        }
+        return null;
+    }
+
+    public MalariaDetail[] downloadMalariaHistory(){
+        try {
+            RestTemplate restTemplate = getRestTemplate();
+            ResponseEntity<MalariaDetail[]> responseEntity = restTemplate.exchange(getRestUrl() + "task/listCompleteMalaria?max=" + Integer.MAX_VALUE, HttpMethod.GET, getRequestEntity(), MalariaDetail[].class);
+            return responseEntity.getBody();
+        } catch (HttpClientErrorException se) {
+            Log.i("Server Error:", se.getResponseBodyAsString());
+            Utils.log("HttpClientErrorException -> " + se.getMessage());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Utils.log("Exception -> " + ex.getMessage());
+        }
+        return null;
     }
 }

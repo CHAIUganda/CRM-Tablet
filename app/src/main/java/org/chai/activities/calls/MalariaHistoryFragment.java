@@ -70,6 +70,7 @@ public class MalariaHistoryFragment extends Fragment {
                 Intent i = new Intent(getActivity(), MalariaFormActivity.class);
                 i.putExtra("detail_id", detail.getUuid());
                 i.putExtra("task_id", detail.getTaskId());
+                i.putExtra("is_from_history", true);
                 getActivity().startActivity(i);
             }
         });

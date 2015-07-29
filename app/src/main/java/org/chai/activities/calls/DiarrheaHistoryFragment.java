@@ -70,6 +70,7 @@ public class DiarrheaHistoryFragment extends Fragment {
                 Intent i = new Intent(getActivity(), DiarrheaFormActivity.class);
                 i.putExtra("detail_id", detail.getUuid());
                 i.putExtra("task_id", detail.getTaskId());
+                i.putExtra("is_from_history", true);
                 getActivity().startActivity(i);
             }
         });

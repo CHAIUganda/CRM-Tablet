@@ -170,6 +170,8 @@ public class CHAISynchroniser extends Service {
             uploadSales();
             uploadTasks();
             uploadOrders();
+            downloadDiarrheaHistory();
+            downloadMalariaHistory();
             if (!syncronisationErros.isEmpty()) {
                 displaySyncErros(syncronisationErros);
             }
@@ -319,10 +321,76 @@ public class CHAISynchroniser extends Service {
         return false;
     }
 
+    private void downloadDiarrheaHistory(){
+        updatePropgress("Downloading Diarrhea History...");
+        DetailerCall[] tasks = taskClient.downloadDiarrheaHistory();
+        if(tasks != null){
+            Task task;
+            for(DetailerCall d: tasks){
+                task = taskDao.load(d.getUuid());
+                if(task == null){
+                    task = new Task();
+                }
+                task.setStatus(HomeActivity.STATUS_COMPLETE);
+                task.setType("detailer");
+                task.setCompletionDate(d.getCompletionDate());
+                task.setIsDirty(false);
+                task.setCustomerId(d.getCustomerId());
+
+                if(task.getUuid() == null){
+                    task.setUuid(d.getUuid());
+                    taskDao.insert(task);
+                }else{
+                    taskDao.update(task);
+                }
+
+                d.setTaskId(task.getUuid());
+                d.setDateOfSurvey(d.getCompletionDate());
+                d.setIsDirty(false);
+                d.setIsHistory(true);
+            }
+            detailerCallDao.insertOrReplaceInTx(tasks);
+        }
+        Utils.log("Done downloading diarrhea history");
+    }
+
+    private void downloadMalariaHistory(){
+        updatePropgress("Downloading Malaria History...");
+        MalariaDetail[] tasks = taskClient.downloadMalariaHistory();
+        if(tasks != null){
+            Task task;
+            for(MalariaDetail d: tasks){
+                task = taskDao.load(d.getUuid());
+                if(task == null){
+                    task = new Task();
+                }
+                task.setStatus(HomeActivity.STATUS_COMPLETE);
+                task.setType("malaria");
+                task.setCompletionDate(d.getCompletionDate());
+                task.setIsDirty(false);
+                task.setCustomerId(d.getCustomerId());
+
+                if(task.getUuid() == null){
+                    task.setUuid(d.getUuid());
+                    taskDao.insert(task);
+                }else{
+                    taskDao.update(task);
+                }
+
+                d.setTaskId(task.getUuid());
+                d.setDateOfSurvey(d.getCompletionDate());
+                d.setIsDirty(false);
+                d.setIsHistory(true);
+            }
+            malariaDetailDao.insertOrReplaceInTx(tasks);
+        }
+        Utils.log("Done downloading malaria history");
+    }
+
     public void uploadCustomers(){
         List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
         for (Customer customer : customersList) {
-            ServerResponse response = customerClient.uploadCustomer(customer,RestClient.getRestTemplate());
+            ServerResponse response = customerClient.uploadCustomer(customer, RestClient.getRestTemplate());
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 customer.setIsDirty(false);
                 customerDao.update(customer);

@@ -70,9 +70,10 @@ public class MalariaFormActivity extends BaseActivity {
     List<DetailerStock> antimalarials;
     List<DetailerStock> rdts;
 
+    private boolean isFromHistory = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Utils.log("onCreate() Main Activity");
         CURRENT_SCREEN = SCREEN_MALARIA_DETAILING;
 
         super.onCreate(savedInstanceState);
@@ -92,6 +93,7 @@ public class MalariaFormActivity extends BaseActivity {
 
         detailId = getIntent().getStringExtra("detail_id");
         taskId = getIntent().getStringExtra("task_id");
+        isFromHistory = getIntent().getBooleanExtra("is_from_history", false);
 
         if(detailId != null){
             call = malariaDetailDao.load(detailId);
@@ -108,7 +110,7 @@ public class MalariaFormActivity extends BaseActivity {
 
         if(call == null){
             call = new MalariaDetail();
-            stocks = new ArrayList<DetailerStock>();
+            stocks = new ArrayList<>();
         }else{
             stocks = call.getDetailerMalariaStocks();
         }
@@ -117,8 +119,8 @@ public class MalariaFormActivity extends BaseActivity {
             task = new Task();
         }
 
-        antimalarials = new ArrayList<DetailerStock>();
-        rdts = new ArrayList<DetailerStock>();
+        antimalarials = new ArrayList<>();
+        rdts = new ArrayList<>();
 
         for(DetailerStock stock: stocks){
             if(stock.getCategory() != null && stock.getCategory().equalsIgnoreCase(MalariaFormAntiMalarialFragment.STOCK_TYPE)){
@@ -173,8 +175,10 @@ public class MalariaFormActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.save_form_menu, menu);
+        if(!isFromHistory){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.save_form_menu, menu);
+        }
         return true;
     }
 

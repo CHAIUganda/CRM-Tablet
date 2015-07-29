@@ -64,6 +64,7 @@ public class SaleHistoryAdapter extends ArrayAdapter<Sale> {
             aq.id(R.id.txt_time).text(new PrettyTime().format(d));
         }
         aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
+        aq.id(R.id.img_segment).gone();
 
         Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         row.startAnimation(animation);

@@ -3,6 +3,7 @@ package org.chai.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.dao.DaoException;
@@ -58,6 +59,8 @@ public class DetailerCall implements BaseEntity {
     private java.util.Date dateCreated;
     @JsonIgnore
     private java.util.Date lastUpdated;
+    private String customerId; //Added to link between hostory items and customers - because the history endpoint does not return task that contains the customer information
+    private Date completionDate;
 
     /** Used to resolve relations */
     @JsonIgnore
@@ -437,6 +440,12 @@ public class DetailerCall implements BaseEntity {
     }
 
     // KEEP METHODS - put your custom methods here
-    // KEEP METHODS END
+    public String getCustomerId(){
+        return this.customerId;
+    }
 
+    public Date getCompletionDate(){
+        return completionDate;
+    }
+    // KEEP METHODS END
 }
