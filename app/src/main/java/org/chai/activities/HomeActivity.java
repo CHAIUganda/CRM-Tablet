@@ -14,8 +14,11 @@ import org.chai.R;
 import org.chai.activities.tasks.TaskByLocationFragment;
 import org.chai.activities.tasks.TaskCalenderFragment;
 import org.chai.activities.tasks.TaskViewOnMapFragment;
+import org.chai.model.MalariaDetailDao;
 import org.chai.sync.CHAISynchroniser;
+import org.chai.util.MyApplication;
 import org.chai.util.Utils;
+import org.chai.util.migration.MigrationHelper3;
 
 /**
  * Created by victor on 10/15/14.
@@ -54,7 +57,12 @@ public class HomeActivity extends BaseActivity{
         }
 
         //Manually Upgrade DB - NEVER leave this in production
-        //new MigrationHelper3().onUpgrade(new MyApplication().getDbOpenHelper().getWritableDatabase());
+        if(!Utils.dbTableExists(MalariaDetailDao.TABLENAME, new MyApplication().getDbOpenHelper().getWritableDatabase())){
+            new MigrationHelper3().onUpgrade(new MyApplication().getDbOpenHelper().getWritableDatabase());
+            Utils.log(MalariaDetailDao.TABLENAME + " does not exist");
+        }else{
+            Utils.log(MalariaDetailDao.TABLENAME + " already exists");
+        }
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {

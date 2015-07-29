@@ -28,7 +28,7 @@ public class Place extends RestClient {
     public Region[] downloadRegions(){
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Region[]> responseEntity = restTemplate.exchange(getRestUrl() + "place/regions", HttpMethod.GET,getRequestEntity(), Region[].class);
+            ResponseEntity<Region[]> responseEntity = restTemplate.exchange(getRestUrl() + "place/regions", HttpMethod.GET, getRequestEntity(), Region[].class);
             Region[] regions = responseEntity.getBody();
             return regions;
         }catch (HttpClientErrorException ex){
@@ -41,7 +41,7 @@ public class Place extends RestClient {
     public District[] downloadDistricts(){
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<District[]> responseEntity = restTemplate.exchange(getRestUrl() + "place/districts",HttpMethod.GET,getRequestEntity(),District[].class);
+            ResponseEntity<District[]> responseEntity = restTemplate.exchange(getRestUrl() + "place/districts",HttpMethod.GET, getRequestEntity(),District[].class);
             District[] districts = responseEntity.getBody();
             Log.i("REST CLIENT:","found "+districts.length+" Districts");
             return districts;

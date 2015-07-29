@@ -4,6 +4,8 @@ package org.chai.util;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
 import android.text.Spannable;
@@ -28,6 +30,7 @@ import org.osmdroid.util.GeoPoint;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -274,7 +277,15 @@ public class Utils {
         return 0;
     }
 
-    public static boolean taskIsHistory(Task task){
+    public static boolean dbTableExists(String tableName, SQLiteDatabase db) {
+        Cursor cursor = db.rawQuery("SELECT DISTINCT tbl_name from sqlite_master where tbl_name = '" + tableName + "'", null);
+        if(cursor != null) {
+            if(cursor.getCount() > 0) {
+                cursor.close();
+                return true;
+            }
+            cursor.close();
+        }
         return false;
     }
 }

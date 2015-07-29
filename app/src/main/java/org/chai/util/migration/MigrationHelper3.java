@@ -12,7 +12,7 @@ import org.chai.util.Utils;
 public class MigrationHelper3 extends MigratorHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db) {
-        Utils.log("Doing MigrationHelper 3 Upgrade");
+        Utils.log("Doing MigrationHelper 3 Upgrade - Malaria form upgrade");
         //The new Malaria form and pack size
         MalariaDetailDao.createTable(db, true);
         try{

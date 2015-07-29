@@ -137,11 +137,11 @@ public class TaskCalenderFragment extends Fragment {
 
         int itemPosition = Utils.getItemPosition(dueDateString,choices);
         QueryBuilder<Task> taskQueryBuilder = taskDao.queryBuilder();
-        List<Task> outstandingTasks=null;
-        if(itemPosition==1){
+        List<Task> outstandingTasks = null;
+        if(itemPosition == 1){
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(Utils.addToDateOffset(new Date(), 0)),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         } else if (itemPosition >= 0 && itemPosition < 6) {
-            itemPosition = itemPosition==0?itemPosition:itemPosition - 1;
+            itemPosition = itemPosition == 0 ? itemPosition : itemPosition - 1;
             Date dueDateOffset = Utils.addToDateOffset(new Date(), itemPosition);
             Date dueDatemax = Utils.addToDateMax(new Date(), itemPosition);
             Log.i("Due Date:", dueDateOffset.toString() + ":max-" + dueDatemax.toString());
