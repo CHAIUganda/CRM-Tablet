@@ -58,6 +58,7 @@ public class AddNewCustomerActivity extends BaseActivity {
     private CustomerContactsFormFragment contactFragment;
 
     public List<CustomerContact> contacts;
+    boolean canSaveCustomer = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class AddNewCustomerActivity extends BaseActivity {
             customer = customerDao.load(customerId);
             if(customer != null){
                 getSupportActionBar().setTitle("Edit Customer");
+                canSaveCustomer = false;
             }
         }
 
@@ -98,8 +100,10 @@ public class AddNewCustomerActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.save_form_menu, menu);
+        if(canSaveCustomer){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.save_form_menu, menu);
+        }
         return true;
     }
 

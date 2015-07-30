@@ -149,15 +149,20 @@ public class TaskViewOnMapFragment extends Fragment {
     }
 
     private void addTasksToMap2(List<Task> taskList){
-        items = new ArrayList<OverlayItem>();
-        for(Task task:taskList){
+        items = new ArrayList<>();
+
+        OverlayItem myLocationMarker = new OverlayItem("Your Location", "You are here!", new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE));
+        Drawable d = this.getResources().getDrawable(R.drawable.ic_map_location);
+        myLocationMarker.setMarker(d);
+        items.add(myLocationMarker);
+
+        for(Task task: taskList){
             Customer customer = task.getCustomer();
-            if(customer!=null&&customer.getLatitude()!=null){
+
+            if(customer != null && customer.getLatitude() != null){
                 double latitude = customer.getLatitude();
                 double longitude = customer.getLongitude();
-                Log.i("Latitude============",latitude+"");
-                Log.i("Longitude===========",longitude+"");
-                if(longitude != 0&&latitude!= 0){
+                if(longitude != 0 && latitude!= 0){
                     OverlayItem taskMarker = new OverlayItem(task.getUuid(), task.getDescription(), new GeoPoint(latitude, longitude));
                     if(task.getType().equalsIgnoreCase(HomeActivity.TASK_TYPE_ORDER)){
                         Drawable myCurrentLocationMarker = this.getResources().getDrawable(R.drawable.drugstore_order);
@@ -167,11 +172,11 @@ public class TaskViewOnMapFragment extends Fragment {
                         taskMarker.setMarker(myCurrentLocationMarker);
                     }
                     items.add(taskMarker);
-                    markers.put(taskMarker.getTitle(),task.getUuid());
+                    markers.put(taskMarker.getTitle(), task.getUuid());
                 }
             }
         }
-        currentLocationOverlay = new ItemizedIconOverlay<OverlayItem>(items,
+        currentLocationOverlay = new ItemizedIconOverlay<>(items,
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
                         Toast.makeText(getActivity(),item.getSnippet(),Toast.LENGTH_LONG).show();
@@ -180,8 +185,10 @@ public class TaskViewOnMapFragment extends Fragment {
 
                     public boolean onItemLongPress(final int index, final OverlayItem item) {
                         String taskId = markers.get(item.getTitle());
-                        runner = new AsyncTaskRunner();
-                        runner.execute(taskId);
+                        if(taskId != null){
+                            runner = new AsyncTaskRunner();
+                            runner.execute(taskId);
+                        }
                         return true;
                     }
                 }, resourceProxy);
@@ -191,7 +198,7 @@ public class TaskViewOnMapFragment extends Fragment {
         if(!items.isEmpty()){
             this.mapController.animateTo(items.get(0).getPoint());
         }else{
-            this.mapController.animateTo(new GeoPoint(MAP_DEFAULT_LATITUDE,MAP_DEFAULT_LONGITUDE));
+            this.mapController.animateTo(new GeoPoint(MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE));
         }
         this.mapView.invalidate();
 
