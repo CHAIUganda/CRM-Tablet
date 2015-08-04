@@ -212,10 +212,10 @@ public class CustomerBasicsFormFragment extends Fragment {
             }catch(Exception ex){
                 Utils.log("Error setting cordinates");
             }
-        }else{
+        }/*else{
             Toast.makeText(getActivity(), "Location codinates are not set. Please turn on your GPS and try again.", Toast.LENGTH_LONG).show();
             return false;
-        }
+        }*/
 
         AddNewCustomerActivity a = (AddNewCustomerActivity)getActivity();
         if(a.customer == null){

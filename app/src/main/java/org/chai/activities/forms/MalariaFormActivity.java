@@ -249,7 +249,7 @@ public class MalariaFormActivity extends BaseActivity {
         detailerStockDao.deleteInTx(call.getDetailerMalariaStocks());
 
         //Save stocks
-        stocks = new ArrayList<DetailerStock>();
+        stocks = new ArrayList<>();
         stocks.addAll(antimalarials);
         stocks.addAll(rdts);
 
