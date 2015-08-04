@@ -211,7 +211,7 @@ public class BaseActivity extends ActionBarActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Class target = null;
-                if(RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)){
+                if (RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER)) {
                     switch (position) {
                         case 0:
                             target = HomeActivity.class;
@@ -232,7 +232,7 @@ public class BaseActivity extends ActionBarActivity{
                             target = ReportsActivity.class;
                             break;
                     }
-                }else{
+                } else {
                     switch (position) {
                         case 0:
                             target = HomeActivity.class;
@@ -264,9 +264,9 @@ public class BaseActivity extends ActionBarActivity{
             }
         });
 
-        aquery.id(R.id.txt_logout).clicked(new View.OnClickListener(){
+        aquery.id(R.id.txt_logout).clicked(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 AccountManager.logout(BaseActivity.this);
             }
         });
@@ -300,16 +300,22 @@ public class BaseActivity extends ActionBarActivity{
         aquery.id(R.id.sync).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!CHAISynchroniser.isSyncing){
+                if (!CHAISynchroniser.isSyncing) {
                     CHAISynchroniser.isSyncing = true;
                     startService(new Intent(BaseActivity.this, CHAISynchroniser.class));
                     updateLastSynced();
-                }else{
+                } else {
                     Utils.log("Sync is already running...please wait");
                     Toast.makeText(BaseActivity.this, "Sync is already running...", Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+        try{
+            aquery.id(R.id.version).text("Version: " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+        }catch (Exception ex){
+            Utils.log("Error getting package name -> " + ex.getMessage());
+        }
     }
 
     private void updateLastSynced(){

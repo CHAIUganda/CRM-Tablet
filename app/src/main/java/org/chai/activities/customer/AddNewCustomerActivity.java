@@ -103,6 +103,9 @@ public class AddNewCustomerActivity extends BaseActivity {
         if(canSaveCustomer){
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.save_form_menu, menu);
+        }else{
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.customer_task_list_menu, menu);
         }
         return true;
     }
