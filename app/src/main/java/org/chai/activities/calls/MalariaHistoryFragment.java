@@ -23,6 +23,7 @@ import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.MalariaDetail;
 import org.chai.model.MalariaDetailDao;
+import org.chai.model.Task;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
@@ -46,6 +47,8 @@ public class MalariaHistoryFragment extends Fragment {
 
     ListView listView;
 
+    String customerId;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +60,24 @@ public class MalariaHistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.form_history_fragment, container, false);
         initialiseGreenDao();
 
+        customerId = getArguments().getString("customer_id");
+
         listView = (ListView)view.findViewById(R.id.lst_items);
         aq = new AQuery(view);
         items = new ArrayList<>();
-        items.addAll(malariaDetailDao.queryBuilder().orderDesc(MalariaDetailDao.Properties.DateOfSurvey).list());
+
+        List<MalariaDetail> tasks = malariaDetailDao.queryBuilder().orderDesc(MalariaDetailDao.Properties.DateOfSurvey).list();
+        if(customerId == null){
+            items.addAll(tasks);
+        }else{
+            for(MalariaDetail d: tasks){
+                Task t = d.getTask();
+                if(t != null && t.getCustomerId().equals(customerId)){
+                    items.add(d);
+                }
+            }
+        }
+
         adapter = new MalariaHistoryAdapter(getActivity(), R.layout.history_item_row, items);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

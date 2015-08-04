@@ -47,6 +47,8 @@ public class OrdersHistoryFragment extends Fragment {
 
     ListView listView;
 
+    String customerId;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +60,23 @@ public class OrdersHistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.form_history_fragment, container, false);
         initialiseGreenDao();
 
+        customerId = getArguments().getString("customer_id");
+
         listView = (ListView)view.findViewById(R.id.lst_items);
         aq = new AQuery(view);
-        items = new ArrayList<Order>();
-        items.addAll(orderDao.queryBuilder().orderDesc(OrderDao.Properties.OrderDate).list());
+        items = new ArrayList<>();
+
+        List<Order> tasks = orderDao.queryBuilder().orderDesc(OrderDao.Properties.OrderDate).list();
+        if(customerId == null){
+            items.addAll(tasks);
+        }else{
+            for(Order d: tasks){
+                if(d.getCustomerId().equals(customerId)){
+                    items.add(d);
+                }
+            }
+        }
+
         adapter = new OrderHistoryAdapter(getActivity(), R.layout.history_item_row, items);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

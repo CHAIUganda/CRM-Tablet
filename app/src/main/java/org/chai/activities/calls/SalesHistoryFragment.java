@@ -23,6 +23,7 @@ import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.Sale;
 import org.chai.model.SaleDao;
+import org.chai.model.Task;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
@@ -46,6 +47,8 @@ public class SalesHistoryFragment extends Fragment {
 
     ListView listView;
 
+    String customerId;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +61,24 @@ public class SalesHistoryFragment extends Fragment {
         initialiseGreenDao();
         aq = new AQuery(view);
 
+        customerId = getArguments().getString("customer_id");
+
         listView = (ListView)view.findViewById(R.id.lst_items);
         aq = new AQuery(view);
-        items = new ArrayList<Sale>();
-        items.addAll(saleDao.queryBuilder().orderDesc(SaleDao.Properties.DateCreated).list());
+        items = new ArrayList<>();
+
+        List<Sale> tasks = saleDao.queryBuilder().orderDesc(SaleDao.Properties.DateCreated).list();
+        if(customerId == null){
+            items.addAll(tasks);
+        }else{
+            for(Sale d: tasks){
+                Task t = d.getTask();
+                if(t != null && t.getCustomerId().equals(customerId)){
+                    items.add(d);
+                }
+            }
+        }
+
         adapter = new SaleHistoryAdapter(getActivity(), R.layout.history_item_row, items);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

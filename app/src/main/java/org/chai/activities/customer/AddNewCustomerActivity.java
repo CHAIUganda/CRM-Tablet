@@ -17,6 +17,7 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.activities.BaseActivity;
+import org.chai.activities.calls.HistoryActivity;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.CustomerContactDao;
@@ -118,6 +119,12 @@ public class AddNewCustomerActivity extends BaseActivity {
 
         if(item.getItemId() == R.id.action_save){
             saveForm();
+        }
+
+        if(item.getItemId() == R.id.action_tasks){
+            Intent i = new Intent(this, HistoryActivity.class);
+            i.putExtra("customer_id", customerId);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);

@@ -23,6 +23,7 @@ import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.DetailerCall;
 import org.chai.model.DetailerCallDao;
+import org.chai.model.Task;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
@@ -46,6 +47,8 @@ public class DiarrheaHistoryFragment extends Fragment {
 
     ListView listView;
 
+    String customerId;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +59,24 @@ public class DiarrheaHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.form_history_fragment, container, false);
         initialiseGreenDao();
+        customerId = getArguments().getString("customer_id");
 
         listView = (ListView)view.findViewById(R.id.lst_items);
         aq = new AQuery(view);
         items = new ArrayList<>();
-        items.addAll(detailerCallDao.queryBuilder().orderDesc(DetailerCallDao.Properties.DateOfSurvey).list());
+
+        List<DetailerCall> tasks = detailerCallDao.queryBuilder().orderDesc(DetailerCallDao.Properties.DateOfSurvey).list();
+        if(customerId == null){
+            items.addAll(tasks);
+        }else{
+            for(DetailerCall d: tasks){
+                Task t = d.getTask();
+                if(t != null && t.getCustomerId().equals(customerId)){
+                    items.add(d);
+                }
+            }
+        }
+
         adapter = new DiarrheaHistoryAdapter(getActivity(), R.layout.history_item_row, items);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
