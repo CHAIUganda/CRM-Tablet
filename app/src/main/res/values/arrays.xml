@@ -197,6 +197,7 @@
         <item>Always</item>
     </array>
     <array name="SpinnerKnowldgeLevel">
+        <item>""</item>
         <item>High</item>
         <item>Medium</item>
         <item>Low</item>

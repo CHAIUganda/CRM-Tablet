@@ -48,7 +48,9 @@ public class DiarrheaOrsFragment extends Fragment implements IViewManipulator {
             "Oralyte (orange)",
             "Restors",
             "Revive (plain)",
-            "Revive (orange)"
+            "Revive (orange)",
+            "D-lyte (plain)",
+            "D-lyte (flavored)"
     };
 
     DiarrheaFormActivity activity;

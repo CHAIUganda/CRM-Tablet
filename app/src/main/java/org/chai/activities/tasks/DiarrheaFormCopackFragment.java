@@ -47,7 +47,8 @@ public class DiarrheaFormCopackFragment extends Fragment implements IViewManipul
             "Oralyte & Zinc syrup (60mL)",
             "Oralyte & Zinc syrup (100mL)",
             "Oralyte & DT Zinc",
-            "Dts Z-kit"
+            "Dts Z-kit",
+            "D-lyte"
     };
 
     DiarrheaFormActivity activity;

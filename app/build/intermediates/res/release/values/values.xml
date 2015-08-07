@@ -3,6 +3,7 @@
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/values/arrays.xml -->
     <eat-comment/>
     <array name="SpinnerKnowldgeLevel">
+        <item>""</item>
         <item>High</item>
         <item>Medium</item>
         <item>Low</item>

@@ -46,13 +46,19 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         Customer c = t.getCustomer();
         CustomerContact contact = c.getCustomerContacts().get(0);
 
-        int segment = cxt.getResources().getIdentifier("segment_" + c.getSegment().toLowerCase(), "drawable", cxt.getPackageName());
-
         AQuery aq = new AQuery(row);
+
+        try{
+            int segment = cxt.getResources().getIdentifier("segment_" + c.getSegment().toLowerCase(), "drawable", cxt.getPackageName());
+            aq.id(R.id.img_segment).image(segment);
+        }catch (Exception ex){
+            aq.id(R.id.img_segment).gone();
+        }
+
         aq.id(R.id.txt_customer_name).text(c.getOutletName());
         aq.id(R.id.txt_time).text(c.getDescriptionOfOutletLocation());
         aq.id(R.id.txt_customer_contact).text(contact.getContact());
-        aq.id(R.id.img_segment).image(segment);
+
 
         Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         row.startAnimation(animation);

@@ -107,18 +107,18 @@
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\release\jackson-core-2.4.3-2fe98417063a207dc2556dc17634edc372e5d50c.jar" />
     </item>
     <item
-        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.4.0\d6a66c7a5f01cf500377bd669507a08cfeba882a\jackson-annotations-2.4.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d6a66c7a5f01cf500377bd669507a08cfeba882a">
-        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\release\jackson-annotations-2.4.0-2cc5cc24a6fbd0fca790bf6fcab23fa620e8c413.jar" />
-    </item>
-    <item
         jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\libs\android-query-full.0.26.8.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="5ab405d9f4eaf5ddd615967cd35650657b758d40">
         <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\release\android-query-full.0.26.8-c7ed0ccb708bba875b137beedc7dd469adcaa6e2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Zed\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.4.0\d6a66c7a5f01cf500377bd669507a08cfeba882a\jackson-annotations-2.4.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d6a66c7a5f01cf500377bd669507a08cfeba882a">
+        <dex dex="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\pre-dexed\release\jackson-annotations-2.4.0-2cc5cc24a6fbd0fca790bf6fcab23fa620e8c413.jar" />
     </item>
     <item
         jar="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"

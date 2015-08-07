@@ -170,6 +170,7 @@ public class CHAISynchroniser extends Service {
             uploadSales();
             uploadTasks();
             uploadOrders();
+
             downloadDiarrheaHistory();
             downloadMalariaHistory();
             if (!syncronisationErros.isEmpty()) {

@@ -164,13 +164,10 @@ public class TaskViewOnMapFragment extends Fragment {
                 double longitude = customer.getLongitude();
                 if(longitude != 0 && latitude!= 0){
                     OverlayItem taskMarker = new OverlayItem(task.getUuid(), task.getDescription(), new GeoPoint(latitude, longitude));
-                    if(task.getType().equalsIgnoreCase(HomeActivity.TASK_TYPE_ORDER)){
-                        Drawable myCurrentLocationMarker = this.getResources().getDrawable(R.drawable.drugstore_order);
-                        taskMarker.setMarker(myCurrentLocationMarker);
-                    }else{
-                        Drawable myCurrentLocationMarker = this.getResources().getDrawable(R.drawable.drugstore);
-                        taskMarker.setMarker(myCurrentLocationMarker);
-                    }
+                    int drawableId = getResources().getIdentifier("ic_map_" + customer.getSegment().toLowerCase(), "drawable", getActivity().getPackageName());
+                    Drawable myCurrentLocationMarker = this.getResources().getDrawable(drawableId);
+                    taskMarker.setMarker(myCurrentLocationMarker);
+
                     items.add(taskMarker);
                     markers.put(taskMarker.getTitle(), task.getUuid());
                 }

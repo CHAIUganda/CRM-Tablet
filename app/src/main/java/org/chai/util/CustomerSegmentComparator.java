@@ -10,6 +10,12 @@ import java.util.Comparator;
 public class CustomerSegmentComparator implements Comparator<Task> {
     @Override
     public int compare(Task t1, Task t2) {
-        return t1.getCustomer().getSegment().compareTo(t2.getCustomer().getSegment());
+        try{
+            return t1.getCustomer().getSegment().compareTo(t2.getCustomer().getSegment());
+        }catch (Exception ex){
+            Utils.log("Error comparing -> " + ex.getMessage());
+        }
+
+        return -1;
     }
 }
