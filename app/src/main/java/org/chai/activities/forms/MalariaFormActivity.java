@@ -263,8 +263,10 @@ public class MalariaFormActivity extends BaseActivity {
             if(stock.getUuid() == null){
                 stock.setUuid(UUID.randomUUID().toString());
                 stock.setDateCreated(new Date());
+                detailerStockDao.insert(stock);
+            }else{
+                detailerStockDao.update(stock);
             }
-            detailerStockDao.insert(stock);
         }
 
         Toast.makeText(this, "Malaria form has been saved. Please complete Diarrhea details too.", Toast.LENGTH_LONG).show();

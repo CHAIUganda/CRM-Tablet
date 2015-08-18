@@ -295,8 +295,11 @@ public class DiarrheaFormActivity extends BaseActivity {
             if(stock.getUuid() == null){
                 stock.setUuid(UUID.randomUUID().toString());
                 stock.setDateCreated(new Date());
+                detailerStockDao.insert(stock);
+            }else{
+                detailerStockDao.update(stock);
             }
-            detailerStockDao.insert(stock);
+
         }
 
         Toast.makeText(this, "Diarrhea form has been saved", Toast.LENGTH_LONG).show();

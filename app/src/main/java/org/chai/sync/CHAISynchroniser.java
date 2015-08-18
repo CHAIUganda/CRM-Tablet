@@ -327,30 +327,36 @@ public class CHAISynchroniser extends Service {
         DetailerCall[] tasks = taskClient.downloadDiarrheaHistory();
         if(tasks != null){
             Task task;
+            DetailerCall dc;
             for(DetailerCall d: tasks){
-                task = taskDao.load(d.getUuid());
-                if(task == null){
-                    task = new Task();
-                }
-                task.setStatus(HomeActivity.STATUS_COMPLETE);
-                task.setType("detailer");
-                task.setCompletionDate(d.getCompletionDate());
-                task.setIsDirty(false);
-                task.setCustomerId(d.getCustomerId());
+                dc = detailerCallDao.load(d.getUuid());
+                if(dc == null){
+                    task = taskDao.load(d.getUuid());
+                    if(task == null){
+                        task = new Task();
+                    }
+                    task.setStatus(HomeActivity.STATUS_COMPLETE);
+                    task.setType("detailer");
+                    task.setCompletionDate(d.getCompletionDate());
+                    task.setIsDirty(false);
+                    task.setCustomerId(d.getCustomerId());
 
-                if(task.getUuid() == null){
-                    task.setUuid(d.getUuid());
-                    taskDao.insert(task);
-                }else{
-                    taskDao.update(task);
-                }
+                    if(task.getUuid() == null){
+                        task.setUuid(d.getUuid());
+                        taskDao.insert(task);
+                    }else{
+                        taskDao.update(task);
+                    }
 
-                d.setTaskId(task.getUuid());
-                d.setDateOfSurvey(d.getCompletionDate());
-                d.setIsDirty(false);
-                d.setIsHistory(true);
+                    d.setTaskId(task.getUuid());
+                    d.setDateOfSurvey(d.getCompletionDate());
+                    d.setIsDirty(false);
+                    d.setIsHistory(true);
+
+                    d.setTaskId(task.getUuid());
+                    detailerCallDao.insert(d);
+                }
             }
-            detailerCallDao.insertOrReplaceInTx(tasks);
         }
         Utils.log("Done downloading diarrhea history");
     }
@@ -360,30 +366,36 @@ public class CHAISynchroniser extends Service {
         MalariaDetail[] tasks = taskClient.downloadMalariaHistory();
         if(tasks != null){
             Task task;
+            MalariaDetail md;
             for(MalariaDetail d: tasks){
-                task = taskDao.load(d.getUuid());
-                if(task == null){
-                    task = new Task();
-                }
-                task.setStatus(HomeActivity.STATUS_COMPLETE);
-                task.setType("malaria");
-                task.setCompletionDate(d.getCompletionDate());
-                task.setIsDirty(false);
-                task.setCustomerId(d.getCustomerId());
+                md = malariaDetailDao.load(d.getUuid());
+                if(md == null){
+                    task = taskDao.load(d.getUuid());
+                    if(task == null){
+                        task = new Task();
+                    }
+                    task.setStatus(HomeActivity.STATUS_COMPLETE);
+                    task.setType("malaria");
+                    task.setCompletionDate(d.getCompletionDate());
+                    task.setIsDirty(false);
+                    task.setCustomerId(d.getCustomerId());
 
-                if(task.getUuid() == null){
-                    task.setUuid(d.getUuid());
-                    taskDao.insert(task);
-                }else{
-                    taskDao.update(task);
-                }
+                    if(task.getUuid() == null){
+                        task.setUuid(d.getUuid());
+                        taskDao.insert(task);
+                    }else{
+                        taskDao.update(task);
+                    }
 
-                d.setTaskId(task.getUuid());
-                d.setDateOfSurvey(d.getCompletionDate());
-                d.setIsDirty(false);
-                d.setIsHistory(true);
+                    d.setTaskId(task.getUuid());
+                    d.setDateOfSurvey(d.getCompletionDate());
+                    d.setIsDirty(false);
+                    d.setIsHistory(true);
+
+                    d.setTaskId(task.getUuid());
+                    malariaDetailDao.insert(d);
+                }
             }
-            malariaDetailDao.insertOrReplaceInTx(tasks);
         }
         Utils.log("Done downloading malaria history");
     }
