@@ -17,7 +17,6 @@ import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.User;
 import org.chai.model.UserDao;
-import org.chai.model.VillageDao;
 import org.chai.rest.Place;
 import org.chai.rest.RestClient;
 import org.chai.util.AccountManager;
@@ -33,7 +32,6 @@ public class LoginActivity extends BaseActivity {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private UserDao userDao;
-    private VillageDao villageDao;
     private String role = User.ROLE_DETAILER;
     Toolbar toolbar;
 
@@ -171,7 +169,6 @@ public class LoginActivity extends BaseActivity {
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
             userDao = daoSession.getUserDao();
-            villageDao = daoSession.getVillageDao();
         } catch (Exception ex) {
             Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }

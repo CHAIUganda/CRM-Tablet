@@ -79,6 +79,10 @@
             android:label="Reports" >
         </activity>
         <activity
+            android:name="org.chai.activities.ProductsActivity"
+            android:label="Products" >
+        </activity>
+        <activity
             android:name="org.chai.activities.customer.AddNewCustomerActivity"
             android:label="New Customer" >
         </activity>

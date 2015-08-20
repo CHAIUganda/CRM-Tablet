@@ -1,6 +1,7 @@
 package org.chai.activities.tasks;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -23,18 +24,31 @@ import com.androidquery.AQuery;
 import org.chai.R;
 import org.chai.activities.IViewManipulator;
 import org.chai.adapter.FormListAdapter;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
 import org.chai.model.DetailerStock;
+import org.chai.model.Product;
+import org.chai.model.ProductDao;
+import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.customwidget.FormSearchTextField;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Zed on 5/2/2015.
  */
 public class DiarrheaFormZincFragment extends Fragment implements IViewManipulator {
     public static final String STOCK_TYPE = "zinc";
+
+    private SQLiteDatabase db;
+    private DaoMaster daoMaster;
+    private DaoSession daoSession;
+    private ProductDao productDao;
+
     AQuery aq;
     LinearLayout rowsContainer;
     View view;
@@ -43,17 +57,8 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
 
     boolean viewsHidden = false;
 
-    String[] items = new String[]{
-            "DT Zinc",
-            "Zincocet",
-            "Zinkid",
-            "Zinc Sulphate (FDC)",
-            "Zinc Sulphate (Medicamen)",
-            "Zincos",
-            "Zinc Syrup (60mL)",
-            "Zinc Syrup (100mL)",
-            "ReZn"
-    };
+    String[] items;
+    int groupId = 25982;
 
     DiarrheaFormActivity activity;
 
@@ -62,6 +67,9 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
         activity = (DiarrheaFormActivity)getActivity();
 
         view = inflater.inflate(R.layout.diarrhea_form_zinc_fragment, container, false);
+
+        initialiseGreenDao();
+        populateProducts();
 
         aq = new AQuery(view);
         rowsContainer = (LinearLayout)view.findViewById(R.id.ln_rows_container);
@@ -117,12 +125,39 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
             try{
                 for(View row : rows){
                     ((ViewGroup)row.getParent()).removeView(row);
-                    activity.zincStocks = new ArrayList<DetailerStock>();
-                    rows = new ArrayList<View>();
+                    activity.zincStocks = new ArrayList<>();
+                    rows = new ArrayList<>();
                 }
             }catch (Exception ex){
 
             }
+        }
+    }
+
+    private void populateProducts(){
+        List<Product> products = productDao.queryBuilder().where(ProductDao.Properties.GroupId.eq(groupId)).list();
+        if(products.size() > 0){
+            items = new String[products.size()];
+            String unit;
+            for(int i = 0; i < products.size(); i++){
+                items[i] = products.get(i).getName();
+                unit = products.get(i).getUnitOfMeasure();
+                if(unit != null && unit != "null"){
+                    items[i] += " - " + unit;
+                }
+            }
+        }else{
+            items = new String[]{
+                    "DT Zinc",
+                    "Zincocet",
+                    "Zinkid",
+                    "Zinc Sulphate (FDC)",
+                    "Zinc Sulphate (Medicamen)",
+                    "Zincos",
+                    "Zinc Syrup (60mL)",
+                    "Zinc Syrup (100mL)",
+                    "ReZn"
+            };
         }
     }
 
@@ -136,11 +171,11 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
             }
         }
 
-        ArrayList<DetailerStock> temp = new ArrayList<DetailerStock>();
+        ArrayList<DetailerStock> temp = new ArrayList<>();
         temp.addAll(activity.zincStocks);
 
-        rows = new ArrayList<View>();
-        activity.zincStocks = new ArrayList<DetailerStock>();
+        rows = new ArrayList<>();
+        activity.zincStocks = new ArrayList<>();
 
         for(int i = 0; i < temp.size(); i++){
             addRow(temp.get(i), false);
@@ -356,5 +391,17 @@ public class DiarrheaFormZincFragment extends Fragment implements IViewManipulat
             i++;
         }
         return true;
+    }
+
+    private void initialiseGreenDao() {
+        try {
+            UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
+            db = helper.getWritableDatabase();
+            daoMaster = new DaoMaster(db);
+            daoSession = daoMaster.newSession();
+            productDao = daoSession.getProductDao();
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 }

@@ -16,6 +16,7 @@ public class ProductEntity {
         product.addStringProperty("formulation");
         product.addStringProperty("unitPrice");
         product.addStringProperty("groupName");
+        product.addIntProperty("groupId");
 
         return product;
 

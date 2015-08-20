@@ -32,7 +32,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> implements Filterabl
 
     public CustomerAdapter(Activity activity, List<Customer> items) {
         super(activity.getApplicationContext(), R.layout.customer_list_row, items);
-        this.customers = new ArrayList<Customer>();
+        this.customers = new ArrayList<>();
         this.customers.addAll(items);
     }
 

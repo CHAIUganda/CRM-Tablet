@@ -24,6 +24,7 @@ public class Product {
     private String formulation;
     private String unitPrice;
     private String groupName;
+    private int groupId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -47,13 +48,14 @@ public class Product {
         this.uuid = uuid;
     }
 
-    public Product(String uuid, String name, String unitOfMeasure, String formulation, String unitPrice, String groupName) {
+    public Product(String uuid, String name, String unitOfMeasure, String formulation, String unitPrice, String groupName, int groupId) {
         this.uuid = uuid;
         this.name = name;
         this.unitOfMeasure = unitOfMeasure;
         this.formulation = formulation;
         this.unitPrice = unitPrice;
         this.groupName = groupName;
+        this.groupId = groupId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -112,6 +114,14 @@ public class Product {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

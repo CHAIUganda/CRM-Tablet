@@ -420,6 +420,7 @@ public class CHAISynchroniser extends Service {
 
     private void downloadProducts() {
         Product[] products = productClient.downloadProducts();
+        Utils.log("downloadProducts -> " + products.length);
         if(products != null){
             productDao.deleteAll();
             for (Product product : products) {

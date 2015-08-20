@@ -53,6 +53,9 @@
       <activity android:name=".reports.ReportsActivity" android:label="Reports">
 
       </activity>
+      <activity android:name=".activities.ProductsActivity" android:label="Products">
+
+      </activity>
       <activity android:name=".activities.customer.AddNewCustomerActivity" android:label="New Customer">
 
       </activity>
