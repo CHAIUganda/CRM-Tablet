@@ -23,7 +23,7 @@ import java.util.Collections;
  * Created by victor on 11/3/14.
  */
 public class RestClient {
-    public static boolean PRODUCTION_SERVER = false;
+    public static boolean PRODUCTION_SERVER = true;
     public static String userName;
     public static String password;
     private static String role;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.chai"
-    android:versionCode="15"
-    android:versionName="2.1.0.5" >
+    android:versionCode="16"
+    android:versionName="2.1.1.2" >
 
     <uses-sdk
         android:minSdkVersion="15"
@@ -77,6 +77,10 @@
         <activity
             android:name="org.chai.reports.ReportsActivity"
             android:label="Reports" >
+        </activity>
+        <activity
+            android:name="org.chai.activities.ProductsActivity"
+            android:label="Products" >
         </activity>
         <activity
             android:name="org.chai.activities.customer.AddNewCustomerActivity"
