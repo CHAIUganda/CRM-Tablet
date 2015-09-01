@@ -138,9 +138,6 @@ public class BaseActivity extends ActionBarActivity{
         super.onCreate(savedInstanceBundle);
         aquery = new AQuery(this);
 
-        //we initialise gps tracker her to start computing to get accuracy quickly
-        //Globals.getInstance().initGpsTracker(this);
-
         if(!skipLogin){
             AccountManager.offlineLogin(this, true);
 
@@ -148,6 +145,8 @@ public class BaseActivity extends ActionBarActivity{
                 drawerItems[5] = "Unscheduled Sale";
             }
         }
+
+        skipLogin = false; //Restore this for other activities that require login
     }
 
     @Override

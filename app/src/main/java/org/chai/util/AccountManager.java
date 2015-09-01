@@ -12,6 +12,7 @@ import org.chai.model.DaoSession;
 import org.chai.model.User;
 import org.chai.model.UserDao;
 import org.chai.rest.RestClient;
+import org.chai.sync.CHAISynchroniser;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.List;
@@ -79,10 +80,18 @@ public class AccountManager {
     }
 
     public static void logout(Context cxt){
+        //Cancel all syncing tasks before we logout
+        CHAISynchroniser.abortSync();
+
         SharedPreferences prefs = cxt.getSharedPreferences(PREFS, 0);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(USERNAME);
         editor.commit();
+
+        editor = cxt.getSharedPreferences(CHAISynchroniser.PREFS, 0).edit();
+        editor.remove(CHAISynchroniser.LAST_SYNCED);
+        editor.commit();
+
         Intent i = new Intent(cxt, LoginActivity.class);
         cxt.startActivity(i);
     }

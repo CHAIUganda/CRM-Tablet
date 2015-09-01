@@ -52,6 +52,7 @@ import org.chai.rest.ProductClient;
 import org.chai.rest.RestClient;
 import org.chai.rest.SalesClient;
 import org.chai.rest.TaskClient;
+import org.chai.util.AccountManager;
 import org.chai.util.MyApplication;
 import org.chai.util.ServerResponse;
 import org.chai.util.Utils;
@@ -94,8 +95,10 @@ public class CHAISynchroniser extends Service {
     private List<ServerResponse> syncronisationErros;
 
     public static boolean isSyncing = false;
-    private static final String PREFS = "sync_prefs";
-    private static final String LAST_SYNCED = "last_synced";
+    public static final String PREFS = "sync_prefs";
+    public static final String LAST_SYNCED = "last_synced";
+
+    private static SyncTask syncTask;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -108,7 +111,8 @@ public class CHAISynchroniser extends Service {
         initialiseGreenDao();
 
         //Sync everything here
-        new SyncTask().execute();
+        syncTask = new SyncTask();
+        syncTask.execute();
 
         return START_NOT_STICKY;
     }
@@ -182,6 +186,9 @@ public class CHAISynchroniser extends Service {
     }
 
     public void downloadRegions() {
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         updatePropgress("Downloading Regions...");
         Region[] regions = place.downloadRegions();
         if (regions != null) {
@@ -194,6 +201,9 @@ public class CHAISynchroniser extends Service {
     }
 
     public void downloadDistricts() {
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         updatePropgress("Downloading Districts...");
         District[] districts = place.downloadDistricts();
         if(districts != null){
@@ -206,6 +216,9 @@ public class CHAISynchroniser extends Service {
     }
 
     public void downloadSubcounties() {
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         updatePropgress("Downloading Subcounties...");
         Subcounty[] subcounties = place.downloadSubcounties();
         if(subcounties != null){
@@ -217,6 +230,9 @@ public class CHAISynchroniser extends Service {
     }
 
     public void downloadCustomers() {
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         updatePropgress("Downloading Customers..");
         Customer[] customers = customerClient.downloadCustomers();
         customerDao.insertOrReplaceInTx(customers);
@@ -235,6 +251,9 @@ public class CHAISynchroniser extends Service {
     }
 
     public void downloadTasks() {
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         updatePropgress("Downloading Tasks...");
 
         Task[] tasks = taskClient.downloadTasks();
@@ -256,6 +275,9 @@ public class CHAISynchroniser extends Service {
     }
 
     public void uploadTasks() /*throws SyncronizationException*/ {
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         List<Task> taskList = taskDao.queryBuilder().where(TaskDao.Properties.Status.notEq(HomeActivity.STATUS_NEW)).list();
 
         if (!taskList.isEmpty()) {
@@ -323,6 +345,9 @@ public class CHAISynchroniser extends Service {
     }
 
     private void downloadDiarrheaHistory(){
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         updatePropgress("Downloading Diarrhea History...");
         DetailerCall[] tasks = taskClient.downloadDiarrheaHistory();
         if(tasks != null){
@@ -362,6 +387,9 @@ public class CHAISynchroniser extends Service {
     }
 
     private void downloadMalariaHistory(){
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         updatePropgress("Downloading Malaria History...");
         MalariaDetail[] tasks = taskClient.downloadMalariaHistory();
         if(tasks != null){
@@ -401,6 +429,9 @@ public class CHAISynchroniser extends Service {
     }
 
     public void uploadCustomers(){
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
         for (Customer customer : customersList) {
             ServerResponse response = customerClient.uploadCustomer(customer, RestClient.getRestTemplate());
@@ -419,6 +450,9 @@ public class CHAISynchroniser extends Service {
     }
 
     private void downloadProducts() {
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         Product[] products = productClient.downloadProducts();
         Utils.log("downloadProducts -> " + products.length);
         if(products != null){
@@ -430,6 +464,9 @@ public class CHAISynchroniser extends Service {
     }
 
     private void uploadSales(){
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         List<Sale> saleList = saleDao.queryBuilder().where(SaleDao.Properties.IsHistory.notEq(true)).list();
         if (!saleList.isEmpty()) {
             updatePropgress("Uploading Sales...");
@@ -454,6 +491,9 @@ public class CHAISynchroniser extends Service {
     }
 
     private void uploadDirectSales(){
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         List<AdhockSale> saleList = adhockSaleDao.loadAll();
         if (!saleList.isEmpty()) {
             updatePropgress("Uploading Sales...");
@@ -481,6 +521,9 @@ public class CHAISynchroniser extends Service {
     }
 
     private void uploadOrders() /*throws SyncronizationException*/{
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         List<Order> orderList = orderDao.loadAll();
         if (!orderList.isEmpty()) {
             updatePropgress("Uploading Orders...");
@@ -502,6 +545,9 @@ public class CHAISynchroniser extends Service {
     }
 
     private void downloadSummaryReports() {
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
         SummaryReport[] summaryReports = place.getSummaryReports();
         if(summaryReports != null){
             summaryReportDao.deleteAll();
@@ -554,6 +600,17 @@ public class CHAISynchroniser extends Service {
 
         @Override
         protected void onProgressUpdate(Void... values) {}
+    }
+
+    public static void abortSync(){
+        Utils.log("Cancelling syncing");
+        isSyncing = false;
+        if(syncTask != null && syncTask.getStatus() == AsyncTask.Status.RUNNING){
+            Utils.log("Sync was running");
+            syncTask.cancel(true);
+        }else{
+            Utils.log("No need sync is not running");
+        }
     }
 
     public static long getLastSynced(Context cxt){
