@@ -35,6 +35,7 @@ public class MyApplication extends Application {
                 Utils.log("Location found -> " + location.getLatitude() + " : " + location.getLongitude());
                 if(locationTextField != null){
                     locationTextField.setText(location.getLatitude() + "," + location.getLongitude());
+                    locationTracker.stopListen(); //Stop listening here
                 }
             }
 
@@ -49,11 +50,15 @@ public class MyApplication extends Application {
 
     public static void registerEditTextForLocationUpdates(EditText editText, FragmentActivity activity){
         locationTextField = editText;
-        locationTracker.quickFix();
+
+        locationTracker.startListen(); //Start listening for location updates
+
+        locationTracker.quickFix(); //Get quick location - if any
 
         //Check location settings
         if (!locationTracker.isGPSEnabled()) {
             new GPSSettingsDialog().show(activity.getSupportFragmentManager(), "gps_settings");
+            return;
         }
     }
 
