@@ -72,7 +72,7 @@ public class CustomerBasicsFormFragment extends Fragment {
                 String districtId = ((District) districtSpinner.getSelectedItem()).getUuid();
                 List<Subcounty> subcounties = subcountyDao.queryBuilder().where(SubcountyDao.Properties.DistrictId.eq(districtId)).list();
                 subcountySpinner.setAdapter(new SubcountyArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, subcounties.toArray(new Subcounty[subcounties.size()])));
-                if(ac.customer != null){
+                if (ac.customer != null) {
                     setCustomerLocationDetails(ac.customer);
                 }
             }
@@ -86,7 +86,6 @@ public class CustomerBasicsFormFragment extends Fragment {
         subcountySpinner.setAdapter(new SubcountyArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, subcountiesList.toArray(new Subcounty[subcountiesList.size()])));
 
         setRequiredFields();
-        setLatLong();
 
         ac = (AddNewCustomerActivity)getActivity();
         if(ac.customer != null){
@@ -94,6 +93,12 @@ public class CustomerBasicsFormFragment extends Fragment {
         }
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setLatLong();
     }
 
     private void setLatLong(){

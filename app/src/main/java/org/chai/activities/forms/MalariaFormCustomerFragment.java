@@ -71,8 +71,6 @@ public class MalariaFormCustomerFragment extends Fragment {
             }
         });
 
-        setLatLong();
-
         customerId = getActivity().getIntent().getStringExtra("customer_id");
         if(customerId == null){
             customerId = parent.task.getCustomerId();
@@ -119,6 +117,12 @@ public class MalariaFormCustomerFragment extends Fragment {
         }
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setLatLong();
     }
 
     private void setLatLong(){

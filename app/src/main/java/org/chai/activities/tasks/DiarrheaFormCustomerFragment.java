@@ -94,8 +94,6 @@ public class DiarrheaFormCustomerFragment extends Fragment {
             });
         }
 
-        setLatLong();
-
         if(activity.call.getUuid() != null){
             populateFields();
         }
@@ -105,6 +103,12 @@ public class DiarrheaFormCustomerFragment extends Fragment {
 
     private void setLatLong(){
         MyApplication.registerEditTextForLocationUpdates(aq.id(R.id.gps).getEditText(), getActivity());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setLatLong();
     }
 
     private void setRequiredFields(){

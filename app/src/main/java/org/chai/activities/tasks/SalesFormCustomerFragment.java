@@ -95,9 +95,13 @@ public class SalesFormCustomerFragment extends Fragment {
             });
         }
 
-        setLatLong();
-
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setLatLong();
     }
 
     private void setLatLong(){
