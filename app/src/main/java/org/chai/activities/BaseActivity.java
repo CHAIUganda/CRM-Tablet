@@ -311,7 +311,7 @@ public class BaseActivity extends ActionBarActivity{
         });
 
         try{
-            aquery.id(R.id.version).text("Version: " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+            aquery.id(R.id.version).text("Version: " + getPackageManager().getPackageInfo(getPackageName(), 0).versionCode);
         }catch (Exception ex){
             Utils.log("Error getting package name -> " + ex.getMessage());
         }
