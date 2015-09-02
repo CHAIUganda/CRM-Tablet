@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="#7b98b8"
+            android:text="Update Available"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageView"
+            android:src="@drawable/ic_update"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:gravity="center_horizontal"
+            android:text="Please update the application to the latest version to ensure stability and imporved functionality.\n\nClick the button below to go to the Play Store and update."
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/btn_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:background="#bfd3e8"
+            android:textColor="@color/primary"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_gravity="center_horizontal"
+            android:text="Update"/>
+    </LinearLayout>
+</RelativeLayout><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/update_activity.xml -->
