@@ -250,7 +250,7 @@
         <item>@string/no</item>
     </string-array>
     <array name="zinc_pack_sizes">
-        <item>1 x 10</item>
+        <item>1 tablet</item>
         <item>Syrup bottle</item>
     </array>
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
