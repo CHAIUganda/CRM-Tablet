@@ -183,7 +183,6 @@ public class HomeActivity extends BaseActivity{
     }
 
     private void saveLastCheckedVersion(long milis){
-        Utils.log("Saving last checked -> " + milis);
         SharedPreferences.Editor editor = getSharedPreferences(VERSION_PREFS, 0).edit();
         editor.putLong(VERSION_LAST_CHECKED, milis);
         editor.commit();
@@ -191,7 +190,6 @@ public class HomeActivity extends BaseActivity{
 
     private long getVersionLastChecked(){
         SharedPreferences prefs = getSharedPreferences(VERSION_PREFS, 0);
-        Utils.log("version last checked -> " + prefs.getLong(VERSION_LAST_CHECKED, -1));
         return prefs.getLong(VERSION_LAST_CHECKED, -1);
     }
 
