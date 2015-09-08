@@ -66,6 +66,7 @@ public class OrderHistoryAdapter extends ArrayAdapter<Order> {
             CustomerContact contact = c.getCustomerContacts().get(0);
             aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
         }catch (Exception ex){
+            aq.id(R.id.txt_customer_contact).text("Contact Not Found");
             Utils.log("Error loading history contact");
         }
 

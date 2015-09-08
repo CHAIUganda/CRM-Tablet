@@ -52,7 +52,6 @@ public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> implement
 
         MalariaDetail m = getItem(position);
         Customer c = m.getTask().getCustomer();
-        CustomerContact contact = c.getCustomerContacts().get(0);
 
         AQuery aq = new AQuery(row);
         aq.id(R.id.txt_customer_name).text(c.getOutletName());
@@ -63,7 +62,12 @@ public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> implement
         if(d != null){
             aq.id(R.id.txt_time).text(new PrettyTime().format(d));
         }
-        String customerline = contact.getContact();
+
+        String customerline = "";
+        if(c.getCustomerContacts().size() > 0){
+            CustomerContact contact = c.getCustomerContacts().get(0);
+            customerline = contact.getContact();
+        }
         if(c.getSubcounty() != null){
             customerline += " - " + c.getSubcounty().getName();
             if(c.getSubcounty().getDistrict() != null){
