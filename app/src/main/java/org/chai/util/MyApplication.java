@@ -19,6 +19,7 @@ public class MyApplication extends Application {
     TrackerSettings settings;
     public static LocationTracker locationTracker;
     public static EditText locationTextField;
+    private static FragmentActivity activity;
 
     public void onCreate() {
         super.onCreate();
@@ -26,8 +27,8 @@ public class MyApplication extends Application {
         settings.setUseGPS(true);
         settings.setUseNetwork(true);
         settings.setUsePassive(true);
-        settings.setTimeBetweenUpdates(2 * 60 * 1000);
-        settings.setMetersBetweenUpdates(100);
+        settings.setTimeBetweenUpdates(1000); // 1 sec
+        settings.setMetersBetweenUpdates(2);
         locationTracker = new LocationTracker(this, settings) {
 
             @Override
@@ -42,13 +43,18 @@ public class MyApplication extends Application {
             @Override
             public void onTimeout() {
                 Utils.log("onTimeout()");
+                if(locationTextField != null){
+                    registerEditTextForLocationUpdates(locationTextField, activity);
+                }
             }
         };
 
         mContext = getApplicationContext();
     }
 
-    public static void registerEditTextForLocationUpdates(EditText editText, FragmentActivity activity){
+    public static void registerEditTextForLocationUpdates(EditText editText, FragmentActivity a){
+        activity = a;
+
         locationTextField = editText;
 
         locationTracker.startListen(); //Start listening for location updates

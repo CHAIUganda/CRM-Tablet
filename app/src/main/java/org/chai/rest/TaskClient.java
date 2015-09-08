@@ -25,8 +25,9 @@ public class TaskClient extends RestClient {
             ResponseEntity<Task[]> responseEntity = restTemplate.exchange(getRestUrl() + "task/list?max=" + Integer.MAX_VALUE, HttpMethod.GET, getRequestEntity(), Task[].class);
             return responseEntity.getBody();
         } catch (HttpClientErrorException se) {
-            Log.i("Server Error:", se.getResponseBodyAsString());
+            Utils.log("Server Error:" + se.getResponseBodyAsString());
         } catch (Exception ex) {
+            Utils.log("Error downloading tasks -> " + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
@@ -40,7 +41,6 @@ public class TaskClient extends RestClient {
             String url = getRestUrl() + "task/update";
             if(task.getType().equalsIgnoreCase("malaria")){
                 url = getRestUrl() + "task/malariaUpdate";
-                Utils.log("Syncing to -> " + url);
             }
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, httpEntity, ServerResponse.class);
             ServerResponse body = responseEntity.getBody();
