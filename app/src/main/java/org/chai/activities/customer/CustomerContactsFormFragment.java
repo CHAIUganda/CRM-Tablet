@@ -45,7 +45,7 @@ public class CustomerContactsFormFragment extends Fragment{
             }
         });
 
-        rows = new ArrayList<View>();
+        rows = new ArrayList<>();
 
         return view;
     }
@@ -63,7 +63,6 @@ public class CustomerContactsFormFragment extends Fragment{
                 String gender = a.id(R.id.contact_gender).getSelectedItem().toString();
                 String role = a.id(R.id.contact_role).getSelectedItem().toString();
                 contact = activity.contacts.get(rows.indexOf(row));
-                Utils.log("Saving contact -> " + name);
                 contact.setContact(phone);
                 contact.setNames(name);
                 contact.setGender(gender);
@@ -84,11 +83,11 @@ public class CustomerContactsFormFragment extends Fragment{
             }
         }
 
-        ArrayList<CustomerContact> temp = new ArrayList<CustomerContact>();
+        ArrayList<CustomerContact> temp = new ArrayList<>();
         temp.addAll(activity.contacts);
 
-        rows = new ArrayList<View>();
-        activity.contacts = new ArrayList<CustomerContact>();
+        rows = new ArrayList<>();
+        activity.contacts = new ArrayList<>();
 
         for(int i = 0; i < temp.size(); i++){
             addRow(temp.get(i));

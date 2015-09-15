@@ -31,7 +31,7 @@ public class CustomerCommercialFormFragment extends Fragment {
         setRequiredFields();
 
         AddNewCustomerActivity ac = (AddNewCustomerActivity)getActivity();
-        if(ac.customer != null){
+        if(ac.customer.getUuid() != null){
             populateFields(ac.customer);
         }
 

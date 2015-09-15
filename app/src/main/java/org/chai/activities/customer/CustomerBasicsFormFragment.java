@@ -88,7 +88,7 @@ public class CustomerBasicsFormFragment extends Fragment {
         setRequiredFields();
 
         ac = (AddNewCustomerActivity)getActivity();
-        if(ac.customer != null){
+        if(ac.customer.getUuid() != null){
             populateFields(ac.customer);
         }
 
@@ -139,9 +139,10 @@ public class CustomerBasicsFormFragment extends Fragment {
     }
 
     private void setCustomerLocationDetails(Customer c){
-        Subcounty s = c.getSubcounty();
+        Subcounty s = ac.subcounty;
+        District d = ac.district;
+
         if(s != null) {
-            District d = s.getDistrict();
             if(d != null){
                 int dIndex = -1;
                 for(District di : districtList){
@@ -223,9 +224,6 @@ public class CustomerBasicsFormFragment extends Fragment {
         }*/
 
         AddNewCustomerActivity a = (AddNewCustomerActivity)getActivity();
-        if(a.customer == null){
-            a.customer = new Customer();
-        }
 
         a.customer.setOutletName(name);
         a.customer.setLicenceVisible(licenceVisible.equalsIgnoreCase("yes"));

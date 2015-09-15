@@ -617,7 +617,7 @@ int id action_menu_presenter 0x7f0c0003
 int id action_mode_bar 0x7f0c0049
 int id action_mode_bar_stub 0x7f0c0048
 int id action_mode_close_button 0x7f0c003b
-int id action_save 0x7f0c0107
+int id action_save 0x7f0c0102
 int id action_search 0x7f0c0108
 int id action_tasks 0x7f0c0101
 int id activity_chooser_view_content 0x7f0c003c
@@ -640,7 +640,7 @@ int id buyButton 0x7f0c002f
 int id buy_now 0x7f0c0033
 int id buy_with_google 0x7f0c0034
 int id calender_tasks_list_view 0x7f0c00f8
-int id cancel_task 0x7f0c0105
+int id cancel_task 0x7f0c0106
 int id checkbox 0x7f0c0044
 int id children 0x7f0c00bc
 int id chk_other_recommendation 0x7f0c00a1
@@ -655,12 +655,12 @@ int id customeraddress 0x7f0c007e
 int id customername 0x7f0c007c
 int id customertelephone 0x7f0c007d
 int id dangler 0x7f0c0092
-int id deactivate 0x7f0c0104
+int id deactivate 0x7f0c0105
 int id decor_content_parent 0x7f0c004a
 int id default_activity_button 0x7f0c003f
-int id detail_diarrhea 0x7f0c0103
-int id detail_malaria 0x7f0c0102
-int id detail_sale 0x7f0c0106
+int id detail_diarrhea 0x7f0c0104
+int id detail_malaria 0x7f0c0103
+int id detail_sale 0x7f0c0107
 int id dialog 0x7f0c0025
 int id diarrhea_effects_on_the_body 0x7f0c008a
 int id diarrhea_effects_on_the_community 0x7f0c0089

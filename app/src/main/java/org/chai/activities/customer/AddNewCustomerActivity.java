@@ -24,6 +24,8 @@ import org.chai.model.CustomerContactDao;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
+import org.chai.model.District;
+import org.chai.model.Subcounty;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
@@ -59,7 +61,11 @@ public class AddNewCustomerActivity extends BaseActivity {
     private CustomerContactsFormFragment contactFragment;
 
     public List<CustomerContact> contacts;
-    boolean canSaveCustomer = true;
+
+    public Subcounty subcounty;
+    public District district;
+
+    private boolean editing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +85,17 @@ public class AddNewCustomerActivity extends BaseActivity {
         if(customerId != null){
             customer = customerDao.load(customerId);
             if(customer != null){
+                editing = true;
+                subcounty = customer.getSubcounty();
+                district= subcounty.getDistrict();
                 getSupportActionBar().setTitle("Edit Customer");
-                canSaveCustomer = false;
             }
         }
 
         if(customer != null){
             contacts = customer.getCustomerContacts();
         }else{
+            customer = new Customer();
             contacts = new ArrayList<>();
         }
 
@@ -101,12 +110,11 @@ public class AddNewCustomerActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        if(canSaveCustomer){
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.save_form_menu, menu);
-        }else{
-            MenuInflater inflater = getMenuInflater();
+        MenuInflater inflater = getMenuInflater();
+        if(editing == true){
             inflater.inflate(R.menu.customer_task_list_menu, menu);
+        }else{
+            inflater.inflate(R.menu.save_form_menu, menu);
         }
         return true;
     }

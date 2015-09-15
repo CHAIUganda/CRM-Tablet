@@ -2137,7 +2137,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c0049;
         public static final int action_mode_bar_stub=0x7f0c0048;
         public static final int action_mode_close_button=0x7f0c003b;
-        public static final int action_save=0x7f0c0107;
+        public static final int action_save=0x7f0c0102;
         public static final int action_search=0x7f0c0108;
         public static final int action_tasks=0x7f0c0101;
         public static final int activity_chooser_view_content=0x7f0c003c;
@@ -2160,7 +2160,7 @@ containing a value of this type.
         public static final int buy_now=0x7f0c0033;
         public static final int buy_with_google=0x7f0c0034;
         public static final int calender_tasks_list_view=0x7f0c00f8;
-        public static final int cancel_task=0x7f0c0105;
+        public static final int cancel_task=0x7f0c0106;
         public static final int checkbox=0x7f0c0044;
         public static final int children=0x7f0c00bc;
         public static final int chk_other_recommendation=0x7f0c00a1;
@@ -2175,12 +2175,12 @@ containing a value of this type.
         public static final int customername=0x7f0c007c;
         public static final int customertelephone=0x7f0c007d;
         public static final int dangler=0x7f0c0092;
-        public static final int deactivate=0x7f0c0104;
+        public static final int deactivate=0x7f0c0105;
         public static final int decor_content_parent=0x7f0c004a;
         public static final int default_activity_button=0x7f0c003f;
-        public static final int detail_diarrhea=0x7f0c0103;
-        public static final int detail_malaria=0x7f0c0102;
-        public static final int detail_sale=0x7f0c0106;
+        public static final int detail_diarrhea=0x7f0c0104;
+        public static final int detail_malaria=0x7f0c0103;
+        public static final int detail_sale=0x7f0c0107;
         public static final int dialog=0x7f0c0025;
         public static final int diarrhea_effects_on_the_body=0x7f0c008a;
         public static final int diarrhea_effects_on_the_community=0x7f0c0089;

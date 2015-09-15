@@ -167,13 +167,13 @@ public class CHAISynchroniser extends Service {
             downloadCustomers();
             downloadTasks();
             downloadProducts();
-            downloadSummaryReports();
+            downloadSummaryReports();*/
 
             uploadCustomers();
-            uploadDirectSales();
-            uploadSales();*/
+            /*uploadDirectSales();
+            uploadSales();
             uploadTasks();
-            /*uploadOrders();
+            uploadOrders();
 
             downloadDiarrheaHistory();
             downloadMalariaHistory();*/
@@ -434,7 +434,9 @@ public class CHAISynchroniser extends Service {
             return;
         }
         List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
+        Utils.log("Syncing customers -> " + customersList.size());
         for (Customer customer : customersList) {
+            Utils.log("Uploading customer -> " + customer.getOutletName());
             ServerResponse response = customerClient.uploadCustomer(customer, RestClient.getRestTemplate());
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 customer.setIsDirty(false);
