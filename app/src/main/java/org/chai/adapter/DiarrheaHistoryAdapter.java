@@ -15,8 +15,8 @@ import org.chai.R;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.DetailerCall;
-import org.ocpsoft.prettytime.PrettyTime;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -61,7 +61,8 @@ public class DiarrheaHistoryAdapter extends ArrayAdapter<DetailerCall> {
             d = m.getTask().getCompletionDate();
         }
         if(d != null){
-            aq.id(R.id.txt_time).text(new PrettyTime().format(d));
+            SimpleDateFormat f = new SimpleDateFormat("EE, d MMM yyyy h:m a");
+            aq.id(R.id.txt_time).text(f.format(d));
         }
 
         String customerline = "";

@@ -131,6 +131,8 @@ public class MalariaFormActivity extends BaseActivity {
             }
         }
 
+        Utils.log("Loading task info: " + task.getDetailers().size() + " : " + task.getMalariadetails().size() + " : " + task.getSales().size());
+
         super.setUpDrawer(toolbar);
     }
 

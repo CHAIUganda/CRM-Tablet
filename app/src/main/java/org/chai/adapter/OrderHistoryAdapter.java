@@ -16,8 +16,8 @@ import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.Order;
 import org.chai.util.Utils;
-import org.ocpsoft.prettytime.PrettyTime;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -60,7 +60,8 @@ public class OrderHistoryAdapter extends ArrayAdapter<Order> {
             d = m.getOrderDate();
         }
         if(d != null){
-            aq.id(R.id.txt_time).text(new PrettyTime().format(d));
+            SimpleDateFormat f = new SimpleDateFormat("EE, d MMM yyyy h:m a");
+            aq.id(R.id.txt_time).text(f.format(d));
         }
         try{
             CustomerContact contact = c.getCustomerContacts().get(0);

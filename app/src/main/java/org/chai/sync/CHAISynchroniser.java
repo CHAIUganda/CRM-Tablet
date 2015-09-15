@@ -163,7 +163,7 @@ public class CHAISynchroniser extends Service {
         Utils.log("startSyncronisationProcess()");
         try {
             syncronisationErros = new ArrayList<>();
-            downloadRegions();
+            /*downloadRegions();
             downloadCustomers();
             downloadTasks();
             downloadProducts();
@@ -171,12 +171,12 @@ public class CHAISynchroniser extends Service {
 
             uploadCustomers();
             uploadDirectSales();
-            uploadSales();
+            uploadSales();*/
             uploadTasks();
-            uploadOrders();
+            /*uploadOrders();
 
             downloadDiarrheaHistory();
-            downloadMalariaHistory();
+            downloadMalariaHistory();*/
             if (!syncronisationErros.isEmpty()) {
                 displaySyncErros(syncronisationErros);
             }
@@ -322,6 +322,7 @@ public class CHAISynchroniser extends Service {
 
     private boolean taskIsHistory(Task task) {
         try {
+            Utils.log("Checking if is history: " + task.getDetailers().size() + " : " + task.getMalariadetails().size() + " : " + task.getSales().size());
             if (!task.getDetailers().isEmpty() && task.getDetailers().get(0).getIsHistory()) {
                 return true;
             }else if (!task.getMalariadetails().isEmpty() && task.getMalariadetails().get(0).getIsHistory()) {
