@@ -96,7 +96,11 @@ public class HomeActivity extends BaseActivity{
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    checkPlayStoreVersion();
+                    try{
+                        checkPlayStoreVersion();
+                    }catch (Exception ex){
+                        Utils.log("Error getting permissions for checking version -> " + ex.getMessage());
+                    }
                 }
             }).start();
         }

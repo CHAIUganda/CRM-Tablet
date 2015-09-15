@@ -258,10 +258,10 @@ public class DiarrheaFormActivity extends BaseActivity {
 
         if(task.getUuid() == null){
             task.setUuid(UUID.randomUUID().toString());
-            taskDao.insert(task);
-        }else{
             task.setIsAdhock(true);
             task.setDateCreated(new Date());
+            taskDao.insert(task);
+        }else{
             taskDao.update(task);
         }
 
