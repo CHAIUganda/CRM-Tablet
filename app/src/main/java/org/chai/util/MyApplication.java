@@ -4,8 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.widget.EditText;
 
+import org.chai.R;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import fr.quentinklein.slt.LocationTracker;
@@ -18,6 +20,7 @@ public class MyApplication extends Application {
     private static Context mContext;
     TrackerSettings settings;
     public static LocationTracker locationTracker;
+    public static View gpsContainer;
     public static EditText locationTextField;
     private static FragmentActivity activity;
 
@@ -36,6 +39,7 @@ public class MyApplication extends Application {
                 Utils.log("Location found -> " + location.getLatitude() + " : " + location.getLongitude());
                 if(locationTextField != null){
                     locationTextField.setText(location.getLatitude() + "," + location.getLongitude());
+                    gpsContainer.findViewById(R.id.prg_loader).setVisibility(View.GONE);
                     locationTracker.stopListen(); //Stop listening here
                 }
             }
@@ -43,8 +47,8 @@ public class MyApplication extends Application {
             @Override
             public void onTimeout() {
                 Utils.log("onTimeout()");
-                if(locationTextField != null){
-                    registerEditTextForLocationUpdates(locationTextField, activity);
+                if(gpsContainer != null){
+                    registerEditTextForLocationUpdates(gpsContainer, activity);
                 }
             }
         };
@@ -52,10 +56,13 @@ public class MyApplication extends Application {
         mContext = getApplicationContext();
     }
 
-    public static void registerEditTextForLocationUpdates(EditText editText, FragmentActivity a){
+    public static void registerEditTextForLocationUpdates(View container, FragmentActivity a){
         activity = a;
 
-        locationTextField = editText;
+        gpsContainer = container;
+        locationTextField = (EditText)container.findViewById(R.id.gps);
+
+        gpsContainer.findViewById(R.id.prg_loader).setVisibility(View.VISIBLE);
 
         locationTracker.startListen(); //Start listening for location updates
 

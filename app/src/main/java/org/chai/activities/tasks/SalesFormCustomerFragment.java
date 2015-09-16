@@ -105,7 +105,7 @@ public class SalesFormCustomerFragment extends Fragment {
     }
 
     private void setLatLong(){
-        MyApplication.registerEditTextForLocationUpdates(aq.id(R.id.gps).getEditText(), getActivity());
+        MyApplication.registerEditTextForLocationUpdates(aq.id(R.id.frm_gps_container).getView(), getActivity());
     }
 
     public boolean saveFields(){

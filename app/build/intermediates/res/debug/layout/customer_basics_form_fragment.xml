@@ -204,23 +204,6 @@
                 style="@style/TextBoxStyle"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="vertical">
-            <TextView
-                android:tag="required"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/LabelStyle"
-                android:text="11. Location GPS"/>
-
-            <EditText
-                android:id="@+id/location_gps"
-                android:layout_width="match_parent"
-                android:enabled="false"
-                style="@style/TextBoxStyle"/>
-        </LinearLayout>
+        <include layout="@layout/gps_container" />
     </LinearLayout>
 </ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/customer_basics_form_fragment.xml -->

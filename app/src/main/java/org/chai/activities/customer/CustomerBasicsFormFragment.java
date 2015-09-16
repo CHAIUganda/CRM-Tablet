@@ -102,7 +102,7 @@ public class CustomerBasicsFormFragment extends Fragment {
     }
 
     private void setLatLong(){
-        MyApplication.registerEditTextForLocationUpdates(aq.id(R.id.location_gps).getEditText(), getActivity());
+        MyApplication.registerEditTextForLocationUpdates(aq.id(R.id.frm_gps_container).getView(), getActivity());
     }
 
     private void setRequiredFields(){
@@ -133,7 +133,6 @@ public class CustomerBasicsFormFragment extends Fragment {
         aq.id(R.id.trading_center).text(c.getTradingCenter());
         aq.id(R.id.directions).text(c.getDescriptionOfOutletLocation());
         aq.id(R.id.gps).text(c.getLatitude() + "," + c.getLongitude());
-        aq.id(R.id.location_gps).text(c.getLatitude() + "," + c.getLongitude());
 
         setCustomerLocationDetails(c);
     }
@@ -176,7 +175,7 @@ public class CustomerBasicsFormFragment extends Fragment {
         String subcountyUuid = subcounty.getUuid();
         String tradingCenter = aq.id(R.id.trading_center).getText().toString().trim();
         String directions = aq.id(R.id.directions).getText().toString().trim();
-        String gps = aq.id(R.id.location_gps).getText().toString().trim();
+        String gps = aq.id(R.id.gps).getText().toString().trim();
 
         double lat = 0, lon = 0;
 
