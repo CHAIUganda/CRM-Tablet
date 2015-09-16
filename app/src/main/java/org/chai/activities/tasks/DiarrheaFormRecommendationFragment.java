@@ -74,7 +74,7 @@ public class DiarrheaFormRecommendationFragment extends Fragment {
             aq.id(R.id.bunting).checked(materials.indexOf(aq.id(R.id.bunting).getText().toString()) != -1);
             aq.id(R.id.mrp_dangler).checked(materials.indexOf(aq.id(R.id.mrp_dangler).getText().toString()) != -1);
             aq.id(R.id.pen).checked(materials.indexOf(aq.id(R.id.pen).getText().toString()) != -1);
-
+            aq.id(R.id.samples).checked(materials.indexOf(aq.id(R.id.samples).getText().toString()) != -1);
         }
 
         String recommendations = activity.call.getRecommendationNextStep();
@@ -117,6 +117,9 @@ public class DiarrheaFormRecommendationFragment extends Fragment {
         }
         if(!aq.id(R.id.txt_other_material).getText().toString().isEmpty()){
             materials += ", " + aq.id(R.id.txt_other_material).getText().toString();
+        }
+        if(!aq.id(R.id.samples).getText().toString().isEmpty()){
+            materials += ", " + aq.id(R.id.samples).getText().toString();
         }
 
         Utils.log("Materials -> " + materials);

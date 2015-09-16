@@ -6,4 +6,10 @@
         android:icon="@drawable/ic_action_tasks"
         fezah:showAsAction="always|withText"
         android:title="Tasks" />
+
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_action_save"
+        fezah:showAsAction="always|withText|collapseActionView"
+        android:title="Save" />
 </menu><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/menu/customer_task_list_menu.xml -->

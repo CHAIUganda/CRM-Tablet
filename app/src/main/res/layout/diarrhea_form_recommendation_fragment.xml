@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/LabelStyle"
-            android:text="13. Point of sales materials dropped"/>
+            android:text="13. Materials dropped"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -153,6 +153,22 @@
                     android:button="@drawable/checkbox"
                     android:textColor="@color/app_text_color"
                     android:text="Other"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:paddingLeft="5dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/samples"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox"
+                    android:textColor="@color/app_text_color"
+                    android:text="Samples"/>
 
             </LinearLayout>
         </LinearLayout>

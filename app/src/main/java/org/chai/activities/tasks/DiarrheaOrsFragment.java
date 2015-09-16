@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -249,7 +247,8 @@ public class DiarrheaOrsFragment extends Fragment implements IViewManipulator {
         final FormSearchTextField text = (FormSearchTextField)row.findViewById(R.id.txt_antimalarial);
         text.setViewManipulator(this);
         text.setListView(list);
-        text.setHint("Type or select brand");
+        text.setHint("Select brand below");
+        text.setKeyListener(null);
 
         Spinner packsizeSpinner = a.id(R.id.spn_pack_size).getSpinner();
         ArrayAdapter<CharSequence> packAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.ors_pack_sizes, android.R.layout.simple_spinner_item);
@@ -276,7 +275,7 @@ public class DiarrheaOrsFragment extends Fragment implements IViewManipulator {
             Utils.log("Error populating stock items -> " + ex.getMessage());
         }
 
-        text.addTextChangedListener(new TextWatcher() {
+        /*text.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -291,7 +290,7 @@ public class DiarrheaOrsFragment extends Fragment implements IViewManipulator {
             public void afterTextChanged(Editable s) {
 
             }
-        });
+        });*/
 
         text.setOnTouchListener(new View.OnTouchListener() {
             @Override

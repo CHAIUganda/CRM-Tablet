@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:tag="required"
                 style="@style/LabelStyle"
-                android:text="8. Do you know the affect that diarrhea has on the body?"/>
+                android:text="8. Do you know the effect that diarrhea has on the body?"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
