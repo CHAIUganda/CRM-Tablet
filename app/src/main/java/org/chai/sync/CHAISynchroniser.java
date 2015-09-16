@@ -356,23 +356,18 @@ public class CHAISynchroniser extends Service {
             DetailerCall dc;
             for(DetailerCall d: tasks){
                 dc = detailerCallDao.load(d.getUuid());
-                if(dc == null){
-                    task = taskDao.load(d.getUuid());
-                    if(task == null){
-                        task = new Task();
-                    }
+                task = taskDao.load(d.getUuid());
+                if(dc == null && task == null){
+                    task = new Task();
+
                     task.setStatus(HomeActivity.STATUS_COMPLETE);
                     task.setType("detailer");
                     task.setCompletionDate(d.getCompletionDate());
                     task.setIsDirty(false);
                     task.setCustomerId(d.getCustomerId());
 
-                    if(task.getUuid() == null){
-                        task.setUuid(d.getUuid());
-                        taskDao.insert(task);
-                    }else{
-                        taskDao.update(task);
-                    }
+                    task.setUuid(d.getUuid());
+                    taskDao.insert(task);
 
                     d.setTaskId(task.getUuid());
                     d.setDateOfSurvey(d.getCompletionDate());
@@ -398,23 +393,17 @@ public class CHAISynchroniser extends Service {
             MalariaDetail md;
             for(MalariaDetail d: tasks){
                 md = malariaDetailDao.load(d.getUuid());
-                if(md == null){
-                    task = taskDao.load(d.getUuid());
-                    if(task == null){
-                        task = new Task();
-                    }
+                task = taskDao.load(d.getUuid());
+                if(md == null && task == null){ //If we don't have the task and details in our system - add it
+                    task = new Task();
                     task.setStatus(HomeActivity.STATUS_COMPLETE);
                     task.setType("malaria");
                     task.setCompletionDate(d.getCompletionDate());
                     task.setIsDirty(false);
                     task.setCustomerId(d.getCustomerId());
 
-                    if(task.getUuid() == null){
-                        task.setUuid(d.getUuid());
-                        taskDao.insert(task);
-                    }else{
-                        taskDao.update(task);
-                    }
+                    task.setUuid(d.getUuid());
+                    taskDao.insert(task);
 
                     d.setTaskId(task.getUuid());
                     d.setDateOfSurvey(d.getCompletionDate());

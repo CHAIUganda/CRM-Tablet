@@ -93,6 +93,9 @@ public class AccountManager {
         editor.commit();
 
         Intent i = new Intent(cxt, LoginActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                Intent.FLAG_ACTIVITY_NEW_TASK);
         cxt.startActivity(i);
     }
 }
