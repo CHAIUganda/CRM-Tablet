@@ -163,20 +163,20 @@ public class CHAISynchroniser extends Service {
         Utils.log("startSyncronisationProcess()");
         try {
             syncronisationErros = new ArrayList<>();
-            /*downloadRegions();
+            downloadRegions();
             downloadCustomers();
             downloadTasks();
             downloadProducts();
-            downloadSummaryReports();*/
+            downloadSummaryReports();
 
             uploadCustomers();
-            /*uploadDirectSales();
+            uploadDirectSales();
             uploadSales();
             uploadTasks();
             uploadOrders();
 
             downloadDiarrheaHistory();
-            downloadMalariaHistory();*/
+            downloadMalariaHistory();
             if (!syncronisationErros.isEmpty()) {
                 displaySyncErros(syncronisationErros);
             }

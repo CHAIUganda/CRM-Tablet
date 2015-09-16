@@ -59,7 +59,7 @@ public class MyApplication extends Application {
 
         locationTracker.startListen(); //Start listening for location updates
 
-        locationTracker.quickFix(); //Get quick location - if any
+        //locationTracker.quickFix(); //Get quick location - if any
 
         //Check location settings
         if (!locationTracker.isGPSEnabled()) {
