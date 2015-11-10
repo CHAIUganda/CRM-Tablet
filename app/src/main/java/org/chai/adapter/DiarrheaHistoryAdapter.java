@@ -32,6 +32,8 @@ public class DiarrheaHistoryAdapter extends ArrayAdapter<DetailerCall> {
     private ArrayList<DetailerCall> filteredItems;
     private HistoryFilter historyFilter;
 
+    SimpleDateFormat f;
+
     public DiarrheaHistoryAdapter(Context context, int resource, List<DetailerCall> items) {
         super(context, resource, items);
 
@@ -40,6 +42,8 @@ public class DiarrheaHistoryAdapter extends ArrayAdapter<DetailerCall> {
 
         filteredItems = new ArrayList<>();
         filteredItems.addAll(items);
+
+        f = new SimpleDateFormat("EE, d MMM yyyy h:m a");
     }
 
     @Override
@@ -61,7 +65,6 @@ public class DiarrheaHistoryAdapter extends ArrayAdapter<DetailerCall> {
             d = m.getTask().getCompletionDate();
         }
         if(d != null){
-            SimpleDateFormat f = new SimpleDateFormat("EE, d MMM yyyy h:m a");
             aq.id(R.id.txt_time).text(f.format(d));
         }
 

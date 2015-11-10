@@ -80,6 +80,18 @@ public class AdhockSalesFormActivity extends BaseActivity {
         saledId = getIntent().getStringExtra("sale_id");
         isFromHistory = getIntent().getBooleanExtra("is_from_history", false);
 
+        aq = new AQuery(this);
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        pager = (ViewPager) findViewById(R.id.pager);
+        indicator = (CircleIndicator) findViewById(R.id.indicator);
+        pager.setAdapter(new FormPagerAdapter(getSupportFragmentManager()));
+        indicator.setViewPager(pager);
+
+        super.setUpDrawer(toolbar);
+
         if(saledId != null){
             sale = saleDao.load(saledId);
             if(sale != null){
@@ -94,19 +106,8 @@ public class AdhockSalesFormActivity extends BaseActivity {
         }else{
             stocks = sale.getAdhockStockDatas();
             sales = sale.getAdhockSalesDatas();
+            getActionBar().setTitle("Adhock Sale Details");
         }
-
-        aq = new AQuery(this);
-
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        pager = (ViewPager) findViewById(R.id.pager);
-        indicator = (CircleIndicator) findViewById(R.id.indicator);
-        pager.setAdapter(new FormPagerAdapter(getSupportFragmentManager()));
-        indicator.setViewPager(pager);
-
-        super.setUpDrawer(toolbar);
     }
 
     private class FormPagerAdapter extends FragmentPagerAdapter {
@@ -242,6 +243,7 @@ public class AdhockSalesFormActivity extends BaseActivity {
 
         Toast.makeText(this, "Sale details have been saved", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, HistoryActivity.class);
+        i.putExtra("tab", 1);
         startActivity(i);
     }
 }

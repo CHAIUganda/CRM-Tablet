@@ -32,6 +32,8 @@ public class OrderHistoryAdapter extends ArrayAdapter<Order> {
     private ArrayList<Order> filteredItems;
     private HistoryFilter historyFilter;
 
+    SimpleDateFormat f;
+
     public OrderHistoryAdapter(Context context, int resource, List<Order> items) {
         super(context, resource, items);
 
@@ -40,6 +42,8 @@ public class OrderHistoryAdapter extends ArrayAdapter<Order> {
 
         filteredItems = new ArrayList<>();
         filteredItems.addAll(items);
+
+        f = new SimpleDateFormat("EE, d MMM yyyy h:m a");
     }
 
     @Override
@@ -60,7 +64,6 @@ public class OrderHistoryAdapter extends ArrayAdapter<Order> {
             d = m.getOrderDate();
         }
         if(d != null){
-            SimpleDateFormat f = new SimpleDateFormat("EE, d MMM yyyy h:m a");
             aq.id(R.id.txt_time).text(f.format(d));
         }
         try{

@@ -57,8 +57,8 @@ public class HistoryActivity extends BaseActivity {
             titles = new String[]{"MALARIA FORMS", "DIARRHEA FORMS"};
             PAGES = 2;
         }else{
-            titles = new String[]{"SALES FORMS", "ORDERS"};
-            PAGES = 2;
+            titles = new String[]{"SALES FORMS", "ADHOCK SALES", "ORDERS"};
+            PAGES = 3;
         }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -111,6 +111,9 @@ public class HistoryActivity extends BaseActivity {
                         target = new SalesHistoryFragment();
                         break;
                     case 1:
+                        target = new AdhockSalesHistoryFragment();
+                        break;
+                    case 2:
                         target = new OrdersHistoryFragment();
                         break;
                 }

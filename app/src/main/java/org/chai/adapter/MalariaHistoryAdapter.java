@@ -32,6 +32,8 @@ public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> implement
     private ArrayList<MalariaDetail> filteredItems;
     private HistoryFilter historyFilter;
 
+    SimpleDateFormat f;
+
     public MalariaHistoryAdapter(Context context, int resource, List<MalariaDetail> items) {
         super(context, resource, items);
 
@@ -40,6 +42,8 @@ public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> implement
 
         filteredItems = new ArrayList<>();
         filteredItems.addAll(items);
+
+        f = new SimpleDateFormat("EE, d MMM yyyy h:m a");
     }
 
     @Override
@@ -60,7 +64,6 @@ public class MalariaHistoryAdapter extends ArrayAdapter<MalariaDetail> implement
             d = m.getTask().getCompletionDate();
         }
         if(d != null){
-            SimpleDateFormat f = new SimpleDateFormat("EE, d MMM yyyy h:m a");
             aq.id(R.id.txt_time).text(f.format(d));
         }
 

@@ -370,7 +370,7 @@ public class NewOrderActivity extends BaseActivity {
         Toast.makeText(this, "New order has been saved", Toast.LENGTH_LONG).show();
 
         Intent i = new Intent(this, HistoryActivity.class);
-        i.putExtra("tab", RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER) ? 2 : 1);
+        i.putExtra("tab", RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER) ? 2 : 2);
         startActivity(i);
     }
 }

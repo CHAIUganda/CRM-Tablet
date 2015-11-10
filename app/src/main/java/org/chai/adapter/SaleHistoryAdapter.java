@@ -15,8 +15,8 @@ import org.chai.R;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.Sale;
-import org.ocpsoft.prettytime.PrettyTime;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +32,8 @@ public class SaleHistoryAdapter extends ArrayAdapter<Sale> {
     private ArrayList<Sale> filteredItems;
     private HistoryFilter historyFilter;
 
+    SimpleDateFormat f;
+
     public SaleHistoryAdapter(Context context, int resource, List<Sale> items) {
         super(context, resource, items);
 
@@ -40,6 +42,8 @@ public class SaleHistoryAdapter extends ArrayAdapter<Sale> {
 
         filteredItems = new ArrayList<>();
         filteredItems.addAll(items);
+
+        f = new SimpleDateFormat("EE, d MMM yyyy h:m a");
     }
 
     @Override
@@ -61,7 +65,7 @@ public class SaleHistoryAdapter extends ArrayAdapter<Sale> {
             d = s.getTask().getCompletionDate();
         }
         if(d != null){
-            aq.id(R.id.txt_time).text(new PrettyTime().format(d));
+            aq.id(R.id.txt_time).text(f.format(d));
         }
         aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
         aq.id(R.id.img_segment).gone();
