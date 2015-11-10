@@ -56,7 +56,13 @@
         <activity
             android:name="org.chai.activities.tasks.SalesFormActivity"
             android:configChanges="orientation|screenSize"
-            android:label="New Sales Detail"
+            android:label="New Sales"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="org.chai.activities.tasks.AdhockSalesFormActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="New Adhock Sale"
             android:theme="@style/AppTheme" >
         </activity>
         <activity

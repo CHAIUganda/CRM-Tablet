@@ -85,6 +85,15 @@ public class SalesFormStockFragment extends Fragment{
 
         products = productDao.loadAll();
 
+        ArrayList<Product> filtered = new ArrayList<>();
+        for(Product p: products){
+            if(!p.getName().contains("Deleted Product")){
+                filtered.add(p);
+            }
+        }
+
+        products = filtered;
+
         if(parent.sale.getUuid() != null){
             populateFields();
         }
@@ -97,8 +106,8 @@ public class SalesFormStockFragment extends Fragment{
             try{
                 for(View row : rows){
                     ((ViewGroup)row.getParent()).removeView(row);
-                    parent.stocks = new ArrayList<StokeData>();
-                    rows = new ArrayList<View>();
+                    parent.stocks = new ArrayList<>();
+                    rows = new ArrayList<>();
                 }
             }catch (Exception ex){
 
@@ -125,11 +134,11 @@ public class SalesFormStockFragment extends Fragment{
             }
         }
 
-        ArrayList<StokeData> temp = new ArrayList<StokeData>();
+        ArrayList<StokeData> temp = new ArrayList<>();
         temp.addAll(parent.stocks);
 
-        rows = new ArrayList<View>();
-        parent.stocks = new ArrayList<StokeData>();
+        rows = new ArrayList<>();
+        parent.stocks = new ArrayList<>();
 
         for(int i = 0; i < temp.size(); i++){
             addRow(temp.get(i));

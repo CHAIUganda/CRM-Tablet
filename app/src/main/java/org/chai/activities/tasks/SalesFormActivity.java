@@ -54,7 +54,9 @@ public class SalesFormActivity extends BaseActivity {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private TaskDao taskDao;
+
     private SaleDao saleDao;
+
     private SaleDataDao saleDataDao;
     private StokeDataDao stokeDataDao;
 
@@ -236,6 +238,7 @@ public class SalesFormActivity extends BaseActivity {
         sale.setTaskId(task.getUuid());
         sale.setTask(task);
         sale.setOrderId(task.getUuid());
+        sale.setIsHistory(false);
 
         if(sale.getUuid() == null){
             sale.setUuid(UUID.randomUUID().toString());

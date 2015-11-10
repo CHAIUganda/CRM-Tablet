@@ -40,7 +40,9 @@ public class MyApplication extends Application {
                 if(locationTextField != null){
                     locationTextField.setText(location.getLatitude() + "," + location.getLongitude());
                     gpsContainer.findViewById(R.id.prg_loader).setVisibility(View.GONE);
-                    locationTracker.stopListen(); //Stop listening here
+                }
+                if(locationTracker != null && locationTracker.isListening()){
+                    locationTracker.stopListen();
                 }
             }
 

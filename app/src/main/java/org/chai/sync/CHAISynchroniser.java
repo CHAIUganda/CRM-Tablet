@@ -287,9 +287,7 @@ public class CHAISynchroniser extends Service {
         }
 
         for (Task task : taskList) {
-            Utils.log("Sycn task -> " + task.getDescription() + " : " + task.getType());
             if (taskIsHistory(task)) {
-                Utils.log("Task is history");
                 continue;
             }
             if(!taskHasDetails(task)){
@@ -322,7 +320,6 @@ public class CHAISynchroniser extends Service {
 
     private boolean taskIsHistory(Task task) {
         try {
-            Utils.log("Checking if is history: " + task.getDetailers().size() + " : " + task.getMalariadetails().size() + " : " + task.getSales().size());
             if (!task.getDetailers().isEmpty() && task.getDetailers().get(0).getIsHistory()) {
                 return true;
             }else if (!task.getMalariadetails().isEmpty() && task.getMalariadetails().get(0).getIsHistory()) {
@@ -462,6 +459,8 @@ public class CHAISynchroniser extends Service {
         List<Sale> saleList = saleDao.queryBuilder().where(SaleDao.Properties.IsHistory.notEq(true)).list();
         if (!saleList.isEmpty()) {
             updatePropgress("Uploading Sales...");
+        }else{
+            Utils.log("Sales is empty");
         }
         for (Sale sale : saleList) {
             ServerResponse response = salesClient.uploadSale(sale);
@@ -494,7 +493,6 @@ public class CHAISynchroniser extends Service {
             if(adhockSale.getIsHistory()){
                 continue;
             }
-            updatePropgress("Uploading Sales...");
             ServerResponse response = salesClient.uploadDirectSale(adhockSale);
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 adhockSale.setIsHistory(true);

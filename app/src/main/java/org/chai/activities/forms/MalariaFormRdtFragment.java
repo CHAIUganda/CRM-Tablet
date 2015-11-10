@@ -115,8 +115,8 @@ public class MalariaFormRdtFragment extends Fragment implements IViewManipulator
             try{
                 for(View row : rows){
                     ((ViewGroup)row.getParent()).removeView(row);
-                    activity.rdts = new ArrayList<DetailerStock>();
-                    rows = new ArrayList<View>();
+                    activity.rdts = new ArrayList<>();
+                    rows = new ArrayList<>();
                 }
             }catch (Exception ex){
 
@@ -133,11 +133,11 @@ public class MalariaFormRdtFragment extends Fragment implements IViewManipulator
             }
         }
 
-        ArrayList<DetailerStock> temp = new ArrayList<DetailerStock>();
+        ArrayList<DetailerStock> temp = new ArrayList<>();
         temp.addAll(activity.rdts);
 
-        rows = new ArrayList<View>();
-        activity.rdts = new ArrayList<DetailerStock>();
+        rows = new ArrayList<>();
+        activity.rdts = new ArrayList<>();
 
         for(int i = 0; i < temp.size(); i++){
             addRow(temp.get(i), false);

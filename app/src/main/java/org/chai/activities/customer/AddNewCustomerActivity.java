@@ -87,7 +87,7 @@ public class AddNewCustomerActivity extends BaseActivity {
             if(customer != null){
                 editing = true;
                 subcounty = customer.getSubcounty();
-                district= subcounty.getDistrict();
+                district = subcounty.getDistrict();
                 getSupportActionBar().setTitle("Edit Customer");
             }
         }

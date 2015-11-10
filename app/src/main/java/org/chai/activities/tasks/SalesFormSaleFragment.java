@@ -80,6 +80,15 @@ public class SalesFormSaleFragment extends Fragment {
 
         products = productDao.loadAll();
 
+        ArrayList<Product> filtered = new ArrayList<>();
+        for(Product p: products){
+            if(!p.getName().contains("Deleted Product")){
+                filtered.add(p);
+            }
+        }
+
+        products = filtered;
+
         return view;
     }
 

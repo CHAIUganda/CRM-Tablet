@@ -28,7 +28,6 @@ import org.chai.model.MalariaDetailDao;
 import org.chai.model.Task;
 import org.chai.model.TaskDao;
 import org.chai.util.MyApplication;
-import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
@@ -254,7 +253,6 @@ public class MalariaFormActivity extends BaseActivity {
         stocks.addAll(rdts);
 
         for(DetailerStock stock: stocks){
-            Utils.log("Saving stock -> " + stock.getCategory() + " : " + stock.getBrand());
             stock.setIsDirty(true);
             stock.setMalariadetailId(call.getUuid());
             stock.setMalariaDetail(call);

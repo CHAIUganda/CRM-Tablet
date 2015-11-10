@@ -24,9 +24,9 @@ import org.chai.R;
 import org.chai.activities.calls.HistoryActivity;
 import org.chai.activities.customer.CustomersActivity;
 import org.chai.activities.forms.MalariaFormActivity;
+import org.chai.activities.tasks.AdhockSalesFormActivity;
 import org.chai.activities.tasks.DiarrheaFormActivity;
 import org.chai.activities.tasks.NewOrderActivity;
-import org.chai.activities.tasks.SalesFormActivity;
 import org.chai.model.User;
 import org.chai.reports.ReportsActivity;
 import org.chai.rest.RestClient;
@@ -246,7 +246,7 @@ public class BaseActivity extends ActionBarActivity{
                             target = NewOrderActivity.class;
                             break;
                         case 4:
-                            target = SalesFormActivity.class;
+                            target = AdhockSalesFormActivity.class;
                             break;
                         case 5:
                             target = ReportsActivity.class;

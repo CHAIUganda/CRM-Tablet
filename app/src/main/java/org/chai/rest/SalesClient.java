@@ -19,7 +19,7 @@ public class SalesClient extends RestClient {
     public ServerResponse uploadSale(Sale sale) {
         try {
             RestTemplate restTemplate = getRestTemplate();
-            HttpEntity<Sale> httpEntity = new HttpEntity<Sale>(sale, getHeaders());
+            HttpEntity<Sale> httpEntity = new HttpEntity<>(sale, getHeaders());
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(getRestUrl() + "sale/saleOrder", HttpMethod.PUT, httpEntity, ServerResponse.class);
 
             ServerResponse body = responseEntity.getBody();
@@ -35,7 +35,7 @@ public class SalesClient extends RestClient {
     public ServerResponse uploadSaleData(SaleData saleData) {
         try {
             RestTemplate restTemplate = getRestTemplate();
-            HttpEntity<SaleData> httpEntity = new HttpEntity<SaleData>(saleData, getHeaders());
+            HttpEntity<SaleData> httpEntity = new HttpEntity<>(saleData, getHeaders());
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(getRestUrl() + "sale/orderSale", HttpMethod.PUT, httpEntity, ServerResponse.class);
             return responseEntity.getBody();
         } catch (HttpClientErrorException ex) {
@@ -47,7 +47,7 @@ public class SalesClient extends RestClient {
     public ServerResponse uploadDirectSale(AdhockSale sale) {
         try {
             RestTemplate restTemplate = getRestTemplate();
-            HttpEntity<AdhockSale> httpEntity = new HttpEntity<AdhockSale>(sale, getHeaders());
+            HttpEntity<AdhockSale> httpEntity = new HttpEntity<>(sale, getHeaders());
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(getRestUrl() + "sale/directSale", HttpMethod.PUT, httpEntity, ServerResponse.class);
 
             ServerResponse body = responseEntity.getBody();
@@ -63,7 +63,7 @@ public class SalesClient extends RestClient {
     public ServerResponse uploadOrder(Order order) {
         try {
             RestTemplate restTemplate = getRestTemplate();
-            HttpEntity<Order> httpEntity = new HttpEntity<Order>(order, getHeaders());
+            HttpEntity<Order> httpEntity = new HttpEntity<>(order, getHeaders());
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(getRestUrl() + "sale/placeOrder", HttpMethod.PUT, httpEntity, ServerResponse.class);
 
             ServerResponse body = responseEntity.getBody();
