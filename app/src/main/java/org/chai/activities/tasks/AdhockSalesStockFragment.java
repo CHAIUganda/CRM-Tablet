@@ -73,7 +73,7 @@ public class AdhockSalesStockFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 2) {
                     clearStocks();
-                    ((SalesFormActivity) getActivity()).pager.setCurrentItem(2);
+                    ((AdhockSalesFormActivity) getActivity()).pager.setCurrentItem(2);
                 }
             }
 
