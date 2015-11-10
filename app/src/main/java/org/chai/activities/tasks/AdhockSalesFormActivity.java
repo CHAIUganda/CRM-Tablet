@@ -100,13 +100,15 @@ public class AdhockSalesFormActivity extends BaseActivity {
         }
 
         if(sale == null){
+            Utils.log("Sale is NULL");
             sale = new AdhockSale();
             stocks = new ArrayList<>();
             sales = new ArrayList<>();
         }else{
+            Utils.log("Sale is not null");
             stocks = sale.getAdhockStockDatas();
             sales = sale.getAdhockSalesDatas();
-            getActionBar().setTitle("Adhock Sale Details");
+            toolbar.setTitle("Adhock Sale Details");
         }
     }
 
