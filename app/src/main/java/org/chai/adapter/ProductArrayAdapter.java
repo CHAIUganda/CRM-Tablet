@@ -16,7 +16,7 @@ public class ProductArrayAdapter extends ArrayAdapter<Product> {
     private Product[] products;
 
     public ProductArrayAdapter(Context context, int textViewResourceId, Product[] products) {
-        super(context, textViewResourceId,products);
+        super(context, textViewResourceId, products);
         this.context = context;
         this.products = products;
     }
@@ -37,15 +37,15 @@ public class ProductArrayAdapter extends ArrayAdapter<Product> {
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView label = new TextView(context);
         label.setTextColor(Color.WHITE);
-        label.setText(products[position].getName());
+        label.setText(products[position].getName() + " (" + products[position].getUnitOfMeasure() + ")");
         label.setPadding(10, 10, 10, 10);
         return label;
     }
     @Override
-    public View getDropDownView(int position, View convertView,ViewGroup parent) {
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
         TextView label = new TextView(context);
         label.setTextColor(Color.WHITE);
-        label.setText(products[position].getName());
+        label.setText(products[position].getName() + " (" + products[position].getUnitOfMeasure() + ")");
         label.setPadding(10, 10, 10, 10);
 
         return label;

@@ -109,7 +109,7 @@ public class NewOrderActivity extends BaseActivity {
         dateFormat = DateFormat.getDateInstance();
         Calendar c = new GregorianCalendar();
 
-        products = productDao.loadAll();
+        products = productDao.queryBuilder().orderAsc(ProductDao.Properties.Name).list();
 
         dateField = aq.id(R.id.due_date).getEditText();
         dateField.setHint(dateFormat.format(new Date(c.getTimeInMillis())));

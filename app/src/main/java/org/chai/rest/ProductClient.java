@@ -13,7 +13,7 @@ public class ProductClient extends RestClient{
     public Product[] downloadProducts(){
         try{
             RestTemplate restTemplate = getRestTemplate();
-            ResponseEntity<Product[]> responseEntity = restTemplate.exchange(getRestUrl() + "product/list", HttpMethod.GET,getRequestEntity(),Product[].class);
+            ResponseEntity<Product[]> responseEntity = restTemplate.exchange(getRestUrl() + "product/list?max=" + Integer.MAX_VALUE, HttpMethod.GET,getRequestEntity(),Product[].class);
             return responseEntity.getBody();
         }catch (Exception ex){
             ex.printStackTrace();

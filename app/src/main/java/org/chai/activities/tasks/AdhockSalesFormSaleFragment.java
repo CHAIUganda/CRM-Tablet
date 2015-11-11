@@ -78,7 +78,7 @@ public class AdhockSalesFormSaleFragment extends Fragment {
             }
         });
 
-        products = productDao.loadAll();
+        products = productDao.queryBuilder().orderAsc(ProductDao.Properties.Name).list();
 
         ArrayList<Product> filtered = new ArrayList<>();
         for(Product p: products){

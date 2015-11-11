@@ -132,7 +132,7 @@ public class DiarrheaFormCopackFragment extends Fragment implements IViewManipul
     }
 
     private void populateProducts(){
-        List<Product> products = productDao.queryBuilder().where(ProductDao.Properties.GroupId.eq(groupId)).list();
+        List<Product> products = productDao.queryBuilder().where(ProductDao.Properties.GroupId.eq(groupId)).orderAsc(ProductDao.Properties.Name).list();
 
         //Filter off deleted products
         ArrayList<Product> filtered = new ArrayList<>();
