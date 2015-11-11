@@ -44,7 +44,7 @@ public class BaseActivity extends ActionBarActivity{
     public final static String STATUS_NEW = "new", STATUS_COMPLETE = "complete", STATUS_CANCELLED = "cancelled";
     public final static String TASK_TYPE_ORDER = "Order";
 
-    AQuery aquery;
+    static AQuery aquery;
 
     boolean skipLogin = false;
 
@@ -280,7 +280,7 @@ public class BaseActivity extends ActionBarActivity{
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                updateLastSynced();
+                updateLastSynced(BaseActivity.this);
             }
 
             @Override
@@ -294,7 +294,7 @@ public class BaseActivity extends ActionBarActivity{
             }
         });
 
-        updateLastSynced();
+        updateLastSynced(this);
 
         aquery.id(R.id.sync).clicked(new View.OnClickListener() {
             @Override
@@ -302,9 +302,8 @@ public class BaseActivity extends ActionBarActivity{
                 if (!CHAISynchroniser.isSyncing) {
                     CHAISynchroniser.isSyncing = true;
                     startService(new Intent(BaseActivity.this, CHAISynchroniser.class));
-                    updateLastSynced();
+                    updateLastSynced(BaseActivity.this);
                 } else {
-                    Utils.log("Sync is already running...please wait");
                     Toast.makeText(BaseActivity.this, "Sync is already running...", Toast.LENGTH_LONG).show();
                 }
             }
@@ -317,8 +316,8 @@ public class BaseActivity extends ActionBarActivity{
         }
     }
 
-    private void updateLastSynced(){
-        long last = CHAISynchroniser.getLastSynced(this);
+    public static void updateLastSynced(Context cxt){
+        long last = CHAISynchroniser.getLastSynced(cxt);
         String lastSynced = "Never";
         if(last != -1){
             lastSynced = new PrettyTime().format(new Date(last));

@@ -13,6 +13,7 @@ import android.os.IBinder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.chai.activities.BaseActivity;
 import org.chai.activities.HomeActivity;
 import org.chai.model.AdhockSale;
 import org.chai.model.AdhockSaleDao;
@@ -206,11 +207,9 @@ public class CHAISynchroniser extends Service {
         }
         updatePropgress("Downloading Districts...");
         District[] districts = place.downloadDistricts();
+        Utils.log("Got districts -> " + districts.length);
         if(districts != null){
-            districtDao.deleteAll();
-            for (District district : districts) {
-                districtDao.insert(district);
-            }
+            districtDao.insertOrReplaceInTx(districts);
         }
         downloadSubcounties();
     }
@@ -221,11 +220,9 @@ public class CHAISynchroniser extends Service {
         }
         updatePropgress("Downloading Subcounties...");
         Subcounty[] subcounties = place.downloadSubcounties();
+        Utils.log("Got subcounties -> " + subcounties.length);
         if(subcounties != null){
-            subcountyDao.deleteAll();
-            for (Subcounty subcounty : subcounties) {
-                subcountyDao.insert(subcounty);
-            }
+            subcountyDao.insertOrReplaceInTx(subcounties);
         }
     }
 
@@ -585,6 +582,7 @@ public class CHAISynchroniser extends Service {
         protected void onPostExecute(Void aVoid) {
             saveLastSynced(getApplicationContext(), System.currentTimeMillis());
             isSyncing = false;
+            BaseActivity.updateLastSynced(getApplicationContext());
             stopSelf();
         }
 

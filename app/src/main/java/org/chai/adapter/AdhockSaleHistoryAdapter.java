@@ -1,6 +1,7 @@
 package org.chai.adapter;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
@@ -15,6 +17,13 @@ import org.chai.R;
 import org.chai.model.AdhockSale;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
+import org.chai.model.DaoMaster;
+import org.chai.model.DaoSession;
+import org.chai.model.Subcounty;
+import org.chai.model.SubcountyDao;
+import org.chai.util.MyApplication;
+import org.chai.util.Utils;
+import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +42,11 @@ public class AdhockSaleHistoryAdapter extends ArrayAdapter<AdhockSale>{
     private HistoryFilter historyFilter;
     SimpleDateFormat f;
 
+    private SQLiteDatabase db;
+    private DaoMaster daoMaster;
+    private DaoSession daoSession;
+    private SubcountyDao subcountyDao;
+
     public AdhockSaleHistoryAdapter(Context context, int resource, List<AdhockSale> items) {
         super(context, resource, items);
 
@@ -43,6 +57,8 @@ public class AdhockSaleHistoryAdapter extends ArrayAdapter<AdhockSale>{
         filteredItems.addAll(items);
 
         f = new SimpleDateFormat("EE, d MMM yyyy h:m a");
+
+        initialiseGreenDao();
     }
 
     @Override
@@ -64,8 +80,20 @@ public class AdhockSaleHistoryAdapter extends ArrayAdapter<AdhockSale>{
         if(d != null){
             aq.id(R.id.txt_time).text(f.format(d));
         }
-        aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
-        aq.id(R.id.img_segment).gone();
+        Utils.log("Setting up -> " + c.getOutletName() + " -> " + c.getSubcountyId());
+        Subcounty subcounty = subcountyDao.load(c.getSubcountyId());
+        if(subcounty == null){
+            Utils.log("NO subcounty");
+        }else{
+            Utils.log("GOT subcounty");
+        }
+        try{
+            aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
+            aq.id(R.id.img_segment).gone();
+        }catch (Exception ex){
+            aq.id(R.id.txt_customer_contact).gone();
+            Utils.log("Error getting customer details");
+        }
 
         Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         row.startAnimation(animation);
@@ -127,6 +155,18 @@ public class AdhockSaleHistoryAdapter extends ArrayAdapter<AdhockSale>{
                 add(filtered.get(i));
             }
             notifyDataSetChanged();
+        }
+    }
+
+    private void initialiseGreenDao() {
+        try {
+            UpgradeOpenHelper helper = MyApplication.getDbOpenHelper();
+            db = helper.getWritableDatabase();
+            daoMaster = new DaoMaster(db);
+            daoSession = daoMaster.newSession();
+            subcountyDao = daoSession.getSubcountyDao();
+        } catch (Exception ex) {
+            Toast.makeText(getContext(), "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }
