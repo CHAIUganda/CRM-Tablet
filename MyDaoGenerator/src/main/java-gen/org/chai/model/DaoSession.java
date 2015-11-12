@@ -16,6 +16,7 @@ import org.chai.model.Parish;
 import org.chai.model.Village;
 import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
+import org.chai.model.ProductGroup;
 import org.chai.model.Product;
 import org.chai.model.Order;
 import org.chai.model.Task;
@@ -40,6 +41,7 @@ import org.chai.model.ParishDao;
 import org.chai.model.VillageDao;
 import org.chai.model.CustomerDao;
 import org.chai.model.CustomerContactDao;
+import org.chai.model.ProductGroupDao;
 import org.chai.model.ProductDao;
 import org.chai.model.OrderDao;
 import org.chai.model.TaskDao;
@@ -73,6 +75,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig villageDaoConfig;
     private final DaoConfig customerDaoConfig;
     private final DaoConfig customerContactDaoConfig;
+    private final DaoConfig productGroupDaoConfig;
     private final DaoConfig productDaoConfig;
     private final DaoConfig orderDaoConfig;
     private final DaoConfig taskDaoConfig;
@@ -97,6 +100,7 @@ public class DaoSession extends AbstractDaoSession {
     private final VillageDao villageDao;
     private final CustomerDao customerDao;
     private final CustomerContactDao customerContactDao;
+    private final ProductGroupDao productGroupDao;
     private final ProductDao productDao;
     private final OrderDao orderDao;
     private final TaskDao taskDao;
@@ -138,6 +142,9 @@ public class DaoSession extends AbstractDaoSession {
 
         customerContactDaoConfig = daoConfigMap.get(CustomerContactDao.class).clone();
         customerContactDaoConfig.initIdentityScope(type);
+
+        productGroupDaoConfig = daoConfigMap.get(ProductGroupDao.class).clone();
+        productGroupDaoConfig.initIdentityScope(type);
 
         productDaoConfig = daoConfigMap.get(ProductDao.class).clone();
         productDaoConfig.initIdentityScope(type);
@@ -194,6 +201,7 @@ public class DaoSession extends AbstractDaoSession {
         villageDao = new VillageDao(villageDaoConfig, this);
         customerDao = new CustomerDao(customerDaoConfig, this);
         customerContactDao = new CustomerContactDao(customerContactDaoConfig, this);
+        productGroupDao = new ProductGroupDao(productGroupDaoConfig, this);
         productDao = new ProductDao(productDaoConfig, this);
         orderDao = new OrderDao(orderDaoConfig, this);
         taskDao = new TaskDao(taskDaoConfig, this);
@@ -218,6 +226,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(Village.class, villageDao);
         registerDao(Customer.class, customerDao);
         registerDao(CustomerContact.class, customerContactDao);
+        registerDao(ProductGroup.class, productGroupDao);
         registerDao(Product.class, productDao);
         registerDao(Order.class, orderDao);
         registerDao(Task.class, taskDao);
@@ -244,6 +253,7 @@ public class DaoSession extends AbstractDaoSession {
         villageDaoConfig.getIdentityScope().clear();
         customerDaoConfig.getIdentityScope().clear();
         customerContactDaoConfig.getIdentityScope().clear();
+        productGroupDaoConfig.getIdentityScope().clear();
         productDaoConfig.getIdentityScope().clear();
         orderDaoConfig.getIdentityScope().clear();
         taskDaoConfig.getIdentityScope().clear();
@@ -288,6 +298,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public CustomerContactDao getCustomerContactDao() {
         return customerContactDao;
+    }
+
+    public ProductGroupDao getProductGroupDao() {
+        return productGroupDao;
     }
 
     public ProductDao getProductDao() {

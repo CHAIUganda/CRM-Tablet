@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -18,10 +19,13 @@ import com.androidquery.AQuery;
 
 import org.chai.R;
 import org.chai.adapter.ProductArrayAdapter;
+import org.chai.adapter.ProductGroupAdapter;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
 import org.chai.model.Product;
 import org.chai.model.ProductDao;
+import org.chai.model.ProductGroup;
+import org.chai.model.ProductGroupDao;
 import org.chai.model.StokeData;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
@@ -42,9 +46,16 @@ public class AdhockSalesStockFragment extends Fragment {
     private SQLiteDatabase db;
     private DaoMaster daoMaster;
     private DaoSession daoSession;
+    private ProductGroupDao productGroupDao;
     private ProductDao productDao;
 
+    private List<Product> allProducts;
     private List<Product> products;
+    private List<ProductGroup> groups;
+
+    private ArrayList<String> brands;
+    private ArrayList<String> sizes;
+    private ArrayList<String> formulations;
 
     AdhockSalesFormActivity parent;
 
@@ -84,6 +95,16 @@ public class AdhockSalesStockFragment extends Fragment {
         });
 
         products = productDao.queryBuilder().orderAsc(ProductDao.Properties.Name).list();
+        groups = productGroupDao.queryBuilder().orderAsc(ProductGroupDao.Properties.Name).list();
+
+        ArrayList<ProductGroup> filteredGroups = new ArrayList<>();
+        for(ProductGroup group: groups){
+            if(group.getProducts().size() > 0){
+                filteredGroups.add(group);
+            }
+        }
+
+        groups = filteredGroups;
 
         ArrayList<Product> filtered = new ArrayList<>();
         for(Product p: products){
@@ -93,6 +114,7 @@ public class AdhockSalesStockFragment extends Fragment {
         }
 
         products = filtered;
+        allProducts = filtered;
 
         if(parent.sale.getUuid() != null){
             populateFields();
@@ -172,7 +194,7 @@ public class AdhockSalesStockFragment extends Fragment {
     private void addRow(final StokeData stock){
         LayoutInflater inflator = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        final View row = inflator.inflate(R.layout.stock_form_row, null);
+        final View row = inflator.inflate(R.layout.sale_stock_form_row, null);
 
         AQuery a = new AQuery(row);
 
@@ -189,8 +211,108 @@ public class AdhockSalesStockFragment extends Fragment {
             }
         });
 
-        Spinner spinner = (Spinner)row.findViewById(R.id.product);
-        spinner.setAdapter(new ProductArrayAdapter(getActivity(),android.R.layout.simple_spinner_dropdown_item, products.toArray(new Product[products.size()])));
+        final Spinner spinner = (Spinner)row.findViewById(R.id.product);
+        spinner.setAdapter(new ProductArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, allProducts.toArray(new Product[allProducts.size()])));
+
+        final Spinner brand = (Spinner)row.findViewById(R.id.brand);
+        final Spinner size = (Spinner)row.findViewById(R.id.size);
+        final Spinner formulation = (Spinner)row.findViewById(R.id.formulation);
+
+        Spinner group = (Spinner)row.findViewById(R.id.group);
+        group.setAdapter(new ProductGroupAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, groups.toArray(new ProductGroup[groups.size()])));
+        group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ProductGroup g = ((ProductGroupAdapter) parent.getAdapter()).getItem(position);
+                products = g.getProducts();
+                brands = new ArrayList<>();
+                for (Product p : products) {
+                    if (!brands.contains(p.getName()) && !p.getName().contains("Deleted Product")) {
+                        brands.add(p.getName());
+                    }
+                }
+                brand.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, brands.toArray(new String[brands.size()])));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sizes = new ArrayList<>();
+                String selectedBrand = parent.getAdapter().getItem(position).toString();
+                for(Product p: products){
+                    if(p.getUnitOfMeasure() != null){
+                        if(p.getName().equalsIgnoreCase(selectedBrand) && !sizes.contains(p.getUnitOfMeasure())){
+                            sizes.add(p.getUnitOfMeasure());
+                        }
+                    }
+                }
+                size.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, sizes.toArray(new String[sizes.size()])));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        size.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                formulations = new ArrayList<>();
+                String selectedBrand = brand.getSelectedItem().toString();
+                String selectedSize = parent.getAdapter().getItem(position).toString();
+                for(Product p: products){
+                    if(p.getFormulation() != null && p.getUnitOfMeasure() != null){
+                        if(p.getName().equalsIgnoreCase(selectedBrand) && p.getUnitOfMeasure().equalsIgnoreCase(selectedSize) && !formulations.contains(p.getFormulation())){
+                            formulations.add(p.getFormulation());
+                        }
+                    }
+                }
+                formulation.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, formulations.toArray(new String[formulations.size()])));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        formulation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                formulations = new ArrayList<>();
+                String selectedBrand = brand.getSelectedItem().toString();
+                String selectedSize = size.getSelectedItem().toString();
+                String selectedFormulation = parent.getAdapter().getItem(position).toString();
+                for (Product p : products) {
+                    if (p.getFormulation() != null && p.getUnitOfMeasure() != null && p.getFormulation() != null) {
+                        if (p.getName().equalsIgnoreCase(selectedBrand) && p.getUnitOfMeasure().equalsIgnoreCase(selectedSize) && selectedFormulation.equalsIgnoreCase(p.getFormulation())) {
+                            int index = 0;
+                            for(Product pp: allProducts){
+                                if(pp.getUuid().equalsIgnoreCase(p.getUuid())){
+                                    index = allProducts.indexOf(p);
+                                    break;
+                                }
+                            }
+
+                            spinner.setSelection(index);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         try{
             if(stock.getQuantity() != 0){
@@ -205,6 +327,7 @@ public class AdhockSalesStockFragment extends Fragment {
                     }
                 }
             }
+
             spinner.setSelection(index);
         }catch(Exception ex){
             Utils.log("Error while adding row -> " + ex.getMessage());
@@ -221,6 +344,7 @@ public class AdhockSalesStockFragment extends Fragment {
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
+            productGroupDao = daoSession.getProductGroupDao();
             productDao = daoSession.getProductDao();
         } catch (Exception ex) {
             Log.d("Error", ex.getLocalizedMessage());

@@ -47,7 +47,6 @@ public class AdhockSaleNextStepsFragment extends Fragment {
         }
         String recommendations = activity.sale.getRecommendationNextStep();
         if(recommendations != null){
-            Utils.log("Recommendations -> " + recommendations);
             aq.id(R.id.none).checked(recommendations.indexOf(aq.id(R.id.none).getText().toString()) != -1);
             aq.id(R.id.stock_ors).checked(recommendations.indexOf(aq.id(R.id.stock_ors).getText().toString()) != -1);
             aq.id(R.id.stock_zinc).checked(recommendations.indexOf(aq.id(R.id.stock_zinc).getText().toString()) != -1);

@@ -34,6 +34,8 @@ import org.chai.model.Order;
 import org.chai.model.OrderDao;
 import org.chai.model.Product;
 import org.chai.model.ProductDao;
+import org.chai.model.ProductGroup;
+import org.chai.model.ProductGroupDao;
 import org.chai.model.Region;
 import org.chai.model.RegionDao;
 import org.chai.model.Sale;
@@ -87,6 +89,7 @@ public class CHAISynchroniser extends Service {
     private TaskDao taskDao;
     private DetailerCallDao detailerCallDao;
     private MalariaDetailDao malariaDetailDao;
+    private ProductGroupDao productGroupDao;
     private ProductDao productDao;
     private SaleDao saleDao;
     private OrderDao orderDao;
@@ -149,6 +152,7 @@ public class CHAISynchroniser extends Service {
             taskDao = daoSession.getTaskDao();
             detailerCallDao = daoSession.getDetailerCallDao();
             malariaDetailDao = daoSession.getMalariaDetailDao();
+            productGroupDao = daoSession.getProductGroupDao();
             productDao = daoSession.getProductDao();
             saleDao = daoSession.getSaleDao();
             orderDao = daoSession.getOrderDao();
@@ -164,20 +168,20 @@ public class CHAISynchroniser extends Service {
         Utils.log("startSyncronisationProcess()");
         try {
             syncronisationErros = new ArrayList<>();
-            downloadRegions();
-            downloadCustomers();
-            downloadTasks();
-            downloadProducts();
-            downloadSummaryReports();
+            //downloadRegions();
+            //downloadCustomers();
+            //downloadTasks();
+            downloadProductGroups();
+            //downloadSummaryReports();
 
-            uploadCustomers();
-            uploadDirectSales();
-            uploadSales();
-            uploadTasks();
-            uploadOrders();
+            //uploadCustomers();
+            //uploadDirectSales();
+            //uploadSales();
+            //uploadTasks();
+            //uploadOrders();
 
-            downloadDiarrheaHistory();
-            downloadMalariaHistory();
+            //downloadDiarrheaHistory();
+            //downloadMalariaHistory();
             if (!syncronisationErros.isEmpty()) {
                 displaySyncErros(syncronisationErros);
             }
@@ -193,9 +197,12 @@ public class CHAISynchroniser extends Service {
         updatePropgress("Downloading Regions...");
         Region[] regions = place.downloadRegions();
         if (regions != null) {
-            regionDao.deleteAll();
             for (Region region : regions) {
-                regionDao.insert(region);
+                if(regionDao.load(region.getUuid()) == null){
+                    regionDao.insert(region);
+                }else{
+                    regionDao.update(region);
+                }
             }
             downloadDistricts();
         }
@@ -207,9 +214,14 @@ public class CHAISynchroniser extends Service {
         }
         updatePropgress("Downloading Districts...");
         District[] districts = place.downloadDistricts();
-        Utils.log("Got districts -> " + districts.length);
         if(districts != null){
-            districtDao.insertOrReplaceInTx(districts);
+            for(District d : districts){
+                if(districtDao.load(d.getUuid()) == null){
+                    districtDao.insert(d);
+                }else{
+                    districtDao.update(d);
+                }
+            }
         }
         downloadSubcounties();
     }
@@ -220,9 +232,14 @@ public class CHAISynchroniser extends Service {
         }
         updatePropgress("Downloading Subcounties...");
         Subcounty[] subcounties = place.downloadSubcounties();
-        Utils.log("Got subcounties -> " + subcounties.length);
         if(subcounties != null){
-            subcountyDao.insertOrReplaceInTx(subcounties);
+            for(Subcounty s: subcounties){
+                if(subcountyDao.load(s.getUuid()) == null){
+                    subcountyDao.insert(s);
+                }else{
+                    subcountyDao.update(s);
+                }
+            }
         }
     }
 
@@ -232,6 +249,7 @@ public class CHAISynchroniser extends Service {
         }
         updatePropgress("Downloading Customers..");
         Customer[] customers = customerClient.downloadCustomers();
+        Utils.log("Got customers -> " + customers.length);
         customerDao.insertOrReplaceInTx(customers);
         List<CustomerContact> contacts = new ArrayList<>();
         for (Customer customer : customers) {
@@ -417,9 +435,7 @@ public class CHAISynchroniser extends Service {
             return;
         }
         List<Customer> customersList = customerDao.queryBuilder().where(CustomerDao.Properties.IsDirty.eq(true)).list();
-        Utils.log("Syncing customers -> " + customersList.size());
         for (Customer customer : customersList) {
-            Utils.log("Uploading customer -> " + customer.getOutletName());
             ServerResponse response = customerClient.uploadCustomer(customer, RestClient.getRestTemplate());
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 customer.setIsDirty(false);
@@ -432,6 +448,25 @@ public class CHAISynchroniser extends Service {
                 customerDao.update(customer);
                 syncronisationErros.add(response);
             }
+        }
+    }
+
+    private void downloadProductGroups(){
+        if(!AccountManager.offlineLogin(getApplication(), false)){
+            return;
+        }
+        updatePropgress("Downloading Product Groups...");
+        ProductGroup[] groups = productClient.downloadProductGroups();
+        Utils.log("Got product groups -> " + groups.length);
+        if (groups != null) {
+            for (ProductGroup group : groups) {
+                if(productGroupDao.load(group.getId()) == null){
+                    productGroupDao.insert(group);
+                }else{
+                    productGroupDao.update(group);
+                }
+            }
+            downloadProducts();
         }
     }
 
@@ -516,7 +551,6 @@ public class CHAISynchroniser extends Service {
             updatePropgress("Uploading Orders...");
         }
         for (Order order : orderList) {
-            updatePropgress("Uploading Orders...");
             ServerResponse response = salesClient.uploadOrder(order);
             if (response.getStatus().equalsIgnoreCase("OK")) {
                 orderDao.delete(order);

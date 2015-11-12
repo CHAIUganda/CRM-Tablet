@@ -9,7 +9,7 @@ import de.greenrobot.daogenerator.ToMany;
  * Created by victor on 10/13/14.
  */
 public class PromotionEntity {
-    public static Entity createPromotionEntity(Schema schema,Entity product){
+    public static Entity createPromotionEntity(Schema schema, Entity product){
         Entity promotion = schema.addEntity("Promotion");
         promotion.addStringProperty("uuid").notNull().unique().primaryKey();
         promotion.addStringProperty("description").notNull();

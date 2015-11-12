@@ -14,7 +14,7 @@ public class MigrationHelper4 extends MigratorHelper {
         Utils.log("Doing MigrationHelper 4 Upgrade - Product Upgrade");
         //The new Product groupId
         try{
-            String sql = "ALTER TABLE " + ProductDao.TABLENAME + " ADD COLUMN " + ProductDao.Properties.GroupId.columnName + " INTEGER";
+            String sql = "ALTER TABLE " + ProductDao.TABLENAME + " ADD COLUMN " + ProductDao.Properties.GroupId.columnName + " TEXT";
             db.execSQL(sql);
         }catch (Exception ex){
             Utils.log("Error adding column -> " + ex.getMessage());

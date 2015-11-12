@@ -9,7 +9,7 @@ import de.greenrobot.daogenerator.ToMany;
  * Created by victor on 10/13/14.
  */
 public class DistrictEntity {
-    public static Entity createDistrictEntity(Schema schema,Entity region){
+    public static Entity createDistrictEntity(Schema schema, Entity region){
         Entity district = schema.addEntity("District");
         district.addStringProperty("uuid").notNull().unique().primaryKey();
         district.addStringProperty("name").notNull();

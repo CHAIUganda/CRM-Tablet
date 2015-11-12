@@ -7,8 +7,8 @@ android {
         applicationId "org.chai"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 19
-        versionName "2.2.0.0"
+        versionCode 20
+        versionName "2.5.0.0"
     }
 
     lintOptions{

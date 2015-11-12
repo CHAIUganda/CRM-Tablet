@@ -24,13 +24,17 @@ public class Product {
     private String formulation;
     private String unitPrice;
     private String groupName;
-    private int groupId;
+    /** Not-null value. */
+    private String groupId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
     private transient ProductDao myDao;
+
+    private ProductGroup productGroup;
+    private String productGroup__resolvedKey;
 
     private List<TaskOrder> taskOrderproducts;
     private List<Promotion> promotions;
@@ -48,7 +52,7 @@ public class Product {
         this.uuid = uuid;
     }
 
-    public Product(String uuid, String name, String unitOfMeasure, String formulation, String unitPrice, String groupName, int groupId) {
+    public Product(String uuid, String name, String unitOfMeasure, String formulation, String unitPrice, String groupName, String groupId) {
         this.uuid = uuid;
         this.name = name;
         this.unitOfMeasure = unitOfMeasure;
@@ -116,12 +120,42 @@ public class Product {
         this.groupName = groupName;
     }
 
-    public int getGroupId() {
+    /** Not-null value. */
+    public String getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setGroupId(String groupId) {
         this.groupId = groupId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    public ProductGroup getProductGroup() {
+        String __key = this.groupId;
+        if (productGroup__resolvedKey == null || productGroup__resolvedKey != __key) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            ProductGroupDao targetDao = daoSession.getProductGroupDao();
+            ProductGroup productGroupNew = targetDao.load(__key);
+            synchronized (this) {
+                productGroup = productGroupNew;
+            	productGroup__resolvedKey = __key;
+            }
+        }
+        return productGroup;
+    }
+
+    public void setProductGroup(ProductGroup productGroup) {
+        if (productGroup == null) {
+            throw new DaoException("To-one property 'groupId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.productGroup = productGroup;
+            groupId = productGroup.getId();
+            productGroup__resolvedKey = groupId;
+        }
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

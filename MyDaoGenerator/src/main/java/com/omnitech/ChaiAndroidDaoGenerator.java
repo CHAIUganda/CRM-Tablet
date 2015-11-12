@@ -11,13 +11,13 @@ public class ChaiAndroidDaoGenerator{
     private static final int DATABASE_VERSION = 1;
 
     public static void main(String args[]) throws Exception {
-        Schema schema = new Schema(4, "org.chai.model");
+        Schema schema = new Schema(5, "org.chai.model");
         schema.setDefaultJavaPackageDao("org.chai.model");
         schema.enableKeepSectionsByDefault();
         schema.enableActiveEntitiesByDefault();
 
         Entity region = RegionEntity.createRegionEntity(schema);
-        Entity district = DistrictEntity.createDistrictEntity(schema,region);
+        Entity district = DistrictEntity.createDistrictEntity(schema, region);
         Entity subcounty = SubcountyEntity.createSubcountyEntity(schema, district);
         Entity parish = ParishEntity.createParishEntity(schema, subcounty);
         Entity village = VillageEntity.createVillageEntity(schema, parish);
@@ -25,7 +25,9 @@ public class ChaiAndroidDaoGenerator{
         Entity customer = CustomerEntity.createCustomerEntity(schema, subcounty);
         CustomerContact.createCustomercontactEntity(schema, customer);
 
-        Entity product = ProductEntity.createProductEntity(schema);
+        Entity productGroup = ProductGroup.createProductGroupEntity(schema);
+
+        Entity product = ProductEntity.createProductEntity(schema, productGroup);
         Entity order = OrderEntity.createOrderEntity(schema, customer, product);
         Entity task = TaskEntity.createTaskEntity(schema, customer);
         TaskEntity.createTaskOrderEntity(schema, task, product);

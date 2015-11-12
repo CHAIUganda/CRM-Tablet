@@ -19,7 +19,6 @@ import org.chai.model.Customer;
 import org.chai.model.CustomerContact;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
-import org.chai.model.Subcounty;
 import org.chai.model.SubcountyDao;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
@@ -79,13 +78,6 @@ public class AdhockSaleHistoryAdapter extends ArrayAdapter<AdhockSale>{
 
         if(d != null){
             aq.id(R.id.txt_time).text(f.format(d));
-        }
-        Utils.log("Setting up -> " + c.getOutletName() + " -> " + c.getSubcountyId());
-        Subcounty subcounty = subcountyDao.load(c.getSubcountyId());
-        if(subcounty == null){
-            Utils.log("NO subcounty");
-        }else{
-            Utils.log("GOT subcounty");
         }
         try{
             aq.id(R.id.txt_customer_contact).text(contact.getContact() + " - " + c.getSubcounty().getName() + " | " + c.getSubcounty().getDistrict().getName());
