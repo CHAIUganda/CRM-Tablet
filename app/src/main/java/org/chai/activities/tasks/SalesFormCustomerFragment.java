@@ -17,6 +17,7 @@ import com.androidquery.AQuery;
 import org.chai.R;
 import org.chai.adapter.CustomerAutocompleteAdapter;
 import org.chai.model.Customer;
+import org.chai.model.CustomerContact;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
@@ -66,6 +67,12 @@ public class SalesFormCustomerFragment extends Fragment {
                 aq.id(R.id.customer_id).text(customer.getOutletName());
                 try{
                     aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+                    CustomerContact contact = customer.getCustomerContacts().get(0);
+                    if(contact != null){
+                        aq.id(R.id.txt_customer_contact).text("Contact: " + contact.getNames() + " : " + contact.getContact());
+                    }else{
+                        aq.id(R.id.txt_customer_contact).text("Cannot retrieve customer contact");
+                    }
                 }catch (Exception ex){
                     aq.id(R.id.txt_customer_location).text("Failed to load District & Subcounty");
                 }
@@ -87,6 +94,12 @@ public class SalesFormCustomerFragment extends Fragment {
                     if (customer != null) {
                         try{
                             aq.id(R.id.txt_customer_location).text("District: " + customer.getSubcounty().getDistrict().getName() + " | " + "Subcounty: " + customer.getSubcounty().getName());
+                            CustomerContact contact = customer.getCustomerContacts().get(0);
+                            if(contact != null){
+                                aq.id(R.id.txt_customer_contact).text("Contact: " + contact.getNames() + " : " + contact.getContact());
+                            }else{
+                                aq.id(R.id.txt_customer_contact).text("Cannot retrieve customer contact");
+                            }
                         }catch (Exception ex){
                             aq.id(R.id.txt_customer_location).text("Failed to load District & Subcounty");
                         }
