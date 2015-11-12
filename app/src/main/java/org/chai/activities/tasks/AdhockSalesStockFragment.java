@@ -177,7 +177,7 @@ public class AdhockSalesStockFragment extends Fragment {
             for(View row : rows){
                 AQuery a = new AQuery(row);
                 productIndex = a.id(R.id.product).getSelectedItemPosition();
-                product = products.get(productIndex);
+                product = allProducts.get(productIndex);
                 String quantity = a.id(R.id.txt_quantity).getText().toString();
 
                 stock = parent.stocks.get(rows.indexOf(row));
@@ -287,9 +287,24 @@ public class AdhockSalesStockFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 formulations = new ArrayList<>();
-                String selectedBrand = brand.getSelectedItem().toString();
-                String selectedSize = size.getSelectedItem().toString();
-                String selectedFormulation = parent.getAdapter().getItem(position).toString();
+                String selectedBrand = "";
+                try{
+                    selectedBrand = brand.getSelectedItem().toString();
+                }catch (Exception ex){
+
+                }
+                String selectedSize = "";
+                try{
+                    selectedSize = size.getSelectedItem().toString();
+                }catch (Exception ex){
+
+                }
+                String selectedFormulation = "";
+                try{
+                    selectedFormulation = parent.getAdapter().getItem(position).toString();
+                }catch (Exception ex){
+
+                }
                 for (Product p : products) {
                     if (p.getFormulation() != null && p.getUnitOfMeasure() != null && p.getFormulation() != null) {
                         if (p.getName().equalsIgnoreCase(selectedBrand) && p.getUnitOfMeasure().equalsIgnoreCase(selectedSize) && selectedFormulation.equalsIgnoreCase(p.getFormulation())) {
