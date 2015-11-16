@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/TitleTextStyle"
+            android:text="ICCM"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="3. Do you stock ORS?"/>
+            <Spinner
+                android:id="@+id/spn_do_you_stock_ors"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/yesnolist" />
+
+            <LinearLayout
+                android:id="@+id/ln_ors_price_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/LabelStyle"
+                    android:text="What is the lowest price you sell 1 sachet of ORS?"/>
+
+                <EditText
+                    android:id="@+id/txt_ors_lowest_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:inputType="numberDecimal"
+                    style="@style/TextBoxStyle"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="3. Do you stock Zinc?"/>
+            <Spinner
+                android:id="@+id/spn_do_you_stock_zinc"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/yesnolist" />
+
+            <LinearLayout
+                android:id="@+id/ln_zinc_price_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/LabelStyle"
+                    android:text="What is the lowest price you sell 10 tablets of Zinc?"/>
+
+                <EditText
+                    android:id="@+id/txt_zinc_lowest_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:inputType="numberDecimal"
+                    style="@style/TextBoxStyle"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="3. Do you stock ACTs?"/>
+            <Spinner
+                android:id="@+id/spn_do_you_stock_acts"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/yesnolist" />
+
+            <LinearLayout
+                android:id="@+id/ln_acts_price_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/LabelStyle"
+                    android:text="What is the lowest price you sell 6 ACT tablets?"/>
+
+                <EditText
+                    android:id="@+id/txt_act_lowest_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:inputType="numberDecimal"
+                    style="@style/TextBoxStyle"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="3. Do you stock Amoxicillin 250mg (dispersible tablets)?"/>
+            <Spinner
+                android:id="@+id/spn_do_you_stock_amoxicillin"
+                style="@style/SpinnerStyle"
+                android:layout_width="match_parent"
+                android:entries="@array/yesnolist" />
+
+            <LinearLayout
+                android:id="@+id/ln_amoxicillin_price_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/LabelStyle"
+                    android:text="What is the lowest price you sell 1 tablet?"/>
+
+                <EditText
+                    android:id="@+id/txt_amoxicillin_lowest_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:inputType="numberDecimal"
+                    style="@style/TextBoxStyle"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView><!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/src/main/res/layout/sales_form_iccm_fragment.xml -->

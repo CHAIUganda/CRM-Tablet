@@ -50,26 +50,78 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="AndroidRuntime" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="CHAI" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dad7d78f-c0b3-4a33-b333-77a49d84f0ba" name="Default" comment="">
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\DaoGenerator_1_3_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\android_query_full_0_26_8.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\androidmarketapi_0_6.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\appcompat_v7_21_0_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\circleindicator_1_1_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\freemarker_2_3_19.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\greendao_1_3_7.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\jackson_annotations_2_4_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\jackson_core_2_4_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\jackson_databind_2_4_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\library_1_0_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\library_1_0_9.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\library_1_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\library_2_4_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\mint_4_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\osmdroid_android_4_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\play_services_6_5_87.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\prettytime_3_2_7_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\protobuf_java_2_2_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\roundedimageview_1_5_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\slf4j_android_1_6_1_RC1.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\spring_android_core_1_0_1_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\spring_android_rest_template_1_0_1_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\support_annotations_21_0_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Zed\AndroidStudioProjects\chai-crm-android1\.idea\libraries\support_v4_21_0_3.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/AddNewCustomerActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/AddNewCustomerActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSaleNextStepsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSaleNextStepsFragment.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesCustomerFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesCustomerFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesFormActivity$FormPagerAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesFormActivity$FormPagerAdapter.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesFormActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesFormSaleFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesFormSaleFragment$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesFormSaleFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesFormSaleFragment$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesFormSaleFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesFormSaleFragment$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesFormSaleFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesFormSaleFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesStockFragment$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesStockFragment$7.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/AdhockSalesHistoryFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/AdhockSalesHistoryFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/AdhockSalesHistoryFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/AdhockSalesHistoryFragment.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesStockFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/AdhockSalesStockFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BlankActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/BlankActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/sync/CHAISynchroniser.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/sync/CHAISynchroniser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomersActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomersActivity$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomersActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/customer/CustomersActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormCopackFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormCopackFragment.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormZincFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaFormZincFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/DiarrheaHistoryFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/DiarrheaHistoryFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/DiarrheaHistoryFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/DiarrheaHistoryFragment.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaOrsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/DiarrheaOrsFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/HistoryActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/HistoryActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/HomeActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/HomeActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/LoginActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/LoginActivity$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/LoginActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/LoginActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormAntiMalarialFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormAntiMalarialFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormCustomerFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormCustomerFragment$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormCustomerFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormCustomerFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormEducationFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormEducationFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormNextStepsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormNextStepsFragment.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormRdtFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/forms/MalariaFormRdtFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/MalariaHistoryFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/MalariaHistoryFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/MalariaHistoryFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/MalariaHistoryFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/NewOrderActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/NewOrderActivity$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/NewOrderActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/NewOrderActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/OrdersHistoryFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/OrdersHistoryFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/OrdersHistoryFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/OrdersHistoryFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/adapter/ProductListAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/adapter/ProductListAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/ProductsActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/ProductsActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/astuetz/pagerslidingtabstrip/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/astuetz/pagerslidingtabstrip/R$id.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$integer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/astuetz/pagerslidingtabstrip/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/astuetz/pagerslidingtabstrip/R$layout.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/daimajia/easing/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/daimajia/easing/R$layout.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$layout.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$menu.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$menu.class" />
@@ -79,16 +131,19 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$styleable.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$xml.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R$xml.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/R.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/reports/ReportsActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/reports/ReportsActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormCustomerFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormCustomerFragment.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormNextStepsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormNextStepsFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormSaleFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormSaleFragment$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormSaleFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormSaleFragment$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormSaleFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormSaleFragment$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormSaleFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormSaleFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormStockFragment$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormStockFragment$7.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormStockFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/SalesFormStockFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/SalesHistoryFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/SalesHistoryFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/SalesHistoryFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/calls/SalesHistoryFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskByLocationFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskCalenderFragment.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/adapter/TaskListAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/adapter/TaskListAdapter.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskViewOnMapFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/org/chai/activities/tasks/TaskViewOnMapFragment.class" />
@@ -101,14 +156,13 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormSaleFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormSaleFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesStockFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesStockFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/astuetz/pagerslidingtabstrip/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/astuetz/pagerslidingtabstrip/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/daimajia/easing/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/daimajia/easing/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/chai/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/org/chai/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormSaleFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormSaleFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormStockFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormStockFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/debug/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/debug/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -233,67 +287,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AdhockSalesStockFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesStockFragment.java">
+      <file leaf-file-name="ICCMPopupDialogFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/util/ICCMPopupDialogFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="179" column="37" selection-start-line="179" selection-start-column="37" selection-end-line="179" selection-end-column="37" />
+              <caret line="20" column="36" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="36" />
               <folding>
-                <element signature="e#2248#2405#0" expanded="true" />
-                <element signature="e#2404#2405#0" expanded="true" />
-                <element signature="e#6122#6570#0" expanded="true" />
-                <element signature="e#6569#6570#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1603#1927#0" expanded="true" />
+                <element signature="e#1926#1927#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SalesFormSaleFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormSaleFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="159" column="33" selection-start-line="159" selection-start-column="22" selection-end-line="159" selection-end-column="33" />
-              <folding>
-                <element signature="e#5651#6098#0" expanded="true" />
-                <element signature="e#6097#6098#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdhockSalesFormSaleFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormSaleFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="159" column="33" selection-start-line="159" selection-start-column="33" selection-end-line="159" selection-end-column="33" />
-              <folding>
-                <element signature="e#2132#2288#0" expanded="true" />
-                <element signature="e#2287#2288#0" expanded="true" />
-                <element signature="e#5645#6092#0" expanded="true" />
-                <element signature="e#6091#6092#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sale_form_multidropdown_row.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sale_form_multidropdown_row.xml">
+      <file leaf-file-name="iccm_popup_dialog.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/iccm_popup_dialog.xml">
           <provider editor-type-id="android-designer">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.5172415">
-              <caret line="86" column="36" selection-start-line="86" selection-start-column="29" selection-end-line="86" selection-end-column="36" />
+            <state vertical-scroll-proportion="-8.689655">
+              <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
               <folding>
-                <element signature="e#257#292#0" expanded="true" />
-                <element signature="e#687#722#0" expanded="true" />
-                <element signature="e#993#1028#0" expanded="true" />
-                <element signature="e#1735#1770#0" expanded="true" />
-                <element signature="e#2173#2208#0" expanded="true" />
-                <element signature="e#2574#2609#0" expanded="true" />
-                <element signature="e#2976#3017#0" expanded="true" />
-                <element signature="e#3056#3097#0" expanded="true" />
-                <element signature="e#3528#3563#0" expanded="true" />
+                <element signature="e#234#269#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sales_form_iccm_fragment.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sales_form_iccm_fragment.xml">
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="161" column="52" selection-start-line="161" selection-start-column="52" selection-end-line="161" selection-end-column="52" />
+              <folding>
+                <element signature="e#363#398#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -303,20 +335,22 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="150" column="46" selection-start-line="150" selection-start-column="46" selection-end-line="150" selection-end-column="46" />
-              <folding />
+              <caret line="239" column="31" selection-start-line="239" selection-start-column="31" selection-end-line="239" selection-end-column="31" />
+              <folding>
+                <element signature="e#4261#4262#0" expanded="true" />
+                <element signature="e#4301#4302#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SalesFormStockFragment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormStockFragment.java">
+      <file leaf-file-name="AdhockSalesFormICCMFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormICCMFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0519481">
-              <caret line="292" column="38" selection-start-line="292" selection-start-column="38" selection-end-line="292" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.12696148">
+              <caret line="177" column="0" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
               <folding>
-                <element signature="e#6099#6547#0" expanded="true" />
-                <element signature="e#6546#6547#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -330,6 +364,7 @@
         <option value="resourceFile" />
         <option value="Class" />
         <option value="layoutResourceFile_vertical" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -2216,11 +2251,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_education_fragment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormZincFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaOrsFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/diarrhea_form_recommendation_fragment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/DiarrheaFormRecommendationFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/forms/MalariaFormActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/customer/AddNewCustomerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/util/MyApplication.java" />
@@ -2243,9 +2273,7 @@
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/AdhockSaleHistoryAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/NewOrderActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/rest/RestClient.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/MyDaoGenerator/src/main/java/com/omnitech/DistrictEntity.java" />
         <option value="$PROJECT_DIR$/MyDaoGenerator/src/main/java/com/omnitech/PromotionEntity.java" />
         <option value="$PROJECT_DIR$/MyDaoGenerator/src/main/java/com/omnitech/ChaiAndroidDaoGenerator.java" />
@@ -2258,7 +2286,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/model/DaoMaster.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/util/migration/MigrationHelper4.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/util/migration/MigrationHelper5.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/ProductGroupAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/sale_stock_form_row.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/adapter/TaskListAdapter.java" />
@@ -2267,6 +2294,14 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormSaleFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesStockFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormStockFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/util/ICCMPopupDialogFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/sales_form_iccm_fragment.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/iccm_popup_dialog.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormICCMFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/chai/activities/ISalesActivity.java" />
       </list>
     </option>
   </component>
@@ -2305,6 +2340,20 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chai-crm-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2372,26 +2421,8 @@
               <option name="myItemId" value="chai" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="chai-crm-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chai" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sync" />
+              <option name="myItemId" value="util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2411,10 +2442,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="chai" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="adapter" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2487,44 +2514,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chai-crm-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -2611,6 +2600,26 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="chai" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -2937,15 +2946,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8587106" sideWeight="0.4974293" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5116598" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.75034297" sideWeight="0.49485862" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.75034297" sideWeight="0.49485862" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49245542" sideWeight="0.5070694" order="7" side_tool="true" content_ui="tabs" />
@@ -2954,11 +2962,11 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8148148" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5010225" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8148148" sideWeight="0.4974293" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.4974293" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969153" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.4974293" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24357326" sideWeight="0.4989775" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24357326" sideWeight="0.4989775" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49245542" sideWeight="0.4929306" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2966,6 +2974,7 @@
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5569273" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5116598" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7407407" sideWeight="0.48714653" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2990,75 +2999,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MyDaoGenerator/proguard-rules.pro">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyDaoGenerator/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyDaoGenerator/src/main/java/com/omnitech/BaseEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="32" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyDaoGenerator/src/main/java/com/omnitech/AdhockSaleEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyDaoGenerator/src/main/java/com/omnitech/CustomerContact.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyDaoGenerator/src/main/java/com/omnitech/CustomerEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyDaoGenerator/src/main/java/com/omnitech/DetailerCall.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyDaoGenerator/src/main/java/com/omnitech/DetailerStock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyDaoGenerator/src/main/java/com/omnitech/PromotionalItemEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3066,7 +3010,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3074,7 +3017,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="65" selection-start-line="11" selection-start-column="65" selection-end-line="11" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3082,7 +3024,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="22" selection-start-line="10" selection-start-column="8" selection-end-line="13" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3090,7 +3031,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="62" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3098,7 +3038,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.46219686">
           <caret line="31" column="71" selection-start-line="31" selection-start-column="71" selection-end-line="31" selection-end-column="71" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3106,7 +3045,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1783167">
           <caret line="124" column="13" selection-start-line="124" selection-start-column="13" selection-end-line="124" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3114,7 +3052,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3122,7 +3059,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.3352354">
           <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3130,9 +3066,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3140,7 +3073,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3148,9 +3080,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="43" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3174,7 +3103,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3182,10 +3110,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30813125">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding>
-            <element signature="e#1344#1345#0" expanded="true" />
-            <element signature="e#1369#1370#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3193,7 +3117,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17974323">
           <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3209,7 +3132,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.025677603">
           <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3217,7 +3139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="55" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3225,9 +3146,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3235,7 +3153,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="47" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3243,7 +3160,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="5" selection-start-line="10" selection-start-column="29" selection-end-line="22" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3251,28 +3167,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="177" column="34" selection-start-line="177" selection-start-column="34" selection-end-line="177" selection-end-column="34" />
-          <folding>
-            <element signature="method#initialiseGreenDao#0;class#CHAISynchroniser#0" expanded="false" />
-            <element signature="method#downloadRegions#0;class#CHAISynchroniser#0" expanded="false" />
-            <element signature="method#downloadDistricts#0;class#CHAISynchroniser#0" expanded="false" />
-            <element signature="method#downloadSubcounties#0;class#CHAISynchroniser#0" expanded="false" />
-            <element signature="method#downloadCustomers#0;class#CHAISynchroniser#0" expanded="false" />
-            <element signature="method#downloadTasks#0;class#CHAISynchroniser#0" expanded="false" />
-            <element signature="method#uploadTasks#0;class#CHAISynchroniser#0" expanded="false" />
-            <element signature="method#taskIsHistory#0;class#CHAISynchroniser#0" expanded="false" />
-            <element signature="method#taskHasDetails#0;class#CHAISynchroniser#0" expanded="false" />
-            <element signature="method#downloadDiarrheaHistory#0;class#CHAISynchroniser#0" expanded="false" />
-            <element signature="method#downloadMalariaHistory#0;class#CHAISynchroniser#0" expanded="false" />
-            <element signature="class#SyncTask#0;class#CHAISynchroniser#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3280,9 +3174,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="26" selection-start-line="13" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3291,7 +3182,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3300,7 +3191,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3342,13 +3232,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#673#674#0" expanded="true" />
-            <element signature="e#709#710#0" expanded="true" />
-            <element signature="e#758#759#0" expanded="true" />
-            <element signature="e#797#798#0" expanded="true" />
-            <element signature="e#840#841#0" expanded="true" />
-            <element signature="e#871#872#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#673#674#0" expanded="false" />
+            <element signature="e#709#710#0" expanded="false" />
+            <element signature="e#758#759#0" expanded="false" />
+            <element signature="e#797#798#0" expanded="false" />
+            <element signature="e#840#841#0" expanded="false" />
+            <element signature="e#871#872#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3357,26 +3247,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="150" column="46" selection-start-line="150" selection-start-column="46" selection-end-line="150" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sale_stock_form_row.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25">
-          <caret line="35" column="19" selection-start-line="7" selection-start-column="4" selection-end-line="35" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3395,9 +3265,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.3095578">
           <caret line="51" column="59" selection-start-line="51" selection-start-column="59" selection-end-line="51" selection-end-column="59" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3405,7 +3272,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17974323">
           <caret line="45" column="13" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3413,8 +3279,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.46077034">
           <caret line="68" column="39" selection-start-line="68" selection-start-column="39" selection-end-line="68" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/sync/CHAISynchroniser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="179" column="26" selection-start-line="179" selection-start-column="26" selection-end-line="179" selection-end-column="26" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#initialiseGreenDao#0;class#CHAISynchroniser#0" expanded="false" />
+            <element signature="method#downloadRegions#0;class#CHAISynchroniser#0" expanded="false" />
+            <element signature="method#downloadDistricts#0;class#CHAISynchroniser#0" expanded="false" />
+            <element signature="method#downloadSubcounties#0;class#CHAISynchroniser#0" expanded="false" />
+            <element signature="method#downloadCustomers#0;class#CHAISynchroniser#0" expanded="false" />
+            <element signature="method#downloadTasks#0;class#CHAISynchroniser#0" expanded="false" />
+            <element signature="method#uploadTasks#0;class#CHAISynchroniser#0" expanded="false" />
+            <element signature="method#taskIsHistory#0;class#CHAISynchroniser#0" expanded="false" />
+            <element signature="method#taskHasDetails#0;class#CHAISynchroniser#0" expanded="false" />
+            <element signature="method#downloadDiarrheaHistory#0;class#CHAISynchroniser#0" expanded="false" />
+            <element signature="method#downloadMalariaHistory#0;class#CHAISynchroniser#0" expanded="false" />
+            <element signature="class#SyncTask#0;class#CHAISynchroniser#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3424,66 +3308,140 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.5172415">
+        <state vertical-scroll-proportion="0.4107143">
           <caret line="86" column="36" selection-start-line="86" selection-start-column="29" selection-end-line="86" selection-end-column="36" />
-          <folding>
-            <element signature="e#257#292#0" expanded="true" />
-            <element signature="e#687#722#0" expanded="true" />
-            <element signature="e#993#1028#0" expanded="true" />
-            <element signature="e#1735#1770#0" expanded="true" />
-            <element signature="e#2173#2208#0" expanded="true" />
-            <element signature="e#2574#2609#0" expanded="true" />
-            <element signature="e#2976#3017#0" expanded="true" />
-            <element signature="e#3056#3097#0" expanded="true" />
-            <element signature="e#3528#3563#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormSaleFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="159" column="33" selection-start-line="159" selection-start-column="33" selection-end-line="159" selection-end-column="33" />
-          <folding>
-            <element signature="e#2132#2288#0" expanded="true" />
-            <element signature="e#2287#2288#0" expanded="true" />
-            <element signature="e#5645#6092#0" expanded="true" />
-            <element signature="e#6091#6092#0" expanded="true" />
-          </folding>
+          <caret line="45" column="24" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormSaleFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.07703281">
+          <caret line="159" column="33" selection-start-line="159" selection-start-column="22" selection-end-line="159" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormStockFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="94" column="11" selection-start-line="81" selection-start-column="49" selection-end-line="94" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sale_stock_form_row.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26785713">
+          <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesStockFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="179" column="37" selection-start-line="179" selection-start-column="37" selection-end-line="179" selection-end-column="37" />
-          <folding>
-            <element signature="e#2248#2405#0" expanded="true" />
-            <element signature="e#2404#2405#0" expanded="true" />
-            <element signature="e#6122#6570#0" expanded="true" />
-            <element signature="e#6569#6570#0" expanded="true" />
-          </folding>
+          <caret line="268" column="55" selection-start-line="268" selection-start-column="45" selection-end-line="268" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormSaleFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormSaleFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="159" column="33" selection-start-line="159" selection-start-column="22" selection-end-line="159" selection-end-column="33" />
+          <caret line="114" column="5" selection-start-line="40" selection-start-column="3" selection-end-line="114" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customer_commercial_form_fragment.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.758621">
+          <caret line="27" column="81" selection-start-line="23" selection-start-column="12" selection-end-line="27" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sales_form_stock_fragment.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6964286">
+          <caret line="26" column="31" selection-start-line="0" selection-start-column="0" selection-end-line="53" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="239" column="31" selection-start-line="239" selection-start-column="31" selection-end-line="239" selection-end-column="31" />
           <folding>
-            <element signature="e#5651#6098#0" expanded="true" />
-            <element signature="e#6097#6098#0" expanded="true" />
+            <element signature="e#4261#4262#0" expanded="true" />
+            <element signature="e#4301#4302#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/SalesFormStockFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/util/ICCMPopupDialogFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0519481">
-          <caret line="292" column="38" selection-start-line="292" selection-start-column="38" selection-end-line="292" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="36" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="36" />
           <folding>
-            <element signature="e#6099#6547#0" expanded="true" />
-            <element signature="e#6546#6547#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1603#1927#0" expanded="true" />
+            <element signature="e#1926#1927#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sales_form_iccm_fragment.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="161" column="52" selection-start-line="161" selection-start-column="52" selection-end-line="161" selection-end-column="52" />
+          <folding>
+            <element signature="e#363#398#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/iccm_popup_dialog.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.689655">
+          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+          <folding>
+            <element signature="e#234#269#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/chai/activities/tasks/AdhockSalesFormICCMFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12696148">
+          <caret line="177" column="0" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

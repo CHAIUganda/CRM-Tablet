@@ -31,9 +31,7 @@ import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -64,7 +62,7 @@ public class AdhockSalesFormActivity extends BaseActivity {
     AdhockSalesCustomerFragment customerFragment;
     AdhockSalesStockFragment stockFragment;
     AdhockSalesFormSaleFragment salesFragment;
-    AdhockSaleNextStepsFragment nextStepsFragment;
+    AdhockSalesFormICCMFragment iccmFragment;
 
     String saledId;
     private boolean isFromHistory = false;
@@ -108,6 +106,8 @@ public class AdhockSalesFormActivity extends BaseActivity {
             sales = sale.getAdhockSalesDatas();
             toolbar.setTitle("Adhock Sale Details");
         }
+
+        pager.setCurrentItem(3);
     }
 
     private class FormPagerAdapter extends FragmentPagerAdapter {
@@ -132,8 +132,8 @@ public class AdhockSalesFormActivity extends BaseActivity {
                     fragment = salesFragment;
                     break;
                 case 3:
-                    nextStepsFragment = new AdhockSaleNextStepsFragment();
-                    fragment = nextStepsFragment;
+                    iccmFragment = new AdhockSalesFormICCMFragment();
+                    fragment = iccmFragment;
                     break;
             }
             return fragment;
@@ -179,7 +179,7 @@ public class AdhockSalesFormActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveForm(){
+    public void saveForm(){
         Utils.log("Saving sales form");
         if(customerFragment == null || !customerFragment.saveFields()){
             pager.setCurrentItem(0);
@@ -196,12 +196,12 @@ public class AdhockSalesFormActivity extends BaseActivity {
             return;
         }
 
-        if(nextStepsFragment == null || !nextStepsFragment.saveFields()){
+        if(iccmFragment == null || !iccmFragment.saveFields()){
             pager.setCurrentItem(3);
             return;
         }
 
-        sale.setIsDirty(true);
+        /*sale.setIsDirty(true);
         sale.setDateOfSale(new Date());
         sale.setLastUpdated(new Date());
         sale.setIsHistory(false);
@@ -239,7 +239,7 @@ public class AdhockSalesFormActivity extends BaseActivity {
             s.setLastUpdated(new Date());
             s.setIsDirty(true);
             saleDataDao.insert(s);
-        }
+        }*/
 
         Toast.makeText(this, "Sale details have been saved", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, HistoryActivity.class);
