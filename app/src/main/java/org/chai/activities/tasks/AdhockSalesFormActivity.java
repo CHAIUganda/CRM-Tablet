@@ -31,7 +31,9 @@ import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -201,7 +203,7 @@ public class AdhockSalesFormActivity extends BaseActivity {
             return;
         }
 
-        /*sale.setIsDirty(true);
+        sale.setIsDirty(true);
         sale.setDateOfSale(new Date());
         sale.setLastUpdated(new Date());
         sale.setIsHistory(false);
@@ -239,7 +241,7 @@ public class AdhockSalesFormActivity extends BaseActivity {
             s.setLastUpdated(new Date());
             s.setIsDirty(true);
             saleDataDao.insert(s);
-        }*/
+        }
 
         Toast.makeText(this, "Sale details have been saved", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, HistoryActivity.class);

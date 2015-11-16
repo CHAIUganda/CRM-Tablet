@@ -12,18 +12,18 @@ import android.view.View;
 import com.androidquery.AQuery;
 
 import org.chai.R;
-import org.chai.activities.tasks.AdhockSalesFormActivity;
-import org.chai.activities.tasks.AdhockSalesFormICCMFragment;
+import org.chai.activities.tasks.SalesFormActivity;
+import org.chai.activities.tasks.SalesFormICCMFragment;
 
 /**
  * Created by Zed on 11/16/2015.
  */
-public class ICCMPopupDialogFragment extends DialogFragment {
+public class ICCMPopupDialogFragment extends DialogFragment{
     AQuery aq;
-    static AdhockSalesFormActivity activity;
-    static AdhockSalesFormICCMFragment fragment;
+    static SalesFormActivity activity;
+    static SalesFormICCMFragment fragment;
 
-    public static ICCMPopupDialogFragment newInstance(AdhockSalesFormActivity a, String message, AdhockSalesFormICCMFragment f) {
+    public static ICCMPopupDialogFragment newInstance(SalesFormActivity a, String message, SalesFormICCMFragment f) {
         ICCMPopupDialogFragment frag = new ICCMPopupDialogFragment();
         Bundle b = new Bundle();
         b.putString("message", message);

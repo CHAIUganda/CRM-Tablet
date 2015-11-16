@@ -69,7 +69,7 @@ public class SalesFormActivity extends BaseActivity {
     SalesFormCustomerFragment customerFragment;
     SalesFormStockFragment stockFragment;
     SalesFormSaleFragment salesFragment;
-    SalesFormNextStepsFragment nextStepsFragment;
+    SalesFormICCMFragment iccmFragment;
 
     String saledId;
     String taskId;
@@ -147,8 +147,8 @@ public class SalesFormActivity extends BaseActivity {
                     fragment = salesFragment;
                     break;
                 case 3:
-                    nextStepsFragment = new SalesFormNextStepsFragment();
-                    fragment = nextStepsFragment;
+                    iccmFragment = new SalesFormICCMFragment();
+                    fragment = iccmFragment;
                     break;
             }
             return fragment;
@@ -195,7 +195,7 @@ public class SalesFormActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveForm(){
+    public void saveForm(){
         Utils.log("Saving sales form");
         if(customerFragment == null || !customerFragment.saveFields()){
             pager.setCurrentItem(0);
@@ -212,7 +212,7 @@ public class SalesFormActivity extends BaseActivity {
             return;
         }
 
-        if(nextStepsFragment == null || !nextStepsFragment.saveFields()){
+        if(iccmFragment == null || !iccmFragment.saveFields()){
             pager.setCurrentItem(3);
             return;
         }

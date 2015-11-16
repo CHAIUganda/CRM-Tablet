@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.androidquery.AQuery;
 
 import org.chai.R;
-import org.chai.util.ICCMPopupDialogFragment;
+import org.chai.util.AdhockICCMPopupDialogFragment;
 import org.chai.util.Utils;
 
 /**
@@ -202,7 +202,7 @@ public class AdhockSalesFormICCMFragment extends Fragment {
 
 
         if(!fieldsSaved){
-            ICCMPopupDialogFragment.newInstance(parent, message, this).show(getActivity().getSupportFragmentManager(), "iccm_message");
+            AdhockICCMPopupDialogFragment.newInstance(parent, message, this).show(getActivity().getSupportFragmentManager(), "iccm_message");
         }
 
         return fieldsSaved;
