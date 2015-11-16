@@ -101,8 +101,8 @@ public class BaseActivity extends ActionBarActivity{
             "Tasks",
             "Customers",
             "History",
-            "New Order",
-            "Unscheduled Sale",
+            "Order",
+            "Unscheduled Call",
             "My Report"
     };
     int[] iconsNormalSales = new int[]{
