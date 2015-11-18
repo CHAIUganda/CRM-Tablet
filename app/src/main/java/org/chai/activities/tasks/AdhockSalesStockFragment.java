@@ -334,10 +334,10 @@ public class AdhockSalesStockFragment extends Fragment {
                 a.id(R.id.txt_quantity).text(Integer.toString(stock.getQuantity()));
             }
             int index = 0;
-            if(stock.getProductId() != null){
-                for(Product p: products){
+            if(stock.getProductId() != null){ //Setup dropdown selections
+                for(Product p: allProducts){
                     if(p.getUuid().equalsIgnoreCase(stock.getProductId())){
-                        index = products.indexOf(p);
+                        index = allProducts.indexOf(p);
                         break;
                     }
                 }
@@ -386,7 +386,7 @@ public class AdhockSalesStockFragment extends Fragment {
         for(View row : rows){
             AQuery a = new AQuery(row);
             productIndex = a.id(R.id.product).getSelectedItemPosition();
-            product = products.get(productIndex);
+            product = allProducts.get(productIndex);
             String quantity = a.id(R.id.txt_quantity).getText().toString();
             if(quantity.isEmpty()){
                 Toast.makeText(getActivity(), "Please enter stock quanity on row " + i, Toast.LENGTH_LONG).show();

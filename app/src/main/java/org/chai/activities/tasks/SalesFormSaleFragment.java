@@ -50,7 +50,6 @@ public class SalesFormSaleFragment extends Fragment {
     private ProductDao productDao;
 
     private List<Product> allProducts;
-    private List<Product> products;
     private List<ProductGroup> groups;
 
     private ArrayList<String> brands;
@@ -89,7 +88,7 @@ public class SalesFormSaleFragment extends Fragment {
             }
         });
 
-        products = productDao.queryBuilder().orderAsc(ProductDao.Properties.Name).list();
+        allProducts = productDao.queryBuilder().orderAsc(ProductDao.Properties.Name).list();
         groups = productGroupDao.queryBuilder().orderAsc(ProductGroupDao.Properties.Name).list();
 
         ArrayList<ProductGroup> filteredGroups = new ArrayList<>();
@@ -102,13 +101,12 @@ public class SalesFormSaleFragment extends Fragment {
         groups = filteredGroups;
 
         ArrayList<Product> filtered = new ArrayList<>();
-        for(Product p: products){
+        for(Product p: allProducts){
             if(!p.getName().contains("Deleted Product")){
                 filtered.add(p);
             }
         }
 
-        products = filtered;
         allProducts = filtered;
 
         return view;
@@ -119,8 +117,8 @@ public class SalesFormSaleFragment extends Fragment {
             try{
                 for(View row : rows){
                     ((ViewGroup)row.getParent()).removeView(row);
-                    parent.sales = new ArrayList<SaleData>();
-                    rows = new ArrayList<View>();
+                    parent.sales = new ArrayList<>();
+                    rows = new ArrayList<>();
                 }
             }catch (Exception ex){
 
@@ -140,8 +138,8 @@ public class SalesFormSaleFragment extends Fragment {
         ArrayList<SaleData> temp = new ArrayList<SaleData>();
         temp.addAll(parent.sales);
 
-        rows = new ArrayList<View>();
-        parent.sales = new ArrayList<SaleData>();
+        rows = new ArrayList<>();
+        parent.sales = new ArrayList<>();
 
         for(int i = 0; i < temp.size(); i++){
             addRow(temp.get(i));
@@ -194,24 +192,20 @@ public class SalesFormSaleFragment extends Fragment {
         final Spinner spinner = (Spinner)row.findViewById(R.id.product);
         spinner.setAdapter(new ProductArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, allProducts.toArray(new Product[allProducts.size()])));
 
+        final Spinner group = (Spinner)row.findViewById(R.id.group);
         final Spinner brand = (Spinner)row.findViewById(R.id.brand);
         final Spinner size = (Spinner)row.findViewById(R.id.size);
         final Spinner formulation = (Spinner)row.findViewById(R.id.formulation);
 
-        Spinner group = (Spinner)row.findViewById(R.id.group);
         group.setAdapter(new ProductGroupAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, groups.toArray(new ProductGroup[groups.size()])));
         group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ProductGroup g = ((ProductGroupAdapter) parent.getAdapter()).getItem(position);
-                products = g.getProducts();
-                brands = new ArrayList<>();
-                for (Product p : products) {
-                    if (!brands.contains(p.getName()) && !p.getName().contains("Deleted Product")) {
-                        brands.add(p.getName());
-                    }
+                if(group.getTag() != null || sale.getProductId() == null){
+                    ProductGroup g = ((ProductGroupAdapter) group.getAdapter()).getItem(position);
+                    setBrands(brand, g);
                 }
-                brand.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, brands.toArray(new String[brands.size()])));
+                group.setTag(1);
             }
 
             @Override
@@ -223,16 +217,12 @@ public class SalesFormSaleFragment extends Fragment {
         brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sizes = new ArrayList<>();
-                String selectedBrand = parent.getAdapter().getItem(position).toString();
-                for(Product p: products){
-                    if(p.getUnitOfMeasure() != null){
-                        if(p.getName().equalsIgnoreCase(selectedBrand) && !sizes.contains(p.getUnitOfMeasure())){
-                            sizes.add(p.getUnitOfMeasure());
-                        }
-                    }
+                if(brand.getTag() != null || sale.getProductId() == null){
+                    ProductGroup g = (ProductGroup)group.getSelectedItem();
+                    String selectedBrand = parent.getAdapter().getItem(position).toString();
+                    setSizes(size, selectedBrand, g);
                 }
-                size.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, sizes.toArray(new String[sizes.size()])));
+                brand.setTag(1);
             }
 
             @Override
@@ -244,17 +234,13 @@ public class SalesFormSaleFragment extends Fragment {
         size.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                formulations = new ArrayList<>();
-                String selectedBrand = brand.getSelectedItem().toString();
-                String selectedSize = parent.getAdapter().getItem(position).toString();
-                for(Product p: products){
-                    if(p.getFormulation() != null && p.getUnitOfMeasure() != null){
-                        if(p.getName().equalsIgnoreCase(selectedBrand) && p.getUnitOfMeasure().equalsIgnoreCase(selectedSize) && !formulations.contains(p.getFormulation())){
-                            formulations.add(p.getFormulation());
-                        }
-                    }
+                if (size.getTag() != null || sale.getProductId() == null) {
+                    ProductGroup g = (ProductGroup) group.getSelectedItem();
+                    String selectedBrand = brand.getSelectedItem().toString();
+                    String selectedSize = parent.getAdapter().getItem(position).toString();
+                    setFormulations(formulation, selectedBrand, selectedSize, g);
                 }
-                formulation.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, formulations.toArray(new String[formulations.size()])));
+                size.setTag(1);
             }
 
             @Override
@@ -266,45 +252,47 @@ public class SalesFormSaleFragment extends Fragment {
         formulation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                formulations = new ArrayList<>();
-                String selectedBrand = "";
-                try{
-                    selectedBrand = brand.getSelectedItem().toString();
-                }catch (Exception ex){
+                if (formulation.getTag() != null || sale.getProductId() == null) {
+                    formulations = new ArrayList<>();
+                    ProductGroup g = (ProductGroup) group.getSelectedItem();
+                    List<Product> products = g.getProducts();
+                    String selectedBrand = "";
+                    try {
+                        selectedBrand = brand.getSelectedItem().toString();
+                    } catch (Exception ex) {
 
-                }
-                String selectedSize = "";
-                try{
-                    selectedSize = size.getSelectedItem().toString();
-                }catch (Exception ex){
+                    }
+                    String selectedSize = "";
+                    try {
+                        selectedSize = size.getSelectedItem().toString();
+                    } catch (Exception ex) {
 
-                }
-                String selectedFormulation = "";
-                try{
-                    selectedFormulation = parent.getAdapter().getItem(position).toString();
-                }catch (Exception ex){
+                    }
+                    String selectedFormulation = "";
+                    try {
+                        selectedFormulation = parent.getAdapter().getItem(position).toString();
+                    } catch (Exception ex) {
 
-                }
-                for (Product p : products) {
-                    if (p.getFormulation() != null && p.getUnitOfMeasure() != null && p.getFormulation() != null) {
-                        if (p.getName().equalsIgnoreCase(selectedBrand) && p.getUnitOfMeasure().equalsIgnoreCase(selectedSize) && selectedFormulation.equalsIgnoreCase(p.getFormulation())) {
-                            int index = 0;
-                            for(Product pp: allProducts){
-                                if(pp.getUuid().equalsIgnoreCase(p.getUuid())){
-                                    index = allProducts.indexOf(p);
-                                    break;
+                    }
+                    for (Product p : products) {
+                        if (p.getFormulation() != null && p.getUnitOfMeasure() != null && p.getFormulation() != null) {
+                            if (p.getName().equalsIgnoreCase(selectedBrand) && p.getUnitOfMeasure().equalsIgnoreCase(selectedSize) && selectedFormulation.equalsIgnoreCase(p.getFormulation())) {
+                                int index = 0;
+                                for (Product pp : allProducts) {
+                                    if (pp.getUuid().equalsIgnoreCase(p.getUuid())) {
+                                        index = allProducts.indexOf(p);
+                                        break;
+                                    }
                                 }
-                            }
 
-                            spinner.setSelection(index);
-                            break;
-                        }else{
-                            spinner.setSelection(0);
+                                spinner.setSelection(index);
+                                break;
+                            }
                         }
-                    }else{
-                        spinner.setSelection(0);
                     }
                 }
+
+                formulation.setTag(1);
             }
 
             @Override
@@ -318,13 +306,52 @@ public class SalesFormSaleFragment extends Fragment {
                 a.id(R.id.txt_quantity).text(Integer.toString(sale.getQuantity()));
             }
             if(sale.getPrice() != 0){
-                a.id(R.id.txt_unit_price).text(Integer.toString(sale.getQuantity()));
+                a.id(R.id.txt_unit_price).text(Integer.toString(sale.getPrice()));
             }
+
             int index = 0;
             if(sale.getProductId() != null){
-                for(Product p: products){
+                ProductGroup g = sale.getProduct().getProductGroup();
+
+                for(int i = 0; i < group.getAdapter().getCount(); i++){
+                    String s = ((ProductGroup)group.getAdapter().getItem(i)).getName();
+                    if(s.equalsIgnoreCase(sale.getProduct().getProductGroup().getName())){
+                        group.setSelection(i);
+                        break;
+                    }
+                }
+
+                setBrands(brand, g);
+                setSizes(size, sale.getProduct().getName(), g);
+                setFormulations(formulation, sale.getProduct().getName(), sale.getProduct().getUnitOfMeasure(), g);
+
+                for(int i = 0; i < brand.getAdapter().getCount(); i++){
+                    String s = brand.getAdapter().getItem(i).toString();
+                    if(s.equalsIgnoreCase(sale.getProduct().getName())){
+                        brand.setSelection(i);
+                        break;
+                    }
+                }
+
+                for(int i = 0; i < size.getAdapter().getCount(); i++){
+                    String s = size.getAdapter().getItem(i).toString();
+                    if(s.equalsIgnoreCase(sale.getProduct().getUnitOfMeasure())){
+                        size.setSelection(i);
+                        break;
+                    }
+                }
+
+                for(int i = 0; i < formulation.getAdapter().getCount(); i++){
+                    String s = formulation.getAdapter().getItem(i).toString();
+                    if(s.equalsIgnoreCase(sale.getProduct().getFormulation())){
+                        formulation.setSelection(i);
+                        break;
+                    }
+                }
+
+                for(Product p: allProducts){
                     if(p.getUuid().equalsIgnoreCase(sale.getProductId())){
-                        index = products.indexOf(p);
+                        index = allProducts.indexOf(p);
                         break;
                     }
                 }
@@ -395,5 +422,42 @@ public class SalesFormSaleFragment extends Fragment {
         }
 
         return true;
+    }
+
+    private void setBrands(Spinner spinner, ProductGroup group){
+        List<Product> products = group.getProducts();
+        brands = new ArrayList<>();
+        for (Product p : products) {
+            if (!brands.contains(p.getName()) && !p.getName().contains("Deleted Product")) {
+                brands.add(p.getName());
+            }
+        }
+        spinner.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, brands.toArray(new String[brands.size()])));
+    }
+
+    private void setSizes(Spinner spinner, String brand, ProductGroup group){
+        List<Product> products = group.getProducts();
+        sizes = new ArrayList<>();
+        for(Product p: products){
+            if(p.getUnitOfMeasure() != null){
+                if(p.getName().equalsIgnoreCase(brand) && !sizes.contains(p.getUnitOfMeasure())){
+                    sizes.add(p.getUnitOfMeasure());
+                }
+            }
+        }
+        spinner.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, sizes.toArray(new String[sizes.size()])));
+    }
+
+    private void setFormulations(Spinner spinner, String brand, String size, ProductGroup group){
+        List<Product> products = group.getProducts();
+        formulations = new ArrayList<>();
+        for(Product p: products){
+            if(p.getFormulation() != null && p.getUnitOfMeasure() != null){
+                if(p.getName().equalsIgnoreCase(brand) && p.getUnitOfMeasure().equalsIgnoreCase(size) && !formulations.contains(p.getFormulation())){
+                    formulations.add(p.getFormulation());
+                }
+            }
+        }
+        spinner.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, formulations.toArray(new String[formulations.size()])));
     }
 }

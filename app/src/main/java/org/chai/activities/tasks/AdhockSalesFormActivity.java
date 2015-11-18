@@ -107,6 +107,8 @@ public class AdhockSalesFormActivity extends BaseActivity {
             sales = sale.getAdhockSalesDatas();
             toolbar.setTitle("Adhock Sale Details");
         }
+
+        pager.setCurrentItem(1);
     }
 
     private class FormPagerAdapter extends FragmentPagerAdapter {
