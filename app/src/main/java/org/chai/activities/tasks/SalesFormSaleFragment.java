@@ -298,7 +298,11 @@ public class SalesFormSaleFragment extends Fragment {
 
                             spinner.setSelection(index);
                             break;
+                        }else{
+                            spinner.setSelection(0);
                         }
+                    }else{
+                        spinner.setSelection(0);
                     }
                 }
             }
@@ -369,7 +373,7 @@ public class SalesFormSaleFragment extends Fragment {
         for(View row : rows){
             AQuery a = new AQuery(row);
             productIndex = a.id(R.id.product).getSelectedItemPosition();
-            product = products.get(productIndex);
+            product = allProducts.get(productIndex);
             quantity = a.id(R.id.txt_quantity).getText().toString();
             if(quantity.isEmpty()){
                 Toast.makeText(getActivity(), "Please enter sale quanity on row " + i, Toast.LENGTH_LONG).show();

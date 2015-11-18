@@ -30,6 +30,8 @@
                 android:id="@+id/spn_do_you_stock_ors"
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:entries="@array/yesnolist" />
 
             <LinearLayout
@@ -68,6 +70,8 @@
                 android:id="@+id/spn_do_you_stock_zinc"
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:entries="@array/yesnolist" />
 
             <LinearLayout
@@ -106,6 +110,8 @@
                 android:id="@+id/spn_do_you_stock_acts"
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:entries="@array/yesnolist" />
 
             <LinearLayout
@@ -144,6 +150,8 @@
                 android:id="@+id/spn_do_you_stock_amoxicillin"
                 style="@style/SpinnerStyle"
                 android:layout_width="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:entries="@array/yesnolist" />
 
             <LinearLayout

@@ -3,7 +3,6 @@ package org.chai.util;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -12,25 +11,18 @@ import android.view.View;
 import com.androidquery.AQuery;
 
 import org.chai.R;
-import org.chai.activities.tasks.AdhockSalesFormActivity;
-import org.chai.activities.tasks.AdhockSalesFormICCMFragment;
 
 /**
  * Created by Zed on 11/16/2015.
  */
 public class AdhockICCMPopupDialogFragment extends DialogFragment {
     AQuery aq;
-    static AdhockSalesFormActivity activity;
-    static AdhockSalesFormICCMFragment fragment;
 
-    public static AdhockICCMPopupDialogFragment newInstance(AdhockSalesFormActivity a, String message, AdhockSalesFormICCMFragment f) {
+    public static AdhockICCMPopupDialogFragment newInstance(String message) {
         AdhockICCMPopupDialogFragment frag = new AdhockICCMPopupDialogFragment();
         Bundle b = new Bundle();
         b.putString("message", message);
         frag.setArguments(b);
-        activity = a;
-        fragment = f;
-
 
         return frag;
     }
@@ -47,15 +39,7 @@ public class AdhockICCMPopupDialogFragment extends DialogFragment {
 
         builder.setView(v);
 
-        builder.setPositiveButton("DONE", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                fragment.fieldsSaved = true; //This stops us from showing dialog again
-                activity.saveForm(); //Re-save fields - will not show dialog again
-            }
-        });
-
-        builder.setNegativeButton("Cancel", null);
+        builder.setPositiveButton("DONE", null);
 
         return builder.create();
     }

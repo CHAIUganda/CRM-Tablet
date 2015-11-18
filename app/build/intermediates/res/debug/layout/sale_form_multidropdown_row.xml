@@ -17,7 +17,7 @@
             android:layout_weight="4"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:popupBackground="@color/primary_dark"
-            style="@style/SpinnerStyle"/>
+            style="@style/SpinnerStyle2"/>
 
         <Spinner
             android:id="@+id/brand"
@@ -25,14 +25,14 @@
             android:layout_weight="4"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:popupBackground="@color/primary_dark"
-            style="@style/SpinnerStyle"/>
+            style="@style/SpinnerStyle2"/>
 
         <Spinner
             android:id="@+id/size"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:popupBackground="@color/primary_dark"
-            style="@style/SpinnerStyle"/>
+            style="@style/SpinnerStyle2"/>
     </LinearLayout>
 
     <LinearLayout
@@ -47,7 +47,7 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:entries="@array/productlist"
             android:popupBackground="@color/primary_dark"
-            style="@style/SpinnerStyle"/>
+            style="@style/SpinnerStyle2"/>
 
         <EditText
             android:id="@+id/txt_quantity"
@@ -90,7 +90,7 @@
             android:entries="@array/productlist"
             android:popupBackground="@color/primary_dark"
             android:visibility="gone"
-            style="@style/SpinnerStyle"/>
+            style="@style/SpinnerStyle2"/>
 
     </LinearLayout>
 

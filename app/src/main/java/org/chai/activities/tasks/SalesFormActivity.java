@@ -46,7 +46,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class SalesFormActivity extends BaseActivity {
     Toolbar toolbar;
     AQuery aq;
-    int NUM_PAGES = 4;
+    int NUM_PAGES = 3;
     ViewPager pager;
     CircleIndicator indicator;
 
@@ -67,7 +67,6 @@ public class SalesFormActivity extends BaseActivity {
     public List<SaleData> sales;
 
     SalesFormCustomerFragment customerFragment;
-    SalesFormStockFragment stockFragment;
     SalesFormSaleFragment salesFragment;
     SalesFormICCMFragment iccmFragment;
 
@@ -139,14 +138,10 @@ public class SalesFormActivity extends BaseActivity {
                     fragment = customerFragment;
                     break;
                 case 1:
-                    stockFragment = new SalesFormStockFragment();
-                    fragment = stockFragment;
-                    break;
-                case 2:
                     salesFragment = new SalesFormSaleFragment();
                     fragment = salesFragment;
                     break;
-                case 3:
+                case 2:
                     iccmFragment = new SalesFormICCMFragment();
                     fragment = iccmFragment;
                     break;
@@ -202,18 +197,13 @@ public class SalesFormActivity extends BaseActivity {
             return;
         }
 
-        if(stockFragment == null || !stockFragment.saveFields()){
+        if(salesFragment == null || !salesFragment.saveFields()){
             pager.setCurrentItem(1);
             return;
         }
 
-        if(salesFragment == null || !salesFragment.saveFields()){
-            pager.setCurrentItem(2);
-            return;
-        }
-
         if(iccmFragment == null || !iccmFragment.saveFields()){
-            pager.setCurrentItem(3);
+            pager.setCurrentItem(2);
             return;
         }
 

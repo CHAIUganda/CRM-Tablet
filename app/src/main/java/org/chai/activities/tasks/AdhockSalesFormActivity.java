@@ -43,7 +43,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class AdhockSalesFormActivity extends BaseActivity {
     Toolbar toolbar;
     AQuery aq;
-    int NUM_PAGES = 4;
+    int NUM_PAGES = 3;
     ViewPager pager;
     CircleIndicator indicator;
 
@@ -62,7 +62,6 @@ public class AdhockSalesFormActivity extends BaseActivity {
     public List<SaleData> sales;
 
     AdhockSalesCustomerFragment customerFragment;
-    AdhockSalesStockFragment stockFragment;
     AdhockSalesFormSaleFragment salesFragment;
     AdhockSalesFormICCMFragment iccmFragment;
 
@@ -124,14 +123,10 @@ public class AdhockSalesFormActivity extends BaseActivity {
                     fragment = customerFragment;
                     break;
                 case 1:
-                    stockFragment = new AdhockSalesStockFragment();
-                    fragment = stockFragment;
-                    break;
-                case 2:
                     salesFragment = new AdhockSalesFormSaleFragment();
                     fragment = salesFragment;
                     break;
-                case 3:
+                case 2:
                     iccmFragment = new AdhockSalesFormICCMFragment();
                     fragment = iccmFragment;
                     break;
@@ -186,18 +181,13 @@ public class AdhockSalesFormActivity extends BaseActivity {
             return;
         }
 
-        if(stockFragment == null || !stockFragment.saveFields()){
+        if(salesFragment == null || !salesFragment.saveFields()){
             pager.setCurrentItem(1);
             return;
         }
 
-        if(salesFragment == null || !salesFragment.saveFields()){
-            pager.setCurrentItem(2);
-            return;
-        }
-
         if(iccmFragment == null || !iccmFragment.saveFields()){
-            pager.setCurrentItem(3);
+            pager.setCurrentItem(2);
             return;
         }
 

@@ -1647,6 +1647,11 @@ m>        <item name="android:textColorLink">@color/link_text_material_dark</ite
         <item name="android:background">@drawable/spinner_background_selector</item>
         <item name="android:layout_height">45dp</item>
     </style>
+    <style name="SpinnerStyle2">
+        <item name="android:layout_width">@dimen/spinner_max_wth</item>
+        <item name="android:background">@drawable/spinner_s_background_selector</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
     <style name="TableHeaderStyle">
         <item name="android:background">@color/window_background_dark</item>
         <item name="android:textColor">@color/app_text_color</item>
