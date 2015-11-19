@@ -1650,7 +1650,7 @@ m>        <item name="android:textColorLink">@color/link_text_material_dark</ite
     <style name="SpinnerStyle2">
         <item name="android:layout_width">@dimen/spinner_max_wth</item>
         <item name="android:background">@drawable/spinner_s_background_selector</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">35dp</item>
     </style>
     <style name="TableHeaderStyle">
         <item name="android:background">@color/window_background_dark</item>
@@ -1715,6 +1715,10 @@ m>        <item name="android:textColorLink">@color/link_text_material_dark</ite
         <item name="android:background">@drawable/form_text_field</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:padding">@dimen/text_field_padding</item>
+    </style>
+    <style name="TextBoxStyleS" parent="TextBoxStyle">
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_height">30dp</item>
     </style>
     <!-- From: file:/C:/Users/Zed/AndroidStudioProjects/chai-crm-android1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment/>

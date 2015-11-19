@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
@@ -206,6 +207,7 @@ public class AdhockSalesFormSaleFragment extends Fragment {
                     setBrands(brand, g);
                 }
                 group.setTag(1);
+                ((TextView)parent.getChildAt(0)).setTextSize(10);
             }
 
             @Override
@@ -223,6 +225,7 @@ public class AdhockSalesFormSaleFragment extends Fragment {
                     setSizes(size, selectedBrand, g);
                 }
                 brand.setTag(1);
+                ((TextView)parent.getChildAt(0)).setTextSize(10);
             }
 
             @Override
@@ -241,6 +244,7 @@ public class AdhockSalesFormSaleFragment extends Fragment {
                     setFormulations(formulation, selectedBrand, selectedSize, g);
                 }
                 size.setTag(1);
+                ((TextView)parent.getChildAt(0)).setTextSize(10);
             }
 
             @Override
@@ -293,6 +297,7 @@ public class AdhockSalesFormSaleFragment extends Fragment {
                 }
 
                 formulation.setTag(1);
+                ((TextView)parent.getChildAt(0)).setTextSize(10);
             }
 
             @Override
