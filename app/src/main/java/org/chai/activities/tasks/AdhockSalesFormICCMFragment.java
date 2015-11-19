@@ -56,6 +56,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                 }else{
                     aq.id(R.id.ln_ors_price_container).visible();
                 }
+                if(position != 0){
+                    aq.id(R.id.ln_zinc_container).visible();
+                }
             }
 
             @Override
@@ -77,6 +80,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                 }else{
                     aq.id(R.id.ln_zinc_price_container).visible();
                 }
+                if(position != 0){
+                    aq.id(R.id.ln_act_container).visible();
+                }
             }
 
             @Override
@@ -97,6 +103,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                     AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
                 }else{
                     aq.id(R.id.ln_acts_price_container).visible();
+                }
+                if(position != 0){
+                    aq.id(R.id.ln_amox_container).visible();
                 }
             }
 
