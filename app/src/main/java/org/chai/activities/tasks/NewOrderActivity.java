@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ import org.chai.activities.BaseActivity;
 import org.chai.activities.calls.HistoryActivity;
 import org.chai.adapter.CustomerAutocompleteAdapter;
 import org.chai.adapter.ProductArrayAdapter;
+import org.chai.adapter.ProductGroupAdapter;
 import org.chai.model.Customer;
 import org.chai.model.CustomerDao;
 import org.chai.model.DaoMaster;
@@ -41,6 +43,8 @@ import org.chai.model.OrderData;
 import org.chai.model.OrderDataDao;
 import org.chai.model.Product;
 import org.chai.model.ProductDao;
+import org.chai.model.ProductGroup;
+import org.chai.model.ProductGroupDao;
 import org.chai.model.User;
 import org.chai.rest.RestClient;
 import org.chai.util.MyApplication;
@@ -74,7 +78,6 @@ public class NewOrderActivity extends BaseActivity {
     Customer customer;
     Order order;
 
-    private List<Product> products;
     private List<Customer> customers;
     private List<OrderData> orderDataItems;
 
@@ -83,10 +86,18 @@ public class NewOrderActivity extends BaseActivity {
     private DaoSession daoSession;
     private CustomerDao customerDao;
     private OrderDao orderDao;
+    private ProductGroupDao productGroupDao;
     private ProductDao productDao;
     private OrderDataDao orderDataDao;
 
     private boolean isFromHistory;
+
+    private List<Product> allProducts;
+    private List<ProductGroup> groups;
+
+    private ArrayList<String> brands;
+    private ArrayList<String> sizes;
+    private ArrayList<String> formulations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +120,26 @@ public class NewOrderActivity extends BaseActivity {
         dateFormat = DateFormat.getDateInstance();
         Calendar c = new GregorianCalendar();
 
-        products = productDao.queryBuilder().orderAsc(ProductDao.Properties.Name).list();
+        allProducts = productDao.queryBuilder().orderAsc(ProductDao.Properties.Name).list();
+        groups = productGroupDao.queryBuilder().orderAsc(ProductGroupDao.Properties.Name).list();
+
+        ArrayList<ProductGroup> filteredGroups = new ArrayList<>();
+        for(ProductGroup group: groups){
+            if(group.getProducts().size() > 0){
+                filteredGroups.add(group);
+            }
+        }
+
+        groups = filteredGroups;
+
+        ArrayList<Product> filtered = new ArrayList<>();
+        for(Product p: allProducts){
+            if(!p.getName().contains("Deleted Product")){
+                filtered.add(p);
+            }
+        }
+
+        allProducts = filtered;
 
         dateField = aq.id(R.id.due_date).getEditText();
         dateField.setHint(dateFormat.format(new Date(c.getTimeInMillis())));
@@ -208,16 +238,168 @@ public class NewOrderActivity extends BaseActivity {
         LayoutInflater inflator = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View row = inflator.inflate(R.layout.order_form_item_row, null);
-        Spinner spinner = (Spinner)row.findViewById(R.id.item);
-        spinner.setAdapter(new ProductArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, products.toArray(new Product[products.size()])));
+        final Spinner spinner = (Spinner)row.findViewById(R.id.item);
+        spinner.setAdapter(new ProductArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, allProducts.toArray(new Product[allProducts.size()])));
 
         AQuery a = new AQuery(row);
+
+        final Spinner group = (Spinner)row.findViewById(R.id.group);
+        final Spinner brand = (Spinner)row.findViewById(R.id.brand);
+        final Spinner size = (Spinner)row.findViewById(R.id.size);
+        final Spinner formulation = (Spinner)row.findViewById(R.id.formulation);
+
+        group.setAdapter(new ProductGroupAdapter(this, android.R.layout.simple_spinner_dropdown_item, groups.toArray(new ProductGroup[groups.size()])));
+        group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(group.getTag() != null || data.getProductId() == null){
+                    ProductGroup g = ((ProductGroupAdapter) group.getAdapter()).getItem(position);
+                    setBrands(brand, g);
+                }
+                group.setTag(1);
+                ((TextView)group.getChildAt(0)).setTextSize(10);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (brand.getTag() != null || data.getProductId() == null) {
+                    ProductGroup g = (ProductGroup) group.getSelectedItem();
+                    String selectedBrand = parent.getAdapter().getItem(position).toString();
+                    setSizes(size, selectedBrand, g);
+                }
+                brand.setTag(1);
+                ((TextView)brand.getChildAt(0)).setTextSize(10);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        size.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (size.getTag() != null || data.getProductId() == null) {
+                    ProductGroup g = (ProductGroup) group.getSelectedItem();
+                    String selectedBrand = brand.getSelectedItem().toString();
+                    String selectedSize = parent.getAdapter().getItem(position).toString();
+                    setFormulations(formulation, selectedBrand, selectedSize, g);
+                }
+                size.setTag(1);
+                ((TextView)size.getChildAt(0)).setTextSize(10);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        formulation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (formulation.getTag() != null || data.getProductId() == null) {
+                    formulations = new ArrayList<>();
+                    ProductGroup g = (ProductGroup) group.getSelectedItem();
+                    List<Product> products = g.getProducts();
+                    String selectedBrand = "";
+                    try {
+                        selectedBrand = brand.getSelectedItem().toString();
+                    } catch (Exception ex) {
+
+                    }
+                    String selectedSize = "";
+                    try {
+                        selectedSize = size.getSelectedItem().toString();
+                    } catch (Exception ex) {
+
+                    }
+                    String selectedFormulation = "";
+                    try {
+                        selectedFormulation = parent.getAdapter().getItem(position).toString();
+                    } catch (Exception ex) {
+
+                    }
+                    for (Product p : products) {
+                        if (p.getFormulation() != null && p.getUnitOfMeasure() != null && p.getFormulation() != null) {
+                            if (p.getName().equalsIgnoreCase(selectedBrand) && p.getUnitOfMeasure().equalsIgnoreCase(selectedSize) && selectedFormulation.equalsIgnoreCase(p.getFormulation())) {
+                                int index = 0;
+                                for (Product pp : allProducts) {
+                                    if (pp.getUuid().equalsIgnoreCase(p.getUuid())) {
+                                        index = allProducts.indexOf(p);
+                                        break;
+                                    }
+                                }
+
+                                spinner.setSelection(index);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                formulation.setTag(1);
+                ((TextView)formulation.getChildAt(0)).setTextSize(10);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         if(data.getUuid() != null){
             try{
                 spinner.setSelection(((ProductArrayAdapter)spinner.getAdapter()).getPosition(data.getProduct()));
                 a.id(R.id.drop_sample).checked(data.getDropSample());
                 if(data.getQuantity() != 0){
                     a.id(R.id.quantity).text(Integer.toString(data.getQuantity()));
+                }
+
+                ProductGroup g = data.getProduct().getProductGroup();
+
+                for(int i = 0; i < group.getAdapter().getCount(); i++){
+                    String s = ((ProductGroup)group.getAdapter().getItem(i)).getName();
+                    if(s.equalsIgnoreCase(data.getProduct().getProductGroup().getName())){
+                        group.setSelection(i);
+                        break;
+                    }
+                }
+
+                setBrands(brand, g);
+                setSizes(size, data.getProduct().getName(), g);
+                setFormulations(formulation, data.getProduct().getName(), data.getProduct().getUnitOfMeasure(), g);
+
+                for(int i = 0; i < brand.getAdapter().getCount(); i++){
+                    String s = brand.getAdapter().getItem(i).toString();
+                    if(s.equalsIgnoreCase(data.getProduct().getName())){
+                        brand.setSelection(i);
+                        break;
+                    }
+                }
+
+                for(int i = 0; i < size.getAdapter().getCount(); i++){
+                    String s = size.getAdapter().getItem(i).toString();
+                    if(s.equalsIgnoreCase(data.getProduct().getUnitOfMeasure())){
+                        size.setSelection(i);
+                        break;
+                    }
+                }
+
+                for(int i = 0; i < formulation.getAdapter().getCount(); i++){
+                    String s = formulation.getAdapter().getItem(i).toString();
+                    if(s.equalsIgnoreCase(data.getProduct().getFormulation())){
+                        formulation.setSelection(i);
+                        break;
+                    }
                 }
             }catch (Exception ex){
                 Utils.log("Error populating order row");
@@ -263,6 +445,7 @@ public class NewOrderActivity extends BaseActivity {
             daoSession = daoMaster.newSession();
             customerDao = daoSession.getCustomerDao();
             orderDao = daoSession.getOrderDao();
+            productGroupDao = daoSession.getProductGroupDao();
             productDao = daoSession.getProductDao();
             orderDataDao = daoSession.getOrderDataDao();
         } catch (Exception ex) {
@@ -322,7 +505,7 @@ public class NewOrderActivity extends BaseActivity {
 
         for(View row : rows){
             AQuery a = new AQuery(row);
-            p = products.get(a.id(R.id.item).getSelectedItemPosition());
+            p = allProducts.get(a.id(R.id.item).getSelectedItemPosition());
             String quantity = a.id(R.id.quantity).getText().toString();
             boolean sample = a.id(R.id.drop_sample).isChecked();
             if(quantity.isEmpty()){
@@ -371,5 +554,42 @@ public class NewOrderActivity extends BaseActivity {
         Intent i = new Intent(this, HistoryActivity.class);
         i.putExtra("tab", RestClient.getRole().equalsIgnoreCase(User.ROLE_DETAILER) ? 2 : 2);
         startActivity(i);
+    }
+
+    private void setBrands(Spinner spinner, ProductGroup group){
+        List<Product> products = group.getProducts();
+        brands = new ArrayList<>();
+        for (Product p : products) {
+            if (!brands.contains(p.getName()) && !p.getName().contains("Deleted Product")) {
+                brands.add(p.getName());
+            }
+        }
+        spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, brands.toArray(new String[brands.size()])));
+    }
+
+    private void setSizes(Spinner spinner, String brand, ProductGroup group){
+        List<Product> products = group.getProducts();
+        sizes = new ArrayList<>();
+        for(Product p: products){
+            if(p.getUnitOfMeasure() != null){
+                if(p.getName().equalsIgnoreCase(brand) && !sizes.contains(p.getUnitOfMeasure())){
+                    sizes.add(p.getUnitOfMeasure());
+                }
+            }
+        }
+        spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sizes.toArray(new String[sizes.size()])));
+    }
+
+    private void setFormulations(Spinner spinner, String brand, String size, ProductGroup group){
+        List<Product> products = group.getProducts();
+        formulations = new ArrayList<>();
+        for(Product p: products){
+            if(p.getFormulation() != null && p.getUnitOfMeasure() != null){
+                if(p.getName().equalsIgnoreCase(brand) && p.getUnitOfMeasure().equalsIgnoreCase(size) && !formulations.contains(p.getFormulation())){
+                    formulations.add(p.getFormulation());
+                }
+            }
+        }
+        spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, formulations.toArray(new String[formulations.size()])));
     }
 }

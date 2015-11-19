@@ -360,8 +360,9 @@ public class AdhockSalesFormSaleFragment extends Fragment {
                         break;
                     }
                 }
+
+                spinner.setSelection(index);
             }
-            spinner.setSelection(index);
         }catch(Exception ex){
             Utils.log("Error loading row -> " + ex.getMessage());
         }

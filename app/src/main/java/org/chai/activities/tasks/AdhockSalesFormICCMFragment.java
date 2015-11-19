@@ -139,7 +139,6 @@ public class AdhockSalesFormICCMFragment extends Fragment {
         aq.id(R.id.txt_ors_lowest_price).getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                Utils.log("Focus changed -> " + hasFocus);
                 if (!hasFocus) {
                     stockOrs = (aq.id(R.id.spn_do_you_stock_ors).getSelectedItemPosition() == 1);
                     minOrsPrice = aq.id(R.id.txt_ors_lowest_price).getText().toString();
