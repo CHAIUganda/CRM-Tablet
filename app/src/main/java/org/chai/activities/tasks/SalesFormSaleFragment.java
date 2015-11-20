@@ -207,7 +207,7 @@ public class SalesFormSaleFragment extends Fragment {
                     setBrands(brand, g);
                 }
                 group.setTag(1);
-                ((TextView)parent.getChildAt(0)).setTextSize(10);
+                ((TextView)group.getChildAt(0)).setTextSize(10);
             }
 
             @Override
@@ -225,7 +225,7 @@ public class SalesFormSaleFragment extends Fragment {
                     setSizes(size, selectedBrand, g);
                 }
                 brand.setTag(1);
-                ((TextView)parent.getChildAt(0)).setTextSize(10);
+                ((TextView)brand.getChildAt(0)).setTextSize(10);
             }
 
             @Override
@@ -244,7 +244,7 @@ public class SalesFormSaleFragment extends Fragment {
                     setFormulations(formulation, selectedBrand, selectedSize, g);
                 }
                 size.setTag(1);
-                ((TextView)parent.getChildAt(0)).setTextSize(10);
+                ((TextView)size.getChildAt(0)).setTextSize(10);
             }
 
             @Override
@@ -297,7 +297,7 @@ public class SalesFormSaleFragment extends Fragment {
                 }
 
                 formulation.setTag(1);
-                ((TextView)parent.getChildAt(0)).setTextSize(10);
+                ((TextView)formulation.getChildAt(0)).setTextSize(10);
             }
 
             @Override
