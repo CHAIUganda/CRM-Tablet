@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -100,6 +102,8 @@ public class NewOrderActivity extends BaseActivity {
     private ArrayList<String> brands;
     private ArrayList<String> sizes;
     private ArrayList<String> formulations;
+
+    TextWatcher watcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -244,6 +248,49 @@ public class NewOrderActivity extends BaseActivity {
         spinner.setAdapter(new ProductArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, allProducts.toArray(new Product[allProducts.size()])));
 
         AQuery a = new AQuery(row);
+
+        a.id(R.id.quantity).getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try{
+                    data.setQuantity(Integer.parseInt(s.toString()));
+                }catch (Exception ex){
+                    data.setQuantity(0);
+                }
+                refreshOrderTotal();
+            }
+        });
+        a.id(R.id.price).getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try{
+                    data.setPrice(Integer.parseInt(s.toString()));
+                }catch (Exception ex){
+                    data.setPrice(0);
+                }
+                refreshOrderTotal();
+            }
+        });
 
         final Spinner group = (Spinner)row.findViewById(R.id.group);
         final Spinner brand = (Spinner)row.findViewById(R.id.brand);
@@ -609,8 +656,10 @@ public class NewOrderActivity extends BaseActivity {
     private void refreshOrderTotal(){
         int total = 0;
         for(OrderData item : orderDataItems){
-            total += item.getPrice();
+            total += (item.getQuantity() * item.getPrice());
         }
-        aq.id(R.id.txt_order_total).text("Total: UGX " + NumberFormat.getNumberInstance(Locale.US).format(total));
+        String totalStr = "Total: UGX " + NumberFormat.getNumberInstance(Locale.US).format(total);
+        aq.id(R.id.txt_order_total).text(totalStr);
+        //setTitle(totalStr);
     }
 }
