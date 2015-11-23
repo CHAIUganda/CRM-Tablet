@@ -39,6 +39,8 @@ public class AdhockSalesFormICCMFragment extends Fragment {
     int minAmoxPriceVal = -1;
     int minRDTPriceVal = -1;
 
+    boolean canFireSpinnerEvent = false;
+
     String message;
 
     @Override
@@ -50,6 +52,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
         aq.id(R.id.spn_do_you_stock_ors).itemSelected(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!canFireSpinnerEvent){
+                    return;
+                }
                 if(position == 2){
                     aq.id(R.id.ln_zinc_container).visible();
 
@@ -75,6 +80,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
         aq.id(R.id.spn_do_you_stock_zinc).itemSelected(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!canFireSpinnerEvent){
+                    return;
+                }
                 if (position == 2) {
                     aq.id(R.id.ln_act_container).visible();
                     message = "The MOH recommends that zinc always be given in COMBINATION with ORS as 1st line treatment for diarrhea - Always stock ORS and zinc!\n\n" +
@@ -99,6 +107,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
         aq.id(R.id.spn_do_you_stock_acts).itemSelected(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!canFireSpinnerEvent){
+                    return;
+                }
                 if (position == 2) {
                     aq.id(R.id.ln_rdt_container).visible();
 
@@ -124,6 +135,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
         aq.id(R.id.spn_do_you_stock_rdt).itemSelected(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!canFireSpinnerEvent){
+                    return;
+                }
                 if (position == 2) {
                     aq.id(R.id.ln_amox_container).visible();
 
@@ -149,6 +163,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
         aq.id(R.id.spn_do_you_stock_amoxicillin).itemSelected(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!canFireSpinnerEvent){
+                    return;
+                }
                 if (position == 2) {
                     message = "The MOH now recommends Amoxicillin 250mg DT as the 1st line treatment for childhood pneumonia\n\n" +
                             "Proper diagnosis must be performed before prescribing - Remember!  Not all coughs need an antibiotic - Count breaths before treating!";
@@ -174,6 +191,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
         lowestOrsPrice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!canFireSpinnerEvent){
+                    return;
+                }
                 stockOrs = (aq.id(R.id.spn_do_you_stock_ors).getSelectedItemPosition() == 1);
                 minOrsPrice = lowestOrsPrice.getAdapter().getItem(position).toString();
                 if (minOrsPrice.length() == 0) {
@@ -206,6 +226,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
         lowestZincPrice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!canFireSpinnerEvent){
+                    return;
+                }
                 stockZinc = (aq.id(R.id.spn_do_you_stock_zinc).getSelectedItemPosition() == 1);
                 minZincPrice = lowestZincPrice.getAdapter().getItem(position).toString();
                 if (minZincPrice.length() == 0) {
@@ -238,6 +261,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
         lowestACTPrice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!canFireSpinnerEvent){
+                    return;
+                }
                 stockACTs = (aq.id(R.id.spn_do_you_stock_acts).getSelectedItemPosition() == 1);
                 minACTPrice = lowestACTPrice.getAdapter().getItem(position).toString();
                 if (minACTPrice.length() == 0) {
@@ -270,6 +296,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
         lowestRDTPrice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!canFireSpinnerEvent){
+                    return;
+                }
                 stockRDT = (aq.id(R.id.spn_do_you_stock_rdt).getSelectedItemPosition() == 1);
                 minRDTPrice = lowestRDTPrice.getAdapter().getItem(position).toString();
                 if (minRDTPrice.length() == 0) {
@@ -302,6 +331,9 @@ public class AdhockSalesFormICCMFragment extends Fragment {
         lowestAmoxPrice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!canFireSpinnerEvent){
+                    return;
+                }
                 stockAmox = (aq.id(R.id.spn_do_you_stock_amoxicillin).getSelectedItemPosition() == 1);
                 minAmoxPrice = lowestAmoxPrice.getAdapter().getItem(position).toString();
                 if (minAmoxPrice.length() == 0) {
@@ -330,6 +362,25 @@ public class AdhockSalesFormICCMFragment extends Fragment {
         populateFields();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        canFireSpinnerEvent = false;
+        Utils.log("cannot fire events");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Utils.log("can now fire events");
+                canFireSpinnerEvent = true;
+            }
+        }).start();
     }
 
     private void populateFields(){
