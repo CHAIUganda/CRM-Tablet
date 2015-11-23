@@ -38,13 +38,23 @@ public class SaleDao extends AbstractDao<Sale, String> {
         public final static Property IsHistory = new Property(7, Boolean.class, "isHistory", false, "IS_HISTORY");
         public final static Property Latitude = new Property(8, Double.class, "latitude", false, "LATITUDE");
         public final static Property Longitude = new Property(9, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property OrderId = new Property(10, String.class, "orderId", false, "ORDER_ID");
-        public final static Property TaskId = new Property(11, String.class, "taskId", false, "TASK_ID");
-        public final static Property IsDirty = new Property(12, Boolean.class, "isDirty", false, "IS_DIRTY");
-        public final static Property SyncronisationStatus = new Property(13, Integer.class, "syncronisationStatus", false, "SYNCRONISATION_STATUS");
-        public final static Property SyncronisationMessage = new Property(14, String.class, "syncronisationMessage", false, "SYNCRONISATION_MESSAGE");
-        public final static Property DateCreated = new Property(15, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
-        public final static Property LastUpdated = new Property(16, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
+        public final static Property StocksORS = new Property(10, Boolean.class, "stocksORS", false, "STOCKS_ORS");
+        public final static Property StocksZinc = new Property(11, Boolean.class, "stocksZinc", false, "STOCKS_ZINC");
+        public final static Property StocksACTs = new Property(12, Boolean.class, "stocksACTs", false, "STOCKS_ACTS");
+        public final static Property StocksAmox = new Property(13, Boolean.class, "stocksAmox", false, "STOCKS_AMOX");
+        public final static Property StocksRDT = new Property(14, Boolean.class, "stocksRDT", false, "STOCKS_RDT");
+        public final static Property MinORSPrice = new Property(15, String.class, "minORSPrice", false, "MIN_ORSPRICE");
+        public final static Property MinZincPrice = new Property(16, String.class, "minZincPrice", false, "MIN_ZINC_PRICE");
+        public final static Property MinACTPrice = new Property(17, String.class, "minACTPrice", false, "MIN_ACTPRICE");
+        public final static Property MinAmoxPrice = new Property(18, String.class, "minAmoxPrice", false, "MIN_AMOX_PRICE");
+        public final static Property MinRDTPrice = new Property(19, String.class, "minRDTPrice", false, "MIN_RDTPRICE");
+        public final static Property OrderId = new Property(20, String.class, "orderId", false, "ORDER_ID");
+        public final static Property TaskId = new Property(21, String.class, "taskId", false, "TASK_ID");
+        public final static Property IsDirty = new Property(22, Boolean.class, "isDirty", false, "IS_DIRTY");
+        public final static Property SyncronisationStatus = new Property(23, Integer.class, "syncronisationStatus", false, "SYNCRONISATION_STATUS");
+        public final static Property SyncronisationMessage = new Property(24, String.class, "syncronisationMessage", false, "SYNCRONISATION_MESSAGE");
+        public final static Property DateCreated = new Property(25, java.util.Date.class, "dateCreated", false, "DATE_CREATED");
+        public final static Property LastUpdated = new Property(26, java.util.Date.class, "lastUpdated", false, "LAST_UPDATED");
     };
 
     private DaoSession daoSession;
@@ -75,13 +85,23 @@ public class SaleDao extends AbstractDao<Sale, String> {
                 "'IS_HISTORY' INTEGER," + // 7: isHistory
                 "'LATITUDE' REAL," + // 8: latitude
                 "'LONGITUDE' REAL," + // 9: longitude
-                "'ORDER_ID' TEXT NOT NULL ," + // 10: orderId
-                "'TASK_ID' TEXT NOT NULL ," + // 11: taskId
-                "'IS_DIRTY' INTEGER," + // 12: isDirty
-                "'SYNCRONISATION_STATUS' INTEGER," + // 13: syncronisationStatus
-                "'SYNCRONISATION_MESSAGE' TEXT," + // 14: syncronisationMessage
-                "'DATE_CREATED' INTEGER," + // 15: dateCreated
-                "'LAST_UPDATED' INTEGER);"); // 16: lastUpdated
+                "'STOCKS_ORS' INTEGER," + // 10: stocksORS
+                "'STOCKS_ZINC' INTEGER," + // 11: stocksZinc
+                "'STOCKS_ACTS' INTEGER," + // 12: stocksACTs
+                "'STOCKS_AMOX' INTEGER," + // 13: stocksAmox
+                "'STOCKS_RDT' INTEGER," + // 14: stocksRDT
+                "'MIN_ORSPRICE' TEXT," + // 15: minORSPrice
+                "'MIN_ZINC_PRICE' TEXT," + // 16: minZincPrice
+                "'MIN_ACTPRICE' TEXT," + // 17: minACTPrice
+                "'MIN_AMOX_PRICE' TEXT," + // 18: minAmoxPrice
+                "'MIN_RDTPRICE' TEXT," + // 19: minRDTPrice
+                "'ORDER_ID' TEXT NOT NULL ," + // 20: orderId
+                "'TASK_ID' TEXT NOT NULL ," + // 21: taskId
+                "'IS_DIRTY' INTEGER," + // 22: isDirty
+                "'SYNCRONISATION_STATUS' INTEGER," + // 23: syncronisationStatus
+                "'SYNCRONISATION_MESSAGE' TEXT," + // 24: syncronisationMessage
+                "'DATE_CREATED' INTEGER," + // 25: dateCreated
+                "'LAST_UPDATED' INTEGER);"); // 26: lastUpdated
     }
 
     /** Drops the underlying database table. */
@@ -136,32 +156,82 @@ public class SaleDao extends AbstractDao<Sale, String> {
         if (longitude != null) {
             stmt.bindDouble(10, longitude);
         }
-        stmt.bindString(11, entity.getOrderId());
-        stmt.bindString(12, entity.getTaskId());
+ 
+        Boolean stocksORS = entity.getStocksORS();
+        if (stocksORS != null) {
+            stmt.bindLong(11, stocksORS ? 1l: 0l);
+        }
+ 
+        Boolean stocksZinc = entity.getStocksZinc();
+        if (stocksZinc != null) {
+            stmt.bindLong(12, stocksZinc ? 1l: 0l);
+        }
+ 
+        Boolean stocksACTs = entity.getStocksACTs();
+        if (stocksACTs != null) {
+            stmt.bindLong(13, stocksACTs ? 1l: 0l);
+        }
+ 
+        Boolean stocksAmox = entity.getStocksAmox();
+        if (stocksAmox != null) {
+            stmt.bindLong(14, stocksAmox ? 1l: 0l);
+        }
+ 
+        Boolean stocksRDT = entity.getStocksRDT();
+        if (stocksRDT != null) {
+            stmt.bindLong(15, stocksRDT ? 1l: 0l);
+        }
+ 
+        String minORSPrice = entity.getMinORSPrice();
+        if (minORSPrice != null) {
+            stmt.bindString(16, minORSPrice);
+        }
+ 
+        String minZincPrice = entity.getMinZincPrice();
+        if (minZincPrice != null) {
+            stmt.bindString(17, minZincPrice);
+        }
+ 
+        String minACTPrice = entity.getMinACTPrice();
+        if (minACTPrice != null) {
+            stmt.bindString(18, minACTPrice);
+        }
+ 
+        String minAmoxPrice = entity.getMinAmoxPrice();
+        if (minAmoxPrice != null) {
+            stmt.bindString(19, minAmoxPrice);
+        }
+ 
+        String minRDTPrice = entity.getMinRDTPrice();
+        if (minRDTPrice != null) {
+            stmt.bindString(20, minRDTPrice);
+        }
+        stmt.bindString(21, entity.getOrderId());
+        stmt.bindString(22, entity.getTaskId());
  
         Boolean isDirty = entity.getIsDirty();
         if (isDirty != null) {
-            stmt.bindLong(13, isDirty ? 1l: 0l);
+            stmt.bindLong(23, isDirty ? 1l: 0l);
         }
  
         Integer syncronisationStatus = entity.getSyncronisationStatus();
         if (syncronisationStatus != null) {
-            stmt.bindLong(14, syncronisationStatus);
+            stmt.bindLong(24, syncronisationStatus);
         }
  
         String syncronisationMessage = entity.getSyncronisationMessage();
         if (syncronisationMessage != null) {
-            stmt.bindString(15, syncronisationMessage);
+            stmt.bindString(25, syncronisationMessage);
         }
  
         java.util.Date dateCreated = entity.getDateCreated();
         if (dateCreated != null) {
-            stmt.bindLong(16, dateCreated.getTime());
+            stmt.bindLong(26, dateCreated.getTime());
         }
  
         java.util.Date lastUpdated = entity.getLastUpdated();
         if (lastUpdated != null) {
-            stmt.bindLong(17, lastUpdated.getTime());
+            stmt.bindLong(27, lastUpdated.getTime());
         }
     }
 
@@ -191,13 +261,23 @@ public class SaleDao extends AbstractDao<Sale, String> {
             cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0, // isHistory
             cursor.isNull(offset + 8) ? null : cursor.getDouble(offset + 8), // latitude
             cursor.isNull(offset + 9) ? null : cursor.getDouble(offset + 9), // longitude
-            cursor.getString(offset + 10), // orderId
-            cursor.getString(offset + 11), // taskId
-            cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0, // isDirty
-            cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13), // syncronisationStatus
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // syncronisationMessage
-            cursor.isNull(offset + 15) ? null : new java.util.Date(cursor.getLong(offset + 15)), // dateCreated
-            cursor.isNull(offset + 16) ? null : new java.util.Date(cursor.getLong(offset + 16)) // lastUpdated
+            cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0, // stocksORS
+            cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0, // stocksZinc
+            cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0, // stocksACTs
+            cursor.isNull(offset + 13) ? null : cursor.getShort(offset + 13) != 0, // stocksAmox
+            cursor.isNull(offset + 14) ? null : cursor.getShort(offset + 14) != 0, // stocksRDT
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // minORSPrice
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // minZincPrice
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // minACTPrice
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // minAmoxPrice
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // minRDTPrice
+            cursor.getString(offset + 20), // orderId
+            cursor.getString(offset + 21), // taskId
+            cursor.isNull(offset + 22) ? null : cursor.getShort(offset + 22) != 0, // isDirty
+            cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23), // syncronisationStatus
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // syncronisationMessage
+            cursor.isNull(offset + 25) ? null : new java.util.Date(cursor.getLong(offset + 25)), // dateCreated
+            cursor.isNull(offset + 26) ? null : new java.util.Date(cursor.getLong(offset + 26)) // lastUpdated
         );
         return entity;
     }
@@ -215,13 +295,23 @@ public class SaleDao extends AbstractDao<Sale, String> {
         entity.setIsHistory(cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0);
         entity.setLatitude(cursor.isNull(offset + 8) ? null : cursor.getDouble(offset + 8));
         entity.setLongitude(cursor.isNull(offset + 9) ? null : cursor.getDouble(offset + 9));
-        entity.setOrderId(cursor.getString(offset + 10));
-        entity.setTaskId(cursor.getString(offset + 11));
-        entity.setIsDirty(cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0);
-        entity.setSyncronisationStatus(cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13));
-        entity.setSyncronisationMessage(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setDateCreated(cursor.isNull(offset + 15) ? null : new java.util.Date(cursor.getLong(offset + 15)));
-        entity.setLastUpdated(cursor.isNull(offset + 16) ? null : new java.util.Date(cursor.getLong(offset + 16)));
+        entity.setStocksORS(cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0);
+        entity.setStocksZinc(cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0);
+        entity.setStocksACTs(cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0);
+        entity.setStocksAmox(cursor.isNull(offset + 13) ? null : cursor.getShort(offset + 13) != 0);
+        entity.setStocksRDT(cursor.isNull(offset + 14) ? null : cursor.getShort(offset + 14) != 0);
+        entity.setMinORSPrice(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setMinZincPrice(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setMinACTPrice(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setMinAmoxPrice(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setMinRDTPrice(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
+        entity.setOrderId(cursor.getString(offset + 20));
+        entity.setTaskId(cursor.getString(offset + 21));
+        entity.setIsDirty(cursor.isNull(offset + 22) ? null : cursor.getShort(offset + 22) != 0);
+        entity.setSyncronisationStatus(cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23));
+        entity.setSyncronisationMessage(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setDateCreated(cursor.isNull(offset + 25) ? null : new java.util.Date(cursor.getLong(offset + 25)));
+        entity.setLastUpdated(cursor.isNull(offset + 26) ? null : new java.util.Date(cursor.getLong(offset + 26)));
      }
     
     /** @inheritdoc */

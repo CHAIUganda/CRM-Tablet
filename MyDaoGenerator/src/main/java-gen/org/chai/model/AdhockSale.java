@@ -26,6 +26,16 @@ public class AdhockSale implements BaseEntity {
     private Double latitude;
     private Double longitude;
     private Boolean isHistory;
+    private Boolean stocksORS;
+    private Boolean stocksZinc;
+    private Boolean stocksACTs;
+    private Boolean stocksAmox;
+    private Boolean stocksRDT;
+    private String minORSPrice;
+    private String minZincPrice;
+    private String minACTPrice;
+    private String minAmoxPrice;
+    private String minRDTPrice;
     /** Not-null value. */
     private String customerId;
     private Boolean isDirty;
@@ -69,7 +79,7 @@ public class AdhockSale implements BaseEntity {
         this.uuid = uuid;
     }
 
-    public AdhockSale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String governmentApproval, Double latitude, Double longitude, Boolean isHistory, String customerId, Boolean isDirty, Integer syncronisationStatus, String syncronisationMessage, java.util.Date dateCreated, java.util.Date lastUpdated) {
+    public AdhockSale(String uuid, java.util.Date dateOfSale, Boolean doYouStockOrsZinc, String ifNoWhy, String pointOfsaleMaterial, String recommendationNextStep, String governmentApproval, Double latitude, Double longitude, Boolean isHistory, Boolean stocksORS, Boolean stocksZinc, Boolean stocksACTs, Boolean stocksAmox, Boolean stocksRDT, String minORSPrice, String minZincPrice, String minACTPrice, String minAmoxPrice, String minRDTPrice, String customerId, Boolean isDirty, Integer syncronisationStatus, String syncronisationMessage, java.util.Date dateCreated, java.util.Date lastUpdated) {
         this.uuid = uuid;
         this.dateOfSale = dateOfSale;
         this.doYouStockOrsZinc = doYouStockOrsZinc;
@@ -80,6 +90,16 @@ public class AdhockSale implements BaseEntity {
         this.latitude = latitude;
         this.longitude = longitude;
         this.isHistory = isHistory;
+        this.stocksORS = stocksORS;
+        this.stocksZinc = stocksZinc;
+        this.stocksACTs = stocksACTs;
+        this.stocksAmox = stocksAmox;
+        this.stocksRDT = stocksRDT;
+        this.minORSPrice = minORSPrice;
+        this.minZincPrice = minZincPrice;
+        this.minACTPrice = minACTPrice;
+        this.minAmoxPrice = minAmoxPrice;
+        this.minRDTPrice = minRDTPrice;
         this.customerId = customerId;
         this.isDirty = isDirty;
         this.syncronisationStatus = syncronisationStatus;
@@ -176,6 +196,86 @@ public class AdhockSale implements BaseEntity {
 
     public void setIsHistory(Boolean isHistory) {
         this.isHistory = isHistory;
+    }
+
+    public Boolean getStocksORS() {
+        return stocksORS;
+    }
+
+    public void setStocksORS(Boolean stocksORS) {
+        this.stocksORS = stocksORS;
+    }
+
+    public Boolean getStocksZinc() {
+        return stocksZinc;
+    }
+
+    public void setStocksZinc(Boolean stocksZinc) {
+        this.stocksZinc = stocksZinc;
+    }
+
+    public Boolean getStocksACTs() {
+        return stocksACTs;
+    }
+
+    public void setStocksACTs(Boolean stocksACTs) {
+        this.stocksACTs = stocksACTs;
+    }
+
+    public Boolean getStocksAmox() {
+        return stocksAmox;
+    }
+
+    public void setStocksAmox(Boolean stocksAmox) {
+        this.stocksAmox = stocksAmox;
+    }
+
+    public Boolean getStocksRDT() {
+        return stocksRDT;
+    }
+
+    public void setStocksRDT(Boolean stocksRDT) {
+        this.stocksRDT = stocksRDT;
+    }
+
+    public String getMinORSPrice() {
+        return minORSPrice;
+    }
+
+    public void setMinORSPrice(String minORSPrice) {
+        this.minORSPrice = minORSPrice;
+    }
+
+    public String getMinZincPrice() {
+        return minZincPrice;
+    }
+
+    public void setMinZincPrice(String minZincPrice) {
+        this.minZincPrice = minZincPrice;
+    }
+
+    public String getMinACTPrice() {
+        return minACTPrice;
+    }
+
+    public void setMinACTPrice(String minACTPrice) {
+        this.minACTPrice = minACTPrice;
+    }
+
+    public String getMinAmoxPrice() {
+        return minAmoxPrice;
+    }
+
+    public void setMinAmoxPrice(String minAmoxPrice) {
+        this.minAmoxPrice = minAmoxPrice;
+    }
+
+    public String getMinRDTPrice() {
+        return minRDTPrice;
+    }
+
+    public void setMinRDTPrice(String minRDTPrice) {
+        this.minRDTPrice = minRDTPrice;
     }
 
     /** Not-null value. */

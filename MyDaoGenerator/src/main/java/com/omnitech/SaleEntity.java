@@ -22,6 +22,17 @@ public class SaleEntity {
         sale.addDoubleProperty("latitude");
         sale.addDoubleProperty("longitude");
 
+        sale.addBooleanProperty("stocksORS");
+        sale.addBooleanProperty("stocksZinc");
+        sale.addBooleanProperty("stocksACTs");
+        sale.addBooleanProperty("stocksAmox");
+        sale.addBooleanProperty("stocksRDT");
+        sale.addStringProperty("minORSPrice");
+        sale.addStringProperty("minZincPrice");
+        sale.addStringProperty("minACTPrice");
+        sale.addStringProperty("minAmoxPrice");
+        sale.addStringProperty("minRDTPrice");
+
         Property orderRefid = sale.addStringProperty("orderId").notNull().getProperty();
         ToMany orderToSales = order.addToMany(sale,orderRefid);
         orderToSales.setName("sales");

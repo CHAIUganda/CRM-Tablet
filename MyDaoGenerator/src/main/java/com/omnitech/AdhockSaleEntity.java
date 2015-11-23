@@ -23,13 +23,23 @@ public class AdhockSaleEntity {
         sale.addDoubleProperty("longitude");
         sale.addBooleanProperty("isHistory");
 
+        sale.addBooleanProperty("stocksORS");
+        sale.addBooleanProperty("stocksZinc");
+        sale.addBooleanProperty("stocksACTs");
+        sale.addBooleanProperty("stocksAmox");
+        sale.addBooleanProperty("stocksRDT");
+        sale.addStringProperty("minORSPrice");
+        sale.addStringProperty("minZincPrice");
+        sale.addStringProperty("minACTPrice");
+        sale.addStringProperty("minAmoxPrice");
+        sale.addStringProperty("minRDTPrice");
+
         Property customerId = sale.addStringProperty("customerId").notNull().getProperty();
         ToMany customerToAdhockSales = customer.addToMany(sale,customerId);
         customerToAdhockSales.setName("adhockSales");
         customerToAdhockSales.orderAsc(dateOfSale);
 
         sale.addToOne(customer,customerId);
-
 
         sale.addBooleanProperty("isDirty");
         sale.addIntProperty("syncronisationStatus");

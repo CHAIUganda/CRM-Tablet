@@ -8,10 +8,8 @@ import de.greenrobot.daogenerator.Schema;
  * Created by victor on 10/12/14.
  */
 public class ChaiAndroidDaoGenerator{
-    private static final int DATABASE_VERSION = 1;
-
     public static void main(String args[]) throws Exception {
-        Schema schema = new Schema(5, "org.chai.model");
+        Schema schema = new Schema(6, "org.chai.model");
         schema.setDefaultJavaPackageDao("org.chai.model");
         schema.enableKeepSectionsByDefault();
         schema.enableActiveEntitiesByDefault();

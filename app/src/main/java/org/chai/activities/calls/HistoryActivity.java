@@ -57,7 +57,7 @@ public class HistoryActivity extends BaseActivity {
             titles = new String[]{"MALARIA FORMS", "DIARRHEA FORMS"};
             PAGES = 2;
         }else{
-            titles = new String[]{"SALES FORMS", "ADHOCK SALES", "ORDERS"};
+            titles = new String[]{"SALES FORMS", "UNSCHEDULED CALLS", "ORDERS"};
             PAGES = 3;
         }
 

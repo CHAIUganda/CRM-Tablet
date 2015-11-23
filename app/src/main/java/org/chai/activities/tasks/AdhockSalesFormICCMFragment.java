@@ -51,6 +51,8 @@ public class AdhockSalesFormICCMFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 2){
+                    aq.id(R.id.ln_zinc_container).visible();
+
                     message = "The MOH recommends ORS and zinc as the 1st line treatment for diarrhea - ALWAYS stock ORS!\n\n" +
                             "ORS replaces lost fluids and essential salts in a child with diarrhea - ORS saves the child's life!\n\n" +
                             "ORS should be given to a child until diarrhea stops - Prescribe 2 sachets per child!";
@@ -74,10 +76,10 @@ public class AdhockSalesFormICCMFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 2) {
+                    aq.id(R.id.ln_act_container).visible();
                     message = "The MOH recommends that zinc always be given in COMBINATION with ORS as 1st line treatment for diarrhea - Always stock ORS and zinc!\n\n" +
                             "Zinc reduces the duration of diarrhea and future episodes of diarrhea - ORS saves the child's life and Zinc keeps the child healthy!\n\n" +
                             "Give zinc to child for at least 10 days (1 tablet per day) - Prescribe a COMPLETE course of 10 tablets!";
-                    ;
 
                     AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
                 }
@@ -98,6 +100,8 @@ public class AdhockSalesFormICCMFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 2) {
+                    aq.id(R.id.ln_rdt_container).visible();
+
                     message = "The MOH recommends ACTs as the 1st line treatment for malaria - ACTs are the most effective antimalarial available!\n\n" +
                             "High-quality ACTs have a Green Leaf logo on the packaging - Always look for the Green Leaf!\n\n" +
                             "The MOH helps lower the cost of these Green Leaf ACTs - Sell ACTs at lower cost to make more affordable to patients!";
@@ -121,6 +125,8 @@ public class AdhockSalesFormICCMFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 2) {
+                    aq.id(R.id.ln_amox_container).visible();
+
                     message = "An mRDT is a simple to use test that can detect malaria in human blood and give results in 15 minutes.\n\n" +
                             "The MOH recommends that every fever case be tested with an mRDT - Always test and treat!\n\n" +
                             "Only treat a patient with an ACT if a positive diagnosis is confirmed through testing";
@@ -321,10 +327,103 @@ public class AdhockSalesFormICCMFragment extends Fragment {
             }
         });
 
+        populateFields();
+
         return view;
     }
 
+    private void populateFields(){
+        if(parent.sale.getUuid() != null){
+            aq.id(R.id.ln_ors_container).visible();
+            aq.id(R.id.ln_ors_price_container).visible();
+            aq.id(R.id.ln_zinc_container).visible();
+            aq.id(R.id.ln_zinc_price_container).visible();
+            aq.id(R.id.ln_act_container).visible();
+            aq.id(R.id.ln_acts_price_container).visible();
+            aq.id(R.id.ln_rdt_container).visible();
+            aq.id(R.id.ln_rdt_price_container).visible();
+            aq.id(R.id.ln_amox_container).visible();
+            aq.id(R.id.ln_amoxicillin_price_container).visible();
+
+            aq.id(R.id.spn_do_you_stock_ors).setSelection(parent.sale.getStocksORS() ? 1 : 0);
+            aq.id(R.id.spn_do_you_stock_zinc).setSelection(parent.sale.getStocksZinc() ? 1 : 0);
+            aq.id(R.id.spn_do_you_stock_acts).setSelection(parent.sale.getStocksACTs() ? 1 : 0);
+            aq.id(R.id.spn_do_you_stock_rdt).setSelection(parent.sale.getStocksRDT() ? 1 : 0);
+            aq.id(R.id.spn_do_you_stock_amoxicillin).setSelection(parent.sale.getStocksAmox() ? 1 : 0);
+
+            int priceIndex = 0;
+            if(parent.sale.getMinORSPrice() != null){
+                priceIndex = ((ArrayAdapter)aq.id(R.id.spn_ors_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinORSPrice());
+                aq.id(R.id.spn_ors_lowest_price).setSelection(priceIndex);
+            }
+
+            if(parent.sale.getMinZincPrice() != null){
+                priceIndex = ((ArrayAdapter)aq.id(R.id.spn_zinc_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinZincPrice());
+                aq.id(R.id.spn_zinc_lowest_price).setSelection(priceIndex);
+            }
+
+            if(parent.sale.getMinACTPrice() != null){
+                priceIndex = ((ArrayAdapter)aq.id(R.id.spn_act_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinACTPrice());
+                aq.id(R.id.spn_act_lowest_price).setSelection(priceIndex);
+            }
+
+            if(parent.sale.getMinRDTPrice() != null){
+                priceIndex = ((ArrayAdapter)aq.id(R.id.spn_rdt_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinRDTPrice());
+                aq.id(R.id.spn_rdt_lowest_price).setSelection(priceIndex);
+            }
+
+            if(parent.sale.getMinAmoxPrice() != null){
+                priceIndex = ((ArrayAdapter)aq.id(R.id.spn_amox_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinAmoxPrice());
+                aq.id(R.id.spn_amox_lowest_price).setSelection(priceIndex);
+            }
+        }
+    }
+
     public boolean saveFields(){
+        if(aq.id(R.id.spn_do_you_stock_ors).getSelectedItemPosition() == 0){
+            Toast.makeText(getActivity(), "Please select wether customer stocks ORS", Toast.LENGTH_LONG).show();
+            return false;
+        }else{
+            stockOrs = aq.id(R.id.spn_do_you_stock_ors).getSelectedItemPosition() == 1;
+        }
+        if(aq.id(R.id.spn_do_you_stock_zinc).getSelectedItemPosition() == 0){
+            Toast.makeText(getActivity(), "Please select wether customer stocks Zinc", Toast.LENGTH_LONG).show();
+            return false;
+        }else{
+            stockZinc = aq.id(R.id.spn_do_you_stock_zinc).getSelectedItemPosition() == 1;
+        }
+        if(aq.id(R.id.spn_do_you_stock_acts).getSelectedItemPosition() == 0){
+            Toast.makeText(getActivity(), "Please select wether customer stocks ACTs", Toast.LENGTH_LONG).show();
+            return false;
+        }else{
+            stockACTs = aq.id(R.id.spn_do_you_stock_acts).getSelectedItemPosition() == 1;
+        }
+        if(aq.id(R.id.spn_do_you_stock_rdt).getSelectedItemPosition() == 0){
+            Toast.makeText(getActivity(), "Please select wether customer stocks RDTs", Toast.LENGTH_LONG).show();
+            return false;
+        }else{
+            stockRDT = aq.id(R.id.spn_do_you_stock_rdt).getSelectedItemPosition() == 1;
+        }
+
+        if(aq.id(R.id.spn_do_you_stock_amoxicillin).getSelectedItemPosition() == 0){
+            Toast.makeText(getActivity(), "Please select wether customer stocks Amoxicillin", Toast.LENGTH_LONG).show();
+            return false;
+        }else{
+            stockAmox = aq.id(R.id.spn_do_you_stock_amoxicillin).getSelectedItemPosition() == 1;
+        }
+
+        parent.sale.setStocksORS(stockOrs);
+        parent.sale.setStocksZinc(stockZinc);
+        parent.sale.setStocksACTs(stockACTs);
+        parent.sale.setStocksRDT(stockRDT);
+        parent.sale.setStocksAmox(stockAmox);
+
+        parent.sale.setMinORSPrice(minOrsPrice);
+        parent.sale.setMinZincPrice(minZincPrice);
+        parent.sale.setMinACTPrice(minACTPrice);
+        parent.sale.setMinRDTPrice(minRDTPrice);
+        parent.sale.setMinAmoxPrice(minAmoxPrice);
+
         return true;
     }
 }

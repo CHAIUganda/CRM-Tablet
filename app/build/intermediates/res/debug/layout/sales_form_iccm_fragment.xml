@@ -109,7 +109,7 @@
                 android:text="3. Do you stock ACTs?"/>
             <Spinner
                 android:id="@+id/spn_do_you_stock_acts"
-                style="@style/SpinnerStyle"
+                style="@style/SpinnerStyle2"
                 android:layout_width="match_parent"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
