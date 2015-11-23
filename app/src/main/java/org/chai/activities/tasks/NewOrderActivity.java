@@ -53,11 +53,13 @@ import org.chai.util.customwidget.CustomDatePicker;
 import org.chai.util.migration.UpgradeOpenHelper;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -363,6 +365,9 @@ public class NewOrderActivity extends BaseActivity {
                 if(data.getQuantity() != 0){
                     a.id(R.id.quantity).text(Integer.toString(data.getQuantity()));
                 }
+                if(data.getPrice() != 0){
+                    a.id(R.id.price).text(Integer.toString(data.getPrice()));
+                }
 
                 ProductGroup g = data.getProduct().getProductGroup();
 
@@ -423,6 +428,8 @@ public class NewOrderActivity extends BaseActivity {
         rowContainer.addView(row);
         rows.add(row);
         orderDataItems.add(data);
+
+        refreshOrderTotal();
     }
 
     private void setRequiredFields(){
@@ -507,9 +514,14 @@ public class NewOrderActivity extends BaseActivity {
             AQuery a = new AQuery(row);
             p = allProducts.get(a.id(R.id.item).getSelectedItemPosition());
             String quantity = a.id(R.id.quantity).getText().toString();
+            String price = a.id(R.id.price).getText().toString();
             boolean sample = a.id(R.id.drop_sample).isChecked();
             if(quantity.isEmpty()){
                 Toast.makeText(this, "Please select quantity for " + p.getName(), Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(price.isEmpty()){
+                Toast.makeText(this, "Please select price for " + p.getName(), Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -519,6 +531,7 @@ public class NewOrderActivity extends BaseActivity {
             d.setProductId(p.getUuid());
             d.setProduct(p);
             d.setQuantity(Integer.parseInt(quantity));
+            d.setPrice(Integer.parseInt(price));
         }
 
         if(order == null){
@@ -591,5 +604,13 @@ public class NewOrderActivity extends BaseActivity {
             }
         }
         spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, formulations.toArray(new String[formulations.size()])));
+    }
+
+    private void refreshOrderTotal(){
+        int total = 0;
+        for(OrderData item : orderDataItems){
+            total += item.getPrice();
+        }
+        aq.id(R.id.txt_order_total).text("Total: UGX " + NumberFormat.getNumberInstance(Locale.US).format(total));
     }
 }
