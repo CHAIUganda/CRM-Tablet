@@ -92,8 +92,6 @@ public class AdhockSalesFormSaleFragment extends Fragment {
         allProducts = productDao.queryBuilder().orderAsc(ProductDao.Properties.Name).list();
         groups = productGroupDao.queryBuilder().orderAsc(ProductGroupDao.Properties.Name).list();
 
-        Utils.log("Got groups -> " + groups.size());
-
         ArrayList<ProductGroup> filteredGroups = new ArrayList<>();
         for(ProductGroup group: groups){
             if(group.getProducts().size() > 0){
@@ -102,8 +100,6 @@ public class AdhockSalesFormSaleFragment extends Fragment {
         }
 
         groups = filteredGroups;
-
-        Utils.log("Got groups -> " + groups.size());
 
         ArrayList<Product> filtered = new ArrayList<>();
         for(Product p: allProducts){

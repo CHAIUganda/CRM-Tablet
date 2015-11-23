@@ -104,8 +104,6 @@ public class AdhockSalesFormActivity extends BaseActivity {
             stocks = sale.getAdhockStockDatas();
             sales = sale.getAdhockSalesDatas();
         }
-
-        pager.setCurrentItem(2);
     }
 
     private class FormPagerAdapter extends FragmentPagerAdapter {

@@ -201,7 +201,7 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                 }
                 if (stockOrs) {
                     try {
-                        minOrsPriceVal = Integer.parseInt(minOrsPrice);
+                        minOrsPriceVal = Utils.parseICCMItemPrice(minOrsPrice);
                         if (minOrsPriceVal > 300) {
                             message = "Remind provider about the government approved Recommended Retail Price (300UGX per 1 sachet of ORS)";
                             AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
@@ -236,7 +236,7 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                 }
                 if (stockZinc) {
                     try {
-                        minZincPriceVal = Integer.parseInt(minZincPrice);
+                        minZincPriceVal = Utils.parseICCMItemPrice(minZincPrice);
                         if (minZincPriceVal > 90) {
                             message = "Remind provider about the government approved Recommended Retail Price (90UGX per 1 tablet of zinc)\n";
                             AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
@@ -271,7 +271,7 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                 }
                 if (stockZinc) {
                     try {
-                        minACTPriceVal = Integer.parseInt(minACTPrice);
+                        minACTPriceVal = Utils.parseICCMItemPrice(minACTPrice);
                         if (minACTPriceVal > 900) {
                             message = "Remind provider about the government approved Recommended Retail Price (XXX)";
                             AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
@@ -306,7 +306,7 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                 }
                 if (stockRDT) {
                     try {
-                        minRDTPriceVal = Integer.parseInt(minRDTPrice);
+                        minRDTPriceVal = Utils.parseICCMItemPrice(minRDTPrice);
                         if (minRDTPriceVal > 900) {
                             message = "Remind provider about the government approved Recommended Retail Price (XXX)";
                             AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
@@ -341,7 +341,7 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                 }
                 if (stockAmox) {
                     try {
-                        minAmoxPriceVal = Integer.parseInt(minAmoxPrice);
+                        minAmoxPriceVal = Utils.parseICCMItemPrice(minAmoxPrice);
                         if (minAmoxPriceVal > 900) {
                             message = "Remind provider about the government approved Recommended Retail Price (XXX)";
                             AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
@@ -368,7 +368,6 @@ public class AdhockSalesFormICCMFragment extends Fragment {
     public void onResume() {
         super.onResume();
         canFireSpinnerEvent = false;
-        Utils.log("cannot fire events");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -377,7 +376,6 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Utils.log("can now fire events");
                 canFireSpinnerEvent = true;
             }
         }).start();

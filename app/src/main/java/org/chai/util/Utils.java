@@ -237,7 +237,7 @@ public class Utils {
     }
 
     public static ArrayList<View> getViewsByTag(ViewGroup root, String tag){
-        ArrayList<View> views = new ArrayList<View>();
+        ArrayList<View> views = new ArrayList<>();
         final int childCount = root.getChildCount();
         for (int i = 0; i < childCount; i++) {
             final View child = root.getChildAt(i);
@@ -301,5 +301,23 @@ public class Utils {
             prices.add(append);
         }
         return prices;
+    }
+
+    public static int parseICCMItemPrice(String price){
+        int val = 0;
+        int increament = 0;
+        try{
+            if(price.indexOf("<") != -1){ //Less than
+                increament = -1;
+            }
+            if(price.indexOf(">") != -1){ //Greather than
+                increament = 1;
+            }
+            price = price.replaceAll("[^\\d.]", "");
+            val = Integer.parseInt(price);
+        }catch(Exception ex){
+        }
+        val = val + increament;
+        return val;
     }
 }
