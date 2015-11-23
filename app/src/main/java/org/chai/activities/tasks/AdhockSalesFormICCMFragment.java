@@ -47,14 +47,16 @@ public class AdhockSalesFormICCMFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 2){
-                    aq.id(R.id.ln_ors_price_container).gone();
                     message = "The MOH recommends ORS and zinc as the 1st line treatment for diarrhea - ALWAYS stock ORS!\n\n" +
                             "ORS replaces lost fluids and essential salts in a child with diarrhea - ORS saves the child's life!\n\n" +
                             "ORS should be given to a child until diarrhea stops - Prescribe 2 sachets per child!";
 
                     AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
-                }else{
+                }
+                if(position == 1){
                     aq.id(R.id.ln_ors_price_container).visible();
+                }else{
+                    aq.id(R.id.ln_ors_price_container).gone();
                 }
                 if(position != 0){
                     aq.id(R.id.ln_zinc_container).visible();
@@ -71,14 +73,16 @@ public class AdhockSalesFormICCMFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 2){
-                    aq.id(R.id.ln_zinc_price_container).gone();
                     message = "The MOH recommends that zinc always be given in COMBINATION with ORS as 1st line treatment for diarrhea - Always stock ORS and zinc!\n\n" +
                             "Zinc reduces the duration of diarrhea and future episodes of diarrhea - ORS saves the child's life and Zinc keeps the child healthy!\n\n" +
                             "Give zinc to child for at least 10 days (1 tablet per day) - Prescribe a COMPLETE course of 10 tablets!";;
 
                     AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
-                }else{
+                }
+                if(position == 1){
                     aq.id(R.id.ln_zinc_price_container).visible();
+                }else{
+                    aq.id(R.id.ln_zinc_price_container).gone();
                 }
                 if(position != 0){
                     aq.id(R.id.ln_act_container).visible();
@@ -95,14 +99,16 @@ public class AdhockSalesFormICCMFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 2){
-                    aq.id(R.id.ln_acts_price_container).gone();
                     message = "The MOH recommends ACTs as the 1st line treatment for malaria - ACTs are the most effective antimalarial available!\n\n" +
                             "High-quality ACTs have a Green Leaf logo on the packaging - Always look for the Green Leaf!\n\n" +
                             "The MOH helps lower the cost of these Green Leaf ACTs - Sell ACTs at lower cost to make more affordable to patients!";
 
                     AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
-                }else{
+                }
+                if(position == 1){
                     aq.id(R.id.ln_acts_price_container).visible();
+                }else{
+                    aq.id(R.id.ln_acts_price_container).gone();
                 }
                 if(position != 0){
                     aq.id(R.id.ln_amox_container).visible();
@@ -119,14 +125,15 @@ public class AdhockSalesFormICCMFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 2){
-                    aq.id(R.id.ln_amoxicillin_price_container).gone();
                     message = "The MOH now recommends Amoxicillin 250mg DT as the 1st line treatment for childhood pneumonia\n\n" +
                             "Proper diagnosis must be performed before prescribing - Remember!  Not all coughs need an antibiotic - Count breaths before treating!";
 
                     AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
-                }else{
+                }
+                if(position == 1){
                     aq.id(R.id.ln_amoxicillin_price_container).visible();
-
+                }else{
+                    aq.id(R.id.ln_amoxicillin_price_container).gone();
                 }
             }
 
