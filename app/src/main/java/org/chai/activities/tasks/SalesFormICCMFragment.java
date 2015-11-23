@@ -5,14 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
 import org.chai.R;
-import org.chai.util.ICCMPopupDialogFragment;
-import org.chai.util.Utils;
 
 /**
  * Created by Zed on 11/16/2015.
@@ -43,7 +39,7 @@ public class SalesFormICCMFragment extends Fragment {
         view = inflater.inflate(R.layout.sales_form_iccm_fragment, container, false);
         aq = new AQuery(view);
 
-        aq.id(R.id.spn_do_you_stock_ors).itemSelected(new AdapterView.OnItemSelectedListener() {
+        /*aq.id(R.id.spn_do_you_stock_ors).itemSelected(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 2){
@@ -236,7 +232,7 @@ public class SalesFormICCMFragment extends Fragment {
                     }
                 }
             }
-        });
+        });*/
 
         return view;
     }

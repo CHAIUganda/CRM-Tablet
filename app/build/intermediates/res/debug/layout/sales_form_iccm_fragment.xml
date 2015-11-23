@@ -26,10 +26,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="3. Do you stock ORS?"/>
+                android:text="1. Do you stock ORS?"/>
             <Spinner
                 android:id="@+id/spn_do_you_stock_ors"
-                style="@style/SpinnerStyle"
+                style="@style/SpinnerStyle2"
                 android:layout_width="match_parent"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -48,13 +48,10 @@
                     style="@style/LabelStyle"
                     android:text="What is the lowest price you sell 1 sachet of ORS?"/>
 
-                <EditText
-                    android:id="@+id/txt_ors_lowest_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:inputType="numberDecimal"
-                    style="@style/TextBoxStyle"/>
+                <Spinner
+                    android:id="@+id/spn_ors_lowest_price"
+                    style="@style/SpinnerStyle2"
+                    android:layout_width="match_parent" />
             </LinearLayout>
         </LinearLayout>
 
@@ -69,10 +66,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="3. Do you stock Zinc?"/>
+                android:text="2. Do you stock Zinc?"/>
             <Spinner
                 android:id="@+id/spn_do_you_stock_zinc"
-                style="@style/SpinnerStyle"
+                style="@style/SpinnerStyle2"
                 android:layout_width="match_parent"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -89,15 +86,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/LabelStyle"
-                    android:text="What is the lowest price you sell 10 tablets of Zinc?"/>
+                    android:text="What is the lowest price you sell 1 tablet of Zinc?"/>
 
-                <EditText
-                    android:id="@+id/txt_zinc_lowest_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:inputType="numberDecimal"
-                    style="@style/TextBoxStyle"/>
+                <Spinner
+                    android:id="@+id/spn_zinc_lowest_price"
+                    style="@style/SpinnerStyle2"
+                    android:layout_width="match_parent" />
             </LinearLayout>
         </LinearLayout>
 
@@ -132,15 +126,52 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/LabelStyle"
-                    android:text="What is the lowest price you sell 6 ACT tablets?"/>
+                    android:text="What is the lowest price you sell 1 ACT tablet?"/>
 
-                <EditText
-                    android:id="@+id/txt_act_lowest_price"
+                <Spinner
+                    android:id="@+id/spn_act_lowest_price"
+                    style="@style/SpinnerStyle2"
+                    android:layout_width="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_rdt_container"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="4. Do you stock Malaria Rapid Diagnostic Tests (mRDTs)?"/>
+            <Spinner
+                android:id="@+id/spn_do_you_stock_rdt"
+                style="@style/SpinnerStyle2"
+                android:layout_width="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:entries="@array/yesnolist" />
+
+            <LinearLayout
+                android:id="@+id/ln_rdt_price_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:inputType="numberDecimal"
-                    style="@style/TextBoxStyle"/>
+                    style="@style/LabelStyle"
+                    android:text="What is the lowest price you sell 1 mRDT?"/>
+
+                <Spinner
+                    android:id="@+id/spn_rdt_lowest_price"
+                    style="@style/SpinnerStyle2"
+                    android:layout_width="match_parent" />
             </LinearLayout>
         </LinearLayout>
 
@@ -155,10 +186,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
-                android:text="3. Do you stock Amoxicillin 250mg (dispersible tablets)?"/>
+                android:text="5. Do you stock Amoxicillin 250mg (dispersible tablets)?"/>
             <Spinner
                 android:id="@+id/spn_do_you_stock_amoxicillin"
-                style="@style/SpinnerStyle"
+                style="@style/SpinnerStyle2"
                 android:layout_width="match_parent"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -177,13 +208,10 @@
                     style="@style/LabelStyle"
                     android:text="What is the lowest price you sell 1 tablet?"/>
 
-                <EditText
-                    android:id="@+id/txt_amoxicillin_lowest_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:inputType="numberDecimal"
-                    style="@style/TextBoxStyle"/>
+                <Spinner
+                    android:id="@+id/spn_amox_lowest_price"
+                    style="@style/SpinnerStyle2"
+                    android:layout_width="match_parent" />
             </LinearLayout>
         </LinearLayout>
 

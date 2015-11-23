@@ -30,7 +30,6 @@ import org.osmdroid.util.GeoPoint;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -287,5 +286,20 @@ public class Utils {
             cursor.close();
         }
         return false;
+    }
+
+    public static ArrayList<String> generatePriceList(int min, int max, int step, String prepend, String append){
+        ArrayList<String> prices = new ArrayList<>();
+        prices.add("");
+        if(prepend != null){
+            prices.add(prepend);
+        }
+        for(int i = min; i <= max; i += step){
+            prices.add(Integer.toString(i));
+        }
+        if(append != null){
+            prices.add(append);
+        }
+        return prices;
     }
 }
