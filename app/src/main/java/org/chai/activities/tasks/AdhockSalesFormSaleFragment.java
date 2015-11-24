@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,8 +34,10 @@ import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Zed on 11/10/2015.
@@ -187,6 +191,49 @@ public class AdhockSalesFormSaleFragment extends Fragment {
                 LinearLayout root = (LinearLayout) parent.getParent();
                 LinearLayout top = (LinearLayout) root.getParent();
                 rowContainer.removeView(top);
+            }
+        });
+
+        a.id(R.id.txt_quantity).getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try{
+                    sale.setQuantity(Integer.parseInt(s.toString()));
+                }catch (Exception ex){
+                    sale.setQuantity(0);
+                }
+                refreshOrderTotal();
+            }
+        });
+        a.id(R.id.txt_unit_price).getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    sale.setPrice(Integer.parseInt(s.toString()));
+                } catch (Exception ex) {
+                    sale.setPrice(0);
+                }
+                refreshOrderTotal();
             }
         });
 
@@ -465,5 +512,15 @@ public class AdhockSalesFormSaleFragment extends Fragment {
             }
         }
         spinner.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, formulations.toArray(new String[formulations.size()])));
+    }
+
+    private void refreshOrderTotal(){
+        int total = 0;
+        for(SaleData item : parent.sales){
+            total += (item.getQuantity() * item.getPrice());
+        }
+        String totalStr = "Total: UGX " + NumberFormat.getNumberInstance(Locale.US).format(total);
+        aq.id(R.id.txt_order_total).text(totalStr);
+        //setTitle(totalStr);
     }
 }

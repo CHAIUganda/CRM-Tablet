@@ -206,12 +206,12 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                             message = "Remind provider about the government approved Recommended Retail Price (300UGX per 1 sachet of ORS)";
                             AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
                         }
-                        aq.id(R.id.ln_zinc_container).visible();
                     } catch (NumberFormatException ex) {
                         Utils.log("Cannot parse min ORS price");
                         Toast.makeText(getActivity(), "Please enter a valid lowest price of ORS", Toast.LENGTH_LONG).show();
                     }
                 }
+                aq.id(R.id.ln_zinc_container).visible();
             }
 
             @Override
@@ -241,12 +241,12 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                             message = "Remind provider about the government approved Recommended Retail Price (90UGX per 1 tablet of zinc)\n";
                             AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
                         }
-                        aq.id(R.id.ln_act_container).visible();
                     } catch (NumberFormatException ex) {
                         Utils.log("Cannot parse min Zinc price");
                         Toast.makeText(getActivity(), "Please enter a valid lowest price of Zinc", Toast.LENGTH_LONG).show();
                     }
                 }
+                aq.id(R.id.ln_act_container).visible();
             }
 
             @Override
@@ -276,12 +276,12 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                             message = "Remind provider about the government approved Recommended Retail Price (XXX)";
                             AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
                         }
-                        aq.id(R.id.ln_rdt_container).visible();
                     } catch (NumberFormatException ex) {
                         Utils.log("Cannot parse min ACT price");
                         Toast.makeText(getActivity(), "Please enter a valid lowest price of ACTs", Toast.LENGTH_LONG).show();
                     }
                 }
+                aq.id(R.id.ln_rdt_container).visible();
             }
 
             @Override
