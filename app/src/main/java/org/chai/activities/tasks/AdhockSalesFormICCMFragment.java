@@ -301,22 +301,7 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                 }
                 stockRDT = (aq.id(R.id.spn_do_you_stock_rdt).getSelectedItemPosition() == 1);
                 minRDTPrice = lowestRDTPrice.getAdapter().getItem(position).toString();
-                if (minRDTPrice.length() == 0) {
-                    return;
-                }
-                if (stockRDT) {
-                    try {
-                        minRDTPriceVal = Utils.parseICCMItemPrice(minRDTPrice);
-                        if (minRDTPriceVal > 900) {
-                            message = "Remind provider about the government approved Recommended Retail Price (XXX)";
-                            AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
-                        }
-                        aq.id(R.id.ln_amox_container).visible();
-                    } catch (NumberFormatException ex) {
-                        Utils.log("Cannot parse min RDT price");
-                        Toast.makeText(getActivity(), "Please enter a valid lowest price of RDT", Toast.LENGTH_LONG).show();
-                    }
-                }
+                aq.id(R.id.ln_amox_container).visible();
             }
 
             @Override
@@ -336,21 +321,6 @@ public class AdhockSalesFormICCMFragment extends Fragment {
                 }
                 stockAmox = (aq.id(R.id.spn_do_you_stock_amoxicillin).getSelectedItemPosition() == 1);
                 minAmoxPrice = lowestAmoxPrice.getAdapter().getItem(position).toString();
-                if (minAmoxPrice.length() == 0) {
-                    return;
-                }
-                if (stockAmox) {
-                    try {
-                        minAmoxPriceVal = Utils.parseICCMItemPrice(minAmoxPrice);
-                        if (minAmoxPriceVal > 900) {
-                            message = "Remind provider about the government approved Recommended Retail Price (XXX)";
-                            AdhockICCMPopupDialogFragment.newInstance(message).show(getActivity().getSupportFragmentManager(), "iccm_message");
-                        }
-                    } catch (NumberFormatException ex) {
-                        Utils.log("Cannot parse min Amox price");
-                        Toast.makeText(getActivity(), "Please enter a valid lowest price of Amoxicillin", Toast.LENGTH_LONG).show();
-                    }
-                }
             }
 
             @Override
