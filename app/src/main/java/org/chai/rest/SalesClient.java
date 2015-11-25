@@ -67,7 +67,7 @@ public class SalesClient extends RestClient {
             ResponseEntity<ServerResponse> responseEntity = restTemplate.exchange(getRestUrl() + "sale/placeOrder", HttpMethod.PUT, httpEntity, ServerResponse.class);
 
             ServerResponse body = responseEntity.getBody();
-            body.setItemRef(order.getCustomer()+"(Order)");
+            body.setItemRef(order.getCustomer() + "(Order)");
             return body;
         } catch (HttpClientErrorException ex) {
             ServerResponse serverResponse = ServerResponse.getServerErrorResponse(ex);

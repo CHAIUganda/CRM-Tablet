@@ -2,6 +2,7 @@ package org.chai.activities.tasks;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +37,6 @@ public class SalesFormICCMFragment extends Fragment {
     int minOrsPriceVal = -1;
     int minZincPriceVal = -1;
     int minACTPriceVal = -1;
-    int minAmoxPriceVal = -1;
-    int minRDTPriceVal = -1;
 
     boolean canFireSpinnerEvent = false;
 
@@ -329,7 +328,19 @@ public class SalesFormICCMFragment extends Fragment {
             }
         });
 
-        populateFields();
+        if(parent.sale.getUuid() != null){
+            stockOrs = parent.sale.getStocksORS();
+            stockZinc = parent.sale.getStocksZinc();
+            stockACTs = parent.sale.getStocksACTs();
+            stockRDT = parent.sale.getStocksRDT();
+            stockAmox = parent.sale.getStocksAmox();
+
+            minOrsPrice = parent.sale.getMinORSPrice();
+            minZincPrice = parent.sale.getMinZincPrice();
+            minACTPrice = parent.sale.getMinACTPrice();
+            minRDTPrice = parent.sale.getMinRDTPrice();
+            minAmoxPrice = parent.sale.getMinAmoxPrice();
+        }
 
         return view;
     }
@@ -338,6 +349,7 @@ public class SalesFormICCMFragment extends Fragment {
     public void onResume() {
         super.onResume();
         canFireSpinnerEvent = false;
+        populateFields();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -351,49 +363,72 @@ public class SalesFormICCMFragment extends Fragment {
         }).start();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        assignVariables();
+    }
+
     private void populateFields(){
-        if(parent.sale.getUuid() != null){
+        int priceIndex = 0;
+        if(parent.sale.getStocksORS() != null){
             aq.id(R.id.ln_ors_container).visible();
-            aq.id(R.id.ln_ors_price_container).visible();
+            aq.id(R.id.spn_do_you_stock_ors).setSelection(parent.sale.getStocksORS() ? 1 : 2);
+            if(parent.sale.getStocksORS()){
+                aq.id(R.id.ln_ors_price_container).visible();
+                if(!TextUtils.isEmpty(parent.sale.getMinORSPrice())){
+                    priceIndex = ((ArrayAdapter)aq.id(R.id.spn_ors_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinORSPrice());
+                    aq.id(R.id.spn_ors_lowest_price).setSelection(priceIndex);
+                }
+            }
+        }
+
+        if(parent.sale.getStocksZinc() != null){
             aq.id(R.id.ln_zinc_container).visible();
-            aq.id(R.id.ln_zinc_price_container).visible();
+            aq.id(R.id.spn_do_you_stock_zinc).setSelection(parent.sale.getStocksZinc() ? 1 : 2);
+            if(parent.sale.getStocksAmox()){
+                aq.id(R.id.ln_zinc_price_container).visible();
+                if(!TextUtils.isEmpty(parent.sale.getMinZincPrice())){
+                    priceIndex = ((ArrayAdapter)aq.id(R.id.spn_zinc_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinZincPrice());
+                    aq.id(R.id.spn_zinc_lowest_price).setSelection(priceIndex);
+                }
+            }
+        }
+
+        if(parent.sale.getStocksACTs() != null){
             aq.id(R.id.ln_act_container).visible();
-            aq.id(R.id.ln_acts_price_container).visible();
+            aq.id(R.id.spn_do_you_stock_acts).setSelection(parent.sale.getStocksACTs() ? 1 : 2);
+            if(parent.sale.getStocksACTs()){
+                aq.id(R.id.ln_acts_price_container).visible();
+                if(!TextUtils.isEmpty(parent.sale.getMinACTPrice())){
+                    priceIndex = ((ArrayAdapter)aq.id(R.id.spn_act_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinACTPrice());
+                    aq.id(R.id.spn_act_lowest_price).setSelection(priceIndex);
+                }
+            }
+
+        }
+
+        if(parent.sale.getStocksRDT() != null){
             aq.id(R.id.ln_rdt_container).visible();
-            aq.id(R.id.ln_rdt_price_container).visible();
+            aq.id(R.id.spn_do_you_stock_rdt).setSelection(parent.sale.getStocksRDT() ? 1 : 2);
+            if(parent.sale.getStocksRDT()){
+                aq.id(R.id.ln_rdt_price_container).visible();
+                if(!TextUtils.isEmpty(parent.sale.getMinRDTPrice())){
+                    priceIndex = ((ArrayAdapter)aq.id(R.id.spn_rdt_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinRDTPrice());
+                    aq.id(R.id.spn_rdt_lowest_price).setSelection(priceIndex);
+                }
+            }
+        }
+
+        if(parent.sale.getStocksAmox() != null){
             aq.id(R.id.ln_amox_container).visible();
-            aq.id(R.id.ln_amoxicillin_price_container).visible();
-
-            aq.id(R.id.spn_do_you_stock_ors).setSelection(parent.sale.getStocksORS() ? 1 : 0);
-            aq.id(R.id.spn_do_you_stock_zinc).setSelection(parent.sale.getStocksZinc() ? 1 : 0);
-            aq.id(R.id.spn_do_you_stock_acts).setSelection(parent.sale.getStocksACTs() ? 1 : 0);
-            aq.id(R.id.spn_do_you_stock_rdt).setSelection(parent.sale.getStocksRDT() ? 1 : 0);
-            aq.id(R.id.spn_do_you_stock_amoxicillin).setSelection(parent.sale.getStocksAmox() ? 1 : 0);
-
-            int priceIndex = 0;
-            if(parent.sale.getMinORSPrice() != null){
-                priceIndex = ((ArrayAdapter)aq.id(R.id.spn_ors_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinORSPrice());
-                aq.id(R.id.spn_ors_lowest_price).setSelection(priceIndex);
-            }
-
-            if(parent.sale.getMinZincPrice() != null){
-                priceIndex = ((ArrayAdapter)aq.id(R.id.spn_zinc_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinZincPrice());
-                aq.id(R.id.spn_zinc_lowest_price).setSelection(priceIndex);
-            }
-
-            if(parent.sale.getMinACTPrice() != null){
-                priceIndex = ((ArrayAdapter)aq.id(R.id.spn_act_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinACTPrice());
-                aq.id(R.id.spn_act_lowest_price).setSelection(priceIndex);
-            }
-
-            if(parent.sale.getMinRDTPrice() != null){
-                priceIndex = ((ArrayAdapter)aq.id(R.id.spn_rdt_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinRDTPrice());
-                aq.id(R.id.spn_rdt_lowest_price).setSelection(priceIndex);
-            }
-
-            if(parent.sale.getMinAmoxPrice() != null){
-                priceIndex = ((ArrayAdapter)aq.id(R.id.spn_amox_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinAmoxPrice());
-                aq.id(R.id.spn_amox_lowest_price).setSelection(priceIndex);
+            aq.id(R.id.spn_do_you_stock_amoxicillin).setSelection(parent.sale.getStocksAmox() ? 1 : 2);
+            if(parent.sale.getStocksAmox()){
+                aq.id(R.id.ln_amoxicillin_price_container).visible();
+                if(!TextUtils.isEmpty(parent.sale.getMinAmoxPrice())){
+                    priceIndex = ((ArrayAdapter)aq.id(R.id.spn_amox_lowest_price).getSpinner().getAdapter()).getPosition(parent.sale.getMinAmoxPrice());
+                    aq.id(R.id.spn_amox_lowest_price).setSelection(priceIndex);
+                }
             }
         }
     }
@@ -431,6 +466,12 @@ public class SalesFormICCMFragment extends Fragment {
             stockAmox = aq.id(R.id.spn_do_you_stock_amoxicillin).getSelectedItemPosition() == 1;
         }
 
+        assignVariables();
+
+        return true;
+    }
+
+    private void assignVariables(){
         parent.sale.setStocksORS(stockOrs);
         parent.sale.setStocksZinc(stockZinc);
         parent.sale.setStocksACTs(stockACTs);
@@ -442,7 +483,5 @@ public class SalesFormICCMFragment extends Fragment {
         parent.sale.setMinACTPrice(minACTPrice);
         parent.sale.setMinRDTPrice(minRDTPrice);
         parent.sale.setMinAmoxPrice(minAmoxPrice);
-
-        return true;
     }
 }

@@ -25,7 +25,7 @@ public class CustomerAutocompleteAdapter extends ArrayAdapter<Customer> {
         super(context,viewResourceId,items);
         this.items = items;
         this.itemsAll = (ArrayList<Customer>)items.clone();
-        this.suggestions = new ArrayList<Customer>();
+        this.suggestions = new ArrayList<>();
         this.viewResourceId = viewResourceId;
     }
 
