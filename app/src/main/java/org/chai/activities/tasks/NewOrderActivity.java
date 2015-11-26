@@ -510,10 +510,8 @@ public class NewOrderActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        if(!isFromHistory){
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.save_form_menu, menu);
-        }
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.save_form_menu, menu);
         return true;
     }
 

@@ -168,6 +168,8 @@ public class CHAISynchroniser extends Service {
         Utils.log("startSyncronisationProcess()");
         try {
             syncronisationErros = new ArrayList<>();
+            uploadOrders();
+
             downloadRegions();
             downloadCustomers();
             downloadTasks();
@@ -178,7 +180,6 @@ public class CHAISynchroniser extends Service {
             uploadDirectSales();
             uploadSales();
             uploadTasks();
-            uploadOrders();
 
             downloadDiarrheaHistory();
             downloadMalariaHistory();

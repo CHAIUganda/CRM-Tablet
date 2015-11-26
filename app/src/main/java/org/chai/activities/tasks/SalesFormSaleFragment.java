@@ -363,6 +363,7 @@ public class SalesFormSaleFragment extends Fragment {
 
             int index = 0;
             if(sale.getProductId() != null){
+                Utils.log("Product ID -> " + sale.getProductId());
                 ProductGroup g = sale.getProduct().getProductGroup();
 
                 for(int i = 0; i < group.getAdapter().getCount(); i++){

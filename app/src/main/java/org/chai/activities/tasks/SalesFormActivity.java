@@ -21,6 +21,7 @@ import org.chai.activities.HomeActivity;
 import org.chai.activities.calls.HistoryActivity;
 import org.chai.model.DaoMaster;
 import org.chai.model.DaoSession;
+import org.chai.model.ProductDao;
 import org.chai.model.Sale;
 import org.chai.model.SaleDao;
 import org.chai.model.SaleData;
@@ -29,6 +30,7 @@ import org.chai.model.StokeData;
 import org.chai.model.StokeDataDao;
 import org.chai.model.Task;
 import org.chai.model.TaskDao;
+import org.chai.model.TaskOrder;
 import org.chai.util.MyApplication;
 import org.chai.util.Utils;
 import org.chai.util.migration.UpgradeOpenHelper;
@@ -54,8 +56,8 @@ public class SalesFormActivity extends BaseActivity {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private TaskDao taskDao;
-
     private SaleDao saleDao;
+    private ProductDao productDao;
 
     private SaleDataDao saleDataDao;
     private StokeDataDao stokeDataDao;
@@ -102,6 +104,16 @@ public class SalesFormActivity extends BaseActivity {
             sale = new Sale();
             stocks = new ArrayList<>();
             sales = new ArrayList<>();
+            if(task != null){
+                for(TaskOrder taskOrder: task.getLineItems()){
+                    SaleData d = new SaleData();
+                    d.setQuantity((int) Double.parseDouble(taskOrder.getQuantity()));
+                    d.setPrice((int) Double.parseDouble(taskOrder.getUnitPrice()));
+                    d.setProductId(taskOrder.getProductId());
+                    d.setProduct(productDao.load(taskOrder.getProductId()));
+                    sales.add(d);
+                }
+            }
         }else{
             stocks = sale.getStockDatas();
             sales = sale.getSalesDatas();
@@ -165,6 +177,7 @@ public class SalesFormActivity extends BaseActivity {
             saleDao = daoSession.getSaleDao();
             saleDataDao = daoSession.getSaleDataDao();
             stokeDataDao = daoSession.getStokeDataDao();
+            productDao = daoSession.getProductDao();
         } catch (Exception ex) {
             Toast.makeText(this, "Error initialising Database:" + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
