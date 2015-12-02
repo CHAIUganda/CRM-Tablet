@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,12 +61,8 @@ public class TaskViewOnMapFragment extends Fragment {
 
 
     private int MAP_DEFAULT_ZOOM = 8;
-    private double MAP_DEFAULT_LATITUDE =0.3417;
+    private double MAP_DEFAULT_LATITUDE = 0.3417;
     private double MAP_DEFAULT_LONGITUDE = 32.5811;
-    private int MAX_TASKS_TO_SHOW_ON_MAP = 100;
-
-    /*private double MAP_DEFAULT_LATITUDE = 0.7190105;
-    private double MAP_DEFAULT_LONGITUDE = 31.4345434;*/
 
     private MapView mapView;
     private IMapController mapController;
@@ -123,7 +118,6 @@ public class TaskViewOnMapFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = (String)calenderSpinner.getSelectedItem();
-                Log.i("selected:",item);
                 List<Task> taskList = loadTasksFromDb(item);
                 addTasksToMap2(taskList);
             }
@@ -176,7 +170,7 @@ public class TaskViewOnMapFragment extends Fragment {
         currentLocationOverlay = new ItemizedIconOverlay<>(items,
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        Toast.makeText(getActivity(),item.getSnippet(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), item.getSnippet(), Toast.LENGTH_LONG).show();
                         return true;
                     }
 
@@ -206,20 +200,18 @@ public class TaskViewOnMapFragment extends Fragment {
 
         int itemPosition = Utils.getItemPosition(dueDateString, choices);
         QueryBuilder<Task> taskQueryBuilder = taskDao.queryBuilder();
-        List<Task> outstandingTasks=null;
-        if(itemPosition==1){
-            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE)).orderAsc(TaskDao.Properties.Description).list();
+        List<Task> outstandingTasks = null;
+        if(itemPosition == 1){
+            outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.lt(new Date()), TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE)).orderAsc(TaskDao.Properties.Description).list();
         } else if (itemPosition >= 0 && itemPosition < 6) {
-            itemPosition = itemPosition==0?itemPosition:itemPosition - 1;
+            itemPosition = itemPosition == 0? itemPosition : itemPosition - 1;
             Date dueDateOffset = Utils.addToDateOffset(new Date(), itemPosition);
-            Date dueDatemax = Utils.addToDateMax(new Date(), itemPosition + 1);
-            Log.i("Due Date:",dueDateOffset.toString()+":max-"+dueDatemax.toString());
+            Date dueDatemax = Utils.addToDateMax(new Date(), itemPosition);
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE)).orderAsc(TaskDao.Properties.Description).list();
         } else if (itemPosition == 6) {
             //nearby tasks
             List list = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
             outstandingTasks = Utils.orderAndFilterUsingRealDistanceTo(new GeoPoint(LocationTracker.getLocation().getLatitude(), LocationTracker.getLocation().getLongitude()), list,MAX_RADIUS_IN_KM);
-
         } else if (itemPosition == 7) {
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         }

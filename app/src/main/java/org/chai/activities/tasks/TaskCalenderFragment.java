@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -144,7 +143,6 @@ public class TaskCalenderFragment extends Fragment {
             itemPosition = itemPosition == 0 ? itemPosition : itemPosition - 1;
             Date dueDateOffset = Utils.addToDateOffset(new Date(), itemPosition);
             Date dueDatemax = Utils.addToDateMax(new Date(), itemPosition);
-            Log.i("Due Date:", dueDateOffset.toString() + ":max-" + dueDatemax.toString());
             outstandingTasks = taskQueryBuilder.where(TaskDao.Properties.DueDate.between(dueDateOffset, dueDatemax),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_COMPLETE),TaskDao.Properties.Status.notEq(HomeActivity.STATUS_CANCELLED)).orderAsc(TaskDao.Properties.Description).list();
         }else if(itemPosition == 6){
             //nearby tasks
